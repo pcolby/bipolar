@@ -1,13 +1,32 @@
 @echo off
-
+:: Prerequisites:
+:: * OpenSSL (ideally version 1.0.1g, or ABI compatible).
+:: * Qt 5.1.1 source, in the "src" subdirectory.
 ::http://download.qt-project.org/archive/qt/5.1/5.1.1/single/
 ::http://slproweb.com/download/Win32OpenSSL-1_0_1g.exe
 
 :: SSL 1.0.1.7 (1.0.1g)
 
 :: The following are all required; adjust to match your setup.
+set OPENSSL=C:\OpenSSL-Win32
 set QT_VERSION=5.1.1
 set ZIP7=%PROGRAMFILES%\7-zip\7z.exe
+
+:: Check the pre-requisites.
+if not exist "%OPENSSL%" (
+  echo OpenSSL not found. Have you installed OpenSSL for Windows?
+  pause
+  exit 1
+)
+if exist "%~dp0src\qt-everywhere-opensource-src-%QT_VERSION%.7z" (
+  set QT_SRC_FILE=%~dp0src\qt-everywhere-opensource-src-%QT_VERSION%.7z
+) else if exist "%~dp0src\qt-everywhere-opensource-src-%QT_VERSION%.zip" (
+  set QT_SRC_FILE=%~dp0src\qt-everywhere-opensource-src-%QT_VERSION%.zip
+) else (
+  echo Qt source not found. Have you downloaded the Qt %QT_VERSION% source?
+  pause
+  exit 1
+)
 goto main
 
 :: usage: call:extract input-file output-dir
