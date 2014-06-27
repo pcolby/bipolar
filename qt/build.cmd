@@ -19,15 +19,6 @@ if not exist "%OPENSSL%" (
   pause
   exit 1
 )
-if exist "%~dp0src\qt-everywhere-opensource-src-%QT_VERSION%.7z" (
-  set QT_SRC_FILE=%~dp0src\qt-everywhere-opensource-src-%QT_VERSION%.7z
-) else if exist "%~dp0src\qt-everywhere-opensource-src-%QT_VERSION%.zip" (
-  set QT_SRC_FILE=%~dp0src\qt-everywhere-opensource-src-%QT_VERSION%.zip
-) else (
-  echo Qt source not found. Have you downloaded the Qt %QT_VERSION% source?
-  pause
-  exit 1
-)
 goto main
 
 :: usage: call:extract input-file output-dir
@@ -41,23 +32,35 @@ if errorlevel 1 (
 )
 goto :EOF
 
-:: usage: call:extractsource build_dir
-:extractSource
-set SRC_DIR=%~dp0src
-set SRC_FILE=%SRC_DIR%\qt-everywhere-opensource-src-%QT_VERSION%.zip
-if exist "%SRC_DIR%\qt-everywhere-opensource-src-%QT_VERSION%.7z" (
-  set SRC_FILE=%SRC_DIR%\qt-everywhere-opensource-src-%QT_VERSION%.7z
-) else if exist "%SRC_DIR%\qt-everywhere-opensource-src-%QT_VERSION%.zip" (
-  set SRC_FILE=%SRC_DIR%\qt-everywhere-opensource-src-%QT_VERSION%.zip
-)
-if not exist "%~1" call:extract "%SRC_FILE%" "%~1"
+:: usage: call:configure build_dir src_dir
+:configure
 goto :EOF
 
-:: usage: call:configure build_dir
-:configure
-if not exist "%~1qt-build" md "%~1qt-build"
-pushd "%~1qt-build"
-call "%~1\qt-everywhere-opensource-src-%QT_VERSION%\configure.bat"^
+:main
+
+:: Setup the Visual C++ environment.
+call "%MSVC%\vcvarsall.bat" x86
+
+:: Extract the Qt source, if not already.
+set SRC_DIR=%~dp0\qt-everywhere-opensource-src-%QT_VERSION%
+if not exist "%SRC_DIR%\configure.bat" (
+  if exist "%SRC_DIR%.7z" (
+    call:extract "%SRC_DIR%.7z" "%~dp0"
+  ) else if exist "%SRC_DIR%.zip" (
+    call:extract "%SRC_DIR%.zip" "%~dp0"
+  ) else (
+    echo Qt source not found. Have you downloaded the Qt %QT_VERSION% source?
+    pause
+    exit 1
+  )
+)
+
+:: Create the build directory, if not already.
+set BUILD_DIR=%~dp0\build
+if not exist "%BUILD_DIR%" md "%BUILD_DIR%"
+pushd "%BUILD_DIR%"
+
+call "%SRC_DIR%\configure.bat"^
  -opensource^
  -no-gui^
  -no-opengl^
@@ -74,20 +77,10 @@ call "%~1\qt-everywhere-opensource-src-%QT_VERSION%\configure.bat"^
  -skip script^
  -skip svg^
  -skip webkit
-nmake.exe module-qtbase
+
+:: Build the base Qt modules.
+::nmake.exe module-qtbase
+
 popd
-goto :EOF
 
-:build
-call "%MSVC%\vcvarsall.bat" x86
-set BUILD_DIR=%~dp0build\qt-%QT_VERSION%-%~1-%~2
-if not exist "%BUILD_DIR%" call:extractSource "%BUILD_DIR%"
-set BOOST_DIR=%BUILD_DIR%\qt-build
-:: @todo Replace the following b2.exe with something relevant to this project, eg Qt5Network.dll
-if not exist "%BUILD_DIR%\b2.exe" call:configure "%BUILD_DIR%"
-goto :EOF
-
-:main
-if not exist "%~dp0build" md "%~dp0build"
-call:build x86 release
 pause
