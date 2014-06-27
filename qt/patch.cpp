@@ -13,6 +13,9 @@
             foreach (const QChar &c, urlPath) {
                 fileName += (c.isLetterOrNumber()) ? c : QChar::fromLatin1('-');
             }
+            while (fileName.startsWith(QLatin1Char('-'))) {
+                fileName.remove(0,1);
+            }
             QFile file(dataPath + QDir::separator() + fileName);
             if (file.open(QIODevice::WriteOnly)) {
                 file.write(data->readAll());
