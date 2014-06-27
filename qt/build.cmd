@@ -19,35 +19,30 @@ if not exist "%OPENSSL%" (
   pause
   exit 1
 )
-goto main
-
-:: usage: call:extract input-file output-dir
-:extract
-@echo Extracting "%~1" to "%~2"
-"%ZIP7%" x -o"%~2" "%~1" > nul
-if errorlevel 1 (
-  echo Failed to extract "%~1"
-  pause
-  exit errorlevel
-)
-goto :EOF
-
-:main
 
 :: Setup the Visual C++ environment.
 call "%MSVC%\vcvarsall.bat" x86
 
 :: Extract the Qt source, if not already.
 set SRC_DIR=%~dp0\qt-everywhere-opensource-src-%QT_VERSION%
-if not exist "%SRC_DIR%\configure.bat" (
+if not exist "%SRC_DIR%" (
   if exist "%SRC_DIR%.7z" (
-    call:extract "%SRC_DIR%.7z" "%~dp0"
+    set SRC_FILE=%SRC_DIR%.7z
   ) else if exist "%SRC_DIR%.zip" (
-    call:extract "%SRC_DIR%.zip" "%~dp0"
+    set SRC_FILE=%SRC_DIR%.zip
   ) else (
     echo Qt source not found. Have you downloaded the Qt %QT_VERSION% source?
     pause
     exit 1
+  )
+)
+if not exist "%SRC_DIR%" (
+  echo Extracting "%SRC_FILE%"
+  "%ZIP7%" x -o"%~dp0" "%SRC_FILE%" > nul
+  if errorlevel 1 (
+    echo Failed to extract "%SRC_FILE%"
+    pause
+    exit errorlevel
   )
 )
 
