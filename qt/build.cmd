@@ -32,10 +32,6 @@ if errorlevel 1 (
 )
 goto :EOF
 
-:: usage: call:configure build_dir src_dir
-:configure
-goto :EOF
-
 :main
 
 :: Setup the Visual C++ environment.
@@ -81,9 +77,8 @@ if not exist "%BUILD_DIR%\Makefile" (
    -skip webkit
 )
 
-:: Build the base Qt modules.
+:: Build the Qt network module (among others).
 nmake.exe module-qtbase
-
+dir "%BUILD_DIR%\qtbase\lib\Qt5Network.dll"
 popd
-
 pause
