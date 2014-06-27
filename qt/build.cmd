@@ -1,13 +1,14 @@
 @echo off
 :: Prerequisites:
-:: * OpenSSL (ideally version 1.0.1g, or ABI compatible).
+:: * MSVC tool chain; ideally version 10.0, such as Visual C++ Express 2010.
+::    * Installed.
+:: * OpenSSL (ideally version 1.0.1g, or ABI compatible), headers and binaries installed.
+::    * http://slproweb.com/download/Win32OpenSSL-1_0_1g.exe
 :: * Qt 5.1.1 source, in the "src" subdirectory.
-::http://download.qt-project.org/archive/qt/5.1/5.1.1/single/
-::http://slproweb.com/download/Win32OpenSSL-1_0_1g.exe
-
-:: SSL 1.0.1.7 (1.0.1g)
+::    * http://download.qt-project.org/archive/qt/5.1/5.1.1/single/
 
 :: The following are all required; adjust to match your setup.
+set MSVC=C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC
 set OPENSSL=C:\OpenSSL-Win32
 set QT_VERSION=5.1.1
 set ZIP7=%PROGRAMFILES%\7-zip\7z.exe
@@ -40,27 +41,20 @@ if errorlevel 1 (
 )
 goto :EOF
 
-:: usage: call:configureWinSDK x86|x64|ia64 debug|release [/vista^|/xp^|/2003^|/2008^|/win7]
-:configureWinSDK
-if "%WIN_SDK%" EQU "" goto :EOF
-set TARGET_ARCH=/%1
-set MODE=/%2
-if "%3" EQU "" ( set TARGET_OS=/xp ) else set TARGET_OS=%3
-call "%SET_ENV%" %MODE% %TARGET_ARCH% %TARGET_OS%
-goto :EOF
-
 :: usage: call:extractsource build_dir
 :extractSource
 set SRC_DIR=%~dp0src
 set SRC_FILE=%SRC_DIR%\qt-everywhere-opensource-src-%QT_VERSION%.zip
 if exist "%SRC_DIR%\qt-everywhere-opensource-src-%QT_VERSION%.7z" (
   set SRC_FILE=%SRC_DIR%\qt-everywhere-opensource-src-%QT_VERSION%.7z
+) else if exist "%SRC_DIR%\qt-everywhere-opensource-src-%QT_VERSION%.zip" (
+  set SRC_FILE=%SRC_DIR%\qt-everywhere-opensource-src-%QT_VERSION%.zip
 )
 if not exist "%~1" call:extract "%SRC_FILE%" "%~1"
 goto :EOF
 
 :: usage: call:configure build_dir
-:configureX
+:configure
 if not exist "%~1qt-build" md "%~1qt-build"
 pushd "%~1qt-build"
 call "%~1\qt-everywhere-opensource-src-%QT_VERSION%\configure.bat"^
@@ -84,17 +78,13 @@ nmake.exe module-qtbase
 popd
 goto :EOF
 
-:: usage: call:build x86|x64|ia64 debug|release
 :build
-@echo ==== Building %~1 %~2 ====
-::call:configureWinSDK %~1 %~2
-call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" x86
+call "%MSVC%\vcvarsall.bat" x86
 set BUILD_DIR=%~dp0build\qt-%QT_VERSION%-%~1-%~2
 if not exist "%BUILD_DIR%" call:extractSource "%BUILD_DIR%"
 set BOOST_DIR=%BUILD_DIR%\qt-build
-if not exist "%BUILD_DIR%\b2.exe" call:configureX "%BUILD_DIR%"
-::set INSTALL_DIR=%BUILD_DIR%\install
-::if not exist "%INSTALL_DIR%" call:buildBoost %BOOST_DIR% %INSTALL_DIR% %~1 %~2
+:: @todo Replace the following b2.exe with something relevant to this project, eg Qt5Network.dll
+if not exist "%BUILD_DIR%\b2.exe" call:configure "%BUILD_DIR%"
 goto :EOF
 
 :main
