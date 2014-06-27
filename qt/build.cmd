@@ -60,26 +60,29 @@ set BUILD_DIR=%~dp0\build
 if not exist "%BUILD_DIR%" md "%BUILD_DIR%"
 pushd "%BUILD_DIR%"
 
-call "%SRC_DIR%\configure.bat"^
- -opensource^
- -no-gui^
- -no-opengl^
- -no-openvg^
- -no-widgets^
- -nomake examples^
- -nomake tools^
- -openssl -I C:\OpenSSL-Win32\include -L C:\OpenSSL-Win32\lib^
- -platform win32-msvc2010^
- -qt-sql-sqlite^
- -release^
- -shared^
- -skip multimedia^
- -skip script^
- -skip svg^
- -skip webkit
+:: Configure the Qt build, if not already.
+if not exist "%BUILD_DIR%\Makefile" (
+  call "%SRC_DIR%\configure.bat"^
+   -opensource^
+   -no-gui^
+   -no-opengl^
+   -no-openvg^
+   -no-widgets^
+   -nomake examples^
+   -nomake tools^
+   -openssl -I C:\OpenSSL-Win32\include -L C:\OpenSSL-Win32\lib^
+   -platform win32-msvc2010^
+   -qt-sql-sqlite^
+   -release^
+   -shared^
+   -skip multimedia^
+   -skip script^
+   -skip svg^
+   -skip webkit
+)
 
 :: Build the base Qt modules.
-::nmake.exe module-qtbase
+nmake.exe module-qtbase
 
 popd
 
