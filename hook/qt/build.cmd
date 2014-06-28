@@ -10,12 +10,18 @@
 :: The following are all required; adjust to match your setup.
 set MSVC=C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC
 set OPENSSL=C:\OpenSSL-Win32
+set PATCH=C:\Program Files (x86)\Git\bin\patch.exe
 set QT_VERSION=5.1.1
 set ZIP7=%PROGRAMFILES%\7-zip\7z.exe
 
 :: Check the pre-requisites.
 if not exist "%OPENSSL%" (
   echo OpenSSL not found. Have you installed OpenSSL for Windows?
+  pause
+  exit 1
+)
+if not exist "%PATCH%" (
+  echo Patch command not found.
   pause
   exit 1
 )
@@ -45,6 +51,13 @@ if not exist "%SRC_DIR%" (
     exit errorlevel
   )
 )
+
+:: Apply our hook patch.
+if not exist "%SRC_DIR%\qnetworkaccessmanager.ori" (
+  copy "%SRC_DIR%\qnetworkaccessmanager.cpp" "%SRC_DIR%\qnetworkaccessmanager.ori"
+)
+"%PATCH%" -Ni qnetworkaccessmanager.patch
+if errorlevel 1 pause
 
 :: Create the build directory, if not already.
 set BUILD_DIR=%~dp0\build
