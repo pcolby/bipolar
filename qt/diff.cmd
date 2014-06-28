@@ -9,7 +9,7 @@
   exit 1
 )
 @set QT_VERSION=5.1.1
-@set SRC_DIR=%~dp0\qt-everywhere-opensource-src-%QT_VERSION%\qtbase\src\network\access
+@set SRC_DIR=qt-everywhere-opensource-src-%QT_VERSION%\qtbase\src\network\access
 %DIFF% -u^
  "%SRC_DIR%\qnetworkaccessmanager.ori"^
  "%SRC_DIR%\qnetworkaccessmanager.cpp"^
