@@ -22,3 +22,14 @@ hook (it's encoded using Google Protocol Buffers).  Help with this would be
 greatly appreciated!
 
 See [Hooks](../../wiki/Hooks) for more information.
+
+## How to Help
+
+Right now, I need help with deciphering the Google Protocol Buffers. If you
+already know what that means, then please go ahead and install the
+[FlowSync hook](../../wiki/Hooks), capture some session data, and star
+mapping - either add the results to the [Polar API V2](../../wiki/Polar API V2)
+wiki page, or to a new issue.
+
+If you still want to help, but aren't sure how, just create a new issue asking
+how to help, and we can all discuss some options :D
