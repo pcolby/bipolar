@@ -1,5 +1,5 @@
 --- qt-everywhere-opensource-src-5.1.1\qtbase\src\network\access\qnetworkaccessmanager.cpp	Sun Jun 29 10:12:25 2014
-+++ qt-everywhere-opensource-src-5.1.1\qtbase\src\network\access\qnetworkaccessmanager.new	Sun Jun 29 15:26:36 2014
++++ qt-everywhere-opensource-src-5.1.1\qtbase\src\network\access\qnetworkaccessmanager.new	Sun Jun 29 15:44:45 2014
 @@ -71,6 +71,8 @@
  
  #include "qthread.h"
@@ -17,9 +17,9 @@
 +    const QString &urlPath = request.url().path();
 +    if (urlPath.contains(QLatin1String("training-sessions"))) {
 +        const QDir dataDir(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
-+        QString fileName(dataDir.path() + QDir::separator() + QLatin1String("export"));
++        QString fileName(dataDir.path() + QDir::separator() + QLatin1String("export") + QDir::separator());
 +        dataDir.mkpath(fileName);
-+        foreach (const QChar &c, urlPath) {
++        foreach (const QChar &c, urlPath.startsWith(QLatin1Char('/')) ? urlPath.mid(1) : urlPath) {
 +            fileName += (c.isLetterOrNumber()) ? c : QChar::fromLatin1('-');
 +        }
 +        QFile file(fileName);
