@@ -1,5 +1,5 @@
 --- qt-everywhere-opensource-src-5.1.1\qtbase\src\network\access\qnetworkaccessmanager.cpp	Sun Jun 29 10:12:25 2014
-+++ qt-everywhere-opensource-src-5.1.1\qtbase\src\network\access\qnetworkaccessmanager.new	Sun Jun 29 11:09:33 2014
++++ qt-everywhere-opensource-src-5.1.1\qtbase\src\network\access\qnetworkaccessmanager.new	Sun Jun 29 14:37:30 2014
 @@ -71,6 +71,8 @@
  
  #include "qthread.h"
@@ -9,29 +9,21 @@
  QT_BEGIN_NAMESPACE
  
  Q_GLOBAL_STATIC(QNetworkAccessFileBackendFactory, fileBackend)
-@@ -701,6 +703,30 @@
+@@ -701,6 +703,22 @@
  */
  QNetworkReply *QNetworkAccessManager::post(const QNetworkRequest &request, QIODevice *data)
  {
-+    // Example: /v2/users/1234567/training-sessions/23456789/exercises/34567890/autolaps
-+    if ((data != NULL) && (!data->isSequential())) {
++    // See https://github.com/pcolby/bipolar/wiki/Polar-API-V2
++    if ((data != NULL) && (!data->isSequential())) {    
 +        const QString &urlPath = request.url().path();
 +        if (urlPath.contains(QLatin1String("training-sessions"))) {
-+            QString dataPath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
-+            if (dataPath.isEmpty()) {
-+                dataPath = QDir::currentPath();
-+            }
-+            dataPath += QDir::separator() + QLatin1String("export");
-+            QDir dir;
-+            dir.mkpath(dataPath);
-+            QString fileName;
++            const QDir dataDir(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
++            QString fileName(dataDir.path() + QDir::separator() + QLatin1String("export"));
++            dataDir.mkpath(fileName);
 +            foreach (const QChar &c, urlPath) {
 +                fileName += (c.isLetterOrNumber()) ? c : QChar::fromLatin1('-');
 +            }
-+            while (fileName.startsWith(QLatin1Char('-'))) {
-+                fileName.remove(0,1);
-+            }
-+            QFile file(dataPath + QDir::separator() + fileName);
++            QFile file(fileName);
 +            if (file.open(QIODevice::WriteOnly)) {
 +                file.write(data->readAll());
 +            }
