@@ -53,11 +53,13 @@ if not exist "%SRC_DIR%" (
 )
 
 :: Apply our hook patch.
-if not exist "%SRC_DIR%\qnetworkaccessmanager.ori" (
-  copy "%SRC_DIR%\qnetworkaccessmanager.cpp" "%SRC_DIR%\qnetworkaccessmanager.ori"
+if not exist "%SRC_DIR%\qtbase\src\network\access\qnetworkaccessmanager.ori" (
+  copy "%SRC_DIR%\qtbase\src\network\access\qnetworkaccessmanager.cpp"^
+       "%SRC_DIR%\qtbase\src\network\access\qnetworkaccessmanager.ori"
 )
 "%PATCH%" -Ni qnetworkaccessmanager.patch
 if errorlevel 1 pause
+pause
 
 :: Create the build directory, if not already.
 set BUILD_DIR=%~dp0\build
