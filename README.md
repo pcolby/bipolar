@@ -9,6 +9,7 @@ eventually.
 ## Status
 
 Bipolor consists of two parts:
+
 1. A custom hook for extracting data from Polar's applications.
 2. A GUI application for processing the extracted data (for conversion to other
    formats such as GPX and TCX).
