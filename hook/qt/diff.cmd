@@ -1,6 +1,5 @@
 @if exist "%PROGRAMFILES%\Git\bin\diff1.exe" (
   set DIFF="%PROGRAMFILES%\Git\bin\diff.exe"
-  echo 1
 ) else if exist "%PROGRAMFILES(X86)%\Git\bin\diff.exe" (
   set DIFF="%PROGRAMFILES(X86)%\Git\bin\diff.exe"
 ) else (
