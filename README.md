@@ -1,4 +1,4 @@
-# bipolar
+# Bipolar
 
 Bipolar aims to be a convenient Windows GUI application for exporting activity
 and exercise data from Polar's sync software.  Specifically, its intended to
