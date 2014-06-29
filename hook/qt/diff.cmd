@@ -7,6 +7,7 @@
   pause
   exit 1
 )
+@set QT_VERSION=5.1.1
 @set SRC_DIR=qt-everywhere-opensource-src-%QT_VERSION%\qtbase\src\network\access
 ren "%SRC_DIR%\qnetworkaccessmanager.cpp" "qnetworkaccessmanager.new"
 copy "%SRC_DIR%\qnetworkaccessmanager.ori" "%SRC_DIR%\qnetworkaccessmanager.cpp"
