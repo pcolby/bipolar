@@ -59,7 +59,6 @@ if not exist "%SRC_DIR%\qtbase\src\network\access\qnetworkaccessmanager.ori" (
 )
 "%PATCH%" -Ni qnetworkaccessmanager.patch
 if errorlevel 1 pause
-pause
 
 :: Create the build directory, if not already.
 set BUILD_DIR=%~dp0\build
