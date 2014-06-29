@@ -27,7 +27,7 @@ See [Hooks](../../wiki/Hooks) for more information.
 
 Right now, I need help with deciphering the Google Protocol Buffers. If you
 already know what that means, then please go ahead and install the
-[FlowSync hook](../../wiki/Hooks), capture some session data, and star
+[FlowSync hook](../../wiki/Hooks), capture some session data, and start
 mapping - either add the results to the [Polar API V2](../../wiki/Polar API V2)
 wiki page, or to a new issue.
 
