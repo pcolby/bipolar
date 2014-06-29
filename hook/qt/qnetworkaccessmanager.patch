@@ -1,5 +1,5 @@
---- qt-everywhere-opensource-src-5.1.1\qtbase\src\network\access\qnetworkaccessmanager.cpp	Mon Aug 26 04:03:34 2013
-+++ qt-everywhere-opensource-src-5.1.1\qtbase\src\network\access\qnetworkaccessmanager.new	Fri Jun 27 20:32:42 2014
+--- qt-everywhere-opensource-src-5.1.1\qtbase\src\network\access\qnetworkaccessmanager.cpp	Sun Jun 29 10:12:25 2014
++++ qt-everywhere-opensource-src-5.1.1\qtbase\src\network\access\qnetworkaccessmanager.new	Sun Jun 29 11:09:33 2014
 @@ -71,6 +71,8 @@
  
  #include "qthread.h"
@@ -20,10 +20,10 @@
 +            QString dataPath = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 +            if (dataPath.isEmpty()) {
 +                dataPath = QDir::currentPath();
-+            } else {
-+                QDir dir;
-+                dir.mkpath(dataPath);
 +            }
++            dataPath += QDir::separator() + QLatin1String("export");
++            QDir dir;
++            dir.mkpath(dataPath);
 +            QString fileName;
 +            foreach (const QChar &c, urlPath) {
 +                fileName += (c.isLetterOrNumber()) ? c : QChar::fromLatin1('-');
