@@ -23,6 +23,11 @@ greatly appreciated!
 
 See [Hooks](../../wiki/Hooks) for more information.
 
+### Update
+
+I've now worked out the latitude, longitude, and altitude encoding! Work on the
+conversion application can begin now :D
+
 ## How to Help
 
 Right now, I need help with deciphering the Google Protocol Buffers. If you
