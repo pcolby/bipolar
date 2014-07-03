@@ -1,6 +1,6 @@
 # Bipolar
 
-Bipolar aims to be a convenient Windows GUI application for exporting activity
+Bipolar aims to be a convenient GUI application for exporting activity
 and exercise data from Polar's sync software.  Specifically, its intended to
 provide a way to get your own data from Polar's new V800 watch, via Polar
 FlowSync, but other devices (as well as Polar WebSync) may be supported too
