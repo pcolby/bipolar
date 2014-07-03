@@ -11,17 +11,11 @@ DEFINES += QT_NO_CAST_FROM_ASCII QT_NO_CAST_TO_ASCII
 RESOURCES = qrc/app.qrc
 
 # Neaten the output directories.
-CONFIG(debug,debug|release) {
-    DESTDIR = build/debug
-    MOC_DIR = build/debug/tmp
-    OBJECTS_DIR = build/debug/tmp
-    RCC_DIR = build/debug/tmp
-}
-CONFIG(release,debug|release) {
-    DESTDIR = build/release
-    MOC_DIR = build/release/tmp
-    OBJECTS_DIR = build/release/tmp
-    RCC_DIR = build/release/tmp
-}
+CONFIG(debug,debug|release) DESTDIR = debug
+CONFIG(release,debug|release) DESTDIR = release
+MOC_DIR = $$DESTDIR/tmp
+OBJECTS_DIR = $$DESTDIR/tmp
+RCC_DIR = $$DESTDIR/tmp
+UI_DIR = $$DESTDIR/tmp
 
 include(src/src.pri)

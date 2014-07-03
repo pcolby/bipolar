@@ -1,3 +1,4 @@
 *.user
-build
+debug
+release
 Makefile*
