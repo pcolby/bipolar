@@ -1,0 +1,34 @@
+// @todo IDI_ICON1 ICON DISCARDABLE "..\\assets\\...\\Bipolar.ico"
+
+1 TYPELIB "Bipolar.rc"
+
+1 VERSIONINFO
+ FILEVERSION 0,1,0,0
+ PRODUCTVERSION 0,1,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "Comments", "https://github.com/pcolby/bipolar\0"
+            VALUE "CompanyName", "Paul Colby\0"
+            VALUE "FileDescription", "Bipolar Executable\0"
+            VALUE "LegalCopyright", "2014 Paul Colby\0"
+            VALUE "ProductName", "Bipolar\0"
+            VALUE "ProductVersion", "0.1.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END

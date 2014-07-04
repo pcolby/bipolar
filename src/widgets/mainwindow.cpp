@@ -1,21 +1,34 @@
+/*
+    Copyright 2014 Paul Colby
+
+    This file is part of Bipolar.
+
+    Bipolar is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Biplar is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Bipolar.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "mainwindow.h"
 
 #include <QApplication>
 #include <QSettings>
 
-#ifdef DEBUG
-#define VERSION_STRING_REGEX "([^.]+\\.[^.]+\\.[^.]+\\.[^.]+)"
-#else
-#define VERSION_STRING_REGEX "([^.]+\\.[^.]+\\.[^.]+)\\."
-#endif // DEBUG
-
 #define SETTINGS_GEOMETRY QLatin1String("geometry")
 
 MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(parent, flags) {
     // Set the main window title.
-    QRegExp versionMatch(QLatin1String(VERSION_STRING_REGEX));
-    const QString versionStr=(QApplication::applicationVersion().contains(versionMatch)) ? versionMatch.cap(1) : QString::null;
-    setWindowTitle(tr("%1 %2").arg(QApplication::applicationName()).arg(versionStr));
+    setWindowTitle(tr("%1 %2")
+        .arg(QApplication::applicationName())
+        .arg(QStringList(QApplication::applicationVersion().split(QLatin1Char('.')).mid(0, 3)).join(QLatin1Char('.'))));
 
     /// @todo Build the UI.
 

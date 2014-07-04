@@ -2,7 +2,7 @@
 TARGET = Bipolar
 TEMPLATE = app
 CONFIG += warn_on
-QT += network widgets
+QT += widgets
 
 # Disable automatic ASCII conversions (best practice for internationalization).
 DEFINES += QT_NO_CAST_FROM_ASCII QT_NO_CAST_TO_ASCII

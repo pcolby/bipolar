@@ -17,20 +17,18 @@
     along with Bipolar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef __MAIN_WINDOW_H__
-#define __MAIN_WINDOW_H__
+#ifndef __VERSION_H__
+#define __VERSION_H__
+#include <QString>
 
-#include <QMainWindow>
-
-class MainWindow : public QMainWindow {
-Q_OBJECT
-
-public:
-    MainWindow(QWidget *parent=0, Qt::WindowFlags flags=0);
-
-protected:
-    virtual void closeEvent(QCloseEvent *event);
-
+#ifdef Q_OS_WIN // VersionInfo is a Windows-only class.
+class VersionInfo {
+  public:
+    static bool getAppVersion(quint16 &major, quint16 &minor, quint16 &error, quint16 &build);
+    static bool getAppVersion(quint16 &major, quint16 &minor, quint16 &error);
+    static bool getAppVersion(quint16 &major, quint16 &minor);
+    static QString getAppVersionStr();
 };
+#endif // Q_OS_WIN
 
-#endif // __MAIN_WINDOW_H__
+#endif // __VERSION_H__
