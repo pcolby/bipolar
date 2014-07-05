@@ -51,7 +51,7 @@ QVariantList parseSignedVarints(QByteArray &data, int maxItems)
 QVariantList parseSignedVarints(QIODevice &data, int maxItems)
 {
     QVariantList list;
-    for (; maxItems > 0; --maxItems) {
+    for (; (maxItems < 0) || (list.size() < maxItems);) {
         const QVariant item = parseSignedVarint(data);
         if (item.isValid()) {
             list << item;
@@ -91,7 +91,7 @@ QVariantList parseUnsignedVarints(QByteArray &data, int maxItems)
 QVariantList parseUnsignedVarints(QIODevice &data, int maxItems)
 {
     QVariantList list;
-    for (; maxItems > 0; --maxItems) {
+    for (; (maxItems < 0) || (list.size() < maxItems);) {
         const QVariant item = parseUnsignedVarint(data);
         if (item.isValid()) {
             list << item;

@@ -67,18 +67,45 @@ void TestVarint::parseSignedInt()
     QFETCH(QByteArray, data);
     QFETCH(QVariant, expected);
 
-    const QVariant result = ProtoBuf::parseSignedVarint(data);
-    QCOMPARE(result, expected);
+    QCOMPARE(ProtoBuf::parseSignedVarint(data), expected);
 }
 
 void TestVarint::parseSignedInts_data()
 {
-    /// @todo
+    QTest::addColumn<QByteArray>("data");
+    QTest::addColumn<QVariantList>("expected");
+
+    QVariantList list;
+
+    list.clear();
+    list << QVariant(0) << QVariant(-1) << QVariant(1) << QVariant(-2);
+    QTest::newRow("0;-1;1;-2")
+        << QByteArray("\x00\x01\x02\x03", 4)
+        << list;
+
+    list.clear();
+    list << QVariant(Q_INT64_C(2147483647)) << QVariant(1) << QVariant(Q_INT64_C(-2147483648));
+    QTest::newRow("2147483647;1;-2147483648")
+        << QByteArray("\xFE\xFF\xFF\xFF\x0F" "\x02" "\xFF\xFF\xFF\xFF\x0F")
+        << list;
+
+    /// @todo  Add some examples from actual FlowSync data too.
 }
 
 void TestVarint::parseSignedInts()
 {
-    /// @todo
+    QFETCH(QByteArray, data);
+    QFETCH(QVariantList, expected);
+
+    // Various ways to parse all items.
+    QCOMPARE(ProtoBuf::parseSignedVarints(data), expected);
+    QCOMPARE(ProtoBuf::parseSignedVarints(data, expected.size()), expected);
+    QCOMPARE(ProtoBuf::parseSignedVarints(data, expected.size() * 2), expected);
+
+    // Parse just first n items, where n is from all items down to none.
+    for (int size = expected.size(); size >= 0; --size) {
+        QCOMPARE(ProtoBuf::parseSignedVarints(data, size), expected.mid(0, size));
+    }
 }
 
 void TestVarint::parseUnsignedInt_data()
@@ -117,16 +144,43 @@ void TestVarint::parseUnsignedInt()
     QFETCH(QByteArray, data);
     QFETCH(QVariant, expected);
 
-    const QVariant result = ProtoBuf::parseUnsignedVarint(data);
-    QCOMPARE(result, expected);
+    QCOMPARE(ProtoBuf::parseUnsignedVarint(data), expected);
 }
 
 void TestVarint::parseUnsignedInts_data()
 {
-    /// @todo
+    QTest::addColumn<QByteArray>("data");
+    QTest::addColumn<QVariantList>("expected");
+
+    QVariantList list;
+
+    list.clear();
+    list << QVariant(1) << QVariant(2) << QVariant(3);
+    QTest::newRow("1;2;3")
+        << QByteArray("\x01\x02\x03")
+        << list;
+
+    list.clear();
+    list << QVariant(300) << QVariant(1) << QVariant(300);
+    QTest::newRow("300;1;300")
+        << QByteArray("\xAC\x02" "\x01" "\xAC\x02")
+        << list;
+
+    /// @todo  Add some examples from actual FlowSync data too.
 }
 
 void TestVarint::parseUnsignedInts()
 {
-    /// @todo
+    QFETCH(QByteArray, data);
+    QFETCH(QVariantList, expected);
+
+    // Various ways to parse all items.
+    QCOMPARE(ProtoBuf::parseUnsignedVarints(data), expected);
+    QCOMPARE(ProtoBuf::parseUnsignedVarints(data, expected.size()), expected);
+    QCOMPARE(ProtoBuf::parseUnsignedVarints(data, expected.size() * 2), expected);
+
+    // Parse just first n items, where n is from all items down to none.
+    for (int size = expected.size(); size >= 0; --size) {
+        QCOMPARE(ProtoBuf::parseUnsignedVarints(data, size), expected.mid(0, size));
+    }
 }
