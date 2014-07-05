@@ -9,7 +9,7 @@ before_install:
   - sudo apt-get update -qq
 
 install:
-  - sudo apt-get install -qq dqt5-qmake qtbase5-dev
+  - sudo apt-get install -qq qt5-qmake qtbase5-dev
 
 before_script:
   - pushd test
