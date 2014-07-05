@@ -1,0 +1,23 @@
+language: cpp
+
+compiler:
+  - clang
+  - gcc
+
+before_install:
+  - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
+  - sudo apt-get update -qq
+
+install:
+  - sudo apt-get install -qq dqt5-qmake qtbase5-dev
+
+before_script:
+  - pushd test
+  - qmake -qt=qt5
+  - popd
+
+script:
+  - pushd test
+  - make
+  - make check
+  - popd
