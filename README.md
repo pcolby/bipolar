@@ -1,4 +1,7 @@
 # Bipolar
+[![Build Status](http://api.travis-ci.org/pcolby/bipolar.svg)](https://travis-ci.org/pcolby/bipolar)
+[![Github Release](http://img.shields.io/github/release/pcolby/bipolar.svg)](https://github.com/pcolby/bipolar/releases/latest)
+[![GPLv3 License](http://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/copyleft/gpl.html)
 
 Bipolar aims to be a convenient GUI application for exporting activity
 and exercise data from Polar's sync software.  Specifically, its intended to
