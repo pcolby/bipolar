@@ -89,7 +89,10 @@ void TestVarint::parseSignedInts_data()
         << QByteArray("\xFE\xFF\xFF\xFF\x0F" "\x02" "\xFF\xFF\xFF\xFF\x0F")
         << list;
 
-    /// @todo  Add some examples from actual FlowSync data too.
+    // Samples from actual FlowSync data.
+    list.clear();
+    list << 58 << 58 << 55 << 52 << 50 << 48 << 46 << 45 << 44 << 43 << 42 << 41 << 40 << 39 << 39;
+    QTest::newRow("mzoo:route:4:first") << QByteArray("ttnhd`\\ZXVTRPNN") << list;
 }
 
 void TestVarint::parseSignedInts()
