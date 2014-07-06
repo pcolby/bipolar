@@ -226,11 +226,11 @@ void TestFixnum::parseSigned64_data()
 
     QTest::newRow("1234567890123456789")
         << QByteArray("\x15\x81\xE9\x7D\xF4\x10\x22\x11")
-        << QVariant(1234567890123456789);
+        << QVariant(Q_INT64_C(1234567890123456789));
 
     QTest::newRow("-1234567890123456789")
         << QByteArray("\xEB\x7E\x16\x82\x0B\xEF\xDD\xEE")
-        << QVariant(-1234567890123456789);
+        << QVariant(Q_INT64_C(-1234567890123456789));
 
     QTest::newRow("min")
         << QByteArray("\x00\x00\x00\x00\x00\x00\x00\x80", 8)
@@ -259,7 +259,9 @@ void TestFixnum::parseSigned64s_data()
     QVariantList list;
 
     list.clear();
-    list << QVariant(0) << QVariant(1234567890123456789) << QVariant(-1234567890123456789);
+    list << QVariant(0)
+         << QVariant(Q_INT64_C(1234567890123456789))
+         << QVariant(Q_INT64_C(-1234567890123456789));
     QTest::newRow("0;1234567890123456789;-1234567890123456789")
         << QByteArray("\x00\x00\x00\x00\x00\x00\x00\x00"
                       "\x15\x81\xE9\x7D\xF4\x10\x22\x11"
@@ -362,7 +364,7 @@ void TestFixnum::parseUnsigned64_data()
 
     QTest::newRow("1234567890123456789")
         << QByteArray("\x15\x81\xE9\x7D\xF4\x10\x22\x11")
-        << QVariant(1234567890123456789);
+        << QVariant(Q_UINT64_C(1234567890123456789));
 
     QTest::newRow("min")
         << QByteArray("\x00\x00\x00\x00\x00\x00\x00\x00", 8)
@@ -392,7 +394,7 @@ void TestFixnum::parseUnsigned64s_data()
 
     list.clear();
     list << QVariant(std::numeric_limits<quint64>::min())
-         << QVariant(1234567890123456789)
+         << QVariant(Q_UINT64_C(1234567890123456789))
          << QVariant(std::numeric_limits<quint64>::max());
     QTest::newRow("min;1234567890123456789;max")
         << QByteArray("\x00\x00\x00\x00\x00\x00\x00\x00"
