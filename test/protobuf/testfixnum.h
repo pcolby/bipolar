@@ -28,7 +28,7 @@ private slots:
     void parseDoubles_data();
     void parseDoubles();
 
-/*    void parseFloat_data();
+    void parseFloat_data();
     void parseFloat();
     void parseFloats_data();
     void parseFloats();
@@ -51,6 +51,6 @@ private slots:
     void parseUnsigned64_data();
     void parseUnsigned64();
     void parseUnsigned64s_data();
-    void parseUnsigned64s();*/
+    void parseUnsigned64s();
 
 };
