@@ -145,7 +145,8 @@ void TestFixnum::parseFloat_data()
         << QByteArray("\x79\xE9\xF6\xC2")
         << QVariant(-123.456f);
 
-    /// @todo  Add some examples from actual FlowSync data too.
+    // Barometric altitude samples from actual FlowSync data.
+    QTest::newRow("mzoo:samples:6:1:1") << QByteArray("UTyB") << QVariant(62.332355f);
 }
 
 void TestFixnum::parseFloat()
@@ -169,7 +170,14 @@ void TestFixnum::parseFloats_data()
         << QByteArray("\x00\x00\x00\x00" "\x79\xE9\xF6\x42" "\x79\xE9\xF6\xC2", 12)
         << list;
 
-    /// @todo  Add some examples from actual FlowSync data too.
+    // Barometric altitude samples from actual FlowSync data.
+    list.clear();
+    list << 63.39916992f << 63.39916992f << 62.332355f   << 62.332355f   << 62.332355f
+         << 62.332355f   << 62.332355f   << 62.332355f   << 62.332355f   << 62.332355f
+         << 62.332355f   << 62.332355f   << 62.332355f   << 62.332355f   << 62.332355f;
+    QTest::newRow("mzoo:samples:6:5")
+         << QByteArray("\300\230}B\300\230}BUTyBUTyBUTyBUTyBUTyBUTyBUTyBUTyBUTyBUTyBUTyBUTyBUTyB")
+         << list;
 }
 
 void TestFixnum::parseFloats()
