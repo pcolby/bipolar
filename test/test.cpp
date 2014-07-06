@@ -17,6 +17,7 @@
     along with Bipolar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "protobuf/testfixnum.h"
 #include "protobuf/testvarint.h"
 
 #include <QTest>
@@ -51,6 +52,7 @@ int main(int argc, char *argv[]) {
 
     // Setup our tests factory object.
     ObjectFactory testFactory;
+    testFactory.registerClass<TestFixnum>();
     testFactory.registerClass<TestVarint>();
 
     // If the user has specified a Test* class name, execute that test class only.

@@ -1,0 +1,97 @@
+/*
+    Copyright 2014 Paul Colby
+
+    This file is part of Bipolar.
+
+    Bipolar is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Biplar is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Bipolar.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#include "fixnum.h"
+
+#include <QBuffer>
+#include <QDebug>
+#include <QtEndian>
+
+// Template specialisation for double (not included in Qt).
+template<> double qFromLittleEndian<double>(const uchar * src)
+{
+    const quint64 value = qFromLittleEndian<quint64>(src);
+    return *reinterpret_cast<const double *>(&value);
+}
+
+// Template specialisation for float (not included in Qt).
+template<> float qFromLittleEndian<float>(const uchar * src)
+{
+    const quint32 value = qFromLittleEndian<quint32>(src);
+    return *reinterpret_cast<const float *>(&value);
+}
+
+namespace ProtoBuf {
+
+/// @tparam  Type  May be one of: qint32, quint32, qint64, quint64, float or double.
+
+template<typename Type>
+QVariant parseFixedNumber(QByteArray &data) {
+    QBuffer buffer(&data);
+    buffer.open(QIODevice::ReadOnly);
+    return parseFixedNumber<Type>(buffer);
+}
+
+template<typename Type>
+QVariant parseFixedNumber(QIODevice &data)
+{
+    Q_ASSERT((sizeof(Type) == 4) || (sizeof(type == 8)));
+    const QByteArray array = data.read(sizeof(Type));
+    if (array.size() != sizeof(Type)) return QVariant();
+    return qFromLittleEndian<Type>(reinterpret_cast<const uchar *>(array.constData()));
+}
+
+template<typename Type>
+QVariantList parseFixedNumbers(QByteArray &data, int maxItems)
+{
+    QBuffer buffer(&data);
+    buffer.open(QIODevice::ReadOnly);
+    return parseFixedNumbers<Type>(buffer, maxItems);
+}
+
+template<typename Type>
+QVariantList parseFixedNumbers(QIODevice &data, int maxItems)
+{
+    QVariantList list;
+    for (; (maxItems < 0) || (list.size() < maxItems);) {
+        const QVariant item = parseFixedNumber<Type>(data);
+        if (item.isValid()) {
+            list << item;
+        } else {
+            maxItems = 0;
+        }
+    }
+    return list;
+}
+
+template QVariant parseFixedNumber<double> (QByteArray &);
+template QVariant parseFixedNumber<float>  (QByteArray &);
+template QVariant parseFixedNumber<qint32> (QByteArray &);
+template QVariant parseFixedNumber<qint64> (QByteArray &);
+template QVariant parseFixedNumber<quint32>(QByteArray &);
+template QVariant parseFixedNumber<quint64>(QByteArray &);
+
+template QVariantList parseFixedNumbers<double> (QByteArray &, int);
+template QVariantList parseFixedNumbers<float>  (QByteArray &, int);
+template QVariantList parseFixedNumbers<qint32> (QByteArray &, int);
+template QVariantList parseFixedNumbers<qint64> (QByteArray &, int);
+template QVariantList parseFixedNumbers<quint32>(QByteArray &, int);
+template QVariantList parseFixedNumbers<quint64>(QByteArray &, int);
+
+}

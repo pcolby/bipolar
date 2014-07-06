@@ -72,10 +72,10 @@ QVariant parseUnsignedVarint(QByteArray &data)
 QVariant parseUnsignedVarint(QIODevice &data)
 {
     quint64 result = 0;
-    for (unsigned char byte = 0xFF, index = 0; byte >= 0x80; ++index) {
+    for (uchar byte = 0xFF, index = 0; byte >= 0x80; ++index) {
         const QByteArray array = data.read(1);
         if (array.isEmpty()) return QVariant();
-        byte = static_cast<unsigned char>(array.at(0));
+        byte = static_cast<uchar>(array.at(0));
         result += (byte & Q_UINT64_C(0x7F)) << (7 * index);
     }
     return result;
