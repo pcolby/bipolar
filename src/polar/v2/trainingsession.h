@@ -21,7 +21,9 @@
 #define __POLAR_V2_TRAINING_SESSION_H__
 
 #include <QIODevice>
+#include <QMap>
 #include <QStringList>
+#include <QVariant>
 
 namespace polar {
 namespace v2 {
@@ -62,9 +64,9 @@ public:
 
 protected:
     QString baseName;
+    QVariantMap parsedExercises;
 
-    bool parse(const QStringList &laps, const QStringList &routes,
-               const QStringList &samples, const QStringList &zones);
+    bool parse(const QMap<QString, QMap<QString, QString> > &fileNames);
 
 private:
 

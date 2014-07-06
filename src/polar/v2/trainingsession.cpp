@@ -19,24 +19,27 @@
 
 #include "trainingsession.h"
 
+#include <QDir>
+#include <QFileInfo>
+
 namespace polar {
 namespace v2 {
 
 TrainingSession::TrainingSession(const QString &baseName)
     : baseName(baseName)
 {
-    Q_UNUSED(baseName);
-    Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
+
 }
 
 bool TrainingSession::isValid() const
 {
-    Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
-    return false;
+    return parsedExercises.isEmpty();
 }
 
 bool TrainingSession::parse(const QString &baseName)
 {
+    parsedExercises.clear();
+
     if (!baseName.isEmpty()) {
         this->baseName = baseName;
     }
@@ -46,18 +49,22 @@ bool TrainingSession::parse(const QString &baseName)
         return false;
     }
 
-    QStringList laps, routes, samples, zones;
-    /// @todo The QDir work.
-    return parse(laps, routes, samples, zones);
+    const QFileInfo fileInfo(baseName);
+    const QDir dir(fileInfo.baseName(), fileInfo.fileName(), QDir::NoSort, QDir::Readable|QDir::Files);
+    QMap<QString, QMap<QString, QString> > fileNames;
+    foreach (const QFileInfo &fileInfo, dir.entryInfoList()) {
+        const QStringList nameParts = fileInfo.fileName().split(QLatin1Char('_'));
+        if ((nameParts.size() >= 3) && (nameParts.at(nameParts.size() - 3) == QLatin1String("exercises"))) {
+            fileNames[nameParts.at(nameParts.size() - 2)][nameParts.at(nameParts.size() - 1)] = fileInfo.path();
+        }
+    }
+
+    return parse(fileNames);
 }
 
-bool TrainingSession::parse(const QStringList &laps, const QStringList &routes,
-           const QStringList &samples, const QStringList &zones)
+bool TrainingSession::parse(const QMap<QString, QMap<QString, QString> > &fileNames)
 {
-    Q_UNUSED(laps);
-    Q_UNUSED(routes);
-    Q_UNUSED(samples);
-    Q_UNUSED(zones);
+    Q_UNUSED(fileNames);
     Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
     return false;
 }
