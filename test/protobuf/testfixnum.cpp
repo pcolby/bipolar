@@ -17,7 +17,7 @@
     along with Bipolar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "TestFixnum.h"
+#include "testfixnum.h"
 
 #include "../../src/protobuf/fixnum.h"
 
