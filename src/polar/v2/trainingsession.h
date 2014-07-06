@@ -35,9 +35,11 @@ namespace v2 {
 class TrainingSession {
 
 public:
-    TrainingSession(const QString &basePath);
+    TrainingSession(const QString &basePath = QString());
 
-    bool parse();
+    bool isValid() const;
+
+    bool parse(const QString &basePath = QString());
 
     bool writeGPX(const QString &fileName = QString());
     bool writeGPX(const QIODevice &device);
@@ -58,6 +60,7 @@ public:
     bool writeTCX(const bool separateFiles, const QStringList &sport = QStringList());
 
 protected:
+
     bool parse(const QStringList &laps, const QStringList &route,
                const QStringList &samples, const QStringList &zones);
 

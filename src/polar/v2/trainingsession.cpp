@@ -22,47 +22,53 @@
 namespace polar {
 namespace v2 {
 
-TrainingSession::TrainingSession(const QString &basePath)
+TrainingSession::TrainingSession(const QString &basePath = QString())
 {
     Q_UNUSED(basePath);
     Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
 }
 
-bool parse()
+bool TrainingSession::isValid() const
 {
     Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
     return false;
 }
 
-bool writeGPX(const QString &fileName)
+bool TrainingSession::parse(const QString &basePath = QString())
+{
+    Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
+    return false;
+}
+
+bool TrainingSession::writeGPX(const QString &fileName)
 {
     Q_UNUSED(fileName);
     Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
     return false;
 }
 
-bool writeGPX(const QIODevice &device)
+bool TrainingSession::writeGPX(const QIODevice &device)
 {
     Q_UNUSED(device);
     Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
     return false;
 }
 
-bool writeGPX(const bool separateFiles)
+bool TrainingSession::writeGPX(const bool separateFiles)
 {
     Q_UNUSED(separateFiles);
     Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
     return false;
 }
 
-bool writeTCX(const QStringList &sport)
+bool TrainingSession::writeTCX(const QStringList &sport)
 {
     Q_UNUSED(sport);
     Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
     return false;
 }
 
-bool writeTCX(const QString &fileName, const QStringList &sport)
+bool TrainingSession::writeTCX(const QString &fileName, const QStringList &sport)
 {
     Q_UNUSED(fileName);
     Q_UNUSED(sport);
@@ -70,7 +76,7 @@ bool writeTCX(const QString &fileName, const QStringList &sport)
     return false;
 }
 
-bool writeTCX(const QIODevice &device, const QStringList &sport)
+bool TrainingSession::writeTCX(const QIODevice &device, const QStringList &sport)
 {
     Q_UNUSED(device);
     Q_UNUSED(sport);
@@ -78,7 +84,7 @@ bool writeTCX(const QIODevice &device, const QStringList &sport)
     return false;
 }
 
-bool writeTCX(const bool separateFiles, const QStringList &sport)
+bool TrainingSession::writeTCX(const bool separateFiles, const QStringList &sport)
 {
     Q_UNUSED(separateFiles);
     Q_UNUSED(sport);
