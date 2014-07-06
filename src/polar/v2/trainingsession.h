@@ -32,14 +32,15 @@ namespace v2 {
  * @note This class does not yet make any use of *-phases, *-rrsamples,
  *       *-sensors, nor *-statistics file, if present.
  */
-class TrainingSession {
+class TrainingSession : public QObject {
+    Q_OBJECT
 
 public:
-    TrainingSession(const QString &basePath = QString());
+    TrainingSession(const QString &baseName = QString());
 
     bool isValid() const;
 
-    bool parse(const QString &basePath = QString());
+    bool parse(const QString &baseName = QString());
 
     bool writeGPX(const QString &fileName = QString());
     bool writeGPX(const QIODevice &device);
@@ -60,11 +61,15 @@ public:
     bool writeTCX(const bool separateFiles, const QStringList &sport = QStringList());
 
 protected:
+    QString baseName;
 
-    bool parse(const QStringList &laps, const QStringList &route,
+    bool parse(const QStringList &laps, const QStringList &routes,
                const QStringList &samples, const QStringList &zones);
 
 private:
+
+signals:
+    void parseError(const QString &message, const QString &fileName = QString());
 
 };
 

@@ -22,9 +22,10 @@
 namespace polar {
 namespace v2 {
 
-TrainingSession::TrainingSession(const QString &basePath = QString())
+TrainingSession::TrainingSession(const QString &baseName)
+    : baseName(baseName)
 {
-    Q_UNUSED(basePath);
+    Q_UNUSED(baseName);
     Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
 }
 
@@ -34,8 +35,29 @@ bool TrainingSession::isValid() const
     return false;
 }
 
-bool TrainingSession::parse(const QString &basePath = QString())
+bool TrainingSession::parse(const QString &baseName)
 {
+    if (!baseName.isEmpty()) {
+        this->baseName = baseName;
+    }
+
+    if (this->baseName.isEmpty()) {
+        emit parseError(QLatin1String("parse called with no baseName specified"));
+        return false;
+    }
+
+    QStringList laps, routes, samples, zones;
+    /// @todo The QDir work.
+    return parse(laps, routes, samples, zones);
+}
+
+bool TrainingSession::parse(const QStringList &laps, const QStringList &routes,
+           const QStringList &samples, const QStringList &zones)
+{
+    Q_UNUSED(laps);
+    Q_UNUSED(routes);
+    Q_UNUSED(samples);
+    Q_UNUSED(zones);
     Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
     return false;
 }
@@ -88,17 +110,6 @@ bool TrainingSession::writeTCX(const bool separateFiles, const QStringList &spor
 {
     Q_UNUSED(separateFiles);
     Q_UNUSED(sport);
-    Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
-    return false;
-}
-
-bool parse(const QStringList &laps, const QStringList &route,
-           const QStringList &samples, const QStringList &zones)
-{
-    Q_UNUSED(laps);
-    Q_UNUSED(route);
-    Q_UNUSED(samples);
-    Q_UNUSED(zones);
     Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
     return false;
 }
