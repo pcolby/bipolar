@@ -214,6 +214,7 @@ void TestFixnum::parseSigned32_data()
         << QVariant(std::numeric_limits<qint32>::max());
 
     /// @todo  Add some examples from actual FlowSync data too.
+    ///        Note, currently FlowSync uses no fixed-length ints.
 }
 
 void TestFixnum::parseSigned32()
@@ -238,6 +239,7 @@ void TestFixnum::parseSigned32s_data()
         << list;
 
     /// @todo  Add some examples from actual FlowSync data too.
+    ///        Note, currently FlowSync uses no fixed-length ints.
 }
 
 void TestFixnum::parseSigned32s()
@@ -282,6 +284,7 @@ void TestFixnum::parseSigned64_data()
         << QVariant(std::numeric_limits<qint64>::max());
 
     /// @todo  Add some examples from actual FlowSync data too.
+    ///        Note, currently FlowSync uses no fixed-length ints.
 }
 
 void TestFixnum::parseSigned64()
@@ -310,6 +313,7 @@ void TestFixnum::parseSigned64s_data()
         << list;
 
     /// @todo  Add some examples from actual FlowSync data too.
+    ///        Note, currently FlowSync uses no fixed-length ints.
 }
 
 void TestFixnum::parseSigned64s()
@@ -350,6 +354,7 @@ void TestFixnum::parseUnsigned32_data()
         << QVariant(std::numeric_limits<quint32>::max());
 
     /// @todo  Add some examples from actual FlowSync data too.
+    ///        Note, currently FlowSync uses no fixed-length ints.
 }
 
 void TestFixnum::parseUnsigned32()
@@ -376,6 +381,7 @@ void TestFixnum::parseUnsigned32s_data()
         << list;
 
     /// @todo  Add some examples from actual FlowSync data too.
+    ///        Note, currently FlowSync uses no fixed-length ints.
 }
 
 void TestFixnum::parseUnsigned32s()
@@ -416,6 +422,7 @@ void TestFixnum::parseUnsigned64_data()
         << QVariant(std::numeric_limits<quint64>::max());
 
     /// @todo  Add some examples from actual FlowSync data too.
+    ///        Note, currently FlowSync uses no fixed-length ints.
 }
 
 void TestFixnum::parseUnsigned64()
@@ -444,6 +451,7 @@ void TestFixnum::parseUnsigned64s_data()
         << list;
 
     /// @todo  Add some examples from actual FlowSync data too.
+    ///        Note, currently FlowSync uses no fixed-length ints.
 }
 
 void TestFixnum::parseUnsigned64s()
