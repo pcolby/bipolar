@@ -89,7 +89,7 @@ void TestVarint::parseSignedInts_data()
         << QByteArray("\xFE\xFF\xFF\xFF\x0F" "\x02" "\xFF\xFF\xFF\xFF\x0F")
         << list;
 
-    // Samples from actual FlowSync data.
+    // GPS altitude samples from actual FlowSync data.
     list.clear();
     list << 58 << 58 << 55 << 52 << 50 << 48 << 46 << 45 << 44 << 43 << 42 << 41 << 40 << 39 << 39;
     QTest::newRow("mzoo:route:4:first") << QByteArray("ttnhd`\\ZXVTRPNN") << list;
@@ -169,7 +169,7 @@ void TestVarint::parseUnsignedInts_data()
         << QByteArray("\xAC\x02" "\x01" "\xAC\x02")
         << list;
 
-    // Samples from actual FlowSync data.
+    // Duration samples from actual FlowSync data.
     list.clear();
     list << 500 << 1000 << 2000 << 3000 << 4000 << 5000 << 6000 << 7000
          << 8000 << 9000 << 10000 << 11000 << 12000 << 13000 << 14000;
@@ -190,6 +190,7 @@ void TestVarint::parseUnsignedInts_data()
                       "\340\276\253\003")
         << list;
 
+    // Satellite counts from actual FlowSync data.
     list.clear();
     list << 10 << 10 << 10 << 10 << 10 << 10 << 10 << 9 << 8 << 8 << 8 << 9 << 8 << 8 << 9;
     QTest::newRow("mzoo:route:5:rnd")
