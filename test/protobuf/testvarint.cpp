@@ -166,7 +166,32 @@ void TestVarint::parseUnsignedInts_data()
         << QByteArray("\xAC\x02" "\x01" "\xAC\x02")
         << list;
 
-    /// @todo  Add some examples from actual FlowSync data too.
+    // Samples from actual FlowSync data.
+    list.clear();
+    list << 500 << 1000 << 2000 << 3000 << 4000 << 5000 << 6000 << 7000
+         << 8000 << 9000 << 10000 << 11000 << 12000 << 13000 << 14000;
+    QTest::newRow("mzoo:route:1:first")
+        << QByteArray("\364\003\350\007\320\017\270\027\240\037\210\'\360."
+                      "\3306\300>\250F\220N\370U\340]\310e\260m")
+        << list;
+
+    list.clear();
+    list << 6992000 << 6993000 << 6994000 << 6995000 << 6996000 << 6997000
+         << 6998000 << 6999000 << 7000000 << 7001000 << 7002000 << 7003000
+         << 7004000;
+    QTest::newRow("mzoo:route:1:last")
+        << QByteArray("\200\341\252\003\350\350\252\003\320\360\252\003"
+                      "\270\370\252\003\240\200\253\003\210\210\253\003"
+                      "\360\217\253\003\330\227\253\003\300\237\253\003"
+                      "\250\247\253\003\220\257\253\003\370\266\253\003"
+                      "\340\276\253\003")
+        << list;
+
+    list.clear();
+    list << 10 << 10 << 10 << 10 << 10 << 10 << 10 << 9 << 8 << 8 << 8 << 9 << 8 << 8 << 9;
+    QTest::newRow("mzoo:route:5:rnd")
+        << QByteArray("\n\n\n\n\n\n\n\t\010\010\010\t\010\010\t")
+        << list;
 }
 
 void TestVarint::parseUnsignedInts()
