@@ -22,6 +22,12 @@
 #include <QDir>
 #include <QFileInfo>
 
+// These constants match those used by Polar's V2 API.
+#define LAPS    QLatin1String("laps")
+#define ROUTE   QLatin1String("route")
+#define SAMPLES QLatin1String("samples")
+#define ZONES   QLatin1String("zones")
+
 namespace polar {
 namespace v2 {
 
@@ -59,14 +65,118 @@ bool TrainingSession::parse(const QString &baseName)
         }
     }
 
-    return parse(fileNames);
+    for (QMap<QString, QMap<QString, QString> >::const_iterator iter = fileNames.constBegin();
+         iter != fileNames.constEnd(); ++iter)
+    {
+        parse(iter.key(), iter.value());
+    }
+
+    return isValid();
 }
 
-bool TrainingSession::parse(const QMap<QString, QMap<QString, QString> > &fileNames)
+bool TrainingSession::parse(const QString &exerciseId, const QMap<QString, QString> &fileNames)
 {
-    Q_UNUSED(fileNames);
+    // Don't bother parsing exercises without any route nor sample-based data.
+    // GPX conversion needs samples, and TCX conversion need either route or samples.
+    if ((!fileNames.contains(ROUTE)) || (!fileNames.contains(SAMPLES))) {
+        return false;
+    }
+
+    #define PARSE_IF_CONTAINS(var, str, Func) \
+        const QVariantMap var = (fileNames.contains(str)) ? parse##Func(fileNames[str]) : QVariantMap();
+    PARSE_IF_CONTAINS(laps,    LAPS,    Laps);
+    PARSE_IF_CONTAINS(route,   ROUTE,   Route);
+    PARSE_IF_CONTAINS(samples, SAMPLES, Samples);
+    PARSE_IF_CONTAINS(zones,   ZONES,   Zones);
+    #undef PARSE_IF_CONTAINS
+
+    if ((route.isEmpty()) && (samples.isEmpty())) {
+        return false;
+    }
+
+    QVariantMap exercise;
+    #define ASSIGN_IF_NOT_EMPTY(var, str) \
+        if (!var.empty()) { exercise[str] = var; }
+    ASSIGN_IF_NOT_EMPTY(laps,    LAPS);
+    ASSIGN_IF_NOT_EMPTY(route,   ROUTE);
+    ASSIGN_IF_NOT_EMPTY(samples, SAMPLES);
+    ASSIGN_IF_NOT_EMPTY(zones,   ZONES);
+    #undef ASSIGN_IF_NOT_EMPTY
+    parsedExercises[exerciseId] = exercise;
+    return true;
+
+    // GPX:
+    //  * Multiple <trk> elements.
+    //  * No HR, cadence, etc. So really no use without "route".
+
+    // TCX:
+    //  * Multiple <Activity> elements.
+    //  * Each can track GPS, HR, cadence, alti, sensor states, etc. All optional.
+    //  * So either of route, samples would suffice.
+}
+
+QVariantMap TrainingSession::parseLaps(QIODevice &data)
+{
+    Q_UNUSED(data);
     Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
-    return false;
+    return QVariantMap();
+}
+
+QVariantMap TrainingSession::parseLaps(const QString &fileName)
+{
+    QFile file(fileName);
+    if (!file.open(QIODevice::ReadOnly)) {
+        emit parseError(tr("failed to open laps file"), fileName);
+    }
+    return parseLaps(file);
+}
+
+QVariantMap TrainingSession::parseRoute(QIODevice &data)
+{
+    Q_UNUSED(data);
+    Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
+    return QVariantMap();
+}
+
+QVariantMap TrainingSession::parseRoute(const QString &fileName)
+{
+    QFile file(fileName);
+    if (!file.open(QIODevice::ReadOnly)) {
+        emit parseError(tr("failed to open route file"), fileName);
+    }
+    return parseRoute(file);
+}
+
+QVariantMap TrainingSession::parseSamples(QIODevice &data)
+{
+    Q_UNUSED(data);
+    Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
+    return QVariantMap();
+}
+
+QVariantMap TrainingSession::parseSamples(const QString &fileName)
+{
+    QFile file(fileName);
+    if (!file.open(QIODevice::ReadOnly)) {
+        emit parseError(tr("failed to open samples file"), fileName);
+    }
+    return parseSamples(file);
+}
+
+QVariantMap TrainingSession::parseZones(QIODevice &data)
+{
+    Q_UNUSED(data);
+    Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
+    return QVariantMap();
+}
+
+QVariantMap TrainingSession::parseZones(const QString &fileName)
+{
+    QFile file(fileName);
+    if (!file.open(QIODevice::ReadOnly)) {
+        emit parseError(tr("failed to open zones file"), fileName);
+    }
+    return parseZones(file);
 }
 
 bool TrainingSession::writeGPX(const QString &fileName)

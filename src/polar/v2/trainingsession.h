@@ -66,7 +66,15 @@ protected:
     QString baseName;
     QVariantMap parsedExercises;
 
-    bool parse(const QMap<QString, QMap<QString, QString> > &fileNames);
+    bool parse(const QString &exerciseId, const QMap<QString, QString> &fileNames);
+    QVariantMap parseLaps(QIODevice &data);
+    QVariantMap parseLaps(const QString &fileName);
+    QVariantMap parseRoute(QIODevice &data);
+    QVariantMap parseRoute(const QString &fileName);
+    QVariantMap parseSamples(QIODevice &data);
+    QVariantMap parseSamples(const QString &fileName);
+    QVariantMap parseZones(QIODevice &data);
+    QVariantMap parseZones(const QString &fileName);
 
 private:
 
