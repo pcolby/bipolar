@@ -18,6 +18,7 @@
 */
 
 #include "protobuf/testfixnum.h"
+#include "protobuf/testmessage.h"
 #include "protobuf/testvarint.h"
 
 #include <QTest>
@@ -53,6 +54,7 @@ int main(int argc, char *argv[]) {
     // Setup our tests factory object.
     ObjectFactory testFactory;
     testFactory.registerClass<TestFixnum>();
+    testFactory.registerClass<TestMessage>();
     testFactory.registerClass<TestVarint>();
 
     // If the user has specified a Test* class name, execute that test class only.

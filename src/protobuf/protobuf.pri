@@ -1,4 +1,4 @@
 INCLUDEPATH += $$PWD
 VPATH += $$PWD
-HEADERS += fixnum.h   varint.h
-SOURCES += fixnum.cpp varint.cpp
+HEADERS += fixnum.h   message.h   varint.h
+SOURCES += fixnum.cpp message.cpp varint.cpp
