@@ -76,34 +76,25 @@ bool TrainingSession::parse(const QString &baseName)
 
 bool TrainingSession::parse(const QString &exerciseId, const QMap<QString, QString> &fileNames)
 {
-    // Don't bother parsing exercises without any route nor sample-based data.
-    // GPX conversion needs samples, and TCX conversion need either route or samples.
-    if ((!fileNames.contains(ROUTE)) || (!fileNames.contains(SAMPLES))) {
-        return false;
-    }
-
-    #define PARSE_IF_CONTAINS(var, str, Func) \
-        const QVariantMap var = (fileNames.contains(str)) ? parse##Func(fileNames[str]) : QVariantMap();
-    PARSE_IF_CONTAINS(laps,    LAPS,    Laps);
-    PARSE_IF_CONTAINS(route,   ROUTE,   Route);
-    PARSE_IF_CONTAINS(samples, SAMPLES, Samples);
-    PARSE_IF_CONTAINS(zones,   ZONES,   Zones);
+    QVariantMap exercise;
+    #define PARSE_IF_CONTAINS(str, Func) \
+        if (fileNames.contains(str)) { \
+            const QVariantMap map = parse##Func(fileNames[str]); \
+            if (!map.empty()) { \
+                exercise[str] = map; \
+            } \
+        }
+    PARSE_IF_CONTAINS(LAPS,    Laps);
+    PARSE_IF_CONTAINS(ROUTE,   Route);
+    PARSE_IF_CONTAINS(SAMPLES, Samples);
+    PARSE_IF_CONTAINS(ZONES,   Zones);
     #undef PARSE_IF_CONTAINS
 
-    if ((route.isEmpty()) && (samples.isEmpty())) {
-        return false;
+    if (!exercise.empty()) {
+        parsedExercises[exerciseId] = exercise;
+        return true;
     }
-
-    QVariantMap exercise;
-    #define ASSIGN_IF_NOT_EMPTY(var, str) \
-        if (!var.empty()) { exercise[str] = var; }
-    ASSIGN_IF_NOT_EMPTY(laps,    LAPS);
-    ASSIGN_IF_NOT_EMPTY(route,   ROUTE);
-    ASSIGN_IF_NOT_EMPTY(samples, SAMPLES);
-    ASSIGN_IF_NOT_EMPTY(zones,   ZONES);
-    #undef ASSIGN_IF_NOT_EMPTY
-    parsedExercises[exerciseId] = exercise;
-    return true;
+    return false;
 
     // GPX:
     //  * Multiple <trk> elements.
