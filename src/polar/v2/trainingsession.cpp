@@ -85,8 +85,11 @@ bool TrainingSession::parse(const QString &exerciseId, const QMap<QString, QStri
             } \
         }
     PARSE_IF_CONTAINS(LAPS,    Laps);
+  //PARSE_IF_CONTAINS(PHASES,  Phases);
     PARSE_IF_CONTAINS(ROUTE,   Route);
     PARSE_IF_CONTAINS(SAMPLES, Samples);
+  //PARSE_IF_CONTAINS(SENSORS, Sensors);
+  //PARSE_IF_CONTAINS(STATS,   Zones);
     PARSE_IF_CONTAINS(ZONES,   Zones);
     #undef PARSE_IF_CONTAINS
 
@@ -95,15 +98,6 @@ bool TrainingSession::parse(const QString &exerciseId, const QMap<QString, QStri
         return true;
     }
     return false;
-
-    // GPX:
-    //  * Multiple <trk> elements.
-    //  * No HR, cadence, etc. So really no use without "route".
-
-    // TCX:
-    //  * Multiple <Activity> elements.
-    //  * Each can track GPS, HR, cadence, alti, sensor states, etc. All optional.
-    //  * So either of route, samples would suffice.
 }
 
 QVariantMap TrainingSession::parseLaps(QIODevice &data)
@@ -171,7 +165,10 @@ QVariantMap TrainingSession::parseZones(const QString &fileName)
 }
 
 bool TrainingSession::writeGPX(const QString &fileName)
-{
+{    
+    // GPX:
+    //  * Multiple <trk> elements.
+    //  * No HR, cadence, etc. So really no use without "route".
     Q_UNUSED(fileName);
     Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
     return false;
@@ -193,6 +190,10 @@ bool TrainingSession::writeGPX(const bool separateFiles)
 
 bool TrainingSession::writeTCX(const QStringList &sport)
 {
+    // TCX:
+    //  * Multiple <Activity> elements.
+    //  * Each can track GPS, HR, cadence, alti, sensor states, etc. All optional.
+    //  * So either of route, samples would suffice.
     Q_UNUSED(sport);
     Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
     return false;
