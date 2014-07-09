@@ -22,12 +22,65 @@
 
 #include <QByteArray>
 #include <QIODevice>
+#include <QPair>
 #include <QVariantList>
 
 namespace ProtoBuf {
 
-QVariantList parseMessage(QByteArray &data, int maxItems = -1);
-QVariantList parseMessage(QIODevice &data, int maxItems = -1);
+class Message : public QObject {
+    Q_OBJECT
+
+public:
+    typedef enum FieldType {
+        TypeUnknown = 0,
+        TypeBoolean,
+        TypeBytes,
+        TypeEmbeddedMessage,
+        TypeEnum, // uses int* (not sint* or uint*).
+        TypeFloatingPoint,
+        TypeInteger,
+        TypeSignedInteger,
+        TypeString,
+        TypeUnsignedInteger,
+    };
+
+    struct FieldInfo {
+        QString fieldName;
+        FieldType typeHint;
+
+        FieldInfo(const QString fieldName = QString(), FieldType typeHint = TypeUnknown)
+            : fieldName(fieldName), typeHint(typeHint)
+        {
+
+        }
+    };
+
+    typedef QMap<QString, FieldInfo> FieldInfoMap;
+
+    Message(const FieldInfoMap &fieldInfo, const QString pathSeparator = QLatin1String("/"));
+
+    QVariantMap parse(QByteArray &data, const QString &tagPathPrefix = QString()) const;
+    QVariantMap parse(QIODevice &data, const QString &tagPathPrefix = QString()) const;
+
+protected:
+    FieldInfoMap fieldInfo;
+    QString pathSeparator;
+
+    QPair<quint32, quint8> parseTagAndType(QIODevice &data) const;
+
+    template<typename Type>
+    QVariant parsePrefixDelimitedValue(Type &data, const quint8 wireType,
+                                       const FieldType typeHint,
+                                       const QString &tagPath) const;
+
+    template<typename Type>
+    QVariant parseValue(Type &data, const quint8 wireType, const FieldType typeHint,
+                        const QString &tagPath) const;
+
+    template<typename Type>
+    QByteArray readPrefixDelimitedValue(Type &data) const;
+
+};
 
 }
 

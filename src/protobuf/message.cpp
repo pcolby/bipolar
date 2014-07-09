@@ -27,19 +27,159 @@
 
 namespace ProtoBuf {
 
-QVariantList parseMessage(QByteArray &data, int maxItems)
+Message::Message(const FieldInfoMap &fieldInfo, const QString pathSeparator)
+    : fieldInfo(fieldInfo), pathSeparator(pathSeparator)
+{
+    Q_ASSERT_X(!pathSeparator.isEmpty(), "Message::Message", "pathSeparator should not be empty");
+}
+
+QVariantMap Message::parse(QByteArray &data, const QString &tagPathPrefix) const
 {
     QBuffer buffer(&data);
     buffer.open(QIODevice::ReadOnly);
-    return parseMessage(buffer);
+    return parse(buffer, tagPathPrefix);
 }
 
-QVariantList parseMessage(QIODevice &data, int maxItems)
+QVariantMap Message::parse(QIODevice &data, const QString &tagPathPrefix) const
 {
-    Q_UNUSED(data);
-    Q_UNUSED(maxItems);
-    Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
-    return QVariantList();
+    QVariantMap parsedFields;
+    while (!data.atEnd()) {
+        // Fetch the next field's tag index and wire type.
+        QPair<quint32, quint8> tagAndType = parseTagAndType(data);
+        if (tagAndType.first == 0) {
+            return QVariantMap();
+        }
+
+        // Get the (optional) field name and type hint for this field.
+        const QString tagPath = QString::fromLatin1("%1%2").arg(tagPathPrefix).arg(tagAndType.first);
+        FieldInfo fieldInfo = this->fieldInfo.value(tagPath); // Note intentional fallback to default-constructed.
+        if (fieldInfo.fieldName.isEmpty()) {
+            fieldInfo.fieldName = tagPath;
+        }
+
+        // Parse the field value.
+        const QVariant value = parseValue(data, tagAndType.second, fieldInfo.typeHint, tagPath);
+        if (value.isNull()) {
+            return QVariantMap();
+        }
+
+        // Add the parsed value(s) to the parsed fields map.
+        QVariantList list = parsedFields[fieldInfo.fieldName].toList();
+        if (value.type() == QMetaType::QVariantList) {
+            list << value.toList();
+        } else {
+            list << value;
+        }
+        parsedFields[fieldInfo.fieldName] = list;
+    }
+    return parsedFields;
+}
+
+
+QPair<quint32, quint8> Message::parseTagAndType(QIODevice &data) const
+{
+    QVariant tagAndType = parseUnsignedVarint(data);
+    return tagAndType.isValid()
+        ? qMakePair(tagAndType.toULongLong() >> 3, tagAndType.toULongLong() & 0x07)
+        : qMakePair(0,0);
+}
+
+template <typename Type>
+QVariant Message::parseValue(Type &data, const quint8 wireType, const FieldType typeHint,
+                             const QString &tagPath) const
+{
+    switch (wireType) {
+    case 0: // Varint (int32, int64, uint32, uint64, sint32, sint64, bool, enum)
+        switch (typeHint) {
+        case TypeBoolean:         return parseUnsignedVarint(data);
+        case TypeEnum:
+            Q_ASSERT_X(false, "Message::parseValue", "varint int not implemented yet");
+            parseUnsignedVarint(data); // Skip the varint.
+            /// @todo Implement varint int support in varint.{cpp,h}
+            return QVariant();
+        case TypeInteger:
+            Q_ASSERT_X(false, "Message::parseValue", "varint int not implemented yet");
+            parseUnsignedVarint(data); // Skip the varint.
+            /// @todo Implement varint int support in varint.{cpp,h}
+            return QVariant();
+        case TypeSignedInteger:   return parseSignedVarint(data);
+        case TypeUnsignedInteger: return parseUnsignedVarint(data);
+        default:                  return parseUnsignedVarint(data);
+        }
+        break;
+    case 1: // 64-bit (fixed64, sfixed64, double)
+        switch (typeHint) {
+        case TypeFloatingPoint:   return parseFixedNumber<double>(data);
+        case TypeSignedInteger:   return parseFixedNumber<qint64>(data);
+        case TypeUnsignedInteger: return parseFixedNumber<quint64>(data);
+        default:                  return data.read(8); // The raw 8-byte sequence.
+        }
+        break;
+    case 2: // Length-delimited (string, bytes, embedded messages, packed repeated fields)
+        return parsePrefixDelimitedValue(data, wireType, typeHint, tagPath);
+    case 3: // Start group (groups (deprecated)
+        Q_ASSERT_X(false, "Message::parseValue", "start group not implemented");
+        /// @todo At least skip the field.
+        break;
+    case 4: // End group (groups (deprecated)
+        Q_ASSERT_X(false, "Message::parseValue", "end group not implemented");
+        /// @todo At least skip the field.
+        break;
+    case 5: // 32-bit (fixed32, sfixed32, float)
+        switch (typeHint) {
+        case TypeFloatingPoint:   return parseFixedNumber<float>(data);
+        case TypeSignedInteger:   return parseFixedNumber<qint32>(data);
+        case TypeUnsignedInteger: return parseFixedNumber<quint32>(data);
+        default:                  return data.read(8); // The raw 4-byte sequence.
+        }
+        break;
+    }
+    return QVariant();
+}
+
+template<typename Type>
+QVariant Message::parsePrefixDelimitedValue(Type &data, const quint8 wireType,
+                                            const FieldType typeHint,
+                                            const QString &tagPath) const
+{
+    const QByteArray value = readPrefixDelimitedValue(data);
+    if (value.isNull()) {
+        return QVariant();
+    }
+
+    // Return bytes and strings as-is. For strings, the caller will need to
+    // determine / assume the character encoding used in the field.
+    if ((typeHint == TypeBytes) || (typeHint == TypeString)) {
+        return value;
+    }
+
+    // Parse embedded messages recursively.
+    if (typeHint == TypeEmbeddedMessage) {
+        return parse(data, tagPath + pathSeparator);
+    }
+
+    // Parse packed repeated values into a list.
+    QVariantList list;
+    for (QVariant item(0); !item.isNull();) {
+        item = parseValue(data, wireType, typeHint, tagPath + pathSeparator);
+        if (!item.isNull()) {
+            list << item;
+        }
+    }
+    return list;
+}
+
+template<typename Type>
+QByteArray Message::readPrefixDelimitedValue(Type &data) const
+{
+    // Note: We're assuming length-delimited values use unsigned varints for lengths.
+    // I haven't found any Protocl Buffers documentation to support / dispute this.
+    const QVariant length = parseUnsignedVarint(data);
+    if (length.isNull()) {
+        return QByteArray();
+    }
+    const QByteArray value = data.read(length.toULongLong());
+    return (value.length() == length.toULongLong()) ? value : QByteArray();
 }
 
 }
