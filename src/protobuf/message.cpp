@@ -81,7 +81,7 @@ QPair<quint32, quint8> Message::parseTagAndType(QIODevice &data) const
     QVariant tagAndType = parseUnsignedVarint(data);
     return tagAndType.isValid()
         ? qMakePair(tagAndType.toULongLong() >> 3, tagAndType.toULongLong() & 0x07)
-        : qMakePair(0,0);
+        : qMakePair(Q_UINT64_C(0),Q_UINT64_C(0));
 }
 
 template <typename Type>
@@ -171,7 +171,7 @@ QByteArray Message::readPrefixDelimitedValue(Type &data) const
         return QByteArray();
     }
     const QByteArray value = data.read(length.toULongLong());
-    return (value.length() == length.toULongLong()) ? value : QByteArray();
+    return (value.length() == length.toInt()) ? value : QByteArray();
 }
 
 }
