@@ -65,7 +65,7 @@ QVariantMap Message::parse(QIODevice &data, const QString &tagPathPrefix) const
 
         // Add the parsed value(s) to the parsed fields map.
         QVariantList list = parsedFields[fieldInfo.fieldName].toList();
-        if (value.type() == QMetaType::QVariantList) {
+        if (static_cast<QMetaType::Type>(value.type()) == QMetaType::QVariantList) {
             list << value.toList();
         } else {
             list << value;
