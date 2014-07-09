@@ -31,7 +31,7 @@ class Message : public QObject {
     Q_OBJECT
 
 public:
-    typedef enum FieldType {
+    enum FieldType {
         TypeUnknown = 0,
         TypeBoolean,
         TypeBytes,
