@@ -80,8 +80,8 @@ QPair<quint32, quint8> Message::parseTagAndType(QIODevice &data) const
 {
     QVariant tagAndType = parseUnsignedVarint(data);
     return tagAndType.isValid()
-        ? qMakePair(tagAndType.toULongLong() >> 3, tagAndType.toULongLong() & 0x07)
-        : qMakePair(Q_UINT64_C(0), Q_UINT64_C(0));
+        ? QPair<quint32, quint8>(tagAndType.toULongLong() >> 3, tagAndType.toULongLong() & 0x07)
+        : QPair<quint32, quint8>(0, 0);
 }
 
 template <typename Type>
