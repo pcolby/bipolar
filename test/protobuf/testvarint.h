@@ -28,6 +28,11 @@ private slots:
     void parseSignedInts_data();
     void parseSignedInts();
 
+    void parseStandardInt_data();
+    void parseStandardInt();
+    void parseStandardInts_data();
+    void parseStandardInts();
+
     void parseUnsignedInt_data();
     void parseUnsignedInt();
     void parseUnsignedInts_data();

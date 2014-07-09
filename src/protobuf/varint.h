@@ -26,14 +26,19 @@
 
 namespace ProtoBuf {
 
-QVariant parseSignedVarint(QByteArray &data);
+QVariant parseSignedVarint(QByteArray data);
 QVariant parseSignedVarint(QIODevice &data);
-QVariantList parseSignedVarints(QByteArray &data, int maxItems = -1);
+QVariantList parseSignedVarints(QByteArray data, int maxItems = -1);
 QVariantList parseSignedVarints(QIODevice &data, int maxItems = -1);
 
-QVariant parseUnsignedVarint(QByteArray &data);
+QVariant parseStandardVarint(QByteArray data);
+QVariant parseStandardVarint(QIODevice &data);
+QVariantList parseStandardVarints(QByteArray data, int maxItems = -1);
+QVariantList parseStandardVarints(QIODevice &data, int maxItems = -1);
+
+QVariant parseUnsignedVarint(QByteArray data);
 QVariant parseUnsignedVarint(QIODevice &data);
-QVariantList parseUnsignedVarints(QByteArray &data, int maxItems = -1);
+QVariantList parseUnsignedVarints(QByteArray data, int maxItems = -1);
 QVariantList parseUnsignedVarints(QIODevice &data, int maxItems = -1);
 
 }

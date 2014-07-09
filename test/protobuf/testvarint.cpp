@@ -111,6 +111,110 @@ void TestVarint::parseSignedInts()
     }
 }
 
+void TestVarint::parseStandardInt_data()
+{
+    QTest::addColumn<QByteArray>("data");
+    QTest::addColumn<QVariant>("expected");
+
+    // Examples from https://developers.google.com/protocol-buffers/docs/encoding#varints
+    // Assuming that values less than 8-bytes are identical to unsigned varints.
+    QTest::newRow("0000 0001")
+        << QByteArray("\x01")
+        << QVariant(1);
+    QTest::newRow("1010 1100 0000 0010")
+        << QByteArray("\xAC\x02")
+        << QVariant(300);
+
+    // Some edge cases.
+    QTest::newRow("0")
+        << QByteArray("\x0", 1)
+        << QVariant(0);
+    QTest::newRow("1")
+        << QByteArray("\x01")
+        << QVariant(1);
+    QTest::newRow("-1")
+        << QByteArray("\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x01")
+        << QVariant(-1);
+    QTest::newRow("int64::min")
+        << QByteArray("\x80\x80\x80\x80\x80\x80\x80\x80\x80\x01")
+        << QVariant(std::numeric_limits<qint64>::min());
+    QTest::newRow("int64::max")
+        << QByteArray("\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x00", 10)
+        << QVariant(std::numeric_limits<qint64>::max());
+}
+
+void TestVarint::parseStandardInt()
+{
+    QFETCH(QByteArray, data);
+    QFETCH(QVariant, expected);
+
+    QCOMPARE(ProtoBuf::parseStandardVarint(data), expected);
+}
+
+void TestVarint::parseStandardInts_data()
+{
+    QTest::addColumn<QByteArray>("data");
+    QTest::addColumn<QVariantList>("expected");
+
+    QVariantList list;
+
+    list.clear();
+    list << QVariant(1) << QVariant(2) << QVariant(3);
+    QTest::newRow("1;2;3")
+        << QByteArray("\x01\x02\x03")
+        << list;
+
+    list.clear();
+    list << QVariant(300) << QVariant(1) << QVariant(300);
+    QTest::newRow("300;1;300")
+        << QByteArray("\xAC\x02" "\x01" "\xAC\x02")
+        << list;
+
+    // Duration samples from actual FlowSync data.
+    list.clear();
+    list << 500 << 1000 << 2000 << 3000 << 4000 << 5000 << 6000 << 7000
+         << 8000 << 9000 << 10000 << 11000 << 12000 << 13000 << 14000;
+    QTest::newRow("mzoo:route:1:first")
+        << QByteArray("\364\003\350\007\320\017\270\027\240\037\210\'\360."
+                      "\3306\300>\250F\220N\370U\340]\310e\260m")
+        << list;
+
+    list.clear();
+    list << 6992000 << 6993000 << 6994000 << 6995000 << 6996000 << 6997000
+         << 6998000 << 6999000 << 7000000 << 7001000 << 7002000 << 7003000
+         << 7004000;
+    QTest::newRow("mzoo:route:1:last")
+        << QByteArray("\200\341\252\003\350\350\252\003\320\360\252\003"
+                      "\270\370\252\003\240\200\253\003\210\210\253\003"
+                      "\360\217\253\003\330\227\253\003\300\237\253\003"
+                      "\250\247\253\003\220\257\253\003\370\266\253\003"
+                      "\340\276\253\003")
+        << list;
+
+    // Satellite counts from actual FlowSync data.
+    list.clear();
+    list << 10 << 10 << 10 << 10 << 10 << 10 << 10 << 9 << 8 << 8 << 8 << 9 << 8 << 8 << 9;
+    QTest::newRow("mzoo:route:5:rnd")
+        << QByteArray("\n\n\n\n\n\n\n\t\010\010\010\t\010\010\t")
+        << list;
+}
+
+void TestVarint::parseStandardInts()
+{
+    QFETCH(QByteArray, data);
+    QFETCH(QVariantList, expected);
+
+    // Various ways to parse all items.
+    //QCOMPARE(ProtoBuf::parseStandardVarints(data), expected);
+    //QCOMPARE(ProtoBuf::parseStandardVarints(data, expected.size()), expected);
+    //QCOMPARE(ProtoBuf::parseStandardVarints(data, expected.size() * 2), expected);
+
+    // Parse just first n items, where n is from all items down to none.
+    for (int size = expected.size(); size >= 0; --size) {
+        //QCOMPARE(ProtoBuf::parseStandardVarints(data, size), expected.mid(0, size));
+    }
+}
+
 void TestVarint::parseUnsignedInt_data()
 {
     QTest::addColumn<QByteArray>("data");

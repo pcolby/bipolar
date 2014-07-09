@@ -24,7 +24,7 @@
 
 namespace ProtoBuf {
 
-QVariant parseSignedVarint(QByteArray &data)
+QVariant parseSignedVarint(QByteArray data)
 {
     QBuffer buffer(&data);
     buffer.open(QIODevice::ReadOnly);
@@ -41,7 +41,7 @@ QVariant parseSignedVarint(QIODevice &data)
     return static_cast<qint64>(result >> 1) * ((result & 0x1) ? -1 : 1) + ((result & 0x1) ? -1 : 0);
 }
 
-QVariantList parseSignedVarints(QByteArray &data, int maxItems)
+QVariantList parseSignedVarints(QByteArray data, int maxItems)
 {
     QBuffer buffer(&data);
     buffer.open(QIODevice::ReadOnly);
@@ -62,7 +62,44 @@ QVariantList parseSignedVarints(QIODevice &data, int maxItems)
     return list;
 }
 
-QVariant parseUnsignedVarint(QByteArray &data)
+QVariant parseStandardVarint(QByteArray data)
+{
+    QBuffer buffer(&data);
+    buffer.open(QIODevice::ReadOnly);
+    return parseStandardVarint(buffer);
+}
+
+QVariant parseStandardVarint(QIODevice &data)
+{
+    const QVariant variant = parseUnsignedVarint(data);
+    if (!variant.isValid()) {
+        return QVariant();
+    }
+    return static_cast<qint64>(variant.toULongLong());
+}
+
+QVariantList parseStandardVarints(QByteArray data, int maxItems)
+{
+    QBuffer buffer(&data);
+    buffer.open(QIODevice::ReadOnly);
+    return parseStandardVarints(buffer, maxItems);
+}
+
+QVariantList parseStandardVarints(QIODevice &data, int maxItems)
+{
+    QVariantList list;
+    for (; (maxItems < 0) || (list.size() < maxItems);) {
+        const QVariant item = parseStandardVarint(data);
+        if (item.isValid()) {
+            list << item;
+        } else {
+            maxItems = 0;
+        }
+    }
+    return list;
+}
+
+QVariant parseUnsignedVarint(QByteArray data)
 {
     QBuffer buffer(&data);
     buffer.open(QIODevice::ReadOnly);
@@ -81,7 +118,7 @@ QVariant parseUnsignedVarint(QIODevice &data)
     return result;
 }
 
-QVariantList parseUnsignedVarints(QByteArray &data, int maxItems)
+QVariantList parseUnsignedVarints(QByteArray data, int maxItems)
 {
     QBuffer buffer(&data);
     buffer.open(QIODevice::ReadOnly);
