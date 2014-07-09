@@ -92,17 +92,9 @@ QVariant Message::parseValue(Type &data, const quint8 wireType, const FieldType 
     case 0: // Varint (int32, int64, uint32, uint64, sint32, sint64, bool, enum)
         switch (typeHint) {
         case TypeBoolean:         return parseUnsignedVarint(data);
-        case TypeEnum:
-            Q_ASSERT_X(false, "Message::parseValue", "varint int not implemented yet");
-            parseUnsignedVarint(data); // Skip the varint.
-            /// @todo Implement varint int support in varint.{cpp,h}
-            return QVariant();
-        case TypeInteger:
-            Q_ASSERT_X(false, "Message::parseValue", "varint int not implemented yet");
-            parseUnsignedVarint(data); // Skip the varint.
-            /// @todo Implement varint int support in varint.{cpp,h}
-            return QVariant();
+        case TypeEnumerator:      return parseStandardVarint(data);
         case TypeSignedInteger:   return parseSignedVarint(data);
+        case TypeStandardInteger: return parseStandardVarint(data);
         case TypeUnsignedInteger: return parseUnsignedVarint(data);
         default:                  return parseUnsignedVarint(data);
         }

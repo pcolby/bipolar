@@ -36,10 +36,10 @@ public:
         TypeBoolean,
         TypeBytes,
         TypeEmbeddedMessage,
-        TypeEnum, // uses int* (not sint* or uint*).
+        TypeEnumerator,
         TypeFloatingPoint,
-        TypeInteger,
         TypeSignedInteger,
+        TypeStandardInteger,
         TypeString,
         TypeUnsignedInteger,
     };
