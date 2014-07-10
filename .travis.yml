@@ -18,5 +18,11 @@ before_script:
 
 script:
   - pushd test
+  - pwd
+  - ls -l
+  - find . -name *.dat || true
+  - find . -name golden* || true
+  - find . -name testdata || true
+  - updatedb && locate golden_message || true
   - make && make check
   - popd
