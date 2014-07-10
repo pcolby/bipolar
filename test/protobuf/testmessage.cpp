@@ -29,22 +29,22 @@ void TestMessage::parse_data()
     QTest::addColumn<QByteArray>("data");
     QTest::addColumn<QVariant>("expected");
 
-    QFile goldenMessage(QFINDTESTDATA("protobuf/testdata/golden_message"));
+    QFile goldenMessage(QLatin1String("protobuf/testdata/golden_message"));
     goldenMessage.open(QIODevice::ReadOnly);
     QTest::newRow("golden-message") << goldenMessage.readAll() << QVariant();
     goldenMessage.close();
 
-    QFile goldenPackedFieldsMessage(QFINDTESTDATA("protobuf/testdata/golden_packed_fields_message"));
+    QFile goldenPackedFieldsMessage(QLatin1String("protobuf/testdata/golden_packed_fields_message"));
     goldenPackedFieldsMessage.open(QIODevice::ReadOnly);
     QTest::newRow("golden-message") << goldenPackedFieldsMessage.readAll() << QVariant();
     goldenPackedFieldsMessage.close();
 
-    QFile googleMessage1(QFINDTESTDATA("protobuf/testdata/google_message1.dat"));
+    QFile googleMessage1(QLatin1String("protobuf/testdata/google_message1.dat"));
     googleMessage1.open(QIODevice::ReadOnly);
     QTest::newRow("golden-message") << googleMessage1.readAll() << QVariant();
     googleMessage1.close();
 
-    QFile googlemessage2(QFINDTESTDATA("protobuf/testdata/google_message2.dat"));
+    QFile googlemessage2(QLatin1String("protobuf/testdata/google_message2.dat"));
     googlemessage2.open(QIODevice::ReadOnly);
     QTest::newRow("golden-message") << googlemessage2.readAll() << QVariant();
     googlemessage2.close();
