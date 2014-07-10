@@ -12,7 +12,7 @@ licensed accordingly.  Please see the following table for details.
 File | Project | License | Original Link
 -----|---------|---------|--------------
 `golden_message` | [Google Protocol Buffers][pb] | [BSD] | [golden_message][gm3]
-`golden_packed_fields_message` | [Google Protocol Buffers][pb] |  [golden_packed_fields_message][gm4]
+`golden_packed_fields_message` | [Google Protocol Buffers][pb] | [BSD] | [golden_packed_fields_message][gm4]
 `google_message1.dat` | [Google Protocol Buffers]() | [BSD] | [google_message1.dat][gm1]
 `google_message2.dat` | [Google Protocol Buffers]() | [BSD] | [google_message2.dat][gm2]
 
@@ -20,5 +20,5 @@ File | Project | License | Original Link
 [gm1]: https://code.google.com/p/protobuf/source/browse/trunk/benchmarks/google_message1.dat
 [gm2]: https://code.google.com/p/protobuf/source/browse/trunk/benchmarks/google_message2.dat
 [gm3]: https://code.google.com/p/protobuf/source/browse/trunk/src/google/protobuf/testdata/golden_message
-[gm4:] https://code.google.com/p/protobuf/source/browse/trunk/src/google/protobuf/testdata/golden_packed_fields_message
+[gm4]: https://code.google.com/p/protobuf/source/browse/trunk/src/google/protobuf/testdata/golden_packed_fields_message
 [pb]: https://code.google.com/p/protobuf/ "Protocol Bufers - Google Developers"
