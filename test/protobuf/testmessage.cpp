@@ -46,7 +46,7 @@ void TestMessage::parse_data()
 
     QFile googlemessage2(QLatin1String("protobuf/testdata/google_message2.dat"));
     googlemessage2.open(QIODevice::ReadOnly);
-    QTest::newRow("google-message1") << googlemessage2.readAll() << QVariant();
+    QTest::newRow("google-message2") << googlemessage2.readAll() << QVariant();
     googlemessage2.close();
 }
 
