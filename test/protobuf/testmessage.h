@@ -23,7 +23,7 @@ class TestMessage : public QObject {
     Q_OBJECT
 
 private slots:
-    void parseMessage_data();
-    void parseMessage();
+    void parse_data();
+    void parse();
 
 };
