@@ -36,17 +36,17 @@ void TestMessage::parse_data()
 
     QFile goldenPackedFieldsMessage(QLatin1String("protobuf/testdata/golden_packed_fields_message"));
     goldenPackedFieldsMessage.open(QIODevice::ReadOnly);
-    QTest::newRow("golden-message") << goldenPackedFieldsMessage.readAll() << QVariant();
+    QTest::newRow("golden-packed-fields-message") << goldenPackedFieldsMessage.readAll() << QVariant();
     goldenPackedFieldsMessage.close();
 
     QFile googleMessage1(QLatin1String("protobuf/testdata/google_message1.dat"));
     googleMessage1.open(QIODevice::ReadOnly);
-    QTest::newRow("golden-message") << googleMessage1.readAll() << QVariant();
+    QTest::newRow("google-message1") << googleMessage1.readAll() << QVariant();
     googleMessage1.close();
 
     QFile googlemessage2(QLatin1String("protobuf/testdata/google_message2.dat"));
     googlemessage2.open(QIODevice::ReadOnly);
-    QTest::newRow("golden-message") << googlemessage2.readAll() << QVariant();
+    QTest::newRow("google-message1") << googlemessage2.readAll() << QVariant();
     googlemessage2.close();
 }
 
