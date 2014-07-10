@@ -29,25 +29,21 @@ void TestMessage::parse_data()
     QTest::addColumn<QByteArray>("data");
     QTest::addColumn<QVariant>("expected");
 
-    QFile goldenMessage(QLatin1String("protobuf/testdata/golden_message"));
-    goldenMessage.open(QIODevice::ReadOnly);
-    QTest::newRow("golden-message") << goldenMessage.readAll() << QVariant();
-    goldenMessage.close();
+    #define LOAD_TEST_DATA(name) { \
+        QString fileName = QFINDTESTDATA("protobuf/testdata/" name); \
+        if (fileName.isEmpty()) fileName = QFINDTESTDATA("../protobuf/testdata/" name); \
+        QVERIFY2(!fileName.isEmpty(), "failed to find " name " testdata"); \
+        QFile file(fileName); \
+        file.open(QIODevice::ReadOnly); \
+        QTest::newRow(name) << file.readAll() << QVariant(); \
+    }
 
-    QFile goldenPackedFieldsMessage(QLatin1String("./protobuf/testdata/golden_packed_fields_message"));
-    goldenPackedFieldsMessage.open(QIODevice::ReadOnly);
-    QTest::newRow("golden-packed-fields-message") << goldenPackedFieldsMessage.readAll() << QVariant();
-    goldenPackedFieldsMessage.close();
+    LOAD_TEST_DATA("golden_message")
+    LOAD_TEST_DATA("golden_packed_fields_message")
+    LOAD_TEST_DATA("google_message1.dat")
+    LOAD_TEST_DATA("google_message2.dat")
 
-    QFile googleMessage1(QLatin1String("../protobuf/testdata/google_message1.dat"));
-    googleMessage1.open(QIODevice::ReadOnly);
-    QTest::newRow("google-message1") << googleMessage1.readAll() << QVariant();
-    googleMessage1.close();
-
-    QFile googlemessage2(QLatin1String("protobuf/testdata/google_message2.dat"));
-    googlemessage2.open(QIODevice::ReadOnly);
-    QTest::newRow("google-message2") << googlemessage2.readAll() << QVariant();
-    googlemessage2.close();
+    #undef LOAD_TEST_DATA
 }
 
 void TestMessage::parse()
