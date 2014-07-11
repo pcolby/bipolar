@@ -152,9 +152,9 @@ QVariant Message::parsePrefixDelimitedValue(Type &data, const quint8 wireType,
 
     // Parse packed repeated values into a list.
     QVariantList list;
-    for (QVariant item(0); !item.isNull();) {
+    for (QVariant item(0); item.isValid();) {
         item = parseValue(data, wireType, typeHint, tagPath + pathSeparator);
-        if (!item.isNull()) {
+        if (item.isValid()) {
             list << item;
         }
     }
