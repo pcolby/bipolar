@@ -69,7 +69,7 @@ protected:
     QPair<quint32, quint8> parseTagAndType(QIODevice &data) const;
 
     template<typename Type>
-    QVariant parsePrefixDelimitedValue(Type &data, const quint8 wireType,
+    QVariant parseLengthDelimitedValue(Type &data, const quint8 wireType,
                                        const FieldType typeHint,
                                        const QString &tagPath) const;
 
@@ -78,7 +78,7 @@ protected:
                         const QString &tagPath) const;
 
     template<typename Type>
-    QByteArray readPrefixDelimitedValue(Type &data) const;
+    QByteArray readLengthDelimitedValue(Type &data) const;
 
 };
 

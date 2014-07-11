@@ -108,7 +108,7 @@ QVariant Message::parseValue(Type &data, const quint8 wireType, const FieldType 
         }
         break;
     case 2: // Length-delimited (string, bytes, embedded messages, packed repeated fields)
-        return parsePrefixDelimitedValue(data, wireType, typeHint, tagPath);
+        return parseLengthDelimitedValue(data, wireType, typeHint, tagPath);
     case 3: // Start group (groups (deprecated)
         Q_ASSERT_X(false, "Message::parseValue", "start group not implemented");
         /// @todo At least skip the field.
@@ -130,11 +130,11 @@ QVariant Message::parseValue(Type &data, const quint8 wireType, const FieldType 
 }
 
 template<typename Type>
-QVariant Message::parsePrefixDelimitedValue(Type &data, const quint8 wireType,
+QVariant Message::parseLengthDelimitedValue(Type &data, const quint8 wireType,
                                             const FieldType typeHint,
                                             const QString &tagPath) const
 {
-    const QByteArray value = readPrefixDelimitedValue(data);
+    const QByteArray value = readLengthDelimitedValue(data);
     if (value.isNull()) {
         return QVariant();
     }
@@ -162,7 +162,7 @@ QVariant Message::parsePrefixDelimitedValue(Type &data, const quint8 wireType,
 }
 
 template<typename Type>
-QByteArray Message::readPrefixDelimitedValue(Type &data) const
+QByteArray Message::readLengthDelimitedValue(Type &data) const
 {
     // Note: We're assuming length-delimited values use unsigned varints for lengths.
     // I haven't found any Protocl Buffers documentation to support / dispute this.
