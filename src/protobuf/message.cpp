@@ -141,7 +141,7 @@ QVariant Message::parsePrefixDelimitedValue(Type &data, const quint8 wireType,
 
     // Return bytes and strings as-is. For strings, the caller will need to
     // determine / assume the character encoding used in the field.
-    if ((typeHint == TypeBytes) || (typeHint == TypeString)) {
+    if ((typeHint == TypeBytes) || (typeHint == TypeString) || (typeHint == TypeUnknown)) {
         return value;
     }
 
