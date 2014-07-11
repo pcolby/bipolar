@@ -122,7 +122,7 @@ QVariant Message::parseValue(Type &data, const quint8 wireType, const FieldType 
         case TypeFloatingPoint:   return parseFixedNumber<float>(data);
         case TypeSignedInteger:   return parseFixedNumber<qint32>(data);
         case TypeUnsignedInteger: return parseFixedNumber<quint32>(data);
-        default:                  return data.read(8); // The raw 4-byte sequence.
+        default:                  return data.read(4); // The raw 4-byte sequence.
         }
         break;
     }
