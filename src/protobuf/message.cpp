@@ -50,6 +50,11 @@ QVariantMap Message::parse(QIODevice &data, const QString &tagPathPrefix) const
             return QVariantMap();
         }
 
+        // If this is a (deprecated) "end group", return the parsed group.
+        if (tagAndType.second == 4) {
+            return parsedFields;
+        }
+
         // Get the (optional) field name and type hint for this field.
         const QString tagPath = QString::fromLatin1("%1%2").arg(tagPathPrefix).arg(tagAndType.first);
         FieldInfo fieldInfo = this->fieldInfo.value(tagPath); // Note intentional fallback to default-constructed.
@@ -110,13 +115,9 @@ QVariant Message::parseValue(Type &data, const quint8 wireType, const FieldType 
     case 2: // Length-delimited (string, bytes, embedded messages, packed repeated fields)
         return parseLengthDelimitedValue(data, wireType, typeHint, tagPath);
     case 3: // Start group (groups (deprecated)
-        Q_ASSERT_X(false, "Message::parseValue", "start group not implemented");
-        /// @todo At least skip the field.
-        break;
+        return parse(data, tagPath + pathSeparator);
     case 4: // End group (groups (deprecated)
-        Q_ASSERT_X(false, "Message::parseValue", "end group not implemented");
-        /// @todo At least skip the field.
-        break;
+        return QVariant(); // Caller will need to end the group started previously.
     case 5: // 32-bit (fixed32, sfixed32, float)
         switch (typeHint) {
         case TypeFloatingPoint:   return parseFixedNumber<float>(data);
