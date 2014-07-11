@@ -30,10 +30,7 @@ void TestMessage::parse_data()
     QTest::addColumn<QVariant>("expected");
 
     #define LOAD_TEST_DATA(name) { \
-        QString fileName = QFINDTESTDATA("protobuf/testdata/" name); \
-        if (fileName.isEmpty()) fileName = QFINDTESTDATA("../protobuf/testdata/" name); \
-        QVERIFY2(!fileName.isEmpty(), "failed to find " name " testdata"); \
-        QFile file(fileName); \
+        QFile file(QFINDTESTDATA("testdata/" name)); \
         file.open(QIODevice::ReadOnly); \
         QTest::newRow(name) << file.readAll() << QVariant(); \
     }
