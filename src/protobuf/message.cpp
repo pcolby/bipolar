@@ -59,7 +59,7 @@ QVariantMap Message::parse(QIODevice &data, const QString &tagPathPrefix) const
         const QString tagPath = QString::fromLatin1("%1%2").arg(tagPathPrefix).arg(tagAndType.first);
         FieldInfo fieldInfo = this->fieldInfo.value(tagPath); // Note intentional fallback to default-constructed.
         if (fieldInfo.fieldName.isEmpty()) {
-            fieldInfo.fieldName = tagPath;
+            fieldInfo.fieldName = QString::fromLatin1("%1").arg(tagAndType.first);
         }
 
         // Parse the field value.
