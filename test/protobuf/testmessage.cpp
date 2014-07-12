@@ -45,7 +45,7 @@ void TestMessage::parse_data()
     #define LOAD_TEST_DATA(name, subTest) { \
         QFile dataFile(QFINDTESTDATA("testdata/" name)); \
         dataFile.open(QIODevice::ReadOnly); \
-        QFile expected(QFINDTESTDATA("testdata/golden_message" subTest ".expected.json")); \
+        QFile expected(QFINDTESTDATA("testdata/" name subTest ".expected.json")); \
         expected.open(QIODevice::ReadOnly); \
         QTest::newRow(name) \
             << dataFile.readAll() \
@@ -54,7 +54,7 @@ void TestMessage::parse_data()
     }
 
     LOAD_TEST_DATA("golden_message", "");
-    //LOAD_TEST_DATA("golden_packed_fields_message", "")
+    LOAD_TEST_DATA("golden_packed_fields_message", "")
     //LOAD_TEST_DATA("google_message1.dat", "")
     //LOAD_TEST_DATA("google_message2.dat", "")
 
