@@ -28,12 +28,36 @@
 
 Q_DECLARE_METATYPE(ProtoBuf::Message::FieldInfoMap)
 
-ProtoBuf::Message::FieldInfoMap loadFieldInfoMap()
+ProtoBuf::Message::FieldInfoMap loadFieldInfoMap(const QString &name, const QString &subTest)
 {
-    /// @todo
-    //QFile fields(QFINDTESTDATA("testdata/golden_message" subTest ".fields.json"));
-    //fields.open(QIODevice::ReadOnly);
-    return ProtoBuf::Message::FieldInfoMap();
+    ProtoBuf::Message::FieldInfoMap fields;
+    QFile file(QString::fromLatin1("testdata/%1%2.fields.csv").arg(name).arg(subTest));
+    if (file.exists()) {
+        file.open(QIODevice::ReadOnly);
+        foreach (const QString &line, QString::fromLatin1(file.readAll()).split(QLatin1Char('\n'))) {
+            const QStringList parts = line.split(QLatin1Char(','));
+            if ((parts.size() == 3) && (!parts.at(1).startsWith(QLatin1Char('#')))) {
+                ProtoBuf::Message::FieldInfo fieldInfo(parts.at(1));
+                #define SET_TYPEHINT_IF_MATCH(type) \
+                    if (parts.at(2) == QLatin1String(#type)) { \
+                        fieldInfo.typeHint = ProtoBuf::Message::Type##type; \
+                    }
+                SET_TYPEHINT_IF_MATCH(Unknown)
+                SET_TYPEHINT_IF_MATCH(Boolean)
+                SET_TYPEHINT_IF_MATCH(Bytes)
+                SET_TYPEHINT_IF_MATCH(EmbeddedMessage)
+                SET_TYPEHINT_IF_MATCH(Enumerator)
+                SET_TYPEHINT_IF_MATCH(FloatingPoint)
+                SET_TYPEHINT_IF_MATCH(SignedInteger)
+                SET_TYPEHINT_IF_MATCH(StandardInteger)
+                SET_TYPEHINT_IF_MATCH(String)
+                SET_TYPEHINT_IF_MATCH(UnsignedInteger)
+                #undef SET_TYPEHINT_IF_MATCH
+                fields[parts.at(1)] = fieldInfo;
+            }
+        }
+    }
+    return fields;
 }
 
 // Replace raw QByteArray data with hex strings. This is needed because the
@@ -81,7 +105,7 @@ void TestMessage::parse_data()
         expectedStream >> expectedMap; \
         QTest::newRow(name) \
             << dataFile.readAll() \
-            << loadFieldInfoMap() \
+            << loadFieldInfoMap(QLatin1String(name), QLatin1String(subTest)) \
             << expectedMap; \
     }
 
