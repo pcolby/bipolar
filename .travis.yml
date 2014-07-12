@@ -20,3 +20,11 @@ script:
   - pushd test
   - make && make check
   - popd
+
+after_failure:
+  - pushd test/protobuf/testdata/
+  - diff -u golden_message.expected.json golden_message.result.json
+  - diff -u golden_packed_fields_message.expected.json golden_packed_fields_message.result.json
+  - diff -u google_message1.dat.expected.json google_message1.dat.result.json
+  - diff -u google_message2.dat.expected.json google_message2.dat.result.json
+  - popd
