@@ -65,7 +65,7 @@ QVariantMap Message::parse(QIODevice &data, const QString &tagPathPrefix) const
 
         // Parse the field value.
         const QVariant value = parseValue(data, tagAndType.second, fieldInfo.typeHint, tagPath);
-        if (value.isNull()) {
+        if (!value.isValid()) {
             return QVariantMap();
         }
 
@@ -137,8 +137,8 @@ QVariant Message::parseLengthDelimitedValue(Type &data, const quint8 wireType,
                                             const FieldType typeHint,
                                             const QString &tagPath) const
 {
-    const QByteArray value = readLengthDelimitedValue(data);
-    if (value.isNull()) {
+    const QVariant value = readLengthDelimitedValue(data);
+    if (!value.isValid()) {
         qWarning() << "failed to read prefix-delimited value";
         return QVariant();
     }
@@ -166,12 +166,12 @@ QVariant Message::parseLengthDelimitedValue(Type &data, const quint8 wireType,
 }
 
 template<typename Type>
-QByteArray Message::readLengthDelimitedValue(Type &data) const
+QVariant Message::readLengthDelimitedValue(Type &data) const
 {
     // Note: We're assuming length-delimited values use unsigned varints for lengths.
     // I haven't found any Protocl Buffers documentation to support / dispute this.
     const QVariant length = parseUnsignedVarint(data);
-    if (length.isNull()) {
+    if (!length.isValid()) {
         qWarning() << "failed to read prefix-delimited length";
         return QByteArray();
     }

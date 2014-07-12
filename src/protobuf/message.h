@@ -78,7 +78,7 @@ protected:
                         const QString &tagPath) const;
 
     template<typename Type>
-    QByteArray readLengthDelimitedValue(Type &data) const;
+    QVariant readLengthDelimitedValue(Type &data) const;
 
 };
 
