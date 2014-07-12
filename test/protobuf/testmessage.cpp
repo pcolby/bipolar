@@ -75,7 +75,7 @@ void TestMessage::parse()
     const QJsonDocument json = QJsonDocument::fromVariant(result);
 
     // Write the result to a JSON file for optional post-mortem investigation.
-#if Q_OS_WIN
+#ifdef Q_OS_WIN
     QFile output(QString::fromLatin1("protobuf/testdata/%1.result.json")
 #else
     QFile output(QString::fromLatin1("../protobuf/testdata/%1.result.json")
