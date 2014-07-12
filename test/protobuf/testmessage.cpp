@@ -36,21 +36,53 @@ ProtoBuf::Message::FieldInfoMap loadFieldInfoMap()
     return ProtoBuf::Message::FieldInfoMap();
 }
 
+// Replace raw QByteArray data with hex strings. This is needed because the
+// JSON export to UTF-8 is inconsitent accross platforms, and accross Qt
+// versions unfortunately.  Note, this is done for diagnostic outputs only,
+// and does not affect the QVariant comparisons that make up the actual tests.
+void sanitize(QVariant &variant) {
+    switch (static_cast<QMetaType::Type>(variant.type())) {
+    case QMetaType::QByteArray:
+        variant = variant.toByteArray().toHex();
+        break;
+    case QMetaType::QVariantList: {
+            QVariantList list;
+            foreach (QVariant item, variant.toList()) {
+                sanitize(item);
+                list << item;
+            }
+            variant = list;
+        }
+        break;
+    case QMetaType::QVariantMap: {
+            QVariantMap map(variant.toMap());
+            for (QVariantMap::iterator iter = map.begin(); iter != map.end(); ++iter) {
+                sanitize(iter.value());
+            }
+            variant = map;
+        }
+        break;
+    }
+}
+
 void TestMessage::parse_data()
 {
     QTest::addColumn<QByteArray>("data");
     QTest::addColumn<ProtoBuf::Message::FieldInfoMap>("fieldInfo");
-    QTest::addColumn<QJsonDocument>("expected");
+    QTest::addColumn<QVariantMap>("expected");
 
     #define LOAD_TEST_DATA(name, subTest) { \
         QFile dataFile(QFINDTESTDATA("testdata/" name)); \
         dataFile.open(QIODevice::ReadOnly); \
-        QFile expected(QFINDTESTDATA("testdata/" name subTest ".expected.json")); \
-        expected.open(QIODevice::ReadOnly); \
+        QFile expectedFile(QFINDTESTDATA("testdata/" name subTest ".expected.var")); \
+        expectedFile.open(QIODevice::ReadOnly); \
+        QDataStream expectedStream(&expectedFile); \
+        QVariantMap expectedMap; \
+        expectedStream >> expectedMap; \
         QTest::newRow(name) \
             << dataFile.readAll() \
             << loadFieldInfoMap() \
-            << QJsonDocument::fromJson(expected.readAll()); \
+            << expectedMap; \
     }
 
     LOAD_TEST_DATA("golden_message", "");
@@ -65,27 +97,41 @@ void TestMessage::parse()
 {
     QFETCH(QByteArray, data);
     QFETCH(ProtoBuf::Message::FieldInfoMap, fieldInfo);
-    QFETCH(QJsonDocument, expected);
+    QFETCH(QVariantMap, expected);
 
     QVERIFY2(!data.isEmpty(), "failed to load testdata");
 
     // Parse the protobuf message.
     const ProtoBuf::Message message(fieldInfo);
     const QVariantMap result = message.parse(data);
-    const QJsonDocument json = QJsonDocument::fromVariant(result);
+
+    // Write the result to a binary file for optional post-mortem investigation.
+#ifdef Q_OS_WIN
+    QFile binaryFile(QString::fromLatin1("protobuf/testdata/%1.result.var")
+#else
+    QFile binaryFile(QString::fromLatin1("../protobuf/testdata/%1.result.var")
+#endif
+                 .arg(QString::fromLatin1(QTest::currentDataTag())));
+    if (binaryFile.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+        QDataStream stream(&binaryFile);
+        stream << result;
+        binaryFile.close();
+    }
 
     // Write the result to a JSON file for optional post-mortem investigation.
 #ifdef Q_OS_WIN
-    QFile output(QString::fromLatin1("protobuf/testdata/%1.result.json")
+    QFile jsonFile(QString::fromLatin1("protobuf/testdata/%1.result.json")
 #else
-    QFile output(QString::fromLatin1("../protobuf/testdata/%1.result.json")
+    QFile jsonFile(QString::fromLatin1("../protobuf/testdata/%1.result.json")
 #endif
                  .arg(QString::fromLatin1(QTest::currentDataTag())));
-    if (output.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
-        output.write(json.toJson().data());
-        output.close();
+    if (jsonFile.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+        QVariant saneResult(result);
+        sanitize(saneResult);
+        jsonFile.write(QJsonDocument::fromVariant(saneResult).toJson());
+        jsonFile.close();
     }
 
     // Compare the result.
-    QCOMPARE(json, expected);
+    QCOMPARE(result, expected);
 }
