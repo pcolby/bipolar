@@ -21,24 +21,42 @@
 
 #include "../../src/protobuf/message.h"
 
+#include <QDebug>
 #include <QFile>
+#include <QJsonDocument>
 #include <QTest>
+
+Q_DECLARE_METATYPE(ProtoBuf::Message::FieldInfoMap)
+
+ProtoBuf::Message::FieldInfoMap loadFieldInfoMap()
+{
+    /// @todo
+    //QFile fields(QFINDTESTDATA("testdata/golden_message" subTest ".fields.json"));
+    //fields.open(QIODevice::ReadOnly);
+    return ProtoBuf::Message::FieldInfoMap();
+}
 
 void TestMessage::parse_data()
 {
     QTest::addColumn<QByteArray>("data");
-    QTest::addColumn<QVariant>("expected");
+    QTest::addColumn<ProtoBuf::Message::FieldInfoMap>("fieldInfo");
+    QTest::addColumn<QJsonDocument>("expected");
 
-    #define LOAD_TEST_DATA(name) { \
-        QFile file(QFINDTESTDATA("testdata/" name)); \
-        file.open(QIODevice::ReadOnly); \
-        QTest::newRow(name) << file.readAll() << QVariant(); \
+    #define LOAD_TEST_DATA(name, subTest) { \
+        QFile dataFile(QFINDTESTDATA("testdata/" name)); \
+        dataFile.open(QIODevice::ReadOnly); \
+        QFile expected(QFINDTESTDATA("testdata/golden_message" subTest ".expected.json")); \
+        expected.open(QIODevice::ReadOnly); \
+        QTest::newRow(name) \
+            << dataFile.readAll() \
+            << loadFieldInfoMap() \
+            << QJsonDocument::fromJson(expected.readAll()); \
     }
 
-    LOAD_TEST_DATA("golden_message")
-    LOAD_TEST_DATA("golden_packed_fields_message")
-    LOAD_TEST_DATA("google_message1.dat")
-    LOAD_TEST_DATA("google_message2.dat")
+    LOAD_TEST_DATA("golden_message", "");
+    //LOAD_TEST_DATA("golden_packed_fields_message", "")
+    //LOAD_TEST_DATA("google_message1.dat", "")
+    //LOAD_TEST_DATA("google_message2.dat", "")
 
     #undef LOAD_TEST_DATA
 }
@@ -46,10 +64,24 @@ void TestMessage::parse_data()
 void TestMessage::parse()
 {
     QFETCH(QByteArray, data);
-    QFETCH(QVariant, expected);
+    QFETCH(ProtoBuf::Message::FieldInfoMap, fieldInfo);
+    QFETCH(QJsonDocument, expected);
 
     QVERIFY2(!data.isEmpty(), "failed to load testdata");
 
-    /// @todo
-    //QCOMPARE(ProtoBuf::parseMessage(data), expected);
+    // Parse the protobuf message.
+    const ProtoBuf::Message message(fieldInfo);
+    const QVariantMap result = message.parse(data);
+    const QJsonDocument json = QJsonDocument::fromVariant(result);
+
+    // Write the result to a JSON file for optional post-mortem investigation.
+    QFile output(QString::fromLatin1("protobuf/testdata/%1.result.json")
+                 .arg(QString::fromLatin1(QTest::currentDataTag())));
+    if (output.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+        output.write(json.toJson().data());
+        output.close();
+    }
+
+    // Compare the result.
+    QCOMPARE(json, expected);
 }
