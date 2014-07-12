@@ -16,6 +16,9 @@ File | Project | License | Original Link
 `google_message1.dat` | [Google Protocol Buffers]() | [BSD] | [google_message1.dat][gm1]
 `google_message2.dat` | [Google Protocol Buffers]() | [BSD] | [google_message2.dat][gm2]
 
+The associated `*.expected.json` files are part of the Bipolar project itself,
+and licensed accordingly.
+
 [BSD]: http://opensource.org/licenses/BSD-3-Clause "The BSD 3-Clause License | Open Source Initiative"
 [gm1]: https://code.google.com/p/protobuf/source/browse/trunk/benchmarks/google_message1.dat
 [gm2]: https://code.google.com/p/protobuf/source/browse/trunk/benchmarks/google_message2.dat
