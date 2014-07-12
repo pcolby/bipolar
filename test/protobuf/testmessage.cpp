@@ -56,7 +56,7 @@ void TestMessage::parse_data()
     LOAD_TEST_DATA("golden_message", "");
     LOAD_TEST_DATA("golden_packed_fields_message", "")
     LOAD_TEST_DATA("google_message1.dat", "")
-    //LOAD_TEST_DATA("google_message2.dat", "")
+    LOAD_TEST_DATA("google_message2.dat", "")
 
     #undef LOAD_TEST_DATA
 }
