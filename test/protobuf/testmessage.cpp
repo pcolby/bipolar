@@ -103,7 +103,7 @@ void TestMessage::parse_data()
         QDataStream expectedStream(&expectedFile); \
         QVariantMap expectedMap; \
         expectedStream >> expectedMap; \
-        QTest::newRow(name) \
+        QTest::newRow(name subTest) \
             << dataFile.readAll() \
             << loadFieldInfoMap(QLatin1String(name), QLatin1String(subTest)) \
             << expectedMap; \
@@ -112,7 +112,9 @@ void TestMessage::parse_data()
     LOAD_TEST_DATA("golden_message", "");
     LOAD_TEST_DATA("golden_packed_fields_message", "")
     LOAD_TEST_DATA("google_message1.dat", "")
+    LOAD_TEST_DATA("google_message1.dat", ".with_fields")
     LOAD_TEST_DATA("google_message2.dat", "")
+    LOAD_TEST_DATA("google_message2.dat", ".with_fields")
 
     #undef LOAD_TEST_DATA
 }
