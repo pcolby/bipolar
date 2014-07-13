@@ -19,6 +19,8 @@
 
 #include "trainingsession.h"
 
+#include "message.h"
+
 #include <QDir>
 #include <QFileInfo>
 
@@ -100,6 +102,11 @@ bool TrainingSession::parse(const QString &exerciseId, const QMap<QString, QStri
     return false;
 }
 
+#define ADD_FIELD_INFO(tag, name, type) \
+    fieldInfo[QLatin1String(tag)] = ProtoBuf::Message::FieldInfo( \
+        QLatin1String(name), ProtoBuf::Message::Type##type \
+    )
+
 QVariantMap TrainingSession::parseLaps(QIODevice &data)
 {
     Q_UNUSED(data);
@@ -118,9 +125,23 @@ QVariantMap TrainingSession::parseLaps(const QString &fileName)
 
 QVariantMap TrainingSession::parseRoute(QIODevice &data)
 {
-    Q_UNUSED(data);
-    Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
-    return QVariantMap();
+    ProtoBuf::Message::FieldInfoMap fieldInfo;
+    ADD_FIELD_INFO("1",     "duration",     UnsignedInteger);
+    ADD_FIELD_INFO("2",     "latitude",     FloatingPoint);
+    ADD_FIELD_INFO("3",     "longitude",    FloatingPoint);
+    ADD_FIELD_INFO("4",     "altitude",     SignedInteger);
+    ADD_FIELD_INFO("5",     "satellites",   UnsignedInteger);
+    ADD_FIELD_INFO("9",     "timestamp",    EmbeddedMessage);
+    ADD_FIELD_INFO("9/1",   "date",         EmbeddedMessage);
+    ADD_FIELD_INFO("9/1/1", "year",         UnsignedInteger);
+    ADD_FIELD_INFO("9/1/2", "month",        UnsignedInteger);
+    ADD_FIELD_INFO("9/1/3", "day",          UnsignedInteger);
+    ADD_FIELD_INFO("9/2",   "time",         EmbeddedMessage);
+    ADD_FIELD_INFO("9/2/1", "hour",         UnsignedInteger);
+    ADD_FIELD_INFO("9/2/2", "minute",       UnsignedInteger);
+    ADD_FIELD_INFO("9/2/3", "seconds",      UnsignedInteger);
+    ADD_FIELD_INFO("9/2/4", "milliseconds", UnsignedInteger);
+    return ProtoBuf::Message(fieldInfo).parse(data);
 }
 
 QVariantMap TrainingSession::parseRoute(const QString &fileName)
