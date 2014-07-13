@@ -60,7 +60,7 @@ ProtoBuf::Message::FieldInfoMap loadFieldInfoMap(const QString &name, const QStr
                     qWarning() << "unknown type" << parts.at(2) << "from" << file.fileName();
                 }
                 #undef SET_TYPEHINT_IF_MATCH
-                fields[parts.at(1)] = fieldInfo;
+                fields[parts.at(0)] = fieldInfo;
             }
         }
     }
