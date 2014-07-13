@@ -148,7 +148,8 @@ QVariant Message::parseLengthDelimitedValue(QIODevice &data,
 
     // Parse embedded messages recursively.
     if (typeHint == TypeEmbeddedMessage) {
-        return parse(value.toByteArray(), tagPath + pathSeparator);
+        QByteArray array = value.toByteArray();
+        return parse(array, tagPath + pathSeparator);
     }
 
     // Parse packed repeated values into a list.
