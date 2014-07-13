@@ -31,27 +31,34 @@ Q_DECLARE_METATYPE(ProtoBuf::Message::FieldInfoMap)
 ProtoBuf::Message::FieldInfoMap loadFieldInfoMap(const QString &name, const QString &subTest)
 {
     ProtoBuf::Message::FieldInfoMap fields;
-    QFile file(QString::fromLatin1("testdata/%1%2.fields.csv").arg(name).arg(subTest));
+#ifdef Q_OS_WIN
+    QFile file(QString::fromLatin1("protobuf/testdata/%1%2.fields.csv").arg(name).arg(subTest));
+#else
+    QFile file(QString::fromLatin1("../protobuf/testdata/%1%2.fields.csv").arg(name).arg(subTest));
+#endif
     if (file.exists()) {
         file.open(QIODevice::ReadOnly);
         foreach (const QString &line, QString::fromLatin1(file.readAll()).split(QLatin1Char('\n'))) {
-            const QStringList parts = line.split(QLatin1Char(','));
+            const QStringList parts = line.trimmed().split(QLatin1Char(','));
             if ((parts.size() == 3) && (!parts.at(1).startsWith(QLatin1Char('#')))) {
                 ProtoBuf::Message::FieldInfo fieldInfo(parts.at(1));
                 #define SET_TYPEHINT_IF_MATCH(type) \
-                    if (parts.at(2) == QLatin1String(#type)) { \
+                    if (parts.at(2).compare(QLatin1String(#type), Qt::CaseInsensitive) == 0) { \
                         fieldInfo.typeHint = ProtoBuf::Message::Type##type; \
                     }
                 SET_TYPEHINT_IF_MATCH(Unknown)
-                SET_TYPEHINT_IF_MATCH(Boolean)
-                SET_TYPEHINT_IF_MATCH(Bytes)
-                SET_TYPEHINT_IF_MATCH(EmbeddedMessage)
-                SET_TYPEHINT_IF_MATCH(Enumerator)
-                SET_TYPEHINT_IF_MATCH(FloatingPoint)
-                SET_TYPEHINT_IF_MATCH(SignedInteger)
-                SET_TYPEHINT_IF_MATCH(StandardInteger)
-                SET_TYPEHINT_IF_MATCH(String)
-                SET_TYPEHINT_IF_MATCH(UnsignedInteger)
+                else SET_TYPEHINT_IF_MATCH(Boolean)
+                else SET_TYPEHINT_IF_MATCH(Bytes)
+                else SET_TYPEHINT_IF_MATCH(EmbeddedMessage)
+                else SET_TYPEHINT_IF_MATCH(Enumerator)
+                else SET_TYPEHINT_IF_MATCH(FloatingPoint)
+                else SET_TYPEHINT_IF_MATCH(SignedInteger)
+                else SET_TYPEHINT_IF_MATCH(StandardInteger)
+                else SET_TYPEHINT_IF_MATCH(String)
+                else SET_TYPEHINT_IF_MATCH(UnsignedInteger)
+                else {
+                    qWarning() << "unknown type" << parts.at(2) << "from" << file.fileName();
+                }
                 #undef SET_TYPEHINT_IF_MATCH
                 fields[parts.at(1)] = fieldInfo;
             }
