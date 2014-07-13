@@ -93,6 +93,8 @@ void sanitize(QVariant &variant) {
             variant = map;
         }
         break;
+    default:
+        ; // Leave variant unmodified.
     }
 }
 
