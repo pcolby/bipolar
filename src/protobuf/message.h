@@ -74,7 +74,7 @@ protected:
 
     QPair<quint32, quint8> parseTagAndType(QIODevice &data) const;
 
-    QVariant parseLengthDelimitedValue(QIODevice &data, const quint8 wireType,
+    QVariant parseLengthDelimitedValue(QIODevice &data,
                                        const FieldType typeHint,
                                        const QString &tagPath) const;
 

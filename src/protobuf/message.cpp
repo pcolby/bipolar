@@ -130,7 +130,7 @@ QVariant Message::parseValue(QIODevice &data, const quint8 wireType, const Field
     return QVariant();
 }
 
-QVariant Message::parseLengthDelimitedValue(QIODevice &data, const quint8 wireType,
+QVariant Message::parseLengthDelimitedValue(QIODevice &data,
                                             const FieldType typeHint,
                                             const QString &tagPath) const
 {
