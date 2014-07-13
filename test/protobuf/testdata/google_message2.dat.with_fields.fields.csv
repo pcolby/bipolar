@@ -1,3 +1,6 @@
+# See SizeMessage2 from:
+# * https://code.google.com/p/protobuf/source/browse/trunk/benchmarks/google_size.proto
+# * https://code.google.com/p/protobuf/source/browse/trunk/benchmarks/google_speed.proto
 2,field2,Bytes
 3,field3,SignedInteger
 4,field4,SignedInteger
