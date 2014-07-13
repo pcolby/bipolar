@@ -81,7 +81,6 @@ QVariantMap Message::parse(QIODevice &data, const QString &tagPathPrefix) const
     return parsedFields;
 }
 
-
 QPair<quint32, quint8> Message::parseTagAndType(QIODevice &data) const
 {
     QVariant tagAndType = parseUnsignedVarint(data);
@@ -110,7 +109,7 @@ QVariant Message::parseValue(Type &data, const quint8 wireType, const FieldType 
         case TypeFloatingPoint:   return parseFixedNumber<double>(data);
         case TypeSignedInteger:   return parseFixedNumber<qint64>(data);
         case TypeUnsignedInteger: return parseFixedNumber<quint64>(data);
-        default:                  return data.read(8); // The raw 8-byte sequence.
+        default:                  return readBytes(data, 8); // The raw 8-byte sequence.
         }
         break;
     case 2: // Length-delimited (string, bytes, embedded messages, packed repeated fields)
@@ -124,7 +123,7 @@ QVariant Message::parseValue(Type &data, const quint8 wireType, const FieldType 
         case TypeFloatingPoint:   return parseFixedNumber<float>(data);
         case TypeSignedInteger:   return parseFixedNumber<qint32>(data);
         case TypeUnsignedInteger: return parseFixedNumber<quint32>(data);
-        default:                  return data.read(4); // The raw 4-byte sequence.
+        default:                  return readBytes(data, 4); // The raw 4-byte sequence.
         }
         break;
     }
@@ -151,18 +150,28 @@ QVariant Message::parseLengthDelimitedValue(Type &data, const quint8 wireType,
 
     // Parse embedded messages recursively.
     if (typeHint == TypeEmbeddedMessage) {
-        return parse(data, tagPath + pathSeparator);
+        return parse(value.toByteArray(), tagPath + pathSeparator);
     }
 
     // Parse packed repeated values into a list.
     QVariantList list;
     for (QVariant item(0); item.isValid();) {
-        item = parseValue(data, wireType, typeHint, tagPath + pathSeparator);
+        item = parseValue(value.toByteArray(), wireType, typeHint, tagPath + pathSeparator);
         if (item.isValid()) {
             list << item;
         }
     }
     return list;
+}
+
+QByteArray Message::readBytes(const QByteArray &array, const int length) const
+{
+    return array.left(length);
+}
+
+QByteArray Message::readBytes(QIODevice &device, const qint64 length) const
+{
+    return device.read(length);
 }
 
 template<typename Type>
@@ -175,7 +184,7 @@ QVariant Message::readLengthDelimitedValue(Type &data) const
         qWarning() << "failed to read prefix-delimited length";
         return QByteArray();
     }
-    const QByteArray value = data.read(length.toULongLong());
+    const QByteArray value = readBytes(data, length.toInt());
     return (value.length() == length.toInt()) ? value : QByteArray();
 }
 

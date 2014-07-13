@@ -53,6 +53,12 @@ public:
         {
 
         }
+
+        FieldInfo(FieldType typeHint, const QString fieldName = QString())
+            : fieldName(fieldName), typeHint(typeHint)
+        {
+
+        }
     };
 
     typedef QMap<QString, FieldInfo> FieldInfoMap;
@@ -76,6 +82,9 @@ protected:
     template<typename Type>
     QVariant parseValue(Type &data, const quint8 wireType, const FieldType typeHint,
                         const QString &tagPath) const;
+
+    QByteArray readBytes(const QByteArray &array, const int length) const;
+    QByteArray readBytes(QIODevice &device, const qint64 length) const;
 
     template<typename Type>
     QVariant readLengthDelimitedValue(Type &data) const;
