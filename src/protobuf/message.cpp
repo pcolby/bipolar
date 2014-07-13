@@ -89,8 +89,7 @@ QPair<quint32, quint8> Message::parseTagAndType(QIODevice &data) const
         : QPair<quint32, quint8>(0, 0);
 }
 
-template <typename Type>
-QVariant Message::parseValue(Type &data, const quint8 wireType, const FieldType typeHint,
+QVariant Message::parseValue(QIODevice &data, const quint8 wireType, const FieldType typeHint,
                              const QString &tagPath) const
 {
     switch (wireType) {
@@ -109,7 +108,7 @@ QVariant Message::parseValue(Type &data, const quint8 wireType, const FieldType 
         case TypeFloatingPoint:   return parseFixedNumber<double>(data);
         case TypeSignedInteger:   return parseFixedNumber<qint64>(data);
         case TypeUnsignedInteger: return parseFixedNumber<quint64>(data);
-        default:                  return readBytes(data, 8); // The raw 8-byte sequence.
+        default:                  return data.read(8); // The raw 8-byte sequence.
         }
         break;
     case 2: // Length-delimited (string, bytes, embedded messages, packed repeated fields)
@@ -123,16 +122,15 @@ QVariant Message::parseValue(Type &data, const quint8 wireType, const FieldType 
         case TypeFloatingPoint:   return parseFixedNumber<float>(data);
         case TypeSignedInteger:   return parseFixedNumber<qint32>(data);
         case TypeUnsignedInteger: return parseFixedNumber<quint32>(data);
-        default:                  return readBytes(data, 4); // The raw 4-byte sequence.
+        default:                  return data.read(4); // The raw 4-byte sequence.
         }
         break;
     }
-    qWarning() << "invalid wireType:" << wireType;
+    qWarning() << "invalid wireType:" << wireType << "(tagPath:" << tagPath << ')';
     return QVariant();
 }
 
-template<typename Type>
-QVariant Message::parseLengthDelimitedValue(Type &data, const quint8 wireType,
+QVariant Message::parseLengthDelimitedValue(QIODevice &data, const quint8 wireType,
                                             const FieldType typeHint,
                                             const QString &tagPath) const
 {
@@ -155,8 +153,9 @@ QVariant Message::parseLengthDelimitedValue(Type &data, const quint8 wireType,
 
     // Parse packed repeated values into a list.
     QVariantList list;
+    QByteArray array = value.toByteArray();
     for (QVariant item(0); item.isValid();) {
-        item = parseValue(value.toByteArray(), wireType, typeHint, tagPath + pathSeparator);
+        item = parse(array, tagPath + pathSeparator);
         if (item.isValid()) {
             list << item;
         }
@@ -164,28 +163,17 @@ QVariant Message::parseLengthDelimitedValue(Type &data, const quint8 wireType,
     return list;
 }
 
-QByteArray Message::readBytes(const QByteArray &array, const int length) const
-{
-    return array.left(length);
-}
-
-QByteArray Message::readBytes(QIODevice &device, const qint64 length) const
-{
-    return device.read(length);
-}
-
-template<typename Type>
-QVariant Message::readLengthDelimitedValue(Type &data) const
+QVariant Message::readLengthDelimitedValue(QIODevice &data) const
 {
     // Note: We're assuming length-delimited values use unsigned varints for lengths.
     // I haven't found any Protocl Buffers documentation to support / dispute this.
     const QVariant length = parseUnsignedVarint(data);
     if (!length.isValid()) {
         qWarning() << "failed to read prefix-delimited length";
-        return QByteArray();
+        return QVariant();
     }
-    const QByteArray value = readBytes(data, length.toInt());
-    return (value.length() == length.toInt()) ? value : QByteArray();
+    const QByteArray value = data.read(length.toULongLong());
+    return (value.length() == length.toInt()) ? value : QVariant();
 }
 
 }

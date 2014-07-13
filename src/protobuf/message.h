@@ -74,20 +74,14 @@ protected:
 
     QPair<quint32, quint8> parseTagAndType(QIODevice &data) const;
 
-    template<typename Type>
-    QVariant parseLengthDelimitedValue(Type &data, const quint8 wireType,
+    QVariant parseLengthDelimitedValue(QIODevice &data, const quint8 wireType,
                                        const FieldType typeHint,
                                        const QString &tagPath) const;
 
-    template<typename Type>
-    QVariant parseValue(Type &data, const quint8 wireType, const FieldType typeHint,
-                        const QString &tagPath) const;
+    QVariant parseValue(QIODevice &data, const quint8 wireType,
+                        const FieldType typeHint, const QString &tagPath) const;
 
-    QByteArray readBytes(const QByteArray &array, const int length) const;
-    QByteArray readBytes(QIODevice &device, const qint64 length) const;
-
-    template<typename Type>
-    QVariant readLengthDelimitedValue(Type &data) const;
+    QVariant readLengthDelimitedValue(QIODevice &data) const;
 
 };
 
