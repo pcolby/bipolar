@@ -112,7 +112,7 @@ QVariant Message::parseValue(QIODevice &data, const quint8 wireType, const Field
         }
         break;
     case 2: // Length-delimited (string, bytes, embedded messages, packed repeated fields)
-        return parseLengthDelimitedValue(data, wireType, typeHint, tagPath);
+        return parseLengthDelimitedValue(data, typeHint, tagPath);
     case 3: // Start group (groups (deprecated)
         return parse(data, tagPath + pathSeparator);
     case 4: // End group (groups (deprecated)
