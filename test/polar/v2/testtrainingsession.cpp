@@ -59,6 +59,36 @@ void sanitize2(QVariant &variant) {
     }
 }
 
+void TestTrainingSession::isGzipped_data()
+{
+    QTest::addColumn<QByteArray>("data");
+    QTest::addColumn<bool>("expected");
+
+    #define LOAD_TEST_DATA(name) { \
+        QFile dataFile(QFINDTESTDATA("testdata/" name ".gz")); \
+        dataFile.open(QIODevice::ReadOnly); \
+        QFile expectedFile(QFINDTESTDATA("testdata/" name)); \
+        expectedFile.open(QIODevice::ReadOnly); \
+        QTest::newRow(name) << dataFile.readAll() << true; \
+    }
+
+    LOAD_TEST_DATA("lorem-ipsum.txt");
+    LOAD_TEST_DATA("random-bytes");
+
+    #undef LOAD_TEST_DATA
+
+    QTest::newRow("empty")   << QByteArray() << false;
+    QTest::newRow("invalid") << QByteArray("\x11\x22\x33") << false;
+}
+
+void TestTrainingSession::isGzipped()
+{
+    QFETCH(QByteArray, data);
+    QFETCH(bool, expected);
+
+    QCOMPARE(polar::v2::TrainingSession::isGzipped(data), expected);
+}
+
 void TestTrainingSession::parseRoute_data()
 {
     QTest::addColumn<QString>("fileName");

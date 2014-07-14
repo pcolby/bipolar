@@ -23,6 +23,9 @@ class TestTrainingSession : public QObject {
     Q_OBJECT
 
 private slots:
+    void isGzipped_data();
+    void isGzipped();
+
     void parseRoute_data();
     void parseRoute();
 
