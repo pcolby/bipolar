@@ -77,6 +77,7 @@ protected:
     QVariantMap parseZones(const QString &fileName) const;
 
 private:
+    friend class TestTrainingSession;
 
 signals:
     void parseError(const QString &message,

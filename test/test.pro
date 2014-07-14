@@ -54,4 +54,5 @@ unix {
     QMAKE_DISTCLEAN += -r coverage_html
 }
 
+include(polar/v2/v2.pri)
 include(protobuf/protobuf.pri)
