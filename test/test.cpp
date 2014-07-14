@@ -17,6 +17,7 @@
     along with Bipolar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "polar/v2/testtrainingsession.h"
 #include "protobuf/testfixnum.h"
 #include "protobuf/testmessage.h"
 #include "protobuf/testvarint.h"
@@ -55,6 +56,7 @@ int main(int argc, char *argv[]) {
     ObjectFactory testFactory;
     testFactory.registerClass<TestFixnum>();
     testFactory.registerClass<TestMessage>();
+    testFactory.registerClass<TestTrainingSession>();
     testFactory.registerClass<TestVarint>();
 
     // If the user has specified a Test* class name, execute that test class only.

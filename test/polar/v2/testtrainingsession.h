@@ -26,4 +26,7 @@ private slots:
     void parseRoute_data();
     void parseRoute();
 
+    void unzip_data();
+    void unzip();
+
 };

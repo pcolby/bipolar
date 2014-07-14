@@ -21,8 +21,10 @@
 
 #include "message.h"
 
+#include <QDebug>
 #include <QDir>
 #include <QFileInfo>
+#include <QtZlib/zlib.h>
 
 // These constants match those used by Polar's V2 API.
 #define LAPS    QLatin1String("laps")
@@ -37,6 +39,16 @@ TrainingSession::TrainingSession(const QString &baseName)
     : baseName(baseName)
 {
 
+}
+
+bool TrainingSession::isGzipped(const QByteArray &data)
+{
+    return data.startsWith("\x1f\x8b");
+}
+
+bool TrainingSession::isGzipped(QIODevice &data)
+{
+    return isGzipped(data.peek(2));
 }
 
 bool TrainingSession::isValid() const
@@ -119,6 +131,7 @@ QVariantMap TrainingSession::parseLaps(const QString &fileName) const
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
         emit parseError(tr("failed to open laps file"), fileName);
+        return QVariantMap();
     }
     return parseLaps(file);
 }
@@ -126,7 +139,7 @@ QVariantMap TrainingSession::parseLaps(const QString &fileName) const
 QVariantMap TrainingSession::parseRoute(QIODevice &data) const
 {
     ProtoBuf::Message::FieldInfoMap fieldInfo;
-    ADD_FIELD_INFO("1",     "duration",     UnsignedInteger);
+/*    ADD_FIELD_INFO("1",     "duration",     UnsignedInteger);
     ADD_FIELD_INFO("2",     "latitude",     FloatingPoint);
     ADD_FIELD_INFO("3",     "longitude",    FloatingPoint);
     ADD_FIELD_INFO("4",     "altitude",     SignedInteger);
@@ -140,8 +153,15 @@ QVariantMap TrainingSession::parseRoute(QIODevice &data) const
     ADD_FIELD_INFO("9/2/1", "hour",         UnsignedInteger);
     ADD_FIELD_INFO("9/2/2", "minute",       UnsignedInteger);
     ADD_FIELD_INFO("9/2/3", "seconds",      UnsignedInteger);
-    ADD_FIELD_INFO("9/2/4", "milliseconds", UnsignedInteger);
-    return ProtoBuf::Message(fieldInfo).parse(data);
+    ADD_FIELD_INFO("9/2/4", "milliseconds", UnsignedInteger);*/
+    ProtoBuf::Message parser(fieldInfo);
+
+    if (isGzipped(data)) {
+        QByteArray array = unzip(data.readAll());
+        return parser.parse(array);
+    } else {
+        return parser.parse(data);
+    }
 }
 
 QVariantMap TrainingSession::parseRoute(const QString &fileName) const
@@ -149,6 +169,7 @@ QVariantMap TrainingSession::parseRoute(const QString &fileName) const
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
         emit parseError(tr("failed to open route file"), fileName);
+        return QVariantMap();
     }
     return parseRoute(file);
 }
@@ -165,6 +186,7 @@ QVariantMap TrainingSession::parseSamples(const QString &fileName) const
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
         emit parseError(tr("failed to open samples file"), fileName);
+        return QVariantMap();
     }
     return parseSamples(file);
 }
@@ -181,8 +203,55 @@ QVariantMap TrainingSession::parseZones(const QString &fileName) const
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
         emit parseError(tr("failed to open zones file"), fileName);
+        return QVariantMap();
     }
     return parseZones(file);
+}
+
+QByteArray TrainingSession::unzip(const QByteArray &data,
+                                  const int initialBufferSize) const
+{
+    Q_ASSERT(initialBufferSize > 0);
+    QByteArray result;
+    result.resize(initialBufferSize);
+
+    // Prepare a zlib stream structure.
+    z_stream stream = {};
+    stream.next_in = (Bytef *) data.data();
+    stream.avail_in = data.length();
+    stream.next_out = (Bytef *) result.data();
+    stream.avail_out = result.size();
+    stream.zalloc = Z_NULL;
+    stream.zfree = Z_NULL;
+    stream.opaque = Z_NULL;
+
+    // Decompress the data.
+    int z_result;
+    for (z_result = inflateInit2(&stream, 15 + 32); z_result == Z_OK;) {
+        if ((z_result = inflate(&stream, Z_SYNC_FLUSH)) == Z_OK) {
+            const int oldSize = result.size();
+            result.resize(result.size() * 2);
+            stream.next_out = (Bytef *)(result.data() + oldSize);
+            stream.avail_out = oldSize;
+        }
+    }
+
+    // Check for errors.
+    if (z_result != Z_STREAM_END) {
+        qWarning() << stream.msg;
+        emit parseError(tr("zlib error %1: %2").arg(z_result).
+                        arg(QLatin1String(stream.msg)));
+        return QByteArray();
+    }
+
+    // Free any allocated resources.
+    if ((z_result = inflateEnd(&stream)) != Z_OK) {
+        qWarning() << "inflateEnd returned" << z_result << stream.msg;
+    }
+
+    // Return the decompressed data.
+    result.chop(stream.avail_out);
+    return result;
 }
 
 bool TrainingSession::writeGPX(const QString &fileName)

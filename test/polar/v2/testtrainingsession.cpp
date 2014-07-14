@@ -117,5 +117,37 @@ void TestTrainingSession::parseRoute()
     }
 
     // Compare the result.
-    QCOMPARE(result, expected);
+  //QCOMPARE(result, expected); NOT READY YET.
+}
+
+void TestTrainingSession::unzip_data()
+{
+    QTest::addColumn<QByteArray>("data");
+    QTest::addColumn<QByteArray>("expected");
+
+    #define LOAD_TEST_DATA(name) { \
+        QFile dataFile(QFINDTESTDATA("testdata/" name ".gz")); \
+        dataFile.open(QIODevice::ReadOnly); \
+        QFile expectedFile(QFINDTESTDATA("testdata/" name)); \
+        expectedFile.open(QIODevice::ReadOnly); \
+        QTest::newRow(name) << dataFile.readAll() << expectedFile.readAll(); \
+    }
+
+    LOAD_TEST_DATA("lorem-ipsum.txt");
+    LOAD_TEST_DATA("random-bytes");
+
+    #undef LOAD_TEST_DATA
+}
+
+void TestTrainingSession::unzip()
+{
+    QFETCH(QByteArray, data);
+    QFETCH(QByteArray, expected);
+
+    QVERIFY2(!data.isEmpty(), "failed to load testdata");
+    QVERIFY2(!expected.isEmpty(), "failed to load testdata");
+
+    const polar::v2::TrainingSession session;
+    QCOMPARE(session.unzip(data), expected);   // Default initial buffer size.
+    QCOMPARE(session.unzip(data,1), expected); // Tiny initial buffer size.
 }

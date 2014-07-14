@@ -68,6 +68,9 @@ protected:
     QString baseName;
     QVariantMap parsedExercises;
 
+    static bool isGzipped(const QByteArray &data);
+    static bool isGzipped(QIODevice &data);
+
     bool parse(const QString &exerciseId, const QMap<QString, QString> &fileNames);
     QVariantMap parseLaps(QIODevice &data) const;
     QVariantMap parseLaps(const QString &fileName) const;
@@ -77,6 +80,9 @@ protected:
     QVariantMap parseSamples(const QString &fileName) const;
     QVariantMap parseZones(QIODevice &data) const;
     QVariantMap parseZones(const QString &fileName) const;
+
+    QByteArray unzip(const QByteArray &data,
+                     const int initialBufferSize = 10240) const;
 
 private:
     friend class ::TestTrainingSession;
