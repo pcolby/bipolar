@@ -67,19 +67,20 @@ protected:
     QVariantMap parsedExercises;
 
     bool parse(const QString &exerciseId, const QMap<QString, QString> &fileNames);
-    QVariantMap parseLaps(QIODevice &data);
-    QVariantMap parseLaps(const QString &fileName);
-    QVariantMap parseRoute(QIODevice &data);
-    QVariantMap parseRoute(const QString &fileName);
-    QVariantMap parseSamples(QIODevice &data);
-    QVariantMap parseSamples(const QString &fileName);
-    QVariantMap parseZones(QIODevice &data);
-    QVariantMap parseZones(const QString &fileName);
+    QVariantMap parseLaps(QIODevice &data) const;
+    QVariantMap parseLaps(const QString &fileName) const;
+    QVariantMap parseRoute(QIODevice &data) const;
+    QVariantMap parseRoute(const QString &fileName) const;
+    QVariantMap parseSamples(QIODevice &data) const;
+    QVariantMap parseSamples(const QString &fileName) const;
+    QVariantMap parseZones(QIODevice &data) const;
+    QVariantMap parseZones(const QString &fileName) const;
 
 private:
 
 signals:
-    void parseError(const QString &message, const QString &fileName = QString());
+    void parseError(const QString &message,
+                    const QString &fileName = QString()) const;
 
 };
 

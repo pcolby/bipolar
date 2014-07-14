@@ -107,14 +107,14 @@ bool TrainingSession::parse(const QString &exerciseId, const QMap<QString, QStri
         QLatin1String(name), ProtoBuf::Message::Type##type \
     )
 
-QVariantMap TrainingSession::parseLaps(QIODevice &data)
+QVariantMap TrainingSession::parseLaps(QIODevice &data) const
 {
     Q_UNUSED(data);
     Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
     return QVariantMap();
 }
 
-QVariantMap TrainingSession::parseLaps(const QString &fileName)
+QVariantMap TrainingSession::parseLaps(const QString &fileName) const
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
@@ -123,7 +123,7 @@ QVariantMap TrainingSession::parseLaps(const QString &fileName)
     return parseLaps(file);
 }
 
-QVariantMap TrainingSession::parseRoute(QIODevice &data)
+QVariantMap TrainingSession::parseRoute(QIODevice &data) const
 {
     ProtoBuf::Message::FieldInfoMap fieldInfo;
     ADD_FIELD_INFO("1",     "duration",     UnsignedInteger);
@@ -144,7 +144,7 @@ QVariantMap TrainingSession::parseRoute(QIODevice &data)
     return ProtoBuf::Message(fieldInfo).parse(data);
 }
 
-QVariantMap TrainingSession::parseRoute(const QString &fileName)
+QVariantMap TrainingSession::parseRoute(const QString &fileName) const
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
@@ -153,14 +153,14 @@ QVariantMap TrainingSession::parseRoute(const QString &fileName)
     return parseRoute(file);
 }
 
-QVariantMap TrainingSession::parseSamples(QIODevice &data)
+QVariantMap TrainingSession::parseSamples(QIODevice &data) const
 {
     Q_UNUSED(data);
     Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
     return QVariantMap();
 }
 
-QVariantMap TrainingSession::parseSamples(const QString &fileName)
+QVariantMap TrainingSession::parseSamples(const QString &fileName) const
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
@@ -169,14 +169,14 @@ QVariantMap TrainingSession::parseSamples(const QString &fileName)
     return parseSamples(file);
 }
 
-QVariantMap TrainingSession::parseZones(QIODevice &data)
+QVariantMap TrainingSession::parseZones(QIODevice &data) const
 {
     Q_UNUSED(data);
     Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
     return QVariantMap();
 }
 
-QVariantMap TrainingSession::parseZones(const QString &fileName)
+QVariantMap TrainingSession::parseZones(const QString &fileName) const
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
