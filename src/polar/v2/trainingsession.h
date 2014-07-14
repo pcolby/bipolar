@@ -25,6 +25,8 @@
 #include <QStringList>
 #include <QVariant>
 
+class TestTrainingSession;
+
 namespace polar {
 namespace v2 {
 
@@ -77,7 +79,7 @@ protected:
     QVariantMap parseZones(const QString &fileName) const;
 
 private:
-    friend class TestTrainingSession;
+    friend class ::TestTrainingSession;
 
 signals:
     void parseError(const QString &message,
