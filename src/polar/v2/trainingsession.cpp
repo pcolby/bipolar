@@ -25,7 +25,12 @@
 #include <QDebug>
 #include <QDir>
 #include <QFileInfo>
+
+#ifdef Q_OS_WIN
 #include <QtZlib/zlib.h>
+#else
+#include <zlib.h>
+#endif
 
 // These constants match those used by Polar's V2 API.
 #define LAPS    QLatin1String("laps")
@@ -256,7 +261,7 @@ QByteArray TrainingSession::unzip(const QByteArray &data,
 }
 
 bool TrainingSession::writeGPX(const QString &fileName)
-{    
+{
     // GPX:
     //  * Multiple <trk> elements.
     //  * No HR, cadence, etc. So really no use without "route".
