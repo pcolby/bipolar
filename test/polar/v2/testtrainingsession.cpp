@@ -121,7 +121,7 @@ void TestTrainingSession::parseRoute()
 
     // Write the result to a binary file for optional post-mortem investigation.
 #ifdef Q_OS_WIN
-    QFile binaryFile(QString::fromLatin1("polar/v2/testdata/%1.expected.var")
+    QFile binaryFile(QString::fromLatin1("polar/v2/testdata/%1.result.var")
 #else
     QFile binaryFile(QString::fromLatin1("../polar/v2/testdata/%1.result.var")
 #endif
@@ -134,7 +134,7 @@ void TestTrainingSession::parseRoute()
 
     // Write the result to a JSON file for optional post-mortem investigation.
 #ifdef Q_OS_WIN
-    QFile jsonFile(QString::fromLatin1("polar/v2/testdata/%1.expected.json")
+    QFile jsonFile(QString::fromLatin1("polar/v2/testdata/%1.result.json")
 #else
     QFile jsonFile(QString::fromLatin1("../polar/v2/testdata/%1.result.json")
 #endif
