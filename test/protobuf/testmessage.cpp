@@ -42,25 +42,33 @@ ProtoBuf::Message::FieldInfoMap loadFieldInfoMap(const QString &name, const QStr
             const QStringList parts = line.trimmed().split(QLatin1Char(','));
             if ((parts.size() == 3) && (!parts.at(1).startsWith(QLatin1Char('#')))) {
                 ProtoBuf::Message::FieldInfo fieldInfo(parts.at(1));
-                #define SET_TYPEHINT_IF_MATCH(type) \
+                #define SET_SCALAR_TYPE_IF_MATCH(type) \
                     if (parts.at(2).compare(QLatin1String(#type), Qt::CaseInsensitive) == 0) { \
-                        fieldInfo.typeHint = ProtoBuf::Message::Type##type; \
+                        fieldInfo.scalarType = ProtoBuf::Types::type; \
                     }
-                SET_TYPEHINT_IF_MATCH(Unknown)
-                else SET_TYPEHINT_IF_MATCH(Boolean)
-                else SET_TYPEHINT_IF_MATCH(Bytes)
-                else SET_TYPEHINT_IF_MATCH(EmbeddedMessage)
-                else SET_TYPEHINT_IF_MATCH(Enumerator)
-                else SET_TYPEHINT_IF_MATCH(FloatingPoint)
-                else SET_TYPEHINT_IF_MATCH(SignedInteger)
-                else SET_TYPEHINT_IF_MATCH(StandardInteger)
-                else SET_TYPEHINT_IF_MATCH(String)
-                else SET_TYPEHINT_IF_MATCH(UnsignedInteger)
+                SET_SCALAR_TYPE_IF_MATCH(Double)
+                else SET_SCALAR_TYPE_IF_MATCH(Float)
+                else SET_SCALAR_TYPE_IF_MATCH(Int32)
+                else SET_SCALAR_TYPE_IF_MATCH(Int64)
+                else SET_SCALAR_TYPE_IF_MATCH(Uint32)
+                else SET_SCALAR_TYPE_IF_MATCH(Uint64)
+                else SET_SCALAR_TYPE_IF_MATCH(Sint32)
+                else SET_SCALAR_TYPE_IF_MATCH(Sint64)
+                else SET_SCALAR_TYPE_IF_MATCH(Fixed32)
+                else SET_SCALAR_TYPE_IF_MATCH(Fixed64)
+                else SET_SCALAR_TYPE_IF_MATCH(Sfixed32)
+                else SET_SCALAR_TYPE_IF_MATCH(Sfixed64)
+                else SET_SCALAR_TYPE_IF_MATCH(Bool)
+                else SET_SCALAR_TYPE_IF_MATCH(String)
+                else SET_SCALAR_TYPE_IF_MATCH(Bytes)
+                else SET_SCALAR_TYPE_IF_MATCH(EmbeddedMessage)
+                else SET_SCALAR_TYPE_IF_MATCH(Enumerator)
+                else SET_SCALAR_TYPE_IF_MATCH(Group)
                 else {
                     qWarning() << "unknown type" << parts.at(2) << "from" << file.fileName();
                 }
                 #undef SET_TYPEHINT_IF_MATCH
-                fields[parts.at(0)] = fieldInfo;
+                fields[parts.at(0)] = fieldInfo;                
             }
         }
     }

@@ -20,6 +20,8 @@
 #ifndef __PROTOBUF_MESSAGE_H__
 #define __PROTOBUF_MESSAGE_H__
 
+#include "types.h"
+
 #include <QByteArray>
 #include <QIODevice>
 #include <QPair>
@@ -31,31 +33,20 @@ class Message : public QObject {
     Q_OBJECT
 
 public:
-    enum FieldType {
-        TypeUnknown = 0,
-        TypeBoolean,
-        TypeBytes,
-        TypeEmbeddedMessage,
-        TypeEnumerator,
-        TypeFloatingPoint,
-        TypeSignedInteger,
-        TypeStandardInteger,
-        TypeString,
-        TypeUnsignedInteger,
-    };
 
     struct FieldInfo {
         QString fieldName;
-        FieldType typeHint;
+        Types::ScalarType scalarType;
 
-        FieldInfo(const QString fieldName = QString(), FieldType typeHint = TypeUnknown)
-            : fieldName(fieldName), typeHint(typeHint)
+        FieldInfo(const QString fieldName = QString(),
+                  Types::ScalarType scalarType = Types::Unknown)
+            : fieldName(fieldName), scalarType(scalarType)
         {
 
         }
 
-        FieldInfo(FieldType typeHint, const QString fieldName = QString())
-            : fieldName(fieldName), typeHint(typeHint)
+        FieldInfo(Types::ScalarType scalarType, const QString fieldName = QString())
+            : fieldName(fieldName), scalarType(scalarType)
         {
 
         }
@@ -75,11 +66,12 @@ protected:
     QPair<quint32, quint8> parseTagAndType(QIODevice &data) const;
 
     QVariant parseLengthDelimitedValue(QIODevice &data,
-                                       const FieldType typeHint,
+                                       const Types::ScalarType scalarType,
                                        const QString &tagPath) const;
 
     QVariant parseValue(QIODevice &data, const quint8 wireType,
-                        const FieldType typeHint, const QString &tagPath) const;
+                        const Types::ScalarType scalarType,
+                        const QString &tagPath) const;
 
     QVariant readLengthDelimitedValue(QIODevice &data) const;
 

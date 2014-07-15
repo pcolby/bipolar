@@ -1,22 +1,22 @@
 # See SizeMessage1 from:
 # * https://code.google.com/p/protobuf/source/browse/trunk/benchmarks/google_size.proto
 # * https://code.google.com/p/protobuf/source/browse/trunk/benchmarks/google_speed.proto
-1,field1,String
-2,field2,StandardInteger
-3,field3,StandardInteger
-4,field4,String
-9,field9,String
-12,field12,Boolean
-13,field13,Boolean
-14,field14,Boolean
+1,field1,string
+2,field2,int32
+3,field3,int32
+4,field4,string
+9,field9,string
+12,field12,bool
+13,field13,bool
+14,field14,bool
 15,field15,EmbeddedMessage
-15/1,field15/field1,StandardInteger
-15/2,field15/field2,StandardInteger
-15/15,field15/field15,String
-15/21,field15/field21,UnsignedInteger
-15/22,field15/field22,StandardInteger
-15/23,field15/field23,Boolean
-17,field17,Boolean
-18,field18,String
-67,field67,StandardInteger
-100,field100,StandardInteger
+15/1,field15/field1,int32
+15/2,field15/field2,int32
+15/15,field15/field15,string
+15/21,field15/field21,fixed64
+15/22,field15/field22,int32
+15/23,field15/field23,bool
+17,field17,bool
+18,field18,string
+67,field67,int32
+100,field100,int32

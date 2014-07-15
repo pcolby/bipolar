@@ -52,7 +52,7 @@ QVariantMap Message::parse(QIODevice &data, const QString &tagPathPrefix) const
         }
 
         // If this is a (deprecated) "end group", return the parsed group.
-        if (tagAndType.second == 4) {
+        if (tagAndType.second == Types::EndGroup) {
             return parsedFields;
         }
 
@@ -64,7 +64,7 @@ QVariantMap Message::parse(QIODevice &data, const QString &tagPathPrefix) const
         }
 
         // Parse the field value.
-        const QVariant value = parseValue(data, tagAndType.second, fieldInfo.typeHint, tagPath);
+        const QVariant value = parseValue(data, tagAndType.second, fieldInfo.scalarType, tagPath);
         if (!value.isValid()) {
             return QVariantMap();
         }
@@ -89,40 +89,53 @@ QPair<quint32, quint8> Message::parseTagAndType(QIODevice &data) const
         : QPair<quint32, quint8>(0, 0);
 }
 
-QVariant Message::parseValue(QIODevice &data, const quint8 wireType, const FieldType typeHint,
+QVariant Message::parseValue(QIODevice &data, const quint8 wireType,
+                             const Types::ScalarType scalarType,
                              const QString &tagPath) const
 {
+    // A small sanity check. In this case, the wireType will take precedence.
+    if ((scalarType != Types::Unknown) &&
+        (wireType != Types::LengthDelimeted) &&
+        (wireType != Types::getWireType(scalarType))) {
+        qWarning() << tagPath << "wire type" << wireType << "does not match "
+            "expected wire type" << Types::getWireType(scalarType) << "for "
+            "scalar type" << scalarType;
+    }
+
     switch (wireType) {
-    case 0: // Varint (int32, int64, uint32, uint64, sint32, sint64, bool, enum)
-        switch (typeHint) {
-        case TypeBoolean:         return parseUnsignedVarint(data);
-        case TypeEnumerator:      return parseStandardVarint(data);
-        case TypeSignedInteger:   return parseSignedVarint(data);
-        case TypeStandardInteger: return parseStandardVarint(data);
-        case TypeUnsignedInteger: return parseUnsignedVarint(data);
-        default:                  return parseUnsignedVarint(data);
+    case Types::Varint: // int32, int64, uint32, uint64, sint32, sint64, bool, enum.
+        switch (scalarType) {
+        case Types::Int32:      return parseStandardVarint(data);
+        case Types::Int64:      return parseStandardVarint(data);
+        case Types::Uint32:     return parseUnsignedVarint(data);
+        case Types::Uint64:     return parseUnsignedVarint(data);
+        case Types::Sint32:     return parseSignedVarint(data);
+        case Types::Sint64:     return parseSignedVarint(data);
+        case Types::Bool:       return parseStandardVarint(data);
+        case Types::Enumerator: return parseStandardVarint(data);
+        default:                return parseStandardVarint(data);
         }
         break;
-    case 1: // 64-bit (fixed64, sfixed64, double)
-        switch (typeHint) {
-        case TypeFloatingPoint:   return parseFixedNumber<double>(data);
-        case TypeSignedInteger:   return parseFixedNumber<qint64>(data);
-        case TypeUnsignedInteger: return parseFixedNumber<quint64>(data);
-        default:                  return data.read(8); // The raw 8-byte sequence.
+    case Types::SixtyFourBit: // fixed64, sfixed64, double.
+        switch (scalarType) {
+        case Types::Fixed64:  return parseFixedNumber<quint64>(data);
+        case Types::Sfixed64: return parseFixedNumber<qint64>(data);
+        case Types::Double:   return parseFixedNumber<double>(data);
+        default:              return data.read(8); // The raw 8-byte sequence.
         }
         break;
-    case 2: // Length-delimited (string, bytes, embedded messages, packed repeated fields)
-        return parseLengthDelimitedValue(data, typeHint, tagPath);
-    case 3: // Start group (groups (deprecated)
+    case Types::LengthDelimeted: // string, bytes, embedded messages, packed repeated fields.
+        return parseLengthDelimitedValue(data, scalarType, tagPath);
+    case Types::StartGroup: // deprecated.
         return parse(data, tagPath + pathSeparator);
-    case 4: // End group (groups (deprecated)
+    case Types::EndGroup: // deprecated.
         return QVariant(); // Caller will need to end the group started previously.
-    case 5: // 32-bit (fixed32, sfixed32, float)
-        switch (typeHint) {
-        case TypeFloatingPoint:   return parseFixedNumber<float>(data);
-        case TypeSignedInteger:   return parseFixedNumber<qint32>(data);
-        case TypeUnsignedInteger: return parseFixedNumber<quint32>(data);
-        default:                  return data.read(4); // The raw 4-byte sequence.
+    case Types::ThirtyTwoBit: // fixed32, sfixed32, float.
+        switch (scalarType) {
+        case Types::Fixed32:  return parseFixedNumber<quint32>(data);
+        case Types::Sfixed32: return parseFixedNumber<qint32>(data);
+        case Types::Float:    return parseFixedNumber<float>(data);
+        default:              return data.read(4); // The raw 4-byte sequence.
         }
         break;
     }
@@ -131,7 +144,7 @@ QVariant Message::parseValue(QIODevice &data, const quint8 wireType, const Field
 }
 
 QVariant Message::parseLengthDelimitedValue(QIODevice &data,
-                                            const FieldType typeHint,
+                                            const Types::ScalarType scalarType,
                                             const QString &tagPath) const
 {
     const QVariant value = readLengthDelimitedValue(data);
@@ -142,12 +155,14 @@ QVariant Message::parseLengthDelimitedValue(QIODevice &data,
 
     // Return bytes and strings as-is. For strings, the caller will need to
     // determine / assume the character encoding used in the field.
-    if ((typeHint == TypeBytes) || (typeHint == TypeString) || (typeHint == TypeUnknown)) {
+    if ((scalarType == Types::Bytes  ) ||
+        (scalarType == Types::String ) ||
+        (scalarType == Types::Unknown)) {
         return value;
     }
 
     // Parse embedded messages recursively.
-    if (typeHint == TypeEmbeddedMessage) {
+    if (scalarType == Types::EmbeddedMessage) {
         QByteArray array = value.toByteArray();
         return parse(array, tagPath + pathSeparator);
     }
@@ -155,8 +170,11 @@ QVariant Message::parseLengthDelimitedValue(QIODevice &data,
     // Parse packed repeated values into a list.
     QVariantList list;
     QByteArray array = value.toByteArray();
+    QBuffer buffer(&array);
+    buffer.open(QIODevice::ReadOnly);
     for (QVariant item(0); item.isValid();) {
-        item = parse(array, tagPath + pathSeparator);
+        item = parseValue(buffer, Types::getWireType(scalarType), scalarType,
+                          tagPath + pathSeparator);
         if (item.isValid()) {
             list << item;
         }

@@ -20,6 +20,7 @@
 #include "trainingsession.h"
 
 #include "message.h"
+#include "types.h"
 
 #include <QDebug>
 #include <QDir>
@@ -116,7 +117,7 @@ bool TrainingSession::parse(const QString &exerciseId, const QMap<QString, QStri
 
 #define ADD_FIELD_INFO(tag, name, type) \
     fieldInfo[QLatin1String(tag)] = ProtoBuf::Message::FieldInfo( \
-        QLatin1String(name), ProtoBuf::Message::Type##type \
+        QLatin1String(name), ProtoBuf::Types::type \
     )
 
 QVariantMap TrainingSession::parseLaps(QIODevice &data) const
@@ -139,21 +140,21 @@ QVariantMap TrainingSession::parseLaps(const QString &fileName) const
 QVariantMap TrainingSession::parseRoute(QIODevice &data) const
 {
     ProtoBuf::Message::FieldInfoMap fieldInfo;
-/*    ADD_FIELD_INFO("1",     "duration",     UnsignedInteger);
-    ADD_FIELD_INFO("2",     "latitude",     FloatingPoint);
-    ADD_FIELD_INFO("3",     "longitude",    FloatingPoint);
-    ADD_FIELD_INFO("4",     "altitude",     SignedInteger);
-    ADD_FIELD_INFO("5",     "satellites",   UnsignedInteger);
+    ADD_FIELD_INFO("1",     "duration",     Uint32);
+    ADD_FIELD_INFO("2",     "latitude",     Double);
+    ADD_FIELD_INFO("3",     "longitude",    Double);
+    ADD_FIELD_INFO("4",     "altitude",     Sint32);
+    ADD_FIELD_INFO("5",     "satellites",   Uint32);
     ADD_FIELD_INFO("9",     "timestamp",    EmbeddedMessage);
     ADD_FIELD_INFO("9/1",   "date",         EmbeddedMessage);
-    ADD_FIELD_INFO("9/1/1", "year",         UnsignedInteger);
-    ADD_FIELD_INFO("9/1/2", "month",        UnsignedInteger);
-    ADD_FIELD_INFO("9/1/3", "day",          UnsignedInteger);
+    ADD_FIELD_INFO("9/1/1", "year",         Uint32);
+    ADD_FIELD_INFO("9/1/2", "month",        Uint32);
+    ADD_FIELD_INFO("9/1/3", "day",          Uint32);
     ADD_FIELD_INFO("9/2",   "time",         EmbeddedMessage);
-    ADD_FIELD_INFO("9/2/1", "hour",         UnsignedInteger);
-    ADD_FIELD_INFO("9/2/2", "minute",       UnsignedInteger);
-    ADD_FIELD_INFO("9/2/3", "seconds",      UnsignedInteger);
-    ADD_FIELD_INFO("9/2/4", "milliseconds", UnsignedInteger);*/
+    ADD_FIELD_INFO("9/2/1", "hour",         Uint32);
+    ADD_FIELD_INFO("9/2/2", "minute",       Uint32);
+    ADD_FIELD_INFO("9/2/3", "seconds",      Uint32);
+    ADD_FIELD_INFO("9/2/4", "milliseconds", Uint32);
     ProtoBuf::Message parser(fieldInfo);
 
     if (isGzipped(data)) {
