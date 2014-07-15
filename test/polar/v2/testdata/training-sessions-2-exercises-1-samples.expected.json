@@ -6521,7 +6521,7 @@
     ],
     "record-interval": [
         {
-            "3": [
+            "seconds": [
                 1
             ]
         }
@@ -9789,16 +9789,16 @@
     ],
     "stride-calibration": [
         {
-            "1": [
-                0
-            ],
-            "2": [
-                "0000803f"
-            ],
-            "3": [
+            "cause": [
                 1
             ],
-            "4": [
+            "operation": [
+                1
+            ],
+            "start-index": [
+                0
+            ],
+            "value": [
                 1
             ]
         }

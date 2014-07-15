@@ -184,6 +184,10 @@ QVariantMap TrainingSession::parseSamples(QIODevice &data) const
 {
     ProtoBuf::Message::FieldInfoMap fieldInfo;
     ADD_FIELD_INFO("1",     "record-interval",          EmbeddedMessage);
+    ADD_FIELD_INFO("1/1",   "hours",                    Uint32);
+    ADD_FIELD_INFO("1/2",   "mintues",                  Uint32);
+    ADD_FIELD_INFO("1/3",   "seconds",                  Uint32);
+    ADD_FIELD_INFO("1/4",   "milliseconds",             Uint32);
     ADD_FIELD_INFO("2",     "heartrate",                Uint32);
     ADD_FIELD_INFO("3",     "heartrate-offline",        EmbeddedMessage);
     ADD_FIELD_INFO("3/1",   "start-index",              Uint32);
@@ -194,6 +198,10 @@ QVariantMap TrainingSession::parseSamples(QIODevice &data) const
     ADD_FIELD_INFO("5/2",   "stop-index",               Uint32);
     ADD_FIELD_INFO("6",     "altitude",                 Float);
     ADD_FIELD_INFO("7",     "altitude-calibration",     EmbeddedMessage);
+    ADD_FIELD_INFO("7/1",   "start-index",              Uint32);
+    ADD_FIELD_INFO("7/2",   "value",                    Float);
+    ADD_FIELD_INFO("7/3",   "operation",                Enumerator);
+    ADD_FIELD_INFO("7/4",   "cause",                    Enumerator);
     ADD_FIELD_INFO("8",     "temperature",              Float);
     ADD_FIELD_INFO("9",     "speed",                    Float);
     ADD_FIELD_INFO("10",    "speed-offline",            EmbeddedMessage);
@@ -208,8 +216,12 @@ QVariantMap TrainingSession::parseSamples(QIODevice &data) const
     ADD_FIELD_INFO("14/1",  "start-index",              Uint32);
     ADD_FIELD_INFO("14/2",  "stop-index",               Uint32);
     ADD_FIELD_INFO("15",    "stride-calibration",       EmbeddedMessage);
+    ADD_FIELD_INFO("15/1",  "start-index",              Uint32);
+    ADD_FIELD_INFO("15/2",  "value",                    Float);
+    ADD_FIELD_INFO("15/3",  "operation",                Enumerator);
+    ADD_FIELD_INFO("15/4",  "cause",                    Enumerator);
     ADD_FIELD_INFO("16",    "fwd-acceleration",         Float);
-    ADD_FIELD_INFO("17",    "moving-type",              EmbeddedMessage);
+    ADD_FIELD_INFO("17",    "moving-type",              Enumerator);
     ADD_FIELD_INFO("18",    "altitude-offline",         EmbeddedMessage);
     ADD_FIELD_INFO("18/1",  "start-index",              Uint32);
     ADD_FIELD_INFO("18/2",  "stop-index",               Uint32);
