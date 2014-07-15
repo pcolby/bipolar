@@ -8,11 +8,11 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.0"
-   width="53"
-   height="53"
+   width="56"
+   height="56.03125"
    id="svg2"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="Npn_Transistor_Symbol_clip_art.svg">
+   sodipodi:docname="bipolar.svg">
   <metadata
      id="metadata3004">
     <rdf:RDF>
@@ -40,32 +40,36 @@
      id="namedview3000"
      showgrid="false"
      inkscape:zoom="12.686561"
-     inkscape:cx="31.579339"
-     inkscape:cy="30.278758"
+     inkscape:cx="33.063617"
+     inkscape:cy="30.118533"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg2">
+     inkscape:current-layer="g2986"
+     fit-margin-top="2"
+     fit-margin-left="2"
+     fit-margin-right="2"
+     fit-margin-bottom="2">
     <sodipodi:guide
-       position="0,0"
+       position="1.4842777,1.6326706"
        orientation="0,49.6063"
        id="guide2996" />
     <sodipodi:guide
-       position="49.6063,0"
+       position="51.090577,1.6326706"
        orientation="-49.6063,0"
        id="guide2998" />
     <sodipodi:guide
-       position="49.6063,49.6063"
+       position="51.090577,51.23897"
        orientation="0,-49.6063"
        id="guide3000" />
     <sodipodi:guide
-       position="0,49.6063"
+       position="1.4842777,51.23897"
        orientation="49.6063,0"
        id="guide3002" />
   </sodipodi:namedview>
   <g
      id="g2986"
-     transform="translate(-7.4842777,-10.58608)"
+     transform="translate(-6,-9.1875)"
      style="fill:none;stroke:#ffffff;stroke-width:0.99999999mm;stroke-linecap:square">
     <circle
        cx="34"
@@ -79,29 +83,31 @@
        sodipodi:ry="25.299999"
        style="fill:#ee3a43;stroke:#de434b;stroke-width:0.40000001mm" />
     <line
-       x1="25"
+       x1="25.364611"
        y1="37.200001"
-       x2="1.8"
+       x2="9.0024519"
        y2="37.200001"
        id="line2990"
-       style="stroke-width:0.7mm" />
+       style="stroke-width:0.58786053mm" />
     <line
        x1="25"
-       y1="18.299999"
+       y1="18.360981"
        x2="25"
-       y2="55.099998"
+       y2="55.906078"
        id="line2992"
-       style="stroke-width:1.7mm;stroke-linecap:butt" />
+       style="stroke-width:1.71712387mm;stroke-linecap:butt" />
     <path
-       d="M 27.8,46.3 41,56 41,72.6"
+       d="m 27.535099,46.035099 13.729802,9.944854 0,5.692001"
        id="path2994"
        inkscape:connector-curvature="0"
-       style="stroke-width:0.7mm" />
+       style="stroke-width:0.55047811mm"
+       sodipodi:nodetypes="ccc" />
     <path
-       d="M 27.8,28.1 41,16 41,1.8"
+       d="m 27.537265,28.362735 13.646646,-10.381358 0.07882,-5.329989"
        id="path2996"
        inkscape:connector-curvature="0"
-       style="stroke-width:0.7mm" />
+       style="stroke-width:0.55170069mm"
+       sodipodi:nodetypes="ccc" />
     <path
        d="m 40.131528,55.206513 -9.353307,-1.402351 4.097654,-2.063511 0.856763,-4.642395 z"
        id="path2998"
