@@ -182,9 +182,35 @@ QVariantMap TrainingSession::parseRoute(const QString &fileName) const
 
 QVariantMap TrainingSession::parseSamples(QIODevice &data) const
 {
-    Q_UNUSED(data);
-    Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
-    return QVariantMap();
+    ProtoBuf::Message::FieldInfoMap fieldInfo;
+    ADD_FIELD_INFO("1",     "interval",                 EmbeddedMessage);
+    ADD_FIELD_INFO("2",     "heartrate",                Uint32);
+    ADD_FIELD_INFO("3",     "heartrate-offline",        EmbeddedMessage);
+    ADD_FIELD_INFO("4",     "cadence",                  Uint32);
+    ADD_FIELD_INFO("5",     "cadence-offline",          EmbeddedMessage);
+    ADD_FIELD_INFO("6",     "altitude",                 Float);
+    ADD_FIELD_INFO("7",     "altitude-calibration",     EmbeddedMessage);
+    ADD_FIELD_INFO("8",     "temperature",              Float);
+    ADD_FIELD_INFO("9",     "speed",                    Float);
+    ADD_FIELD_INFO("10",    "speed-offline",            EmbeddedMessage);
+    ADD_FIELD_INFO("11",    "distance",                 Float);
+    ADD_FIELD_INFO("12",    "distance-offline",         EmbeddedMessage);
+    ADD_FIELD_INFO("13",    "stride-length",            Uint32);
+    ADD_FIELD_INFO("14",    "stride-offline",           EmbeddedMessage);
+    ADD_FIELD_INFO("15",    "stride-calibration",       EmbeddedMessage);
+    ADD_FIELD_INFO("16",    "fwd-acceleration",         Float);
+    ADD_FIELD_INFO("17",    "moving-type",              EmbeddedMessage);
+    ADD_FIELD_INFO("18",    "altitude-offline",         EmbeddedMessage);
+    ADD_FIELD_INFO("19",    "temperature-offline",      EmbeddedMessage);
+    ADD_FIELD_INFO("20",    "fwd-acceleration-offline", EmbeddedMessage);
+    ProtoBuf::Message parser(fieldInfo);
+
+    if (isGzipped(data)) {
+        QByteArray array = unzip(data.readAll());
+        return parser.parse(array);
+    } else {
+        return parser.parse(data);
+    }
 }
 
 QVariantMap TrainingSession::parseSamples(const QString &fileName) const

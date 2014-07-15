@@ -150,6 +150,68 @@ void TestTrainingSession::parseRoute()
     QCOMPARE(result, expected);
 }
 
+void TestTrainingSession::parseSamples_data()
+{
+    QTest::addColumn<QString>("fileName");
+    QTest::addColumn<QVariantMap>("expected");
+
+    #define LOAD_TEST_DATA(name) { \
+        QFile expectedFile(QFINDTESTDATA("testdata/" name ".expected.var")); \
+        expectedFile.open(QIODevice::ReadOnly); \
+        QDataStream expectedStream(&expectedFile); \
+        QVariantMap expectedMap; \
+        expectedStream >> expectedMap; \
+        QTest::newRow(name) << QFINDTESTDATA("testdata/" name) << expectedMap; \
+    }
+
+    LOAD_TEST_DATA("training-sessions-1-exercises-1-samples");
+    LOAD_TEST_DATA("training-sessions-2-exercises-1-samples");
+
+    #undef LOAD_TEST_DATA
+}
+
+void TestTrainingSession::parseSamples()
+{
+    QFETCH(QString, fileName);
+    QFETCH(QVariantMap, expected);
+
+    QVERIFY2(!fileName.isEmpty(), "failed to find testdata");
+
+    // Parse the route (protobuf) message.
+    const polar::v2::TrainingSession session;
+    const QVariantMap result = session.parseSamples(fileName);
+
+    // Write the result to a binary file for optional post-mortem investigation.
+#ifdef Q_OS_WIN
+    QFile binaryFile(QString::fromLatin1("polar/v2/testdata/%1.result.var")
+#else
+    QFile binaryFile(QString::fromLatin1("../polar/v2/testdata/%1.result.var")
+#endif
+                 .arg(QString::fromLatin1(QTest::currentDataTag())));
+    if (binaryFile.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+        QDataStream stream(&binaryFile);
+        stream << result;
+        binaryFile.close();
+    }
+
+    // Write the result to a JSON file for optional post-mortem investigation.
+#ifdef Q_OS_WIN
+    QFile jsonFile(QString::fromLatin1("polar/v2/testdata/%1.result.json")
+#else
+    QFile jsonFile(QString::fromLatin1("../polar/v2/testdata/%1.result.json")
+#endif
+                 .arg(QString::fromLatin1(QTest::currentDataTag())));
+    if (jsonFile.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+        QVariant saneResult(result);
+        sanitize2(saneResult);
+        jsonFile.write(QJsonDocument::fromVariant(saneResult).toJson());
+        jsonFile.close();
+    }
+
+    // Compare the result.
+    QCOMPARE(result, expected);
+}
+
 void TestTrainingSession::unzip_data()
 {
     QTest::addColumn<QByteArray>("data");
