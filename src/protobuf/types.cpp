@@ -24,6 +24,7 @@ namespace ProtoBuf {
 Types::WireType Types::getWireType(const ScalarType ScalarType)
 {
     switch (ScalarType) {
+    case Unknown:         break;
     case Double:          return SixtyFourBit;
     case Float:           return ThirtyTwoBit;
     case Int32:           return Varint;
@@ -44,6 +45,7 @@ Types::WireType Types::getWireType(const ScalarType ScalarType)
     case Group:           return StartGroup;
     }
     Q_ASSERT_X(false, "getWireType", "invalid scalar type");
+    return Varint; // There's really nothing sensible to return here :|
 }
 
 }
