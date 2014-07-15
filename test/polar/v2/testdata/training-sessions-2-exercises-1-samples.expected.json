@@ -6503,23 +6503,23 @@
     ],
     "heartrate-offline": [
         {
-            "1": [
+            "start-index": [
                 1587
             ],
-            "2": [
+            "stop-index": [
                 1589
             ]
         },
         {
-            "1": [
+            "start-index": [
                 1604
             ],
-            "2": [
+            "stop-index": [
                 1605
             ]
         }
     ],
-    "interval": [
+    "record-interval": [
         {
             "3": [
                 1
@@ -9779,10 +9779,10 @@
     ],
     "speed-offline": [
         {
-            "1": [
+            "start-index": [
                 0
             ],
-            "2": [
+            "stop-index": [
                 3248
             ]
         }
