@@ -56,3 +56,4 @@ unix {
 
 include(polar/v2/v2.pri)
 include(protobuf/protobuf.pri)
+include(tools/tools.pri)

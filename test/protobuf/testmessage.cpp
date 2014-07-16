@@ -20,10 +20,10 @@
 #include "testmessage.h"
 
 #include "../../src/protobuf/message.h"
+#include "../../tools/variant.h"
 
 #include <QDebug>
 #include <QFile>
-#include <QJsonDocument>
 #include <QTest>
 
 Q_DECLARE_METATYPE(ProtoBuf::Message::FieldInfoMap)
@@ -75,37 +75,6 @@ ProtoBuf::Message::FieldInfoMap loadFieldInfoMap(const QString &name, const QStr
     return fields;
 }
 
-// Replace raw QByteArray data with hex strings. This is needed because the
-// JSON export to UTF-8 is inconsitent accross platforms, and accross Qt
-// versions unfortunately.  Note, this is done for diagnostic outputs only,
-// and does not affect the QVariant comparisons that make up the actual tests.
-void sanitize(QVariant &variant) {
-    switch (static_cast<QMetaType::Type>(variant.type())) {
-    case QMetaType::QByteArray:
-        variant = variant.toByteArray().toHex();
-        break;
-    case QMetaType::QVariantList: {
-            QVariantList list;
-            foreach (QVariant item, variant.toList()) {
-                sanitize(item);
-                list << item;
-            }
-            variant = list;
-        }
-        break;
-    case QMetaType::QVariantMap: {
-            QVariantMap map(variant.toMap());
-            for (QVariantMap::iterator iter = map.begin(); iter != map.end(); ++iter) {
-                sanitize(iter.value());
-            }
-            variant = map;
-        }
-        break;
-    default:
-        ; // Leave variant unmodified.
-    }
-}
-
 void TestMessage::parse_data()
 {
     QTest::addColumn<QByteArray>("data");
@@ -148,32 +117,10 @@ void TestMessage::parse()
     const ProtoBuf::Message message(fieldInfo);
     const QVariantMap result = message.parse(data);
 
-    // Write the result to a binary file for optional post-mortem investigation.
-#ifdef Q_OS_WIN
-    QFile binaryFile(QString::fromLatin1("protobuf/testdata/%1.result.var")
-#else
-    QFile binaryFile(QString::fromLatin1("../protobuf/testdata/%1.result.var")
-#endif
-                 .arg(QString::fromLatin1(QTest::currentDataTag())));
-    if (binaryFile.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
-        QDataStream stream(&binaryFile);
-        stream << result;
-        binaryFile.close();
-    }
-
-    // Write the result to a JSON file for optional post-mortem investigation.
-#ifdef Q_OS_WIN
-    QFile jsonFile(QString::fromLatin1("protobuf/testdata/%1.result.json")
-#else
-    QFile jsonFile(QString::fromLatin1("../protobuf/testdata/%1.result.json")
-#endif
-                 .arg(QString::fromLatin1(QTest::currentDataTag())));
-    if (jsonFile.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
-        QVariant saneResult(result);
-        sanitize(saneResult);
-        jsonFile.write(QJsonDocument::fromVariant(saneResult).toJson());
-        jsonFile.close();
-    }
+    // Write the result to files for optional post-mortem investigations.
+    tools::variant::writeAll(result,
+        QString::fromLatin1("protobuf/testdata/%1.result")
+             .arg(QString::fromLatin1(QTest::currentDataTag())));
 
     // Compare the result.
     QCOMPARE(result, expected);
