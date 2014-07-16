@@ -63,7 +63,7 @@ void compare(const QDomNodeList &a, const QDomNodeList &b)
 void compare(const QDomNode &a, const QDomNode &b)
 {
     compare(a.attributes(), b.attributes());
-    compare(a.childNodes(), a.childNodes());
+    compare(a.childNodes(), b.childNodes());
     QCOMPARE(a.localName(), b.localName());
     QCOMPARE(a.namespaceURI(), b.namespaceURI());
     QCOMPARE(a.nodeName(), b.nodeName());
