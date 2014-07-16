@@ -60,7 +60,7 @@ bool TrainingSession::isGzipped(QIODevice &data)
 
 bool TrainingSession::isValid() const
 {
-    return parsedExercises.isEmpty();
+    return !parsedExercises.isEmpty();
 }
 
 bool TrainingSession::parse(const QString &baseName)
@@ -76,13 +76,14 @@ bool TrainingSession::parse(const QString &baseName)
         return false;
     }
 
-    const QFileInfo fileInfo(baseName);
-    const QDir dir(fileInfo.baseName(), fileInfo.fileName(), QDir::NoSort, QDir::Readable|QDir::Files);
     QMap<QString, QMap<QString, QString> > fileNames;
-    foreach (const QFileInfo &fileInfo, dir.entryInfoList()) {
-        const QStringList nameParts = fileInfo.fileName().split(QLatin1Char('_'));
+    const QFileInfo fileInfo(baseName);
+    foreach (const QFileInfo &entryInfo, fileInfo.dir().entryInfoList(
+             QStringList(fileInfo.fileName() + QLatin1Char('*'))))
+    {
+        const QStringList nameParts = entryInfo.fileName().split(QLatin1Char('-'));
         if ((nameParts.size() >= 3) && (nameParts.at(nameParts.size() - 3) == QLatin1String("exercises"))) {
-            fileNames[nameParts.at(nameParts.size() - 2)][nameParts.at(nameParts.size() - 1)] = fileInfo.path();
+            fileNames[nameParts.at(nameParts.size() - 2)][nameParts.at(nameParts.size() - 1)] = entryInfo.filePath();
         }
     }
 
@@ -375,6 +376,10 @@ QDomDocument TrainingSession::toGPX() const
     gpx.setAttribute(QLatin1String("xsi:schemaLocation"),
                      QLatin1String("http://www.topografix.com/GPX/1/1 "
                                    "http://www.topografix.com/GPX/1/1/gpx.xsd"));
+
+    foreach (const QVariant &exercise, parsedExercises) {
+        //qDebug() << exercise;
+    }
 
     doc.appendChild(gpx);
     return doc;
