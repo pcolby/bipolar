@@ -1,5 +1,5 @@
 TEMPLATE = app
-QT += testlib widgets xml
+QT += testlib widgets xml xmlpatterns
 CONFIG += testcase
 SOURCES += test.cpp
 

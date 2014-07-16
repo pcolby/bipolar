@@ -26,6 +26,8 @@
 #include <QDomDocument>
 #include <QFile>
 #include <QTest>
+#include <QXmlSchema>
+#include <QXmlSchemaValidator>
 
 // Qt's QDomDocument comparisons are based on references, and always fail when
 // comparing two separate documents.  Additionally, the QDomDocument::toString
@@ -321,9 +323,16 @@ void TestTrainingSession::toGPX()
     }
     file.close();
 
+    // Compare the generated document against the expected result.
     QDomDocument expectedDoc;
     expectedDoc.setContent(expected);
     compare(gpx, expectedDoc);
+
+    // Validate the generated document against the relevant XML schema.
+    QXmlSchema schema;
+    QVERIFY(schema.load(QUrl(QLatin1String("http://www.topografix.com/GPX/1/1/gpx.xsd"))));
+    QXmlSchemaValidator validator(schema);
+    QVERIFY(validator.validate(gpx.toByteArray()));
 }
 
 void TestTrainingSession::toTCX_data()

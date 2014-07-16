@@ -380,7 +380,7 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
                      .arg(QApplication::applicationVersion())
                      .arg(QLatin1String("https://github.com/pcolby/bipolar")));
     gpx.setAttribute(QLatin1String("xmlns"),
-                     QLatin1String("http://www.topografix.com/GPX/1/0"));
+                     QLatin1String("http://www.topografix.com/GPX/1/1"));
     gpx.setAttribute(QLatin1String("xmlns:xsi"),
                      QLatin1String("http://www.w3.org/2001/XMLSchema-instance"));
     gpx.setAttribute(QLatin1String("xsi:schemaLocation"),
