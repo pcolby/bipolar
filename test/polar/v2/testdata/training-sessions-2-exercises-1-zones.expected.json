@@ -1,0 +1,132 @@
+{
+    "heartrate": [
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "mintues": [
+                        0
+                    ],
+                    "seconds": [
+                        59
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        111
+                    ],
+                    "low": [
+                        93
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "mintues": [
+                        12
+                    ],
+                    "seconds": [
+                        50
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        130
+                    ],
+                    "low": [
+                        111
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "mintues": [
+                        25
+                    ],
+                    "seconds": [
+                        19
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        148
+                    ],
+                    "low": [
+                        130
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "mintues": [
+                        14
+                    ],
+                    "seconds": [
+                        13
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        167
+                    ],
+                    "low": [
+                        148
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "mintues": [
+                        0
+                    ],
+                    "seconds": [
+                        38
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        185
+                    ],
+                    "low": [
+                        167
+                    ]
+                }
+            ]
+        }
+    ],
+    "heartrate-source": [
+        0
+    ]
+}

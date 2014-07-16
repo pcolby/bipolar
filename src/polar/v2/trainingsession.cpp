@@ -109,7 +109,7 @@ bool TrainingSession::parse(const QString &exerciseId, const QMap<QString, QStri
     PARSE_IF_CONTAINS(ROUTE,   Route);
     PARSE_IF_CONTAINS(SAMPLES, Samples);
   //PARSE_IF_CONTAINS(SENSORS, Sensors);
-  //PARSE_IF_CONTAINS(STATS,   Zones);
+  //PARSE_IF_CONTAINS(STATS,   Stats);
     PARSE_IF_CONTAINS(ZONES,   Zones);
     #undef PARSE_IF_CONTAINS
 
@@ -253,9 +253,56 @@ QVariantMap TrainingSession::parseSamples(const QString &fileName) const
 
 QVariantMap TrainingSession::parseZones(QIODevice &data) const
 {
-    Q_UNUSED(data);
-    Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
-    return QVariantMap();
+    ProtoBuf::Message::FieldInfoMap fieldInfo;
+    ADD_FIELD_INFO("1",     "heartrate",        EmbeddedMessage);
+    ADD_FIELD_INFO("1/1",   "limits",           EmbeddedMessage);
+    ADD_FIELD_INFO("1/1/1", "low",              Uint32);
+    ADD_FIELD_INFO("1/1/2", "high",             Uint32);
+    ADD_FIELD_INFO("1/2",   "duration",         EmbeddedMessage);
+    ADD_FIELD_INFO("1/2/1", "hours",            Uint32);
+    ADD_FIELD_INFO("1/2/2", "mintues",          Uint32);
+    ADD_FIELD_INFO("1/2/3", "seconds",          Uint32);
+    ADD_FIELD_INFO("1/2.4", "milliseconds",     Uint32);
+    ADD_FIELD_INFO("2",     "power",            EmbeddedMessage);
+    ADD_FIELD_INFO("2/1",   "limits",           EmbeddedMessage);
+    ADD_FIELD_INFO("2/1/1", "low",              Uint32);
+    ADD_FIELD_INFO("2/1/2", "high",             Uint32);
+    ADD_FIELD_INFO("2/2",   "duration",         EmbeddedMessage);
+    ADD_FIELD_INFO("2/2/1", "hours",            Uint32);
+    ADD_FIELD_INFO("2/2/2", "mintues",          Uint32);
+    ADD_FIELD_INFO("2/2/3", "seconds",          Uint32);
+    ADD_FIELD_INFO("2/2.4", "milliseconds",     Uint32);
+    ADD_FIELD_INFO("3",     "fatfit",           EmbeddedMessage);
+    ADD_FIELD_INFO("3/1",   "limit",            Uint32);
+    ADD_FIELD_INFO("3/2",   "fit-duration",     EmbeddedMessage);
+    ADD_FIELD_INFO("3/2/1", "hours",            Uint32);
+    ADD_FIELD_INFO("3/2/2", "mintues",          Uint32);
+    ADD_FIELD_INFO("3/2/3", "seconds",          Uint32);
+    ADD_FIELD_INFO("3/2.4", "milliseconds",     Uint32);
+    ADD_FIELD_INFO("3/3",   "fat-duration",     EmbeddedMessage);
+    ADD_FIELD_INFO("3/3/1", "hours",            Uint32);
+    ADD_FIELD_INFO("3/3/2", "mintues",          Uint32);
+    ADD_FIELD_INFO("3/3/3", "seconds",          Uint32);
+    ADD_FIELD_INFO("3/3.4", "milliseconds",     Uint32);
+    ADD_FIELD_INFO("4",     "speed",            EmbeddedMessage);
+    ADD_FIELD_INFO("4/1",   "limits",           EmbeddedMessage);
+    ADD_FIELD_INFO("4/1/1", "low",              Float);
+    ADD_FIELD_INFO("4/1/2", "high",             Float);
+    ADD_FIELD_INFO("4/2",   "duration",         EmbeddedMessage);
+    ADD_FIELD_INFO("4/2/1", "hours",            Uint32);
+    ADD_FIELD_INFO("4/2/2", "mintues",          Uint32);
+    ADD_FIELD_INFO("4/2/3", "seconds",          Uint32);
+    ADD_FIELD_INFO("4/2.4", "milliseconds",     Uint32);
+    ADD_FIELD_INFO("4/3",   "distance",         Float);
+    ADD_FIELD_INFO("10",    "heartrate-source", Enumerator);
+    ProtoBuf::Message parser(fieldInfo);
+
+    if (isGzipped(data)) {
+        QByteArray array = unzip(data.readAll());
+        return parser.parse(array);
+    } else {
+        return parser.parse(data);
+    }
 }
 
 QVariantMap TrainingSession::parseZones(const QString &fileName) const

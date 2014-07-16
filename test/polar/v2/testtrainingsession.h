@@ -32,6 +32,9 @@ private slots:
     void parseSamples_data();
     void parseSamples();
 
+    void parseZones_data();
+    void parseZones();
+
     void unzip_data();
     void unzip();
 
