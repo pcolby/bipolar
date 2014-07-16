@@ -38,6 +38,12 @@ private slots:
     void parseZones_data();
     void parseZones();
 
+    void toGPX_data();
+    void toGPX();
+
+    void toTCX_data();
+    void toTCX();
+
     void unzip_data();
     void unzip();
 

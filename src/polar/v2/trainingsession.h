@@ -20,6 +20,7 @@
 #ifndef __POLAR_V2_TRAINING_SESSION_H__
 #define __POLAR_V2_TRAINING_SESSION_H__
 
+#include <QDomDocument>
 #include <QIODevice>
 #include <QMap>
 #include <QStringList>
@@ -80,6 +81,9 @@ protected:
     QVariantMap parseSamples(const QString &fileName) const;
     QVariantMap parseZones(QIODevice &data) const;
     QVariantMap parseZones(const QString &fileName) const;
+
+    QDomDocument toGPX() const;
+    QDomDocument toTCX() const;
 
     QByteArray unzip(const QByteArray &data,
                      const int initialBufferSize = 10240) const;

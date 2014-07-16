@@ -22,6 +22,7 @@
 #include "message.h"
 #include "types.h"
 
+#include <QApplication>
 #include <QDebug>
 #include <QDir>
 #include <QFileInfo>
@@ -354,6 +355,48 @@ QVariantMap TrainingSession::parseZones(const QString &fileName) const
         return QVariantMap();
     }
     return parseZones(file);
+}
+
+QDomDocument TrainingSession::toGPX() const
+{
+    QDomDocument doc;
+    doc.appendChild(doc.createProcessingInstruction(QLatin1String("xml"),
+        QLatin1String("version='1.0' encoding='utf-8'")));
+
+    QDomElement gpx = doc.createElement(QLatin1String("gpx"));
+    gpx.setAttribute(QLatin1String("version"), QLatin1String("1.1"));
+    gpx.setAttribute(QLatin1String("creator"), QString::fromLatin1("%1 %2")
+                     .arg(QApplication::applicationName())
+                     .arg(QApplication::applicationVersion()));
+    gpx.setAttribute(QLatin1String("xmlns"),
+                     QLatin1String("http://www.topografix.com/GPX/1/0"));
+    gpx.setAttribute(QLatin1String("xmlns:xsi"),
+                     QLatin1String("http://www.w3.org/2001/XMLSchema-instance"));
+    gpx.setAttribute(QLatin1String("xsi:schemaLocation"),
+                     QLatin1String("http://www.topografix.com/GPX/1/1 "
+                                   "http://www.topografix.com/GPX/1/1/gpx.xsd"));
+
+    doc.appendChild(gpx);
+    return doc;
+}
+
+QDomDocument TrainingSession::toTCX() const
+{
+    QDomDocument doc;
+    doc.appendChild(doc.createProcessingInstruction(QLatin1String("xml"),
+        QLatin1String("version='1.0' encoding='utf-8'")));
+
+    QDomElement tcx = doc.createElement(QLatin1String("TrainingCenterDatabase"));
+    tcx.setAttribute(QLatin1String("xmlns"),
+                     QLatin1String("http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2"));
+    tcx.setAttribute(QLatin1String("xmlns:xsi"),
+                     QLatin1String("http://www.w3.org/2001/XMLSchema-instance"));
+    tcx.setAttribute(QLatin1String("xsi:schemaLocation"),
+                     QLatin1String("http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 "
+                                   "http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd"));
+
+    doc.appendChild(tcx);
+    return doc;
 }
 
 QByteArray TrainingSession::unzip(const QByteArray &data,

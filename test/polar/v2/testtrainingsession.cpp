@@ -23,8 +23,73 @@
 #include "../../tools/variant.h"
 
 #include <QDebug>
+#include <QDomDocument>
 #include <QFile>
 #include <QTest>
+
+// Qt's QDomDocument comparisons are based on references, and always fail when
+// comparing two separate documents.  Additionally, the QDomDocument::toString
+// and toByteArray functions are both non-deterministic. Hence we have to roll
+// our own QDomDocument comparison functions :(
+
+void compare(const QDomNode &a, const QDomNode &b);
+
+void compare(const QDomNode &a, const QDomNamedNodeMap &b)
+{
+    if (a.namespaceURI().isEmpty()) {
+        compare(a, b.namedItem(a.nodeName()));
+    } else {
+        compare(a, b.namedItemNS(a.namespaceURI(), a.localName()));
+    }
+}
+
+void compare(const QDomNamedNodeMap &a, const QDomNamedNodeMap &b)
+{
+    QCOMPARE(a.length(), b.length());
+    for (int i = 0; i < a.length(); ++i) {
+        compare(a.item(i), b);
+        compare(b.item(i), a);
+    }
+}
+
+void compare(const QDomNodeList &a, const QDomNodeList &b)
+{
+    QCOMPARE(a.length(), b.length());
+    for (int i = 0; i < a.length(); ++i) {
+        compare(a.at(i), b.at(i));
+    }
+}
+
+void compare(const QDomNode &a, const QDomNode &b)
+{
+    compare(a.attributes(), b.attributes());
+    compare(a.childNodes(), a.childNodes());
+    QCOMPARE(a.localName(), b.localName());
+    QCOMPARE(a.namespaceURI(), b.namespaceURI());
+    QCOMPARE(a.nodeName(), b.nodeName());
+    QCOMPARE(a.nodeType(), b.nodeType());
+    QCOMPARE(a.nodeValue(), b.nodeValue());
+    QCOMPARE(a.prefix(), b.prefix());
+}
+
+void compare(const QDomDocumentType &a, const QDomDocumentType &b)
+{
+    compare(static_cast<const QDomNode &>(a), static_cast<const QDomNode &>(b));
+    compare(a.entities(), b.entities());
+    QCOMPARE(a.internalSubset(), b.internalSubset());
+    QCOMPARE(a.name(), b.name());
+    QCOMPARE(a.nodeType(), b.nodeType());
+    compare(a.notations(), b.notations());
+    QCOMPARE(a.publicId(), b.publicId());
+    QCOMPARE(a.systemId(), b.systemId());
+}
+
+void compare(const QDomDocument &a, const QDomDocument &b)
+{
+    compare(a.doctype(), b.doctype());
+    compare(a.documentElement(), b.documentElement());
+    QCOMPARE(a.nodeType(), b.nodeType());
+}
 
 void TestTrainingSession::isGzipped_data()
 {
@@ -211,6 +276,96 @@ void TestTrainingSession::parseZones()
 
     // Compare the result.
     QCOMPARE(result, expected);
+}
+
+void TestTrainingSession::toGPX_data()
+{
+    QTest::addColumn<QString>("baseName");
+    QTest::addColumn<QByteArray>("expected");
+
+    #define LOAD_TEST_DATA(name) { \
+        QFile expectedFile(QFINDTESTDATA("testdata/" name ".gpx")); \
+        expectedFile.open(QIODevice::ReadOnly); \
+        QTest::newRow(name) << name << expectedFile.readAll(); \
+    }
+
+    LOAD_TEST_DATA("training-sessions-1");
+    LOAD_TEST_DATA("training-sessions-2");
+    LOAD_TEST_DATA("training-sessions-3");
+
+    #undef LOAD_TEST_DATA
+}
+
+void TestTrainingSession::toGPX()
+{
+    QFETCH(QString, baseName);
+    QFETCH(QByteArray, expected);
+
+    // Parse the route (protobuf) message.
+    polar::v2::TrainingSession session(baseName);
+    QVERIFY(session.parse(baseName));
+    QDomDocument gpx = session.toGPX();
+
+    // Write the result to an XML for optional post-mortem investigations.
+#ifdef Q_OS_WIN
+    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.gpx")
+#else
+    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.gpx")
+#endif
+        .arg(QString::fromLatin1(QTest::currentDataTag())));
+    if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+        file.write(gpx.toByteArray(2));
+    }
+    file.close();
+
+    QDomDocument expectedDoc;
+    expectedDoc.setContent(expected);
+    compare(gpx, expectedDoc);
+}
+
+void TestTrainingSession::toTCX_data()
+{
+    QTest::addColumn<QString>("baseName");
+    QTest::addColumn<QByteArray>("expected");
+
+    #define LOAD_TEST_DATA(name) { \
+        QFile expectedFile(QFINDTESTDATA("testdata/" name ".tcx")); \
+        expectedFile.open(QIODevice::ReadOnly); \
+        QTest::newRow(name) << name << expectedFile.readAll(); \
+    }
+
+    LOAD_TEST_DATA("training-sessions-1");
+    LOAD_TEST_DATA("training-sessions-2");
+    LOAD_TEST_DATA("training-sessions-3");
+
+    #undef LOAD_TEST_DATA
+}
+
+void TestTrainingSession::toTCX()
+{
+    QFETCH(QString, baseName);
+    QFETCH(QByteArray, expected);
+
+    // Parse the route (protobuf) message.
+    polar::v2::TrainingSession session(baseName);
+    QVERIFY(session.parse(baseName));
+    QDomDocument tcx = session.toTCX();
+
+    // Write the result to an XML for optional post-mortem investigations.
+#ifdef Q_OS_WIN
+    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.tcx")
+#else
+    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.tcx")
+#endif
+        .arg(QString::fromLatin1(QTest::currentDataTag())));
+    if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+        file.write(tcx.toByteArray(2));
+    }
+    file.close();
+
+    QDomDocument expectedDoc;
+    expectedDoc.setContent(expected);
+    compare(tcx, expectedDoc);
 }
 
 void TestTrainingSession::unzip_data()

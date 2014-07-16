@@ -1,6 +1,5 @@
 TEMPLATE = app
-QT += testlib
-QT -= gui
+QT += testlib widgets xml
 CONFIG += testcase
 SOURCES += test.cpp
 

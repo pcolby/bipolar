@@ -1,2 +1,4 @@
+*.result.gpx
 *.result.json
+*.result.tcx
 *.result.var
