@@ -99,11 +99,13 @@ bool TrainingSession::parse(const QString &baseName)
 bool TrainingSession::parse(const QString &exerciseId, const QMap<QString, QString> &fileNames)
 {
     QVariantMap exercise;
+    QVariantList sources;
     #define PARSE_IF_CONTAINS(str, Func) \
         if (fileNames.contains(str)) { \
             const QVariantMap map = parse##Func(fileNames[str]); \
             if (!map.empty()) { \
                 exercise[str] = map; \
+                sources << fileNames[str]; \
             } \
         }
     PARSE_IF_CONTAINS(LAPS,    Laps);
@@ -116,6 +118,7 @@ bool TrainingSession::parse(const QString &exerciseId, const QMap<QString, QStri
     #undef PARSE_IF_CONTAINS
 
     if (!exercise.empty()) {
+        exercise[QLatin1String("sources")] = sources;
         parsedExercises[exerciseId] = exercise;
         return true;
     }
@@ -358,6 +361,12 @@ QVariantMap TrainingSession::parseZones(const QString &fileName) const
     return parseZones(file);
 }
 
+QString getFileName(const QString &file)
+{
+    const QFileInfo info(file);
+    return info.fileName();
+}
+
 QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
 {
     QDomDocument doc;
@@ -366,9 +375,10 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
 
     QDomElement gpx = doc.createElement(QLatin1String("gpx"));
     gpx.setAttribute(QLatin1String("version"), QLatin1String("1.1"));
-    gpx.setAttribute(QLatin1String("creator"), QString::fromLatin1("%1 %2")
+    gpx.setAttribute(QLatin1String("creator"), QString::fromLatin1("%1 %2 - %3")
                      .arg(QApplication::applicationName())
-                     .arg(QApplication::applicationVersion()));
+                     .arg(QApplication::applicationVersion())
+                     .arg(QLatin1String("https://github.com/pcolby/bipolar")));
     gpx.setAttribute(QLatin1String("xmlns"),
                      QLatin1String("http://www.topografix.com/GPX/1/0"));
     gpx.setAttribute(QLatin1String("xmlns:xsi"),
@@ -380,16 +390,51 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
 
     QDomElement metaData = doc.createElement(QLatin1String("metadata"));
     gpx.appendChild(metaData);
+    QDomElement name = doc.createElement(QLatin1String("name"));
+    metaData.appendChild(name);
+    name.appendChild(doc.createTextNode(getFileName(baseName)));
+    QDomElement desc = doc.createElement(QLatin1String("desc"));
+    metaData.appendChild(desc);
+    desc.appendChild(doc.createTextNode(tr("GPX encoding of %1")
+                                        .arg(getFileName(baseName))));
     QDomElement time = doc.createElement(QLatin1String("time"));
     metaData.appendChild(time);
     time.appendChild(doc.createTextNode(creationTime.toString(Qt::ISODate)));
 
     foreach (const QVariant &exercise, parsedExercises) {
         const QVariantMap map = exercise.toMap();
-        qDebug() << map.contains(LAPS);
+
+        QDomElement trk = doc.createElement(QLatin1String("trk"));
+        gpx.appendChild(trk);
+
+        QDomElement src = doc.createElement(QLatin1String("src"));
+        trk.appendChild(src);
+        QStringList sources;
+        foreach (const QVariant &source, map.value(QLatin1String("sources")).toList()) {
+            sources << getFileName(source.toString());
+        }
+        src.appendChild(doc.createTextNode(sources.join(QLatin1Char(' '))));
+
+        if (map.contains(ROUTE)) {
+
+        }
+
+/*        qDebug() << map.contains(LAPS);
+        if (map.contains(LAPS)) {
+            qDebug() << map.value(LAPS).toMap().size();
+        }
         qDebug() << map.contains(ROUTE);
+        if (map.contains(ROUTE)) {
+            qDebug() << map.value(ROUTE).toMap().size();
+        }
         qDebug() << map.contains(SAMPLES);
+        if (map.contains(SAMPLES)) {
+            qDebug() << map.value(SAMPLES).toMap().size();
+        }
         qDebug() << map.contains(ZONES);
+        if (map.contains(ZONES)) {
+            qDebug() << map.value(ZONES).toMap().size();
+        }*/
     }
 
     return doc;

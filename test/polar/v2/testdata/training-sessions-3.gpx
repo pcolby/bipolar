@@ -1,6 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<gpx creator="test " xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/0" version="1.1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<gpx xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" creator="test  - https://github.com/pcolby/bipolar" xmlns="http://www.topografix.com/GPX/1/0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.1">
   <metadata>
+    <name>training-sessions-3</name>
+    <desc>GPX encoding of training-sessions-3</desc>
     <time>2014-07-15T12:34:56Z</time>
   </metadata>
+  <trk>
+    <src>training-sessions-3-exercises-1-laps</src>
+  </trk>
 </gpx>
