@@ -329,8 +329,11 @@ void TestTrainingSession::toGPX()
     compare(gpx, expectedDoc);
 
     // Validate the generated document against the relevant XML schema.
+    gpx.documentElement().removeAttribute(QLatin1String("xsi:schemaLocation"));
+    QFile xsd(QFINDTESTDATA("schemata/gpx.xsd"));
+    QVERIFY(xsd.open(QIODevice::ReadOnly));
     QXmlSchema schema;
-    QVERIFY(schema.load(QUrl(QLatin1String("http://www.topografix.com/GPX/1/1/gpx.xsd"))));
+    QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
     QXmlSchemaValidator validator(schema);
     QVERIFY(validator.validate(gpx.toByteArray()));
 }
