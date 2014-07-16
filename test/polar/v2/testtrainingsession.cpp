@@ -285,8 +285,10 @@ void TestTrainingSession::toGPX_data()
 
     #define LOAD_TEST_DATA(name) { \
         QFile expectedFile(QFINDTESTDATA("testdata/" name ".gpx")); \
+        QString baseName(expectedFile.fileName()); \
+        baseName.chop(4); \
         expectedFile.open(QIODevice::ReadOnly); \
-        QTest::newRow(name) << name << expectedFile.readAll(); \
+        QTest::newRow(name) << baseName << expectedFile.readAll(); \
     }
 
     LOAD_TEST_DATA("training-sessions-1");
@@ -330,8 +332,10 @@ void TestTrainingSession::toTCX_data()
 
     #define LOAD_TEST_DATA(name) { \
         QFile expectedFile(QFINDTESTDATA("testdata/" name ".tcx")); \
+        QString baseName(expectedFile.fileName()); \
+        baseName.chop(4); \
         expectedFile.open(QIODevice::ReadOnly); \
-        QTest::newRow(name) << name << expectedFile.readAll(); \
+        QTest::newRow(name) << baseName << expectedFile.readAll(); \
     }
 
     LOAD_TEST_DATA("training-sessions-1");
