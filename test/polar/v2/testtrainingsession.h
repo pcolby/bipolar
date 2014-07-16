@@ -26,6 +26,9 @@ private slots:
     void isGzipped_data();
     void isGzipped();
 
+    void parseLaps_data();
+    void parseLaps();
+
     void parseRoute_data();
     void parseRoute();
 

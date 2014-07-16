@@ -127,9 +127,50 @@ bool TrainingSession::parse(const QString &exerciseId, const QMap<QString, QStri
 
 QVariantMap TrainingSession::parseLaps(QIODevice &data) const
 {
-    Q_UNUSED(data);
-    Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
-    return QVariantMap();
+    ProtoBuf::Message::FieldInfoMap fieldInfo;
+    ADD_FIELD_INFO("1",        "laps",             EmbeddedMessage);
+    ADD_FIELD_INFO("1/1",      "header",           EmbeddedMessage);
+    ADD_FIELD_INFO("1/1/1",    "split-time",       EmbeddedMessage);
+    ADD_FIELD_INFO("1/1/1/1",  "hours",            Uint32);
+    ADD_FIELD_INFO("1/1/1/2",  "mintues",          Uint32);
+    ADD_FIELD_INFO("1/1/1/3",  "seconds",          Uint32);
+    ADD_FIELD_INFO("1/1/1/4/", "milliseconds",     Uint32);
+    ADD_FIELD_INFO("1/1/2",    "duration",         EmbeddedMessage);
+    ADD_FIELD_INFO("1/1/2/1",  "hours",            Uint32);
+    ADD_FIELD_INFO("1/1/2/2",  "mintues",          Uint32);
+    ADD_FIELD_INFO("1/1/2/3",  "seconds",          Uint32);
+    ADD_FIELD_INFO("1/1/2/4/", "milliseconds",     Uint32);
+    ADD_FIELD_INFO("1/1/3",    "distance",         Float);
+    ADD_FIELD_INFO("1/1/4",    "ascent",           Float);
+    ADD_FIELD_INFO("1/1/5",    "descent",          Float);
+    ADD_FIELD_INFO("1/1/6",    "lap-type",         Enumerator);
+    ADD_FIELD_INFO("1/2",      "stats",            EmbeddedMessage);
+    ADD_FIELD_INFO("1/2/1",    "heartrate",        EmbeddedMessage); ///< @todo
+    ADD_FIELD_INFO("1/2/2",    "speed",            EmbeddedMessage); ///< @todo
+    ADD_FIELD_INFO("1/2/3",    "cadence",          EmbeddedMessage); ///< @todo
+    ADD_FIELD_INFO("1/2/4",    "power",            EmbeddedMessage); ///< @todo
+    ADD_FIELD_INFO("1/2/5",    "pedaling",         EmbeddedMessage); ///< @todo
+    ADD_FIELD_INFO("1/2/6",    "incline",          EmbeddedMessage); ///< @todo
+    ADD_FIELD_INFO("1/2/7",    "stride",           EmbeddedMessage); ///< @todo
+    ADD_FIELD_INFO("2",        "summary",          EmbeddedMessage);
+    ADD_FIELD_INFO("2/1",      "best-duration",    EmbeddedMessage);
+    ADD_FIELD_INFO("2/1/1",    "hours",            Uint32);
+    ADD_FIELD_INFO("2/1/2",    "mintues",          Uint32);
+    ADD_FIELD_INFO("2/1/3",    "seconds",          Uint32);
+    ADD_FIELD_INFO("2/1.4",    "milliseconds",     Uint32);
+    ADD_FIELD_INFO("2/2",      "average-duration", EmbeddedMessage);
+    ADD_FIELD_INFO("2/2/1",    "hours",            Uint32);
+    ADD_FIELD_INFO("2/2/2",    "mintues",          Uint32);
+    ADD_FIELD_INFO("2/2/3",    "seconds",          Uint32);
+    ADD_FIELD_INFO("2/2.4",    "milliseconds",     Uint32);
+    ProtoBuf::Message parser(fieldInfo);
+
+    if (isGzipped(data)) {
+        QByteArray array = unzip(data.readAll());
+        return parser.parse(array);
+    } else {
+        return parser.parse(data);
+    }
 }
 
 QVariantMap TrainingSession::parseLaps(const QString &fileName) const
