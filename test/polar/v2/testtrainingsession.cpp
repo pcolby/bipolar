@@ -306,7 +306,8 @@ void TestTrainingSession::toGPX()
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession session(baseName);
     QVERIFY(session.parse(baseName));
-    QDomDocument gpx = session.toGPX();
+    QDomDocument gpx = session.toGPX(QDateTime::fromString(
+        QLatin1String("2014-07-15T12:34:56Z"), Qt::ISODate));
 
     // Write the result to an XML for optional post-mortem investigations.
 #ifdef Q_OS_WIN

@@ -358,7 +358,7 @@ QVariantMap TrainingSession::parseZones(const QString &fileName) const
     return parseZones(file);
 }
 
-QDomDocument TrainingSession::toGPX() const
+QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
 {
     QDomDocument doc;
     doc.appendChild(doc.createProcessingInstruction(QLatin1String("xml"),
@@ -376,12 +376,22 @@ QDomDocument TrainingSession::toGPX() const
     gpx.setAttribute(QLatin1String("xsi:schemaLocation"),
                      QLatin1String("http://www.topografix.com/GPX/1/1 "
                                    "http://www.topografix.com/GPX/1/1/gpx.xsd"));
+    doc.appendChild(gpx);
+
+    QDomElement metaData = doc.createElement(QLatin1String("metadata"));
+    gpx.appendChild(metaData);
+    QDomElement time = doc.createElement(QLatin1String("time"));
+    metaData.appendChild(time);
+    time.appendChild(doc.createTextNode(creationTime.toString(Qt::ISODate)));
 
     foreach (const QVariant &exercise, parsedExercises) {
-        //qDebug() << exercise;
+        const QVariantMap map = exercise.toMap();
+        qDebug() << map.contains(LAPS);
+        qDebug() << map.contains(ROUTE);
+        qDebug() << map.contains(SAMPLES);
+        qDebug() << map.contains(ZONES);
     }
 
-    doc.appendChild(gpx);
     return doc;
 }
 

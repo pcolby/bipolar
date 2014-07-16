@@ -20,6 +20,7 @@
 #ifndef __POLAR_V2_TRAINING_SESSION_H__
 #define __POLAR_V2_TRAINING_SESSION_H__
 
+#include <QDateTime>
 #include <QDomDocument>
 #include <QIODevice>
 #include <QMap>
@@ -82,7 +83,7 @@ protected:
     QVariantMap parseZones(QIODevice &data) const;
     QVariantMap parseZones(const QString &fileName) const;
 
-    QDomDocument toGPX() const;
+    QDomDocument toGPX(const QDateTime &creationTime = QDateTime::currentDateTimeUtc()) const;
     QDomDocument toTCX() const;
 
     QByteArray unzip(const QByteArray &data,
