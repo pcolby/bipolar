@@ -31,6 +31,6 @@ Things remaining for the next release (0.1.0) are:
 
 ## Contact
 
-The [Bipolar Google Group](https://github.com/pcolby/bipolar) is available for
-general discussion, questions, comments, suggestions, announcements etc.  Email
-bipolar-app@googlegroups.com to subscribe.
+The [Bipolar Google Group](http://groups.google.com/d/forum/bipolar-app) is
+available for general discussion, questions, comments, suggestions,
+announcements etc.  Email bipolar-app@googlegroups.com to subscribe.
