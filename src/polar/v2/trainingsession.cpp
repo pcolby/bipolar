@@ -481,7 +481,16 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
     return doc;
 }
 
-QDomDocument TrainingSession::toTCX() const
+/**
+ * @brief TrainingSession::toTCX
+ *
+ * @param buildTime If set, will override the internally detected build time.
+ *                  Note, this really only here to allow for deterministic
+ *                  testing - not used by the final application itself.
+ *
+ * @return A TCX document representing the parsed Polar data.
+ */
+QDomDocument TrainingSession::toTCX(const QString &buildTime) const
 {
     QDomDocument doc;
     doc.appendChild(doc.createProcessingInstruction(QLatin1String("xml"),
@@ -531,7 +540,8 @@ QDomDocument TrainingSession::toTCX() const
             type.appendChild(doc.createTextNode(QLatin1String("Internal")));
             build.appendChild(type);
             QDomElement time = doc.createElement(QLatin1String("Time"));
-            time.appendChild(doc.createTextNode(QLatin1String(__DATE__" "__TIME__)));
+            time.appendChild(doc.createTextNode(
+                buildTime.isEmpty() ? QString::fromLatin1(__DATE__" "__TIME__) : buildTime));
             build.appendChild(time);
             QDomElement builder = doc.createElement(QLatin1String("Builder"));
             builder.appendChild(doc.createTextNode(QLatin1String("Paul Colby")));

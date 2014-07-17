@@ -84,7 +84,7 @@ protected:
     QVariantMap parseZones(const QString &fileName) const;
 
     QDomDocument toGPX(const QDateTime &creationTime = QDateTime::currentDateTimeUtc()) const;
-    QDomDocument toTCX() const;
+    QDomDocument toTCX(const QString &buildTime = QString()) const;
 
     QByteArray unzip(const QByteArray &data,
                      const int initialBufferSize = 10240) const;

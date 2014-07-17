@@ -381,7 +381,7 @@ void TestTrainingSession::toTCX()
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession session(baseName);
     QVERIFY(session.parse(baseName));
-    QDomDocument tcx = session.toTCX();
+    QDomDocument tcx = session.toTCX(QLatin1String("Jul 17 2014 21:02:38"));
 
     // Write the result to an XML for optional post-mortem investigations.
 #ifdef Q_OS_WIN
