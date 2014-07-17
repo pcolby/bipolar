@@ -50,6 +50,7 @@ private:
 
 int main(int argc, char *argv[]) {
     QCoreApplication app(argc, argv);
+    app.setApplicationVersion(QLatin1String("1.2.3.4"));
     app.setAttribute(Qt::AA_Use96Dpi, true);
 
     // Setup our tests factory object.

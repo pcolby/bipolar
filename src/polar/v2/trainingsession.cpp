@@ -453,6 +453,8 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
                            << longitude.size() << satellites.size();
             }
 
+            /// @todo Use lap data to split the <trk> into multiple <trkseg>?
+
             for (int index = 0; index < duration.size(); ++index) {
                 QDomElement trkpt = doc.createElement(QLatin1String("trkpt"));
                 trkseg.appendChild(trkpt);
@@ -493,8 +495,58 @@ QDomDocument TrainingSession::toTCX() const
     tcx.setAttribute(QLatin1String("xsi:schemaLocation"),
                      QLatin1String("http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 "
                                    "http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd"));
-
     doc.appendChild(tcx);
+
+    /// @todo Activities
+
+    {
+        QDomElement author = doc.createElement(QLatin1String("Author"));
+        author.setAttribute(QLatin1String("xsi:type"), QLatin1String("Application_t"));
+        tcx.appendChild(author);
+
+        QDomElement name = doc.createElement(QLatin1String("Name"));
+        name.appendChild(doc.createTextNode(QLatin1String("Bipolar")));
+        author.appendChild(name);
+
+        {
+            QDomElement build = doc.createElement(QLatin1String("Build"));
+            author.appendChild(build);
+            QDomElement version = doc.createElement(QLatin1String("Version"));
+            build.appendChild(version);
+            QStringList versionParts = QApplication::applicationVersion().split(QLatin1Char('.'));
+            QDomElement versionMajor = doc.createElement(QLatin1String("VersionMajor"));
+            versionMajor.appendChild(doc.createTextNode(versionParts.at(0)));
+            version.appendChild(versionMajor);
+            QDomElement versionMinor = doc.createElement(QLatin1String("VersionMinor"));
+            versionMinor.appendChild(doc.createTextNode(versionParts.at(1)));
+            version.appendChild(versionMinor);
+            QDomElement buildMajor = doc.createElement(QLatin1String("BuildMajor"));
+            buildMajor.appendChild(doc.createTextNode(versionParts.at(2)));
+            version.appendChild(buildMajor);
+            QDomElement buildMinor = doc.createElement(QLatin1String("BuildMinor"));
+            buildMinor.appendChild(doc.createTextNode(versionParts.at(3)));
+            version.appendChild(buildMinor);
+            QDomElement type = doc.createElement(QLatin1String("Type"));
+            /// @todo May be: Internal, Alpha, Beta, Release.
+            type.appendChild(doc.createTextNode(QLatin1String("Internal")));
+            build.appendChild(type);
+            QDomElement time = doc.createElement(QLatin1String("Time"));
+            time.appendChild(doc.createTextNode(QLatin1String(__DATE__" "__TIME__)));
+            build.appendChild(time);
+            QDomElement builder = doc.createElement(QLatin1String("Builder"));
+            builder.appendChild(doc.createTextNode(QLatin1String("Paul Colby")));
+            build.appendChild(builder);
+        }
+
+        /// @todo  Make this dynamic if/when app is localized.
+        QDomElement langId = doc.createElement(QLatin1String("LangID"));
+        langId.appendChild(doc.createTextNode(QLatin1String("EN")));
+        author.appendChild(langId);
+
+        QDomElement partNumber = doc.createElement(QLatin1String("PartNumber"));
+        partNumber.appendChild(doc.createTextNode(QLatin1String("123-12345-12")));
+        author.appendChild(partNumber);
+    }
     return doc;
 }
 
