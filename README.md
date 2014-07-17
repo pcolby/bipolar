@@ -28,3 +28,9 @@ files to Strava, with great success :D
 Things remaining for the next release (0.1.0) are:
 - TCX conversion; and
 - a Windows installer.
+
+## Contact
+
+The [Bipolar Google Group](https://github.com/pcolby/bipolar) is available for
+general discussion, questions, comments, suggestions, announcements etc.  Email
+bipolar-app@googlegroups.com to subscribe.
