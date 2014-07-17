@@ -395,9 +395,19 @@ void TestTrainingSession::toTCX()
     }
     file.close();
 
+    // Compare the generated document against the expected result.
     QDomDocument expectedDoc;
     expectedDoc.setContent(expected);
     compare(tcx, expectedDoc);
+
+    // Validate the generated document against the relevant XML schema.
+    tcx.documentElement().removeAttribute(QLatin1String("xsi:schemaLocation"));
+    QFile xsd(QFINDTESTDATA("schemata/TrainingCenterDatabasev2.xsd"));
+    QVERIFY(xsd.open(QIODevice::ReadOnly));
+    QXmlSchema schema;
+    QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
+    QXmlSchemaValidator validator(schema);
+    QVERIFY(validator.validate(tcx.toByteArray()));
 }
 
 void TestTrainingSession::unzip_data()
