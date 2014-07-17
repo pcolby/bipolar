@@ -361,6 +361,21 @@ QVariantMap TrainingSession::parseZones(const QString &fileName) const
     return parseZones(file);
 }
 
+QDateTime getDateTime(const QVariantMap &map)
+{
+    const QString string = QString::fromLatin1("%1-%2-%3 %4:%5:%6.%7")
+        .arg(map[QLatin1String("date")].toList()[0].toMap()[QLatin1String("year")].toList()[0].toString())
+        .arg(map[QLatin1String("date")].toList()[0].toMap()[QLatin1String("month")].toList()[0].toString())
+        .arg(map[QLatin1String("date")].toList()[0].toMap()[QLatin1String("day")].toList()[0].toString())
+        .arg(map[QLatin1String("time")].toList()[0].toMap()[QLatin1String("hour")].toList()[0].toString())
+        .arg(map[QLatin1String("time")].toList()[0].toMap()[QLatin1String("minute")].toList()[0].toString())
+        .arg(map[QLatin1String("time")].toList()[0].toMap()[QLatin1String("seconds")].toList()[0].toString())
+        .arg(map[QLatin1String("time")].toList()[0].toMap()[QLatin1String("milliseconds")].toList()[0].toString());
+    QDateTime dateTime = QDateTime::fromString(string, QLatin1String("yyyy-M-d H:m:s.z"));
+    dateTime.setTimeSpec(Qt::UTC);
+    return dateTime;
+}
+
 QString getFileName(const QString &file)
 {
     const QFileInfo info(file);
@@ -416,27 +431,51 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
         src.appendChild(doc.createTextNode(sources.join(QLatin1Char(' '))));
 
         if (map.contains(ROUTE)) {
+            const QVariantMap route = map.value(ROUTE).toMap();
+            QDomElement trkseg = doc.createElement(QLatin1String("trkseg"));
+            trk.appendChild(trkseg);
+
+            // Get the starting time.
+            const QDateTime startTime = getDateTime(route[QLatin1String("timestamp")].toList().at(0).toMap());
+
+            // Get the number of samples.
+            const QVariantList altitude   = route[QLatin1String("altitude")].toList();
+            const QVariantList duration   = route[QLatin1String("duration")].toList();
+            const QVariantList latitude   = route[QLatin1String("latitude")].toList();
+            const QVariantList longitude  = route[QLatin1String("longitude")].toList();
+            const QVariantList satellites = route[QLatin1String("satellites")].toList();
+            if ((duration.size() != altitude.size())  ||
+                (duration.size() != latitude.size())  ||
+                (duration.size() != longitude.size()) ||
+                (duration.size() != satellites.size())) {
+                qWarning() << "lists not all equal sizes:" << duration.size()
+                           << altitude.size() << latitude.size()
+                           << longitude.size() << satellites.size();
+            }
+
+            for (int index = 0; index < duration.size(); ++index) {
+                QDomElement trkpt = doc.createElement(QLatin1String("trkpt"));
+                trkseg.appendChild(trkpt);
+                trkpt.setAttribute(QLatin1String("lat"), latitude[index].toDouble());
+                trkpt.setAttribute(QLatin1String("lon"), longitude[index].toDouble());
+
+                /// @todo Use the barometric altitude instead, if present?
+                QDomElement ele = doc.createElement(QLatin1String("ele"));
+                trkpt.appendChild(ele);
+                ele.appendChild(doc.createTextNode(altitude[index].toString()));
+
+                QDomElement time = doc.createElement(QLatin1String("time"));
+                trkpt.appendChild(time);
+                time.appendChild(doc.createTextNode(startTime.addMSecs(
+                    duration[index].toLongLong()).toString(Qt::ISODate)));
+
+                QDomElement sat = doc.createElement(QLatin1String("sat"));
+                trkpt.appendChild(sat);
+                sat.appendChild(doc.createTextNode(satellites[index].toString()));
+            }
 
         }
-
-/*        qDebug() << map.contains(LAPS);
-        if (map.contains(LAPS)) {
-            qDebug() << map.value(LAPS).toMap().size();
-        }
-        qDebug() << map.contains(ROUTE);
-        if (map.contains(ROUTE)) {
-            qDebug() << map.value(ROUTE).toMap().size();
-        }
-        qDebug() << map.contains(SAMPLES);
-        if (map.contains(SAMPLES)) {
-            qDebug() << map.value(SAMPLES).toMap().size();
-        }
-        qDebug() << map.contains(ZONES);
-        if (map.contains(ZONES)) {
-            qDebug() << map.value(ZONES).toMap().size();
-        }*/
     }
-
     return doc;
 }
 
