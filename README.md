@@ -11,33 +11,20 @@ eventually.
 
 ## Status
 
-Bipolor consists (or _will_ consist) of two parts:
+The release plans is roughly as follows:
 
-1. A custom hook for extracting data from Polar's applications.
-2. A GUI application for processing the extracted data (for conversion to other
-   formats such as GPX and TCX).
+- [x] 0.0.1 Working hook DLL for extracting data from Polar FlowSync on Windows.
+- [ ] 0.1.0 Export to both GPX and TCX, in a headless mode (no GUI yet).
+- [ ] 0.2.0 Mac OS support (both hook library, and headless app).
+- [ ] 0.3.0 Basic GUI.
 
-The custom hook is pretty-much working now for Polar FlowSync 2.1.x.  However,
-the GUI application has not been started yet.
+The initial hook for Windows has already been released, and is working quite
+well.  I've got all of the protobuf data parsing working (Polar uses Google
+Protocol Buffers), and am now working on the GPX/TCX conversion.
 
-The next step is to understand how to interpret the data exported by the custom
-hook (it's encoded using Google Protocol Buffers).  Help with this would be
-greatly appreciated!
+In fact, GPX conversion is working now! :D  I've even uploaded generated GPX
+files to Strava, with great success :D
 
-See [Hooks](../../wiki/Hooks) for more information.
-
-### Update
-
-I've now worked out the latitude, longitude, and altitude encoding! Work on the
-conversion application can begin now :D
-
-## How to Help
-
-Right now, I need help with deciphering the Google Protocol Buffers. If you
-already know what that means, then please go ahead and install the
-[FlowSync hook](../../wiki/Hooks), capture some session data, and start
-mapping - either add the results to the [Polar API V2](../../wiki/Polar API V2)
-wiki page, or to a new issue.
-
-If you still want to help, but aren't sure how, just create a new issue asking
-how to help, and we can all discuss some options :D
+Things remaining for the next release (0.1.0) are:
+- TCX conversion; and
+- a Windows installer.
