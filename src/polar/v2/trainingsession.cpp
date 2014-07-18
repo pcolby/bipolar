@@ -506,9 +506,56 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                      QLatin1String("http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 "
                                    "http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd"));
     doc.appendChild(tcx);
+/*
+    QDomElement activities = doc.createElement(QLatin1String("Activities"));
+    tcx.appendChild(activities);
 
-    /// @todo Activities
+    foreach (const QVariant &exercise, parsedExercises) {
+        const QVariantMap map = exercise.toMap();
 
+        // We cannot create a (TCX) Activity without a parsed route file, since
+        // only the route files include the start time, which is necessary for
+        // TCX.  This is okay,
+        if (map.contains(ROUTE)) {
+            const QVariantMap route = map.value(ROUTE).toMap();
+            QDomElement trkseg = doc.createElement(QLatin1String("trkseg"));
+            trk.appendChild(trkseg);
+
+        QDomElement activity = doc.createElement(QLatin1String("Activity"));
+        /// @todo Sport must be one of: Running, Biking, Other.
+        activity.setAttribute(QLatin1String("Sport"), QLatin1String("Other"));
+        activities.appendChild(activity);
+
+        // Get the starting time.
+        const QDateTime startTime = getDateTime(
+            route[QLatin1String("timestamp")].toList().at(0).toMap());
+        activity.appendChild(doc.createElement(QLatin1String("Id")))
+            .appendChild(doc.createTextNode(startTime.toString(Qt::ISODate));
+
+
+        // Id -> xsd datetime
+        // Lap startTime...
+        //   * TotalTimeSeconds
+        //   * DistanceMeters
+        //   * Calories
+        //   * Intensity
+        //   * TriggerMethod
+        //   * Track
+        // Notes
+        // Training
+        // Creator
+        // Ext
+
+        // samples:
+        // * record-interval.
+        // * altittude
+        // * distance
+        // * heartrate
+        // * *-offline
+        // * speed
+        // * temp
+    }
+*/
     {
         QDomElement author = doc.createElement(QLatin1String("Author"));
         author.setAttribute(QLatin1String("xsi:type"), QLatin1String("Application_t"));
