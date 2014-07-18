@@ -34,6 +34,7 @@
 #endif
 
 // These constants match those used by Polar's V2 API.
+#define CREATE  QLatin1String("create")
 #define LAPS    QLatin1String("laps")
 #define ROUTE   QLatin1String("route")
 #define SAMPLES QLatin1String("samples")
@@ -109,6 +110,7 @@ bool TrainingSession::parse(const QString &exerciseId, const QMap<QString, QStri
                 sources << fileNames[str]; \
             } \
         }
+    PARSE_IF_CONTAINS(CREATE,  CreateExercise);
     PARSE_IF_CONTAINS(LAPS,    Laps);
   //PARSE_IF_CONTAINS(PHASES,  Phases);
     PARSE_IF_CONTAINS(ROUTE,   Route);
@@ -130,6 +132,75 @@ bool TrainingSession::parse(const QString &exerciseId, const QMap<QString, QStri
     fieldInfo[QLatin1String(tag)] = ProtoBuf::Message::FieldInfo( \
         QLatin1String(name), ProtoBuf::Types::type \
     )
+
+QVariantMap TrainingSession::parseCreateExercise(QIODevice &data) const
+{
+    ProtoBuf::Message::FieldInfoMap fieldInfo;
+    ADD_FIELD_INFO("1",     "start",         EmbeddedMessage);
+    ADD_FIELD_INFO("1/1",   "date",          EmbeddedMessage);
+    ADD_FIELD_INFO("1/1/1", "year",          Uint32);
+    ADD_FIELD_INFO("1/1/2", "month",         Uint32);
+    ADD_FIELD_INFO("1/1/3", "day",           Uint32);
+    ADD_FIELD_INFO("1/2",   "time",          EmbeddedMessage);
+    ADD_FIELD_INFO("1/2/1", "hour",          Uint32);
+    ADD_FIELD_INFO("1/2/2", "minute",        Uint32);
+    ADD_FIELD_INFO("1/2/3", "seconds",       Uint32);
+    ADD_FIELD_INFO("1/2/4", "milliseconds",  Uint32);
+    ADD_FIELD_INFO("1/4",   "offset",        Int32);
+    ADD_FIELD_INFO("2",     "duration",      EmbeddedMessage);
+    ADD_FIELD_INFO("2/1",   "hours",         Uint32);
+    ADD_FIELD_INFO("2/2",   "mintues",       Uint32);
+    ADD_FIELD_INFO("2/3",   "seconds",       Uint32);
+    ADD_FIELD_INFO("2/4",   "milliseconds",  Uint32);
+    ADD_FIELD_INFO("3",     "sport",         EmbeddedMessage);
+    ADD_FIELD_INFO("3/1",   "value",         Uint64);
+    ADD_FIELD_INFO("4",     "distance",      Float);
+    ADD_FIELD_INFO("5",     "calories",      Uint32);
+    ADD_FIELD_INFO("6",     "training-load", EmbeddedMessage);
+    ADD_FIELD_INFO("6/1",   "load-value",    Uint32);
+    ADD_FIELD_INFO("6/2",   "recovery-time", EmbeddedMessage);
+    ADD_FIELD_INFO("6/2/1", "hours",         Uint32);
+    ADD_FIELD_INFO("6/2/2", "mintues",       Uint32);
+    ADD_FIELD_INFO("6/2/3", "seconds",       Uint32);
+    ADD_FIELD_INFO("6/2/4", "milliseconds",  Uint32);
+    ADD_FIELD_INFO("6/3",   "carbs",         Uint32);
+    ADD_FIELD_INFO("6/4",   "protein",       Uint32);
+    ADD_FIELD_INFO("6/5",   "fat",           Uint32);
+    ADD_FIELD_INFO("7",     "sensors",       Enumerator);
+    ADD_FIELD_INFO("9",     "running-index", EmbeddedMessage);
+    ADD_FIELD_INFO("9/1",   "value",         Uint32);
+    ADD_FIELD_INFO("9/2",   "duration",      EmbeddedMessage);
+    ADD_FIELD_INFO("9/2/1", "hours",         Uint32);
+    ADD_FIELD_INFO("9/2/2", "mintues",       Uint32);
+    ADD_FIELD_INFO("9/2/3", "seconds",       Uint32);
+    ADD_FIELD_INFO("9/2/4", "milliseconds",  Uint32);
+    ADD_FIELD_INFO("10",    "ascent",        Float);
+    ADD_FIELD_INFO("11",    "descent",       Float);
+    ADD_FIELD_INFO("12",    "latitude",      Double);
+    ADD_FIELD_INFO("13",    "longitude",     Double);
+    ADD_FIELD_INFO("14",    "place",         String);
+    ADD_FIELD_INFO("15",    "exercise-result",          EmbeddedMessage); /// @todo
+    ADD_FIELD_INFO("16",    "exercise-counters",        EmbeddedMessage); /// @todo
+    ADD_FIELD_INFO("17",    "speed-calibration-offset", Float);
+    ProtoBuf::Message parser(fieldInfo);
+
+    if (isGzipped(data)) {
+        QByteArray array = unzip(data.readAll());
+        return parser.parse(array);
+    } else {
+        return parser.parse(data);
+    }
+}
+
+QVariantMap TrainingSession::parseCreateExercise(const QString &fileName) const
+{
+    QFile file(fileName);
+    if (!file.open(QIODevice::ReadOnly)) {
+        emit parseError(tr("failed to open laps file"), fileName);
+        return QVariantMap();
+    }
+    return parseCreateExercise(file);
+}
 
 QVariantMap TrainingSession::parseLaps(QIODevice &data) const
 {

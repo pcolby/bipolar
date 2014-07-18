@@ -26,6 +26,9 @@ private slots:
     void isGzipped_data();
     void isGzipped();
 
+    void parseCreateExercise_data();
+    void parseCreateExercise();
+
     void parseLaps_data();
     void parseLaps();
 

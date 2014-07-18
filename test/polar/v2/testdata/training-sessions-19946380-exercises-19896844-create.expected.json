@@ -1,0 +1,113 @@
+{
+    "ascent": [
+        334.979248046875
+    ],
+    "calories": [
+        537
+    ],
+    "descent": [
+        345.95220947265625
+    ],
+    "distance": [
+        4571.60009765625
+    ],
+    "duration": [
+        {
+            "hours": [
+                1
+            ],
+            "milliseconds": [
+                250
+            ],
+            "mintues": [
+                5
+            ],
+            "seconds": [
+                0
+            ]
+        }
+    ],
+    "sensors": [
+        2,
+        17,
+        18
+    ],
+    "sport": [
+        {
+            "value": [
+                16
+            ]
+        }
+    ],
+    "start": [
+        {
+            "3": [
+                0
+            ],
+            "date": [
+                {
+                    "day": [
+                        18
+                    ],
+                    "month": [
+                        7
+                    ],
+                    "year": [
+                        2014
+                    ]
+                }
+            ],
+            "offset": [
+                600
+            ],
+            "time": [
+                {
+                    "hour": [
+                        7
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minute": [
+                        48
+                    ],
+                    "seconds": [
+                        56
+                    ]
+                }
+            ]
+        }
+    ],
+    "training-load": [
+        {
+            "carbs": [
+                61
+            ],
+            "fat": [
+                36
+            ],
+            "load-value": [
+                76
+            ],
+            "protein": [
+                3
+            ],
+            "recovery-time": [
+                {
+                    "hours": [
+                        12
+                    ],
+                    "milliseconds": [
+                        658
+                    ],
+                    "mintues": [
+                        4
+                    ],
+                    "seconds": [
+                        41
+                    ]
+                }
+            ]
+        }
+    ]
+}
