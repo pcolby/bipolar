@@ -64,7 +64,7 @@ public:
         ThirtyTwoBit = 5
     };
 
-    static WireType getWireType(const ScalarType ScalarType);
+    static WireType getWireType(const ScalarType scalarType);
 
 };
 

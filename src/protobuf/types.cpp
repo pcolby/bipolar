@@ -21,9 +21,9 @@
 
 namespace ProtoBuf {
 
-Types::WireType Types::getWireType(const ScalarType ScalarType)
+Types::WireType Types::getWireType(const ScalarType scalarType)
 {
-    switch (ScalarType) {
+    switch (scalarType) {
     case Unknown:         break;
     case Double:          return SixtyFourBit;
     case Float:           return ThirtyTwoBit;
