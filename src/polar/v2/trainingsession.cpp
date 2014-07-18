@@ -575,17 +575,16 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
     doc.appendChild(gpx);
 
     QDomElement metaData = doc.createElement(QLatin1String("metadata"));
-    gpx.appendChild(metaData);
-    QDomElement name = doc.createElement(QLatin1String("name"));
-    metaData.appendChild(name);
-    name.appendChild(doc.createTextNode(getFileName(baseName)));
-    QDomElement desc = doc.createElement(QLatin1String("desc"));
-    metaData.appendChild(desc);
-    desc.appendChild(doc.createTextNode(tr("GPX encoding of %1")
+    metaData.appendChild(doc.createElement(QLatin1String("name")))
+        .appendChild(doc.createTextNode(getFileName(baseName)));
+    metaData.appendChild(doc.createElement(QLatin1String("desc")))
+        .appendChild(doc.createTextNode(tr("GPX encoding of %1")
                                         .arg(getFileName(baseName))));
-    QDomElement time = doc.createElement(QLatin1String("time"));
-    metaData.appendChild(time);
-    time.appendChild(doc.createTextNode(creationTime.toString(Qt::ISODate)));
+    /// @todo Include <author> details for this app?
+    /// @todo Include <link> to flow site?
+    metaData.appendChild(doc.createElement(QLatin1String("time")))
+        .appendChild(doc.createTextNode(creationTime.toString(Qt::ISODate)));
+    gpx.appendChild(metaData);
 
     foreach (const QVariant &exercise, parsedExercises) {
         const QVariantMap map = exercise.toMap();
@@ -593,13 +592,12 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
         QDomElement trk = doc.createElement(QLatin1String("trk"));
         gpx.appendChild(trk);
 
-        QDomElement src = doc.createElement(QLatin1String("src"));
-        trk.appendChild(src);
         QStringList sources;
         foreach (const QVariant &source, map.value(QLatin1String("sources")).toList()) {
             sources << getFileName(source.toString());
         }
-        src.appendChild(doc.createTextNode(sources.join(QLatin1Char(' '))));
+        trk.appendChild(doc.createElement(QLatin1String("src")))
+            .appendChild(doc.createTextNode(sources.join(QLatin1Char(' '))));
 
         if (map.contains(ROUTE)) {
             const QVariantMap route = map.value(ROUTE).toMap();
@@ -628,25 +626,18 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
 
             for (int index = 0; index < duration.size(); ++index) {
                 QDomElement trkpt = doc.createElement(QLatin1String("trkpt"));
-                trkseg.appendChild(trkpt);
                 trkpt.setAttribute(QLatin1String("lat"), latitude[index].toDouble());
                 trkpt.setAttribute(QLatin1String("lon"), longitude[index].toDouble());
-
                 /// @todo Use the barometric altitude instead, if present?
-                QDomElement ele = doc.createElement(QLatin1String("ele"));
-                trkpt.appendChild(ele);
-                ele.appendChild(doc.createTextNode(altitude[index].toString()));
-
-                QDomElement time = doc.createElement(QLatin1String("time"));
-                trkpt.appendChild(time);
-                time.appendChild(doc.createTextNode(startTime.addMSecs(
-                    duration[index].toLongLong()).toString(Qt::ISODate)));
-
-                QDomElement sat = doc.createElement(QLatin1String("sat"));
-                trkpt.appendChild(sat);
-                sat.appendChild(doc.createTextNode(satellites[index].toString()));
+                trkpt.appendChild(doc.createElement(QLatin1String("ele")))
+                    .appendChild(doc.createTextNode(altitude[index].toString()));
+                trkpt.appendChild(doc.createElement(QLatin1String("time")))
+                    .appendChild(doc.createTextNode(startTime.addMSecs(
+                        duration[index].toLongLong()).toString(Qt::ISODate)));
+                trkpt.appendChild(doc.createElement(QLatin1String("sat")))
+                    .appendChild(doc.createTextNode(satellites[index].toString()));
+                trkseg.appendChild(trkpt);
             }
-
         }
     }
     return doc;
