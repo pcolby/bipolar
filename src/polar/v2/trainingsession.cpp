@@ -72,6 +72,7 @@ bool TrainingSession::parse(const QString &baseName)
     }
 
     if (this->baseName.isEmpty()) {
+        Q_ASSERT(!baseName.isEmpty());
         emit parseError(QLatin1String("parse called with no baseName specified"));
         return false;
     }
@@ -79,7 +80,7 @@ bool TrainingSession::parse(const QString &baseName)
     QMap<QString, QMap<QString, QString> > fileNames;
     const QFileInfo fileInfo(baseName);
     foreach (const QFileInfo &entryInfo, fileInfo.dir().entryInfoList(
-             QStringList(fileInfo.fileName() + QLatin1Char('*'))))
+             QStringList(fileInfo.fileName() + QLatin1String("-*"))))
     {
         const QStringList nameParts = entryInfo.fileName().split(QLatin1Char('-'));
         if ((nameParts.size() >= 3) && (nameParts.at(nameParts.size() - 3) == QLatin1String("exercises"))) {
@@ -553,6 +554,7 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
         langId.appendChild(doc.createTextNode(QLatin1String("EN")));
         author.appendChild(langId);
 
+        /// @todo Choose a more appropriate part number?
         QDomElement partNumber = doc.createElement(QLatin1String("PartNumber"));
         partNumber.appendChild(doc.createTextNode(QLatin1String("123-12345-12")));
         author.appendChild(partNumber);

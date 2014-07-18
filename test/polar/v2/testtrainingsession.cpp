@@ -192,6 +192,7 @@ void TestTrainingSession::parseRoute_data()
     }
 
     LOAD_TEST_DATA("training-sessions-1-exercises-1-route");
+    LOAD_TEST_DATA("training-sessions-19946380-exercises-19896844-route");
 
     #undef LOAD_TEST_DATA
 }
@@ -232,6 +233,7 @@ void TestTrainingSession::parseSamples_data()
 
     LOAD_TEST_DATA("training-sessions-1-exercises-1-samples");
     LOAD_TEST_DATA("training-sessions-2-exercises-1-samples");
+    LOAD_TEST_DATA("training-sessions-19946380-exercises-19896844-samples");
 
     #undef LOAD_TEST_DATA
 }
@@ -271,6 +273,7 @@ void TestTrainingSession::parseZones_data()
     }
 
     LOAD_TEST_DATA("training-sessions-2-exercises-1-zones");
+    LOAD_TEST_DATA("training-sessions-19946380-exercises-19896844-zones");
 
     #undef LOAD_TEST_DATA
 }
@@ -311,6 +314,7 @@ void TestTrainingSession::toGPX_data()
     LOAD_TEST_DATA("training-sessions-1");
     LOAD_TEST_DATA("training-sessions-2");
     LOAD_TEST_DATA("training-sessions-3");
+    LOAD_TEST_DATA("training-sessions-19946380");
 
     #undef LOAD_TEST_DATA
 }
@@ -369,6 +373,7 @@ void TestTrainingSession::toTCX_data()
     LOAD_TEST_DATA("training-sessions-1");
     LOAD_TEST_DATA("training-sessions-2");
     LOAD_TEST_DATA("training-sessions-3");
+    LOAD_TEST_DATA("training-sessions-19946380");
 
     #undef LOAD_TEST_DATA
 }
