@@ -153,12 +153,17 @@ QVariant Message::parseLengthDelimitedValue(QIODevice &data,
         return QVariant();
     }
 
-    // Return bytes and strings as-is. For strings, the caller will need to
-    // determine / assume the character encoding used in the field.
-    if ((scalarType == Types::Bytes  ) ||
-        (scalarType == Types::String ) ||
-        (scalarType == Types::Unknown)) {
+    // Return bytes and unknowns as-is.
+    if ((scalarType == Types::Bytes) || (scalarType == Types::Unknown)) {
         return value;
+    }
+
+    // Assume strings are UTF-8, which works fine for Polar data. If other
+    // encodings are used, the called should use ScalerType Bytes (or Unknown)
+    // and convert to QString upon return. This is also consistent with the
+    // `protoc --decode_raw` output.
+    if (scalarType == Types::String ) {
+        return QString::fromUtf8(value.toByteArray());
     }
 
     // Parse embedded messages recursively.
