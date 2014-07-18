@@ -76,6 +76,8 @@ protected:
     bool parse(const QString &exerciseId, const QMap<QString, QString> &fileNames);
     QVariantMap parseCreateExercise(QIODevice &data) const;
     QVariantMap parseCreateExercise(const QString &fileName) const;
+    QVariantMap parseCreateSession(QIODevice &data) const;
+    QVariantMap parseCreateSession(const QString &fileName) const;
     QVariantMap parseLaps(QIODevice &data) const;
     QVariantMap parseLaps(const QString &fileName) const;
     QVariantMap parseRoute(QIODevice &data) const;

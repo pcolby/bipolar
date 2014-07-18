@@ -202,6 +202,103 @@ QVariantMap TrainingSession::parseCreateExercise(const QString &fileName) const
     return parseCreateExercise(file);
 }
 
+QVariantMap TrainingSession::parseCreateSession(QIODevice &data) const
+{
+    ProtoBuf::Message::FieldInfoMap fieldInfo;
+    ADD_FIELD_INFO("1",      "start",              EmbeddedMessage);
+    ADD_FIELD_INFO("1/1",    "date",               EmbeddedMessage);
+    ADD_FIELD_INFO("1/1/1",  "year",               Uint32);
+    ADD_FIELD_INFO("1/1/2",  "month",              Uint32);
+    ADD_FIELD_INFO("1/1/3",  "day",                Uint32);
+    ADD_FIELD_INFO("1/2",    "time",               EmbeddedMessage);
+    ADD_FIELD_INFO("1/2/1",  "hour",               Uint32);
+    ADD_FIELD_INFO("1/2/2",  "minute",             Uint32);
+    ADD_FIELD_INFO("1/2/3",  "seconds",            Uint32);
+    ADD_FIELD_INFO("1/2/4",  "milliseconds",       Uint32);
+    ADD_FIELD_INFO("1/4",    "offset",             Int32);
+    ADD_FIELD_INFO("2",      "exercise-count",     Uint32);
+    ADD_FIELD_INFO("3",      "device",             String);
+    ADD_FIELD_INFO("4",      "model",              String);
+    ADD_FIELD_INFO("5",      "duration",           EmbeddedMessage);
+    ADD_FIELD_INFO("5/1",    "hours",              Uint32);
+    ADD_FIELD_INFO("5/2",    "mintues",            Uint32);
+    ADD_FIELD_INFO("5/3",    "seconds",            Uint32);
+    ADD_FIELD_INFO("5/4",    "milliseconds",       Uint32);
+    ADD_FIELD_INFO("6",      "distance",           Float);
+    ADD_FIELD_INFO("7",      "calories",           Uint32);
+    ADD_FIELD_INFO("8",      "heartreat",          EmbeddedMessage);
+    ADD_FIELD_INFO("8/1",    "average",            Uint32);
+    ADD_FIELD_INFO("8/2",    "maximum",            Uint32);
+    ADD_FIELD_INFO("9",      "heartrate-duration", EmbeddedMessage);
+    ADD_FIELD_INFO("9/1",    "hours",              Uint32);
+    ADD_FIELD_INFO("9/2",    "mintues",            Uint32);
+    ADD_FIELD_INFO("9/3",    "seconds",            Uint32);
+    ADD_FIELD_INFO("9/4",    "milliseconds",       Uint32);
+    ADD_FIELD_INFO("10",     "training-load",      EmbeddedMessage);
+    ADD_FIELD_INFO("10/1",   "load-value",         Uint32);
+    ADD_FIELD_INFO("10/2",   "recovery-time",      EmbeddedMessage);
+    ADD_FIELD_INFO("10/2/1", "hours",              Uint32);
+    ADD_FIELD_INFO("10/2/2", "mintues",            Uint32);
+    ADD_FIELD_INFO("10/2/3", "seconds",            Uint32);
+    ADD_FIELD_INFO("10/2/4", "milliseconds",       Uint32);
+    ADD_FIELD_INFO("10/3",   "carbs",              Uint32);
+    ADD_FIELD_INFO("10/4",   "protein",            Uint32);
+    ADD_FIELD_INFO("10/5",   "fat",                Uint32);
+    ADD_FIELD_INFO("11",     "session-name",       EmbeddedMessage);
+    ADD_FIELD_INFO("11/1",   "text",               String);
+    ADD_FIELD_INFO("12",     "feeling",            Float);
+    ADD_FIELD_INFO("13",     "note",               EmbeddedMessage);
+    ADD_FIELD_INFO("13/1",   "text",               String);
+    ADD_FIELD_INFO("14",     "place",              EmbeddedMessage);
+    ADD_FIELD_INFO("14/1",   "text",               String);
+    ADD_FIELD_INFO("15",     "latitude",           Double);
+    ADD_FIELD_INFO("16",     "longitude",          Double);
+    ADD_FIELD_INFO("17",     "benefit",            Enumerator);
+    ADD_FIELD_INFO("18",     "sport",              EmbeddedMessage);
+    ADD_FIELD_INFO("18/1",   "value",              Uint64);
+    ADD_FIELD_INFO("19",     "training-target",    EmbeddedMessage);
+    ADD_FIELD_INFO("19/1",   "value",              Uint64);
+    ADD_FIELD_INFO("19/2",   "last-modified",      EmbeddedMessage);
+    ADD_FIELD_INFO("19/2/1",   "date",             EmbeddedMessage);
+    ADD_FIELD_INFO("19/2/1/1", "year",             Uint32);
+    ADD_FIELD_INFO("19/2/1/2", "month",            Uint32);
+    ADD_FIELD_INFO("19/2/1/3", "day",              Uint32);
+    ADD_FIELD_INFO("19/2/2",   "time",             EmbeddedMessage);
+    ADD_FIELD_INFO("19/2/2/1", "hour",             Uint32);
+    ADD_FIELD_INFO("19/2/2/2", "minute",           Uint32);
+    ADD_FIELD_INFO("19/2/2/3", "seconds",          Uint32);
+    ADD_FIELD_INFO("19/2/2/4", "milliseconds",     Uint32);
+    ADD_FIELD_INFO("20",     "end",                EmbeddedMessage);
+    ADD_FIELD_INFO("20/1",   "date",               EmbeddedMessage);
+    ADD_FIELD_INFO("20/1/1", "year",               Uint32);
+    ADD_FIELD_INFO("20/1/2", "month",              Uint32);
+    ADD_FIELD_INFO("20/1/3", "day",                Uint32);
+    ADD_FIELD_INFO("20/2",   "time",               EmbeddedMessage);
+    ADD_FIELD_INFO("20/2/1", "hour",               Uint32);
+    ADD_FIELD_INFO("20/2/2", "minute",             Uint32);
+    ADD_FIELD_INFO("20/2/3", "seconds",            Uint32);
+    ADD_FIELD_INFO("20/2/4", "milliseconds",       Uint32);
+    ADD_FIELD_INFO("20/4",   "offset",             Int32);
+    ProtoBuf::Message parser(fieldInfo);
+
+    if (isGzipped(data)) {
+        QByteArray array = unzip(data.readAll());
+        return parser.parse(array);
+    } else {
+        return parser.parse(data);
+    }
+}
+
+QVariantMap TrainingSession::parseCreateSession(const QString &fileName) const
+{
+    QFile file(fileName);
+    if (!file.open(QIODevice::ReadOnly)) {
+        emit parseError(tr("failed to open laps file"), fileName);
+        return QVariantMap();
+    }
+    return parseCreateSession(file);
+}
+
 QVariantMap TrainingSession::parseLaps(QIODevice &data) const
 {
     ProtoBuf::Message::FieldInfoMap fieldInfo;

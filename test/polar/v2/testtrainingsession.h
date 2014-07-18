@@ -29,6 +29,9 @@ private slots:
     void parseCreateExercise_data();
     void parseCreateExercise();
 
+    void parseCreateSession_data();
+    void parseCreateSession();
+
     void parseLaps_data();
     void parseLaps();
 
