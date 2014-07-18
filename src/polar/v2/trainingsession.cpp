@@ -78,6 +78,8 @@ bool TrainingSession::parse(const QString &baseName)
         return false;
     }
 
+    parsedSession = parseCreateSession(baseName + QLatin1String("create"));
+
     QMap<QString, QMap<QString, QString> > fileNames;
     const QFileInfo fileInfo(baseName);
     foreach (const QFileInfo &entryInfo, fileInfo.dir().entryInfoList(

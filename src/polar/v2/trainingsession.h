@@ -69,6 +69,7 @@ public:
 protected:
     QString baseName;
     QVariantMap parsedExercises;
+    QVariantMap parsedSession;
 
     static bool isGzipped(const QByteArray &data);
     static bool isGzipped(QIODevice &data);
