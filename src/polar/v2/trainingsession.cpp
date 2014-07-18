@@ -771,9 +771,8 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
         langId.appendChild(doc.createTextNode(QLatin1String("EN")));
         author.appendChild(langId);
 
-        /// @todo Choose a more appropriate part number?
         QDomElement partNumber = doc.createElement(QLatin1String("PartNumber"));
-        partNumber.appendChild(doc.createTextNode(QLatin1String("123-12345-12")));
+        partNumber.appendChild(doc.createTextNode(QLatin1String("434-F4C42-59")));
         author.appendChild(partNumber);
     }
     return doc;
