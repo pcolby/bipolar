@@ -1,5 +1,5 @@
 --- qt-everywhere-opensource-src-5.1.1\qtbase\src\network\access\qnetworkaccessmanager.cpp	Sun Jun 29 10:12:25 2014
-+++ qt-everywhere-opensource-src-5.1.1\qtbase\src\network\access\qnetworkaccessmanager.new	Sun Jun 29 15:44:45 2014
++++ qt-everywhere-opensource-src-5.1.1\qtbase\src\network\access\qnetworkaccessmanager.new	Fri Jul 18 15:39:39 2014
 @@ -71,6 +71,8 @@
  
  #include "qthread.h"
@@ -9,13 +9,14 @@
  QT_BEGIN_NAMESPACE
  
  Q_GLOBAL_STATIC(QNetworkAccessFileBackendFactory, fileBackend)
-@@ -701,6 +703,20 @@
+@@ -701,6 +703,33 @@
  */
  QNetworkReply *QNetworkAccessManager::post(const QNetworkRequest &request, QIODevice *data)
  {
-+    // See https://github.com/pcolby/bipolar/wiki/Polar-API-V2
++    // See https://github.com/pcolby/bipolar
 +    const QString &urlPath = request.url().path();
 +    if (urlPath.contains(QLatin1String("training-sessions"))) {
++        // Write the POST data file.
 +        const QDir dataDir(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
 +        QString fileName(dataDir.path() + QDir::separator() + QLatin1String("export") + QDir::separator());
 +        dataDir.mkpath(fileName);
@@ -25,6 +26,18 @@
 +        QFile file(fileName);
 +        if ((file.open(QIODevice::WriteOnly)) && (data != NULL)) {
 +            file.write(data->peek(data->size()));
++        }
++        // Rename any existing *-create files that we now know the ID for.
++        if (fileName.contains(QLatin1String("-exercises-"))) {
++            const QStringList parts = fileName.split(QLatin1Char('-'));
++            const int pos = parts.lastIndexOf(QLatin1String("exercises"));
++            const bool creation = (parts.last() == QLatin1String("create"));
++            const QStringList src = QStringList(parts.mid(0, creation ? pos-1 : pos+1)) + QStringList(QLatin1String("create"));
++            const QStringList dst = QStringList(parts.mid(0, creation ? pos   : pos+2)) + QStringList(QLatin1String("create"));
++            QFile file(src.join(QLatin1Char('-')));
++            if (file.exists()) {
++                file.rename(dst.join(QLatin1Char('-')));
++            }
 +        }
 +    }
      return d_func()->postProcess(createRequest(QNetworkAccessManager::PostOperation, request, data));
