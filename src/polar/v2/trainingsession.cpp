@@ -720,11 +720,9 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
     {
         QDomElement author = doc.createElement(QLatin1String("Author"));
         author.setAttribute(QLatin1String("xsi:type"), QLatin1String("Application_t"));
+        author.appendChild(doc.createElement(QLatin1String("Name")))
+            .appendChild(doc.createTextNode(QLatin1String("Bipolar")));
         tcx.appendChild(author);
-
-        QDomElement name = doc.createElement(QLatin1String("Name"));
-        name.appendChild(doc.createTextNode(QLatin1String("Bipolar")));
-        author.appendChild(name);
 
         {
             QDomElement build = doc.createElement(QLatin1String("Build"));
@@ -732,39 +730,30 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
             QDomElement version = doc.createElement(QLatin1String("Version"));
             build.appendChild(version);
             QStringList versionParts = QApplication::applicationVersion().split(QLatin1Char('.'));
-            QDomElement versionMajor = doc.createElement(QLatin1String("VersionMajor"));
-            versionMajor.appendChild(doc.createTextNode(versionParts.at(0)));
-            version.appendChild(versionMajor);
-            QDomElement versionMinor = doc.createElement(QLatin1String("VersionMinor"));
-            versionMinor.appendChild(doc.createTextNode(versionParts.at(1)));
-            version.appendChild(versionMinor);
-            QDomElement buildMajor = doc.createElement(QLatin1String("BuildMajor"));
-            buildMajor.appendChild(doc.createTextNode(versionParts.at(2)));
-            version.appendChild(buildMajor);
-            QDomElement buildMinor = doc.createElement(QLatin1String("BuildMinor"));
-            buildMinor.appendChild(doc.createTextNode(versionParts.at(3)));
-            version.appendChild(buildMinor);
-            QDomElement type = doc.createElement(QLatin1String("Type"));
+            version.appendChild(doc.createElement(QLatin1String("VersionMajor")))
+                .appendChild(doc.createTextNode(versionParts.at(0)));
+            version.appendChild(doc.createElement(QLatin1String("VersionMinor")))
+                .appendChild(doc.createTextNode(versionParts.at(1)));
+            version.appendChild(doc.createElement(QLatin1String("BuildMajor")))
+                .appendChild(doc.createTextNode(versionParts.at(2)));
+            version.appendChild(doc.createElement(QLatin1String("BuildMinor")))
+                .appendChild(doc.createTextNode(versionParts.at(3)));
             /// @todo May be: Internal, Alpha, Beta, Release.
-            type.appendChild(doc.createTextNode(QLatin1String("Internal")));
-            build.appendChild(type);
-            QDomElement time = doc.createElement(QLatin1String("Time"));
-            time.appendChild(doc.createTextNode(
-                buildTime.isEmpty() ? QString::fromLatin1(__DATE__" "__TIME__) : buildTime));
-            build.appendChild(time);
-            QDomElement builder = doc.createElement(QLatin1String("Builder"));
-            builder.appendChild(doc.createTextNode(QLatin1String("Paul Colby")));
-            build.appendChild(builder);
+            build.appendChild(doc.createElement(QLatin1String("Type")))
+                .appendChild(doc.createTextNode(QLatin1String("Internal")));
+            build.appendChild(doc.createElement(QLatin1String("Time")))
+                .appendChild(doc.createTextNode(
+                    buildTime.isEmpty() ? QString::fromLatin1(__DATE__" "__TIME__) : buildTime));
+            /// @todo Fetch the login name at build time?
+            build.appendChild(doc.createElement(QLatin1String("Builder")))
+                .appendChild(doc.createTextNode(QLatin1String("Paul Colby")));
         }
 
         /// @todo  Make this dynamic if/when app is localized.
-        QDomElement langId = doc.createElement(QLatin1String("LangID"));
-        langId.appendChild(doc.createTextNode(QLatin1String("EN")));
-        author.appendChild(langId);
-
-        QDomElement partNumber = doc.createElement(QLatin1String("PartNumber"));
-        partNumber.appendChild(doc.createTextNode(QLatin1String("434-F4C42-59")));
-        author.appendChild(partNumber);
+        author.appendChild(doc.createElement(QLatin1String("LangID")))
+            .appendChild(doc.createTextNode(QLatin1String("EN")));
+        author.appendChild(doc.createElement(QLatin1String("PartNumber")))
+            .appendChild(doc.createTextNode(QLatin1String("434-F4C42-59")));
     }
     return doc;
 }
