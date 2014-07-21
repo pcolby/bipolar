@@ -1,5 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
 <TrainingCenterDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" xsi:schemaLocation="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd">
+  <Activities>
+    <Activity Sport="Other">
+      <Id>2014-07-18T07:48:56+10:00</Id>
+      <Lap StartTime="2014-07-18T07:48:56+10:00">
+        <TotalTimeSeconds>3900.25</TotalTimeSeconds>
+        <DistanceMeters>4571.6</DistanceMeters>
+        <Calories>537</Calories>
+        <Intensity>Active</Intensity>
+        <TriggerMethod>Manual</TriggerMethod>
+      </Lap>
+    </Activity>
+  </Activities>
   <Author xsi:type="Application_t">
     <Name>Bipolar</Name>
     <Build>

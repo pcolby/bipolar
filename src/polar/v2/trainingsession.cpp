@@ -78,7 +78,7 @@ bool TrainingSession::parse(const QString &baseName)
         return false;
     }
 
-    parsedSession = parseCreateSession(baseName + QLatin1String("create"));
+    parsedSession = parseCreateSession(baseName + QLatin1String("-create"));
 
     QMap<QString, QMap<QString, QString> > fileNames;
     const QFileInfo fileInfo(baseName);
@@ -151,7 +151,7 @@ QVariantMap TrainingSession::parseCreateExercise(QIODevice &data) const
     ADD_FIELD_INFO("1/4",   "offset",        Int32);
     ADD_FIELD_INFO("2",     "duration",      EmbeddedMessage);
     ADD_FIELD_INFO("2/1",   "hours",         Uint32);
-    ADD_FIELD_INFO("2/2",   "mintues",       Uint32);
+    ADD_FIELD_INFO("2/2",   "minutes",       Uint32);
     ADD_FIELD_INFO("2/3",   "seconds",       Uint32);
     ADD_FIELD_INFO("2/4",   "milliseconds",  Uint32);
     ADD_FIELD_INFO("3",     "sport",         EmbeddedMessage);
@@ -162,7 +162,7 @@ QVariantMap TrainingSession::parseCreateExercise(QIODevice &data) const
     ADD_FIELD_INFO("6/1",   "load-value",    Uint32);
     ADD_FIELD_INFO("6/2",   "recovery-time", EmbeddedMessage);
     ADD_FIELD_INFO("6/2/1", "hours",         Uint32);
-    ADD_FIELD_INFO("6/2/2", "mintues",       Uint32);
+    ADD_FIELD_INFO("6/2/2", "minutes",       Uint32);
     ADD_FIELD_INFO("6/2/3", "seconds",       Uint32);
     ADD_FIELD_INFO("6/2/4", "milliseconds",  Uint32);
     ADD_FIELD_INFO("6/3",   "carbs",         Uint32);
@@ -173,7 +173,7 @@ QVariantMap TrainingSession::parseCreateExercise(QIODevice &data) const
     ADD_FIELD_INFO("9/1",   "value",         Uint32);
     ADD_FIELD_INFO("9/2",   "duration",      EmbeddedMessage);
     ADD_FIELD_INFO("9/2/1", "hours",         Uint32);
-    ADD_FIELD_INFO("9/2/2", "mintues",       Uint32);
+    ADD_FIELD_INFO("9/2/2", "minutes",       Uint32);
     ADD_FIELD_INFO("9/2/3", "seconds",       Uint32);
     ADD_FIELD_INFO("9/2/4", "milliseconds",  Uint32);
     ADD_FIELD_INFO("10",    "ascent",        Float);
@@ -223,7 +223,7 @@ QVariantMap TrainingSession::parseCreateSession(QIODevice &data) const
     ADD_FIELD_INFO("4",      "model",              String);
     ADD_FIELD_INFO("5",      "duration",           EmbeddedMessage);
     ADD_FIELD_INFO("5/1",    "hours",              Uint32);
-    ADD_FIELD_INFO("5/2",    "mintues",            Uint32);
+    ADD_FIELD_INFO("5/2",    "minutes",            Uint32);
     ADD_FIELD_INFO("5/3",    "seconds",            Uint32);
     ADD_FIELD_INFO("5/4",    "milliseconds",       Uint32);
     ADD_FIELD_INFO("6",      "distance",           Float);
@@ -233,14 +233,14 @@ QVariantMap TrainingSession::parseCreateSession(QIODevice &data) const
     ADD_FIELD_INFO("8/2",    "maximum",            Uint32);
     ADD_FIELD_INFO("9",      "heartrate-duration", EmbeddedMessage);
     ADD_FIELD_INFO("9/1",    "hours",              Uint32);
-    ADD_FIELD_INFO("9/2",    "mintues",            Uint32);
+    ADD_FIELD_INFO("9/2",    "minutes",            Uint32);
     ADD_FIELD_INFO("9/3",    "seconds",            Uint32);
     ADD_FIELD_INFO("9/4",    "milliseconds",       Uint32);
     ADD_FIELD_INFO("10",     "training-load",      EmbeddedMessage);
     ADD_FIELD_INFO("10/1",   "load-value",         Uint32);
     ADD_FIELD_INFO("10/2",   "recovery-time",      EmbeddedMessage);
     ADD_FIELD_INFO("10/2/1", "hours",              Uint32);
-    ADD_FIELD_INFO("10/2/2", "mintues",            Uint32);
+    ADD_FIELD_INFO("10/2/2", "minutes",            Uint32);
     ADD_FIELD_INFO("10/2/3", "seconds",            Uint32);
     ADD_FIELD_INFO("10/2/4", "milliseconds",       Uint32);
     ADD_FIELD_INFO("10/3",   "carbs",              Uint32);
@@ -308,12 +308,12 @@ QVariantMap TrainingSession::parseLaps(QIODevice &data) const
     ADD_FIELD_INFO("1/1",      "header",           EmbeddedMessage);
     ADD_FIELD_INFO("1/1/1",    "split-time",       EmbeddedMessage);
     ADD_FIELD_INFO("1/1/1/1",  "hours",            Uint32);
-    ADD_FIELD_INFO("1/1/1/2",  "mintues",          Uint32);
+    ADD_FIELD_INFO("1/1/1/2",  "minutes",          Uint32);
     ADD_FIELD_INFO("1/1/1/3",  "seconds",          Uint32);
     ADD_FIELD_INFO("1/1/1/4/", "milliseconds",     Uint32);
     ADD_FIELD_INFO("1/1/2",    "duration",         EmbeddedMessage);
     ADD_FIELD_INFO("1/1/2/1",  "hours",            Uint32);
-    ADD_FIELD_INFO("1/1/2/2",  "mintues",          Uint32);
+    ADD_FIELD_INFO("1/1/2/2",  "minutes",          Uint32);
     ADD_FIELD_INFO("1/1/2/3",  "seconds",          Uint32);
     ADD_FIELD_INFO("1/1/2/4/", "milliseconds",     Uint32);
     ADD_FIELD_INFO("1/1/3",    "distance",         Float);
@@ -331,12 +331,12 @@ QVariantMap TrainingSession::parseLaps(QIODevice &data) const
     ADD_FIELD_INFO("2",        "summary",          EmbeddedMessage);
     ADD_FIELD_INFO("2/1",      "best-duration",    EmbeddedMessage);
     ADD_FIELD_INFO("2/1/1",    "hours",            Uint32);
-    ADD_FIELD_INFO("2/1/2",    "mintues",          Uint32);
+    ADD_FIELD_INFO("2/1/2",    "minutes",          Uint32);
     ADD_FIELD_INFO("2/1/3",    "seconds",          Uint32);
     ADD_FIELD_INFO("2/1.4",    "milliseconds",     Uint32);
     ADD_FIELD_INFO("2/2",      "average-duration", EmbeddedMessage);
     ADD_FIELD_INFO("2/2/1",    "hours",            Uint32);
-    ADD_FIELD_INFO("2/2/2",    "mintues",          Uint32);
+    ADD_FIELD_INFO("2/2/2",    "minutes",          Uint32);
     ADD_FIELD_INFO("2/2/3",    "seconds",          Uint32);
     ADD_FIELD_INFO("2/2.4",    "milliseconds",     Uint32);
     ProtoBuf::Message parser(fieldInfo);
@@ -402,7 +402,7 @@ QVariantMap TrainingSession::parseSamples(QIODevice &data) const
     ProtoBuf::Message::FieldInfoMap fieldInfo;
     ADD_FIELD_INFO("1",     "record-interval",          EmbeddedMessage);
     ADD_FIELD_INFO("1/1",   "hours",                    Uint32);
-    ADD_FIELD_INFO("1/2",   "mintues",                  Uint32);
+    ADD_FIELD_INFO("1/2",   "minutes",                  Uint32);
     ADD_FIELD_INFO("1/3",   "seconds",                  Uint32);
     ADD_FIELD_INFO("1/4",   "milliseconds",             Uint32);
     ADD_FIELD_INFO("2",     "heartrate",                Uint32);
@@ -477,7 +477,7 @@ QVariantMap TrainingSession::parseZones(QIODevice &data) const
     ADD_FIELD_INFO("1/1/2", "high",             Uint32);
     ADD_FIELD_INFO("1/2",   "duration",         EmbeddedMessage);
     ADD_FIELD_INFO("1/2/1", "hours",            Uint32);
-    ADD_FIELD_INFO("1/2/2", "mintues",          Uint32);
+    ADD_FIELD_INFO("1/2/2", "minutes",          Uint32);
     ADD_FIELD_INFO("1/2/3", "seconds",          Uint32);
     ADD_FIELD_INFO("1/2.4", "milliseconds",     Uint32);
     ADD_FIELD_INFO("2",     "power",            EmbeddedMessage);
@@ -486,19 +486,19 @@ QVariantMap TrainingSession::parseZones(QIODevice &data) const
     ADD_FIELD_INFO("2/1/2", "high",             Uint32);
     ADD_FIELD_INFO("2/2",   "duration",         EmbeddedMessage);
     ADD_FIELD_INFO("2/2/1", "hours",            Uint32);
-    ADD_FIELD_INFO("2/2/2", "mintues",          Uint32);
+    ADD_FIELD_INFO("2/2/2", "minutes",          Uint32);
     ADD_FIELD_INFO("2/2/3", "seconds",          Uint32);
     ADD_FIELD_INFO("2/2.4", "milliseconds",     Uint32);
     ADD_FIELD_INFO("3",     "fatfit",           EmbeddedMessage);
     ADD_FIELD_INFO("3/1",   "limit",            Uint32);
     ADD_FIELD_INFO("3/2",   "fit-duration",     EmbeddedMessage);
     ADD_FIELD_INFO("3/2/1", "hours",            Uint32);
-    ADD_FIELD_INFO("3/2/2", "mintues",          Uint32);
+    ADD_FIELD_INFO("3/2/2", "minutes",          Uint32);
     ADD_FIELD_INFO("3/2/3", "seconds",          Uint32);
     ADD_FIELD_INFO("3/2.4", "milliseconds",     Uint32);
     ADD_FIELD_INFO("3/3",   "fat-duration",     EmbeddedMessage);
     ADD_FIELD_INFO("3/3/1", "hours",            Uint32);
-    ADD_FIELD_INFO("3/3/2", "mintues",          Uint32);
+    ADD_FIELD_INFO("3/3/2", "minutes",          Uint32);
     ADD_FIELD_INFO("3/3/3", "seconds",          Uint32);
     ADD_FIELD_INFO("3/3.4", "milliseconds",     Uint32);
     ADD_FIELD_INFO("4",     "speed",            EmbeddedMessage);
@@ -507,7 +507,7 @@ QVariantMap TrainingSession::parseZones(QIODevice &data) const
     ADD_FIELD_INFO("4/1/2", "high",             Float);
     ADD_FIELD_INFO("4/2",   "duration",         EmbeddedMessage);
     ADD_FIELD_INFO("4/2/1", "hours",            Uint32);
-    ADD_FIELD_INFO("4/2/2", "mintues",          Uint32);
+    ADD_FIELD_INFO("4/2/2", "minutes",          Uint32);
     ADD_FIELD_INFO("4/2/3", "seconds",          Uint32);
     ADD_FIELD_INFO("4/2.4", "milliseconds",     Uint32);
     ADD_FIELD_INFO("4/3",   "distance",         Float);
@@ -543,8 +543,28 @@ QDateTime getDateTime(const QVariantMap &map)
         .arg(map[QLatin1String("time")].toList()[0].toMap()[QLatin1String("seconds")].toList()[0].toString())
         .arg(map[QLatin1String("time")].toList()[0].toMap()[QLatin1String("milliseconds")].toList()[0].toString());
     QDateTime dateTime = QDateTime::fromString(string, QLatin1String("yyyy-M-d H:m:s.z"));
-    dateTime.setTimeSpec(Qt::UTC);
+
+    QVariantMap::const_iterator offset = map.constFind(QLatin1String("offset"));
+    if (offset == map.constEnd()) {
+        dateTime.setTimeSpec(Qt::UTC);
+    } else {
+        dateTime.setUtcOffset(offset.value().toList()[0].toInt() * 60);
+    }
     return dateTime;
+}
+
+quint64 getDuration(const QVariantMap &map)
+{
+    QVariantMap::const_iterator
+        hours        = map.find(QLatin1String("hours")),
+        minutes      = map.find(QLatin1String("minutes")),
+        seconds      = map.find(QLatin1String("seconds")),
+        milliseconds = map.find(QLatin1String("milliseconds"));
+    return
+       ((((  hours == map.constEnd()) ? 0 : hours.value().toList()[0].toULongLong()) * 60
+       + ((minutes == map.constEnd()) ? 0 : minutes.value().toList()[0].toULongLong())) * 60
+       + ((seconds == map.constEnd()) ? 0 : seconds.value().toList()[0].toULongLong())) * 1000
+       + ((milliseconds == map.constEnd()) ? 0 : milliseconds.value().toList()[0].toULongLong());
 }
 
 QString getFileName(const QString &file)
@@ -667,45 +687,77 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                      QLatin1String("http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 "
                                    "http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd"));
     doc.appendChild(tcx);
-/*
+
     QDomElement activities = doc.createElement(QLatin1String("Activities"));
-    tcx.appendChild(activities);
+
+    QDomElement multiSportSession;
+    if (parsedExercises.size() > 1) {
+        multiSportSession = doc.createElement(QLatin1String("MultiSportSession"));
+        activities.appendChild(multiSportSession);
+        /// @todo Id, etc?
+    }
 
     foreach (const QVariant &exercise, parsedExercises) {
         const QVariantMap map = exercise.toMap();
+        if (!map.contains(QLatin1String("create"))) {
+            qWarning() << "skipping exercise with no 'create' request data";
+            continue;
+        }
+        const QVariantMap create = map[QLatin1String("create")].toMap();
 
-        // We cannot create a (TCX) Activity without a parsed route file, since
-        // only the route files include the start time, which is necessary for
-        // TCX.  This is okay,
-        if (map.contains(ROUTE)) {
-            const QVariantMap route = map.value(ROUTE).toMap();
-            QDomElement trkseg = doc.createElement(QLatin1String("trkseg"));
-            trk.appendChild(trkseg);
+        QDomElement activity;
+        if (multiSportSession.isNull()) {
+            activity = doc.createElement(QLatin1String("Activity"));
+            activities.appendChild(activity);
+        } else if (!multiSportSession.hasChildNodes()) {
+            activity = doc.createElement(QLatin1String("Activity"));
+            multiSportSession
+                .appendChild(doc.createElement(QLatin1String("FirstSport")))
+                .appendChild(activity);
+        } else {
+            QDomElement nextSport = doc.createElement(QLatin1String("NextSport"));
+            multiSportSession.appendChild(nextSport);
+            //nextSport.appendChild() // @todo Transition
+            activity = doc.createElement(QLatin1String("Activity"));
+            nextSport.appendChild(activity);
+        }
+        Q_ASSERT(!activity.isNull());
 
-        QDomElement activity = doc.createElement(QLatin1String("Activity"));
         /// @todo Sport must be one of: Running, Biking, Other.
         activity.setAttribute(QLatin1String("Sport"), QLatin1String("Other"));
-        activities.appendChild(activity);
 
         // Get the starting time.
-        const QDateTime startTime = getDateTime(
-            route[QLatin1String("timestamp")].toList().at(0).toMap());
+        const QDateTime startTime = getDateTime(create[QLatin1String("start")].toList().at(0).toMap());
         activity.appendChild(doc.createElement(QLatin1String("Id")))
-            .appendChild(doc.createTextNode(startTime.toString(Qt::ISODate));
+            .appendChild(doc.createTextNode(startTime.toString(Qt::ISODate)));
 
+        {
+            QDomElement lap = doc.createElement(QLatin1String("Lap"));
+            lap.setAttribute(QLatin1String("StartTime"), startTime.toString(Qt::ISODate));
+            activity.appendChild(lap);
 
-        // Id -> xsd datetime
-        // Lap startTime...
-        //   * TotalTimeSeconds
-        //   * DistanceMeters
-        //   * Calories
-        //   * Intensity
-        //   * TriggerMethod
-        //   * Track
-        // Notes
-        // Training
-        // Creator
-        // Ext
+            lap.appendChild(doc.createElement(QLatin1String("TotalTimeSeconds")))
+                .appendChild(doc.createTextNode(QString::fromLatin1("%1")
+                    .arg(getDuration(create[QLatin1String("duration")].toList()[0].toMap())/1000.0)));
+            lap.appendChild(doc.createElement(QLatin1String("DistanceMeters")))
+                .appendChild(doc.createTextNode(QString::fromLatin1("%1")
+                    .arg(create[QLatin1String("distance")].toList()[0].toDouble())));
+            /// @todo [Optional] MaximumSpeed (double)
+            lap.appendChild(doc.createElement(QLatin1String("Calories")))
+                .appendChild(doc.createTextNode(QString::fromLatin1("%1")
+                    .arg(create[QLatin1String("calories")].toList()[0].toUInt())));
+            // @todo [Optional] AverageHeartRateBpm/Value (ubyte)
+            // @todo [Optional] MaximumHeartRateBpm/Value (ubyte)
+            /// @todo Intensity must be one of: Active, Resting.
+            lap.appendChild(doc.createElement(QLatin1String("Intensity")))
+                .appendChild(doc.createTextNode(QString::fromLatin1("Active")));
+            /// @todo [Optional] Cadence (ubyte, <=254).
+            /// @todo TriggerMethod must be one of: Manual, Distance, Location, Time, HeartRate.
+            lap.appendChild(doc.createElement(QLatin1String("TriggerMethod")))
+                .appendChild(doc.createTextNode(QString::fromLatin1("Manual")));
+
+            /// @todo Track!!
+        }
 
         // samples:
         // * record-interval.
@@ -716,7 +768,12 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
         // * speed
         // * temp
     }
-*/
+
+    if ((multiSportSession.hasChildNodes()) ||
+        (multiSportSession.isNull() && activities.hasChildNodes())) {
+        tcx.appendChild(activities);
+    }
+
     {
         QDomElement author = doc.createElement(QLatin1String("Author"));
         author.setAttribute(QLatin1String("xsi:type"), QLatin1String("Application_t"));
