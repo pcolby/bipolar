@@ -74,14 +74,14 @@ bool TrainingSession::parse(const QString &baseName)
 
     if (this->baseName.isEmpty()) {
         Q_ASSERT(!baseName.isEmpty());
-        emit parseError(QLatin1String("parse called with no baseName specified"));
+        qWarning() << "parse called with no baseName specified";
         return false;
     }
 
-    parsedSession = parseCreateSession(baseName + QLatin1String("-create"));
+    parsedSession = parseCreateSession(this->baseName + QLatin1String("-create"));
 
     QMap<QString, QMap<QString, QString> > fileNames;
-    const QFileInfo fileInfo(baseName);
+    const QFileInfo fileInfo(this->baseName);
     foreach (const QFileInfo &entryInfo, fileInfo.dir().entryInfoList(
              QStringList(fileInfo.fileName() + QLatin1String("-*"))))
     {
@@ -198,7 +198,7 @@ QVariantMap TrainingSession::parseCreateExercise(const QString &fileName) const
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
-        emit parseError(tr("failed to open laps file"), fileName);
+        qWarning() << "failed to open exercise-create file" << fileName;
         return QVariantMap();
     }
     return parseCreateExercise(file);
@@ -295,7 +295,7 @@ QVariantMap TrainingSession::parseCreateSession(const QString &fileName) const
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
-        emit parseError(tr("failed to open laps file"), fileName);
+        qWarning() << "failed to open session-create file" << fileName;
         return QVariantMap();
     }
     return parseCreateSession(file);
@@ -353,7 +353,7 @@ QVariantMap TrainingSession::parseLaps(const QString &fileName) const
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
-        emit parseError(tr("failed to open laps file"), fileName);
+        qWarning() << "failed to open laps file" << fileName;
         return QVariantMap();
     }
     return parseLaps(file);
@@ -391,7 +391,7 @@ QVariantMap TrainingSession::parseRoute(const QString &fileName) const
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
-        emit parseError(tr("failed to open route file"), fileName);
+        qWarning() << "failed to open route file" << fileName;
         return QVariantMap();
     }
     return parseRoute(file);
@@ -462,7 +462,7 @@ QVariantMap TrainingSession::parseSamples(const QString &fileName) const
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
-        emit parseError(tr("failed to open samples file"), fileName);
+        qWarning() << "failed to open samples file" << fileName;
         return QVariantMap();
     }
     return parseSamples(file);
@@ -526,7 +526,7 @@ QVariantMap TrainingSession::parseZones(const QString &fileName) const
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
-        emit parseError(tr("failed to open zones file"), fileName);
+        qWarning() << "failed to open zones file" << fileName;
         return QVariantMap();
     }
     return parseZones(file);
@@ -932,9 +932,7 @@ QByteArray TrainingSession::unzip(const QByteArray &data,
 
     // Check for errors.
     if (z_result != Z_STREAM_END) {
-        qWarning() << stream.msg;
-        emit parseError(tr("zlib error %1: %2").arg(z_result).
-                        arg(QLatin1String(stream.msg)));
+        qWarning() << "zlib error" << z_result << stream.msg;
         return QByteArray();
     }
 
@@ -950,61 +948,44 @@ QByteArray TrainingSession::unzip(const QByteArray &data,
 
 bool TrainingSession::writeGPX(const QString &fileName)
 {
-    // GPX:
-    //  * Multiple <trk> elements.
-    //  * No HR, cadence, etc. So really no use without "route".
-    Q_UNUSED(fileName);
-    Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
-    return false;
+    QFile file(fileName);
+    if (!file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+        qWarning() << "failed to open" << QDir::toNativeSeparators(fileName);
+        return false;
+    }
+    return writeGPX(file);
 }
 
-bool TrainingSession::writeGPX(const QIODevice &device)
+bool TrainingSession::writeGPX(QIODevice &device)
 {
-    Q_UNUSED(device);
-    Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
-    return false;
+    QDomDocument gpx = toGPX();
+    if (gpx.isNull()) {
+        qWarning() << "failed to conver to GPX" << baseName;
+        return false;
+    }
+    device.write(gpx.toByteArray());
+    return true;
 }
 
-bool TrainingSession::writeGPX(const bool separateFiles)
+bool TrainingSession::writeTCX(const QString &fileName)
 {
-    Q_UNUSED(separateFiles);
-    Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
-    return false;
+    QFile file(fileName);
+    if (!file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+        qWarning() << "failed to open" << QDir::toNativeSeparators(fileName);
+        return false;
+    }
+    return writeTCX(file);
 }
 
-bool TrainingSession::writeTCX(const QStringList &sport)
+bool TrainingSession::writeTCX(QIODevice &device)
 {
-    // TCX:
-    //  * Multiple <Activity> elements.
-    //  * Each can track GPS, HR, cadence, alti, sensor states, etc. All optional.
-    //  * So either of route, samples would suffice.
-    Q_UNUSED(sport);
-    Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
-    return false;
-}
-
-bool TrainingSession::writeTCX(const QString &fileName, const QStringList &sport)
-{
-    Q_UNUSED(fileName);
-    Q_UNUSED(sport);
-    Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
-    return false;
-}
-
-bool TrainingSession::writeTCX(const QIODevice &device, const QStringList &sport)
-{
-    Q_UNUSED(device);
-    Q_UNUSED(sport);
-    Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
-    return false;
-}
-
-bool TrainingSession::writeTCX(const bool separateFiles, const QStringList &sport)
-{
-    Q_UNUSED(separateFiles);
-    Q_UNUSED(sport);
-    Q_ASSERT_X(false, __FUNCTION__, "not implemented yet");
-    return false;
+    QDomDocument tcx = toTCX();
+    if (tcx.isNull()) {
+        qWarning() << "failed to conver to TCX" << baseName;
+        return false;
+    }
+    device.write(tcx.toByteArray());
+    return true;
 }
 
 }}

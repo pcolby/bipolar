@@ -38,6 +38,9 @@ public:
 protected:
     virtual void closeEvent(QCloseEvent *event);
 
+protected slots:
+    void convertAll();
+
 private:
     QTextEdit *log;
 

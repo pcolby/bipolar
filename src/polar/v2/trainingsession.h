@@ -49,22 +49,10 @@ public:
     bool parse(const QString &baseName = QString());
 
     bool writeGPX(const QString &fileName = QString());
-    bool writeGPX(const QIODevice &device);
-    bool writeGPX(const bool separateFiles);
+    bool writeGPX(QIODevice &device);
 
-    /**
-     * @brief writeTCX
-     * @param fileName
-     * @param sport     Optional TCX sport for each acitivity. Each entry should
-     *                  be one of "Running", "Biking" or "Other". If not set,
-     *                  the function will attempt to detect the value based on
-     *                  information such as the presence of bicycle cadence data.
-     * @return
-     */
-    bool writeTCX(const QStringList &sport = QStringList());
-    bool writeTCX(const QString &fileName, const QStringList &sport = QStringList());
-    bool writeTCX(const QIODevice &device, const QStringList &sport = QStringList());
-    bool writeTCX(const bool separateFiles, const QStringList &sport = QStringList());
+    bool writeTCX(const QString &fileName = QString());
+    bool writeTCX(QIODevice &device);
 
 protected:
     QString baseName;
@@ -96,10 +84,6 @@ protected:
 
 private:
     friend class ::TestTrainingSession;
-
-signals:
-    void parseError(const QString &message,
-                    const QString &fileName = QString()) const;
 
 };
 
