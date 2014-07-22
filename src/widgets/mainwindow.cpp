@@ -21,6 +21,7 @@
 
 #include <QApplication>
 #include <QSettings>
+#include <QTextEdit>
 
 #define SETTINGS_GEOMETRY QLatin1String("geometry")
 
@@ -30,7 +31,9 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(par
         .arg(QApplication::applicationName())
         .arg(QStringList(QApplication::applicationVersion().split(QLatin1Char('.')).mid(0, 3)).join(QLatin1Char('.'))));
 
-    /// @todo Build the UI.
+    log = new QTextEdit;
+    log->setReadOnly(true);
+    setCentralWidget(log);
 
     // Restore the window's previous size and position.
     QSettings settings;
@@ -44,4 +47,19 @@ void MainWindow::closeEvent(QCloseEvent *event) {
     QSettings settings;
     settings.setValue(SETTINGS_GEOMETRY,saveGeometry());
     QMainWindow::closeEvent(event);
+}
+
+void MainWindow::logMessage(QtMsgType type, const QMessageLogContext &context,
+                            const QString &message, const QDateTime &time)
+{
+    if (log) {
+        QString level(QLatin1String("invalid"));
+        switch (type) {
+        case QtDebugMsg:    level = QLatin1String("Debug");    break;
+        case QtWarningMsg:  level = QLatin1String("Warning");  break;
+        case QtCriticalMsg: level = QLatin1String("Critical"); break;
+        case QtFatalMsg:    level = QLatin1String("Fatal");    break;
+        }
+        log->append(tr("%1 %2 %3").arg(time.toString()).arg(level).arg(message));
+    }
 }

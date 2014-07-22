@@ -21,6 +21,7 @@
 #include "os/versioninfo.h"
 
 #include <QApplication>
+#include <QDebug>
 #include <QErrorMessage>
 #include <QTranslator>
 
@@ -29,6 +30,15 @@
 #define APPLICATION_NAME    QLatin1String("Bipolar")
 #define ORGANISATION_NAME   QLatin1String("Paul Colby")
 #define ORGANISATION_DOMAIN QLatin1String("bipolar.colby.id.au")
+
+MainWindow * mainWindow = NULL;
+
+void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
+    if (mainWindow) {
+        mainWindow->logMessage(type, context, msg);
+    }
+}
 
 int main(int argc, char *argv[]) {
     // Setup the primary Qt application object.
@@ -39,7 +49,8 @@ int main(int argc, char *argv[]) {
     app.setApplicationVersion(VersionInfo::getAppVersionStr());
 
     // Install the QErrorMessage class' Qt message handler.
-    QErrorMessage::qtHandler();
+    //QErrorMessage::qtHandler();
+    qInstallMessageHandler(messageHandler);
 
     // Try to load a localised translator.
     QTranslator translator;
@@ -47,7 +58,8 @@ int main(int argc, char *argv[]) {
         app.installTranslator(&translator);
 
     // Instantiate the main window.
-    MainWindow mainWindow;
-    mainWindow.show();
+    mainWindow = new MainWindow;
+    qDebug() << QApplication::applicationName() << QApplication::applicationVersion();
+    mainWindow->show();
     return app.exec();
 }

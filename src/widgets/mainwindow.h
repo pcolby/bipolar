@@ -20,7 +20,10 @@
 #ifndef __MAIN_WINDOW_H__
 #define __MAIN_WINDOW_H__
 
+#include <QDateTime>
 #include <QMainWindow>
+
+class QTextEdit;
 
 class MainWindow : public QMainWindow {
 Q_OBJECT
@@ -28,8 +31,15 @@ Q_OBJECT
 public:
     MainWindow(QWidget *parent=0, Qt::WindowFlags flags=0);
 
+    void logMessage(QtMsgType type, const QMessageLogContext &context,
+                    const QString &message,
+                    const QDateTime &time = QDateTime::currentDateTime());
+
 protected:
     virtual void closeEvent(QCloseEvent *event);
+
+private:
+    QTextEdit *log;
 
 };
 
