@@ -127,8 +127,10 @@ void MainWindow::convertAll()
             continue;
         }
 
+        const bool overwrite = false; ///< Just used for dev/debugging currently.
+
         const QString gpxFileName = session + QLatin1String(".gpx");
-        if (QFile::exists(gpxFileName)) {
+        if ((QFile::exists(gpxFileName)) && (!overwrite)) {
             qDebug() << QDir::toNativeSeparators(gpxFileName) << "already exists";
         } else if (!parser.writeGPX(gpxFileName)) {
             qWarning() << "failed to write GPX";
@@ -139,7 +141,7 @@ void MainWindow::convertAll()
         }
 
         const QString tcxFileName = session + QLatin1String(".tcx");
-        if (QFile::exists(tcxFileName)) {
+        if ((QFile::exists(tcxFileName)) && (!overwrite)) {
             qDebug() << QDir::toNativeSeparators(tcxFileName) << "already exists";
         } else if (!parser.writeTCX(tcxFileName)) {
             qWarning() << "failed to write TCX";
