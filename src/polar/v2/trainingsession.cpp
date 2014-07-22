@@ -622,8 +622,11 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
     metaData.appendChild(doc.createElement(QLatin1String("desc")))
         .appendChild(doc.createTextNode(tr("GPX encoding of %1")
                                         .arg(getFileName(baseName))));
-    /// @todo Include <author> details for this app?
-    /// @todo Include <link> to flow site?
+    QDomElement link = doc.createElement(QLatin1String("link"));
+    link.setAttribute(QLatin1String("href"), QLatin1String("https://github.com/pcolby/bipolar"));
+    metaData.appendChild(doc.createElement(QLatin1String("author")))
+        .appendChild(link).appendChild(doc.createElement(QLatin1String("text")))
+            .appendChild(doc.createTextNode(QLatin1String("Bipolar")));
     metaData.appendChild(doc.createElement(QLatin1String("time")))
         .appendChild(doc.createTextNode(creationTime.toString(Qt::ISODate)));
     gpx.appendChild(metaData);
