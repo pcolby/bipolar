@@ -595,6 +595,24 @@ QString getFileName(const QString &file)
     return info.fileName();
 }
 
+bool sensorOffline(const QVariantList &list, const int index)
+{
+    foreach (const QVariant &entry, list) {
+        const QVariantMap map = entry.toMap();
+        const QVariant startIndex = first(map.value(QLatin1String("start-index")));
+        const QVariant endIndex = first(map.value(QLatin1String("start-index")));
+        if ((!startIndex.canConvert(QMetaType::Int)) ||
+            (!endIndex.canConvert(QMetaType::Int))) {
+            qWarning() << "ignoring invalid 'offline' entry" << entry;
+            continue;
+        }
+        if ((startIndex.toInt() <= index) && (index <= endIndex.toInt())) {
+            return true; // Sensor was offline.
+        }
+    }
+    return false; // Sensor was not offline.
+}
+
 /// @see http://www.topografix.com/GPX/1/1/gpx.xsd
 QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
 {
@@ -694,8 +712,8 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
  * @brief TrainingSession::toTCX
  *
  * @param buildTime If set, will override the internally detected build time.
- *                  Note, this really only here to allow for deterministic
- *                  testing - not used by the final application itself.
+ *                  Note, this is really only here to allow for deterministic
+ *                  testing - not to be used by the final application.
  *
  * @return A TCX document representing the parsed Polar data.
  *
@@ -811,9 +829,6 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
             qDebug() << "route sizes:" << duration.size() << gpsAltitude.size()
                      << latitude.size() << longitude.size() << satellites.size();
 
-            /// @todo  We could make use of the various *-offline fields in the
-            ///        "samples" data to leave out invalid / offline data.
-
             for (int index = 0; index >= 0; ++index) {
                 QDomElement trackPoint = doc.createElement(QLatin1String("Trackpoint"));
 
@@ -826,20 +841,24 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                     trackPoint.appendChild(position);
                 }
 
-                if (index < altitude.length()) {
+                if ((index < altitude.length()) &&
+                    (!sensorOffline(samples.value(QLatin1String("altitude-offline")).toList(), index))) {
                     trackPoint.appendChild(doc.createElement(QLatin1String("AltitudeMeters")))
                         .appendChild(doc.createTextNode(altitude.at(index).toString()));
                 }
-                if (index < distance.length()) {
+                if ((index < distance.length()) &&
+                    (!sensorOffline(samples.value(QLatin1String("distance-offline")).toList(), index))) {
                     trackPoint.appendChild(doc.createElement(QLatin1String("DistanceMeters")))
                         .appendChild(doc.createTextNode(distance.at(index).toString()));
                 }
-                if ((index < heartrate.length()) && (heartrate.at(index).toInt() > 0)) {
+                if ((index < heartrate.length()) && (heartrate.at(index).toInt() > 0) &&
+                    (!sensorOffline(samples.value(QLatin1String("heartrate-offline")).toList(), index))) {
                     trackPoint.appendChild(doc.createElement(QLatin1String("HeartRateBpm")))
                         .appendChild(doc.createElement(QLatin1String("Value")))
                         .appendChild(doc.createTextNode(heartrate.at(index).toString()));
                 }
-                if ((index < cadence.length()) && (cadence.at(index).toInt() >= 0)) {
+                if ((index < cadence.length()) && (cadence.at(index).toInt() >= 0) &&
+                    (!sensorOffline(samples.value(QLatin1String("cadence-offline")).toList(), index))) {
                     trackPoint.appendChild(doc.createElement(QLatin1String("Cadence")))
                         .appendChild(doc.createTextNode(cadence.at(index).toString()));
                 }
