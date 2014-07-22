@@ -647,8 +647,8 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
             trk.appendChild(trkseg);
 
             // Get the starting time.
-            const QDateTime startTime = getDateTime(
-                route.value(QLatin1String("timestamp")).toList().at(0).toMap());
+            const QDateTime startTime = getDateTime(firstMap(
+                route.value(QLatin1String("timestamp"))));
 
             // Get the number of samples.
             const QVariantList altitude   = route.value(QLatin1String("altitude")).toList();
@@ -717,8 +717,8 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
     if ((parsedExercises.size() > 1) && (!parsedSession.isEmpty())) {
         multiSportSession = doc.createElement(QLatin1String("MultiSportSession"));
         multiSportSession.appendChild(doc.createElement(QLatin1String("Id")))
-            .appendChild(doc.createTextNode(getDateTime(parsedSession.value(
-                QLatin1String("start")).toList().at(0).toMap()).toString(Qt::ISODate)));
+            .appendChild(doc.createTextNode(getDateTime(firstMap(parsedSession
+                .value(QLatin1String("start")))).toString(Qt::ISODate)));
         activities.appendChild(multiSportSession);
     }
 
