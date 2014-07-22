@@ -147,7 +147,7 @@ void MainWindow::convertAll()
             qWarning() << "failed to write TCX";
             failed++;
         } else {
-            qDebug() << "wrote GPX" << QDir::toNativeSeparators(tcxFileName);
+            qDebug() << "wrote TCX" << QDir::toNativeSeparators(tcxFileName);
             succeeded++;
         }
     }
