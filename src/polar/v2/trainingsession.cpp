@@ -106,10 +106,10 @@ bool TrainingSession::parse(const QString &exerciseId, const QMap<QString, QStri
     QVariantList sources;
     #define PARSE_IF_CONTAINS(str, Func) \
         if (fileNames.contains(str)) { \
-            const QVariantMap map = parse##Func(fileNames[str]); \
+            const QVariantMap map = parse##Func(fileNames.value(str)); \
             if (!map.empty()) { \
                 exercise[str] = map; \
-                sources << fileNames[str]; \
+                sources << fileNames.value(str); \
             } \
         }
     PARSE_IF_CONTAINS(CREATE,  CreateExercise);
@@ -647,14 +647,15 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
             trk.appendChild(trkseg);
 
             // Get the starting time.
-            const QDateTime startTime = getDateTime(route[QLatin1String("timestamp")].toList().at(0).toMap());
+            const QDateTime startTime = getDateTime(
+                route.value(QLatin1String("timestamp")).toList().at(0).toMap());
 
             // Get the number of samples.
-            const QVariantList altitude   = route[QLatin1String("altitude")].toList();
-            const QVariantList duration   = route[QLatin1String("duration")].toList();
-            const QVariantList latitude   = route[QLatin1String("latitude")].toList();
-            const QVariantList longitude  = route[QLatin1String("longitude")].toList();
-            const QVariantList satellites = route[QLatin1String("satellites")].toList();
+            const QVariantList altitude   = route.value(QLatin1String("altitude")).toList();
+            const QVariantList duration   = route.value(QLatin1String("duration")).toList();
+            const QVariantList latitude   = route.value(QLatin1String("latitude")).toList();
+            const QVariantList longitude  = route.value(QLatin1String("longitude")).toList();
+            const QVariantList satellites = route.value(QLatin1String("satellites")).toList();
             if ((duration.size() != altitude.size())  ||
                 (duration.size() != latitude.size())  ||
                 (duration.size() != longitude.size()) ||
@@ -668,16 +669,16 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
 
             for (int index = 0; index < duration.size(); ++index) {
                 QDomElement trkpt = doc.createElement(QLatin1String("trkpt"));
-                trkpt.setAttribute(QLatin1String("lat"), latitude[index].toDouble());
-                trkpt.setAttribute(QLatin1String("lon"), longitude[index].toDouble());
+                trkpt.setAttribute(QLatin1String("lat"), latitude.at(index).toDouble());
+                trkpt.setAttribute(QLatin1String("lon"), longitude.at(index).toDouble());
                 /// @todo Use the barometric altitude instead, if present?
                 trkpt.appendChild(doc.createElement(QLatin1String("ele")))
-                    .appendChild(doc.createTextNode(altitude[index].toString()));
+                    .appendChild(doc.createTextNode(altitude.at(index).toString()));
                 trkpt.appendChild(doc.createElement(QLatin1String("time")))
                     .appendChild(doc.createTextNode(startTime.addMSecs(
-                        duration[index].toLongLong()).toString(Qt::ISODate)));
+                        duration.at(index).toLongLong()).toString(Qt::ISODate)));
                 trkpt.appendChild(doc.createElement(QLatin1String("sat")))
-                    .appendChild(doc.createTextNode(satellites[index].toString()));
+                    .appendChild(doc.createTextNode(satellites.at(index).toString()));
                 trkseg.appendChild(trkpt);
             }
         }
@@ -747,7 +748,7 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
 
         // Get the starting time.
         const QVariantMap create = map.value(QLatin1String("create")).toMap();
-        const QDateTime startTime = getDateTime(create[QLatin1String("start")].toList().at(0).toMap());
+        const QDateTime startTime = getDateTime(firstMap(create.value(QLatin1String("start"))));
         activity.appendChild(doc.createElement(QLatin1String("Id")))
             .appendChild(doc.createTextNode(startTime.toString(Qt::ISODate)));
 
@@ -783,23 +784,23 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
             const QVariantMap samples = map.value(SAMPLES).toMap();
             const quint64 recordInterval = getDuration(
                 firstMap(samples.value(QLatin1String("record-interval"))));
-            const QVariantList altitude    = samples[QLatin1String("altitude")].toList();
-            const QVariantList cadence     = samples[QLatin1String("cadence")].toList();
-            const QVariantList distance    = samples[QLatin1String("distance")].toList();
-            const QVariantList heartrate   = samples[QLatin1String("heartrate")].toList();
-            const QVariantList speed       = samples[QLatin1String("speed")].toList();
-            const QVariantList temperature = samples[QLatin1String("temperature")].toList();
+            const QVariantList altitude    = samples.value(QLatin1String("altitude")).toList();
+            const QVariantList cadence     = samples.value(QLatin1String("cadence")).toList();
+            const QVariantList distance    = samples.value(QLatin1String("distance")).toList();
+            const QVariantList heartrate   = samples.value(QLatin1String("heartrate")).toList();
+            const QVariantList speed       = samples.value(QLatin1String("speed")).toList();
+            const QVariantList temperature = samples.value(QLatin1String("temperature")).toList();
             qDebug() << "samples sizes:"
                 << altitude.size() << cadence.size() << distance.size()
                 << heartrate.size() << speed.size() << temperature.size();
 
             // Get the number of "route" samples.
             const QVariantMap route = map.value(ROUTE).toMap();
-            const QVariantList duration    = route[QLatin1String("duration")].toList();
-            const QVariantList gpsAltitude = route[QLatin1String("altitude")].toList();
-            const QVariantList latitude    = route[QLatin1String("latitude")].toList();
-            const QVariantList longitude   = route[QLatin1String("longitude")].toList();
-            const QVariantList satellites  = route[QLatin1String("satellites")].toList();
+            const QVariantList duration    = route.value(QLatin1String("duration")).toList();
+            const QVariantList gpsAltitude = route.value(QLatin1String("altitude")).toList();
+            const QVariantList latitude    = route.value(QLatin1String("latitude")).toList();
+            const QVariantList longitude   = route.value(QLatin1String("longitude")).toList();
+            const QVariantList satellites  = route.value(QLatin1String("satellites")).toList();
             qDebug() << "route sizes:" << duration.size() << gpsAltitude.size()
                      << latitude.size() << longitude.size() << satellites.size();
 
