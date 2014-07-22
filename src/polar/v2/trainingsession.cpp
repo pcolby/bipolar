@@ -691,10 +691,12 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
     QDomElement activities = doc.createElement(QLatin1String("Activities"));
 
     QDomElement multiSportSession;
-    if (parsedExercises.size() > 1) {
+    if ((parsedExercises.size() > 1) && (!parsedSession.isEmpty())) {
         multiSportSession = doc.createElement(QLatin1String("MultiSportSession"));
+        multiSportSession.appendChild(doc.createElement(QLatin1String("Id")))
+            .appendChild(doc.createTextNode(getDateTime(parsedSession.value(
+                QLatin1String("start")).toList().at(0).toMap()).toString(Qt::ISODate)));
         activities.appendChild(multiSportSession);
-        /// @todo Id, etc?
     }
 
     foreach (const QVariant &exercise, parsedExercises) {
@@ -704,23 +706,19 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
             continue;
         }
 
-        QDomElement activity;
+        QDomElement activity = doc.createElement(QLatin1String("Activity"));
         if (multiSportSession.isNull()) {
-            activity = doc.createElement(QLatin1String("Activity"));
             activities.appendChild(activity);
-        } else if (!multiSportSession.hasChildNodes()) {
-            activity = doc.createElement(QLatin1String("Activity"));
+        } else if (multiSportSession.childNodes().length() <= 1) {
             multiSportSession
                 .appendChild(doc.createElement(QLatin1String("FirstSport")))
                 .appendChild(activity);
         } else {
-            QDomElement nextSport = doc.createElement(QLatin1String("NextSport"));
-            multiSportSession.appendChild(nextSport);
-            //nextSport.appendChild() // @todo Transition
-            activity = doc.createElement(QLatin1String("Activity"));
-            nextSport.appendChild(activity);
+            multiSportSession
+                .appendChild(doc.createElement(QLatin1String("NextSport")))
+                .appendChild(activity);
         }
-        Q_ASSERT(!activity.isNull());
+        Q_ASSERT(!activity.parentNode().isNull());
 
         /// @todo Sport must be one of: Running, Biking, Other.
         activity.setAttribute(QLatin1String("Sport"), QLatin1String("Other"));
@@ -762,12 +760,6 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
             /// @todo Replace QList::operator[] with QList::at where possible.
             /// @todo Check list sizes prior to calling QList:at, etc.
             /// @todo Use QList::first and QList::isEmpty instead?
-
-            // Get the sample interval.
-            // samples are always present.
-            // route may or may not be present.
-            // Riding without HR: both.
-            // Gym without GPS: samples only.
 
             // Get the number of "samples" samples.
             const QVariantMap samples = map.value(SAMPLES).toMap();
