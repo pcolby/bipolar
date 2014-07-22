@@ -595,6 +595,7 @@ QString getFileName(const QString &file)
     return info.fileName();
 }
 
+/// @see http://www.topografix.com/GPX/1/1/gpx.xsd
 QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
 {
     QDomDocument doc;
@@ -697,6 +698,9 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
  *                  testing - not used by the final application itself.
  *
  * @return A TCX document representing the parsed Polar data.
+ *
+ * @see http://developer.garmin.com/schemas/tcx/v2/
+ * @see http://www8.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd
  */
 QDomDocument TrainingSession::toTCX(const QString &buildTime) const
 {
