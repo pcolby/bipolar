@@ -85,6 +85,7 @@ void MainWindow::convertAll()
 
     QStringList sessions;
     foreach (const QFileInfo &info, dataDir.entryInfoList()) {
+        QApplication::instance()->processEvents();
         if (!info.fileName().startsWith(QLatin1String("v2-users-"))) {
             qDebug() << "ignoring" << QDir::toNativeSeparators(info.fileName());
             continue;
@@ -117,6 +118,8 @@ void MainWindow::convertAll()
     int failed=0, succeeded=0;
     foreach (const QString &session, sessions) {
         qDebug() << "converting" << QDir::toNativeSeparators(session);
+        QApplication::instance()->processEvents();
+
         polar::v2::TrainingSession parser(session);
         if (!parser.parse()) {
             qWarning() << "failed to parse" << QDir::toNativeSeparators(session);
