@@ -532,39 +532,61 @@ QVariantMap TrainingSession::parseZones(const QString &fileName) const
     return parseZones(file);
 }
 
+/**
+ * @brief Fetch the first item from a list contained within a QVariant.
+ *
+ * This is just a convenience function that prevents us from having to perform
+ * the basic QList::isEmpty() check in many, many places.
+ *
+ * @param variant QVariant (probably) containing a list.
+ *
+ * @return The first item in the list, or an invalid variant if there is no
+ *         such list, or the list is empty.
+ */
+QVariant first(const QVariant &variant) {
+    const QVariantList list = variant.toList();
+    return (list.isEmpty()) ? QVariant() : list.first();
+}
+
+QVariantMap firstMap(const QVariant &list) {
+    return first(list).toMap();
+}
+
 QDateTime getDateTime(const QVariantMap &map)
 {
+    const QVariantMap date = firstMap(map.value(QLatin1String("date")));
+    const QVariantMap time = firstMap(map.value(QLatin1String("time")));
     const QString string = QString::fromLatin1("%1-%2-%3 %4:%5:%6.%7")
-        .arg(map[QLatin1String("date")].toList()[0].toMap()[QLatin1String("year")].toList()[0].toString())
-        .arg(map[QLatin1String("date")].toList()[0].toMap()[QLatin1String("month")].toList()[0].toString())
-        .arg(map[QLatin1String("date")].toList()[0].toMap()[QLatin1String("day")].toList()[0].toString())
-        .arg(map[QLatin1String("time")].toList()[0].toMap()[QLatin1String("hour")].toList()[0].toString())
-        .arg(map[QLatin1String("time")].toList()[0].toMap()[QLatin1String("minute")].toList()[0].toString())
-        .arg(map[QLatin1String("time")].toList()[0].toMap()[QLatin1String("seconds")].toList()[0].toString())
-        .arg(map[QLatin1String("time")].toList()[0].toMap()[QLatin1String("milliseconds")].toList()[0].toString());
+        .arg(first(date.value(QLatin1String("year"))).toString())
+        .arg(first(date.value(QLatin1String("month"))).toString())
+        .arg(first(date.value(QLatin1String("day"))).toString())
+        .arg(first(time.value(QLatin1String("hour"))).toString())
+        .arg(first(time.value(QLatin1String("minute"))).toString())
+        .arg(first(time.value(QLatin1String("seconds"))).toString())
+        .arg(first(time.value(QLatin1String("milliseconds"))).toString());
     QDateTime dateTime = QDateTime::fromString(string, QLatin1String("yyyy-M-d H:m:s.z"));
 
-    QVariantMap::const_iterator offset = map.constFind(QLatin1String("offset"));
+    const QVariantMap::const_iterator offset = map.constFind(QLatin1String("offset"));
     if (offset == map.constEnd()) {
         dateTime.setTimeSpec(Qt::UTC);
     } else {
-        dateTime.setUtcOffset(offset.value().toList()[0].toInt() * 60);
+        dateTime.setUtcOffset(first(offset.value()).toInt() * 60);
     }
     return dateTime;
 }
 
 quint64 getDuration(const QVariantMap &map)
 {
-    QVariantMap::const_iterator
-        hours        = map.find(QLatin1String("hours")),
-        minutes      = map.find(QLatin1String("minutes")),
-        seconds      = map.find(QLatin1String("seconds")),
-        milliseconds = map.find(QLatin1String("milliseconds"));
+    const QVariantMap::const_iterator
+        hours        = map.constFind(QLatin1String("hours")),
+        minutes      = map.constFind(QLatin1String("minutes")),
+        seconds      = map.constFind(QLatin1String("seconds")),
+        milliseconds = map.constFind(QLatin1String("milliseconds"));
     return
-       ((((  hours == map.constEnd()) ? 0 : hours.value().toList()[0].toULongLong()) * 60
-       + ((minutes == map.constEnd()) ? 0 : minutes.value().toList()[0].toULongLong())) * 60
-       + ((seconds == map.constEnd()) ? 0 : seconds.value().toList()[0].toULongLong())) * 1000
-       + ((milliseconds == map.constEnd()) ? 0 : milliseconds.value().toList()[0].toULongLong());
+       ((((  hours == map.constEnd()) ? 0 : first(hours.value()).toULongLong()) * 60
+       + ((minutes == map.constEnd()) ? 0 : first(minutes.value()).toULongLong())) * 60
+       + ((seconds == map.constEnd()) ? 0 : first(seconds.value()).toULongLong())) * 1000
+       + ((milliseconds == map.constEnd()) ? 0 : first(milliseconds.value()).toULongLong());
 }
 
 QString getFileName(const QString &file)
@@ -736,14 +758,14 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
 
             lap.appendChild(doc.createElement(QLatin1String("TotalTimeSeconds")))
                 .appendChild(doc.createTextNode(QString::fromLatin1("%1")
-                    .arg(getDuration(create[QLatin1String("duration")].toList()[0].toMap())/1000.0)));
+                    .arg(getDuration(firstMap(create.value(QLatin1String("duration"))))/1000.0)));
             lap.appendChild(doc.createElement(QLatin1String("DistanceMeters")))
                 .appendChild(doc.createTextNode(QString::fromLatin1("%1")
-                    .arg(create[QLatin1String("distance")].toList()[0].toDouble())));
+                    .arg(first(create.value(QLatin1String("distance"))).toDouble())));
             /// @todo [Optional] MaximumSpeed (double)
             lap.appendChild(doc.createElement(QLatin1String("Calories")))
                 .appendChild(doc.createTextNode(QString::fromLatin1("%1")
-                    .arg(create[QLatin1String("calories")].toList()[0].toUInt())));
+                    .arg(first(create.value(QLatin1String("calories"))).toUInt())));
             /// @todo [Optional] AverageHeartRateBpm/Value (ubyte)
             /// @todo [Optional] MaximumHeartRateBpm/Value (ubyte)
             /// @todo Intensity must be one of: Active, Resting.
@@ -757,14 +779,10 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
             QDomElement track = doc.createElement(QLatin1String("Track"));
             lap.appendChild(track);
 
-            /// @todo Replace QList::operator[] with QList::at where possible.
-            /// @todo Check list sizes prior to calling QList:at, etc.
-            /// @todo Use QList::first and QList::isEmpty instead?
-
             // Get the number of "samples" samples.
             const QVariantMap samples = map.value(SAMPLES).toMap();
             const quint64 recordInterval = getDuration(
-                samples[QLatin1String("record-interval")].toList()[0].toMap());
+                firstMap(samples.value(QLatin1String("record-interval"))));
             const QVariantList altitude    = samples[QLatin1String("altitude")].toList();
             const QVariantList cadence     = samples[QLatin1String("cadence")].toList();
             const QVariantList distance    = samples[QLatin1String("distance")].toList();
