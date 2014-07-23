@@ -876,6 +876,10 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                 t.setUtcOffset(startTime.utcOffset());
                 qDebug() << __FUNCTION__ << __LINE__ << t;
                 qDebug() << __FUNCTION__ << __LINE__ << t.toString(Qt::ISODate);
+                t = startTime.toUTC().addMSecs(index * recordInterval);
+                t.setUtcOffset(startTime.utcOffset());
+                qDebug() << __FUNCTION__ << __LINE__ << t;
+                qDebug() << __FUNCTION__ << __LINE__ << t.toString(Qt::ISODate);
 
                 if (trackPoint.hasChildNodes()) {
                     QDateTime trackPointTime = startTime.addMSecs(index * recordInterval);
