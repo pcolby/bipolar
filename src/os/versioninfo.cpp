@@ -42,7 +42,7 @@ bool VersionInfo::getAppVersion(quint16 &major, quint16 &minor, quint16 &error, 
 
     // Get the product version from the version info resource.
     VS_FIXEDFILEINFO *Ver; UINT VerLen;
-    if (VerQueryValue(VerInfo, L"\\", &Ver, &VerLen)) {
+    if (VerQueryValue(VerInfo, L"\\", reinterpret_cast<LPVOID *>(&Ver), &VerLen)) {
             major=HIWORD(Ver->dwFileVersionMS);
             minor=LOWORD(Ver->dwFileVersionMS);
             error=HIWORD(Ver->dwFileVersionLS);
