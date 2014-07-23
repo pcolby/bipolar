@@ -864,10 +864,13 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                 }
 
                 if (trackPoint.hasChildNodes()) {
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 2, 0))
                     QDateTime trackPointTime = startTime.addMSecs(index * recordInterval);
-                    #if (QT_VERSION < QT_VERSION_CHECK(5, 2, 0))
-                    trackPointTime.setUtcOffset(startTime.utcOffset()); // Just for Travis CI.
-                    #endif
+#else /// @todo Remove this hack when Qt 5.2+ is available on Travis CI.
+                    QDateTime trackPointTime = startTime.toUTC()
+                        .addMSecs(index * recordInterval).addSecs(startTime.utcOffset());
+                    trackPointTime.setUtcOffset(startTime.utcOffset());
+#endif
                     trackPoint.insertBefore(doc.createElement(QLatin1String("Time")), QDomNode())
                         .appendChild(doc.createTextNode(trackPointTime.toString(Qt::ISODate)));
                     track.appendChild(trackPoint);
