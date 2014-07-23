@@ -19,14 +19,10 @@ The release plans is roughly as follows:
 - [ ] 0.3.0 Basic GUI.
 
 The initial hook for Windows has already been released, and is working quite
-well.  I've got all of the protobuf data parsing working (Polar uses Google
-Protocol Buffers), and am now working on the GPX/TCX conversion.
-
-In fact, GPX conversion is working now! :D  I've even uploaded generated GPX
-files to Strava, with great success :D
+well.  All of the protobuf data parsing working (Polar uses Google Protocol
+Buffers).  Rudimentary GPX and TCX conversion is also working.
 
 Things remaining for the next release (0.1.0) are:
-- TCX conversion; and
 - a Windows installer.
 
 ## Contact
