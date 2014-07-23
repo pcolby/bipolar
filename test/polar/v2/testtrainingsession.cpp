@@ -437,7 +437,7 @@ void TestTrainingSession::toGPX()
 
 void TestTrainingSession::toTCX_data()
 {
-    QDateTime d0 = QDateTime::fromString(QLatin1String("2014-1-1 1:2:3.45"),
+    QDateTime d0 = QDateTime::fromString(QLatin1String("2014-7-18 7:58:56.0"),
                                          QLatin1String("yyyy-M-d H:m:s.z"));
     QDateTime d1 = d0, d2 = d0;
     d1.setTimeSpec(Qt::UTC);
