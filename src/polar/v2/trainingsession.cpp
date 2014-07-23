@@ -873,7 +873,7 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                 QDateTime t = startTime.addMSecs(index * recordInterval);
                 qDebug() << __FUNCTION__ << __LINE__ << t;
                 qDebug() << __FUNCTION__ << __LINE__ << t.toString(Qt::ISODate);
-                t.setUtcOffset(startTime.offsetFromUtc());
+                t.setUtcOffset(startTime.utcOffset());
                 qDebug() << __FUNCTION__ << __LINE__ << t;
                 qDebug() << __FUNCTION__ << __LINE__ << t.toString(Qt::ISODate);
 
