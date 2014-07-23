@@ -53,6 +53,8 @@ Section "application"
     File "${VCRDIR}\msvcp120.dll"
     File "${VCRDIR}\msvcr120.dll"
     File /r "qtlibs\*"
+    SetOutPath $INSTDIR\hook
+    File "..\..\hook\qt\build\qtbase\lib\Qt5Network.dll"
     WriteRegStr HKCU "Software\Software\Paul Colby\Bipolar" "" $INSTDIR
     WriteUninstaller $INSTDIR\Uninstall.exe
     # The various shortcuts.
@@ -93,6 +95,7 @@ Section "un.application"
     Delete $INSTDIR\qt_*.qm
     Delete $INSTDIR\Uninstall.exe
     RMDir /r $INSTDIR\accessible
+    RMDir /r $INSTDIR\hook
     RMDir /r $INSTDIR\iconengines
     RMDir /r $INSTDIR\imageformats
     RMDir /r $INSTDIR\platforms
