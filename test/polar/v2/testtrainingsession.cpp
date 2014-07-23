@@ -450,16 +450,12 @@ void TestTrainingSession::toTCX_data()
     qDebug() << 'e' << d1.toString(Qt::ISODate);
     qDebug() << 'f' << d2.toString(Qt::ISODate);
 
-    d0.addMSecs(5 * 1000);
-    d1.addMSecs(5 * 1000);
-    d2.addMSecs(5 * 1000);
-
-    qDebug() << 'g' << d0.toString();
-    qDebug() << 'h' << d1.toString();
-    qDebug() << 'i' << d2.toString();
-    qDebug() << 'j' << d0.toString(Qt::ISODate);
-    qDebug() << 'k' << d1.toString(Qt::ISODate);
-    qDebug() << 'l' << d2.toString(Qt::ISODate);
+    qDebug() << 'g' << d0.addMSecs(5 * 1000).toString();
+    qDebug() << 'h' << d1.addMSecs(5 * 1000).toString();
+    qDebug() << 'i' << d2.addMSecs(5 * 1000).toString();
+    qDebug() << 'j' << d0.addMSecs(5 * 1000).toString(Qt::ISODate);
+    qDebug() << 'k' << d1.addMSecs(5 * 1000).toString(Qt::ISODate);
+    qDebug() << 'l' << d2.addMSecs(5 * 1000).toString(Qt::ISODate);
 
     QTest::addColumn<QString>("baseName");
     QTest::addColumn<QByteArray>("expected");
