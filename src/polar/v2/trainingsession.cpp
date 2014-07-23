@@ -572,6 +572,8 @@ QDateTime getDateTime(const QVariantMap &map)
     } else {
         dateTime.setUtcOffset(first(offset.value()).toInt() * 60);
     }
+    qDebug() << __FUNCTION__ << __LINE__ << dateTime;
+    qDebug() << __FUNCTION__ << __LINE__ << dateTime.toString(Qt::ISODate);
     return dateTime;
 }
 
