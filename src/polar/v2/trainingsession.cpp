@@ -878,9 +878,12 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                 qDebug() << __FUNCTION__ << __LINE__ << t.toString(Qt::ISODate);
 
                 if (trackPoint.hasChildNodes()) {
+                    QDateTime trackPointTime = startTime.addMSecs(index * recordInterval);
+                    #if (QT_VERSION < QT_VERSION_CHECK(5, 2, 0))
+                    trackPointTime.setUtcOffset(startTime.utcOffset()); // Just for Travis CI.
+                    #endif
                     trackPoint.insertBefore(doc.createElement(QLatin1String("Time")), QDomNode())
-                        .appendChild(doc.createTextNode(
-                            startTime.addMSecs(index * recordInterval).toString(Qt::ISODate)));
+                        .appendChild(doc.createTextNode(trackPointTime.toString(Qt::ISODate)));
                     track.appendChild(trackPoint);
                 } else {
                     break;
