@@ -1,7 +1,18 @@
 @echo off
 
-:: Make sure the NSIS and git binaries are in the path.
-PATH=%PATH%;C:\Program Files\NSIS;C:\Program Files (x86)\NSIS;C:\Program Files\Git\bin;C:\Program Files (x86)\Git\bin
+:: Make sure the NSIS, git and Qt binaries are in the path.
+path=%path%;C:\Program Files\NSIS;C:\Program Files (x86)\NSIS
+path=%path%;C:\Program Files\Git\bin;C:\Program Files (x86)\Git\bin
+path=%path%;C:\Qt\5.3\msvc2013\bin
+
+:: Gather the Qt dependencies.
+if exist qtlibs rm -rf qtlibs
+windeployqt.exe --dir qtlibs ..\..\release\Bipolar.exe
+if errorlevel 1 (
+  echo windeployqt.exe failed
+  pause
+  exit errorlevel
+)
 
 :: Set the REVISION variable to the current git revision number.
 git.exe rev-list --count HEAD > .revision
