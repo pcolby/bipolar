@@ -42,9 +42,7 @@ bool VersionInfo::getAppVersion(quint16 &major, quint16 &minor, quint16 &error, 
 
     // Get the product version from the version info resource.
     VS_FIXEDFILEINFO *Ver; UINT VerLen;
-    /// @todo Remove the non-const LPTSTR cast from the following call when
-    ///       Qt's MinGW's winver.h is updated (not yet in Qt 4.7.3).
-    if (VerQueryValue(VerInfo,(LPTSTR)L"\\",(LPVOID *)&Ver,&VerLen)) {
+    if (VerQueryValue(VerInfo, L"\\", &Ver, &VerLen)) {
             major=HIWORD(Ver->dwFileVersionMS);
             minor=LOWORD(Ver->dwFileVersionMS);
             error=HIWORD(Ver->dwFileVersionLS);
