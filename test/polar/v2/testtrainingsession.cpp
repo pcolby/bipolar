@@ -437,25 +437,6 @@ void TestTrainingSession::toGPX()
 
 void TestTrainingSession::toTCX_data()
 {
-    QDateTime d1 = QDateTime::fromString(QLatin1String("2014-7-18 7:58:56.0"),
-                                         QLatin1String("yyyy-M-d H:m:s.z"));
-    QDateTime d2 = d1;
-    d1.setTimeSpec(Qt::UTC);
-    d2.setUtcOffset(10 * 60 * 60);
-
-    qDebug() << 'a' << d1.toString(Qt::ISODate);
-    qDebug() << 'b' << d2.toString(Qt::ISODate);
-    qDebug() << 'c' << d1.addMSecs(5 * 1000).toString(Qt::ISODate);
-    qDebug() << 'd' << d2.addMSecs(5 * 1000).toString(Qt::ISODate);
-    qDebug() << 'e' << d2.toUTC().toString(Qt::ISODate);
-    qDebug() << 'f' << d2.toUTC().addMSecs(5 * 1000).toString(Qt::ISODate);
-
-    QDateTime d3 = d2.toUTC().addMSecs(5 * 1000).addSecs(d2.utcOffset());
-    qDebug() << 'g' << d3.toString(Qt::ISODate);
-    d3.setUtcOffset(d2.utcOffset()); // Right TZ.
-    qDebug() << 'h' << d3.toString(Qt::ISODate);
-
-
     QTest::addColumn<QString>("baseName");
     QTest::addColumn<QByteArray>("expected");
 
