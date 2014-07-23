@@ -865,6 +865,8 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                         .appendChild(doc.createTextNode(cadence.at(index).toString()));
                 }
 
+                qDebug() << __FUNCTION__ << __LINE__ << startTime.addMSecs(index * recordInterval);
+                qDebug() << __FUNCTION__ << __LINE__ << startTime.addMSecs(index * recordInterval).toString(Qt::ISODate);
                 if (trackPoint.hasChildNodes()) {
                     trackPoint.insertBefore(doc.createElement(QLatin1String("Time")), QDomNode())
                         .appendChild(doc.createTextNode(
