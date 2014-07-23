@@ -570,11 +570,11 @@ QDateTime getDateTime(const QVariantMap &map)
     if (offset == map.constEnd()) {
         dateTime.setTimeSpec(Qt::UTC);
     } else {
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 2, 0))
+        #if (QT_VERSION >= QT_VERSION_CHECK(5, 2, 0))
         dateTime.setOffsetFromUtc(first(offset.value()).toInt() * 60);
-#else /// @todo Remove this when Qt 5.2+ is available on Travis CI.
+        #else /// @todo Remove this when Qt 5.2+ is available on Travis CI.
         dateTime.setUtcOffset(first(offset.value()).toInt() * 60);
-#endif
+        #endif
     }
     return dateTime;
 }
@@ -868,13 +868,13 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                 }
 
                 if (trackPoint.hasChildNodes()) {
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 2, 0))
+                    #if (QT_VERSION >= QT_VERSION_CHECK(5, 2, 0))
                     QDateTime trackPointTime = startTime.addMSecs(index * recordInterval);
-#else /// @todo Remove this hack when Qt 5.2+ is available on Travis CI.
+                    #else /// @todo Remove this hack when Qt 5.2+ is available on Travis CI.
                     QDateTime trackPointTime = startTime.toUTC()
                         .addMSecs(index * recordInterval).addSecs(startTime.utcOffset());
                     trackPointTime.setUtcOffset(startTime.utcOffset());
-#endif
+                    #endif
                     trackPoint.insertBefore(doc.createElement(QLatin1String("Time")), QDomNode())
                         .appendChild(doc.createTextNode(trackPointTime.toString(Qt::ISODate)));
                     track.appendChild(trackPoint);
