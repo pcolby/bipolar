@@ -437,25 +437,16 @@ void TestTrainingSession::toGPX()
 
 void TestTrainingSession::toTCX_data()
 {
-    QDateTime d0 = QDateTime::fromString(QLatin1String("2014-7-18 7:58:56.0"),
+    QDateTime d1 = QDateTime::fromString(QLatin1String("2014-7-18 7:58:56.0"),
                                          QLatin1String("yyyy-M-d H:m:s.z"));
-    QDateTime d1 = d0, d2 = d0;
+    QDateTime d2 = d1;
     d1.setTimeSpec(Qt::UTC);
     d2.setUtcOffset(10 * 60 * 60);
 
-    qDebug() << 'a' << d0.toString();
-    qDebug() << 'b' << d1.toString();
-    qDebug() << 'c' << d2.toString();
-    qDebug() << 'd' << d0.toString(Qt::ISODate);
-    qDebug() << 'e' << d1.toString(Qt::ISODate);
-    qDebug() << 'f' << d2.toString(Qt::ISODate);
-
-    qDebug() << 'g' << d0.addMSecs(5 * 1000).toString();
-    qDebug() << 'h' << d1.addMSecs(5 * 1000).toString();
-    qDebug() << 'i' << d2.addMSecs(5 * 1000).toString();
-    qDebug() << 'j' << d0.addMSecs(5 * 1000).toString(Qt::ISODate);
-    qDebug() << 'k' << d1.addMSecs(5 * 1000).toString(Qt::ISODate);
-    qDebug() << 'l' << d2.addMSecs(5 * 1000).toString(Qt::ISODate);
+    qDebug() << 'a' << d1.toString(Qt::ISODate);
+    qDebug() << 'b' << d2.toString(Qt::ISODate);
+    qDebug() << 'c' << d1.addMSecs(5 * 1000).toString(Qt::ISODate);
+    qDebug() << 'd' << d2.addMSecs(5 * 1000).toString(Qt::ISODate);
 
     QTest::addColumn<QString>("baseName");
     QTest::addColumn<QByteArray>("expected");
