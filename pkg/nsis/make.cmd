@@ -9,8 +9,7 @@ set /p REVISION=<.revision
 del .revision
 
 :: Update the NSIS script, and build the installer.
-sed.exe -e "s/\(\([ 0-9]\+[.,]\)\{3\} *\)0/\1%REVISION%/g" win32.nsi > win32.tmp.nsi
-makensis win32.tmp.nsi
-rm win32.tmp.nsi
+sed.exe -e "s/\(\([ 0-9]\+[.,]\)\{3\} *\)0/\1%REVISION%/g" win32.nsi.in > win32.nsi
+makensis win32.nsi
 
 pause
