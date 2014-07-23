@@ -23,7 +23,7 @@ well.  All of the protobuf data parsing working (Polar uses Google Protocol
 Buffers).  Rudimentary GPX and TCX conversion is also working.
 
 Things remaining for the next release (0.1.0) are:
-- a Windows installer.
+- a Windows installer (which is already well under way).
 
 ## Contact
 
