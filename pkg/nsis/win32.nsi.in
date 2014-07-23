@@ -1,4 +1,3 @@
-!define QTDIR "C:\Qt\5.3\msvc2013"
 !define VCRDIR "C:\Windows\System32"
 
 # Include the NSIS Modern UI 2.
@@ -50,17 +49,10 @@ Var StartMenuFolder
 Section "application"
     # Files to install.
     SetOutPath $INSTDIR
+    File "..\..\release\Bipolar.exe"
     File "${VCRDIR}\msvcp120.dll"
     File "${VCRDIR}\msvcr120.dll"
-    File "${QTDIR}\bin\icu*52.dll"
-    File "${QTDIR}\bin\libEGL.dll"
-    File "${QTDIR}\bin\libGLESv2.dll"
-    File "${QTDIR}\bin\Qt5Core.dll"
-    File "${QTDIR}\bin\Qt5Gui.dll"
-    File "${QTDIR}\bin\Qt5Widgets.dll"
-    File "..\..\release\Bipolar.exe"
-    SetOutPath $INSTDIR\platforms
-    File /x "*d.dll" "${QTDIR}\plugins\platforms\*.dll"
+    File /r "qtlibs\*"
     WriteRegStr HKCU "Software\Software\Paul Colby\Bipolar" "" $INSTDIR
     WriteUninstaller $INSTDIR\Uninstall.exe
     # The various shortcuts.
@@ -91,18 +83,19 @@ Section "un.application"
     Delete "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk"
     Delete "$SMPROGRAMS\$StartMenuFolder\Bipolar.lnk"
     RMDir "$SMPROGRAMS\$StartMenuFolder"
-    Delete $INSTDIR\msvcp110.dll
-    Delete $INSTDIR\msvcr110.dll
-    Delete $INSTDIR\icu*51.dll
+    Delete $INSTDIR\Bipolar.exe
+    Delete $INSTDIR\D3Dcompiler_*.dll
+    Delete $INSTDIR\icu*.dll
     Delete $INSTDIR\libEGL.dll
     Delete $INSTDIR\libGLESv2.dll
-    Delete $INSTDIR\Qt5Core.dll
-    Delete $INSTDIR\Qt5Gui.dll
-    Delete $INSTDIR\Qt5Widgets.dll
-    Delete $INSTDIR\Bipolar.exe
+    Delete $INSTDIR\msvc*.dll
+    Delete $INSTDIR\Qt5*.dll
+    Delete $INSTDIR\qt_*.qm
     Delete $INSTDIR\Uninstall.exe
-    Delete $INSTDIR\platforms\*  
-    RMDir $INSTDIR\platforms
+    RMDir /r $INSTDIR\accessible
+    RMDir /r $INSTDIR\iconengines
+    RMDir /r $INSTDIR\imageformats
+    RMDir /r $INSTDIR\platforms
     RMDir $INSTDIR
     DeleteRegKey /ifempty HKCU "Software\Paul Colby\Bipolar"
     DeleteRegKey /ifempty HKCU "Software\Paul Colby"
