@@ -570,7 +570,11 @@ QDateTime getDateTime(const QVariantMap &map)
     if (offset == map.constEnd()) {
         dateTime.setTimeSpec(Qt::UTC);
     } else {
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 2, 0))
+        dateTime.setOffsetFromUtc(first(offset.value()).toInt() * 60);
+#else /// @todo Remove this when Qt 5.2+ is available on Travis CI.
         dateTime.setUtcOffset(first(offset.value()).toInt() * 60);
+#endif
     }
     return dateTime;
 }
