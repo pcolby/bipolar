@@ -570,7 +570,7 @@ QDateTime getDateTime(const QVariantMap &map)
     if (offset == map.constEnd()) {
         dateTime.setTimeSpec(Qt::UTC);
     } else {
-        dateTime.setOffsetFromUtc(first(offset.value()).toInt() * 60);
+        dateTime.setUtcOffset(first(offset.value()).toInt() * 60);
     }
     qDebug() << __FUNCTION__ << __LINE__ << dateTime;
     qDebug() << __FUNCTION__ << __LINE__ << dateTime.toString(Qt::ISODate);
@@ -873,7 +873,7 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                 QDateTime t = startTime.addMSecs(index * recordInterval);
                 qDebug() << __FUNCTION__ << __LINE__ << t;
                 qDebug() << __FUNCTION__ << __LINE__ << t.toString(Qt::ISODate);
-                t.setOffsetFromUtc(startTime.offsetFromUtc());
+                t.setUtcOffset(startTime.offsetFromUtc());
                 qDebug() << __FUNCTION__ << __LINE__ << t;
                 qDebug() << __FUNCTION__ << __LINE__ << t.toString(Qt::ISODate);
 

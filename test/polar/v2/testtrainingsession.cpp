@@ -441,7 +441,7 @@ void TestTrainingSession::toTCX_data()
                                          QLatin1String("yyyy-M-d H:m:s.z"));
     QDateTime d1 = d0, d2 = d0;
     d1.setTimeSpec(Qt::UTC);
-    d2.setOffsetFromUtc(10 * 60 * 60);
+    d2.setUtcOffset(10 * 60 * 60);
 
     qDebug() << 'a' << d0.toString();
     qDebug() << 'b' << d1.toString();
