@@ -450,9 +450,11 @@ void TestTrainingSession::toTCX_data()
     qDebug() << 'e' << d2.toUTC().toString(Qt::ISODate);
     qDebug() << 'f' << d2.toUTC().addMSecs(5 * 1000).toString(Qt::ISODate);
 
-    QDateTime d3 = d2.toUTC().addMSecs(5 * 1000);
-    d3.setUtcOffset(d2.utcOffset());
+    QDateTime d3 = d2.toUTC().addMSecs(5 * 1000).addSecs(d2.utcOffset());
     qDebug() << 'g' << d3.toString(Qt::ISODate);
+    d3.setUtcOffset(d2.utcOffset()); // Right TZ.
+    qDebug() << 'h' << d3.toString(Qt::ISODate);
+
 
     QTest::addColumn<QString>("baseName");
     QTest::addColumn<QByteArray>("expected");
