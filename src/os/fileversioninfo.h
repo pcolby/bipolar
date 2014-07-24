@@ -24,11 +24,6 @@
 #include <QString>
 #include <QStringList>
 
-/// @todo  This class should be refactored such that the file info block is
-///        loaded once, and can then be queried repeatedly.  Additionally, the
-///        constructor should accept the name of the file to read info from,
-///        defaulting to "self".
-
 #ifdef Q_OS_WIN // FileVersionInfo is a Windows-only class.
 
 class FileVersionInfo {
