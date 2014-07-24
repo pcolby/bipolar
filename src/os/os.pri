@@ -2,8 +2,8 @@ DEPENDPATH += src/os
 VPATH += $$PWD
 
 win32 {
-  HEADERS += versioninfo.h
-  SOURCES += versioninfo.cpp
+  HEADERS += fileversioninfo.h
+  SOURCES += fileversioninfo.cpp
   LIBS += -lversion
   RC_FILE=qrc/Bipolar.rc
 }

@@ -18,7 +18,7 @@
 */
 
 #include "mainwindow.h"
-#include "os/versioninfo.h"
+#include "os/fileversioninfo.h"
 
 #include <QApplication>
 #include <QDebug>
@@ -46,7 +46,12 @@ int main(int argc, char *argv[]) {
     app.setApplicationName(APPLICATION_NAME);
     app.setOrganizationName(ORGANISATION_NAME);
     app.setOrganizationDomain(ORGANISATION_DOMAIN);
-    app.setApplicationVersion(VersionInfo::getAppVersionStr());
+#ifdef Q_OS_WIN
+    FileVersionInfo versionInfo;
+    if (versionInfo.isValid()) {
+        app.setApplicationVersion(versionInfo.fileVersionStrings().join(QLatin1Char('.')));
+    }
+#endif
 
     // Install the QErrorMessage class' Qt message handler.
     //QErrorMessage::qtHandler();
