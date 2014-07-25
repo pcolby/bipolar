@@ -84,7 +84,7 @@ void MainWindow::checkHook()
     const QDir hookDir = FlowSyncHook::installableHookDir();
     const int availableVersion = FlowSyncHook::getVersion(hookDir);
     if (availableVersion <= 0) {
-        qWarning() << "failed to find hook for installation";
+        qWarning() << "failed to find installable hook";
         QTimer::singleShot(0, this, SLOT(convertAll()));
         return;
     }
@@ -114,8 +114,11 @@ void MainWindow::checkHook()
                 QMessageBox::Yes|QMessageBox::No, QMessageBox::No) == QMessageBox::Yes
             ) && (!FlowSyncHook::install(hookDir, flowSyncDir))) {
             QMessageBox::warning(this, tr(""),
-                tr("Failed to install Bipolar hook into Polar FlowSync.\n"
-                   "See log for details."));
+                tr("Failed to install Bipolar hook into Polar FlowSync. "
+                   "See log for details.\n\n"
+                   "You may need to re-run this application as an administrator,\n"
+                   "and/or exit Polar FlowSync before trying again.\n"
+                   ));
         }
     }
     QTimer::singleShot(0, this, SLOT(convertAll()));
