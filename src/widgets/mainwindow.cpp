@@ -81,31 +81,38 @@ void MainWindow::logMessage(QtMsgType type, const QMessageLogContext &context,
 
 void MainWindow::checkHook()
 {
+    const QDir hookDir = FlowSyncHook::installableHookDir();
+    const int availableVersion = FlowSyncHook::getVersion(hookDir);
+    if (availableVersion <= 0) {
+        qWarning() << "failed to find hook for installation";
+        QTimer::singleShot(0, this, SLOT(convertAll()));
+        return;
+    }
+
     const QDir flowSyncDir = FlowSyncHook::flowSyncDir();
     if (!flowSyncDir.exists()) {
         QMessageBox::information(this, tr(""),
             tr("Unable to check if the Bipolar hook has been installed,\n"
                "because the Polar FlowSync application could not be located."));
     } else {
-        const int installedVersion = FlowSyncHook::installedVersion(flowSyncDir);
+        const int installedVersion = FlowSyncHook::getVersion(flowSyncDir);
 
         QString message;
         if (installedVersion <= 0) {
             message = tr("The Bipolar hook does not appear to be installed.\n"
                          "Would you like to install it now?");
-        } else if (installedVersion < EXPECTED_HOOK_VERSION) {
+        } else if (installedVersion < availableVersion) {
             message = tr("This version of Bipolar includes a newer FlowSync hook.\n"
                          "Would you like to install it now?");
-        } else if (installedVersion > EXPECTED_HOOK_VERSION) {
+        } else if (installedVersion > availableVersion) {
             qWarning() << "the installed flowsync hook version" << installedVersion
-                       << "is more recent than this version if Bipolar expects"
-                       << EXPECTED_HOOK_VERSION;
+                       << "is more recent than available" << availableVersion;
         }
 
         if ((!message.isEmpty()) &&
             (QMessageBox::question(this, tr(""), message,
                 QMessageBox::Yes|QMessageBox::No, QMessageBox::No) == QMessageBox::Yes
-            ) && (!FlowSyncHook::install(flowSyncDir))) {
+            ) && (!FlowSyncHook::install(hookDir, flowSyncDir))) {
             QMessageBox::warning(this, tr(""),
                 tr("Failed to install Bipolar hook into Polar FlowSync.\n"
                    "See log for details."));

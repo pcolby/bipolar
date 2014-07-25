@@ -19,6 +19,7 @@
 
 #include "flowsynchook.h"
 
+#include <QCoreApplication>
 #include <QDebug>
 
 #ifdef Q_OS_WIN
@@ -61,13 +62,20 @@ QDir FlowSyncHook::flowSyncDir()
     return QDir();
 }
 
-bool FlowSyncHook::install(const QDir dir)
+QDir FlowSyncHook::installableHookDir()
+{
+#ifdef Q_OS_WIN
+    return QDir(QCoreApplication::applicationDirPath() + QLatin1String("/hook"));
+#endif
+}
+
+bool FlowSyncHook::install(const QDir &fromDir, const QDir &toDir)
 {
     qWarning() << __FUNCTION__ << "not implemented yet";
     return false;
 }
 
-int FlowSyncHook::installedVersion(const QDir dir)
+int FlowSyncHook::getVersion(const QDir &dir)
 {
     const QString dll = dir.absoluteFilePath(QLatin1String("Qt5Network.dll"));
 

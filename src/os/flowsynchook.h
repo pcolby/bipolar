@@ -28,9 +28,11 @@ public:
 
     static QDir flowSyncDir();
 
-    static bool install(const QDir dir = flowSyncDir());
+    static QDir installableHookDir();
 
-    static int installedVersion(const QDir dir = flowSyncDir());
+    static bool install(const QDir &fromDir, const QDir &toDir);
+
+    static int getVersion(const QDir &dir);
 
 };
 
