@@ -31,7 +31,7 @@ LPTSTR getModuleFileName()
 
     SetLastError(ERROR_SUCCESS);
     do {
-        // [Re]Allocate memeory for the module filename.
+        // [Re]Allocate memory for the module filename.
         if (fileName == NULL) {
             if ((fileName = (LPTSTR)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, size)) == NULL) {
                 return NULL;
