@@ -22,12 +22,9 @@
 #include <QDebug>
 
 #ifdef Q_OS_WIN
+#include "fileversioninfo.h"
 #include <QProcess>
 #endif
-
-//#ifdef Q_OS_WIN
-
-//#include <windows.h>
 
 /// @brief Find out where Polar FlowSync is installed.
 QDir FlowSyncHook::flowSyncDir()
@@ -72,6 +69,17 @@ bool FlowSyncHook::install(const QDir dir)
 
 bool FlowSyncHook::isInstalled(const QDir dir)
 {
-    qWarning() << __FUNCTION__ << "not implemented yet";
+    const QString dll = dir.absoluteFilePath(QLatin1String("Qt5Network.dll"));
+    qDebug() << "checking" << dll;
+
+    const FileVersionInfo info(dll);
+    if (!info.isValid()) {
+        qWarning() << "unabled to read version information for" << dll;
+        return false;
+    }
+
+    qDebug() << info.fileVersion();
+    qDebug() << info.fileInfo(QLatin1String("ProductName"));
+    qDebug() << info.fileInfo(QLatin1String("LegalCopyright"));
     return false;
 }

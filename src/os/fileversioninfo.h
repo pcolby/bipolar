@@ -30,13 +30,22 @@ class FileVersionInfo {
 
 public:
 
+    enum Lang {
+        US_ENGLISH = 0x0409, // == 1033
+    };
+
+    enum CodePage {
+        UTF_16       = 0x04B0, // == 1200
+        ANSI_LATIN_1 = 0x04E4, // == 1252
+    };
+
     FileVersionInfo(const QString &fileName = QString());
     ~FileVersionInfo();
 
     bool isValid() const;
 
-    QString fileInfo(const QString &name, const quint16 lang = 0x0409,
-                     const quint16 &codepage = 0x04e4) const;
+    QString fileInfo(const QString &name, const quint16 lang = US_ENGLISH,
+                     const quint16 &codepage = UTF_16) const;
 
     QList<quint16> fileVersion() const;
     QStringList fileVersionStrings() const;
