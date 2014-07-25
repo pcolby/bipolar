@@ -30,7 +30,7 @@ public:
 
     static QDir installableHookDir();
 
-    static bool install(const QDir &fromDir, const QDir &toDir);
+    static bool install(const QDir &fromDir, QDir toDir);
 
     static int getVersion(const QDir &dir);
 

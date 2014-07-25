@@ -20,6 +20,7 @@
 #include "flowsynchook.h"
 
 #include <QCoreApplication>
+#include <QDateTime>
 #include <QDebug>
 
 #ifdef Q_OS_WIN
@@ -69,10 +70,33 @@ QDir FlowSyncHook::installableHookDir()
 #endif
 }
 
-bool FlowSyncHook::install(const QDir &fromDir, const QDir &toDir)
+bool FlowSyncHook::install(const QDir &fromDir, QDir toDir)
 {
-    qWarning() << __FUNCTION__ << "not implemented yet";
-    return false;
+    // Backup the existing DLL.
+    const QString backupFileName = QString::fromLatin1("Qt5Network.dll.%1")
+        .arg(QDateTime::currentDateTime().toString(QLatin1String("yyyyMMddHHmmss")));
+    qDebug() << "backing up"
+         << QDir::toNativeSeparators(toDir.filePath(QLatin1String("Qt5Network.dll")))
+         << "to" << QDir::toNativeSeparators(toDir.filePath(backupFileName));
+    if (!toDir.rename(QLatin1String("Qt5Network.dll"), backupFileName)) {
+        qWarning() << "failed to backup "
+            << QDir::toNativeSeparators(toDir.filePath(QLatin1String("Qt5Network.dll")))
+            << "to" << QDir::toNativeSeparators(toDir.filePath(backupFileName));
+        return false;
+    }
+
+    // Copy our hook DLL into place.
+    qDebug()
+        << "copying" << QDir::toNativeSeparators(fromDir.filePath(QLatin1String("Qt5Network.dll")))
+        << "to" << QDir::toNativeSeparators(toDir.filePath(QLatin1String("Qt5Network.dll")));
+    if (!QFile::copy(fromDir.filePath(QLatin1String("Qt5Network.dll")),
+                     toDir.filePath(QLatin1String("Qt5Network.dll")))) {
+        qWarning() << "failed to copy"
+            << QDir::toNativeSeparators(fromDir.filePath(QLatin1String("Qt5Network.dll")))
+            << "to" << QDir::toNativeSeparators(toDir.filePath(QLatin1String("Qt5Network.dll")));
+        return false;
+    }
+    return true;
 }
 
 int FlowSyncHook::getVersion(const QDir &dir)
