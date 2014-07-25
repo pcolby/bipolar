@@ -17,34 +17,21 @@
     along with Bipolar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef __MAIN_WINDOW_H__
-#define __MAIN_WINDOW_H__
+#ifndef __FLOWSYNC_HOOK_H__
+#define __FLOWSYNC_HOOK_H__
 
-#include <QDateTime>
-#include <QMainWindow>
+#include <QDir>
 
-class QTextEdit;
-
-class MainWindow : public QMainWindow {
-Q_OBJECT
+class FlowSyncHook {
 
 public:
-    MainWindow(QWidget *parent=0, Qt::WindowFlags flags=0);
 
-    void logMessage(QtMsgType type, const QMessageLogContext &context,
-                    const QString &message,
-                    const QDateTime &time = QDateTime::currentDateTime());
+    static QDir flowSyncDir();
 
-protected:
-    virtual void closeEvent(QCloseEvent *event);
+    static bool install(const QDir dir = flowSyncDir());
 
-protected slots:
-    void checkHook();
-    void convertAll();
-
-private:
-    QTextEdit *log;
+    static bool isInstalled(const QDir dir = flowSyncDir());
 
 };
 
-#endif // __MAIN_WINDOW_H__
+#endif // __FLOWSYNC_HOOK_H__

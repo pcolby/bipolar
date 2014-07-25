@@ -19,9 +19,12 @@
 
 #include "mainwindow.h"
 
+#include "os/flowsynchook.h"
+
 #include <QApplication>
 #include <QDebug>
 #include <QDir>
+#include <QMessageBox>
 #include <QSettings>
 #include <QStandardPaths>
 #include <QTextEdit>
@@ -48,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(par
     else setGeometry(40,40,800,550); // Default to 800x550, at position (40,40).
 
     // Lazy, UI-less, once-off mode for v0.1.
-    QTimer::singleShot(0, this, SLOT(convertAll()));
+    QTimer::singleShot(0, this, SLOT(checkHook()));
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {
@@ -72,6 +75,28 @@ void MainWindow::logMessage(QtMsgType type, const QMessageLogContext &context,
         }
         log->append(tr("%1 %2 %3").arg(time.toString()).arg(level).arg(message));
     }
+}
+
+void MainWindow::checkHook()
+{
+    const QDir flowSyncDir = FlowSyncHook::flowSyncDir();
+    if (!flowSyncDir.exists()) {
+        QMessageBox::information(this, tr(""),
+            tr("Unable to check if the Bipolar hook has been installed,\n"
+               "because the Polar FlowSync application could not be located."));
+    } else {
+        if ((!FlowSyncHook::isInstalled(flowSyncDir)) &&
+            (QMessageBox::question(this, tr(""),
+                tr("The Bipolar hook does not appear to be installed.\n"
+                   "Would you like to install it now?"),
+                QMessageBox::Yes|QMessageBox::No, QMessageBox::No) == QMessageBox::Yes
+            ) && (!FlowSyncHook::install(flowSyncDir))) {
+            QMessageBox::warning(this, tr(""),
+                tr("Failed to install Bipolar hook into Polar FlowSync.\n"
+                   "See log for details."));
+        }
+    }
+    QTimer::singleShot(0, this, SLOT(convertAll()));
 }
 
 void MainWindow::convertAll()

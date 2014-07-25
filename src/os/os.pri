@@ -2,8 +2,8 @@ DEPENDPATH += src/os
 VPATH += $$PWD
 
 win32 {
-  HEADERS += fileversioninfo.h
-  SOURCES += fileversioninfo.cpp
+  HEADERS += fileversioninfo.h   flowsynchook.h
+  SOURCES += fileversioninfo.cpp flowsynchook.cpp
   LIBS += -lversion
   RC_FILE=qrc/Bipolar.rc
 }
