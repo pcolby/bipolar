@@ -30,7 +30,7 @@ public:
 
     static bool install(const QDir dir = flowSyncDir());
 
-    static bool isInstalled(const QDir dir = flowSyncDir());
+    static int installedVersion(const QDir dir = flowSyncDir());
 
 };
 

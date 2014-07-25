@@ -67,19 +67,28 @@ bool FlowSyncHook::install(const QDir dir)
     return false;
 }
 
-bool FlowSyncHook::isInstalled(const QDir dir)
+int FlowSyncHook::installedVersion(const QDir dir)
 {
     const QString dll = dir.absoluteFilePath(QLatin1String("Qt5Network.dll"));
-    qDebug() << "checking" << dll;
 
     const FileVersionInfo info(dll);
     if (!info.isValid()) {
         qWarning() << "unabled to read version information for" << dll;
-        return false;
+        return -1;
     }
 
-    qDebug() << info.fileVersion();
-    qDebug() << info.fileInfo(QLatin1String("ProductName"));
-    qDebug() << info.fileInfo(QLatin1String("LegalCopyright"));
-    return false;
+    const QString internalName = info.fileInfo(QLatin1String("InternalName"));
+    qDebug() << "checking hook" << dll << internalName;
+    if (!internalName.startsWith(QLatin1String("Bipolar Hook"))) {
+        return -2; // Qt5Network.dll is not our hooked version.
+    }
+
+    const QStringList parts = internalName.split(QLatin1Char(' '), QString::SkipEmptyParts);
+    if (parts.length() < 3) {
+        qWarning() << "invalid internal version" << parts;
+        return -3;
+    } else if (parts.length() > 3) {
+        qWarning() << "ignoring trailing version information" << parts.mid(3);
+    }
+    return parts.at(2).toInt();
 }

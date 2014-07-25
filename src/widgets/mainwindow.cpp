@@ -32,6 +32,8 @@
 
 #include "polar/v2/trainingsession.h"
 
+#define EXPECTED_HOOK_VERSION 1
+
 #define SETTINGS_GEOMETRY QLatin1String("geometry")
 
 MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) : QMainWindow(parent, flags) {
@@ -85,10 +87,23 @@ void MainWindow::checkHook()
             tr("Unable to check if the Bipolar hook has been installed,\n"
                "because the Polar FlowSync application could not be located."));
     } else {
-        if ((!FlowSyncHook::isInstalled(flowSyncDir)) &&
-            (QMessageBox::question(this, tr(""),
-                tr("The Bipolar hook does not appear to be installed.\n"
-                   "Would you like to install it now?"),
+        const int installedVersion = FlowSyncHook::installedVersion(flowSyncDir);
+
+        QString message;
+        if (installedVersion <= 0) {
+            message = tr("The Bipolar hook does not appear to be installed.\n"
+                         "Would you like to install it now?");
+        } else if (installedVersion < EXPECTED_HOOK_VERSION) {
+            message = tr("This version of Bipolar includes a newer FlowSync hook.\n"
+                         "Would you like to install it now?");
+        } else if (installedVersion > EXPECTED_HOOK_VERSION) {
+            qWarning() << "the installed flowsync hook version" << installedVersion
+                       << "is more recent than this version if Bipolar expects"
+                       << EXPECTED_HOOK_VERSION;
+        }
+
+        if ((!message.isEmpty()) &&
+            (QMessageBox::question(this, tr(""), message,
                 QMessageBox::Yes|QMessageBox::No, QMessageBox::No) == QMessageBox::Yes
             ) && (!FlowSyncHook::install(flowSyncDir))) {
             QMessageBox::warning(this, tr(""),
