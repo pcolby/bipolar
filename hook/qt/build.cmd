@@ -52,12 +52,18 @@ if not exist "%SRC_DIR%" (
   )
 )
 
-:: Apply our hook patch.
+:: Apply our hook and build patches.
 if not exist "%SRC_DIR%\qtbase\src\network\access\qnetworkaccessmanager.ori" (
   copy "%SRC_DIR%\qtbase\src\network\access\qnetworkaccessmanager.cpp"^
        "%SRC_DIR%\qtbase\src\network\access\qnetworkaccessmanager.ori"
 )
+if not exist "%SRC_DIR%\qtbase\qmake\generators\win32\winmakefile.ori" (
+  copy "%SRC_DIR%\qtbase\qmake\generators\win32\winmakefile.cpp"^
+       "%SRC_DIR%\qtbase\qmake\generators\win32\winmakefile.ori"
+)
 "%PATCH%" -Ni qnetworkaccessmanager.patch
+if errorlevel 1 pause
+"%PATCH%" -Ni winmakefile.patch
 if errorlevel 1 pause
 
 :: Create the build directory, if not already.
