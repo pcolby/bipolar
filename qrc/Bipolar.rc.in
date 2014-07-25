@@ -21,10 +21,13 @@ BEGIN
         BEGIN
             VALUE "Comments", "https://github.com/pcolby/bipolar\0"
             VALUE "CompanyName", "Paul Colby\0"
-            VALUE "FileDescription", "Bipolar Executable\0"
+            VALUE "FileDescription", "Bipolar application\0"
+            VALUE "FileVersion", "0.1.0.0\0"
+            VALUE "InternalName", "Bipolar\0"
             VALUE "LegalCopyright", "2014 Paul Colby\0"
+            VALUE "OriginalFilename", "Bipolar.exe"
             VALUE "ProductName", "Bipolar\0"
-            VALUE "ProductVersion", "0.1.0"
+            VALUE "ProductVersion", "0.1.0.0"
         END
     END
     BLOCK "VarFileInfo"
