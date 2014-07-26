@@ -21,8 +21,9 @@ The release plans is roughly as follows:
 Note, while the current (0.1.0) release includes a lot of behind-the-scenes code
 for parsing training session data and exporting to GPX and TCX, the GUI has
 been intentionally left ultra-bare at this stage. This, of course, is to allow
-people (like myself) to begin capturing and expoorting data as soon as possible,
-while the GUI bells and whistles can follow later (slated for release 0.3.0).
+people (like myself) to begin capturing and exporting data as soon as possible,
+while the GUI bells and whistles can wait for a later release (currently planned
+for 0.3.0).
 
 ## Contact
 
