@@ -8,10 +8,11 @@ Features:
 Features:
 - Mac OS support?
 
-### 0.1.0 (_unreleased_)
+### 0.1.0 (2014-07-26)
 Features:
-- both GPX and TCX export?
-- headless mode only?
+- export to both GPX and TCX file formats.
+- Windows installer, including installation of the Polar FlowSync hook.
+- absolute minimum UI.
 
 ### 0.0.2 (2014-07-18)
 Bugs:
