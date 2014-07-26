@@ -53,8 +53,6 @@ Section "application"
     File "${VCRDIR}\msvcp120.dll"
     File "${VCRDIR}\msvcr120.dll"
     File /r "qtlibs\*"
-    SetOutPath $INSTDIR\hook
-    File "..\..\hook\qt\build\qtbase\lib\Qt5Network.dll"
     WriteRegStr HKCU "Software\Software\Paul Colby\Bipolar" "" $INSTDIR
     WriteUninstaller $INSTDIR\Uninstall.exe
     # The various shortcuts.
@@ -65,7 +63,7 @@ Section "application"
         CreateShortCut "$DESKTOP\Bipolar.lnk" "$INSTDIR\Bipolar.exe"
     !insertmacro MUI_STARTMENU_WRITE_END
     # Windows' add/remove programs information.
-    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Bipolar" "DisplayName" "Bipolar 0.1.0.0"
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Bipolar" "DisplayName" "Bipolar"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Bipolar" "DisplayIcon" "$\"$INSTDIR\Bipolar.exe$\",0"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Bipolar" "DisplayVersion" "0.1.0.0"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Bipolar" "Publisher" "Paul Colby"
@@ -76,7 +74,39 @@ Section "application"
     WriteRegDword HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Bipolar" "NoRepair" 1
 SectionEnd
 
+Section "hook"
+    SetOutPath $INSTDIR\hook
+    File "..\..\hook\qt\build\qtbase\lib\Qt5Network.dll"
+    push $0
+    retry:
+    ClearErrors
+    ExecWait '"$INSTDIR\Bipolar.exe" -install-hook' $0
+    ${If} ${Errors}
+        MessageBox MB_ABORTRETRYIGNORE \
+            "The Polar FlowSync hook could not be installed.$\n$\nPlease ensure Polar FlowSync is not running before trying again." \
+            /SD IDIGNORE IDRETRY retry IDIGNORE ignore
+            Abort    
+    ${Else}
+        DetailPrint "Bipolar returned exit code $0 while installing hook"
+        ${If} $0 == 0
+            DetailPrint "Hook installed successfully."
+        ${Else}
+            MessageBox MB_ABORTRETRYIGNORE \
+                "The Polar FlowSync hook could not be installed.$\n$\nPlease ensure Polar FlowSync is not running before trying again." \
+                /SD IDIGNORE IDRETRY retry IDIGNORE ignore
+                Abort    
+        ${EndIf}
+    ${EndIf}
+    ignore:
+    pop $0
+SectionEnd
+
 # Sections to uninstall.
+
+Section "un.hook"
+    RMDir /r $INSTDIR\hook
+    # @todo Reinstate the original DLL too.
+SectionEnd
 
 Section "un.application"
     DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Bipolar"
@@ -95,7 +125,6 @@ Section "un.application"
     Delete $INSTDIR\qt_*.qm
     Delete $INSTDIR\Uninstall.exe
     RMDir /r $INSTDIR\accessible
-    RMDir /r $INSTDIR\hook
     RMDir /r $INSTDIR\iconengines
     RMDir /r $INSTDIR\imageformats
     RMDir /r $INSTDIR\platforms
