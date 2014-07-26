@@ -19,10 +19,12 @@
 
 #include "mainwindow.h"
 #include "os/fileversioninfo.h"
+#include "os/flowsynchook.h"
 
 #include <QApplication>
 #include <QDebug>
 #include <QErrorMessage>
+#include <QMessageBox>
 #include <QTranslator>
 
 // Note, these values are used by the QSettings default constructor,
@@ -61,6 +63,32 @@ int main(int argc, char *argv[]) {
     QTranslator translator;
     if (translator.load(QLocale::system().name(),app.applicationDirPath()+QLatin1String("/../i18n")))
         app.installTranslator(&translator);
+
+    // Install the hook now, if requested via the command line.
+    if (app.arguments().contains(QLatin1Literal("-install-hook"))) {
+        const QDir fromDir = FlowSyncHook::installableHookDir();
+        const QDir toDir = FlowSyncHook::flowSyncDir();
+        if (!fromDir.exists(QLatin1String("Qt5Network.dll"))) {
+            QMessageBox::warning(NULL, app.tr(""),
+                app.tr("Installable hook not found."));
+            return 1;
+        }
+        if (!toDir.exists(QLatin1String("Qt5Network.dll"))) {
+            QMessageBox::warning(NULL, app.tr(""),
+                app.tr("Failed to locate Polar FlowSync installation."));
+            return 2;
+        }
+        const int fromVersion = FlowSyncHook::getVersion(fromDir);
+        const int toVersion = FlowSyncHook::getVersion(toDir);
+        if (fromVersion > toVersion) {
+            if (!FlowSyncHook::install(fromDir, toDir)) {
+                QMessageBox::warning(NULL, app.tr(""),
+                    app.tr("Failed to install hook DLL."));
+                return 3;
+            }
+        }
+        return 0;
+    }
 
     // Instantiate the main window.
     mainWindow = new MainWindow;
