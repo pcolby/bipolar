@@ -28,6 +28,7 @@
 #include <QFileInfo>
 
 #ifdef Q_OS_WIN
+#include "os/fileversioninfo.h"
 #include <QtZlib/zlib.h>
 #else
 #include <zlib.h>
@@ -911,9 +912,19 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                 .appendChild(doc.createTextNode(versionParts.at(2)));
             version.appendChild(doc.createElement(QLatin1String("BuildMinor")))
                 .appendChild(doc.createTextNode(versionParts.at(3)));
-            /// @todo May be: Internal, Alpha, Beta, Release.
+            QString buildType = QLatin1String("Release");
+            #ifdef Q_OS_WIN
+            {
+                FileVersionInfo versionInfo;
+                const QString specialBuild = versionInfo.fileInfo(QLatin1String("SpecialBuild"),
+                    FileVersionInfo::US_ENGLISH, FileVersionInfo::ANSI_LATIN_1);
+                if (!specialBuild.isEmpty()) {
+                    buildType = specialBuild;
+                }
+            }
+            #endif
             build.appendChild(doc.createElement(QLatin1String("Type")))
-                .appendChild(doc.createTextNode(QLatin1String("Internal")));
+                .appendChild(doc.createTextNode(buildType));
             build.appendChild(doc.createElement(QLatin1String("Time")))
                 .appendChild(doc.createTextNode(
                     buildTime.isEmpty() ? QString::fromLatin1(__DATE__" "__TIME__) : buildTime));

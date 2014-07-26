@@ -111,6 +111,15 @@ bool FileVersionInfo::isValid() const
     return (versionInfo != NULL);
 }
 
+QString FileVersionInfo::fileInfo(const QString &name) const
+{
+    QString result = fileInfo(name, US_ENGLISH, UTF_16);
+    if (result.isEmpty()) {
+        result = fileInfo(name, US_ENGLISH, ANSI_LATIN_1);
+    }
+    return result;
+}
+
 QString FileVersionInfo::fileInfo(const QString &name, const quint16 lang,
                                   const quint16 &codepage) const
 {

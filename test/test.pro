@@ -53,6 +53,8 @@ unix {
     QMAKE_DISTCLEAN += -r coverage_html
 }
 
+INCLUDEPATH += ../src
 include(polar/v2/v2.pri)
 include(protobuf/protobuf.pri)
 include(tools/tools.pri)
+include(../src/os/os.pri)

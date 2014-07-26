@@ -44,8 +44,9 @@ public:
 
     bool isValid() const;
 
-    QString fileInfo(const QString &name, const quint16 lang = US_ENGLISH,
-                     const quint16 &codepage = UTF_16) const;
+    QString fileInfo(const QString &name) const;
+    QString fileInfo(const QString &name, const quint16 lang,
+                     const quint16 &codepage) const;
 
     QList<quint16> fileVersion() const;
     QStringList fileVersionStrings() const;

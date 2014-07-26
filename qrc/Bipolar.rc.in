@@ -1,3 +1,5 @@
+// See http://msdn.microsoft.com/en-us/library/windows/desktop/aa381058.aspx
+
 IDI_ICON1 ICON DISCARDABLE "..\\qrc\\icon\\bipolar.ico"
 
 1 TYPELIB "Bipolar.rc"
@@ -25,9 +27,13 @@ BEGIN
             VALUE "FileVersion", "0.1.0.0\0"
             VALUE "InternalName", "Bipolar\0"
             VALUE "LegalCopyright", "2014 Paul Colby\0"
-            VALUE "OriginalFilename", "Bipolar.exe"
+            VALUE "OriginalFilename", "Bipolar.exe\0"
+          //VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "Bipolar\0"
-            VALUE "ProductVersion", "0.1.0.0"
+            VALUE "ProductVersion", "0.1.0.0\0"
+            // Because we embed the following value in TCX files, if set,
+            // it should be one of: Internal, Alpha, Beta, or Release.
+            VALUE "SpecialBuild", "Alpha\0"
         END
     END
     BLOCK "VarFileInfo"
