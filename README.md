@@ -25,8 +25,29 @@ people (like myself) to begin capturing and exporting data as soon as possible,
 while the GUI bells and whistles can wait for a later release (currently planned
 for 0.3.0).
 
+## How it Works
+
+When Bipolar is installed, it places a custom DLL into the Polar FlowSync
+application directory. This custom DLL then writes all training session data it
+sees to binary files (in `%LOCALAPPDATA%\Polar\PolarFlowSync\export`).
+
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+The installer also installs a separate Bipolar application, which, when exectued
+looks through all training session data exported above, and, for any that don't
+already have corresponding `*.gpx` and/or `*.tcx` files, converts those sessions
+to GPX and/or TCX accordingly.
+
+For the current release (0.1.0) this Bipolar application is extremely simple in
+user interface - it basically just displays a log of its activity.  The UI will
+be made more featureful sometime in the future, but it already does the most
+valuable thing - converting all training sessions to GPX and TCX.
+
 ## Contact
 
 The [Bipolar Google Group](http://groups.google.com/d/forum/bipolar-app) is
 available for general discussion, questions, comments, suggestions,
 announcements etc.  Email bipolar-app@googlegroups.com to subscribe.
+
+Of course, the [issue tracker](https://github.com/pcolby/bipolar/issues?state=open)
+is also available for reporting issues, asking questions, making comments and
+suggestions, etc.
