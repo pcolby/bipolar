@@ -31,7 +31,6 @@ When Bipolar is installed, it places a custom DLL into the Polar FlowSync
 application directory. This custom DLL then writes all training session data it
 sees to binary files (in `%LOCALAPPDATA%\Polar\PolarFlowSync\export`).
 
-12345678901234567890123456789012345678901234567890123456789012345678901234567890
 The installer also installs a separate Bipolar application, which, when exectued
 looks through all training session data exported above, and, for any that don't
 already have corresponding `*.gpx` and/or `*.tcx` files, converts those sessions
