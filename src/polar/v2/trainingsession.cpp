@@ -774,10 +774,11 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
         Q_ASSERT(!activity.parentNode().isNull());
 
         /// @todo Sport must be one of: Running, Biking, Other.
+        const QVariantMap create = map.value(QLatin1String("create")).toMap();
+        qDebug() << "sport" << first(firstMap(create.value(QLatin1String("sport"))).value(QLatin1String("value"))).toULongLong();
         activity.setAttribute(QLatin1String("Sport"), QLatin1String("Other"));
 
         // Get the starting time.
-        const QVariantMap create = map.value(QLatin1String("create")).toMap();
         const QDateTime startTime = getDateTime(firstMap(create.value(QLatin1String("start"))));
         activity.appendChild(doc.createElement(QLatin1String("Id")))
             .appendChild(doc.createTextNode(startTime.toString(Qt::ISODate)));
