@@ -8,6 +8,10 @@ Features:
 Features:
 - Mac OS support?
 
+### 0.1.1 (_unreleased_)
+Features:
+- sport type autodetection ([#12](../../issues/12))
+
 ### 0.1.0 (2014-07-26)
 Features:
 - export to both GPX and TCX file formats.

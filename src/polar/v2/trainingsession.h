@@ -59,6 +59,8 @@ protected:
     QVariantMap parsedExercises;
     QVariantMap parsedSession;
 
+    static QString getTcxSport(const quint64 &polarSportValue);
+
     static bool isGzipped(const QByteArray &data);
     static bool isGzipped(QIODevice &data);
 

@@ -50,6 +50,91 @@ TrainingSession::TrainingSession(const QString &baseName)
 
 }
 
+/// @see https://github.com/pcolby/bipolar/wiki/Polar-Sport-Types
+QString TrainingSession::getTcxSport(const quint64 &polarSportValue)
+{
+    #define TCX_RUNNING QLatin1String("Running")
+    #define TCX_BIKING  QLatin1String("Biking")
+    #define TCX_OTHER   QLatin1String("Other")
+    static QMap<quint64, QString> map;
+    if (map.isEmpty()) {
+        map.insert( 1, TCX_RUNNING); // Running
+        map.insert( 2, TCX_BIKING);  // Cycling
+        map.insert( 3, TCX_OTHER);   // Walking
+        map.insert( 4, TCX_OTHER);   // Jogging
+        map.insert( 5, TCX_BIKING);  // Mountain biking
+        map.insert( 6, TCX_OTHER);   // Skiing
+        map.insert( 7, TCX_OTHER);   // Downhill skiing
+        map.insert( 8, TCX_OTHER);   // Rowing
+        map.insert( 9, TCX_OTHER);   // Nordic walking
+        map.insert(10, TCX_OTHER);   // Skating
+        map.insert(11, TCX_OTHER);   // Hiking
+        map.insert(12, TCX_OTHER);   // Tennis
+        map.insert(13, TCX_OTHER);   // Squash
+        map.insert(14, TCX_OTHER);   // Badminton
+        map.insert(15, TCX_OTHER);   // Strength training
+        map.insert(16, TCX_OTHER);   // Other outdoor
+        map.insert(17, TCX_RUNNING); // Treadmill running
+        map.insert(18, TCX_BIKING);  // Indoor cycling
+        map.insert(19, TCX_RUNNING); // Road running
+        map.insert(20, TCX_OTHER);   // Circuit training
+        map.insert(22, TCX_OTHER);   // Snowboarding
+        map.insert(23, TCX_OTHER);   // Swimming
+        map.insert(24, TCX_OTHER);   // Freestyle XC skiing
+        map.insert(25, TCX_OTHER);   // Classic XC skiing
+        map.insert(27, TCX_RUNNING); // Trail running
+        map.insert(28, TCX_OTHER);   // Ice skating
+        map.insert(29, TCX_OTHER);   // Inline skating
+        map.insert(30, TCX_OTHER);   // Roller skating
+        map.insert(32, TCX_OTHER);   // Group exercise
+        map.insert(33, TCX_OTHER);   // Yoga
+        map.insert(34, TCX_OTHER);   // Crossfit
+        map.insert(35, TCX_OTHER);   // Golf
+        map.insert(36, TCX_RUNNING); // Track&field running
+        map.insert(38, TCX_BIKING);  // Road biking
+        map.insert(39, TCX_OTHER);   // Soccer
+        map.insert(40, TCX_OTHER);   // Cricket
+        map.insert(41, TCX_OTHER);   // Basketball
+        map.insert(42, TCX_OTHER);   // Baseball
+        map.insert(43, TCX_OTHER);   // Rugby
+        map.insert(44, TCX_OTHER);   // Field hockey
+        map.insert(45, TCX_OTHER);   // Volleyball
+        map.insert(46, TCX_OTHER);   // Ice hockey
+        map.insert(47, TCX_OTHER);   // Football
+        map.insert(48, TCX_OTHER);   // Handball
+        map.insert(49, TCX_OTHER);   // Beach volley
+        map.insert(50, TCX_OTHER);   // Futsal
+        map.insert(51, TCX_OTHER);   // Floorball
+        map.insert(52, TCX_OTHER);   // Dancing
+        map.insert(53, TCX_OTHER);   // Trotting
+        map.insert(54, TCX_OTHER);   // Riding
+        map.insert(55, TCX_OTHER);   // Cross-trainer
+        map.insert(56, TCX_OTHER);   // Fitness martial arts
+        map.insert(57, TCX_OTHER);   // Functional training
+        map.insert(58, TCX_OTHER);   // Bootcamp
+        map.insert(59, TCX_OTHER);   // Freestyle roller skiing
+        map.insert(60, TCX_OTHER);   // Classic roller skiing
+        map.insert(61, TCX_OTHER);   // Aerobics
+        map.insert(62, TCX_OTHER);   // Aqua fitness
+        map.insert(63, TCX_OTHER);   // Step workout
+        map.insert(64, TCX_OTHER);   // Body&amp;Mind
+        map.insert(65, TCX_OTHER);   // Pilates
+        map.insert(66, TCX_OTHER);   // Stretching
+        map.insert(67, TCX_OTHER);   // Fitness dancing
+        map.insert(68, TCX_OTHER);   // Triathlon
+        map.insert(69, TCX_OTHER);   // Duathlon
+        map.insert(70, TCX_OTHER);   // Off-road triathlon
+        map.insert(71, TCX_OTHER);   // Off-road duathlon
+        map.insert(82, TCX_OTHER);   // Multisport
+        map.insert(83, TCX_OTHER);   // Other indoor
+    }
+    QMap<quint64, QString>::ConstIterator iter = map.constFind(polarSportValue);
+    if (iter == map.constEnd()) {
+        qWarning() << "unknown polar sport value" << polarSportValue;
+    }
+    return (iter == map.constEnd()) ? TCX_OTHER : iter.value();
+}
+
 bool TrainingSession::isGzipped(const QByteArray &data)
 {
     return data.startsWith("\x1f\x8b");
@@ -773,10 +858,12 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
         }
         Q_ASSERT(!activity.parentNode().isNull());
 
-        /// @todo Sport must be one of: Running, Biking, Other.
         const QVariantMap create = map.value(QLatin1String("create")).toMap();
-        qDebug() << "sport" << first(firstMap(create.value(QLatin1String("sport"))).value(QLatin1String("value"))).toULongLong();
-        activity.setAttribute(QLatin1String("Sport"), QLatin1String("Other"));
+
+        // Get the sport type.
+        activity.setAttribute(QLatin1String("Sport"),
+            getTcxSport(first(firstMap(create.value(QLatin1String("sport")))
+                .value(QLatin1String("value"))).toULongLong()));
 
         // Get the starting time.
         const QDateTime startTime = getDateTime(firstMap(create.value(QLatin1String("start"))));
