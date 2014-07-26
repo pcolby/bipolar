@@ -14,16 +14,15 @@ eventually.
 The release plans is roughly as follows:
 
 - [x] 0.0.1 Working hook DLL for extracting data from Polar FlowSync on Windows.
-- [ ] 0.1.0 Export to both GPX and TCX, in a headless mode (no GUI yet).
+- [x] 0.1.0 Export to both GPX and TCX, in a headless mode (no GUI yet).
 - [ ] 0.2.0 Mac OS support (both hook library, and headless app).
 - [ ] 0.3.0 Basic GUI.
 
-The initial hook for Windows has already been released, and is working quite
-well.  All of the protobuf data parsing working (Polar uses Google Protocol
-Buffers).  Rudimentary GPX and TCX conversion is also working.
-
-Things remaining for the next release (0.1.0) are:
-- a Windows installer (which is already well under way).
+Note, while the current (0.1.0) release includes a lot of behind-the-scenes code
+for parsing training session data and exporting to GPX and TCX, the GUI has
+been intentionally left ultra-bare at this stage. This, of course, is to allow
+people (like myself) to begin capturing and uploading data as soon as possible,
+while the GUI bells and whistles can follow later (slated for release 0.3.0).
 
 ## Contact
 
