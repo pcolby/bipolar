@@ -18,7 +18,7 @@ The release plans is roughly as follows:
 - [ ] 0.2.0 Mac OS support (both hook library, and headless app).
 - [ ] 0.3.0 Basic GUI.
 
-Note, while the current (0.1.0) release includes a lot of behind-the-scenes code
+Note, while the current (0.1.x) release includes a lot of behind-the-scenes code
 for parsing training session data and exporting to GPX and TCX, the GUI has
 been intentionally left ultra-bare at this stage. This, of course, is to allow
 people (like myself) to begin capturing and exporting data as soon as possible,
@@ -36,7 +36,7 @@ looks through all training session data exported above, and, for any that don't
 already have corresponding `*.gpx` and/or `*.tcx` files, converts those sessions
 to GPX and/or TCX accordingly.
 
-For the current release (0.1.0) this Bipolar application is extremely simple in
+For the current release (0.1.x) this Bipolar application is extremely simple in
 user interface - it basically just displays a log of its activity.  The UI will
 be made more featureful sometime in the future, but it already does the most
 valuable thing - converting all training sessions to GPX and TCX.
