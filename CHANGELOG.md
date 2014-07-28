@@ -8,6 +8,10 @@ Features:
 Features:
 - Mac OS support?
 
+### 0.1.2 (_unreleased_)
+Features:
+- upgrade to Qt 5.3.1 (from 5.3.0)
+
 ### 0.1.1 (2014-07-27)
 Features:
 - sport type autodetection ([#12](../../issues/12))
