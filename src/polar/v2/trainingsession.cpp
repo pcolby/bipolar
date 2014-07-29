@@ -871,11 +871,12 @@ QStringList TrainingSession::toHRM()
         }
 
         /// @todo ActiveLimit
-        /// @todo MaxHR
-        /// @todo RestHR
-        /// @todo StartDelay
-        /// @todo VO2max
-        /// @todo Weight
+
+        /// @todo MaxHR - not included in training session data.
+        /// @todo RestHR - not included in training session data.
+        /// @todo StartDelay - RR data not yet supported (by this app).
+        /// @todo VO2max - not included in training session data.
+        /// @todo Weight - not included in training session data.
 
         /// @todo [Coach]
 
