@@ -915,7 +915,11 @@ QStringList TrainingSession::toHRM()
             stream << hrLimitsKeys.at(index) << "\r\n"; // Zone 1 to n upper limits.
         }
         if (!hrLimits.empty()) {
+            #if (QT_VERSION >= QT_VERSION_CHECK(5, 2, 0))
             stream << hrLimits.first() << "\r\n"; // Zone n lower limit.
+            #else
+            stream << hrLimits.constBegin().value() << "\r\n";
+            #endif
         }
         for (int index = hrLimits.size() + (hrLimits.isEmpty() ? 1 : 0); index < 11; ++index) {
             stream << "0\r\n"; // "0" entries for a total of 11 HRZones entries.
