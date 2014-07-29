@@ -465,7 +465,8 @@ void TestTrainingSession::toHRM()
     polar::v2::TrainingSession session(baseName);
     QVERIFY(session.parse(baseName));
     QString hrm;
-    QVERIFY(session.toHRM(QTextStream(&hrm)));
+    QTextStream stream(&hrm);
+    QVERIFY(session.toHRM(stream));
 
     // Write the result to a text file for optional post-mortem investigations.
 #ifdef Q_OS_WIN
