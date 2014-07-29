@@ -798,6 +798,62 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
     return doc;
 }
 
+/// @see http://www.polar.com/files/Polar_HRM_file%20format.pdf
+bool TrainingSession::toHRM(QTextStream &stream)
+{
+    // [Params]
+    stream << "[Params]\r\n"
+              "Version=107\r\n"
+              "Monitor=0\r\n";
+    /// @todo Mode
+    /// @todo SMode
+    /// @todo Date
+    /// @todo StartTime
+    /// @todo Length
+    /// @todo Interval
+    /// @todo Upper1
+    /// @todo Lower1
+    /// @todo Upper2
+    /// @todo Lower2
+    /// @todo Upper3
+    /// @todo Lower3
+    /// @todo Timer1
+    /// @todo Timer2
+    /// @todo Timer3
+    /// @todo ActiveLimit
+    /// @todo MaxHR
+    /// @todo RestHR
+    /// @todo StartDelay
+    /// @todo VO2max
+    /// @todo Weight
+
+    /// @todo [Coach]
+
+    /// @todo [Note]
+
+    /// @todo [HRZones]
+
+    /// @todo [SwapTimes]
+
+    /// @todo [HRCCModeCh]
+
+    /// @todo [IntTimes]
+
+    /// @todo [IntNotes]
+
+    /// @todo [ExtraData]
+    /// @todo Add Power when supported by V800.
+
+    /// @todo [Summary-123]
+
+    /// @todo [Summary-TH]
+
+    /// @todo [Trip]
+
+    /// @todo [HRData]
+    return true;
+}
+
 /**
  * @brief TrainingSession::toTCX
  *

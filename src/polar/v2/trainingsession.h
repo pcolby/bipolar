@@ -25,6 +25,7 @@
 #include <QIODevice>
 #include <QMap>
 #include <QStringList>
+#include <QTextStream>
 #include <QVariant>
 
 class TestTrainingSession;
@@ -79,6 +80,9 @@ protected:
     QVariantMap parseZones(const QString &fileName) const;
 
     QDomDocument toGPX(const QDateTime &creationTime = QDateTime::currentDateTimeUtc()) const;
+
+    bool toHRM(QTextStream &stream);
+
     QDomDocument toTCX(const QString &buildTime = QString()) const;
 
     QByteArray unzip(const QByteArray &data,

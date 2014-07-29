@@ -47,6 +47,9 @@ private slots:
     void toGPX_data();
     void toGPX();
 
+    void toHRM_data();
+    void toHRM();
+
     void toTCX_data();
     void toTCX();
 

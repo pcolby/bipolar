@@ -408,7 +408,7 @@ void TestTrainingSession::toGPX()
     QDomDocument gpx = session.toGPX(QDateTime::fromString(
         QLatin1String("2014-07-15T12:34:56Z"), Qt::ISODate));
 
-    // Write the result to an XML for optional post-mortem investigations.
+    // Write the result to an XML file for optional post-mortem investigations.
 #ifdef Q_OS_WIN
     QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.gpx")
 #else
@@ -433,6 +433,54 @@ void TestTrainingSession::toGPX()
     QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
     QXmlSchemaValidator validator(schema);
     QVERIFY(validator.validate(gpx.toByteArray()));
+}
+
+void TestTrainingSession::toHRM_data()
+{
+    QTest::addColumn<QString>("baseName");
+    QTest::addColumn<QByteArray>("expected");
+
+    #define LOAD_TEST_DATA(name) { \
+        QFile expectedFile(QFINDTESTDATA("testdata/" name ".hrm")); \
+        QString baseName(expectedFile.fileName()); \
+        baseName.chop(4); \
+        expectedFile.open(QIODevice::ReadOnly); \
+        QTest::newRow(name) << baseName << expectedFile.readAll(); \
+    }
+
+    LOAD_TEST_DATA("training-sessions-1");
+    LOAD_TEST_DATA("training-sessions-2");
+    LOAD_TEST_DATA("training-sessions-3");
+    LOAD_TEST_DATA("training-sessions-19946380");
+
+    #undef LOAD_TEST_DATA
+}
+
+void TestTrainingSession::toHRM()
+{
+    QFETCH(QString, baseName);
+    QFETCH(QByteArray, expected);
+
+    // Parse the route (protobuf) message.
+    polar::v2::TrainingSession session(baseName);
+    QVERIFY(session.parse(baseName));
+    QString hrm;
+    QVERIFY(session.toHRM(QTextStream(&hrm)));
+
+    // Write the result to a text file for optional post-mortem investigations.
+#ifdef Q_OS_WIN
+    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.hrm")
+#else
+    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.hrm")
+#endif
+        .arg(QString::fromLatin1(QTest::currentDataTag())));
+    if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+        file.write(hrm.toLatin1());
+    }
+    file.close();
+
+    // Compare the generated HRM string against the expected result.
+    QCOMPARE(hrm, QString::fromLatin1(expected));
 }
 
 void TestTrainingSession::toTCX_data()
@@ -466,7 +514,7 @@ void TestTrainingSession::toTCX()
     QVERIFY(session.parse(baseName));
     QDomDocument tcx = session.toTCX(QLatin1String("Jul 17 2014 21:02:38"));
 
-    // Write the result to an XML for optional post-mortem investigations.
+    // Write the result to an XML file for optional post-mortem investigations.
 #ifdef Q_OS_WIN
     QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.tcx")
 #else
