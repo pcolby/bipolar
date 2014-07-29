@@ -804,9 +804,18 @@ bool TrainingSession::toHRM(QTextStream &stream)
     // [Params]
     stream << "[Params]\r\n"
               "Version=107\r\n"
-              "Monitor=0\r\n";
-    /// @todo Mode
-    /// @todo SMode
+              "Monitor=0\r\n"
+              "SMode="
+                    "?" // a) Speed
+                    "?" // b) Cadence
+                    "?" // c) Altitude
+                    "0" // d) Power (not supported by V800 yet).
+                    "0" // e) Power Left Right Ballance (not supported by V800 yet).
+                    "0" // f) Power Pedalling Index (not supported by V800 yet).
+                    "?" // g) HR/CC data.
+                    "0" // h) US / Euro unit (always metric).
+                    "0" // i) Air pressure (not available).
+                    "\r\n";
     /// @todo Date
     /// @todo StartTime
     /// @todo Length
