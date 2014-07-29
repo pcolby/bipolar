@@ -564,7 +564,7 @@ QVariantMap TrainingSession::parseStatistics(QIODevice &data) const
     ADD_FIELD_INFO("1/3",  "maximum",        Uint32);
     ADD_FIELD_INFO("2",    "speed",          EmbeddedMessage);
     ADD_FIELD_INFO("2/1",  "average",        Float);
-    ADD_FIELD_INFO("2/1",  "maximum",        Float);
+    ADD_FIELD_INFO("2/2",  "maximum",        Float);
     ADD_FIELD_INFO("3",    "cadence",        EmbeddedMessage);
     ADD_FIELD_INFO("3/1",  "average",        Uint32);
     ADD_FIELD_INFO("3/1",  "maximum",        Uint32);
@@ -879,6 +879,7 @@ QStringList TrainingSession::toHRM()
         const QVariantMap map = exercise.toMap();
         const QVariantMap create = map.value(CREATE).toMap();
         const QVariantMap samples = map.value(SAMPLES).toMap();
+        const QVariantMap stats = map.value(STATISTICS).toMap();
         const QVariantMap zones = map.value(ZONES).toMap();
 
         QString hrmData;
@@ -1011,10 +1012,10 @@ QStringList TrainingSession::toHRM()
         stream << qRound(first(create.value(QLatin1String("distance"))).toFloat()/100.0) << "\r\n";
         stream << qRound(first(create.value(QLatin1String("ascent"))).toFloat()) << "\r\n";
         stream << qRound(getDuration(firstMap(create.value(QLatin1String("duration"))))/1000.0) << "\r\n";
-        stream << "?\r\n"; // Average altitude (meters)  **Need to parse *-stats files**
-        stream << "?\r\n"; // Maximum altitude (meters)  **Need to parse *-stats files**
-        stream << "?\r\n"; // Average Speed (km/h * 128) **Need to parse *-stats files**
-        stream << "?\r\n"; // Maximum Speed (km/h * 128) **Need to parse *-stats files**
+        stream << qRound(first(firstMap(stats.value(QLatin1String("altitude"))).value(QLatin1String("average"))).toFloat()) << "\r\n";
+        stream << qRound(first(firstMap(stats.value(QLatin1String("altitude"))).value(QLatin1String("maximum"))).toFloat()) << "\r\n";
+        stream << qRound(first(firstMap(stats.value(QLatin1String("speed"))).value(QLatin1String("average"))).toFloat() * 128.0) << "\r\n";
+        stream << qRound(first(firstMap(stats.value(QLatin1String("speed"))).value(QLatin1String("maximum"))).toFloat() * 128.0) << "\r\n";
         stream << "0\r\n"; // Odometer value at the end of an exercise.
 
         /// @todo [HRData]
