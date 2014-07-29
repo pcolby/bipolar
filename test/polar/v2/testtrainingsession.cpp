@@ -438,20 +438,25 @@ void TestTrainingSession::toGPX()
 void TestTrainingSession::toHRM_data()
 {
     QTest::addColumn<QString>("baseName");
-    QTest::addColumn<QByteArray>("expected");
+    QTest::addColumn<QStringList>("expected");
 
-    #define LOAD_TEST_DATA(name) { \
-        QFile expectedFile(QFINDTESTDATA("testdata/" name ".hrm")); \
-        QString baseName(expectedFile.fileName()); \
-        baseName.chop(4); \
-        expectedFile.open(QIODevice::ReadOnly); \
-        QTest::newRow(name) << baseName << expectedFile.readAll(); \
+    #define LOAD_TEST_DATA(name, expectedCount) { \
+        QString baseName; \
+        QStringList expected; \
+        for (int count = 0; count < expectedCount; ++count) { \
+            QFile expectedFile(QFINDTESTDATA( \
+                QString::fromLatin1("testdata/" name ".%1.hrm").arg(count))); \
+            expectedFile.open(QIODevice::ReadOnly); \
+            expected.append(QString::fromLatin1(expectedFile.readAll())); \
+            if (baseName.isEmpty()) { \
+                baseName = expectedFile.fileName(); \
+                baseName.chop(6); \
+            } \
+        } \
+        QTest::newRow(name) << baseName << expected; \
     }
 
-    LOAD_TEST_DATA("training-sessions-1");
-    LOAD_TEST_DATA("training-sessions-2");
-    LOAD_TEST_DATA("training-sessions-3");
-    LOAD_TEST_DATA("training-sessions-19946380");
+    LOAD_TEST_DATA("training-sessions-19946380", 1);
 
     #undef LOAD_TEST_DATA
 }
@@ -459,29 +464,28 @@ void TestTrainingSession::toHRM_data()
 void TestTrainingSession::toHRM()
 {
     QFETCH(QString, baseName);
-    QFETCH(QByteArray, expected);
+    QFETCH(QStringList, expected);
 
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession session(baseName);
     QVERIFY(session.parse(baseName));
-    QString hrm;
-    QTextStream stream(&hrm);
-    QVERIFY(session.toHRM(stream));
+    const QStringList hrm = session.toHRM();
 
     // Write the result to a text file for optional post-mortem investigations.
+    for (int index = 0; index < hrm.length(); ++index) {
 #ifdef Q_OS_WIN
-    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.hrm")
+        QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.%2.hrm")
 #else
-    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.hrm")
+        QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.%2.hrm")
 #endif
-        .arg(QString::fromLatin1(QTest::currentDataTag())));
-    if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
-        file.write(hrm.toLatin1());
+            .arg(QString::fromLatin1(QTest::currentDataTag())).arg(index));
+        if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+            file.write(hrm.at(index).toLatin1());
+        }
     }
-    file.close();
 
     // Compare the generated HRM string against the expected result.
-    QCOMPARE(hrm, QString::fromLatin1(expected));
+    QCOMPARE(hrm, expected);
 }
 
 void TestTrainingSession::toTCX_data()

@@ -799,68 +799,84 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
 }
 
 /// @see http://www.polar.com/files/Polar_HRM_file%20format.pdf
-bool TrainingSession::toHRM(QTextStream &stream)
+QStringList TrainingSession::toHRM()
 {
-    // [Params]
-    stream << "[Params]\r\n"
-              "Version=107\r\n"
-              "Monitor=0\r\n"
-              "SMode="
-                    "?" // a) Speed
-                    "?" // b) Cadence
-                    "?" // c) Altitude
-                    "0" // d) Power (not supported by V800 yet).
-                    "0" // e) Power Left Right Ballance (not supported by V800 yet).
-                    "0" // f) Power Pedalling Index (not supported by V800 yet).
-                    "?" // g) HR/CC data.
-                    "0" // h) US / Euro unit (always metric).
-                    "0" // i) Air pressure (not available).
-                    "\r\n";
-    /// @todo Date
-    /// @todo StartTime
-    /// @todo Length
-    /// @todo Interval
-    /// @todo Upper1
-    /// @todo Lower1
-    /// @todo Upper2
-    /// @todo Lower2
-    /// @todo Upper3
-    /// @todo Lower3
-    /// @todo Timer1
-    /// @todo Timer2
-    /// @todo Timer3
-    /// @todo ActiveLimit
-    /// @todo MaxHR
-    /// @todo RestHR
-    /// @todo StartDelay
-    /// @todo VO2max
-    /// @todo Weight
+    QStringList hrmList;
 
-    /// @todo [Coach]
+    foreach (const QVariant &exercise, parsedExercises) {
+        const QVariantMap map = exercise.toMap();
+        if (!map.contains(QLatin1String("create"))) {
+            qWarning() << "skipping exercise with no 'create' request data";
+            continue;
+        }
 
-    /// @todo [Note]
+        QString hrmData;
+        QTextStream stream(&hrmData);
 
-    /// @todo [HRZones]
+        // [Params]
+        stream <<
+            "[Params]\r\n"
+            "Version=107\r\n"
+            "Monitor=0\r\n"
+            "SMode="
+                "?" // a) Speed
+                "?" // b) Cadence
+                "?" // c) Altitude
+                "0" // d) Power (not supported by V800 yet).
+                "0" // e) Power Left Right Ballance (not supported by V800 yet).
+                "0" // f) Power Pedalling Index (not supported by V800 yet).
+                "?" // g) HR/CC data.
+                "0" // h) US / Euro unit (always metric).
+                "0" // i) Air pressure (not available).
+                "\r\n";
+        /// @todo Date
+        /// @todo StartTime
+        /// @todo Length
+        /// @todo Interval
+        /// @todo Upper1
+        /// @todo Lower1
+        /// @todo Upper2
+        /// @todo Lower2
+        /// @todo Upper3
+        /// @todo Lower3
+        /// @todo Timer1
+        /// @todo Timer2
+        /// @todo Timer3
+        /// @todo ActiveLimit
+        /// @todo MaxHR
+        /// @todo RestHR
+        /// @todo StartDelay
+        /// @todo VO2max
+        /// @todo Weight
 
-    /// @todo [SwapTimes]
+        /// @todo [Coach]
 
-    /// @todo [HRCCModeCh]
+        /// @todo [Note]
 
-    /// @todo [IntTimes]
+        /// @todo [HRZones]
 
-    /// @todo [IntNotes]
+        /// @todo [SwapTimes]
 
-    /// @todo [ExtraData]
-    /// @todo Add Power when supported by V800.
+        /// @todo [HRCCModeCh]
 
-    /// @todo [Summary-123]
+        /// @todo [IntTimes]
 
-    /// @todo [Summary-TH]
+        /// @todo [IntNotes]
 
-    /// @todo [Trip]
+        /// @todo [ExtraData]
+        /// @todo Add Power when supported by V800.
 
-    /// @todo [HRData]
-    return true;
+        /// @todo [Summary-123]
+
+        /// @todo [Summary-TH]
+
+        /// @todo [Trip]
+
+        /// @todo [HRData]
+
+        hrmList.append(hrmData);
+    }
+    return hrmList;
 }
 
 /**

@@ -25,7 +25,6 @@
 #include <QIODevice>
 #include <QMap>
 #include <QStringList>
-#include <QTextStream>
 #include <QVariant>
 
 class TestTrainingSession;
@@ -81,7 +80,7 @@ protected:
 
     QDomDocument toGPX(const QDateTime &creationTime = QDateTime::currentDateTimeUtc()) const;
 
-    bool toHRM(QTextStream &stream);
+    QStringList toHRM();
 
     QDomDocument toTCX(const QString &buildTime = QString()) const;
 

@@ -1,5 +1,5 @@
 *.result.gpx
-*.result.hrm
+*.result.*.hrm
 *.result.json
 *.result.tcx
 *.result.var
