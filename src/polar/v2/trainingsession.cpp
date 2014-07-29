@@ -878,9 +878,20 @@ QStringList TrainingSession::toHRM()
         /// @todo VO2max - not included in training session data.
         /// @todo Weight - not included in training session data.
 
-        /// @todo [Coach]
+        // [Coach] "Coach parameters are only from Polar Coach HR monitor."
 
-        /// @todo [Note]
+        // [Note]
+        stream << "\r\n[Note]\r\n";
+        if (parsedSession.contains(QLatin1String("note"))) {
+            stream << first(firstMap(parsedSession.value(
+                QLatin1String("note"))).value(QLatin1String("text"))).toString();
+        } else if (parsedSession.contains(QLatin1String("session-name"))) {
+            stream << first(firstMap(parsedSession.value(
+                QLatin1String("session-name"))).value(QLatin1String("text"))).toString();
+        } else {
+            stream << "Exported by " << QApplication::applicationName()
+                   << " " << QApplication::applicationVersion();
+        }
 
         /// @todo [HRZones]
 
