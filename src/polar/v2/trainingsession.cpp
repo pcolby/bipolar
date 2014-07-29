@@ -910,13 +910,13 @@ QStringList TrainingSession::toHRM()
         stream << (haveCadence  ? '0' : '1'); // b) Cadence
         stream << (haveAltitude ? '0' : '1'); // c) Altitude
         stream <<
-                "0" // d) Power (not supported by V800 yet).
-                "0" // e) Power Left Right Ballance (not supported by V800 yet).
-                "0" // f) Power Pedalling Index (not supported by V800 yet).
-                "0" // g) HR/CC data (available only with Polar XTrainer Plus).
-                "0" // h) US / Euro unit (always metric).
-                "0" // i) Air pressure (not available).
-                "\r\n";
+            "0" // d) Power (not supported by V800 yet).
+            "0" // e) Power Left Right Ballance (not supported by V800 yet).
+            "0" // f) Power Pedalling Index (not supported by V800 yet).
+            "0" // g) HR/CC data (available only with Polar XTrainer Plus).
+            "0" // h) US / Euro unit (always metric).
+            "0" // i) Air pressure (not available).
+            "\r\n";
 
         const QDateTime startTime = getDateTime(firstMap(create.value(QLatin1String("start"))));
         stream << "Date="      << startTime.toString(QLatin1String("yyyyMMdd")) << "\r\n";
