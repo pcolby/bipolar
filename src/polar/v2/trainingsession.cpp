@@ -775,6 +775,17 @@ bool sensorOffline(const QVariantList &list, const int index)
     return false; // Sensor was not offline.
 }
 
+bool haveAnySamples(const QVariantMap &samples, const QString &type)
+{
+    const int size = samples.value(type).toList().length();
+    for (int index = 0; index < size; ++index) {
+        if (!sensorOffline(samples.value(type + QLatin1String("-offline")).toList(), index)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 /// @see http://www.topografix.com/GPX/1/1/gpx.xsd
 QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
 {
@@ -882,6 +893,10 @@ QStringList TrainingSession::toHRM()
         const QVariantMap stats = map.value(STATISTICS).toMap();
         const QVariantMap zones = map.value(ZONES).toMap();
 
+        const bool haveAltitude = haveAnySamples(samples, QLatin1String("speed"));
+        const bool haveCadence  = haveAnySamples(samples, QLatin1String("cadence"));
+        const bool haveSpeed    = haveAnySamples(samples, QLatin1String("altitude"));
+
         QString hrmData;
         QTextStream stream(&hrmData);
 
@@ -890,10 +905,11 @@ QStringList TrainingSession::toHRM()
             "[Params]\r\n"
             "Version=107\r\n"
             "Monitor=0\r\n"
-            "SMode="
-                "?" // a) Speed
-                "?" // b) Cadence
-                "?" // c) Altitude
+            "SMode=";
+        stream << (haveSpeed    ? '0' : '1'); // a) Speed
+        stream << (haveCadence  ? '0' : '1'); // b) Cadence
+        stream << (haveAltitude ? '0' : '1'); // c) Altitude
+        stream <<
                 "0" // d) Power (not supported by V800 yet).
                 "0" // e) Power Left Right Ballance (not supported by V800 yet).
                 "0" // f) Power Pedalling Index (not supported by V800 yet).
@@ -1022,16 +1038,23 @@ QStringList TrainingSession::toHRM()
         stream << "\r\n[HRData]\r\n";
         const QVariantList altitude    = samples.value(QLatin1String("altitude")).toList();
         const QVariantList cadence     = samples.value(QLatin1String("cadence")).toList();
-        const QVariantList distance    = samples.value(QLatin1String("distance")).toList();
         const QVariantList heartrate   = samples.value(QLatin1String("heartrate")).toList();
         const QVariantList speed       = samples.value(QLatin1String("speed")).toList();
-        const QVariantList temperature = samples.value(QLatin1String("temperature")).toList();
         for (int index = 0; index < heartrate.length(); ++index) {
-            /// @todo Use flags to enable / disable some of these fields.
-            stream <<        qSetFieldWidth(3) << ((index < heartrate.length()) ? heartrate.at(index).toUInt()             : (uint)0);
-            stream << ' ' << qSetFieldWidth(3) << ((index < speed.length())     ? qRound(speed.at(index).toFloat() * 10.0) : ( int)0);
-            stream << ' ' << qSetFieldWidth(3) << ((index < cadence.length())   ? cadence.at(index).toUInt()               : (uint)0);
-            stream << ' ' << qSetFieldWidth(4) << ((index < altitude.length())  ? qRound(altitude.at(index).toFloat())     : ( int)0);
+            stream << qSetFieldWidth(3) << ((index < heartrate.length())
+                ? heartrate.at(index).toUInt() : (uint)0);
+            if (haveSpeed) {
+                stream << ' ' << qSetFieldWidth(3) << ((index < speed.length())
+                    ? qRound(speed.at(index).toFloat() * 10.0) : ( int)0);
+            }
+            if (haveCadence) {
+                stream << ' ' << qSetFieldWidth(3) << ((index < cadence.length())
+                    ? cadence.at(index).toUInt() : (uint)0);
+            }
+            if (haveAltitude) {
+                stream << ' ' << qSetFieldWidth(4) << ((index < altitude.length())
+                    ? qRound(altitude.at(index).toFloat()) : ( int)0);
+            }
             // Power (Watts) - not yet supported by Polar.
             // Power Balance and Pedalling Index - not yet supported by Polar.
             // Air pressure - not available in protobuf data.
