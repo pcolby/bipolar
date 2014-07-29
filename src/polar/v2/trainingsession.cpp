@@ -1020,6 +1020,23 @@ QStringList TrainingSession::toHRM()
 
         /// @todo [HRData]
         stream << "\r\n[HRData]\r\n";
+        const QVariantList altitude    = samples.value(QLatin1String("altitude")).toList();
+        const QVariantList cadence     = samples.value(QLatin1String("cadence")).toList();
+        const QVariantList distance    = samples.value(QLatin1String("distance")).toList();
+        const QVariantList heartrate   = samples.value(QLatin1String("heartrate")).toList();
+        const QVariantList speed       = samples.value(QLatin1String("speed")).toList();
+        const QVariantList temperature = samples.value(QLatin1String("temperature")).toList();
+        for (int index = 0; index < heartrate.length(); ++index) {
+            stream <<        qSetFieldWidth(3) << ((index < heartrate.length()) ? heartrate.at(index).toUInt()             : (uint)0);
+            stream << ' ' << qSetFieldWidth(3) << ((index < speed.length())     ? qRound(speed.at(index).toFloat() * 10.0) : ( int)0);
+            stream << ' ' << qSetFieldWidth(3) << ((index < cadence.length())   ? cadence.at(index).toUInt()               : (uint)0);
+            stream << ' ' << qSetFieldWidth(4) << ((index < altitude.length())  ? qRound(altitude.at(index).toFloat())     : ( int)0);
+            // Power (Watts) - not yet supported by Polar.
+            // Power Balance and Pedalling Index - not yet supported by Polar.
+            // Air pressure - not available in protobuf data.
+            stream << qSetFieldWidth(0) << "\r\n";
+        }
+
         // HR (BPM)
         // Speed (0.1km/h)
         // Cadence (rpm)
