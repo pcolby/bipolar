@@ -850,9 +850,11 @@ QStringList TrainingSession::toHRM()
         stream << "Interval="  << (getDuration(firstMap(samples.value(QLatin1String("record-interval"))))/1000) << "\r\n";
 
         QVariantList hrZones = zones.value(QLatin1String("heartrate")).toList();
-        // Since HRM v1.4 only supports 3 target zones, try to reduce the list down to three by removing zones with 0 duration.
+        // Since HRM v1.4 only supports 3 target zones, try to reduce the
+        // list down to three by removing zones with 0 duration.
         for (int index = 0; (hrZones.length() > 3) && (index < hrZones.length()); ++index) {
-            const quint64 duration = getDuration(firstMap(hrZones.at(index).toMap().value(QLatin1String("duration"))));
+            const quint64 duration = getDuration(firstMap(hrZones.at(index)
+                .toMap().value(QLatin1String("duration"))));
             if (duration == 0) {
                 hrZones.removeAt(index--);
             }
@@ -863,7 +865,8 @@ QStringList TrainingSession::toHRM()
             stream << "Lower" << (index+1) << "=" << first(limits.value(QLatin1String("low"))).toUInt() << "\r\n";
         }
         for (int index = 0; (index < 3) && (index < hrZones.length()); ++index) {
-            const quint64 duration = getDuration(firstMap(hrZones.at(hrZones.length() - 3 + index).toMap().value(QLatin1String("duration"))));
+            const quint64 duration = getDuration(firstMap(hrZones
+                .at(hrZones.length() - 3 + index).toMap().value(QLatin1String("duration"))));
             const QString hhmm = QString::fromLatin1("%1:%2")
                 .arg(duration/1000/60, 2, 10, QLatin1Char('0'))
                 .arg(duration/1000%60, 2, 10, QLatin1Char('0'));
@@ -892,8 +895,31 @@ QStringList TrainingSession::toHRM()
             stream << "Exported by " << QApplication::applicationName()
                    << " " << QApplication::applicationVersion();
         }
+        stream << "\r\n";
 
-        /// @todo [HRZones]
+        // [HRZones]
+        QMap<quint32, quint32> hrLimits; // Map hr-high to hr-low.
+        foreach (const QVariant &entry, zones.value(QLatin1String("heartrate")).toList()) {
+            const QVariantMap limits = firstMap(entry.toMap().value(QLatin1String("limits")));
+            hrLimits.insert(
+                first(limits.value(QLatin1String("high"))).toUInt(),
+                first(limits.value(QLatin1String("low"))).toUInt());
+        }
+        // Limit to maximum of 10 HRZones (as implied by HRM v1.4).
+        if (hrLimits.size() > 10) {
+            hrZones.erase(hrZones.begin());
+        }
+        stream << "\r\n[HRZones]\r\n";
+        const QList<quint32> hrLimitsKeys = hrLimits.keys();
+        for (int index = hrLimitsKeys.length() - 2; index >=0; --index) {
+            stream << hrLimitsKeys.at(index) << "\r\n"; // Zone 1 to n upper limits.
+        }
+        if (!hrLimits.empty()) {
+            stream << hrLimits.first() << "\r\n"; // Zone n lower limit.
+        }
+        for (int index = hrLimits.size() + (hrLimits.isEmpty() ? 1 : 0); index < 11; ++index) {
+            stream << "0\r\n"; // "0" entries for a total of 11 HRZones entries.
+        }
 
         /// @todo [SwapTimes]
 
