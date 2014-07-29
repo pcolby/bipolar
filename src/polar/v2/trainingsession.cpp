@@ -679,6 +679,20 @@ quint64 getDuration(const QVariantMap &map)
        + ((milliseconds == map.constEnd()) ? 0 : first(milliseconds.value()).toULongLong());
 }
 
+QString getDurationString(const QVariantMap &map)
+{
+    const QVariantMap::const_iterator
+        hours        = map.constFind(QLatin1String("hours")),
+        minutes      = map.constFind(QLatin1String("minutes")),
+        seconds      = map.constFind(QLatin1String("seconds")),
+        milliseconds = map.constFind(QLatin1String("milliseconds"));
+    return QString::fromLatin1("%1:%2:%3.%4")
+            .arg(first(  hours.value()).toUInt(), 2, 10, QLatin1Char('0'))
+            .arg(first(minutes.value()).toUInt(), 2, 10, QLatin1Char('0'))
+            .arg(first(seconds.value()).toUInt(), 2, 10, QLatin1Char('0'))
+            .arg(first(milliseconds.value()).toUInt(), 3, 10, QLatin1Char('0'));
+}
+
 QString getFileName(const QString &file)
 {
     const QFileInfo info(file);
@@ -831,9 +845,8 @@ QStringList TrainingSession::toHRM()
         const QDateTime startTime = getDateTime(firstMap(create.value(QLatin1String("start"))));
         stream << "Date="      << startTime.toString(QLatin1String("yyyyMMdd")) << "\r\n";
         stream << "StartTime=" << startTime.toString(QLatin1String("HH:mm:ss.zzz")) << "\r\n";
-        /// @todo Length
+        stream << "Length="    << getDurationString(firstMap(create.value(QLatin1String("duration")))) << "\r\n";
         stream << "Interval="  << (getDuration(firstMap(samples.value(QLatin1String("record-interval"))))/1000) << "\r\n";
-        /// @todo
         /// @todo Upper1
         /// @todo Lower1
         /// @todo Upper2
