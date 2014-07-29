@@ -1018,7 +1018,7 @@ QStringList TrainingSession::toHRM()
         ///       [IntTimes] above.
 
         /// @todo [Summary-123]
-        stream << "\r\n[Suummary-123]\r\n"; // WebSync includes 0's when empty.
+        stream << "\r\n[Summary-123]\r\n"; // WebSync includes 0's when empty.
 
         /// @todo [Summary-TH]
         stream << "\r\n[Summary-TH]\r\n"; // WebSync includes 0's when empty.
@@ -1036,10 +1036,10 @@ QStringList TrainingSession::toHRM()
 
         // [HRData]
         stream << "\r\n[HRData]\r\n";
-        const QVariantList altitude    = samples.value(QLatin1String("altitude")).toList();
-        const QVariantList cadence     = samples.value(QLatin1String("cadence")).toList();
-        const QVariantList heartrate   = samples.value(QLatin1String("heartrate")).toList();
-        const QVariantList speed       = samples.value(QLatin1String("speed")).toList();
+        const QVariantList altitude  = samples.value(QLatin1String("altitude")).toList();
+        const QVariantList cadence   = samples.value(QLatin1String("cadence")).toList();
+        const QVariantList heartrate = samples.value(QLatin1String("heartrate")).toList();
+        const QVariantList speed     = samples.value(QLatin1String("speed")).toList();
         for (int index = 0; index < heartrate.length(); ++index) {
             stream << qSetFieldWidth(3) << ((index < heartrate.length())
                 ? heartrate.at(index).toUInt() : (uint)0);
