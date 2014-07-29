@@ -805,11 +805,8 @@ QStringList TrainingSession::toHRM()
 
     foreach (const QVariant &exercise, parsedExercises) {
         const QVariantMap map = exercise.toMap();
-        if (!map.contains(QLatin1String("create"))) {
-            qWarning() << "skipping exercise with no 'create' request data";
-            continue;
-        }
-        const QVariantMap create = map.value(QLatin1String("create")).toMap();
+        const QVariantMap create = map.value(CREATE).toMap();
+        const QVariantMap samples = map.value(SAMPLES).toMap();
 
         QString hrmData;
         QTextStream stream(&hrmData);
@@ -832,10 +829,11 @@ QStringList TrainingSession::toHRM()
                 "\r\n";
 
         const QDateTime startTime = getDateTime(firstMap(create.value(QLatin1String("start"))));
-        stream << "Date="     << startTime.toString(QLatin1String("yyyyMMdd")) << "\r\n";
+        stream << "Date="      << startTime.toString(QLatin1String("yyyyMMdd")) << "\r\n";
         stream << "StartTime=" << startTime.toString(QLatin1String("HH:mm:ss.zzz")) << "\r\n";
         /// @todo Length
-        /// @todo Interval
+        stream << "Interval="  << (getDuration(firstMap(samples.value(QLatin1String("record-interval"))))/1000) << "\r\n";
+        /// @todo
         /// @todo Upper1
         /// @todo Lower1
         /// @todo Upper2
