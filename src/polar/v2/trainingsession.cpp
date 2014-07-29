@@ -948,18 +948,16 @@ QStringList TrainingSession::toHRM()
         /// @todo [Summary-TH]
         stream << "\r\n[Summary-TH]\r\n"; // WebSync includes 0's when empty.
 
-        /// @todo [Trip]
-        if (true) {
-            stream << "\r\n[Trip]\r\n";
-            // Distance (km*10 aka per 100m)
-            // Ascent (meters)
-            // Total time (seconds)
-            // Average altitude (meters)
-            // Maximum altitude (meters)
-            // Average Speed (km/h * 128).
-            // Maximum Speed (km/h * 128).
-            // Odometer at end (km).
-        }
+        // [Trip]
+        stream << "\r\n[Trip]\r\n";
+        stream << qRound(first(create.value(QLatin1String("distance"))).toFloat()/100.0) << "\r\n";
+        stream << qRound(first(create.value(QLatin1String("ascent"))).toFloat()) << "\r\n";
+        stream << qRound(getDuration(firstMap(create.value(QLatin1String("duration"))))/1000.0) << "\r\n";
+        stream << "?\r\n"; // Average altitude (meters)  **Need to parse *-stats files**
+        stream << "?\r\n"; // Maximum altitude (meters)  **Need to parse *-stats files**
+        stream << "?\r\n"; // Average Speed (km/h * 128) **Need to parse *-stats files**
+        stream << "?\r\n"; // Maximum Speed (km/h * 128) **Need to parse *-stats files**
+        stream << "0\r\n"; // Odometer value at the end of an exercise.
 
         /// @todo [HRData]
         stream << "\r\n[HRData]\r\n";
