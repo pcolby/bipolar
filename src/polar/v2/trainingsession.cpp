@@ -821,6 +821,7 @@ QStringList TrainingSession::toHRM()
         const QVariantMap map = exercise.toMap();
         const QVariantMap create = map.value(CREATE).toMap();
         const QVariantMap samples = map.value(SAMPLES).toMap();
+        const QVariantMap zones = map.value(ZONES).toMap();
 
         QString hrmData;
         QTextStream stream(&hrmData);
@@ -847,15 +848,21 @@ QStringList TrainingSession::toHRM()
         stream << "StartTime=" << startTime.toString(QLatin1String("HH:mm:ss.zzz")) << "\r\n";
         stream << "Length="    << getDurationString(firstMap(create.value(QLatin1String("duration")))) << "\r\n";
         stream << "Interval="  << (getDuration(firstMap(samples.value(QLatin1String("record-interval"))))/1000) << "\r\n";
-        /// @todo Upper1
-        /// @todo Lower1
-        /// @todo Upper2
-        /// @todo Lower2
-        /// @todo Upper3
-        /// @todo Lower3
-        /// @todo Timer1
-        /// @todo Timer2
-        /// @todo Timer3
+
+        const QVariantList hrZones = zones.value(QLatin1String("heartrate")).toList();
+        for (int index = 0; (index < 3) && (index < hrZones.length()); ++index) {
+            const QVariantMap limits = firstMap(hrZones.at(hrZones.length() - 3 + index).toMap().value(QLatin1String("limits")));
+            stream << "Upper" << (index+1) << "=" << first(limits.value(QLatin1String("high"))).toUInt() << "\r\n";
+            stream << "Lower" << (index+1) << "=" << first(limits.value(QLatin1String("low"))).toUInt() << "\r\n";
+        }
+        for (int index = 0; (index < 3) && (index < hrZones.length()); ++index) {
+            const quint64 duration = getDuration(firstMap(hrZones.at(hrZones.length() - 3 + index).toMap().value(QLatin1String("duration"))));
+            const QString hhmm = QString::fromLatin1("%1:%2")
+                .arg(duration/1000/60, 2, 10, QLatin1Char('0'))
+                .arg(duration/1000%60, 2, 10, QLatin1Char('0'));
+            stream << "Timer" << (index+1) << "=" << hhmm << "\r\n";
+        }
+
         /// @todo ActiveLimit
         /// @todo MaxHR
         /// @todo RestHR
