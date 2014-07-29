@@ -809,6 +809,7 @@ QStringList TrainingSession::toHRM()
             qWarning() << "skipping exercise with no 'create' request data";
             continue;
         }
+        const QVariantMap create = map.value(QLatin1String("create")).toMap();
 
         QString hrmData;
         QTextStream stream(&hrmData);
@@ -829,8 +830,10 @@ QStringList TrainingSession::toHRM()
                 "0" // h) US / Euro unit (always metric).
                 "0" // i) Air pressure (not available).
                 "\r\n";
-        /// @todo Date
-        /// @todo StartTime
+
+        const QDateTime startTime = getDateTime(firstMap(create.value(QLatin1String("start"))));
+        stream << "Date="     << startTime.toString(QLatin1String("yyyyMMdd")) << "\r\n";
+        stream << "StartTime=" << startTime.toString(QLatin1String("HH:mm:ss.zzz")) << "\r\n";
         /// @todo Length
         /// @todo Interval
         /// @todo Upper1
