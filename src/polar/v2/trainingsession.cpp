@@ -923,22 +923,49 @@ QStringList TrainingSession::toHRM()
 
         /// @todo [SwapTimes]
 
-        /// @todo [HRCCModeCh]
+        // [HRCCModeCh] Not applicable to V800 / Loop.
 
-        /// @todo [IntTimes]
+        // [IntTimes]
+        stream << "\r\n[IntTimes]\r\n"; // WebSync includes this even when empty.
+        /// @todo Need a canonical *-laps data file.
 
-        /// @todo [IntNotes]
+        // [IntNotes]
+        stream << "\r\n[IntNotes]\r\n"; // WebSync includes this even when empty.
+        /// @todo Add autolap type (eg distance / duration / location) note.
 
-        /// @todo [ExtraData]
-        /// @todo Add Power when supported by V800.
+        // [ExtraData]
+        /// @todo Can have up to 3 "extra" data series here, such as Lactate
+        ///       and Power. Maybe Temperature? These are then included in
+        ///       [IntTimes] above.
 
         /// @todo [Summary-123]
+        stream << "\r\n[Suummary-123]\r\n"; // WebSync includes 0's when empty.
 
         /// @todo [Summary-TH]
+        stream << "\r\n[Summary-TH]\r\n"; // WebSync includes 0's when empty.
 
         /// @todo [Trip]
+        if (true) {
+            stream << "\r\n[Trip]\r\n";
+            // Distance (km*10 aka per 100m)
+            // Ascent (meters)
+            // Total time (seconds)
+            // Average altitude (meters)
+            // Maximum altitude (meters)
+            // Average Speed (km/h * 128).
+            // Maximum Speed (km/h * 128).
+            // Odometer at end (km).
+        }
 
         /// @todo [HRData]
+        stream << "\r\n[HRData]\r\n";
+        // HR (BPM)
+        // Speed (0.1km/h)
+        // Cadence (rpm)
+        // Altitude (m)
+        // Power (watts)
+        // Power Balance & Pedalling Index
+        // Air pressure
 
         hrmList.append(hrmData);
     }
