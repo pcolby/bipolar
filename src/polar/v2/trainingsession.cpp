@@ -1018,7 +1018,7 @@ QStringList TrainingSession::toHRM()
         stream << qRound(first(firstMap(stats.value(QLatin1String("speed"))).value(QLatin1String("maximum"))).toFloat() * 128.0) << "\r\n";
         stream << "0\r\n"; // Odometer value at the end of an exercise.
 
-        /// @todo [HRData]
+        // [HRData]
         stream << "\r\n[HRData]\r\n";
         const QVariantList altitude    = samples.value(QLatin1String("altitude")).toList();
         const QVariantList cadence     = samples.value(QLatin1String("cadence")).toList();
@@ -1027,6 +1027,7 @@ QStringList TrainingSession::toHRM()
         const QVariantList speed       = samples.value(QLatin1String("speed")).toList();
         const QVariantList temperature = samples.value(QLatin1String("temperature")).toList();
         for (int index = 0; index < heartrate.length(); ++index) {
+            /// @todo Use flags to enable / disable some of these fields.
             stream <<        qSetFieldWidth(3) << ((index < heartrate.length()) ? heartrate.at(index).toUInt()             : (uint)0);
             stream << ' ' << qSetFieldWidth(3) << ((index < speed.length())     ? qRound(speed.at(index).toFloat() * 10.0) : ( int)0);
             stream << ' ' << qSetFieldWidth(3) << ((index < cadence.length())   ? cadence.at(index).toUInt()               : (uint)0);
@@ -1036,14 +1037,6 @@ QStringList TrainingSession::toHRM()
             // Air pressure - not available in protobuf data.
             stream << qSetFieldWidth(0) << "\r\n";
         }
-
-        // HR (BPM)
-        // Speed (0.1km/h)
-        // Cadence (rpm)
-        // Altitude (m)
-        // Power (watts)
-        // Power Balance & Pedalling Index
-        // Air pressure
 
         hrmList.append(hrmData);
     }
