@@ -35,11 +35,12 @@
 #endif
 
 // These constants match those used by Polar's V2 API.
-#define CREATE  QLatin1String("create")
-#define LAPS    QLatin1String("laps")
-#define ROUTE   QLatin1String("route")
-#define SAMPLES QLatin1String("samples")
-#define ZONES   QLatin1String("zones")
+#define CREATE     QLatin1String("create")
+#define LAPS       QLatin1String("laps")
+#define ROUTE      QLatin1String("route")
+#define SAMPLES    QLatin1String("samples")
+#define STATISTICS QLatin1String("statistics")
+#define ZONES      QLatin1String("zones")
 
 namespace polar {
 namespace v2 {
@@ -198,14 +199,14 @@ bool TrainingSession::parse(const QString &exerciseId, const QMap<QString, QStri
                 sources << fileNames.value(str); \
             } \
         }
-    PARSE_IF_CONTAINS(CREATE,  CreateExercise);
-    PARSE_IF_CONTAINS(LAPS,    Laps);
-  //PARSE_IF_CONTAINS(PHASES,  Phases);
-    PARSE_IF_CONTAINS(ROUTE,   Route);
-    PARSE_IF_CONTAINS(SAMPLES, Samples);
-  //PARSE_IF_CONTAINS(SENSORS, Sensors);
-  //PARSE_IF_CONTAINS(STATS,   Stats);
-    PARSE_IF_CONTAINS(ZONES,   Zones);
+    PARSE_IF_CONTAINS(CREATE,     CreateExercise);
+    PARSE_IF_CONTAINS(LAPS,       Laps);
+  //PARSE_IF_CONTAINS(PHASES,     Phases);
+    PARSE_IF_CONTAINS(ROUTE,      Route);
+    PARSE_IF_CONTAINS(SAMPLES,    Samples);
+  //PARSE_IF_CONTAINS(SENSORS,    Sensors);
+    PARSE_IF_CONTAINS(STATISTICS, Statistics);
+    PARSE_IF_CONTAINS(ZONES,      Zones);
     #undef PARSE_IF_CONTAINS
 
     if (!exercise.empty()) {
@@ -552,6 +553,63 @@ QVariantMap TrainingSession::parseSamples(const QString &fileName) const
         return QVariantMap();
     }
     return parseSamples(file);
+}
+
+QVariantMap TrainingSession::parseStatistics(QIODevice &data) const
+{
+    ProtoBuf::Message::FieldInfoMap fieldInfo;
+    ADD_FIELD_INFO("1",    "heartrate",      EmbeddedMessage);
+    ADD_FIELD_INFO("1/1",  "minimum",        Uint32);
+    ADD_FIELD_INFO("1/2",  "average",        Uint32);
+    ADD_FIELD_INFO("1/3",  "maximum",        Uint32);
+    ADD_FIELD_INFO("2",    "speed",          EmbeddedMessage);
+    ADD_FIELD_INFO("2/1",  "average",        Float);
+    ADD_FIELD_INFO("2/1",  "maximum",        Float);
+    ADD_FIELD_INFO("3",    "cadence",        EmbeddedMessage);
+    ADD_FIELD_INFO("3/1",  "average",        Uint32);
+    ADD_FIELD_INFO("3/1",  "maximum",        Uint32);
+    ADD_FIELD_INFO("4",    "altitude",       EmbeddedMessage);
+    ADD_FIELD_INFO("4/1",  "minimum",        Float);
+    ADD_FIELD_INFO("4/2",  "average",        Float);
+    ADD_FIELD_INFO("4/3",  "maximum",        Float);
+    ADD_FIELD_INFO("5",    "power",          EmbeddedMessage);
+    ADD_FIELD_INFO("5/1",  "average",        Uint32);
+    ADD_FIELD_INFO("5/1",  "maximum",        Uint32);
+    ADD_FIELD_INFO("6",    "lr_balance",     EmbeddedMessage);
+    ADD_FIELD_INFO("6/1",  "average",        Float);
+    ADD_FIELD_INFO("7",    "temperature",    EmbeddedMessage);
+    ADD_FIELD_INFO("7/1",  "minimum",        Float);
+    ADD_FIELD_INFO("7/2",  "average",        Float);
+    ADD_FIELD_INFO("7/3",  "maximum",        Float);
+    ADD_FIELD_INFO("8",    "activity",       EmbeddedMessage);
+    ADD_FIELD_INFO("8/1",  "average",        Float);
+    ADD_FIELD_INFO("9",    "stride",         EmbeddedMessage);
+    ADD_FIELD_INFO("9/1",  "average",        Uint32);
+    ADD_FIELD_INFO("9/1",  "maximum",        Uint32);
+    ADD_FIELD_INFO("10",   "include",        EmbeddedMessage);
+    ADD_FIELD_INFO("10/1", "average",        Float);
+    ADD_FIELD_INFO("10/1", "maximum",        Float);
+    ADD_FIELD_INFO("11",   "declince",       EmbeddedMessage);
+    ADD_FIELD_INFO("11/1", "average",        Float);
+    ADD_FIELD_INFO("11/1", "maximum",        Float);
+    ProtoBuf::Message parser(fieldInfo);
+
+    if (isGzipped(data)) {
+        QByteArray array = unzip(data.readAll());
+        return parser.parse(array);
+    } else {
+        return parser.parse(data);
+    }
+}
+
+QVariantMap TrainingSession::parseStatistics(const QString &fileName) const
+{
+    QFile file(fileName);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qWarning() << "failed to open stats file" << fileName;
+        return QVariantMap();
+    }
+    return parseStatistics(file);
 }
 
 QVariantMap TrainingSession::parseZones(QIODevice &data) const
@@ -1015,7 +1073,7 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
 
     foreach (const QVariant &exercise, parsedExercises) {
         const QVariantMap map = exercise.toMap();
-        if (!map.contains(QLatin1String("create"))) {
+        if (!map.contains(CREATE)) {
             qWarning() << "skipping exercise with no 'create' request data";
             continue;
         }
@@ -1034,7 +1092,7 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
         }
         Q_ASSERT(!activity.parentNode().isNull());
 
-        const QVariantMap create = map.value(QLatin1String("create")).toMap();
+        const QVariantMap create = map.value(CREATE).toMap();
 
         // Get the sport type.
         activity.setAttribute(QLatin1String("Sport"),

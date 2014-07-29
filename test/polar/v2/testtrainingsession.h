@@ -41,6 +41,9 @@ private slots:
     void parseSamples_data();
     void parseSamples();
 
+    void parseStatistics_data();
+    void parseStatistics();
+
     void parseZones_data();
     void parseZones();
 
