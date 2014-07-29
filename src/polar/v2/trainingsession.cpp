@@ -913,7 +913,7 @@ QStringList TrainingSession::toHRM()
                 "0" // d) Power (not supported by V800 yet).
                 "0" // e) Power Left Right Ballance (not supported by V800 yet).
                 "0" // f) Power Pedalling Index (not supported by V800 yet).
-                "?" // g) HR/CC data.
+                "0" // g) HR/CC data (available only with Polar XTrainer Plus).
                 "0" // h) US / Euro unit (always metric).
                 "0" // i) Air pressure (not available).
                 "\r\n";
