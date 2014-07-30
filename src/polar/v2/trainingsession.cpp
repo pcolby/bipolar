@@ -568,8 +568,8 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("10/2/2/3", "seconds",             Uint32);
     ADD_FIELD_INFO("10/2/2/4", "milliseconds",        Uint32);
     ADD_FIELD_INFO("10/3",     "source",              Enumerator);
-    ADD_FIELD_INFO("11",       "11",                  EmbeddedMessage); // ???
-    ADD_FIELD_INFO("11/1",     "11/1",                Uint32);          // ???
+    ADD_FIELD_INFO("11",       "training-background", EmbeddedMessage);
+    ADD_FIELD_INFO("11/1",     "value",               Enumerator);
     ADD_FIELD_INFO("11/2",     "modified",            EmbeddedMessage);
     ADD_FIELD_INFO("11/2/1",   "date",                EmbeddedMessage);
     ADD_FIELD_INFO("11/2/1/1", "year",                Uint32);
