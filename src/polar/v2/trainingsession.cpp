@@ -543,7 +543,6 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("8/2/2/4",  "milliseconds",        Uint32);
     ADD_FIELD_INFO("8/3",      "source",              Enumerator);
     ADD_FIELD_INFO("9",        "anaerobic-threshold", EmbeddedMessage);
-    ADD_FIELD_INFO("9/3",      "source",              Enumerator);
     ADD_FIELD_INFO("9/1",      "value",               Uint32);
     ADD_FIELD_INFO("9/2",      "modified",            EmbeddedMessage);
     ADD_FIELD_INFO("9/2/1",    "date",                EmbeddedMessage);
@@ -555,6 +554,7 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("9/2/2/2",  "minute",              Uint32);
     ADD_FIELD_INFO("9/2/2/3",  "seconds",             Uint32);
     ADD_FIELD_INFO("9/2/2/4",  "milliseconds",        Uint32);
+    ADD_FIELD_INFO("9/3",      "source",              Enumerator);
     ADD_FIELD_INFO("10",       "vo2max",              EmbeddedMessage);
     ADD_FIELD_INFO("10/1",     "value",               Uint32);
     ADD_FIELD_INFO("10/2",     "modified",            EmbeddedMessage);
@@ -1095,10 +1095,11 @@ QStringList TrainingSession::toHRM()
             "\r\n";
 
         const QDateTime startTime = getDateTime(firstMap(create.value(QLatin1String("start"))));
+        const quint64 recordInterval = getDuration(firstMap(samples.value(QLatin1String("record-interval"))));
         stream << "Date="      << startTime.toString(QLatin1String("yyyyMMdd")) << "\r\n";
         stream << "StartTime=" << startTime.toString(QLatin1String("HH:mm:ss.zzz")) << "\r\n";
         stream << "Length="    << getDurationString(firstMap(create.value(QLatin1String("duration")))) << "\r\n";
-        stream << "Interval="  << (getDuration(firstMap(samples.value(QLatin1String("record-interval"))))/1000) << "\r\n";
+        stream << "Interval="  << qRound(recordInterval/1000.0f) << "\r\n";
 
         QVariantList hrZones = zones.value(QLatin1String("heartrate")).toList();
         // Since HRM v1.4 only supports 3 target zones, try to reduce the
@@ -1125,12 +1126,15 @@ QStringList TrainingSession::toHRM()
         }
 
         /// @todo ActiveLimit
+        const quint32 hrMax = first(firstMap(parsedPhysicalInformation.value(
+            QLatin1String("maximum-heartrate"))).value(QLatin1String("value"))).toUInt();
+        const quint32 hrRest = first(firstMap(parsedPhysicalInformation.value(
+            QLatin1String("resting-heartrate"))).value(QLatin1String("value"))).toUInt();
+        stream << "MaxHR="  << hrMax  << "\r\n";
+        stream << "RestHR=" << hrRest << "\r\n";
 
-        stream << "MaxHR=" << first(firstMap(parsedPhysicalInformation.value(
-            QLatin1String("maximum-heartrate"))).value(QLatin1String("value"))).toUInt() << "\r\n";
-        stream << "RestHR=" << first(firstMap(parsedPhysicalInformation.value(
-            QLatin1String("resting-heartrate"))).value(QLatin1String("value"))).toUInt() << "\r\n";
         /// @todo StartDelay - RR data not yet supported (by this app).
+
         stream << "VO2max=" << first(firstMap(parsedPhysicalInformation.value(
             QLatin1String("vo2max"))).value(QLatin1String("value"))).toUInt() << "\r\n";
         stream << "Weight=" << first(firstMap(parsedPhysicalInformation.value(
@@ -1195,13 +1199,39 @@ QStringList TrainingSession::toHRM()
         // [ExtraData]
         /// @todo Can have up to 3 "extra" data series here, such as Lactate
         ///       and Power. Maybe Temperature? These are then included in
-        ///       [IntTimes] above.
+        ///       [IntTimes] above. Stride? Distance? Accelleration? Moving Type?
 
         /// @todo [Summary-123]
         stream << "\r\n[Summary-123]\r\n"; // WebSync includes 0's when empty.
 
-        /// @todo [Summary-TH]
+        // [Summary-TH]
+        const quint32 anaerobicThreshold = first(firstMap(parsedPhysicalInformation.value(
+            QLatin1String("anaerobic-threshold"))).value(QLatin1String("value"))).toUInt();
+        const quint32 aerobicThreshold = first(firstMap(parsedPhysicalInformation.value(
+            QLatin1String("aerobic-threshold"))).value(QLatin1String("value"))).toUInt();
+        const QVariantList heartrate = samples.value(QLatin1String("heartrate")).toList();
+        int summaryThRow1[5] = { 0, 0, 0, 0, 0};
+        for (int index = 0; index < heartrate.length(); ++index) {
+            const quint32 hr = ((index < heartrate.length()) ? heartrate.at(index).toUInt() : (uint)0);
+            if (hr > hrMax)
+                summaryThRow1[0]++;
+            else if (hr > anaerobicThreshold)
+                summaryThRow1[1]++;
+            else if (hr > aerobicThreshold)
+                summaryThRow1[2]++;
+            else if (hr > hrRest)
+                summaryThRow1[3]++;
+            else
+                summaryThRow1[4]++;
+        }
         stream << "\r\n[Summary-TH]\r\n"; // WebSync includes 0's when empty.
+        stream << (heartrate.length() * qRound(recordInterval/1000.0f));
+        for (int index = 0; index < (sizeof(summaryThRow1)/sizeof(summaryThRow1[0])); ++index) {
+            stream << '\t' << (summaryThRow1[index] * qRound(recordInterval/1000.0f));
+        }
+        stream << "\r\n";
+        stream << hrMax << '\t' << anaerobicThreshold << '\t' << aerobicThreshold << '\t' << hrRest << "\r\n";
+        stream << "0\t" << heartrate.length() << "\r\n";
 
         // [Trip]
         stream << "\r\n[Trip]\r\n";
@@ -1216,10 +1246,9 @@ QStringList TrainingSession::toHRM()
 
         // [HRData]
         stream << "\r\n[HRData]\r\n";
-        const QVariantList altitude  = samples.value(QLatin1String("altitude")).toList();
-        const QVariantList cadence   = samples.value(QLatin1String("cadence")).toList();
-        const QVariantList heartrate = samples.value(QLatin1String("heartrate")).toList();
-        const QVariantList speed     = samples.value(QLatin1String("speed")).toList();
+        const QVariantList altitude = samples.value(QLatin1String("altitude")).toList();
+        const QVariantList cadence  = samples.value(QLatin1String("cadence")).toList();
+        const QVariantList speed    = samples.value(QLatin1String("speed")).toList();
         for (int index = 0; index < heartrate.length(); ++index) {
             stream << qSetFieldWidth(3) << ((index < heartrate.length())
                 ? heartrate.at(index).toUInt() : (uint)0);
