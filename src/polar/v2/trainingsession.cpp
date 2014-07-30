@@ -1126,11 +1126,15 @@ QStringList TrainingSession::toHRM()
 
         /// @todo ActiveLimit
 
-        /// @todo MaxHR - not included in training session data.
-        /// @todo RestHR - not included in training session data.
+        stream << "MaxHR=" << first(firstMap(parsedPhysicalInformation.value(
+            QLatin1String("maximum-heartrate"))).value(QLatin1String("value"))).toUInt() << "\r\n";
+        stream << "RestHR=" << first(firstMap(parsedPhysicalInformation.value(
+            QLatin1String("resting-heartrate"))).value(QLatin1String("value"))).toUInt() << "\r\n";
         /// @todo StartDelay - RR data not yet supported (by this app).
-        /// @todo VO2max - not included in training session data.
-        /// @todo Weight - not included in training session data.
+        stream << "VO2max=" << first(firstMap(parsedPhysicalInformation.value(
+            QLatin1String("vo2max"))).value(QLatin1String("value"))).toUInt() << "\r\n";
+        stream << "Weight=" << first(firstMap(parsedPhysicalInformation.value(
+            QLatin1String("weight"))).value(QLatin1String("value"))).toFloat() << "\r\n";
 
         // [Coach] "Coach parameters are only from Polar Coach HR monitor."
 
