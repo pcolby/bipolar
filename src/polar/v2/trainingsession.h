@@ -57,6 +57,7 @@ public:
 protected:
     QString baseName;
     QVariantMap parsedExercises;
+    QVariantMap parsedPhysicalInformation;
     QVariantMap parsedSession;
 
     static QString getTcxSport(const quint64 &polarSportValue);
@@ -71,6 +72,8 @@ protected:
     QVariantMap parseCreateSession(const QString &fileName) const;
     QVariantMap parseLaps(QIODevice &data) const;
     QVariantMap parseLaps(const QString &fileName) const;
+    QVariantMap parsePhysicalInformation(QIODevice &data) const;
+    QVariantMap parsePhysicalInformation(const QString &fileName) const;
     QVariantMap parseRoute(QIODevice &data) const;
     QVariantMap parseRoute(const QString &fileName) const;
     QVariantMap parseSamples(QIODevice &data) const;

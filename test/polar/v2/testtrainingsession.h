@@ -35,6 +35,9 @@ private slots:
     void parseLaps_data();
     void parseLaps();
 
+    void parsePhysicalInformation_data();
+    void parsePhysicalInformation();
+
     void parseRoute_data();
     void parseRoute();
 
