@@ -3,9 +3,9 @@
 QT_VERSION=5.1.1 # The version used by Polar FlowSync.
 QT_NAME="qt-everywhere-opensource-src-$QT_VERSION"
 
-[ -n "$CURL"  ] || CURL=`which curl`
-[ -n "$PATCH" ] || PATCH=`which patch`
-[ -n "$TAR"   ] || TAR=`which tar`
+CURL=`which curl`   || { echo 'Failed to find: curl'  2>&1; exit 1; }
+PATCH=`which patch` || { echo 'Failed to find: patch' 2>&1; exit 1; }
+TAR=`which tar`     || { echo 'Failed to find: tar'   2>&1; exit 1; }
 
 SELF_DIR=`dirname "$0"`
 
