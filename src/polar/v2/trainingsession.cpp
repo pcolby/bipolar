@@ -1186,7 +1186,7 @@ QStringList TrainingSession::toHRM()
 
         /// @todo [SwapTimes] - Need to parse *-phases file(s).
 
-        // [HRCCModeCh] Not applicable to V800 / Loop.
+        // [HRCCModeCh] "HR/CC mode swaps are a available only with Polar XTrainer Plus."
 
         // [IntTimes]
         stream << "\r\n[IntTimes]\r\n"; // WebSync includes this even when empty.
@@ -1194,7 +1194,7 @@ QStringList TrainingSession::toHRM()
 
         // [IntNotes]
         stream << "\r\n[IntNotes]\r\n"; // WebSync includes this even when empty.
-        /// @todo Need a canonical *-laps data file.
+        /// @todo Need a canonical *-autolaps data file.
         /// @todo Add autolap type (eg distance / duration / location) note.
 
         // [ExtraData]
