@@ -1101,6 +1101,7 @@ QStringList TrainingSession::toHRM()
         stream << "Length="    << getDurationString(firstMap(create.value(QLatin1String("duration")))) << "\r\n";
         stream << "Interval="  << qRound(recordInterval/1000.0f) << "\r\n";
 
+        /// @todo {Upper,Lower}{1,2,3} - Need to parse *-phases file(s).
         QVariantList hrZones = zones.value(QLatin1String("heartrate")).toList();
         // Since HRM v1.4 only supports 3 target zones, try to reduce the
         // list down to three by removing zones with 0 duration.
@@ -1125,16 +1126,15 @@ QStringList TrainingSession::toHRM()
             stream << "Timer" << (index+1) << "=" << hhmm << "\r\n";
         }
 
-        /// @todo ActiveLimit
+        /// @todo ActiveLimit - Need to parse *-phases file(s).
+
         const quint32 hrMax = first(firstMap(parsedPhysicalInformation.value(
             QLatin1String("maximum-heartrate"))).value(QLatin1String("value"))).toUInt();
         const quint32 hrRest = first(firstMap(parsedPhysicalInformation.value(
             QLatin1String("resting-heartrate"))).value(QLatin1String("value"))).toUInt();
         stream << "MaxHR="  << hrMax  << "\r\n";
         stream << "RestHR=" << hrRest << "\r\n";
-
-        /// @todo StartDelay - RR data not yet supported (by this app).
-
+        stream << "StartDelay=0\r\n"; ///< "Vantage NV RR data only".
         stream << "VO2max=" << first(firstMap(parsedPhysicalInformation.value(
             QLatin1String("vo2max"))).value(QLatin1String("value"))).toUInt() << "\r\n";
         stream << "Weight=" << first(firstMap(parsedPhysicalInformation.value(
@@ -1184,7 +1184,7 @@ QStringList TrainingSession::toHRM()
             stream << "0\r\n"; // "0" entries for a total of 11 HRZones entries.
         }
 
-        /// @todo [SwapTimes]
+        /// @todo [SwapTimes] - Need to parse *-phases file(s).
 
         // [HRCCModeCh] Not applicable to V800 / Loop.
 
@@ -1194,6 +1194,7 @@ QStringList TrainingSession::toHRM()
 
         // [IntNotes]
         stream << "\r\n[IntNotes]\r\n"; // WebSync includes this even when empty.
+        /// @todo Need a canonical *-laps data file.
         /// @todo Add autolap type (eg distance / duration / location) note.
 
         // [ExtraData]
@@ -1201,7 +1202,7 @@ QStringList TrainingSession::toHRM()
         ///       and Power. Maybe Temperature? These are then included in
         ///       [IntTimes] above. Stride? Distance? Accelleration? Moving Type?
 
-        /// @todo [Summary-123]
+        /// @todo [Summary-123] - Need to parse *-phases file(s).
         stream << "\r\n[Summary-123]\r\n"; // WebSync includes 0's when empty.
 
         // [Summary-TH]

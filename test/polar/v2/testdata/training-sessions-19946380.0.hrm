@@ -17,6 +17,7 @@ Timer2=18:16
 Timer3=10:57
 MaxHR=185
 RestHR=55
+StartDelay=0
 VO2max=48
 Weight=72
 
