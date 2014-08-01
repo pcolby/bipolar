@@ -1464,7 +1464,10 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
             lap.appendChild(doc.createElement(QLatin1String("DistanceMeters")))
                 .appendChild(doc.createTextNode(QString::fromLatin1("%1")
                     .arg(first(create.value(QLatin1String("distance"))).toDouble())));
-            /// @todo [Optional] MaximumSpeed (double)
+            lap.appendChild(doc.createElement(QLatin1String("MaximumSpeed")))
+                .appendChild(doc.createTextNode(QString::fromLatin1("%1")
+                    .arg(first(firstMap(stats.value(QLatin1String("speed")))
+                        .value(QLatin1String("maximum"))).toDouble())));
             lap.appendChild(doc.createElement(QLatin1String("Calories")))
                 .appendChild(doc.createTextNode(QString::fromLatin1("%1")
                     .arg(first(create.value(QLatin1String("calories"))).toUInt())));
