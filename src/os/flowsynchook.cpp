@@ -110,7 +110,7 @@ int FlowSyncHook::getVersion(const QDir &dir)
     }
 
     const QString internalName = info.fileInfo(QLatin1String("InternalName"));
-    qDebug() << "checking hook" << dll << internalName;
+    qDebug() << "checking hook" << QDir::toNativeSeparators(dll) << internalName;
     if (!internalName.startsWith(QLatin1String("Bipolar Hook"))) {
         return -2; // Qt5Network.dll is not our hooked version.
     }
