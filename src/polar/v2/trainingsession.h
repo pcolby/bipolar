@@ -76,6 +76,8 @@ protected:
     QVariantMap parsePhysicalInformation(const QString &fileName) const;
     QVariantMap parseRoute(QIODevice &data) const;
     QVariantMap parseRoute(const QString &fileName) const;
+    QVariantMap parseRRSamples(QIODevice &data) const;
+    QVariantMap parseRRSamples(const QString &fileName) const;
     QVariantMap parseSamples(QIODevice &data) const;
     QVariantMap parseSamples(const QString &fileName) const;
     QVariantMap parseStatistics(QIODevice &data) const;

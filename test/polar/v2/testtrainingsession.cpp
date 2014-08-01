@@ -338,6 +338,45 @@ void TestTrainingSession::parseRoute()
     QCOMPARE(result, expected);
 }
 
+void TestTrainingSession::parseRRSamples_data()
+{
+    QTest::addColumn<QString>("fileName");
+    QTest::addColumn<QVariantMap>("expected");
+
+    #define LOAD_TEST_DATA(name) { \
+        QFile expectedFile(QFINDTESTDATA("testdata/" name ".expected.var")); \
+        expectedFile.open(QIODevice::ReadOnly); \
+        QDataStream expectedStream(&expectedFile); \
+        QVariantMap expectedMap; \
+        expectedStream >> expectedMap; \
+        QTest::newRow(name) << QFINDTESTDATA("testdata/" name) << expectedMap; \
+    }
+
+    LOAD_TEST_DATA("training-sessions-19401412-exercises-19344289-rrsamples");
+
+    #undef LOAD_TEST_DATA
+}
+
+void TestTrainingSession::parseRRSamples()
+{
+    QFETCH(QString, fileName);
+    QFETCH(QVariantMap, expected);
+
+    QVERIFY2(!fileName.isEmpty(), "failed to find testdata");
+
+    // Parse the route (protobuf) message.
+    const polar::v2::TrainingSession session;
+    const QVariantMap result = session.parseRRSamples(fileName);
+
+    // Write the result to files for optional post-mortem investigations.
+    tools::variant::writeAll(result,
+        QString::fromLatin1("polar/v2/testdata/%1.result")
+             .arg(QString::fromLatin1(QTest::currentDataTag())));
+
+    // Compare the result.
+    QCOMPARE(result, expected);
+}
+
 void TestTrainingSession::parseSamples_data()
 {
     QTest::addColumn<QString>("fileName");

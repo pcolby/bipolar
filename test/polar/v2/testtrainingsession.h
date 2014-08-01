@@ -41,6 +41,9 @@ private slots:
     void parseRoute_data();
     void parseRoute();
 
+    void parseRRSamples_data();
+    void parseRRSamples();
+
     void parseSamples_data();
     void parseSamples();
 

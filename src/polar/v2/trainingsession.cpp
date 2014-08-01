@@ -39,6 +39,7 @@
 #define CREATE     QLatin1String("create")
 #define LAPS       QLatin1String("laps")
 #define ROUTE      QLatin1String("route")
+#define RRSAMPLES  QLatin1String("rrsamples")
 #define SAMPLES    QLatin1String("samples")
 #define STATISTICS QLatin1String("statistics")
 #define ZONES      QLatin1String("zones")
@@ -208,6 +209,7 @@ bool TrainingSession::parse(const QString &exerciseId, const QMap<QString, QStri
     PARSE_IF_CONTAINS(LAPS,       Laps);
   //PARSE_IF_CONTAINS(PHASES,     Phases);
     PARSE_IF_CONTAINS(ROUTE,      Route);
+    PARSE_IF_CONTAINS(RRSAMPLES,  RRSamples);
     PARSE_IF_CONTAINS(SAMPLES,    Samples);
   //PARSE_IF_CONTAINS(SENSORS,    Sensors);
     PARSE_IF_CONTAINS(STATISTICS, Statistics);
@@ -660,6 +662,30 @@ QVariantMap TrainingSession::parseRoute(const QString &fileName) const
         return QVariantMap();
     }
     return parseRoute(file);
+}
+
+QVariantMap TrainingSession::parseRRSamples(QIODevice &data) const
+{
+    ProtoBuf::Message::FieldInfoMap fieldInfo;
+    ADD_FIELD_INFO("1", "value", Uint32);
+    ProtoBuf::Message parser(fieldInfo);
+
+    if (isGzipped(data)) {
+        QByteArray array = unzip(data.readAll());
+        return parser.parse(array);
+    } else {
+        return parser.parse(data);
+    }
+}
+
+QVariantMap TrainingSession::parseRRSamples(const QString &fileName) const
+{
+    QFile file(fileName);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qWarning() << "failed to open rrsamples file" << fileName;
+        return QVariantMap();
+    }
+    return parseRRSamples(file);
 }
 
 QVariantMap TrainingSession::parseSamples(QIODevice &data) const
