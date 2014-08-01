@@ -1280,7 +1280,19 @@ QStringList TrainingSession::toHRM()
         }
 
         // [IntNotes]
-        stream << "\r\n[IntNotes]\r\n"; // WebSync includes this even when empty.
+        if (!laps.isEmpty()) {
+            stream << "\r\n[IntNotes]\r\n";
+            for (int index = 0; index < laps.length(); ++index) {
+                const QVariantMap header = firstMap(laps.at(index).toMap().value(QLatin1String("header")));
+                switch (first(header.value(QLatin1String("lap-type"))).toInt()) {
+                case 1:  stream << (index+1) << " Distance based lap\r\n"; break;
+                case 2:  stream << (index+1) << " Duration based lap\r\n"; break;
+                case 3:  stream << (index+1) << " Location based lap\r\n"; break;
+                default: stream << (index+1) << " Manual lap\r\n";
+                }
+            }
+        }
+
         /// @todo Need a canonical *-autolaps data file.
         /// @todo Add autolap type (eg distance / duration / location) note.
 
