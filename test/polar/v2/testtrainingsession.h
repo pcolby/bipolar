@@ -35,17 +35,29 @@ private slots:
     void parseLaps_data();
     void parseLaps();
 
+    void parsePhysicalInformation_data();
+    void parsePhysicalInformation();
+
     void parseRoute_data();
     void parseRoute();
 
+    void parseRRSamples_data();
+    void parseRRSamples();
+
     void parseSamples_data();
     void parseSamples();
+
+    void parseStatistics_data();
+    void parseStatistics();
 
     void parseZones_data();
     void parseZones();
 
     void toGPX_data();
     void toGPX();
+
+    void toHRM_data();
+    void toHRM();
 
     void toTCX_data();
     void toTCX();

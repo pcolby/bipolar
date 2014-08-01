@@ -152,6 +152,7 @@ void TestTrainingSession::parseCreateExercise_data()
         QTest::newRow(name) << QFINDTESTDATA("testdata/" name) << expectedMap; \
     }
 
+    LOAD_TEST_DATA("training-sessions-19401412-exercises-19344289-create");
     LOAD_TEST_DATA("training-sessions-19946380-exercises-19896844-create");
 
     #undef LOAD_TEST_DATA
@@ -230,7 +231,8 @@ void TestTrainingSession::parseLaps_data()
         QTest::newRow(name) << QFINDTESTDATA("testdata/" name) << expectedMap; \
     }
 
-    LOAD_TEST_DATA("training-sessions-3-exercises-1-laps");
+    LOAD_TEST_DATA("training-sessions-19401412-exercises-19344289-autolaps");
+    LOAD_TEST_DATA("training-sessions-19401412-exercises-19344289-laps");
 
     #undef LOAD_TEST_DATA
 }
@@ -245,6 +247,46 @@ void TestTrainingSession::parseLaps()
     // Parse the route (protobuf) message.
     const polar::v2::TrainingSession session;
     const QVariantMap result = session.parseLaps(fileName);
+
+    // Write the result to files for optional post-mortem investigations.
+    tools::variant::writeAll(result,
+        QString::fromLatin1("polar/v2/testdata/%1.result")
+            .arg(QString::fromLatin1(QTest::currentDataTag())));
+
+    // Compare the result.
+    QCOMPARE(result, expected);
+}
+
+void TestTrainingSession::parsePhysicalInformation_data()
+{
+    QTest::addColumn<QString>("fileName");
+    QTest::addColumn<QVariantMap>("expected");
+
+    #define LOAD_TEST_DATA(name) { \
+        QFile expectedFile(QFINDTESTDATA("testdata/" name ".expected.var")); \
+        expectedFile.open(QIODevice::ReadOnly); \
+        QDataStream expectedStream(&expectedFile); \
+        QVariantMap expectedMap; \
+        expectedStream >> expectedMap; \
+        QTest::newRow(name) << QFINDTESTDATA("testdata/" name) << expectedMap; \
+    }
+
+    LOAD_TEST_DATA("training-sessions-19401412-physical-information");
+    LOAD_TEST_DATA("training-sessions-19946380-physical-information");
+
+    #undef LOAD_TEST_DATA
+}
+
+void TestTrainingSession::parsePhysicalInformation()
+{
+    QFETCH(QString, fileName);
+    QFETCH(QVariantMap, expected);
+
+    QVERIFY2(!fileName.isEmpty(), "failed to find testdata");
+
+    // Parse the route (protobuf) message.
+    const polar::v2::TrainingSession session;
+    const QVariantMap result = session.parsePhysicalInformation(fileName);
 
     // Write the result to files for optional post-mortem investigations.
     tools::variant::writeAll(result,
@@ -270,6 +312,7 @@ void TestTrainingSession::parseRoute_data()
     }
 
     LOAD_TEST_DATA("training-sessions-1-exercises-1-route");
+    LOAD_TEST_DATA("training-sessions-19401412-exercises-19344289-route");
     LOAD_TEST_DATA("training-sessions-19946380-exercises-19896844-route");
 
     #undef LOAD_TEST_DATA
@@ -295,6 +338,45 @@ void TestTrainingSession::parseRoute()
     QCOMPARE(result, expected);
 }
 
+void TestTrainingSession::parseRRSamples_data()
+{
+    QTest::addColumn<QString>("fileName");
+    QTest::addColumn<QVariantMap>("expected");
+
+    #define LOAD_TEST_DATA(name) { \
+        QFile expectedFile(QFINDTESTDATA("testdata/" name ".expected.var")); \
+        expectedFile.open(QIODevice::ReadOnly); \
+        QDataStream expectedStream(&expectedFile); \
+        QVariantMap expectedMap; \
+        expectedStream >> expectedMap; \
+        QTest::newRow(name) << QFINDTESTDATA("testdata/" name) << expectedMap; \
+    }
+
+    LOAD_TEST_DATA("training-sessions-19401412-exercises-19344289-rrsamples");
+
+    #undef LOAD_TEST_DATA
+}
+
+void TestTrainingSession::parseRRSamples()
+{
+    QFETCH(QString, fileName);
+    QFETCH(QVariantMap, expected);
+
+    QVERIFY2(!fileName.isEmpty(), "failed to find testdata");
+
+    // Parse the route (protobuf) message.
+    const polar::v2::TrainingSession session;
+    const QVariantMap result = session.parseRRSamples(fileName);
+
+    // Write the result to files for optional post-mortem investigations.
+    tools::variant::writeAll(result,
+        QString::fromLatin1("polar/v2/testdata/%1.result")
+             .arg(QString::fromLatin1(QTest::currentDataTag())));
+
+    // Compare the result.
+    QCOMPARE(result, expected);
+}
+
 void TestTrainingSession::parseSamples_data()
 {
     QTest::addColumn<QString>("fileName");
@@ -311,6 +393,7 @@ void TestTrainingSession::parseSamples_data()
 
     LOAD_TEST_DATA("training-sessions-1-exercises-1-samples");
     LOAD_TEST_DATA("training-sessions-2-exercises-1-samples");
+    LOAD_TEST_DATA("training-sessions-19401412-exercises-19344289-samples");
     LOAD_TEST_DATA("training-sessions-19946380-exercises-19896844-samples");
 
     #undef LOAD_TEST_DATA
@@ -336,6 +419,46 @@ void TestTrainingSession::parseSamples()
     QCOMPARE(result, expected);
 }
 
+void TestTrainingSession::parseStatistics_data()
+{
+    QTest::addColumn<QString>("fileName");
+    QTest::addColumn<QVariantMap>("expected");
+
+    #define LOAD_TEST_DATA(name) { \
+        QFile expectedFile(QFINDTESTDATA("testdata/" name ".expected.var")); \
+        expectedFile.open(QIODevice::ReadOnly); \
+        QDataStream expectedStream(&expectedFile); \
+        QVariantMap expectedMap; \
+        expectedStream >> expectedMap; \
+        QTest::newRow(name) << QFINDTESTDATA("testdata/" name) << expectedMap; \
+    }
+
+    LOAD_TEST_DATA("training-sessions-19401412-exercises-19344289-statistics");
+    LOAD_TEST_DATA("training-sessions-19946380-exercises-19896844-statistics");
+
+    #undef LOAD_TEST_DATA
+}
+
+void TestTrainingSession::parseStatistics()
+{
+    QFETCH(QString, fileName);
+    QFETCH(QVariantMap, expected);
+
+    QVERIFY2(!fileName.isEmpty(), "failed to find testdata");
+
+    // Parse the route (protobuf) message.
+    const polar::v2::TrainingSession session;
+    const QVariantMap result = session.parseStatistics(fileName);
+
+    // Write the result to files for optional post-mortem investigations.
+    tools::variant::writeAll(result,
+        QString::fromLatin1("polar/v2/testdata/%1.result")
+             .arg(QString::fromLatin1(QTest::currentDataTag())));
+
+    // Compare the result.
+    QCOMPARE(result, expected);
+}
+
 void TestTrainingSession::parseZones_data()
 {
     QTest::addColumn<QString>("fileName");
@@ -351,6 +474,7 @@ void TestTrainingSession::parseZones_data()
     }
 
     LOAD_TEST_DATA("training-sessions-2-exercises-1-zones");
+    LOAD_TEST_DATA("training-sessions-19401412-exercises-19344289-zones");
     LOAD_TEST_DATA("training-sessions-19946380-exercises-19896844-zones");
 
     #undef LOAD_TEST_DATA
@@ -391,7 +515,7 @@ void TestTrainingSession::toGPX_data()
 
     LOAD_TEST_DATA("training-sessions-1");
     LOAD_TEST_DATA("training-sessions-2");
-    LOAD_TEST_DATA("training-sessions-3");
+    LOAD_TEST_DATA("training-sessions-19401412");
     LOAD_TEST_DATA("training-sessions-19946380");
 
     #undef LOAD_TEST_DATA
@@ -408,7 +532,7 @@ void TestTrainingSession::toGPX()
     QDomDocument gpx = session.toGPX(QDateTime::fromString(
         QLatin1String("2014-07-15T12:34:56Z"), Qt::ISODate));
 
-    // Write the result to an XML for optional post-mortem investigations.
+    // Write the result to an XML file for optional post-mortem investigations.
 #ifdef Q_OS_WIN
     QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.gpx")
 #else
@@ -435,6 +559,60 @@ void TestTrainingSession::toGPX()
     QVERIFY(validator.validate(gpx.toByteArray()));
 }
 
+void TestTrainingSession::toHRM_data()
+{
+    QTest::addColumn<QString>("baseName");
+    QTest::addColumn<QStringList>("expected");
+
+    #define LOAD_TEST_DATA(name, expectedCount) { \
+        QString baseName; \
+        QStringList expected; \
+        for (int count = 0; count < expectedCount; ++count) { \
+            QFile expectedFile(QFINDTESTDATA( \
+                QString::fromLatin1("testdata/" name ".%1.hrm").arg(count))); \
+            expectedFile.open(QIODevice::ReadOnly); \
+            expected.append(QString::fromLatin1(expectedFile.readAll())); \
+            if (baseName.isEmpty()) { \
+                baseName = expectedFile.fileName(); \
+                baseName.chop(6); \
+            } \
+        } \
+        QTest::newRow(name) << baseName << expected; \
+    }
+
+    LOAD_TEST_DATA("training-sessions-19401412", 1);
+    LOAD_TEST_DATA("training-sessions-19946380", 1);
+
+    #undef LOAD_TEST_DATA
+}
+
+void TestTrainingSession::toHRM()
+{
+    QFETCH(QString, baseName);
+    QFETCH(QStringList, expected);
+
+    // Parse the route (protobuf) message.
+    polar::v2::TrainingSession session(baseName);
+    QVERIFY(session.parse(baseName));
+    const QStringList hrm = session.toHRM();
+
+    // Write the result to a text file for optional post-mortem investigations.
+    for (int index = 0; index < hrm.length(); ++index) {
+#ifdef Q_OS_WIN
+        QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.%2.hrm")
+#else
+        QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.%2.hrm")
+#endif
+            .arg(QString::fromLatin1(QTest::currentDataTag())).arg(index));
+        if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+            file.write(hrm.at(index).toLatin1());
+        }
+    }
+
+    // Compare the generated HRM string against the expected result.
+    QCOMPARE(hrm, expected);
+}
+
 void TestTrainingSession::toTCX_data()
 {
     QTest::addColumn<QString>("baseName");
@@ -450,7 +628,7 @@ void TestTrainingSession::toTCX_data()
 
     LOAD_TEST_DATA("training-sessions-1");
     LOAD_TEST_DATA("training-sessions-2");
-    LOAD_TEST_DATA("training-sessions-3");
+    LOAD_TEST_DATA("training-sessions-19401412");
     LOAD_TEST_DATA("training-sessions-19946380");
 
     #undef LOAD_TEST_DATA
@@ -466,7 +644,7 @@ void TestTrainingSession::toTCX()
     QVERIFY(session.parse(baseName));
     QDomDocument tcx = session.toTCX(QLatin1String("Jul 17 2014 21:02:38"));
 
-    // Write the result to an XML for optional post-mortem investigations.
+    // Write the result to an XML file for optional post-mortem investigations.
 #ifdef Q_OS_WIN
     QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.tcx")
 #else

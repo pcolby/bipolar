@@ -1,0 +1,117 @@
+{
+    "laps": [
+        {
+            "header": [
+                {
+                    "ascent": [
+                        765.9716796875
+                    ],
+                    "descent": [
+                        781.0594482421875
+                    ],
+                    "distance": [
+                        8467.599609375
+                    ],
+                    "duration": [
+                        {
+                            "4": [
+                                750
+                            ],
+                            "hours": [
+                                1
+                            ],
+                            "minutes": [
+                                27
+                            ],
+                            "seconds": [
+                                2
+                            ]
+                        }
+                    ],
+                    "lap-type": [
+                        3
+                    ],
+                    "split-time": [
+                        {
+                            "4": [
+                                750
+                            ],
+                            "hours": [
+                                1
+                            ],
+                            "minutes": [
+                                27
+                            ],
+                            "seconds": [
+                                2
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "stats": [
+                {
+                    "heartrate": [
+                        {
+                            "average": [
+                                162
+                            ],
+                            "maximum": [
+                                181
+                            ],
+                            "minimum": [
+                                74
+                            ]
+                        }
+                    ],
+                    "speed": [
+                        {
+                            "average": [
+                                5.8366494178771973
+                            ],
+                            "maximum": [
+                                13.895998954772949
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "summary": [
+        {
+            "average-duration": [
+                {
+                    "4": [
+                        750
+                    ],
+                    "hours": [
+                        1
+                    ],
+                    "minutes": [
+                        27
+                    ],
+                    "seconds": [
+                        2
+                    ]
+                }
+            ],
+            "best-duration": [
+                {
+                    "4": [
+                        750
+                    ],
+                    "hours": [
+                        1
+                    ],
+                    "minutes": [
+                        27
+                    ],
+                    "seconds": [
+                        2
+                    ]
+                }
+            ]
+        }
+    ]
+}
