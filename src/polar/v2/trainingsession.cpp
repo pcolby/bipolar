@@ -1425,6 +1425,8 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
             qWarning() << "skipping exercise with no 'create' request data";
             continue;
         }
+        const QVariantMap create = map.value(CREATE).toMap();
+        const QVariantMap stats  = map.value(STATISTICS).toMap();
 
         QDomElement activity = doc.createElement(QLatin1String("Activity"));
         if (multiSportSession.isNull()) {
@@ -1440,7 +1442,6 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
         }
         Q_ASSERT(!activity.parentNode().isNull());
 
-        const QVariantMap create = map.value(CREATE).toMap();
 
         // Get the sport type.
         activity.setAttribute(QLatin1String("Sport"),
@@ -1467,8 +1468,13 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
             lap.appendChild(doc.createElement(QLatin1String("Calories")))
                 .appendChild(doc.createTextNode(QString::fromLatin1("%1")
                     .arg(first(create.value(QLatin1String("calories"))).toUInt())));
-            /// @todo [Optional] AverageHeartRateBpm/Value (ubyte)
-            /// @todo [Optional] MaximumHeartRateBpm/Value (ubyte)
+            const QVariantMap hrStats = firstMap(stats.value(QLatin1String("heartrate")));
+            lap.appendChild(doc.createElement(QLatin1String("AverageHeartRateBpm")))
+                .appendChild(doc.createElement(QLatin1String("Value")))
+                    .appendChild(doc.createTextNode(first(hrStats.value(QLatin1String("average"))).toString()));
+            lap.appendChild(doc.createElement(QLatin1String("MaximumHeartRateBpm")))
+                .appendChild(doc.createElement(QLatin1String("Value")))
+                    .appendChild(doc.createTextNode(first(hrStats.value(QLatin1String("maximum"))).toString()));
             /// @todo Intensity must be one of: Active, Resting.
             lap.appendChild(doc.createElement(QLatin1String("Intensity")))
                 .appendChild(doc.createTextNode(QString::fromLatin1("Active")));
