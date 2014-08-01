@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<gpx version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" creator="test 1.2.3.4 - https://github.com/pcolby/bipolar" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<gpx xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="test 1.2.3.4 - https://github.com/pcolby/bipolar" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata>
     <name>training-sessions-19401412</name>
     <desc>GPX encoding of training-sessions-19401412</desc>
@@ -11,6 +11,6 @@
     <time>2014-07-15T12:34:56Z</time>
   </metadata>
   <trk>
-    <src>training-sessions-19401412-exercises-1-laps</src>
+    <src>training-sessions-19401412-exercises-19344289-laps</src>
   </trk>
 </gpx>
