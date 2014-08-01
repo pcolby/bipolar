@@ -415,13 +415,24 @@ QVariantMap TrainingSession::parseLaps(QIODevice &data) const
     ADD_FIELD_INFO("1/1/5",    "descent",          Float);
     ADD_FIELD_INFO("1/1/6",    "lap-type",         Enumerator);
     ADD_FIELD_INFO("1/2",      "stats",            EmbeddedMessage);
-    ADD_FIELD_INFO("1/2/1",    "heartrate",        EmbeddedMessage); ///< @todo
-    ADD_FIELD_INFO("1/2/2",    "speed",            EmbeddedMessage); ///< @todo
-    ADD_FIELD_INFO("1/2/3",    "cadence",          EmbeddedMessage); ///< @todo
-    ADD_FIELD_INFO("1/2/4",    "power",            EmbeddedMessage); ///< @todo
-    ADD_FIELD_INFO("1/2/5",    "pedaling",         EmbeddedMessage); ///< @todo
-    ADD_FIELD_INFO("1/2/6",    "incline",          EmbeddedMessage); ///< @todo
-    ADD_FIELD_INFO("1/2/7",    "stride",           EmbeddedMessage); ///< @todo
+    ADD_FIELD_INFO("1/2/1",    "heartrate",        EmbeddedMessage);
+    ADD_FIELD_INFO("1/2/1/1",  "average",          Uint32);
+    ADD_FIELD_INFO("1/2/1/2",  "maximum",          Uint32);
+    ADD_FIELD_INFO("1/2/1/3",  "minimum",          Uint32);
+    ADD_FIELD_INFO("1/2/2",    "speed",            EmbeddedMessage);
+    ADD_FIELD_INFO("1/2/2/1",  "average",          Float);
+    ADD_FIELD_INFO("1/2/2/2",  "maximum",          Float);
+    ADD_FIELD_INFO("1/2/3",    "cadence",          EmbeddedMessage);
+    ADD_FIELD_INFO("1/2/3/1",  "average",          Uint32);
+    ADD_FIELD_INFO("1/2/3/2",  "maximum",          Uint32);
+    ADD_FIELD_INFO("1/2/4",    "power",            EmbeddedMessage);
+    ADD_FIELD_INFO("1/2/4/1",  "average",          Uint32);
+    ADD_FIELD_INFO("1/2/4/2",  "maximum",          Uint32);
+    ADD_FIELD_INFO("1/2/5",    "pedaling",         EmbeddedMessage);
+    ADD_FIELD_INFO("1/2/5/1",  "average",          Uint32);
+    ADD_FIELD_INFO("1/2/6",    "incline",          EmbeddedMessage);
+    ADD_FIELD_INFO("1/2/6/1",  "average",          Float);
+    ADD_FIELD_INFO("1/2/7",    "stride",           EmbeddedMessage);
     ADD_FIELD_INFO("2",        "summary",          EmbeddedMessage);
     ADD_FIELD_INFO("2/1",      "best-duration",    EmbeddedMessage);
     ADD_FIELD_INFO("2/1/1",    "hours",            Uint32);
@@ -1092,10 +1103,12 @@ QStringList TrainingSession::toHRM()
 
     foreach (const QVariant &exercise, parsedExercises) {
         const QVariantMap map = exercise.toMap();
-        const QVariantMap create = map.value(CREATE).toMap();
-        const QVariantMap samples = map.value(SAMPLES).toMap();
-        const QVariantMap stats = map.value(STATISTICS).toMap();
-        const QVariantMap zones = map.value(ZONES).toMap();
+        const QVariantMap autoLaps   = map.value(AUTOLAPS).toMap();
+        const QVariantMap create     = map.value(CREATE).toMap();
+        const QVariantMap manualLaps = map.value(LAPS).toMap();
+        const QVariantMap samples    = map.value(SAMPLES).toMap();
+        const QVariantMap stats      = map.value(STATISTICS).toMap();
+        const QVariantMap zones      = map.value(ZONES).toMap();
 
         const bool haveAltitude = haveAnySamples(samples, QLatin1String("speed"));
         const bool haveCadence  = haveAnySamples(samples, QLatin1String("cadence"));
@@ -1217,8 +1230,20 @@ QStringList TrainingSession::toHRM()
         // [HRCCModeCh] "HR/CC mode swaps are a available only with Polar XTrainer Plus."
 
         // [IntTimes]
-        stream << "\r\n[IntTimes]\r\n"; // WebSync includes this even when empty.
-        /// @todo Need a canonical *-laps data file.
+        QVariantList laps = manualLaps.value(QLatin1String("laps")).toList();
+        if (laps.isEmpty()) {
+            laps = autoLaps.value(QLatin1String("laps")).toList();
+        }
+        if (!laps.isEmpty()) {
+            stream << "\r\n[IntTimes]\r\n";
+            foreach (const QVariant &lap, laps) {
+                const QVariantMap header = firstMap(lap.toMap().value(QLatin1String("header")));
+                const QVariantMap stats = firstMap(lap.toMap().value(QLatin1String("stats")));
+                stream <<
+                    getDurationString(firstMap(header.value(QLatin1String("duration"))));
+                stream << "\r\n";
+            }
+        }
 
         // [IntNotes]
         stream << "\r\n[IntNotes]\r\n"; // WebSync includes this even when empty.
