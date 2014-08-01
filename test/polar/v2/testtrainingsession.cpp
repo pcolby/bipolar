@@ -231,6 +231,7 @@ void TestTrainingSession::parseLaps_data()
         QTest::newRow(name) << QFINDTESTDATA("testdata/" name) << expectedMap; \
     }
 
+    LOAD_TEST_DATA("training-sessions-19401412-exercises-19344289-autolaps");
     LOAD_TEST_DATA("training-sessions-19401412-exercises-19344289-laps");
 
     #undef LOAD_TEST_DATA

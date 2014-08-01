@@ -35,6 +35,7 @@
 #endif
 
 // These constants match those used by Polar's V2 API.
+#define AUTOLAPS   QLatin1String("autolaps")
 #define CREATE     QLatin1String("create")
 #define LAPS       QLatin1String("laps")
 #define ROUTE      QLatin1String("route")
@@ -202,6 +203,7 @@ bool TrainingSession::parse(const QString &exerciseId, const QMap<QString, QStri
                 sources << fileNames.value(str); \
             } \
         }
+    PARSE_IF_CONTAINS(AUTOLAPS,   Laps);
     PARSE_IF_CONTAINS(CREATE,     CreateExercise);
     PARSE_IF_CONTAINS(LAPS,       Laps);
   //PARSE_IF_CONTAINS(PHASES,     Phases);
