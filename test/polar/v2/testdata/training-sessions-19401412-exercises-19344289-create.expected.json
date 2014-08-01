@@ -1,0 +1,136 @@
+{
+    "ascent": [
+        765.9716796875
+    ],
+    "calories": [
+        1212
+    ],
+    "descent": [
+        781.0594482421875
+    ],
+    "distance": [
+        8483.900390625
+    ],
+    "duration": [
+        {
+            "hours": [
+                1
+            ],
+            "milliseconds": [
+                750
+            ],
+            "minutes": [
+                27
+            ],
+            "seconds": [
+                18
+            ]
+        }
+    ],
+    "running-index": [
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minutes": [
+                        11
+                    ],
+                    "seconds": [
+                        0
+                    ]
+                }
+            ],
+            "value": [
+                44
+            ]
+        }
+    ],
+    "sensors": [
+        2,
+        17,
+        18
+    ],
+    "sport": [
+        {
+            "value": [
+                1
+            ]
+        }
+    ],
+    "start": [
+        {
+            "3": [
+                0
+            ],
+            "date": [
+                {
+                    "day": [
+                        13
+                    ],
+                    "month": [
+                        7
+                    ],
+                    "year": [
+                        2014
+                    ]
+                }
+            ],
+            "offset": [
+                600
+            ],
+            "time": [
+                {
+                    "hour": [
+                        7
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minute": [
+                        26
+                    ],
+                    "seconds": [
+                        23
+                    ]
+                }
+            ]
+        }
+    ],
+    "training-load": [
+        {
+            "carbs": [
+                69
+            ],
+            "fat": [
+                14
+            ],
+            "load-value": [
+                254
+            ],
+            "protein": [
+                17
+            ],
+            "recovery-time": [
+                {
+                    "hours": [
+                        153
+                    ],
+                    "milliseconds": [
+                        46
+                    ],
+                    "minutes": [
+                        32
+                    ],
+                    "seconds": [
+                        3
+                    ]
+                }
+            ]
+        }
+    ]
+}
