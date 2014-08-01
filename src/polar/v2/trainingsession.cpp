@@ -1474,10 +1474,12 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
             const QVariantMap hrStats = firstMap(stats.value(QLatin1String("heartrate")));
             lap.appendChild(doc.createElement(QLatin1String("AverageHeartRateBpm")))
                 .appendChild(doc.createElement(QLatin1String("Value")))
-                    .appendChild(doc.createTextNode(first(hrStats.value(QLatin1String("average"))).toString()));
+                    .appendChild(doc.createTextNode(QString::fromLatin1("%1")
+                        .arg(first(hrStats.value(QLatin1String("average"))).toUInt())));
             lap.appendChild(doc.createElement(QLatin1String("MaximumHeartRateBpm")))
                 .appendChild(doc.createElement(QLatin1String("Value")))
-                    .appendChild(doc.createTextNode(first(hrStats.value(QLatin1String("maximum"))).toString()));
+                    .appendChild(doc.createTextNode(QString::fromLatin1("%1")
+                        .arg(first(hrStats.value(QLatin1String("maximum"))).toUInt())));
             /// @todo Intensity must be one of: Active, Resting.
             lap.appendChild(doc.createElement(QLatin1String("Intensity")))
                 .appendChild(doc.createTextNode(QString::fromLatin1("Active")));
