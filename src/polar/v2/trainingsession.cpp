@@ -433,6 +433,7 @@ QVariantMap TrainingSession::parseLaps(QIODevice &data) const
     ADD_FIELD_INFO("1/2/6",    "incline",          EmbeddedMessage);
     ADD_FIELD_INFO("1/2/6/1",  "average",          Float);
     ADD_FIELD_INFO("1/2/7",    "stride",           EmbeddedMessage);
+    ADD_FIELD_INFO("1/2/7",    "average",          Uint32);
     ADD_FIELD_INFO("2",        "summary",          EmbeddedMessage);
     ADD_FIELD_INFO("2/1",      "best-duration",    EmbeddedMessage);
     ADD_FIELD_INFO("2/1/1",    "hours",            Uint32);
@@ -1230,18 +1231,51 @@ QStringList TrainingSession::toHRM()
         // [HRCCModeCh] "HR/CC mode swaps are a available only with Polar XTrainer Plus."
 
         // [IntTimes]
+        bool isAutoLaps = false;
         QVariantList laps = manualLaps.value(QLatin1String("laps")).toList();
         if (laps.isEmpty()) {
             laps = autoLaps.value(QLatin1String("laps")).toList();
+            isAutoLaps = true;
         }
         if (!laps.isEmpty()) {
             stream << "\r\n[IntTimes]\r\n";
             foreach (const QVariant &lap, laps) {
                 const QVariantMap header = firstMap(lap.toMap().value(QLatin1String("header")));
                 const QVariantMap stats = firstMap(lap.toMap().value(QLatin1String("stats")));
-                stream <<
-                    getDurationString(firstMap(header.value(QLatin1String("duration"))));
-                stream << "\r\n";
+                const QVariantMap hrStats = firstMap(stats.value(QLatin1String("heartrate")));
+                // Row 1
+                stream << getDurationString(firstMap(header.value(QLatin1String("duration"))));
+                stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(5) << first(hrStats.value(QLatin1String("average"))).toUInt();
+                stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(5) << first(hrStats.value(QLatin1String("minimum"))).toUInt();
+                stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(5) << first(hrStats.value(QLatin1String("average"))).toUInt();
+                stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(5) << first(hrStats.value(QLatin1String("maximum"))).toUInt();
+                stream << qSetFieldWidth(0) << "\r\n";
+                // Row 2
+                stream << "     0     0     0     0     0     0\r\n";
+                // Row 3
+                stream << "     0     0     0";
+                stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(5) << qRound(first(header.value(QLatin1String("ascent"))).toFloat() / 10.0);
+                stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(5) << qRound(first(header.value(QLatin1String("distance"))).toFloat() / 100.0);
+                stream << qSetFieldWidth(0) << "\r\n";
+                // Row 4
+                switch (first(header.value(QLatin1String("lap-type"))).toInt()) {
+                case 1:  stream << qSetFieldWidth(6) << 1; break; // Distance -> interval
+                case 2:  stream << qSetFieldWidth(6) << 1; break; // Duration -> interval
+                case 3:  stream << qSetFieldWidth(6) << 0; break; // Location -> normal lap
+                default: stream << qSetFieldWidth(6) << 0; // Absent (ie manual) -> normal lap
+                }
+                stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(5) << qRound(first(header.value(QLatin1String("distance"))).toFloat());
+                stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(5) << first(header.value(QLatin1String("power"))).toUInt();
+                stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(5) << first(firstMap(stats.value(QLatin1String("temperature"))).value(QLatin1String("average"))).toFloat();
+                stream << "     0"; // "Internal phase/lap information"
+                stream << "     0"; // Air pressure not available in protobuf data.
+                stream << qSetFieldWidth(0) << "\r\n";
+                // Row 5
+                stream << qSetFieldWidth(6) << first(firstMap(stats.value(
+                    QLatin1String("stride"))).value(QLatin1String("average"))).toUInt();
+                stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(5) << (isAutoLaps ? '1' : '0');
+                stream << "     0     0     0     0\r\n";
+                stream << qSetFieldWidth(0);
             }
         }
 
