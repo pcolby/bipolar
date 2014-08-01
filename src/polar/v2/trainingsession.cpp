@@ -1325,13 +1325,18 @@ QStringList TrainingSession::toHRM()
                 summaryThRow1[4]++;
         }
         stream << "\r\n[Summary-TH]\r\n"; // WebSync includes 0's when empty.
+        stream << qSetFieldWidth(4);
         stream << (heartrate.length() * qRound(recordInterval/1000.0f));
         for (int index = 0; index < (sizeof(summaryThRow1)/sizeof(summaryThRow1[0])); ++index) {
-            stream << '\t' << (summaryThRow1[index] * qRound(recordInterval/1000.0f));
+            stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(4) << (summaryThRow1[index] * qRound(recordInterval/1000.0f));
         }
-        stream << "\r\n";
-        stream << hrMax << '\t' << anaerobicThreshold << '\t' << aerobicThreshold << '\t' << hrRest << "\r\n";
-        stream << "0\t" << heartrate.length() << "\r\n";
+        stream << qSetFieldWidth(0) << "\r\n";
+        stream << qSetFieldWidth(4) << hrMax;
+        stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(4) << anaerobicThreshold;
+        stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(4) << aerobicThreshold;
+        stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(4) << hrRest;
+        stream << qSetFieldWidth(0) << "\r\n";
+        stream << "   0 " << qSetFieldWidth(4) << heartrate.length() << qSetFieldWidth(0) << "\r\n";
 
         // [Trip]
         stream << "\r\n[Trip]\r\n";
