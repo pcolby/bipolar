@@ -230,7 +230,7 @@ void TestTrainingSession::parseLaps_data()
         QTest::newRow(name) << QFINDTESTDATA("testdata/" name) << expectedMap; \
     }
 
-    LOAD_TEST_DATA("training-sessions-3-exercises-1-laps");
+    LOAD_TEST_DATA("training-sessions-19401412-exercises-1-laps");
 
     #undef LOAD_TEST_DATA
 }
@@ -469,7 +469,7 @@ void TestTrainingSession::toGPX_data()
 
     LOAD_TEST_DATA("training-sessions-1");
     LOAD_TEST_DATA("training-sessions-2");
-    LOAD_TEST_DATA("training-sessions-3");
+    LOAD_TEST_DATA("training-sessions-19401412");
     LOAD_TEST_DATA("training-sessions-19946380");
 
     #undef LOAD_TEST_DATA
@@ -581,7 +581,7 @@ void TestTrainingSession::toTCX_data()
 
     LOAD_TEST_DATA("training-sessions-1");
     LOAD_TEST_DATA("training-sessions-2");
-    LOAD_TEST_DATA("training-sessions-3");
+    LOAD_TEST_DATA("training-sessions-19401412");
     LOAD_TEST_DATA("training-sessions-19946380");
 
     #undef LOAD_TEST_DATA
