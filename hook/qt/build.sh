@@ -1,4 +1,8 @@
 #!/bin/bash
+#
+# Prerequisites:
+# * Xcode
+#
 
 QT_VERSION=5.1.1 # The version used by Polar FlowSync.
 QT_NAME="qt-everywhere-opensource-src-$QT_VERSION"
