@@ -23,4 +23,17 @@ echo 'Installing hook'
 cp build/qtbase/lib/QtNetwork.framework/Versions/5/QtNetwork \
    "$TARGET_APP/Contents/Frameworks/QtNetwork.framework/Versions/5/QtNetwork"
 
+install_name_tool -id \
+    '@executable_path/../Frameworks/QtNetwork.framework/Versions/5/QtNetwork' \
+    "$TARGET_APP/Contents/Frameworks/QtNetwork.framework/Versions/5/QtNetwork"
+
+install_name_tool -change \
+    '/usr/local/Qt-5.1.1/lib/QtCore.framework/Versions/5/QtCore' \
+    '@executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore' \
+    "$TARGET_APP/Contents/Frameworks/QtNetwork.framework/Versions/5/QtNetwork"
+
 echo 'Done'
+
+echo 'Debug info:'
+otool -L "$FLOWSYNC_APP/Contents/Frameworks/QtNetwork.framework/Versions/5/QtNetwork" | grep -i qt
+otool -L "$TARGET_APP/Contents/Frameworks/QtNetwork.framework/Versions/5/QtNetwork" | grep -i qt
