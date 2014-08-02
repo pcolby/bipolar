@@ -83,7 +83,7 @@ function configure {
 function build {
     configure || return
     pushd "$SELF_DIR/$QT_NAME"
-    make ; RC=$?
+    make module-qtbase ; RC=$?
     popd
     return $RC
 }
