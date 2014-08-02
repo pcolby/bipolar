@@ -83,7 +83,6 @@ if not exist "%BUILD_DIR%\Makefile" (
    -nomake tools^
    -openssl -I C:\OpenSSL-Win32\include -L C:\OpenSSL-Win32\lib^
    -platform win32-msvc2010^
-   -qt-sql-sqlite^
    -release^
    -shared^
    -skip multimedia^
