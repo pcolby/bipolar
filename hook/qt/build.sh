@@ -57,15 +57,34 @@ function patchSource {
 function configure {
     patchSource || return
     pushd "$SELF_DIR/$QT_NAME"
-    # @todo Do we need to build 32 or 64-bit? (depends on what FlowSync uses).
-    echo ./configure
+    ./configure \
+        -confirm-license \
+        -framework \
+        -no-gui \
+        -no-opengl \
+        -no-widgets \
+        -nomake examples \
+        -nomake tools \
+        -opensource \
+        -openssl \
+        -platform macx-clang-32 \
+        -release \
+        -shared \
+        -skip multimedia \
+        -skip script \
+        -skip svg \
+        -skip webkit ; RC=$?
     popd
+    return $RC
 }
 
 # Build Qt.
 function build {
     configure || return
-    # @todo make
+    pushd "$SELF_DIR/$QT_NAME"
+    make ; RC=$?
+    popd
+    return $RC
 }
 
 build
