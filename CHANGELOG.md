@@ -6,12 +6,10 @@ Features:
 
 ### 0.2.0 (_unreleased_)
 Features:
-- Mac OS support?
-
-### 0.1.2 (_unreleased_)
-Features:
-- upgrade to Qt 5.3.1 (from 5.3.0)
+- Mac OS X support.
 - additional TCX elements ([#16](../../issues/16))
+- preview (incomplete) HRM export ([#14](../../issues/14))
+- upgrade to Qt 5.3.1 (from 5.3.0)
 
 ### 0.1.1 (2014-07-27)
 Features:
