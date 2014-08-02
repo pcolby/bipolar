@@ -32,4 +32,11 @@ CONFIG(release,debug|release):revbuildhook.target = Makefile.Release
 macx:revbuildhook.target = Makefile
 QMAKE_EXTRA_TARGETS += revbuildhook
 
+# Fix an issue where Qt's generated Makefile does not depend on QMAKE_INFO_PLIST.
+macx: {
+    infobuild.target = release/Bipolar.app/Contents/Info.plist
+    infobuild.depends = $$QMAKE_INFO_PLIST
+    QMAKE_EXTRA_TARGETS += infobuild
+}
+
 include(src/src.pri)
