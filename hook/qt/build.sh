@@ -9,6 +9,7 @@ QT_NAME="qt-everywhere-opensource-src-$QT_VERSION"
 
 CP=`which cp`       || { echo 'Failed to find: cp'    2>&1; exit 1; }
 CURL=`which curl`   || { echo 'Failed to find: curl'  2>&1; exit 1; }
+MKDIR=`which mkdir` || { echo 'Failed to find: mkdir' 2>&1; exit 1; }
 PATCH=`which patch` || { echo 'Failed to find: patch' 2>&1; exit 1; }
 SED=`which sed`     || { echo 'Failed to find: sed'   2>&1; exit 1; }
 TAR=`which tar`     || { echo 'Failed to find: tar'   2>&1; exit 1; }
@@ -56,8 +57,10 @@ function patchSource {
 # Configure the Qt build.
 function configure {
     patchSource || return
-    pushd "$SELF_DIR/$QT_NAME"
-    ./configure \
+    ${MKDIR} "$SELF_DIR/build"
+    pushd "$SELF_DIR/build"
+    pushd "$SELF_DIR/build"
+    "../$QT_NAME/configure" \
         -confirm-license \
         -framework \
         -no-gui \
@@ -82,7 +85,7 @@ function configure {
 # Build Qt.
 function build {
     configure || return
-    pushd "$SELF_DIR/$QT_NAME"
+    pushd "$SELF_DIR/build"
     make module-qtbase ; RC=$?
     popd
     return $RC
