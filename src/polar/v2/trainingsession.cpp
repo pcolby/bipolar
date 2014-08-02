@@ -1688,6 +1688,29 @@ bool TrainingSession::writeGPX(QIODevice &device)
     return true;
 }
 
+QStringList TrainingSession::writeHRM(const QString &baseName)
+{
+    QStringList hrm = toHRM();
+    if (hrm.isEmpty()) {
+        qWarning() << "failed to conver to HRM" << baseName;
+        return QStringList();
+    }
+
+    QStringList fileNames;
+    for (int index = 0; index < hrm.length(); ++index) {
+        const QString fileName = (hrm.length() == 1)
+            ? QString::fromLatin1("%1.hrm").arg(baseName)
+            : QString::fromLatin1("%1.%2.hrm").arg(baseName).arg(index);
+        QFile file(fileName);
+        if (!file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+            qWarning() << "failed to open" << QDir::toNativeSeparators(fileName);
+        } else if (file.write(hrm.at(index).toLatin1())) {
+            fileNames.append(fileName);
+        }
+    }
+    return fileNames;
+}
+
 bool TrainingSession::writeTCX(const QString &fileName)
 {
     QFile file(fileName);

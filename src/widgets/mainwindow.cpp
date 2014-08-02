@@ -196,12 +196,17 @@ void MainWindow::convertAll()
         const QString hrmFileName = session + QLatin1String(".hrm");
         if ((QFile::exists(hrmFileName)) && (!overwrite)) {
             qDebug() << QDir::toNativeSeparators(hrmFileName) << "already exists";
-        } else if (!parser.writeGPX(hrmFileName)) {
-            qWarning() << "failed to write HRM";
-            failed++;
         } else {
-            qDebug() << "wrote HRM" << QDir::toNativeSeparators(hrmFileName);
-            succeeded++;
+            QStringList fileNames = parser.writeHRM(session);
+            if (fileNames.isEmpty()) {
+                qWarning() << "failed to write HRM";
+                failed++;
+            } else {
+                foreach (const QString &fileName, fileNames) {
+                    qDebug() << "wrote HRM" << QDir::toNativeSeparators(fileName);
+                }
+                succeeded++;
+            }
         }
 
         const QString tcxFileName = session + QLatin1String(".tcx");

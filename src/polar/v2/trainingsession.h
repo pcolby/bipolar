@@ -48,10 +48,12 @@ public:
 
     bool parse(const QString &baseName = QString());
 
-    bool writeGPX(const QString &fileName = QString());
+    bool writeGPX(const QString &fileName);
     bool writeGPX(QIODevice &device);
 
-    bool writeTCX(const QString &fileName = QString());
+    QStringList writeHRM(const QString &baseName);
+
+    bool writeTCX(const QString &fileName);
     bool writeTCX(QIODevice &device);
 
 protected:
