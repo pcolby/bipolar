@@ -1111,8 +1111,6 @@ QStringList TrainingSession::toHRM()
         const QVariantMap stats      = map.value(STATISTICS).toMap();
         const QVariantMap zones      = map.value(ZONES).toMap();
 
-        const QVariantList rrsamples = map.value(RRSAMPLES).toMap().value(QLatin1String("value")).toList();
-
         const bool haveAltitude = haveAnySamples(samples, QLatin1String("speed"));
         const bool haveCadence  = haveAnySamples(samples, QLatin1String("cadence"));
         const bool haveSpeed    = haveAnySamples(samples, QLatin1String("altitude"));
@@ -1143,8 +1141,7 @@ QStringList TrainingSession::toHRM()
         stream << "Date="      << startTime.toString(QLatin1String("yyyyMMdd")) << "\r\n";
         stream << "StartTime=" << startTime.toString(QLatin1String("HH:mm:ss.zzz")) << "\r\n";
         stream << "Length="    << getDurationString(firstMap(create.value(QLatin1String("duration")))) << "\r\n";
-        // HRM uses interval "238" to indicate the use of heart rate variability data instead.
-        stream << "Interval="  << ((!rrsamples.empty()) ? 238 : qRound(recordInterval/1000.0f)) << "\r\n";
+        stream << "Interval="  << qRound(recordInterval/1000.0f) << "\r\n";
 
         /// @todo {Upper,Lower}{1,2,3} - Need to parse *-phases file(s).
         QVariantList hrZones = zones.value(QLatin1String("heartrate")).toList();
@@ -1358,13 +1355,8 @@ QStringList TrainingSession::toHRM()
         const QVariantList cadence  = samples.value(QLatin1String("cadence")).toList();
         const QVariantList speed    = samples.value(QLatin1String("speed")).toList();
         for (int index = 0; index < heartrate.length(); ++index) {
-            if (rrsamples.isEmpty()) {
-                stream << qSetFieldWidth(3) << ((index < heartrate.length())
-                    ? heartrate.at(index).toUInt() : (uint)0);
-            } else {
-                stream << qSetFieldWidth(4) << ((index < rrsamples.length())
-                    ? rrsamples.at(index).toUInt() : (uint)0);
-            }
+            stream << qSetFieldWidth(3) << ((index < heartrate.length())
+                ? heartrate.at(index).toUInt() : (uint)0);
             if (haveSpeed) {
                 stream << ' ' << qSetFieldWidth(3) << ((index < speed.length())
                     ? qRound(speed.at(index).toFloat() * 10.0) : ( int)0);
