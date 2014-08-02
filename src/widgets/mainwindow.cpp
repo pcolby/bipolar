@@ -19,7 +19,9 @@
 
 #include "mainwindow.h"
 
+#ifdef Q_OS_WIN
 #include "os/flowsynchook.h"
+#endif
 
 #include <QApplication>
 #include <QDebug>
@@ -31,8 +33,6 @@
 #include <QTimer>
 
 #include "polar/v2/trainingsession.h"
-
-#define EXPECTED_HOOK_VERSION 1
 
 #define SETTINGS_GEOMETRY QLatin1String("geometry")
 
@@ -81,6 +81,7 @@ void MainWindow::logMessage(QtMsgType type, const QMessageLogContext &context,
 
 void MainWindow::checkHook()
 {
+#ifdef Q_OS_WIN
     const QDir hookDir = FlowSyncHook::installableHookDir();
     const int availableVersion = FlowSyncHook::getVersion(hookDir);
     if (availableVersion <= 0) {
@@ -121,6 +122,7 @@ void MainWindow::checkHook()
                    ));
         }
     }
+#endif
     QTimer::singleShot(0, this, SLOT(convertAll()));
 }
 

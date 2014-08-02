@@ -19,7 +19,10 @@
 
 #include "mainwindow.h"
 #include "os/fileversioninfo.h"
+
+#ifdef Q_OS_WIN
 #include "os/flowsynchook.h"
+#endif
 
 #include <QApplication>
 #include <QDebug>
@@ -64,6 +67,7 @@ int main(int argc, char *argv[]) {
     if (translator.load(QLocale::system().name(),app.applicationDirPath()+QLatin1String("/../i18n")))
         app.installTranslator(&translator);
 
+#ifdef Q_OS_WIN
     // Install the hook now, if requested via the command line.
     if (app.arguments().contains(QLatin1Literal("-install-hook"))) {
         const QDir fromDir = FlowSyncHook::installableHookDir();
@@ -89,6 +93,7 @@ int main(int argc, char *argv[]) {
         }
         return 0;
     }
+#endif
 
     // Instantiate the main window.
     mainWindow = new MainWindow;
