@@ -1,4 +1,5 @@
 *.user
+.qmake.stash
 debug
 release
 Makefile*
