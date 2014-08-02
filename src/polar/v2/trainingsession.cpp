@@ -1327,7 +1327,7 @@ QStringList TrainingSession::toHRM()
         stream << "\r\n[Summary-TH]\r\n"; // WebSync includes 0's when empty.
         stream << qSetFieldWidth(4);
         stream << (heartrate.length() * qRound(recordInterval/1000.0f));
-        for (int index = 0; index < (sizeof(summaryThRow1)/sizeof(summaryThRow1[0])); ++index) {
+        for (size_t index = 0; index < (sizeof(summaryThRow1)/sizeof(summaryThRow1[0])); ++index) {
             stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(4) << (summaryThRow1[index] * qRound(recordInterval/1000.0f));
         }
         stream << qSetFieldWidth(0) << "\r\n";
