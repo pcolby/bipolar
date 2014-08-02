@@ -1585,6 +1585,9 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
             QDomElement version = doc.createElement(QLatin1String("Version"));
             build.appendChild(version);
             QStringList versionParts = QApplication::applicationVersion().split(QLatin1Char('.'));
+            while (versionParts.length() < 4) {
+                versionParts.append(QLatin1String("0"));
+            }
             version.appendChild(doc.createElement(QLatin1String("VersionMajor")))
                 .appendChild(doc.createTextNode(versionParts.at(0)));
             version.appendChild(doc.createElement(QLatin1String("VersionMinor")))
