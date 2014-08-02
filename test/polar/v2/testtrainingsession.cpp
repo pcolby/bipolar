@@ -568,13 +568,15 @@ void TestTrainingSession::toHRM_data()
         QString baseName; \
         QStringList expected; \
         for (int count = 0; count < expectedCount; ++count) { \
-            QFile expectedFile(QFINDTESTDATA( \
-                QString::fromLatin1("testdata/" name ".%1.hrm").arg(count))); \
+            QFile expectedFile(QFINDTESTDATA((expectedCount == 1) \
+                ? QString::fromLatin1("testdata/" name ".hrm") \
+                : QString::fromLatin1("testdata/" name ".%1.hrm").arg(count) \
+            )); \
             expectedFile.open(QIODevice::ReadOnly); \
             expected.append(QString::fromLatin1(expectedFile.readAll())); \
             if (baseName.isEmpty()) { \
                 baseName = expectedFile.fileName(); \
-                baseName.chop(6); \
+                baseName.chop((expectedCount == 1) ? 4 : 6); \
             } \
         } \
         QTest::newRow(name) << baseName << expected; \
@@ -590,6 +592,7 @@ void TestTrainingSession::toHRM()
 {
     QFETCH(QString, baseName);
     QFETCH(QStringList, expected);
+    qDebug() << baseName;
 
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession session(baseName);
@@ -598,12 +601,17 @@ void TestTrainingSession::toHRM()
 
     // Write the result to a text file for optional post-mortem investigations.
     for (int index = 0; index < hrm.length(); ++index) {
-#ifdef Q_OS_WIN
-        QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.%2.hrm")
-#else
-        QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.%2.hrm")
+        QString fileName;
+#ifndef Q_OS_WIN
+        fileName = QLatin1String("../");
 #endif
-            .arg(QString::fromLatin1(QTest::currentDataTag())).arg(index));
+        fileName += QString::fromLatin1("polar/v2/testdata/%1.result")
+            .arg(QLatin1String(QTest::currentDataTag()));
+        if (hrm.length() != 1) {
+            fileName += QString::fromLatin1(".%1").arg(index);
+        }
+        fileName += QString::fromLatin1(".hrm");
+        QFile file(fileName);
         if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
             file.write(hrm.at(index).toLatin1());
         }
