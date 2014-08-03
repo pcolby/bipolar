@@ -24,7 +24,7 @@ echo 'Copying Bipolar.app'
 cp -a ../../release/Bipolar.app .
 
 echo 'Running macdeployqt'
-#macdeployqt Bipolar.app -dmg
+macdeployqt Bipolar.app -dmg || exit
 
 echo 'Coverting disk image to read/writable'
 [ -e Bipolar-rw.dmg ] && rm -f Bipolar-rw.dmg
