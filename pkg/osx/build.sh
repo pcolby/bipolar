@@ -7,6 +7,11 @@ if [ ! -e "$HOOK" ]; then
     exit 1
 fi
 
+if [ -e /Volumes/Bipolar ]; then
+    echo 'Already mounted: /Volumes/Bipolar' 2>&1
+    exit 1
+fi
+
 if [ -e Bipolar.app ]; then
     if [ "$1" == '--force' ]; then
         rm -rf Bipolar.app
