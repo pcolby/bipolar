@@ -20,9 +20,11 @@ BACKUP_FILE="$TARGET_FILE.$TIMESTAMP"
 echo 'Backing up:'
 echo "  From: $TARGET_FILE"
 echo "    To: $BACKUP_FILE"
-cp -a "$TARGET_FILE" "$BACKUP_FILE" || exit 2
+echo -n 'Note, this requires administrator access.'
+echo ' You will probably be prompted for a password.'
+sudo cp -a "$TARGET_FILE" "$BACKUP_FILE" || exit 2
 
 echo 'Installing hook library'
-cp -af QtNetwork "$TARGET_FILE" || exit 3
+sudo cp -af QtNetwork "$TARGET_FILE" || exit 3
 
 echo 'Hook installed successfully.'
