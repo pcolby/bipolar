@@ -96,10 +96,7 @@ int main(int argc, char *argv[]) {
     // Instantiate the main window.
     mainWindow = new MainWindow;
     qDebug() << QApplication::applicationName() << QApplication::applicationVersion()
-#ifdef Q_OS_WIN
-         << versionInfo.fileInfo(QLatin1String("SpecialBuild"))
-#endif
-        ;
+             << versionInfo.fileInfo(QLatin1String("SpecialBuild"));
     mainWindow->show();
     return app.exec();
 }
