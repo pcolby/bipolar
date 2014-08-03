@@ -9,8 +9,11 @@ DEFINES += QT_NO_CAST_FROM_ASCII QT_NO_CAST_TO_ASCII
 
 # Add the embedded resources.
 RESOURCES = qrc/app.qrc
-macx:QMAKE_INFO_PLIST=qrc/Info.plist
-win32:RC_FILE=qrc/Bipolar.rc
+macx: {
+    ICON  = qrc/icon/Bipolar.icns
+    QMAKE_INFO_PLIST = qrc/Info.plist
+}
+win32:RC_FILE = qrc/Bipolar.rc
 
 # Neaten the output directories.
 CONFIG(debug,debug|release) DESTDIR = debug

@@ -1,4 +1,5 @@
 *.user
+.DS_Store
 .qmake.stash
 debug
 release

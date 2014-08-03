@@ -7,9 +7,9 @@
 	<key>CFBundleDisplayName</key>
 	<string>Bipolar 0.0.0</string>
 	<key>CFBundleExecutable</key>
-	<string>Bipolar</string>
+	<string>@EXECUTABLE@</string>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>@ICON@</string>
 	<key>CFBundleIdentifier</key>
 	<string>au.id.colby.Bipolar</string>
 	<key>CFBundleInfoDictionaryVersion</key>
