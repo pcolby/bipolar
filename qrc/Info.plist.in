@@ -28,5 +28,11 @@
 	<string>Copyright © 2014 Paul Colby</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<!--
+	    Because we embed the following value in TCX files, if set,
+	    it should be one of: Internal, Alpha, Beta, or Release.
+	-->
+	<key>SpecialBuild</key>
+	<string>Alpha</string>
 </dict>
 </plist>
