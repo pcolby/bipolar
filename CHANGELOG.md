@@ -4,6 +4,11 @@
 Features:
 - basic GUI?
 
+### 0.2.1 (_unreleased_)
+Features:
+- official HRM export ([#14](../../issues/14))
+- lap data in TCX output ([#18](../../issues/18))
+
 ### 0.2.0 (2014-08-03)
 Features:
 - OSX support.

@@ -18,7 +18,7 @@ The release plans is roughly as follows:
 - [ ] 0.2.x Export to HRM format.
 - [ ] 0.3.0 Basic GUI.
 
-Note, while the current (0.1.x) release includes a lot of behind-the-scenes code
+Note, while the current (0.2.x) release includes a lot of behind-the-scenes code
 for parsing training session data and exporting to GPX and TCX, the GUI has
 been intentionally left ultra-bare at this stage. This, of course, is to allow
 people (like myself) to begin capturing and exporting data as soon as possible,
