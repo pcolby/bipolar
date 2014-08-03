@@ -52,4 +52,4 @@ FINALNAME="Bipolar-0.2.0.$REVISION.dmg"
 hdiutil convert Bipolar-rw.dmg -format UDZO -o "$FINALNAME"
 
 echo 'Cleaning up Bipolar.app'
-rm -rf Bipolar.app Bipolar-rw.dmg
+rm -rf Bipolar.app Bipolar.dmg Bipolar-rw.dmg
