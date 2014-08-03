@@ -47,7 +47,7 @@ install_name_tool -change \
     '@executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore' \
     '/Volumes/Bipolar/Hook/QtNetwork'
 otool -L '/Volumes/Bipolar/hook/QtNetwork' | grep -i qt # Debug info only.
-cp install-hook.sh /Volumes/Bipolar/Hook || exit
+cp install.command /Volumes/Bipolar/Hook || exit
 cp README.txt /Volumes/Bipolar/  || exit
 hdiutil detach /Volumes/Bipolar/ || exit
 
