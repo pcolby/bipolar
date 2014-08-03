@@ -37,7 +37,7 @@ hdiutil convert Bipolar.dmg -format UDRW -o Bipolar-rw.dmg
 
 echo 'Adding hook to disk image'
 hdiutil attach Bipolar-rw.dmg   || exit
-mkdir /Volumes/Bipolar/hook     || exit
+mkdir /Volumes/Bipolar/Hook     || exit
 cp $HOOK /Volumes/Bipolar/Hook/ || exit
 install_name_tool -id \
     '@executable_path/../Frameworks/QtNetwork.framework/Versions/5/QtNetwork' \
@@ -46,7 +46,7 @@ install_name_tool -change \
     '/usr/local/Qt-5.1.1/lib/QtCore.framework/Versions/5/QtCore' \
     '@executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore' \
     '/Volumes/Bipolar/Hook/QtNetwork'
-otool -L '/Volumes/Bipolar/hook/QtNetwork' | grep -i qt # Debug info only.
+otool -L '/Volumes/Bipolar/Hook/QtNetwork' | grep -i qt # Debug info only.
 cp install.command /Volumes/Bipolar/Hook || exit
 cp README.txt /Volumes/Bipolar/  || exit
 hdiutil detach /Volumes/Bipolar/ || exit
