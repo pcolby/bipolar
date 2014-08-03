@@ -42,13 +42,13 @@ bool BundleInfo::isValid() const
 QString getBundleInfo(const CFBundleRef bundle, const CFStringRef &key)
 {    
     // Get this application's version string.
-    const CFTypeRef ref = CFBundleGetValueForInfoDictionaryKey(CFBundleGetMainBundle(), kCFBundleVersionKey);
+    const CFTypeRef ref = CFBundleGetValueForInfoDictionaryKey(bundle, key);
     if ((ref == NULL) || (CFGetTypeID(ref) != CFStringGetTypeID())) {
-        return QString(); // Invalid version.
+        return QString(); // Not a string.
     }
 
-    // Convert this CFStringRef to a QString (emulate Qt's private QCFString::toString function).
-    const CFIndex length = CFStringGetLength((CFStringRef)ref);
+    // Convert CFStringRef to QString. See Qt's private QString::fromCFString.
+    const CFIndex length = CFStringGetLength(static_cast<CFStringRef>(ref));
     const UniChar * const chars = CFStringGetCharactersPtr(static_cast<CFStringRef>(ref));
     if (chars == NULL) {
       QVarLengthArray<UniChar> buffer(length);
@@ -65,9 +65,11 @@ QString BundleInfo::fileInfo(const QString &name) const
         return QString();
     }
 
-    /// @todo  Convert name to stringref.
+    // Convert QString to CFStringRef. Based on Qt's private QString::toCFString.
+    const CFStringRef key = CFStringCreateWithCharacters(
+        NULL, reinterpret_cast<const UniChar *>(name.unicode()), name.length());
 
-    return getBundleInfo(CFBundleGetMainBundle(), kCFBundleVersionKey);
+    return getBundleInfo(CFBundleGetMainBundle(), key);
 }
 
 QList<quint16> BundleInfo::fileVersion() const
