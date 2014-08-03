@@ -33,7 +33,7 @@ BEGIN
             VALUE "ProductVersion", "0.2.0.0\0"
             // Because we embed the following value in TCX files, if set,
             // it should be one of: Internal, Alpha, Beta, or Release.
-            VALUE "SpecialBuild", "Internal\0"
+            VALUE "SpecialBuild", "Beta\0"
         END
     END
     BLOCK "VarFileInfo"
