@@ -24,7 +24,8 @@ echo -n 'Note, this requires administrator access.'
 echo ' You will probably be prompted for a password.'
 sudo cp -a "$TARGET_FILE" "$BACKUP_FILE" || exit 2
 
-echo 'Installing hook library'
-sudo cp -af QtNetwork "$TARGET_FILE" || exit 3
+SELF_DIR=`dirname "$0"`
+echo 'Installing $SELF_DIR/QtNetwork'
+sudo cp -af "$SELF_DIR/QtNetwork" "$TARGET_FILE" || exit 3
 
 echo 'Hook installed successfully.'
