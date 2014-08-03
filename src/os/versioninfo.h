@@ -22,13 +22,18 @@
 
 #include <QtGlobal>
 
+#ifdef Q_OS_MAC
+#include "bundleinfo.h"
+typedef BundleInfo VersionInfo;
+#endif
+
 #ifdef Q_OS_WIN
 #include "fileversioninfo.h"
 typedef FileVersionInfo VersionInfo;
 #endif
 
-#ifndef Q_OS_WIN
-// Temporary fallback for OSX and Linux.
+#if !defined Q_OS_MAC && !defined Q_OS_WIN
+// Temporary fallback for Linux.
 #include "abstractversioninfo.h"
 class VersionInfo : public AbstractVersionInfo {
 

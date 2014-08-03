@@ -17,28 +17,30 @@
     along with Bipolar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef __ABSTRACT_VERSION_INFO_H__
-#define __ABSTRACT_VERSION_INFO_H__
+#ifndef __BUNDLE_VERSION_INFO_H__
+#define __BUNDLE_VERSION_INFO_H__
 
-#include <QList>
-#include <QString>
-#include <QStringList>
+#include "abstractversioninfo.h"
 
-class AbstractVersionInfo {
+#ifdef Q_OS_MAC // BundleInfo is a Mac-only class.
+
+class BundleInfo : public AbstractVersionInfo {
 
 public:
-    virtual ~AbstractVersionInfo() { };
+    BundleInfo(const QString &fileName = QString());
+    virtual ~BundleInfo();
 
-    virtual bool isValid() const = 0;
+    virtual bool isValid() const;
 
-    virtual QString fileInfo(const QString &name) const = 0;
+    virtual QString fileInfo(const QString &name) const;
 
-    virtual QList<quint16> fileVersion() const = 0;
+    virtual QList<quint16> fileVersion() const;
 
-    virtual QString fileVersionString(const QChar &sep = QLatin1Char('.')) const;
-    virtual QString fileVersionString(const QString &sep) const;
-    virtual QStringList fileVersionStrings() const;
+protected:
+    bool valid;
 
 };
 
-#endif // __ABSTRACT_VERSION_INFO_H__
+#endif // Q_OS_MAC
+
+#endif // __BUNDLE_VERSION_INFO_H__
