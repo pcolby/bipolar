@@ -4,9 +4,9 @@
 Features:
 - basic GUI?
 
-### 0.2.0 (_unreleased_)
+### 0.2.0 (2014-08-03)
 Features:
-- Mac OS X support.
+- OSX support.
 - additional TCX elements ([#16](../../issues/16))
 - preview (incomplete) HRM export ([#14](../../issues/14))
 - upgrade to Qt 5.3.1 (from 5.3.0)

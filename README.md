@@ -6,8 +6,7 @@
 Bipolar aims to be a convenient GUI application for exporting activity
 and exercise data from Polar's sync software.  Specifically, its intended to
 provide a way to get your own data from Polar's new V800 watch, via Polar
-FlowSync, but other devices (as well as Polar WebSync) may be supported too
-eventually.
+FlowSync, but works well for the Polar Loop too.
 
 ## Status
 
@@ -15,7 +14,7 @@ The release plans is roughly as follows:
 
 - [x] 0.0.1 Working hook DLL for extracting data from Polar FlowSync on Windows.
 - [x] 0.1.0 Export to both GPX and TCX, in a headless mode (no GUI yet).
-- [ ] 0.2.0 Mac OS support (both hook library, and headless app).
+- [x] 0.2.0 Mac OS support (both hook library, and headless app).
 - [ ] 0.2.x Export to HRM format.
 - [ ] 0.3.0 Basic GUI.
 
@@ -28,6 +27,8 @@ for 0.3.0).
 
 ## How it Works
 
+### Windows
+
 When Bipolar is installed, it places a custom DLL into the Polar FlowSync
 application directory. This custom DLL then writes all training session data it
 sees to binary files (in `%LOCALAPPDATA%\Polar\PolarFlowSync\export`).
@@ -37,10 +38,25 @@ looks through all training session data exported above, and, for any that don't
 already have corresponding `*.gpx` and/or `*.tcx` files, converts those sessions
 to GPX and/or TCX accordingly.
 
-For the current release (0.1.x) this Bipolar application is extremely simple in
-user interface - it basically just displays a log of its activity.  The UI will
-be made more featureful sometime in the future, but it already does the most
-valuable thing - converting all training sessions to GPX and TCX.
+### OSX
+
+For OSX, Bipolar is provided as a standard disk image (`*.dmg`) file. This file
+contains both the Bipolar application (which can run completely standalone), and
+the hook library.  However, the hook library is not automatically installed for
+OSX. Instead, the disk image includes a simple hook install script to run to
+install the hook (which you will want to do, unless using the direct USB option
+mentioned below).
+
+### Direct USB Interface
+
+The separate [v800_downloader](https://github.com/profanum429/v800_downloader)
+project provides a way of extracting training session data from the V800
+directly, without the need for the hook mentioned above. That project extracts
+data in a format that is compatible with this project's Bipolar application, so
+can be used as a hook alternative if desired.
+
+Of course, that is particularly exciting for Linux users, who otherwise could
+not make any significant use of this project, nor the Polar V800 in general.
 
 ## Contact
 
