@@ -22,13 +22,14 @@
 #include "message.h"
 #include "types.h"
 
+#include "os/versioninfo.h"
+
 #include <QApplication>
 #include <QDebug>
 #include <QDir>
 #include <QFileInfo>
 
 #ifdef Q_OS_WIN
-#include "os/fileversioninfo.h"
 #include <QtZlib/zlib.h>
 #else
 #include <zlib.h>
@@ -1597,16 +1598,11 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
             version.appendChild(doc.createElement(QLatin1String("BuildMinor")))
                 .appendChild(doc.createTextNode(versionParts.at(3)));
             QString buildType = QLatin1String("Release");
-            #ifdef Q_OS_WIN
-            {
-                FileVersionInfo versionInfo;
-                const QString specialBuild = versionInfo.fileInfo(QLatin1String("SpecialBuild"),
-                    FileVersionInfo::US_ENGLISH, FileVersionInfo::ANSI_LATIN_1);
-                if (!specialBuild.isEmpty()) {
-                    buildType = specialBuild;
-                }
+            VersionInfo versionInfo;
+            const QString specialBuild = versionInfo.fileInfo(QLatin1String("SpecialBuild"));
+            if (!specialBuild.isEmpty()) {
+                buildType = specialBuild;
             }
-            #endif
             build.appendChild(doc.createElement(QLatin1String("Type")))
                 .appendChild(doc.createTextNode(buildType));
             build.appendChild(doc.createElement(QLatin1String("Time")))

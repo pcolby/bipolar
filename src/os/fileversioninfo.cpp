@@ -19,8 +19,6 @@
 
 #include "fileversioninfo.h"
 
-#ifdef Q_OS_WIN // VersionInfo is a Windows-only class.
-
 #include <windows.h>
 
 /// The caller is responsible for freeing the result via HeapFree.
@@ -174,14 +172,3 @@ QList<quint16> FileVersionInfo::fileVersion() const
     }
     return list;
 }
-
-QStringList FileVersionInfo::fileVersionStrings() const
-{
-    QStringList list;
-    foreach (const quint16 value, fileVersion()) {
-        list.append(QString::fromLatin1("%1").arg(value));
-    }
-    return list;
-}
-
-#endif // Q_OS_WIN

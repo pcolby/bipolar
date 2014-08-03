@@ -17,42 +17,29 @@
     along with Bipolar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef __FILE_VERSION_INFO_H__
-#define __FILE_VERSION_INFO_H__
+#ifndef __ABSTRACT_VERSION_INFO_H__
+#define __ABSTRACT_VERSION_INFO_H__
 
-#include "abstractversioninfo.h"
+#include <QList>
+#include <QString>
+#include <QStringList>
 
-#ifdef Q_OS_WIN // FileVersionInfo is a Windows-only class.
-
-class FileVersionInfo : public AbstractVersionInfo {
+class AbstractVersionInfo {
 
 public:
+    virtual ~AbstractVersionInfo() { };
 
-    enum Lang {
-        US_ENGLISH = 0x0409, // == 1033
-    };
+    virtual bool isValid() const = 0;
 
-    enum CodePage {
-        UTF_16       = 0x04B0, // == 1200
-        ANSI_LATIN_1 = 0x04E4, // == 1252
-    };
-
-    FileVersionInfo(const QString &fileName = QString());
-    virtual ~FileVersionInfo();
-
-    virtual bool isValid() const;
-
-    virtual QString fileInfo(const QString &name) const;
+    virtual QString fileInfo(const QString &name) const = 0;
     virtual QString fileInfo(const QString &name, const quint16 lang,
-                             const quint16 &codepage) const;
+                             const quint16 &codepage) const = 0;
 
-    virtual QList<quint16> fileVersion() const;
-
-protected:
-    void * versionInfo;
+    virtual QList<quint16> fileVersion() const = 0;
+    virtual QString fileVersionString(const QChar &sep = QLatin1Char('.')) const;
+    virtual QString fileVersionString(const QString &sep) const;
+    virtual QStringList fileVersionStrings() const;
 
 };
 
-#endif // Q_OS_WIN
-
-#endif // __FILE_VERSION_INFO_H__
+#endif // __ABSTRACT_VERSION_INFO_H__

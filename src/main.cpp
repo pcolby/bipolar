@@ -18,7 +18,7 @@
 */
 
 #include "mainwindow.h"
-#include "os/fileversioninfo.h"
+#include "os/versioninfo.h"
 
 #ifdef Q_OS_WIN
 #include "os/flowsynchook.h"
@@ -51,12 +51,10 @@ int main(int argc, char *argv[]) {
     app.setApplicationName(APPLICATION_NAME);
     app.setOrganizationName(ORGANISATION_NAME);
     app.setOrganizationDomain(ORGANISATION_DOMAIN);
-#ifdef Q_OS_WIN
-    FileVersionInfo versionInfo;
+    VersionInfo versionInfo;
     if (versionInfo.isValid()) {
-        app.setApplicationVersion(versionInfo.fileVersionStrings().join(QLatin1Char('.')));
+        app.setApplicationVersion(versionInfo.fileVersionString());
     }
-#endif
 
     // Install the QErrorMessage class' Qt message handler.
     //QErrorMessage::qtHandler();
