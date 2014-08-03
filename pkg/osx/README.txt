@@ -12,7 +12,11 @@ https://github.com/profanum429/v800_downloader), or both.
 
 If you choose to use the hook, you should first install Polar FlowSync (if you
 haven't already), then go into the Hook directory within this disk image, and
-run the install.command script.
+run the install.command script. Note, this script requires administrator access
+to backup and copy to the Polar FlowSync directory; the command script calls
+sudo internally, so admin privileges are restricted to just the commands that
+require it, but you will most likely be prompted for your password as a result.
 
-See https://github.com/pcolby/bipolar and / or
-https://github.com/profanum429/v800_downloader for more information.
+For more information, see:
+* https://github.com/pcolby/bipolar and / or
+* https://github.com/profanum429/v800_downloader
