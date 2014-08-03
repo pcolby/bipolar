@@ -39,12 +39,8 @@ bool BundleInfo::isValid() const
     return valid;
 }
 
-QString BundleInfo::fileInfo(const QString &name) const
-{
-    if (!isValid()) {
-        return QString();
-    }
-
+QString getBundleInfo(const CFBundleRef bundle, const CFStringRef &key)
+{    
     // Get this application's version string.
     const CFTypeRef ref = CFBundleGetValueForInfoDictionaryKey(CFBundleGetMainBundle(), kCFBundleVersionKey);
     if ((ref == NULL) || (CFGetTypeID(ref) != CFStringGetTypeID())) {
@@ -63,6 +59,17 @@ QString BundleInfo::fileInfo(const QString &name) const
     return QString(reinterpret_cast<const QChar *>(chars), length);
 }
 
+QString BundleInfo::fileInfo(const QString &name) const
+{
+    if (!isValid()) {
+        return QString();
+    }
+
+    /// @todo  Convert name to stringref.
+
+    return getBundleInfo(CFBundleGetMainBundle(), kCFBundleVersionKey);
+}
+
 QList<quint16> BundleInfo::fileVersion() const
 {
     QList<quint16> list;
@@ -70,5 +77,9 @@ QList<quint16> BundleInfo::fileVersion() const
         return list;
     }
 
+    const QString version = getBundleInfo(CFBundleGetMainBundle(), kCFBundleVersionKey);
+    foreach (const QString &part, version.split(QLatin1Char('.'))) {
+        list.append(part.toUInt());
+    }
     return list;
 }
