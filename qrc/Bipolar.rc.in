@@ -5,8 +5,8 @@ IDI_ICON1 ICON DISCARDABLE "..\\qrc\\icon\\bipolar.ico"
 1 TYPELIB "Bipolar.rc"
 
 1 VERSIONINFO
- FILEVERSION 0,2,0,0
- PRODUCTVERSION 0,2,0,0
+ FILEVERSION 0,2,1,0
+ PRODUCTVERSION 0,2,1,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -24,16 +24,16 @@ BEGIN
             VALUE "Comments", "https://github.com/pcolby/bipolar\0"
             VALUE "CompanyName", "Paul Colby\0"
             VALUE "FileDescription", "Bipolar application\0"
-            VALUE "FileVersion", "0.2.0.0\0"
+            VALUE "FileVersion", "0.2.1.0\0"
             VALUE "InternalName", "Bipolar\0"
             VALUE "LegalCopyright", "2014 Paul Colby\0"
             VALUE "OriginalFilename", "Bipolar.exe\0"
           //VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "Bipolar\0"
-            VALUE "ProductVersion", "0.2.0.0\0"
+            VALUE "ProductVersion", "0.2.1.0\0"
             // Because we embed the following value in TCX files, if set,
             // it should be one of: Internal, Alpha, Beta, or Release.
-            VALUE "SpecialBuild", "Beta\0"
+            VALUE "SpecialBuild", "Internal\0"
         END
     END
     BLOCK "VarFileInfo"
