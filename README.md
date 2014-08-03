@@ -16,6 +16,7 @@ The release plans is roughly as follows:
 - [x] 0.0.1 Working hook DLL for extracting data from Polar FlowSync on Windows.
 - [x] 0.1.0 Export to both GPX and TCX, in a headless mode (no GUI yet).
 - [ ] 0.2.0 Mac OS support (both hook library, and headless app).
+- [ ] 0.2.x Export to HRM format.
 - [ ] 0.3.0 Basic GUI.
 
 Note, while the current (0.1.x) release includes a lot of behind-the-scenes code
@@ -50,3 +51,6 @@ announcements etc.  Email bipolar-app@googlegroups.com to subscribe.
 Of course, the [issue tracker](https://github.com/pcolby/bipolar/issues?state=open)
 is also available for reporting issues, asking questions, making comments and
 suggestions, etc.
+
+There's also a bit of Bipolar-related chatter on the
+[Polar forums](http://forum.polar.fi/showthread.php?t=29092).
