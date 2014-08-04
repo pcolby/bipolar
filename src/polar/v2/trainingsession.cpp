@@ -1246,37 +1246,37 @@ QStringList TrainingSession::toHRM()
                 const QVariantMap hrStats = firstMap(stats.value(QLatin1String("heartrate")));
                 // Row 1
                 stream << getDurationString(firstMap(header.value(QLatin1String("duration"))));
-                stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(5) << first(hrStats.value(QLatin1String("average"))).toUInt();
-                stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(5) << first(hrStats.value(QLatin1String("minimum"))).toUInt();
-                stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(5) << first(hrStats.value(QLatin1String("average"))).toUInt();
-                stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(5) << first(hrStats.value(QLatin1String("maximum"))).toUInt();
-                stream << qSetFieldWidth(0) << "\r\n";
+                stream << '\t' << first(hrStats.value(QLatin1String("average"))).toUInt();
+                stream << '\t' << first(hrStats.value(QLatin1String("minimum"))).toUInt();
+                stream << '\t' << first(hrStats.value(QLatin1String("average"))).toUInt();
+                stream << '\t' << first(hrStats.value(QLatin1String("maximum"))).toUInt();
+                stream << "\r\n";
                 // Row 2
-                stream << "     0     0     0     0     0     0\r\n";
+                stream << "0\t0\t0\t0\t0\t0\r\n";
                 // Row 3
-                stream << "     0     0     0";
-                stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(5) << qRound(first(header.value(QLatin1String("ascent"))).toFloat() / 10.0);
-                stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(5) << qRound(first(header.value(QLatin1String("distance"))).toFloat() / 100.0);
-                stream << qSetFieldWidth(0) << "\r\n";
+                stream << "0\t0\t0";
+                stream << '\t' << qRound(first(header.value(QLatin1String("ascent"))).toFloat() / 10.0);
+                stream << '\t' << qRound(first(header.value(QLatin1String("distance"))).toFloat() / 100.0);
+                stream << "\r\n";
                 // Row 4
                 switch (first(header.value(QLatin1String("lap-type"))).toInt()) {
-                case 1:  stream << qSetFieldWidth(6) << 1; break; // Distance -> interval
-                case 2:  stream << qSetFieldWidth(6) << 1; break; // Duration -> interval
-                case 3:  stream << qSetFieldWidth(6) << 0; break; // Location -> normal lap
-                default: stream << qSetFieldWidth(6) << 0; // Absent (ie manual) -> normal lap
+                case 1:  stream << 1; break; // Distance -> interval
+                case 2:  stream << 1; break; // Duration -> interval
+                case 3:  stream << 0; break; // Location -> normal lap
+                default: stream << 0; // Absent (ie manual) -> normal lap
                 }
-                stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(5) << qRound(first(header.value(QLatin1String("distance"))).toFloat());
-                stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(5) << first(header.value(QLatin1String("power"))).toUInt();
-                stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(5) << first(firstMap(stats.value(QLatin1String("temperature"))).value(QLatin1String("average"))).toFloat();
-                stream << "     0"; // "Internal phase/lap information"
-                stream << "     0"; // Air pressure not available in protobuf data.
-                stream << qSetFieldWidth(0) << "\r\n";
+                stream << '\t' << qRound(first(header.value(QLatin1String("distance"))).toFloat());
+                stream << '\t' << first(header.value(QLatin1String("power"))).toUInt();
+                stream << '\t' << first(firstMap(stats.value(QLatin1String("temperature")))
+                    .value(QLatin1String("average"))).toFloat();
+                stream << "\t0"; // "Internal phase/lap information"
+                stream << "\t0"; // Air pressure not available in protobuf data.
+                stream << "\r\n";
                 // Row 5
-                stream << qSetFieldWidth(6) << first(firstMap(stats.value(
-                    QLatin1String("stride"))).value(QLatin1String("average"))).toUInt();
-                stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(5) << (isAutoLaps ? '1' : '0');
-                stream << "     0     0     0     0\r\n";
-                stream << qSetFieldWidth(0);
+                stream << first(firstMap(stats.value(QLatin1String("stride")))
+                    .value(QLatin1String("average"))).toUInt();
+                stream << '\t' << (isAutoLaps ? '1' : '0');
+                stream << "\t0\t0\t0\t0\r\n";
             }
         }
 
@@ -1326,18 +1326,17 @@ QStringList TrainingSession::toHRM()
                 summaryThRow1[4]++;
         }
         stream << "\r\n[Summary-TH]\r\n"; // WebSync includes 0's when empty.
-        stream << qSetFieldWidth(4);
         stream << (heartrate.length() * qRound(recordInterval/1000.0f));
         for (size_t index = 0; index < (sizeof(summaryThRow1)/sizeof(summaryThRow1[0])); ++index) {
-            stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(4) << (summaryThRow1[index] * qRound(recordInterval/1000.0f));
+            stream << '\t' << (summaryThRow1[index] * qRound(recordInterval/1000.0f));
         }
-        stream << qSetFieldWidth(0) << "\r\n";
-        stream << qSetFieldWidth(4) << hrMax;
-        stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(4) << anaerobicThreshold;
-        stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(4) << aerobicThreshold;
-        stream << qSetFieldWidth(0) << ' ' << qSetFieldWidth(4) << hrRest;
-        stream << qSetFieldWidth(0) << "\r\n";
-        stream << "   0 " << qSetFieldWidth(4) << heartrate.length() << qSetFieldWidth(0) << "\r\n";
+        stream << "\r\n";
+        stream << hrMax;
+        stream << '\t' << anaerobicThreshold;
+        stream << '\t' << aerobicThreshold;
+        stream << '\t' << hrRest;
+        stream << "\r\n";
+        stream << "0\t" << heartrate.length() << "\r\n";
 
         // [Trip]
         stream << "\r\n[Trip]\r\n";
@@ -1356,24 +1355,24 @@ QStringList TrainingSession::toHRM()
         const QVariantList cadence  = samples.value(QLatin1String("cadence")).toList();
         const QVariantList speed    = samples.value(QLatin1String("speed")).toList();
         for (int index = 0; index < heartrate.length(); ++index) {
-            stream << qSetFieldWidth(3) << ((index < heartrate.length())
+            stream << ((index < heartrate.length())
                 ? heartrate.at(index).toUInt() : (uint)0);
             if (haveSpeed) {
-                stream << ' ' << qSetFieldWidth(3) << ((index < speed.length())
+                stream << '\t' << ((index < speed.length())
                     ? qRound(speed.at(index).toFloat() * 10.0) : ( int)0);
             }
             if (haveCadence) {
-                stream << ' ' << qSetFieldWidth(3) << ((index < cadence.length())
+                stream << '\t' << ((index < cadence.length())
                     ? cadence.at(index).toUInt() : (uint)0);
             }
             if (haveAltitude) {
-                stream << ' ' << qSetFieldWidth(4) << ((index < altitude.length())
+                stream << '\t' << ((index < altitude.length())
                     ? qRound(altitude.at(index).toFloat()) : ( int)0);
             }
             // Power (Watts) - not yet supported by Polar.
             // Power Balance and Pedalling Index - not yet supported by Polar.
             // Air pressure - not available in protobuf data.
-            stream << qSetFieldWidth(0) << "\r\n";
+            stream << "\r\n";
         }
 
         hrmList.append(hrmData);
