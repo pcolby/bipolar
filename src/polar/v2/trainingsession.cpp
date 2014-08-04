@@ -1245,7 +1245,7 @@ QStringList TrainingSession::toHRM()
                 const QVariantMap stats = firstMap(lap.toMap().value(QLatin1String("stats")));
                 const QVariantMap hrStats = firstMap(stats.value(QLatin1String("heartrate")));
                 // Row 1
-                stream << getDurationString(firstMap(header.value(QLatin1String("duration"))));
+                stream << getDurationString(firstMap(header.value(QLatin1String("split-time"))));
                 stream << '\t' << first(hrStats.value(QLatin1String("average"))).toUInt();
                 stream << '\t' << first(hrStats.value(QLatin1String("minimum"))).toUInt();
                 stream << '\t' << first(hrStats.value(QLatin1String("average"))).toUInt();
