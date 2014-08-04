@@ -405,12 +405,12 @@ QVariantMap TrainingSession::parseLaps(QIODevice &data) const
     ADD_FIELD_INFO("1/1/1/1",  "hours",            Uint32);
     ADD_FIELD_INFO("1/1/1/2",  "minutes",          Uint32);
     ADD_FIELD_INFO("1/1/1/3",  "seconds",          Uint32);
-    ADD_FIELD_INFO("1/1/1/4/", "milliseconds",     Uint32);
+    ADD_FIELD_INFO("1/1/1/4",  "milliseconds",     Uint32);
     ADD_FIELD_INFO("1/1/2",    "duration",         EmbeddedMessage);
     ADD_FIELD_INFO("1/1/2/1",  "hours",            Uint32);
     ADD_FIELD_INFO("1/1/2/2",  "minutes",          Uint32);
     ADD_FIELD_INFO("1/1/2/3",  "seconds",          Uint32);
-    ADD_FIELD_INFO("1/1/2/4/", "milliseconds",     Uint32);
+    ADD_FIELD_INFO("1/1/2/4",  "milliseconds",     Uint32);
     ADD_FIELD_INFO("1/1/3",    "distance",         Float);
     ADD_FIELD_INFO("1/1/4",    "ascent",           Float);
     ADD_FIELD_INFO("1/1/5",    "descent",          Float);

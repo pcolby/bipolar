@@ -14,11 +14,11 @@
                     ],
                     "duration": [
                         {
-                            "4": [
-                                875
-                            ],
                             "hours": [
                                 0
+                            ],
+                            "milliseconds": [
+                                875
                             ],
                             "minutes": [
                                 30
@@ -30,11 +30,11 @@
                     ],
                     "split-time": [
                         {
-                            "4": [
-                                875
-                            ],
                             "hours": [
                                 0
+                            ],
+                            "milliseconds": [
+                                875
                             ],
                             "minutes": [
                                 30
@@ -88,11 +88,11 @@
                     ],
                     "duration": [
                         {
-                            "4": [
-                                250
-                            ],
                             "hours": [
                                 0
+                            ],
+                            "milliseconds": [
+                                250
                             ],
                             "minutes": [
                                 24
@@ -104,11 +104,11 @@
                     ],
                     "split-time": [
                         {
-                            "4": [
-                                125
-                            ],
                             "hours": [
                                 0
+                            ],
+                            "milliseconds": [
+                                125
                             ],
                             "minutes": [
                                 54
@@ -162,11 +162,11 @@
                     ],
                     "duration": [
                         {
-                            "4": [
-                                500
-                            ],
                             "hours": [
                                 0
+                            ],
+                            "milliseconds": [
+                                500
                             ],
                             "minutes": [
                                 3
@@ -178,11 +178,11 @@
                     ],
                     "split-time": [
                         {
-                            "4": [
-                                625
-                            ],
                             "hours": [
                                 0
+                            ],
+                            "milliseconds": [
+                                625
                             ],
                             "minutes": [
                                 58
@@ -236,11 +236,11 @@
                     ],
                     "duration": [
                         {
-                            "4": [
-                                625
-                            ],
                             "hours": [
                                 0
+                            ],
+                            "milliseconds": [
+                                625
                             ],
                             "minutes": [
                                 26
@@ -252,11 +252,11 @@
                     ],
                     "split-time": [
                         {
-                            "4": [
-                                250
-                            ],
                             "hours": [
                                 1
+                            ],
+                            "milliseconds": [
+                                250
                             ],
                             "minutes": [
                                 24
@@ -310,11 +310,11 @@
                     ],
                     "duration": [
                         {
-                            "4": [
-                                500
-                            ],
                             "hours": [
                                 0
+                            ],
+                            "milliseconds": [
+                                500
                             ],
                             "minutes": [
                                 2
@@ -326,11 +326,11 @@
                     ],
                     "split-time": [
                         {
-                            "4": [
-                                750
-                            ],
                             "hours": [
                                 1
+                            ],
+                            "milliseconds": [
+                                750
                             ],
                             "minutes": [
                                 27
