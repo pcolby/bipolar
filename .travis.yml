@@ -18,7 +18,7 @@ before_script:
 
 script:
   - pushd test
-  - make && make check
+  - make all && make check
   - popd
 
 after_failure:
