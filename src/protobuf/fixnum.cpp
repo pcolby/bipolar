@@ -51,7 +51,7 @@ QVariant parseFixedNumber(QByteArray &data) {
 template<typename Type>
 QVariant parseFixedNumber(QIODevice &data)
 {
-    Q_ASSERT((sizeof(Type) == 4) || (sizeof(type == 8)));
+    Q_ASSERT((sizeof(Type) == 4) || (sizeof(Type) == 8));
     const QByteArray array = data.read(sizeof(Type));
     if (array.size() != sizeof(Type)) return QVariant();
     return qFromLittleEndian<Type>(reinterpret_cast<const uchar *>(array.constData()));
