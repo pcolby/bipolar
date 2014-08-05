@@ -1442,7 +1442,6 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
         }
         Q_ASSERT(!activity.parentNode().isNull());
 
-
         // Get the sport type.
         activity.setAttribute(QLatin1String("Sport"),
             getTcxSport(first(firstMap(create.value(QLatin1String("sport")))
@@ -1491,79 +1490,8 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
             QDomElement track = doc.createElement(QLatin1String("Track"));
             lap.appendChild(track);
 
-            // Get the number of "samples" samples.
-            const QVariantMap samples = map.value(SAMPLES).toMap();
-            const quint64 recordInterval = getDuration(
-                firstMap(samples.value(QLatin1String("record-interval"))));
-            const QVariantList altitude    = samples.value(QLatin1String("altitude")).toList();
-            const QVariantList cadence     = samples.value(QLatin1String("cadence")).toList();
-            const QVariantList distance    = samples.value(QLatin1String("distance")).toList();
-            const QVariantList heartrate   = samples.value(QLatin1String("heartrate")).toList();
-            const QVariantList speed       = samples.value(QLatin1String("speed")).toList();
-            const QVariantList temperature = samples.value(QLatin1String("temperature")).toList();
-            qDebug() << "samples sizes:"
-                << altitude.size() << cadence.size() << distance.size()
-                << heartrate.size() << speed.size() << temperature.size();
-
-            // Get the number of "route" samples.
-            const QVariantMap route = map.value(ROUTE).toMap();
-            const QVariantList duration    = route.value(QLatin1String("duration")).toList();
-            const QVariantList gpsAltitude = route.value(QLatin1String("altitude")).toList();
-            const QVariantList latitude    = route.value(QLatin1String("latitude")).toList();
-            const QVariantList longitude   = route.value(QLatin1String("longitude")).toList();
-            const QVariantList satellites  = route.value(QLatin1String("satellites")).toList();
-            qDebug() << "route sizes:" << duration.size() << gpsAltitude.size()
-                     << latitude.size() << longitude.size() << satellites.size();
-
-            for (int index = 0; index >= 0; ++index) {
-                QDomElement trackPoint = doc.createElement(QLatin1String("Trackpoint"));
-
-                if ((index < latitude.length()) && (index < longitude.length())) {
-                    QDomElement position = doc.createElement(QLatin1String("Position"));
-                    position.appendChild(doc.createElement(QLatin1String("LatitudeDegrees")))
-                        .appendChild(doc.createTextNode(latitude.at(index).toString()));
-                    position.appendChild(doc.createElement(QLatin1String("LongitudeDegrees")))
-                        .appendChild(doc.createTextNode(longitude.at(index).toString()));
-                    trackPoint.appendChild(position);
-                }
-
-                if ((index < altitude.length()) &&
-                    (!sensorOffline(samples.value(QLatin1String("altitude-offline")).toList(), index))) {
-                    trackPoint.appendChild(doc.createElement(QLatin1String("AltitudeMeters")))
-                        .appendChild(doc.createTextNode(altitude.at(index).toString()));
-                }
-                if ((index < distance.length()) &&
-                    (!sensorOffline(samples.value(QLatin1String("distance-offline")).toList(), index))) {
-                    trackPoint.appendChild(doc.createElement(QLatin1String("DistanceMeters")))
-                        .appendChild(doc.createTextNode(distance.at(index).toString()));
-                }
-                if ((index < heartrate.length()) && (heartrate.at(index).toInt() > 0) &&
-                    (!sensorOffline(samples.value(QLatin1String("heartrate-offline")).toList(), index))) {
-                    trackPoint.appendChild(doc.createElement(QLatin1String("HeartRateBpm")))
-                        .appendChild(doc.createElement(QLatin1String("Value")))
-                        .appendChild(doc.createTextNode(heartrate.at(index).toString()));
-                }
-                if ((index < cadence.length()) && (cadence.at(index).toInt() >= 0) &&
-                    (!sensorOffline(samples.value(QLatin1String("cadence-offline")).toList(), index))) {
-                    trackPoint.appendChild(doc.createElement(QLatin1String("Cadence")))
-                        .appendChild(doc.createTextNode(cadence.at(index).toString()));
-                }
-
-                if (trackPoint.hasChildNodes()) {
-                    #if (QT_VERSION >= QT_VERSION_CHECK(5, 2, 0))
-                    QDateTime trackPointTime = startTime.addMSecs(index * recordInterval);
-                    #else /// @todo Remove this hack when Qt 5.2+ is available on Travis CI.
-                    QDateTime trackPointTime = startTime.toUTC()
-                        .addMSecs(index * recordInterval).addSecs(startTime.utcOffset());
-                    trackPointTime.setUtcOffset(startTime.utcOffset());
-                    #endif
-                    trackPoint.insertBefore(doc.createElement(QLatin1String("Time")), QDomNode())
-                        .appendChild(doc.createTextNode(trackPointTime.toString(Qt::ISODate)));
-                    track.appendChild(trackPoint);
-                } else {
-                    break;
-                }
-            }
+            // Add all the samples data to the track.
+            addTrackSamples(doc, track, map, startTime);
         }
     }
 
@@ -1619,6 +1547,85 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
             .appendChild(doc.createTextNode(QLatin1String("434-F4C42-59")));
     }
     return doc;
+}
+
+void TrainingSession::addTrackSamples(QDomDocument &doc, QDomElement &track,
+                                      const QVariantMap &map, const QDateTime &startTime,
+                                      const int firstIndex, const int lastIndex) const
+{
+    // Get the "samples" samples.
+    const QVariantMap samples = map.value(SAMPLES).toMap();
+    const quint64 recordInterval = getDuration(
+        firstMap(samples.value(QLatin1String("record-interval"))));
+    const QVariantList altitude    = samples.value(QLatin1String("altitude")).toList();
+    const QVariantList cadence     = samples.value(QLatin1String("cadence")).toList();
+    const QVariantList distance    = samples.value(QLatin1String("distance")).toList();
+    const QVariantList heartrate   = samples.value(QLatin1String("heartrate")).toList();
+    const QVariantList speed       = samples.value(QLatin1String("speed")).toList();
+    const QVariantList temperature = samples.value(QLatin1String("temperature")).toList();
+    qDebug() << "samples sizes:"
+        << altitude.size() << cadence.size() << distance.size()
+        << heartrate.size() << speed.size() << temperature.size();
+
+    // Get the "route" samples.
+    const QVariantMap route = map.value(ROUTE).toMap();
+    const QVariantList duration    = route.value(QLatin1String("duration")).toList();
+    const QVariantList gpsAltitude = route.value(QLatin1String("altitude")).toList();
+    const QVariantList latitude    = route.value(QLatin1String("latitude")).toList();
+    const QVariantList longitude   = route.value(QLatin1String("longitude")).toList();
+    const QVariantList satellites  = route.value(QLatin1String("satellites")).toList();
+    qDebug() << "route sizes:" << duration.size() << gpsAltitude.size()
+             << latitude.size() << longitude.size() << satellites.size();
+
+    for (int index = firstIndex; (lastIndex < 0) || (index < lastIndex); ++index) {
+        QDomElement trackPoint = doc.createElement(QLatin1String("Trackpoint"));
+
+        if ((index < latitude.length()) && (index < longitude.length())) {
+            QDomElement position = doc.createElement(QLatin1String("Position"));
+            position.appendChild(doc.createElement(QLatin1String("LatitudeDegrees")))
+                .appendChild(doc.createTextNode(latitude.at(index).toString()));
+            position.appendChild(doc.createElement(QLatin1String("LongitudeDegrees")))
+                .appendChild(doc.createTextNode(longitude.at(index).toString()));
+            trackPoint.appendChild(position);
+        }
+
+        if ((index < altitude.length()) &&
+            (!sensorOffline(samples.value(QLatin1String("altitude-offline")).toList(), index))) {
+            trackPoint.appendChild(doc.createElement(QLatin1String("AltitudeMeters")))
+                .appendChild(doc.createTextNode(altitude.at(index).toString()));
+        }
+        if ((index < distance.length()) &&
+            (!sensorOffline(samples.value(QLatin1String("distance-offline")).toList(), index))) {
+            trackPoint.appendChild(doc.createElement(QLatin1String("DistanceMeters")))
+                .appendChild(doc.createTextNode(distance.at(index).toString()));
+        }
+        if ((index < heartrate.length()) && (heartrate.at(index).toInt() > 0) &&
+            (!sensorOffline(samples.value(QLatin1String("heartrate-offline")).toList(), index))) {
+            trackPoint.appendChild(doc.createElement(QLatin1String("HeartRateBpm")))
+                .appendChild(doc.createElement(QLatin1String("Value")))
+                .appendChild(doc.createTextNode(heartrate.at(index).toString()));
+        }
+        if ((index < cadence.length()) && (cadence.at(index).toInt() >= 0) &&
+            (!sensorOffline(samples.value(QLatin1String("cadence-offline")).toList(), index))) {
+            trackPoint.appendChild(doc.createElement(QLatin1String("Cadence")))
+                .appendChild(doc.createTextNode(cadence.at(index).toString()));
+        }
+
+        if (trackPoint.hasChildNodes()) {
+            #if (QT_VERSION >= QT_VERSION_CHECK(5, 2, 0))
+            QDateTime trackPointTime = startTime.addMSecs(index * recordInterval);
+            #else /// @todo Remove this hack when Qt 5.2+ is available on Travis CI.
+            QDateTime trackPointTime = startTime.toUTC()
+                .addMSecs(index * recordInterval).addSecs(startTime.utcOffset());
+            trackPointTime.setUtcOffset(startTime.utcOffset());
+            #endif
+            trackPoint.insertBefore(doc.createElement(QLatin1String("Time")), QDomNode())
+                .appendChild(doc.createTextNode(trackPointTime.toString(Qt::ISODate)));
+            track.appendChild(trackPoint);
+        } else {
+            return; // We've exceeded the length of all data samples.
+        }
+    }
 }
 
 QByteArray TrainingSession::unzip(const QByteArray &data,

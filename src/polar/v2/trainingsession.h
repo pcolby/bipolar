@@ -99,6 +99,11 @@ protected:
 private:
     friend class ::TestTrainingSession;
 
+    void addTrackSamples(QDomDocument &doc, QDomElement &track,
+                         const QVariantMap &exercise, const QDateTime &startTime,
+                         const int firstIndex = 0,
+                         const int lastIndex = -1) const;
+
 };
 
 }}
