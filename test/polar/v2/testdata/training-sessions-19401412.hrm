@@ -58,6 +58,11 @@ Exported by test 1.2.3.4
 0	0	0	24	26
 0	2595	0	0	0	0
 0	0	0	0	0	0
+01:27:02.750	162	74	162	181
+0	0	0	0	0	0
+0	0	0	77	85
+0	8468	0	0	0	0
+0	1	0	0	0	0
 01:27:18.750	158	150	158	169
 0	0	0	0	0	0
 0	0	0	0	4
@@ -69,7 +74,8 @@ Exported by test 1.2.3.4
 2 Manual lap
 3 Manual lap
 4 Manual lap
-5 Manual lap
+5 Location based lap
+6 Manual lap
 
 [Summary-123]
 

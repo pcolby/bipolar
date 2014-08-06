@@ -1232,17 +1232,29 @@ QStringList TrainingSession::toHRM()
         // [HRCCModeCh] "HR/CC mode swaps are a available only with Polar XTrainer Plus."
 
         // [IntTimes]
-        bool isAutoLaps = false;
-        QVariantList laps = manualLaps.value(QLatin1String("laps")).toList();
-        if (laps.isEmpty()) {
-            laps = autoLaps.value(QLatin1String("laps")).toList();
-            isAutoLaps = true;
+        QMap<QString, QVariantMap> laps;
+        foreach (const QVariant &lap, autoLaps.value(QLatin1String("laps")).toList()) {
+            QVariantMap lapMap = lap.toMap();
+            const QString splitTime = getDurationString(firstMap(firstMap(
+                lapMap.value(QLatin1String("header")))
+                .value(QLatin1String("split-time"))));
+            lapMap.insert(QLatin1String("_isAuto"), QVariant(true));
+            laps.insert(splitTime, lapMap);
+        }
+        foreach (const QVariant &lap, manualLaps.value(QLatin1String("laps")).toList()) {
+            QVariantMap lapMap = lap.toMap();
+            const QString splitTime = getDurationString(firstMap(firstMap(
+                lapMap.value(QLatin1String("header")))
+                .value(QLatin1String("split-time"))));
+            lapMap.insert(QLatin1String("_isAuto"), QVariant(false));
+            laps.insert(splitTime, lapMap);
         }
         if (!laps.isEmpty()) {
             stream << "\r\n[IntTimes]\r\n";
-            foreach (const QVariant &lap, laps) {
-                const QVariantMap header = firstMap(lap.toMap().value(QLatin1String("header")));
-                const QVariantMap stats = firstMap(lap.toMap().value(QLatin1String("stats")));
+            foreach (const QString &splitTime, laps.keys()) {
+                const QVariantMap &lap = laps.value(splitTime);
+                const QVariantMap header = firstMap(lap.value(QLatin1String("header")));
+                const QVariantMap stats = firstMap(lap.value(QLatin1String("stats")));
                 const QVariantMap hrStats = firstMap(stats.value(QLatin1String("heartrate")));
                 // Row 1
                 stream << getDurationString(firstMap(header.value(QLatin1String("split-time"))));
@@ -1275,7 +1287,7 @@ QStringList TrainingSession::toHRM()
                 // Row 5
                 stream << first(firstMap(stats.value(QLatin1String("stride")))
                     .value(QLatin1String("average"))).toUInt();
-                stream << '\t' << (isAutoLaps ? '1' : '0');
+                stream << '\t' << (lap.value(QLatin1String("_isAuto")).toBool() ? '1' : '0');
                 stream << "\t0\t0\t0\t0\r\n";
             }
         }
@@ -1283,8 +1295,10 @@ QStringList TrainingSession::toHRM()
         // [IntNotes]
         if (!laps.isEmpty()) {
             stream << "\r\n[IntNotes]\r\n";
-            for (int index = 0; index < laps.length(); ++index) {
-                const QVariantMap header = firstMap(laps.at(index).toMap().value(QLatin1String("header")));
+            const QStringList keys = laps.keys();
+            for (int index = 0; index < keys.length(); ++index) {
+                const QVariantMap &lap = laps.value(keys.at(index));
+                const QVariantMap header = firstMap(lap.value(QLatin1String("header")));
                 switch (first(header.value(QLatin1String("lap-type"))).toInt()) {
                 case 1:  stream << (index+1) << " Distance based lap\r\n"; break;
                 case 2:  stream << (index+1) << " Duration based lap\r\n"; break;
