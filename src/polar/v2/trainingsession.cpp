@@ -1535,9 +1535,10 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
             build.appendChild(doc.createElement(QLatin1String("Time")))
                 .appendChild(doc.createTextNode(
                     buildTime.isEmpty() ? QString::fromLatin1(__DATE__" "__TIME__) : buildTime));
-            /// @todo Fetch the login name at build time?
+            #ifdef BUILD_USER
             build.appendChild(doc.createElement(QLatin1String("Builder")))
-                .appendChild(doc.createTextNode(QLatin1String("Paul Colby")));
+                .appendChild(doc.createTextNode(QLatin1String(BUILD_USER)));
+            #endif
         }
 
         /// @todo  Make this dynamic if/when app is localized.
