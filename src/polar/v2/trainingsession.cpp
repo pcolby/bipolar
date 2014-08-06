@@ -1308,13 +1308,22 @@ QStringList TrainingSession::toHRM()
             }
         }
 
-        /// @todo Need a canonical *-autolaps data file.
-        /// @todo Add autolap type (eg distance / duration / location) note.
-
         // [ExtraData]
         /// @todo Can have up to 3 "extra" data series here, such as Lactate
         ///       and Power. Maybe Temperature? These are then included in
         ///       [IntTimes] above. Stride? Distance? Accelleration? Moving Type?
+
+        // [LapNames] This HRM section is undocumented, but supported by PPT5.
+        if (!laps.isEmpty()) {
+            stream << "\r\n[LapNames]\r\n";
+            const QStringList keys = laps.keys();
+            for (int index = 0; index < keys.length(); ++index) {
+                const QVariantMap &lap = laps.value(keys.at(index));
+                stream << (index+1) << '\t'
+                       << (lap.value(QLatin1String("_isAuto")).toBool() ? '2' : '1')
+                       << "\r\n"; // 2 = Auto, 1 = Manual.
+            }
+        }
 
         /// @todo [Summary-123] - Need to parse *-phases file(s).
         stream << "\r\n[Summary-123]\r\n"; // WebSync includes 0's when empty.
