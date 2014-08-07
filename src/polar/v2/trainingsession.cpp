@@ -1709,7 +1709,7 @@ bool TrainingSession::writeGPX(QIODevice &device) const
 {
     QDomDocument gpx = toGPX();
     if (gpx.isNull()) {
-        qWarning() << "failed to conver to GPX" << baseName;
+        qWarning() << "failed to convert to GPX" << baseName;
         return false;
     }
     device.write(gpx.toByteArray());
@@ -1720,7 +1720,7 @@ QStringList TrainingSession::writeHRM(const QString &baseName) const
 {
     QStringList hrm = toHRM();
     if (hrm.isEmpty()) {
-        qWarning() << "failed to conver to HRM" << baseName;
+        qWarning() << "failed to convert to HRM" << baseName;
         return QStringList();
     }
 
@@ -1753,7 +1753,7 @@ bool TrainingSession::writeTCX(QIODevice &device) const
 {
     QDomDocument tcx = toTCX();
     if (tcx.isNull()) {
-        qWarning() << "failed to conver to TCX" << baseName;
+        qWarning() << "failed to convert to TCX" << baseName;
         return false;
     }
     device.write(tcx.toByteArray());
