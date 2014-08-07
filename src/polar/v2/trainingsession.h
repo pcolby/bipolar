@@ -48,13 +48,13 @@ public:
 
     bool parse(const QString &baseName = QString());
 
-    bool writeGPX(const QString &fileName);
-    bool writeGPX(QIODevice &device);
+    bool writeGPX(const QString &fileName) const;
+    bool writeGPX(QIODevice &device) const;
 
-    QStringList writeHRM(const QString &baseName);
+    QStringList writeHRM(const QString &baseName) const;
 
-    bool writeTCX(const QString &fileName);
-    bool writeTCX(QIODevice &device);
+    bool writeTCX(const QString &fileName) const;
+    bool writeTCX(QIODevice &device) const;
 
 protected:
     QString baseName;
@@ -89,7 +89,7 @@ protected:
 
     QDomDocument toGPX(const QDateTime &creationTime = QDateTime::currentDateTimeUtc()) const;
 
-    QStringList toHRM();
+    QStringList toHRM() const;
 
     QDomDocument toTCX(const QString &buildTime = QString()) const;
 

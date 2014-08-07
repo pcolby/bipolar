@@ -1098,7 +1098,7 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
 }
 
 /// @see http://www.polar.com/files/Polar_HRM_file%20format.pdf
-QStringList TrainingSession::toHRM()
+QStringList TrainingSession::toHRM() const
 {
     QStringList hrmList;
 
@@ -1695,7 +1695,7 @@ QByteArray TrainingSession::unzip(const QByteArray &data,
     return result;
 }
 
-bool TrainingSession::writeGPX(const QString &fileName)
+bool TrainingSession::writeGPX(const QString &fileName) const
 {
     QFile file(fileName);
     if (!file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
@@ -1705,7 +1705,7 @@ bool TrainingSession::writeGPX(const QString &fileName)
     return writeGPX(file);
 }
 
-bool TrainingSession::writeGPX(QIODevice &device)
+bool TrainingSession::writeGPX(QIODevice &device) const
 {
     QDomDocument gpx = toGPX();
     if (gpx.isNull()) {
@@ -1716,7 +1716,7 @@ bool TrainingSession::writeGPX(QIODevice &device)
     return true;
 }
 
-QStringList TrainingSession::writeHRM(const QString &baseName)
+QStringList TrainingSession::writeHRM(const QString &baseName) const
 {
     QStringList hrm = toHRM();
     if (hrm.isEmpty()) {
@@ -1739,7 +1739,7 @@ QStringList TrainingSession::writeHRM(const QString &baseName)
     return fileNames;
 }
 
-bool TrainingSession::writeTCX(const QString &fileName)
+bool TrainingSession::writeTCX(const QString &fileName) const
 {
     QFile file(fileName);
     if (!file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
@@ -1749,7 +1749,7 @@ bool TrainingSession::writeTCX(const QString &fileName)
     return writeTCX(file);
 }
 
-bool TrainingSession::writeTCX(QIODevice &device)
+bool TrainingSession::writeTCX(QIODevice &device) const
 {
     QDomDocument tcx = toTCX();
     if (tcx.isNull()) {
