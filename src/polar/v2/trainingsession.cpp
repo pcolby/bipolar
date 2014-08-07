@@ -1053,11 +1053,8 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
         trk.appendChild(doc.createElement(QLatin1String("src")))
             .appendChild(doc.createTextNode(sources.join(QLatin1Char(' '))));
 
-        if (map.contains(ROUTE)) {
-            const QVariantMap route = map.value(ROUTE).toMap();
-            QDomElement trkseg = doc.createElement(QLatin1String("trkseg"));
-            trk.appendChild(trkseg);
-
+        const QVariantMap route = map.value(ROUTE).toMap();
+        if (!route.isEmpty()) {
             // Get the starting time.
             const QDateTime startTime = getDateTime(firstMap(
                 route.value(QLatin1String("timestamp"))));
@@ -1077,9 +1074,33 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
                            << longitude.size() << satellites.size();
             }
 
-            /// @todo Use lap data to split the <trk> into multiple <trkseg>?
+            // Build a list of lap split times.
+            QVariantList laps = map.value(LAPS).toMap().value(QLatin1String("laps")).toList();
+            if (laps.isEmpty()) {
+                laps = map.value(AUTOLAPS).toMap().value(QLatin1String("laps")).toList();
+            }
+            QList<quint64> splits;
+            foreach (const QVariant &lap, laps) {
+                const quint64 splitTime = getDuration(firstMap(firstMap(
+                    lap.toMap().value(QLatin1String("header")))
+                    .value(QLatin1String("split-time"))));
+                if (splitTime > 0) {
+                    splits.append(splitTime);
+                }
+            }
+            std::sort(splits.begin(), splits.end());
 
+            // Add trkseg elements containing the actual GPS data.
+            QDomElement trkseg = doc.createElement(QLatin1String("trkseg"));
+            trk.appendChild(trkseg);
             for (int index = 0; index < duration.size(); ++index) {
+                const quint32 timeOffset = duration.at(index).toUInt();
+                if ((!splits.isEmpty()) && (timeOffset > splits.first())) {
+                    trkseg = doc.createElement(QLatin1String("trkseg"));
+                    trk.appendChild(trkseg);
+                    splits.removeFirst();
+                }
+
                 QDomElement trkpt = doc.createElement(QLatin1String("trkpt"));
                 trkpt.setAttribute(QLatin1String("lat"), latitude.at(index).toDouble());
                 trkpt.setAttribute(QLatin1String("lon"), longitude.at(index).toDouble());
@@ -1087,7 +1108,7 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
                     .appendChild(doc.createTextNode(altitude.at(index).toString()));
                 trkpt.appendChild(doc.createElement(QLatin1String("time")))
                     .appendChild(doc.createTextNode(startTime.addMSecs(
-                        duration.at(index).toLongLong()).toString(Qt::ISODate)));
+                        timeOffset).toString(Qt::ISODate)));
                 trkpt.appendChild(doc.createElement(QLatin1String("sat")))
                     .appendChild(doc.createTextNode(satellites.at(index).toString()));
                 trkseg.appendChild(trkpt);

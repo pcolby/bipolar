@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<gpx creator="test 1.2.3.4 - https://github.com/pcolby/bipolar" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" version="1.1">
+<gpx creator="test 1.2.3.4 - https://github.com/pcolby/bipolar" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata>
     <name>training-sessions-19401412</name>
     <desc>GPX encoding of training-sessions-19401412</desc>
@@ -9033,6 +9033,8 @@
         <time>2014-07-12T21:56:27Z</time>
         <sat>9</sat>
       </trkpt>
+    </trkseg>
+    <trkseg>
       <trkpt lat="-37.88664333333333" lon="145.317455">
         <ele>243</ele>
         <time>2014-07-12T21:56:28Z</time>
@@ -16498,6 +16500,8 @@
         <time>2014-07-12T22:21:20Z</time>
         <sat>7</sat>
       </trkpt>
+    </trkseg>
+    <trkseg>
       <trkpt lat="-37.88214333333333" lon="145.316525">
         <ele>372</ele>
         <time>2014-07-12T22:21:21Z</time>
@@ -17633,6 +17637,8 @@
         <time>2014-07-12T22:25:07Z</time>
         <sat>9</sat>
       </trkpt>
+    </trkseg>
+    <trkseg>
       <trkpt lat="-37.88672666666667" lon="145.3175416666667">
         <ele>272</ele>
         <time>2014-07-12T22:25:08Z</time>
@@ -25443,6 +25449,8 @@
         <time>2014-07-12T22:51:09Z</time>
         <sat>9</sat>
       </trkpt>
+    </trkseg>
+    <trkseg>
       <trkpt lat="-37.886655" lon="145.3175016666667">
         <ele>251</ele>
         <time>2014-07-12T22:51:10Z</time>
