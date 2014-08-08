@@ -954,7 +954,13 @@ quint64 getDuration(const QVariantMap &map)
        + ((milliseconds == map.constEnd()) ? 0 : first(milliseconds.value()).toULongLong());
 }
 
-QString getDurationString(const QVariantMap &map)
+QString getFileName(const QString &file)
+{
+    const QFileInfo info(file);
+    return info.fileName();
+}
+
+QString hrmTime(const QVariantMap &map)
 {
     const QVariantMap::const_iterator
         hours        = map.constFind(QLatin1String("hours")),
@@ -962,16 +968,17 @@ QString getDurationString(const QVariantMap &map)
         seconds      = map.constFind(QLatin1String("seconds")),
         milliseconds = map.constFind(QLatin1String("milliseconds"));
     return QString::fromLatin1("%1:%2:%3.%4")
-            .arg(first(  hours.value()).toUInt(), 2, 10, QLatin1Char('0'))
-            .arg(first(minutes.value()).toUInt(), 2, 10, QLatin1Char('0'))
-            .arg(first(seconds.value()).toUInt(), 2, 10, QLatin1Char('0'))
-            .arg(first(milliseconds.value()).toUInt(), 3, 10, QLatin1Char('0'));
+        .arg(first(  hours.value()).toUInt(), 2, 10, QLatin1Char('0'))
+        .arg(first(minutes.value()).toUInt(), 2, 10, QLatin1Char('0'))
+        .arg(first(seconds.value()).toUInt(), 2, 10, QLatin1Char('0'))
+        .arg(qRound(qMin(900u, first(milliseconds.value()).toUInt())/100.0));
 }
 
-QString getFileName(const QString &file)
+QString hrmTime(const QTime &time)
 {
-    const QFileInfo info(file);
-    return info.fileName();
+    return QString::fromLatin1("%1.%2")
+            .arg(time.toString(QLatin1String("HH:mm:ss")))
+            .arg(qRound(time.msec()/100.0));
 }
 
 bool sensorOffline(const QVariantList &list, const int index)
@@ -1119,7 +1126,6 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
 }
 
 /// @see http://www.polar.com/files/Polar_HRM_file%20format.pdf
-/// @todo Limit timestamps to 1/10th of a second.
 QStringList TrainingSession::toHRM() const
 {
     QStringList hrmList;
@@ -1161,8 +1167,8 @@ QStringList TrainingSession::toHRM() const
         const QDateTime startTime = getDateTime(firstMap(create.value(QLatin1String("start"))));
         const quint64 recordInterval = getDuration(firstMap(samples.value(QLatin1String("record-interval"))));
         stream << "Date="      << startTime.toString(QLatin1String("yyyyMMdd")) << "\r\n";
-        stream << "StartTime=" << startTime.toString(QLatin1String("HH:mm:ss.zzz")) << "\r\n";
-        stream << "Length="    << getDurationString(firstMap(create.value(QLatin1String("duration")))) << "\r\n";
+        stream << "StartTime=" << hrmTime(startTime.time()) << "\r\n";
+        stream << "Length="    << hrmTime(firstMap(create.value(QLatin1String("duration")))) << "\r\n";
         stream << "Interval="  << qRound(recordInterval/1000.0f) << "\r\n";
 
         /// @todo {Upper,Lower}{1,2,3} - Need to parse *-phases file(s).
@@ -1256,7 +1262,7 @@ QStringList TrainingSession::toHRM() const
         QMap<QString, QVariantMap> laps;
         foreach (const QVariant &lap, autoLaps.value(QLatin1String("laps")).toList()) {
             QVariantMap lapMap = lap.toMap();
-            const QString splitTime = getDurationString(firstMap(firstMap(
+            const QString splitTime = hrmTime(firstMap(firstMap(
                 lapMap.value(QLatin1String("header")))
                 .value(QLatin1String("split-time"))));
             lapMap.insert(QLatin1String("_isAuto"), QVariant(true));
@@ -1264,7 +1270,7 @@ QStringList TrainingSession::toHRM() const
         }
         foreach (const QVariant &lap, manualLaps.value(QLatin1String("laps")).toList()) {
             QVariantMap lapMap = lap.toMap();
-            const QString splitTime = getDurationString(firstMap(firstMap(
+            const QString splitTime = hrmTime(firstMap(firstMap(
                 lapMap.value(QLatin1String("header")))
                 .value(QLatin1String("split-time"))));
             lapMap.insert(QLatin1String("_isAuto"), QVariant(false));
@@ -1278,7 +1284,7 @@ QStringList TrainingSession::toHRM() const
                 const QVariantMap stats = firstMap(lap.value(QLatin1String("stats")));
                 const QVariantMap hrStats = firstMap(stats.value(QLatin1String("heartrate")));
                 // Row 1
-                stream << getDurationString(firstMap(header.value(QLatin1String("split-time"))));
+                stream << hrmTime(firstMap(header.value(QLatin1String("split-time"))));
                 stream << '\t' << first(hrStats.value(QLatin1String("average"))).toUInt();
                 stream << '\t' << first(hrStats.value(QLatin1String("minimum"))).toUInt();
                 stream << '\t' << first(hrStats.value(QLatin1String("average"))).toUInt();
