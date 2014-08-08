@@ -8,6 +8,7 @@ Features:
 Features:
 - official HRM export ([#14](../../issues/14))
 - lap data in TCX output ([#18](../../issues/18))
+- lap data in GPX output ([#22](../../issues/22))
 
 ### 0.2.0 (2014-08-03)
 Features:
