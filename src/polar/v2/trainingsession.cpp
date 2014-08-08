@@ -1291,7 +1291,15 @@ QStringList TrainingSession::toHRM() const
                 stream << '\t' << first(hrStats.value(QLatin1String("maximum"))).toUInt();
                 stream << "\r\n";
                 // Row 2
-                stream << "0\t0\t0\t0\t0\t0\r\n";
+                stream << "0";   // Bit flags.
+                stream << "\t0"; // Recovery time (seconds); data not available.
+                stream << "\t0"; // Recovery HR (bpm); data not available.
+                stream << "\t" << qRound(first(firstMap(stats.value(QLatin1String("speed")))
+                    .value(QLatin1String("average"))).toFloat() * 128.0);
+                stream << "\t" << first(firstMap(stats.value(QLatin1String("speed")))
+                    .value(QLatin1String("average"))).toUInt();
+                stream << "\t0"; // Momentary altitude; not available per lap.
+                stream << "\r\n";
                 // Row 3
                 stream << "0\t0\t0";
                 stream << '\t' << qRound(first(header.value(QLatin1String("ascent"))).toFloat() / 10.0);
