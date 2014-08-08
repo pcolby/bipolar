@@ -1528,9 +1528,16 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                 : firstMap(lapData.value(QLatin1String("stats")));
 
             // Create the Lap element, and set its StartTime attribute.
+            #if (QT_VERSION >= QT_VERSION_CHECK(5, 2, 0))
+            const QDateTime lapStartTime = startTime.addMSecs(samplesIndex * recordInterval);
+            #else /// @todo Remove this hack when Qt 5.2+ is available on Travis CI.
+            QDateTime lapStartTime = startTime.toUTC()
+                .addMSecs(samplesIndex * recordInterval).addSecs(startTime.utcOffset());
+            lapStartTime.setUtcOffset(startTime.utcOffset());
+            #endif
             QDomElement lap = doc.createElement(QLatin1String("Lap"));
             lap.setAttribute(QLatin1String("StartTime"),
-                startTime.addMSecs(samplesIndex * recordInterval).toString(Qt::ISODate));
+                lapStartTime.toString(Qt::ISODate));
             activity.appendChild(lap);
 
             // Add the per-lap (or per-exercise) statistics.
