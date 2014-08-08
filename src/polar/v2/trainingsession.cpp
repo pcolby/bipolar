@@ -1335,10 +1335,10 @@ QStringList TrainingSession::toHRM() const
                 const QVariantMap &lap = laps.value(keys.at(index));
                 const QVariantMap header = firstMap(lap.value(QLatin1String("header")));
                 switch (first(header.value(QLatin1String("lap-type"))).toInt()) {
-                case 1:  stream << (index+1) << " Distance based lap\r\n"; break;
-                case 2:  stream << (index+1) << " Duration based lap\r\n"; break;
-                case 3:  stream << (index+1) << " Location based lap\r\n"; break;
-                default: stream << (index+1) << " Manual lap\r\n";
+                case 1:  stream << (index+1) << "\tDistance based lap\r\n"; break;
+                case 2:  stream << (index+1) << "\tDuration based lap\r\n"; break;
+                case 3:  stream << (index+1) << "\tLocation based lap\r\n"; break;
+                default: stream << (index+1) << "\tManual lap\r\n";
                 }
             }
         }
