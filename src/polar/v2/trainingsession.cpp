@@ -434,7 +434,7 @@ QVariantMap TrainingSession::parseLaps(QIODevice &data) const
     ADD_FIELD_INFO("1/2/6",    "incline",          EmbeddedMessage);
     ADD_FIELD_INFO("1/2/6/1",  "average",          Float);
     ADD_FIELD_INFO("1/2/7",    "stride",           EmbeddedMessage);
-    ADD_FIELD_INFO("1/2/7",    "average",          Uint32);
+    ADD_FIELD_INFO("1/2/7/1",  "average",          Uint32);
     ADD_FIELD_INFO("2",        "summary",          EmbeddedMessage);
     ADD_FIELD_INFO("2/1",      "best-duration",    EmbeddedMessage);
     ADD_FIELD_INFO("2/1/1",    "hours",            Uint32);
@@ -445,7 +445,7 @@ QVariantMap TrainingSession::parseLaps(QIODevice &data) const
     ADD_FIELD_INFO("2/2/1",    "hours",            Uint32);
     ADD_FIELD_INFO("2/2/2",    "minutes",          Uint32);
     ADD_FIELD_INFO("2/2/3",    "seconds",          Uint32);
-    ADD_FIELD_INFO("2/2.4",    "milliseconds",     Uint32);
+    ADD_FIELD_INFO("2/2/4",    "milliseconds",     Uint32);
     ProtoBuf::Message parser(fieldInfo);
 
     if (isGzipped(data)) {
