@@ -1,0 +1,220 @@
+{
+    "benefit": [
+        2
+    ],
+    "calories": [
+        520
+    ],
+    "device": [
+        "328CD41D"
+    ],
+    "distance": [
+        6043.7998046875
+    ],
+    "duration": [
+        {
+            "hours": [
+                0
+            ],
+            "milliseconds": [
+                125
+            ],
+            "minutes": [
+                35
+            ],
+            "seconds": [
+                30
+            ]
+        }
+    ],
+    "end": [
+        {
+            "3": [
+                0
+            ],
+            "date": [
+                {
+                    "day": [
+                        7
+                    ],
+                    "month": [
+                        8
+                    ],
+                    "year": [
+                        2014
+                    ]
+                }
+            ],
+            "offset": [
+                600
+            ],
+            "time": [
+                {
+                    "hour": [
+                        18
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minute": [
+                        0
+                    ],
+                    "seconds": [
+                        32
+                    ]
+                }
+            ]
+        }
+    ],
+    "exercise-count": [
+        1
+    ],
+    "heartrate-duration": [
+        {
+            "hours": [
+                0
+            ],
+            "minutes": [
+                0
+            ],
+            "seconds": [
+                0
+            ]
+        },
+        {
+            "hours": [
+                0
+            ],
+            "minutes": [
+                0
+            ],
+            "seconds": [
+                0
+            ]
+        },
+        {
+            "hours": [
+                0
+            ],
+            "minutes": [
+                0
+            ],
+            "seconds": [
+                42
+            ]
+        },
+        {
+            "hours": [
+                0
+            ],
+            "minutes": [
+                18
+            ],
+            "seconds": [
+                57
+            ]
+        },
+        {
+            "hours": [
+                0
+            ],
+            "minutes": [
+                15
+            ],
+            "seconds": [
+                50
+            ]
+        }
+    ],
+    "heartreat": [
+        {
+            "average": [
+                167
+            ],
+            "maximum": [
+                189
+            ]
+        }
+    ],
+    "model": [
+        "Polar V800"
+    ],
+    "session-name": [
+        {
+            "text": [
+                "Running"
+            ]
+        }
+    ],
+    "start": [
+        {
+            "3": [
+                0
+            ],
+            "date": [
+                {
+                    "day": [
+                        7
+                    ],
+                    "month": [
+                        8
+                    ],
+                    "year": [
+                        2014
+                    ]
+                }
+            ],
+            "offset": [
+                600
+            ],
+            "time": [
+                {
+                    "hour": [
+                        17
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minute": [
+                        25
+                    ],
+                    "seconds": [
+                        1
+                    ]
+                }
+            ]
+        }
+    ],
+    "training-load": [
+        {
+            "carbs": [
+                81
+            ],
+            "fat": [
+                9
+            ],
+            "load-value": [
+                116
+            ],
+            "protein": [
+                10
+            ],
+            "recovery-time": [
+                {
+                    "hours": [
+                        26
+                    ],
+                    "milliseconds": [
+                        711
+                    ],
+                    "minutes": [
+                        15
+                    ],
+                    "seconds": [
+                        10
+                    ]
+                }
+            ]
+        }
+    ]
+}

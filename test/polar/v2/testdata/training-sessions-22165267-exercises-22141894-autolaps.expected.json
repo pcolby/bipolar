@@ -1,0 +1,859 @@
+{
+    "laps": [
+        {
+            "header": [
+                {
+                    "ascent": [
+                        0
+                    ],
+                    "descent": [
+                        0
+                    ],
+                    "distance": [
+                        664
+                    ],
+                    "duration": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                500
+                            ],
+                            "minutes": [
+                                3
+                            ],
+                            "seconds": [
+                                58
+                            ]
+                        }
+                    ],
+                    "lap-type": [
+                        3
+                    ],
+                    "split-time": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                500
+                            ],
+                            "minutes": [
+                                3
+                            ],
+                            "seconds": [
+                                58
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "stats": [
+                {
+                    "average": [
+                        8,
+                        104
+                    ],
+                    "cadence": [
+                        {
+                            "average": [
+                                80
+                            ],
+                            "maximum": [
+                                84
+                            ]
+                        }
+                    ],
+                    "heartrate": [
+                        {
+                            "average": [
+                                153
+                            ],
+                            "maximum": [
+                                159
+                            ],
+                            "minimum": [
+                                139
+                            ]
+                        }
+                    ],
+                    "speed": [
+                        {
+                            "average": [
+                                10.022641181945801
+                            ],
+                            "maximum": [
+                                11.372134208679199
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "header": [
+                {
+                    "ascent": [
+                        0
+                    ],
+                    "descent": [
+                        0
+                    ],
+                    "distance": [
+                        662
+                    ],
+                    "duration": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minutes": [
+                                4
+                            ],
+                            "seconds": [
+                                2
+                            ]
+                        }
+                    ],
+                    "lap-type": [
+                        3
+                    ],
+                    "split-time": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                500
+                            ],
+                            "minutes": [
+                                8
+                            ],
+                            "seconds": [
+                                0
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "stats": [
+                {
+                    "average": [
+                        8,
+                        99
+                    ],
+                    "cadence": [
+                        {
+                            "average": [
+                                83
+                            ],
+                            "maximum": [
+                                85
+                            ]
+                        }
+                    ],
+                    "heartrate": [
+                        {
+                            "average": [
+                                160
+                            ],
+                            "maximum": [
+                                164
+                            ],
+                            "minimum": [
+                                155
+                            ]
+                        }
+                    ],
+                    "speed": [
+                        {
+                            "average": [
+                                9.8479337692260742
+                            ],
+                            "maximum": [
+                                10.6787109375
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "header": [
+                {
+                    "ascent": [
+                        0
+                    ],
+                    "descent": [
+                        0
+                    ],
+                    "distance": [
+                        665.20001220703125
+                    ],
+                    "duration": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                500
+                            ],
+                            "minutes": [
+                                3
+                            ],
+                            "seconds": [
+                                57
+                            ]
+                        }
+                    ],
+                    "lap-type": [
+                        3
+                    ],
+                    "split-time": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minutes": [
+                                11
+                            ],
+                            "seconds": [
+                                58
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "stats": [
+                {
+                    "average": [
+                        8,
+                        102
+                    ],
+                    "cadence": [
+                        {
+                            "average": [
+                                83
+                            ],
+                            "maximum": [
+                                86
+                            ]
+                        }
+                    ],
+                    "heartrate": [
+                        {
+                            "average": [
+                                166
+                            ],
+                            "maximum": [
+                                173
+                            ],
+                            "minimum": [
+                                161
+                            ]
+                        }
+                    ],
+                    "speed": [
+                        {
+                            "average": [
+                                10.08303165435791
+                            ],
+                            "maximum": [
+                                11.164106369018555
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "header": [
+                {
+                    "ascent": [
+                        0
+                    ],
+                    "descent": [
+                        0
+                    ],
+                    "distance": [
+                        662.0999755859375
+                    ],
+                    "duration": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minutes": [
+                                2
+                            ],
+                            "seconds": [
+                                55
+                            ]
+                        }
+                    ],
+                    "lap-type": [
+                        3
+                    ],
+                    "split-time": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minutes": [
+                                14
+                            ],
+                            "seconds": [
+                                53
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "stats": [
+                {
+                    "average": [
+                        8,
+                        133
+                    ],
+                    "cadence": [
+                        {
+                            "average": [
+                                85
+                            ],
+                            "maximum": [
+                                89
+                            ]
+                        }
+                    ],
+                    "heartrate": [
+                        {
+                            "average": [
+                                184
+                            ],
+                            "maximum": [
+                                189
+                            ],
+                            "minimum": [
+                                174
+                            ]
+                        }
+                    ],
+                    "speed": [
+                        {
+                            "average": [
+                                13.620343208312988
+                            ],
+                            "maximum": [
+                                14.145825386047363
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "header": [
+                {
+                    "ascent": [
+                        0
+                    ],
+                    "descent": [
+                        0
+                    ],
+                    "distance": [
+                        668
+                    ],
+                    "duration": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                500
+                            ],
+                            "minutes": [
+                                4
+                            ],
+                            "seconds": [
+                                24
+                            ]
+                        }
+                    ],
+                    "lap-type": [
+                        3
+                    ],
+                    "split-time": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                500
+                            ],
+                            "minutes": [
+                                19
+                            ],
+                            "seconds": [
+                                17
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "stats": [
+                {
+                    "average": [
+                        8,
+                        95
+                    ],
+                    "cadence": [
+                        {
+                            "average": [
+                                81
+                            ],
+                            "maximum": [
+                                84
+                            ]
+                        }
+                    ],
+                    "heartrate": [
+                        {
+                            "average": [
+                                169
+                            ],
+                            "maximum": [
+                                189
+                            ],
+                            "minimum": [
+                                159
+                            ]
+                        }
+                    ],
+                    "speed": [
+                        {
+                            "average": [
+                                9.0918712615966797
+                            ],
+                            "maximum": [
+                                13.86845588684082
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "header": [
+                {
+                    "ascent": [
+                        0
+                    ],
+                    "descent": [
+                        0
+                    ],
+                    "distance": [
+                        659.20001220703125
+                    ],
+                    "duration": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                500
+                            ],
+                            "minutes": [
+                                4
+                            ],
+                            "seconds": [
+                                17
+                            ]
+                        }
+                    ],
+                    "lap-type": [
+                        3
+                    ],
+                    "split-time": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minutes": [
+                                23
+                            ],
+                            "seconds": [
+                                35
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "stats": [
+                {
+                    "average": [
+                        8,
+                        94
+                    ],
+                    "cadence": [
+                        {
+                            "average": [
+                                82
+                            ],
+                            "maximum": [
+                                85
+                            ]
+                        }
+                    ],
+                    "heartrate": [
+                        {
+                            "average": [
+                                165
+                            ],
+                            "maximum": [
+                                171
+                            ],
+                            "minimum": [
+                                161
+                            ]
+                        }
+                    ],
+                    "speed": [
+                        {
+                            "average": [
+                                9.2159996032714844
+                            ],
+                            "maximum": [
+                                10.193315505981445
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "header": [
+                {
+                    "ascent": [
+                        0
+                    ],
+                    "descent": [
+                        0
+                    ],
+                    "distance": [
+                        673.5999755859375
+                    ],
+                    "duration": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minutes": [
+                                3
+                            ],
+                            "seconds": [
+                                6
+                            ]
+                        }
+                    ],
+                    "lap-type": [
+                        3
+                    ],
+                    "split-time": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minutes": [
+                                26
+                            ],
+                            "seconds": [
+                                41
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "stats": [
+                {
+                    "average": [
+                        8,
+                        129
+                    ],
+                    "cadence": [
+                        {
+                            "average": [
+                                84
+                            ],
+                            "maximum": [
+                                86
+                            ]
+                        }
+                    ],
+                    "heartrate": [
+                        {
+                            "average": [
+                                182
+                            ],
+                            "maximum": [
+                                186
+                            ],
+                            "minimum": [
+                                171
+                            ]
+                        }
+                    ],
+                    "speed": [
+                        {
+                            "average": [
+                                13.037419319152832
+                            ],
+                            "maximum": [
+                                13.660429000854492
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "header": [
+                {
+                    "ascent": [
+                        0
+                    ],
+                    "descent": [
+                        0
+                    ],
+                    "distance": [
+                        670.5999755859375
+                    ],
+                    "duration": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                500
+                            ],
+                            "minutes": [
+                                4
+                            ],
+                            "seconds": [
+                                29
+                            ]
+                        }
+                    ],
+                    "lap-type": [
+                        3
+                    ],
+                    "split-time": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                500
+                            ],
+                            "minutes": [
+                                31
+                            ],
+                            "seconds": [
+                                10
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "stats": [
+                {
+                    "average": [
+                        8,
+                        93
+                    ],
+                    "cadence": [
+                        {
+                            "average": [
+                                81
+                            ],
+                            "maximum": [
+                                83
+                            ]
+                        }
+                    ],
+                    "heartrate": [
+                        {
+                            "average": [
+                                167
+                            ],
+                            "maximum": [
+                                186
+                            ],
+                            "minimum": [
+                                154
+                            ]
+                        }
+                    ],
+                    "speed": [
+                        {
+                            "average": [
+                                8.9579219818115234
+                            ],
+                            "maximum": [
+                                13.175033569335938
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "header": [
+                {
+                    "ascent": [
+                        0
+                    ],
+                    "descent": [
+                        0
+                    ],
+                    "distance": [
+                        676
+                    ],
+                    "duration": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                500
+                            ],
+                            "minutes": [
+                                3
+                            ],
+                            "seconds": [
+                                54
+                            ]
+                        }
+                    ],
+                    "lap-type": [
+                        3
+                    ],
+                    "split-time": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minutes": [
+                                35
+                            ],
+                            "seconds": [
+                                5
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "stats": [
+                {
+                    "average": [
+                        8,
+                        106
+                    ],
+                    "cadence": [
+                        {
+                            "average": [
+                                81
+                            ],
+                            "maximum": [
+                                84
+                            ]
+                        }
+                    ],
+                    "heartrate": [
+                        {
+                            "average": [
+                                169
+                            ],
+                            "maximum": [
+                                173
+                            ],
+                            "minimum": [
+                                164
+                            ]
+                        }
+                    ],
+                    "speed": [
+                        {
+                            "average": [
+                                10.377824783325195
+                            ],
+                            "maximum": [
+                                11.649503707885742
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "summary": [
+        {
+            "average-duration": [
+                {
+                    "4": [
+                        888
+                    ],
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        3
+                    ],
+                    "seconds": [
+                        53
+                    ]
+                }
+            ],
+            "best-duration": [
+                {
+                    "4": [
+                        0
+                    ],
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        2
+                    ],
+                    "seconds": [
+                        55
+                    ]
+                }
+            ]
+        }
+    ]
+}
