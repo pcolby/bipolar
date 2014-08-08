@@ -99,10 +99,13 @@ protected:
 private:
     friend class ::TestTrainingSession;
 
+    void addLapStats(QDomDocument &doc, QDomElement &lap,
+                     const QVariantMap &base, const QVariantMap &stats) const;
+
     void addTrackSamples(QDomDocument &doc, QDomElement &track,
-                         const QVariantMap &exercise, const QDateTime &startTime,
-                         const int firstIndex = 0,
-                         const int lastIndex = -1) const;
+                         const QVariantMap &samples, const QVariantMap &route,
+                         const QDateTime &startTime, const quint64 splitTime,
+                         const quint64 recordInterval, int &index) const;
 
 };
 

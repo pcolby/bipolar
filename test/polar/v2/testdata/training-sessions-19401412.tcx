@@ -1,18 +1,18 @@
 <?xml version='1.0' encoding='utf-8'?>
-<TrainingCenterDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" xsi:schemaLocation="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd">
+<TrainingCenterDatabase xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" xsi:schemaLocation="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Activities>
     <Activity Sport="Running">
       <Id>2014-07-13T07:26:23+10:00</Id>
       <Lap StartTime="2014-07-13T07:26:23+10:00">
-        <TotalTimeSeconds>5238.75</TotalTimeSeconds>
-        <DistanceMeters>8483.9</DistanceMeters>
+        <TotalTimeSeconds>1803.88</TotalTimeSeconds>
+        <DistanceMeters>2941.6</DistanceMeters>
         <MaximumSpeed>13.896</MaximumSpeed>
-        <Calories>1212</Calories>
+        <Calories>0</Calories>
         <AverageHeartRateBpm>
-          <Value>162</Value>
+          <Value>153</Value>
         </AverageHeartRateBpm>
         <MaximumHeartRateBpm>
-          <Value>181</Value>
+          <Value>179</Value>
         </MaximumHeartRateBpm>
         <Intensity>Active</Intensity>
         <TriggerMethod>Manual</TriggerMethod>
@@ -21665,6 +21665,22 @@
               <Value>146</Value>
             </HeartRateBpm>
           </Trackpoint>
+        </Track>
+      </Lap>
+      <Lap StartTime="2014-07-13T07:56:27+10:00">
+        <TotalTimeSeconds>1492.25</TotalTimeSeconds>
+        <DistanceMeters>2033.9</DistanceMeters>
+        <MaximumSpeed>10.476</MaximumSpeed>
+        <Calories>0</Calories>
+        <AverageHeartRateBpm>
+          <Value>165</Value>
+        </AverageHeartRateBpm>
+        <MaximumHeartRateBpm>
+          <Value>178</Value>
+        </MaximumHeartRateBpm>
+        <Intensity>Active</Intensity>
+        <TriggerMethod>Manual</TriggerMethod>
+        <Track>
           <Trackpoint>
             <Time>2014-07-13T07:56:27+10:00</Time>
             <Position>
@@ -39581,6 +39597,22 @@
               <Value>147</Value>
             </HeartRateBpm>
           </Trackpoint>
+        </Track>
+      </Lap>
+      <Lap StartTime="2014-07-13T08:21:20+10:00">
+        <TotalTimeSeconds>227.5</TotalTimeSeconds>
+        <DistanceMeters>529.7</DistanceMeters>
+        <MaximumSpeed>9.684</MaximumSpeed>
+        <Calories>0</Calories>
+        <AverageHeartRateBpm>
+          <Value>144</Value>
+        </AverageHeartRateBpm>
+        <MaximumHeartRateBpm>
+          <Value>151</Value>
+        </MaximumHeartRateBpm>
+        <Intensity>Active</Intensity>
+        <TriggerMethod>Manual</TriggerMethod>
+        <Track>
           <Trackpoint>
             <Time>2014-07-13T08:21:20+10:00</Time>
             <Position>
@@ -42305,6 +42337,22 @@
               <Value>149</Value>
             </HeartRateBpm>
           </Trackpoint>
+        </Track>
+      </Lap>
+      <Lap StartTime="2014-07-13T08:25:07+10:00">
+        <TotalTimeSeconds>1561.62</TotalTimeSeconds>
+        <DistanceMeters>2594.9</DistanceMeters>
+        <MaximumSpeed>12.888</MaximumSpeed>
+        <Calories>0</Calories>
+        <AverageHeartRateBpm>
+          <Value>172</Value>
+        </AverageHeartRateBpm>
+        <MaximumHeartRateBpm>
+          <Value>181</Value>
+        </MaximumHeartRateBpm>
+        <Intensity>Active</Intensity>
+        <TriggerMethod>Manual</TriggerMethod>
+        <Track>
           <Trackpoint>
             <Time>2014-07-13T08:25:07+10:00</Time>
             <Position>
@@ -61049,6 +61097,22 @@
               <Value>169</Value>
             </HeartRateBpm>
           </Trackpoint>
+        </Track>
+      </Lap>
+      <Lap StartTime="2014-07-13T08:51:09+10:00">
+        <TotalTimeSeconds>153.5</TotalTimeSeconds>
+        <DistanceMeters>383.8</DistanceMeters>
+        <MaximumSpeed>11.088</MaximumSpeed>
+        <Calories>0</Calories>
+        <AverageHeartRateBpm>
+          <Value>158</Value>
+        </AverageHeartRateBpm>
+        <MaximumHeartRateBpm>
+          <Value>169</Value>
+        </MaximumHeartRateBpm>
+        <Intensity>Active</Intensity>
+        <TriggerMethod>Manual</TriggerMethod>
+        <Track>
           <Trackpoint>
             <Time>2014-07-13T08:51:09+10:00</Time>
             <Position>
