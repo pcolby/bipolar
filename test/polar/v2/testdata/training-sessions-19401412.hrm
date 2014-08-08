@@ -1,7 +1,7 @@
 [Params]
 Version=107
 Monitor=0
-SMode=010000000
+SMode=101000000
 Date=20140713
 StartTime=07:26:23.0
 Length=01:27:18.8

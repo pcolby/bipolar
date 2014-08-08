@@ -1152,9 +1152,9 @@ QStringList TrainingSession::toHRM() const
             "Version=107\r\n"
             "Monitor=0\r\n"
             "SMode=";
-        stream << (haveSpeed    ? '0' : '1'); // a) Speed
-        stream << (haveCadence  ? '0' : '1'); // b) Cadence
-        stream << (haveAltitude ? '0' : '1'); // c) Altitude
+        stream << (haveSpeed    ? '1' : '0'); // a) Speed
+        stream << (haveCadence  ? '1' : '0'); // b) Cadence
+        stream << (haveAltitude ? '1' : '0'); // c) Altitude
         stream <<
             "0" // d) Power (not supported by V800 yet).
             "0" // e) Power Left Right Ballance (not supported by V800 yet).
