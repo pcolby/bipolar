@@ -1149,7 +1149,7 @@ QStringList TrainingSession::toHRM() const
         // [Params]
         stream <<
             "[Params]\r\n"
-            "Version=107\r\n"
+            "Version=106\r\n"
             "Monitor=0\r\n"
             "SMode=";
         stream << (haveSpeed    ? '1' : '0'); // a) Speed
