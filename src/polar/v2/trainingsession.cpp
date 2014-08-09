@@ -1292,9 +1292,9 @@ QStringList TrainingSession::toHRM() const
                 stream << "\t0"; // Recovery time (seconds); data not available.
                 stream << "\t0"; // Recovery HR (bpm); data not available.
                 stream << "\t" << qRound(first(firstMap(stats.value(QLatin1String("speed")))
-                    .value(QLatin1String("average"))).toFloat() * 128.0);
+                    .value(QLatin1String("maximum"))).toFloat() * 128.0);
                 stream << "\t" << first(firstMap(stats.value(QLatin1String("cadence")))
-                    .value(QLatin1String("average"))).toUInt();
+                    .value(QLatin1String("maximum"))).toUInt();
                 stream << "\t0"; // Momentary altitude; not available per lap.
                 stream << "\r\n";
                 // Row 3
