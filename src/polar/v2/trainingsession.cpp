@@ -1393,7 +1393,7 @@ QStringList TrainingSession::toHRM() const
         stream << "\r\n[Summary-TH]\r\n"; // WebSync includes 0's when empty.
         stream << (heartrate.length() * qRound(recordInterval/1000.0f));
         for (size_t index = 0; index < (sizeof(summaryThRow1)/sizeof(summaryThRow1[0])); ++index) {
-            stream << '\t' << (summaryThRow1[index] * qRound(recordInterval/1000.0f));
+            stream << '\t' << qRound(summaryThRow1[index] * recordInterval / 1000.0f);
         }
         stream << "\r\n";
         stream << hrMax;
