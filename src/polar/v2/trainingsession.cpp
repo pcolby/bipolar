@@ -1186,8 +1186,10 @@ QStringList TrainingSession::toHRM() const
             }
         }
         const QVariantMap phase1Limits = firstMap(longestHrZone.value(QLatin1String("limits")));
-        stream << "Upper1=" << first(phase1Limits.value(QLatin1String("high"))).toUInt() << "\r\n";
-        stream << "Lower1=" << first(phase1Limits.value(QLatin1String("low"))).toUInt() << "\r\n";
+        const quint32 phase1LimitHigh = first(phase1Limits.value(QLatin1String("high"))).toUInt();
+        const quint32 phase1LimitLow  = first(phase1Limits.value(QLatin1String("low"))).toUInt();
+        stream << "Upper1=" << phase1LimitHigh << "\r\n";
+        stream << "Lower1=" << phase1LimitLow << "\r\n";
         stream << "Upper2=0\r\n";
         stream << "Lower2=0\r\n";
         stream << "Upper3=0\r\n";
@@ -1371,15 +1373,39 @@ QStringList TrainingSession::toHRM() const
             }
         }
 
-        /// @todo [Summary-123] - Need to parse *-phases file(s).
-        stream << "\r\n[Summary-123]\r\n"; // WebSync includes 0's when empty.
+        // [Summary-123] This will need updating if/when phases data is available.
+        const QVariantList heartrate = samples.value(QLatin1String("heartrate")).toList();
+        int summary123Row1[5] = { 0, 0, 0, 0, 0};
+        for (int index = 0; index < heartrate.length(); ++index) {
+            const quint32 hr = ((index < heartrate.length()) ? heartrate.at(index).toUInt() : (uint)0);
+            if (hr > hrMax)
+                summary123Row1[0]++;
+            else if (hr > phase1LimitHigh)
+                summary123Row1[2]++;
+            else if (hr > phase1LimitLow)
+                summary123Row1[2]++;
+            else if (hr > hrRest)
+                summary123Row1[3]++;
+            else
+                summary123Row1[5]++;
+        }
+        stream << "\r\n[Summary-123]\r\n";
+        stream << qRound(heartrate.length() * recordInterval / 1000.0);
+        for (size_t index = 0; index < (sizeof(summary123Row1)/sizeof(summary123Row1[0])); ++index) {
+            stream << '\t' << qRound(summary123Row1[index] * recordInterval / 1000.0f);
+        }
+        stream << "\r\n";
+        stream << "0\t0\t0\t0\t0\t0\r\n";
+        stream << "0\t0\t0\t0\r\n";
+        stream << "0\t0\t0\t0\t0\t0\r\n";
+        stream << "0\t0\t0\t0\r\n";
+        stream << "0\t" << heartrate.length() << "\r\n";
 
         // [Summary-TH]
         const quint32 anaerobicThreshold = first(firstMap(parsedPhysicalInformation.value(
             QLatin1String("anaerobic-threshold"))).value(QLatin1String("value"))).toUInt();
         const quint32 aerobicThreshold = first(firstMap(parsedPhysicalInformation.value(
             QLatin1String("aerobic-threshold"))).value(QLatin1String("value"))).toUInt();
-        const QVariantList heartrate = samples.value(QLatin1String("heartrate")).toList();
         int summaryThRow1[5] = { 0, 0, 0, 0, 0};
         for (int index = 0; index < heartrate.length(); ++index) {
             const quint32 hr = ((index < heartrate.length()) ? heartrate.at(index).toUInt() : (uint)0);
