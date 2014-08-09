@@ -1251,7 +1251,9 @@ QStringList TrainingSession::toHRM() const
             stream << "0\r\n"; // "0" entries for a total of 11 HRZones entries.
         }
 
-        /// @todo [SwapTimes] - Need to parse *-phases file(s).
+        // [SwapTimes]
+        stream << "[SwapTimes]\r\n";
+        /// @todo Add phase swap times here if/when the training phases data becomes available.
 
         // [HRCCModeCh] "HR/CC mode swaps are a available only with Polar XTrainer Plus."
 
