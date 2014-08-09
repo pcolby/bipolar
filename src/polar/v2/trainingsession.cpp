@@ -1169,7 +1169,7 @@ QStringList TrainingSession::toHRM() const
         stream << "Date="      << startTime.toString(QLatin1String("yyyyMMdd")) << "\r\n";
         stream << "StartTime=" << hrmTime(startTime.time()) << "\r\n";
         stream << "Length="    << hrmTime(firstMap(create.value(QLatin1String("duration")))) << "\r\n";
-        stream << "Interval="  << qRound(recordInterval/1000.0f) << "\r\n";
+        stream << "Interval="  << qRound(recordInterval / 1000.0) << "\r\n";
 
         // In the absence of available training target phases data, just include
         // one of the static target HR zones (better than nothing). We'll use
@@ -1392,7 +1392,7 @@ QStringList TrainingSession::toHRM() const
         stream << "\r\n[Summary-123]\r\n";
         stream << qRound(heartrate.length() * recordInterval / 1000.0);
         for (size_t index = 0; index < (sizeof(summary123Row1)/sizeof(summary123Row1[0])); ++index) {
-            stream << '\t' << qRound(summary123Row1[index] * recordInterval / 1000.0f);
+            stream << '\t' << qRound(summary123Row1[index] * recordInterval / 1000.0);
         }
         stream << "\r\n";
         stream << "0\t0\t0\t0\t0\t0\r\n";
@@ -1423,7 +1423,7 @@ QStringList TrainingSession::toHRM() const
         stream << "\r\n[Summary-TH]\r\n"; // WebSync includes 0's when empty.
         stream << qRound(heartrate.length() * recordInterval / 1000.0);
         for (size_t index = 0; index < (sizeof(summaryThRow1)/sizeof(summaryThRow1[0])); ++index) {
-            stream << '\t' << qRound(summaryThRow1[index] * recordInterval / 1000.0f);
+            stream << '\t' << qRound(summaryThRow1[index] * recordInterval / 1000.0);
         }
         stream << "\r\n";
         stream << hrMax;
