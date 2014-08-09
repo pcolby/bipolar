@@ -1171,29 +1171,31 @@ QStringList TrainingSession::toHRM() const
         stream << "Length="    << hrmTime(firstMap(create.value(QLatin1String("duration")))) << "\r\n";
         stream << "Interval="  << qRound(recordInterval/1000.0f) << "\r\n";
 
-        /// @todo {Upper,Lower}{1,2,3} - Need to parse *-phases file(s).
+        // In the absence of available training target phases data, just include
+        // one of the static target HR zones (better than nothing). We'll use
+        // the one with the greatest duration (why not?).
         QVariantList hrZones = zones.value(QLatin1String("heartrate")).toList();
-        // Since HRM v1.4 only supports 3 target zones, try to reduce the
-        // list down to three by removing zones with 0 duration.
+        quint64 hrZoneMaxDuration = 0;
+        QVariantMap longestHrZone;
         for (int index = 0; (hrZones.length() > 3) && (index < hrZones.length()); ++index) {
-            const quint64 duration = getDuration(firstMap(hrZones.at(index)
-                .toMap().value(QLatin1String("duration"))));
-            if (duration == 0) {
-                hrZones.removeAt(index--);
+            const QVariantMap hrZone = hrZones.at(index).toMap();
+            const quint64 duration = getDuration(firstMap(hrZone.value(QLatin1String("duration"))));
+            if ((duration > hrZoneMaxDuration) || (hrZoneMaxDuration == 0)) {
+                longestHrZone = hrZone;
+                hrZoneMaxDuration = duration;
             }
         }
-        for (int index = 0; (index < 3) && (index < hrZones.length()); ++index) {
-            const QVariantMap limits = firstMap(hrZones.at(hrZones.length() - 3 + index).toMap().value(QLatin1String("limits")));
-            stream << "Upper" << (index+1) << "=" << first(limits.value(QLatin1String("high"))).toUInt() << "\r\n";
-            stream << "Lower" << (index+1) << "=" << first(limits.value(QLatin1String("low"))).toUInt() << "\r\n";
-        }
-        for (int index = 0; (index < 3) && (index < hrZones.length()); ++index) {
-            stream << "Timer" << (index+1) << "=" << hrmTime(firstMap(hrZones
-                .at(hrZones.length() - 3 + index).toMap()
-                .value(QLatin1String("duration")))) << "\r\n";
-        }
-
-        stream << "ActiveLimit=0\r\n"; ///< @todo Need to parse *-phases file(s).
+        const QVariantMap phase1Limits = firstMap(longestHrZone.value(QLatin1String("limits")));
+        stream << "Upper1=" << first(phase1Limits.value(QLatin1String("high"))).toUInt() << "\r\n";
+        stream << "Lower1=" << first(phase1Limits.value(QLatin1String("low"))).toUInt() << "\r\n";
+        stream << "Upper2=0\r\n";
+        stream << "Lower2=0\r\n";
+        stream << "Upper3=0\r\n";
+        stream << "Lower3=0\r\n";
+        stream << "Timer1=" << hrmTime(firstMap(longestHrZone.value(QLatin1String("duration")))) << "\r\n";
+        stream << "Timer2=00:00:00.0\r\n";
+        stream << "Timer3=00:00:00.0\r\n";
+        stream << "ActiveLimit=0\r\n";
 
         const quint32 hrMax = first(firstMap(parsedPhysicalInformation.value(
             QLatin1String("maximum-heartrate"))).value(QLatin1String("value"))).toUInt();
