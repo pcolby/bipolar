@@ -1,6 +1,6 @@
 [Params]
 Version=106
-Monitor=0
+Monitor=1
 SMode=111000000
 Date=20140807
 StartTime=17:25:01.0
