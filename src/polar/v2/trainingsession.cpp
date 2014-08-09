@@ -1387,7 +1387,7 @@ QStringList TrainingSession::toHRM() const
             else if (hr > hrRest)
                 summary123Row1[3]++;
             else
-                summary123Row1[5]++;
+                summary123Row1[4]++;
         }
         stream << "\r\n[Summary-123]\r\n";
         stream << qRound(heartrate.length() * recordInterval / 1000.0);
