@@ -1188,12 +1188,9 @@ QStringList TrainingSession::toHRM() const
             stream << "Lower" << (index+1) << "=" << first(limits.value(QLatin1String("low"))).toUInt() << "\r\n";
         }
         for (int index = 0; (index < 3) && (index < hrZones.length()); ++index) {
-            const quint64 duration = getDuration(firstMap(hrZones
-                .at(hrZones.length() - 3 + index).toMap().value(QLatin1String("duration"))));
-            const QString hhmm = QString::fromLatin1("%1:%2")
-                .arg(duration/1000/60, 2, 10, QLatin1Char('0'))
-                .arg(duration/1000%60, 2, 10, QLatin1Char('0'));
-            stream << "Timer" << (index+1) << "=" << hhmm << "\r\n";
+            stream << "Timer" << (index+1) << "=" << hrmTime(firstMap(hrZones
+                .at(hrZones.length() - 3 + index).toMap()
+                .value(QLatin1String("duration")))) << "\r\n";
         }
 
         stream << "ActiveLimit=0\r\n"; ///< @todo Need to parse *-phases file(s).
