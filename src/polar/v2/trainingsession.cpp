@@ -1291,7 +1291,7 @@ QStringList TrainingSession::toHRM() const
                 stream << '\t' << first(hrStats.value(QLatin1String("maximum"))).toUInt();
                 stream << "\r\n";
                 // Row 2
-                stream << "0";   // Bit flags.
+                stream << "28";
                 stream << "\t0"; // Recovery time (seconds); data not available.
                 stream << "\t0"; // Recovery HR (bpm); data not available.
                 stream << "\t" << qRound(first(firstMap(stats.value(QLatin1String("speed")))
@@ -1301,7 +1301,11 @@ QStringList TrainingSession::toHRM() const
                 stream << "\t0"; // Momentary altitude; not available per lap.
                 stream << "\r\n";
                 // Row 3
-                stream << "0\t0\t0";
+                stream << qRound(first(header.value(QLatin1String("descent"))).toFloat() * 10.0);
+                stream << '\t' << (first(firstMap(stats.value(QLatin1String("pedaling")))
+                    .value(QLatin1String("average"))).toUInt() * 10);
+                stream << '\t' << qRound(first(firstMap(stats.value(QLatin1String("incline")))
+                    .value(QLatin1String("max"))).toFloat() * 10.0);
                 stream << '\t' << qRound(first(header.value(QLatin1String("ascent"))).toFloat() / 10.0);
                 stream << '\t' << qRound(first(header.value(QLatin1String("distance"))).toFloat() / 100.0);
                 stream << "\r\n";
@@ -1343,10 +1347,16 @@ QStringList TrainingSession::toHRM() const
             }
         }
 
-        // [ExtraData]
-        /// @todo Can have up to 3 "extra" data series here, such as Lactate
-        ///       and Power. Maybe Temperature? These are then included in
-        ///       [IntTimes] above. Stride? Distance? Accelleration? Moving Type?
+        // [ExtraData] This section describes the semantics of the "extra" data.
+        // The data itself is included in the [IntTimes] section ("row 3"),
+        // where HRM2 v1.4 says the acceptable range is 0..3000, and values are
+        // all multiplied by 10, to extra data can hold 0..300 units.
+        if (!laps.isEmpty()) {
+            stream << "\r\n[ExtraData]\r\n";
+            stream << "Descent\r\nMeters\t1000\t0\r\n";
+            stream << "Pedaling Index\r\n%\t100\t0\r\n";
+            stream << "Max Incline\r\nDegrees\t90\t0\r\n";
+        }
 
         // [LapNames] This HRM section is undocumented, but supported by PPT5.
         if (!laps.isEmpty()) {
