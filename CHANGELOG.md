@@ -4,7 +4,7 @@
 Features:
 - basic GUI?
 
-### 0.2.1 (_unreleased_)
+### 0.2.1 (2014-08-09)
 Features:
 - support for HRM export ([#14](../../issues/14))
 - lap data in TCX output ([#18](../../issues/18))
