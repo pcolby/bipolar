@@ -6,7 +6,7 @@ Features:
 
 ### 0.2.1 (_unreleased_)
 Features:
-- official HRM export ([#14](../../issues/14))
+- support for HRM export ([#14](../../issues/14))
 - lap data in TCX output ([#18](../../issues/18))
 - lap data in GPX output ([#22](../../issues/22))
 
