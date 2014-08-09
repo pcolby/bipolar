@@ -1196,7 +1196,7 @@ QStringList TrainingSession::toHRM() const
             stream << "Timer" << (index+1) << "=" << hhmm << "\r\n";
         }
 
-        /// @todo ActiveLimit - Need to parse *-phases file(s).
+        stream << "ActiveLimit=0\r\n"; ///< @todo Need to parse *-phases file(s).
 
         const quint32 hrMax = first(firstMap(parsedPhysicalInformation.value(
             QLatin1String("maximum-heartrate"))).value(QLatin1String("value"))).toUInt();

@@ -15,6 +15,7 @@ Lower3=167
 Timer1=00:42
 Timer2=18:57
 Timer3=15:50
+ActiveLimit=0
 MaxHR=185
 RestHR=55
 StartDelay=0
