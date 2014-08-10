@@ -276,9 +276,34 @@ QVariantMap TrainingSession::parseCreateExercise(QIODevice &data) const
     ADD_FIELD_INFO("12",    "latitude",      Double);
     ADD_FIELD_INFO("13",    "longitude",     Double);
     ADD_FIELD_INFO("14",    "place",         String);
-    ADD_FIELD_INFO("15",    "exercise-result",          EmbeddedMessage); /// @todo
-    ADD_FIELD_INFO("16",    "exercise-counters",        EmbeddedMessage); /// @todo
-    ADD_FIELD_INFO("17",    "speed-calibration-offset", Float);
+    ADD_FIELD_INFO("15",       "target-result",     EmbeddedMessage);
+    ADD_FIELD_INFO("15/1",     "index",             Uint32);
+    ADD_FIELD_INFO("15/2",     "reached",           Bool);
+    ADD_FIELD_INFO("15/3",     "end-time",          EmbeddedMessage);
+    ADD_FIELD_INFO("15/3/1",   "hours",             Uint32);
+    ADD_FIELD_INFO("15/3/2",   "minutes",           Uint32);
+    ADD_FIELD_INFO("15/3/3",   "seconds",           Uint32);
+    ADD_FIELD_INFO("15/3/4",   "milliseconds",      Uint32);
+    ADD_FIELD_INFO("15/4",     "race-pace-result",  EmbeddedMessage);
+    ADD_FIELD_INFO("15/4/1",   "completed",         EmbeddedMessage);
+    ADD_FIELD_INFO("15/4/1/1", "hours",             Uint32);
+    ADD_FIELD_INFO("15/4/1/2", "minutes",           Uint32);
+    ADD_FIELD_INFO("15/4/1/3", "seconds",           Uint32);
+    ADD_FIELD_INFO("15/4/1/4", "milliseconds",      Uint32);
+    ADD_FIELD_INFO("15/4/2",   "heartrate",         Uint32);
+    ADD_FIELD_INFO("15/4/3",   "speed",             Float);
+    ADD_FIELD_INFO("15/5",     "volume-target",     EmbeddedMessage);
+    ADD_FIELD_INFO("15/5/1",   "target-type",       Enumerator);
+    ADD_FIELD_INFO("15/5/2",   "duration",          EmbeddedMessage);
+    ADD_FIELD_INFO("15/5/2/1", "hours",             Uint32);
+    ADD_FIELD_INFO("15/5/2/2", "minutes",           Uint32);
+    ADD_FIELD_INFO("15/5/2/3", "seconds",           Uint32);
+    ADD_FIELD_INFO("15/5/2/4", "milliseconds",      Uint32);
+    ADD_FIELD_INFO("15/5/3",   "distance",          Float);
+    ADD_FIELD_INFO("15/5/4",   "calores",           Uint32);
+    ADD_FIELD_INFO("16",       "exercise-counters", EmbeddedMessage);
+    ADD_FIELD_INFO("16/1",     "sprint-count",      Uint32);
+    ADD_FIELD_INFO("17", "speed-calibration-offset", Float);
     ProtoBuf::Message parser(fieldInfo);
 
     if (isGzipped(data)) {
