@@ -52,7 +52,7 @@ cp README.txt /Volumes/Bipolar/  || exit
 hdiutil detach /Volumes/Bipolar/ || exit
 
 echo 'Converting final disk image'
-FINALNAME="Bipolar-0.2.2.$REVISION.dmg"
+FINALNAME="Bipolar-0.2.3.$REVISION.dmg"
 [ -e "$FINALNAME" ] && rm -f "$FINALNAME"
 hdiutil convert Bipolar-rw.dmg -format UDZO -o "$FINALNAME"
 
