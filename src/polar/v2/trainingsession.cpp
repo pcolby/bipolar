@@ -27,6 +27,7 @@
 #include <QApplication>
 #include <QDebug>
 #include <QDir>
+#include <QDomElement>
 #include <QFileInfo>
 
 #ifdef Q_OS_WIN
@@ -1551,6 +1552,40 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
         const quint64 recordInterval = getDuration(
             firstMap(samples.value(QLatin1String("record-interval"))));
 
+        // Get the "samples" samples.
+        const QVariantList altitude    = samples.value(QLatin1String("altitude")).toList();
+        const QVariantList cadence     = samples.value(QLatin1String("cadence")).toList();
+        const QVariantList distance    = samples.value(QLatin1String("distance")).toList();
+        const QVariantList heartrate   = samples.value(QLatin1String("heartrate")).toList();
+        const QVariantList speed       = samples.value(QLatin1String("speed")).toList();
+        const QVariantList temperature = samples.value(QLatin1String("temperature")).toList();
+        qDebug() << "samples sizes:"
+            << altitude.size() << cadence.size() << distance.size()
+            << heartrate.size() << speed.size() << temperature.size();
+
+        // Get the "route" samples.
+        const QVariantList duration    = route.value(QLatin1String("duration")).toList();
+        const QVariantList gpsAltitude = route.value(QLatin1String("altitude")).toList();
+        const QVariantList latitude    = route.value(QLatin1String("latitude")).toList();
+        const QVariantList longitude   = route.value(QLatin1String("longitude")).toList();
+        const QVariantList satellites  = route.value(QLatin1String("satellites")).toList();
+        qDebug() << "route sizes:" << duration.size() << gpsAltitude.size()
+                 << latitude.size() << longitude.size() << satellites.size();
+
+        const int maxIndex =
+            qMax(altitude.length(),
+            qMax(cadence.length(),
+            qMax(distance.length(),
+            qMax(heartrate.length(),
+            qMax(speed.length(),
+          //qMax(temperature.length(), // We don't use temperature in TCX yet.
+            qMax(duration.length(),
+            qMax(gpsAltitude.length(),
+            qMax(latitude.length(),
+            qMax(longitude.length(),
+            qMax(satellites.length(), 0))))))))));
+        qDebug() << "max index" << maxIndex;
+
         QDomElement activity = doc.createElement(QLatin1String("Activity"));
         if (multiSportSession.isNull()) {
             activities.appendChild(activity);
@@ -1575,51 +1610,116 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
         activity.appendChild(doc.createElement(QLatin1String("Id")))
             .appendChild(doc.createTextNode(startTime.toString(Qt::ISODate)));
 
-        // Determine which laps list to use.
+        // Build a map of lap split times to lap data.
         QVariantList laps = map.value(LAPS).toMap().value(QLatin1String("laps")).toList();
         if (laps.isEmpty()) {
             laps = map.value(AUTOLAPS).toMap().value(QLatin1String("laps")).toList();
         }
+        QMap<quint64, QVariantMap> splits;
+        foreach (const QVariant &lap, laps) {
+            const QVariantMap lapData = lap.toMap();
+            const quint64 splitTime = getDuration(firstMap(firstMap(
+                lapData.value(QLatin1String("header")))
+                .value(QLatin1String("split-time"))));
+            if (splitTime > 0) {
+                splits.insert(splitTime, lapData);
+            }
+        }
 
         // Add each of the laps to the Activity element.
-        int samplesIndex = 0;
-        for (int lapIndex = 0; lapIndex < qMax(1, laps.length()); ++lapIndex) {
-            // Prefect the lap-data, if any, so we only have to do it once.
-            const QVariantMap lapData = (laps.isEmpty())
-                ? QVariantMap() : laps.at(lapIndex).toMap();
+        QDomElement lap;
+        QVariantMap base = create; // The base data for this lap.
+        QVariantMap stats = map.value(STATISTICS).toMap();
+        QDomElement track = doc.createElement(QLatin1String("Track"));
+        for (int index = 0; index < maxIndex; ++index) {
+            if ((lap.isNull()) || ((!splits.isEmpty()) && (index * recordInterval > splits.firstKey()))) {
+                if ((!lap.isNull()) && (!splits.isEmpty())) {
+                    splits.remove(splits.firstKey());
+                }
+                if (!splits.isEmpty()) {
+                    const QVariantMap lapData = splits.first();
+                    base = firstMap(lapData.value(QLatin1String("header")));
+                    stats = firstMap(lapData.value(QLatin1String("stats")));
+                } else if (index != 0) {
+                    base = QVariantMap();
+                    stats = QVariantMap();
+                }
 
-            // Use either the exercise base (aka "create"), or the lap header.
-            const QVariantMap base = (laps.isEmpty()) ? create
-                : firstMap(lapData.value(QLatin1String("header")));
+                // Create the Lap element, and set its StartTime attribute.
+                #if (QT_VERSION >= QT_VERSION_CHECK(5, 2, 0))
+                const QDateTime lapStartTime = startTime.addMSecs(index * recordInterval);
+                #else /// @todo Remove this hack when Qt 5.2+ is available on Travis CI.
+                QDateTime lapStartTime = startTime.toUTC()
+                    .addMSecs(index * recordInterval).addSecs(startTime.utcOffset());
+                lapStartTime.setUtcOffset(startTime.utcOffset());
+                #endif
+                lap = doc.createElement(QLatin1String("Lap"));
+                lap.setAttribute(QLatin1String("StartTime"),
+                    lapStartTime.toString(Qt::ISODate));
+                activity.appendChild(lap);
 
-            // Use either the excercise stats, or the lap stats.
-            const QVariantMap stats = (laps.isEmpty())
-                ? map.value(STATISTICS).toMap()
-                : firstMap(lapData.value(QLatin1String("stats")));
+                // Add the per-lap (or per-exercise) statistics.
+                addLapStats(doc, lap, base, stats);
 
-            // Create the Lap element, and set its StartTime attribute.
-            #if (QT_VERSION >= QT_VERSION_CHECK(5, 2, 0))
-            const QDateTime lapStartTime = startTime.addMSecs(samplesIndex * recordInterval);
-            #else /// @todo Remove this hack when Qt 5.2+ is available on Travis CI.
-            QDateTime lapStartTime = startTime.toUTC()
-                .addMSecs(samplesIndex * recordInterval).addSecs(startTime.utcOffset());
-            lapStartTime.setUtcOffset(startTime.utcOffset());
-            #endif
-            QDomElement lap = doc.createElement(QLatin1String("Lap"));
-            lap.setAttribute(QLatin1String("StartTime"),
-                lapStartTime.toString(Qt::ISODate));
-            activity.appendChild(lap);
+                track = doc.createElement(QLatin1String("Track"));
+                lap.appendChild(track);
+            }
 
-            // Add the per-lap (or per-exercise) statistics.
-            addLapStats(doc, lap, base, stats);
+            //const quint64 splitTime = (laps.isEmpty()) ? 0 :
+                //getDuration(firstMap(base.value(QLatin1String("split-time"))));
 
-            // Add the lap's (or exercise's) sample data.
-            QDomElement track = doc.createElement(QLatin1String("Track"));
-            const quint64 splitTime = (laps.isEmpty()) ? 0 :
-                getDuration(firstMap(base.value(QLatin1String("split-time"))));
-            addTrackSamples(doc, track, samples, route, startTime,
-                            splitTime, recordInterval, samplesIndex);
-            lap.appendChild(track);
+
+            //addTrackSamples(doc, track, samples, route, startTime,
+                            //splitTime, recordInterval, index);
+
+            QDomElement trackPoint = doc.createElement(QLatin1String("Trackpoint"));
+
+            if ((index < latitude.length()) && (index < longitude.length())) {
+                QDomElement position = doc.createElement(QLatin1String("Position"));
+                position.appendChild(doc.createElement(QLatin1String("LatitudeDegrees")))
+                    .appendChild(doc.createTextNode(latitude.at(index).toString()));
+                position.appendChild(doc.createElement(QLatin1String("LongitudeDegrees")))
+                    .appendChild(doc.createTextNode(longitude.at(index).toString()));
+                trackPoint.appendChild(position);
+            }
+
+            if ((index < altitude.length()) &&
+                (!sensorOffline(samples.value(QLatin1String("altitude-offline")).toList(), index))) {
+                trackPoint.appendChild(doc.createElement(QLatin1String("AltitudeMeters")))
+                    .appendChild(doc.createTextNode(altitude.at(index).toString()));
+            }
+            if ((index < distance.length()) &&
+                (!sensorOffline(samples.value(QLatin1String("distance-offline")).toList(), index))) {
+                trackPoint.appendChild(doc.createElement(QLatin1String("DistanceMeters")))
+                    .appendChild(doc.createTextNode(distance.at(index).toString()));
+            }
+            if ((index < heartrate.length()) && (heartrate.at(index).toInt() > 0) &&
+                (!sensorOffline(samples.value(QLatin1String("heartrate-offline")).toList(), index))) {
+                trackPoint.appendChild(doc.createElement(QLatin1String("HeartRateBpm")))
+                    .appendChild(doc.createElement(QLatin1String("Value")))
+                    .appendChild(doc.createTextNode(heartrate.at(index).toString()));
+            }
+            if ((index < cadence.length()) && (cadence.at(index).toInt() >= 0) &&
+                (!sensorOffline(samples.value(QLatin1String("cadence-offline")).toList(), index))) {
+                trackPoint.appendChild(doc.createElement(QLatin1String("Cadence")))
+                    .appendChild(doc.createTextNode(cadence.at(index).toString()));
+            }
+
+            if (trackPoint.hasChildNodes()) {
+                #if (QT_VERSION >= QT_VERSION_CHECK(5, 2, 0))
+                QDateTime trackPointTime = startTime.addMSecs(index * recordInterval);
+                #else /// @todo Remove this hack when Qt 5.2+ is available on Travis CI.
+                QDateTime trackPointTime = startTime.toUTC()
+                    .addMSecs(index * recordInterval).addSecs(startTime.utcOffset());
+                trackPointTime.setUtcOffset(startTime.utcOffset());
+                #endif
+                trackPoint.insertBefore(doc.createElement(QLatin1String("Time")), QDomNode())
+                    .appendChild(doc.createTextNode(trackPointTime.toString(Qt::ISODate)));
+                track.appendChild(trackPoint);
+            } else {
+                /// @todo ?
+                //return; // We've exceeded the length of all data samples.
+            }
         }
     }
 
@@ -1682,16 +1782,19 @@ void TrainingSession::addLapStats(QDomDocument &doc, QDomElement &lap,
                                   const QVariantMap &base,
                                   const QVariantMap &stats) const
 {
+    /// @todo  Sort out trailing duration / distance.
     lap.appendChild(doc.createElement(QLatin1String("TotalTimeSeconds")))
         .appendChild(doc.createTextNode(QString::fromLatin1("%1")
             .arg(getDuration(firstMap(base.value(QLatin1String("duration"))))/1000.0)));
     lap.appendChild(doc.createElement(QLatin1String("DistanceMeters")))
         .appendChild(doc.createTextNode(QString::fromLatin1("%1")
             .arg(first(base.value(QLatin1String("distance"))).toDouble())));
-    lap.appendChild(doc.createElement(QLatin1String("MaximumSpeed")))
-        .appendChild(doc.createTextNode(QString::fromLatin1("%1")
-            .arg(first(firstMap(stats.value(QLatin1String("speed")))
-                .value(QLatin1String("maximum"))).toDouble())));
+    if (stats.contains(QLatin1String("speed"))) {
+        lap.appendChild(doc.createElement(QLatin1String("MaximumSpeed")))
+            .appendChild(doc.createTextNode(QString::fromLatin1("%1")
+                .arg(first(firstMap(stats.value(QLatin1String("speed")))
+                    .value(QLatin1String("maximum"))).toDouble())));
+    }
 
     // Calories is only available per exercise, not per lap, but it is required
     // by the TCX schema, so the following will set it to 0, if not present.
@@ -1700,14 +1803,16 @@ void TrainingSession::addLapStats(QDomDocument &doc, QDomElement &lap,
             .arg(first(base.value(QLatin1String("calories"))).toUInt())));
 
     const QVariantMap hrStats = firstMap(stats.value(QLatin1String("heartrate")));
-    lap.appendChild(doc.createElement(QLatin1String("AverageHeartRateBpm")))
-        .appendChild(doc.createElement(QLatin1String("Value")))
-            .appendChild(doc.createTextNode(QString::fromLatin1("%1")
-                .arg(first(hrStats.value(QLatin1String("average"))).toUInt())));
-    lap.appendChild(doc.createElement(QLatin1String("MaximumHeartRateBpm")))
-        .appendChild(doc.createElement(QLatin1String("Value")))
-            .appendChild(doc.createTextNode(QString::fromLatin1("%1")
-                .arg(first(hrStats.value(QLatin1String("maximum"))).toUInt())));
+    if (!hrStats.isEmpty()) {
+        lap.appendChild(doc.createElement(QLatin1String("AverageHeartRateBpm")))
+            .appendChild(doc.createElement(QLatin1String("Value")))
+                .appendChild(doc.createTextNode(QString::fromLatin1("%1")
+                    .arg(first(hrStats.value(QLatin1String("average"))).toUInt())));
+        lap.appendChild(doc.createElement(QLatin1String("MaximumHeartRateBpm")))
+            .appendChild(doc.createElement(QLatin1String("Value")))
+                .appendChild(doc.createTextNode(QString::fromLatin1("%1")
+                    .arg(first(hrStats.value(QLatin1String("maximum"))).toUInt())));
+    }
     /// @todo Intensity must be one of: Active, Resting.
     lap.appendChild(doc.createElement(QLatin1String("Intensity")))
         .appendChild(doc.createTextNode(QString::fromLatin1("Active")));
@@ -1730,85 +1835,6 @@ void TrainingSession::addLapStats(QDomDocument &doc, QDomElement &lap,
     }
     lap.appendChild(doc.createElement(QLatin1String("TriggerMethod")))
         .appendChild(doc.createTextNode(triggerMethod));
-}
-
-void TrainingSession::addTrackSamples(QDomDocument &doc, QDomElement &track,
-                                      const QVariantMap &samples,
-                                      const QVariantMap &route,
-                                      const QDateTime &startTime,
-                                      const quint64 splitTime,
-                                      const quint64 recordInterval,
-                                      int &index) const
-{
-    // Get the "samples" samples.
-    const QVariantList altitude    = samples.value(QLatin1String("altitude")).toList();
-    const QVariantList cadence     = samples.value(QLatin1String("cadence")).toList();
-    const QVariantList distance    = samples.value(QLatin1String("distance")).toList();
-    const QVariantList heartrate   = samples.value(QLatin1String("heartrate")).toList();
-    const QVariantList speed       = samples.value(QLatin1String("speed")).toList();
-    const QVariantList temperature = samples.value(QLatin1String("temperature")).toList();
-    qDebug() << "samples sizes:"
-        << altitude.size() << cadence.size() << distance.size()
-        << heartrate.size() << speed.size() << temperature.size();
-
-    // Get the "route" samples.
-    const QVariantList duration    = route.value(QLatin1String("duration")).toList();
-    const QVariantList gpsAltitude = route.value(QLatin1String("altitude")).toList();
-    const QVariantList latitude    = route.value(QLatin1String("latitude")).toList();
-    const QVariantList longitude   = route.value(QLatin1String("longitude")).toList();
-    const QVariantList satellites  = route.value(QLatin1String("satellites")).toList();
-    qDebug() << "route sizes:" << duration.size() << gpsAltitude.size()
-             << latitude.size() << longitude.size() << satellites.size();
-
-    for (; (splitTime == 0) || ((index * recordInterval) <= splitTime); ++index) {
-        QDomElement trackPoint = doc.createElement(QLatin1String("Trackpoint"));
-
-        if ((index < latitude.length()) && (index < longitude.length())) {
-            QDomElement position = doc.createElement(QLatin1String("Position"));
-            position.appendChild(doc.createElement(QLatin1String("LatitudeDegrees")))
-                .appendChild(doc.createTextNode(latitude.at(index).toString()));
-            position.appendChild(doc.createElement(QLatin1String("LongitudeDegrees")))
-                .appendChild(doc.createTextNode(longitude.at(index).toString()));
-            trackPoint.appendChild(position);
-        }
-
-        if ((index < altitude.length()) &&
-            (!sensorOffline(samples.value(QLatin1String("altitude-offline")).toList(), index))) {
-            trackPoint.appendChild(doc.createElement(QLatin1String("AltitudeMeters")))
-                .appendChild(doc.createTextNode(altitude.at(index).toString()));
-        }
-        if ((index < distance.length()) &&
-            (!sensorOffline(samples.value(QLatin1String("distance-offline")).toList(), index))) {
-            trackPoint.appendChild(doc.createElement(QLatin1String("DistanceMeters")))
-                .appendChild(doc.createTextNode(distance.at(index).toString()));
-        }
-        if ((index < heartrate.length()) && (heartrate.at(index).toInt() > 0) &&
-            (!sensorOffline(samples.value(QLatin1String("heartrate-offline")).toList(), index))) {
-            trackPoint.appendChild(doc.createElement(QLatin1String("HeartRateBpm")))
-                .appendChild(doc.createElement(QLatin1String("Value")))
-                .appendChild(doc.createTextNode(heartrate.at(index).toString()));
-        }
-        if ((index < cadence.length()) && (cadence.at(index).toInt() >= 0) &&
-            (!sensorOffline(samples.value(QLatin1String("cadence-offline")).toList(), index))) {
-            trackPoint.appendChild(doc.createElement(QLatin1String("Cadence")))
-                .appendChild(doc.createTextNode(cadence.at(index).toString()));
-        }
-
-        if (trackPoint.hasChildNodes()) {
-            #if (QT_VERSION >= QT_VERSION_CHECK(5, 2, 0))
-            QDateTime trackPointTime = startTime.addMSecs(index * recordInterval);
-            #else /// @todo Remove this hack when Qt 5.2+ is available on Travis CI.
-            QDateTime trackPointTime = startTime.toUTC()
-                .addMSecs(index * recordInterval).addSecs(startTime.utcOffset());
-            trackPointTime.setUtcOffset(startTime.utcOffset());
-            #endif
-            trackPoint.insertBefore(doc.createElement(QLatin1String("Time")), QDomNode())
-                .appendChild(doc.createTextNode(trackPointTime.toString(Qt::ISODate)));
-            track.appendChild(trackPoint);
-        } else {
-            return; // We've exceeded the length of all data samples.
-        }
-    }
 }
 
 QByteArray TrainingSession::unzip(const QByteArray &data,
