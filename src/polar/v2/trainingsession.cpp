@@ -1634,13 +1634,25 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
         qint64 durationRemaining = getDuration(firstMap(create.value(QLatin1String("duration"))));
         double distanceRemaining = first(create.value(QLatin1String("distance"))).toDouble();
         for (int index = 0; index < maxIndex; ++index) {
+            #if (QT_VERSION >= QT_VERSION_CHECK(5, 2, 0))
             if ((lap.isNull()) || ((!splits.isEmpty()) && (index * recordInterval > splits.firstKey()))) {
+            #else
+            if ((lap.isNull()) || ((!splits.isEmpty()) && (index * recordInterval > splits.constBegin().key()))) {
+            #endif
                 double trailingDuration = 0, trailingDistance = 0;
                 if ((!lap.isNull()) && (!splits.isEmpty())) {
+                    #if (QT_VERSION >= QT_VERSION_CHECK(5, 2, 0))
                     splits.remove(splits.firstKey());
+                    #else
+                    splits.remove(splits.constBegin().key());
+                    #endif
                 }
                 if (!splits.isEmpty()) {
+                    #if (QT_VERSION >= QT_VERSION_CHECK(5, 2, 0))
                     const QVariantMap lapData = splits.first();
+                    #else
+                    const QVariantMap lapData = splits.constBegin().value();
+                    #endif
                     base = firstMap(lapData.value(QLatin1String("header")));
                     stats = firstMap(lapData.value(QLatin1String("stats")));
                     durationRemaining -= getDuration(firstMap(base.value(QLatin1String("duration"))));
