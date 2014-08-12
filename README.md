@@ -15,7 +15,7 @@ The release plans is roughly as follows:
 - [x] 0.0.1 Working hook DLL for extracting data from Polar FlowSync on Windows.
 - [x] 0.1.0 Export to both GPX and TCX, in a headless mode (no GUI yet).
 - [x] 0.2.0 Mac OS support (both hook library, and headless app).
-- [x] 0.2.1 Export to HRM format.
+- [x] 0.2.x Minor features and bug fixes.
 - [ ] 0.3.0 Basic GUI.
 
 Note, while the current (0.2.x) release includes a lot of behind-the-scenes code
