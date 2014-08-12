@@ -100,7 +100,8 @@ private:
     friend class ::TestTrainingSession;
 
     void addLapStats(QDomDocument &doc, QDomElement &lap,
-                     const QVariantMap &base, const QVariantMap &stats) const;
+                     const QVariantMap &base, const QVariantMap &stats,
+                     const double duration = 0, const double distance = 0) const;
 
 };
 

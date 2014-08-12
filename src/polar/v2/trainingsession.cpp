@@ -1631,8 +1631,11 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
         QVariantMap base = create; // The base data for this lap.
         QVariantMap stats = map.value(STATISTICS).toMap();
         QDomElement track = doc.createElement(QLatin1String("Track"));
+        qint64 durationRemaining = getDuration(firstMap(create.value(QLatin1String("duration"))));
+        double distanceRemaining = first(create.value(QLatin1String("distance"))).toDouble();
         for (int index = 0; index < maxIndex; ++index) {
             if ((lap.isNull()) || ((!splits.isEmpty()) && (index * recordInterval > splits.firstKey()))) {
+                double trailingDuration = 0, trailingDistance = 0;
                 if ((!lap.isNull()) && (!splits.isEmpty())) {
                     splits.remove(splits.firstKey());
                 }
@@ -1640,8 +1643,12 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                     const QVariantMap lapData = splits.first();
                     base = firstMap(lapData.value(QLatin1String("header")));
                     stats = firstMap(lapData.value(QLatin1String("stats")));
+                    durationRemaining -= getDuration(firstMap(base.value(QLatin1String("duration"))));
+                    distanceRemaining -= first(base.value(QLatin1String("distance"))).toDouble();
                 } else if (index != 0) {
                     base = QVariantMap();
+                    trailingDuration = durationRemaining;
+                    trailingDistance = distanceRemaining;
                     stats = QVariantMap();
                 }
 
@@ -1659,18 +1666,12 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                 activity.appendChild(lap);
 
                 // Add the per-lap (or per-exercise) statistics.
-                addLapStats(doc, lap, base, stats);
+                addLapStats(doc, lap, base, stats, trailingDuration / 1000.0,
+                            trailingDistance);
 
                 track = doc.createElement(QLatin1String("Track"));
                 lap.appendChild(track);
             }
-
-            //const quint64 splitTime = (laps.isEmpty()) ? 0 :
-                //getDuration(firstMap(base.value(QLatin1String("split-time"))));
-
-
-            //addTrackSamples(doc, track, samples, route, startTime,
-                            //splitTime, recordInterval, index);
 
             QDomElement trackPoint = doc.createElement(QLatin1String("Trackpoint"));
 
@@ -1716,9 +1717,6 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                 trackPoint.insertBefore(doc.createElement(QLatin1String("Time")), QDomNode())
                     .appendChild(doc.createTextNode(trackPointTime.toString(Qt::ISODate)));
                 track.appendChild(trackPoint);
-            } else {
-                /// @todo ?
-                //return; // We've exceeded the length of all data samples.
             }
         }
     }
@@ -1780,15 +1778,17 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
 
 void TrainingSession::addLapStats(QDomDocument &doc, QDomElement &lap,
                                   const QVariantMap &base,
-                                  const QVariantMap &stats) const
+                                  const QVariantMap &stats,
+                                  const double duration,
+                                  const double distance) const
 {
     /// @todo  Sort out trailing duration / distance.
     lap.appendChild(doc.createElement(QLatin1String("TotalTimeSeconds")))
-        .appendChild(doc.createTextNode(QString::fromLatin1("%1")
-            .arg(getDuration(firstMap(base.value(QLatin1String("duration"))))/1000.0)));
+        .appendChild(doc.createTextNode(QString::fromLatin1("%1").arg(qMax(
+            duration, getDuration(firstMap(base.value(QLatin1String("duration"))))/1000.0))));
     lap.appendChild(doc.createElement(QLatin1String("DistanceMeters")))
-        .appendChild(doc.createTextNode(QString::fromLatin1("%1")
-            .arg(first(base.value(QLatin1String("distance"))).toDouble())));
+        .appendChild(doc.createTextNode(QString::fromLatin1("%1").arg(qMax(
+            distance, first(base.value(QLatin1String("distance"))).toDouble()))));
     if (stats.contains(QLatin1String("speed"))) {
         lap.appendChild(doc.createElement(QLatin1String("MaximumSpeed")))
             .appendChild(doc.createTextNode(QString::fromLatin1("%1")

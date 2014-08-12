@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<TrainingCenterDatabase xsi:schemaLocation="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd" xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<TrainingCenterDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd" xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2">
   <Activities>
     <Activity Sport="Running">
       <Id>2014-08-07T17:25:01+10:00</Id>
@@ -27534,8 +27534,8 @@
         </Track>
       </Lap>
       <Lap StartTime="2014-08-07T18:00:07+10:00">
-        <TotalTimeSeconds>0</TotalTimeSeconds>
-        <DistanceMeters>0</DistanceMeters>
+        <TotalTimeSeconds>25.125</TotalTimeSeconds>
+        <DistanceMeters>43.0999</DistanceMeters>
         <Calories>0</Calories>
         <Intensity>Active</Intensity>
         <TriggerMethod>Manual</TriggerMethod>
