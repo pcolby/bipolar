@@ -4,6 +4,10 @@
 Features:
 - basic GUI?
 
+### 0.2.2 (2014-08-12)
+Bugs:
+- preserve trailing laps in TCX output ([#27](../../issues/27))
+
 ### 0.2.1 (2014-08-09)
 Features:
 - support for HRM export ([#14](../../issues/14))
@@ -29,7 +33,7 @@ Features:
 
 ### 0.0.2 (2014-07-18)
 Bugs:
-- preservation of "create" request files within the export hook.
+- preserve "create" request files within the export hook.
 
 ### 0.0.1 (2014-06-29)
 - initial release of the first export hook, supporting Polar FlowSync 2.1 on
