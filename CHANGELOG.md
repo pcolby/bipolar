@@ -4,7 +4,7 @@
 Features:
 - basic GUI?
 
-### 0.2.3 (2014-08-12)
+### 0.2.3 (2014-08-13)
 Features:
 - separate HRM files for R-R data ([#28](../../issues/28))
 
