@@ -1,4 +1,4 @@
 INCLUDEPATH += $$PWD
 VPATH += $$PWD
-HEADERS += mainwindow.h
-SOURCES += mainwindow.cpp
+HEADERS += inputspage.h   mainwizard.h   outputspage.h
+SOURCES += inputspage.cpp mainwizard.cpp outputspage.cpp

@@ -17,7 +17,7 @@
     along with Bipolar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "mainwindow.h"
+#include "mainwizard.h"
 #include "os/versioninfo.h"
 
 #ifdef Q_OS_WIN
@@ -36,15 +36,6 @@
 #define ORGANISATION_NAME   QLatin1String("Paul Colby")
 #define ORGANISATION_DOMAIN QLatin1String("bipolar.colby.id.au")
 
-MainWindow * mainWindow = NULL;
-
-void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
-{
-    if (mainWindow) {
-        mainWindow->logMessage(type, context, msg);
-    }
-}
-
 int main(int argc, char *argv[]) {
     // Setup the primary Qt application object.
     QApplication app(argc, argv);
@@ -57,8 +48,8 @@ int main(int argc, char *argv[]) {
     }
 
     // Install the QErrorMessage class' Qt message handler.
-    //QErrorMessage::qtHandler();
-    qInstallMessageHandler(messageHandler);
+    QErrorMessage::qtHandler();
+    //qInstallMessageHandler(messageHandler);
 
     // Try to load a localised translator.
     QTranslator translator;
@@ -94,9 +85,7 @@ int main(int argc, char *argv[]) {
 #endif
 
     // Instantiate the main window.
-    mainWindow = new MainWindow;
-    qDebug() << QApplication::applicationName() << QApplication::applicationVersion()
-             << versionInfo.fileInfo(QLatin1String("SpecialBuild"));
-    mainWindow->show();
+    MainWizard mainWizard;
+    mainWizard.show();
     return app.exec();
 }
