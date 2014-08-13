@@ -18,13 +18,28 @@
 */
 
 #include "outputspage.h"
-#include <QVBoxLayout>
+#include <QCheckBox>
+#include <QFormLayout>
+#include <QLineEdit>
+#include <QPushButton>
 
 OutputsPage::OutputsPage(QWidget *parent) : QWizardPage(parent) {
-    setTitle(tr("Select Output Paths"));
+    setTitle(tr("Output Options"));
     setSubTitle(tr("Select the blah blah blah."));
 
-    setLayout(new QVBoxLayout());
+    QFormLayout * const form = new QFormLayout();
+
+    {
+        QHBoxLayout * const hBox = new QHBoxLayout();
+        hBox->addWidget(new QLineEdit());
+        hBox->addWidget(new QPushButton(tr("Browse...")));
+        QVBoxLayout * const vBox = new QVBoxLayout();
+        vBox->addItem(hBox);
+        vBox->addWidget(new QCheckBox(tr("Use input directory")));
+        form->addRow(tr("Output Directory:"), vBox);
+    }
+
+    setLayout(form);
 }
 
 //bool InputPage::isComplete() const {

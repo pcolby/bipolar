@@ -21,7 +21,7 @@
 #include <QVBoxLayout>
 
 InputsPage::InputsPage(QWidget *parent) : QWizardPage(parent) {
-    setTitle(tr("Select Input Paths"));
+    setTitle(tr("Input Options"));
     setSubTitle(tr("Select the path(s) containing training sessions to convert."));
 
     setLayout(new QVBoxLayout());
