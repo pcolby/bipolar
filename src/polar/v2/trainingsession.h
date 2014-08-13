@@ -89,7 +89,7 @@ protected:
 
     QDomDocument toGPX(const QDateTime &creationTime = QDateTime::currentDateTimeUtc()) const;
 
-    QStringList toHRM() const;
+    QStringList toHRM(const bool rrDataOnly = false) const;
 
     QDomDocument toTCX(const QString &buildTime = QString()) const;
 

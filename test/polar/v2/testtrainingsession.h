@@ -59,6 +59,9 @@ private slots:
     void toHRM_data();
     void toHRM();
 
+    void toHRM_RR_data();
+    void toHRM_RR();
+
     void toTCX_data();
     void toTCX();
 

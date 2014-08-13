@@ -609,7 +609,7 @@ void TestTrainingSession::toHRM()
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession session(baseName);
     QVERIFY(session.parse(baseName));
-    const QStringList hrm = session.toHRM();
+    const QStringList hrm = session.toHRM(false);
 
     // Write the result to a text file for optional post-mortem investigations.
     for (int index = 0; index < hrm.length(); ++index) {
@@ -623,6 +623,69 @@ void TestTrainingSession::toHRM()
             fileName += QString::fromLatin1(".%1").arg(index);
         }
         fileName += QString::fromLatin1(".hrm");
+        QFile file(fileName);
+        if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+            file.write(hrm.at(index).toLatin1());
+        }
+    }
+
+    // Compare the generated HRM string against the expected result.
+    QCOMPARE(hrm, expected);
+}
+
+void TestTrainingSession::toHRM_RR_data()
+{
+    QTest::addColumn<QString>("baseName");
+    QTest::addColumn<QStringList>("expected");
+
+    #define LOAD_TEST_DATA(name, expectedCount) { \
+        QString baseName; \
+        QStringList expected; \
+        for (int count = 0; count < expectedCount; ++count) { \
+            QFile expectedFile(QFINDTESTDATA((expectedCount == 1) \
+                ? QString::fromLatin1("testdata/" name ".rr.hrm") \
+                : QString::fromLatin1("testdata/" name ".%1.rr.hrm").arg(count) \
+            )); \
+            expectedFile.open(QIODevice::ReadOnly); \
+            expected.append(QString::fromLatin1(expectedFile.readAll())); \
+            if (baseName.isEmpty()) { \
+                baseName = expectedFile.fileName(); \
+                baseName.chop((expectedCount == 1) ? 7 : 9); \
+            } \
+        } \
+        QTest::newRow(name) << baseName << expected; \
+    }
+
+    LOAD_TEST_DATA("training-sessions-19401412", 1);
+    LOAD_TEST_DATA("training-sessions-19946380", 1);
+    LOAD_TEST_DATA("training-sessions-22165267", 1);
+
+    #undef LOAD_TEST_DATA
+}
+
+void TestTrainingSession::toHRM_RR()
+{
+    QFETCH(QString, baseName);
+    QFETCH(QStringList, expected);
+    qDebug() << baseName;
+
+    // Parse the route (protobuf) message.
+    polar::v2::TrainingSession session(baseName);
+    QVERIFY(session.parse(baseName));
+    const QStringList hrm = session.toHRM(true);
+
+    // Write the result to a text file for optional post-mortem investigations.
+    for (int index = 0; index < hrm.length(); ++index) {
+        QString fileName;
+#ifndef Q_OS_WIN
+        fileName = QLatin1String("../");
+#endif
+        fileName += QString::fromLatin1("polar/v2/testdata/%1.result")
+            .arg(QLatin1String(QTest::currentDataTag()));
+        if (hrm.length() != 1) {
+            fileName += QString::fromLatin1(".%1").arg(index);
+        }
+        fileName += QString::fromLatin1(".rr.hrm");
         QFile file(fileName);
         if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
             file.write(hrm.at(index).toLatin1());

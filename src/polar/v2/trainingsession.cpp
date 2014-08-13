@@ -1152,7 +1152,7 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
 }
 
 /// @see http://www.polar.com/files/Polar_HRM_file%20format.pdf
-QStringList TrainingSession::toHRM() const
+QStringList TrainingSession::toHRM(const bool rrDataOnly) const
 {
     QStringList hrmList;
 
@@ -1165,9 +1165,11 @@ QStringList TrainingSession::toHRM() const
         const QVariantMap stats      = map.value(STATISTICS).toMap();
         const QVariantMap zones      = map.value(ZONES).toMap();
 
-        const bool haveAltitude = haveAnySamples(samples, QLatin1String("speed"));
-        const bool haveCadence  = haveAnySamples(samples, QLatin1String("cadence"));
-        const bool haveSpeed    = haveAnySamples(samples, QLatin1String("altitude"));
+        const QVariantList rrsamples  = map.value(RRSAMPLES).toMap().value(QLatin1String("value")).toList();
+
+        const bool haveAltitude = ((!rrDataOnly) && (haveAnySamples(samples, QLatin1String("speed"))));
+        const bool haveCadence  = ((!rrDataOnly) && (haveAnySamples(samples, QLatin1String("cadence"))));
+        const bool haveSpeed    = ((!rrDataOnly) && (haveAnySamples(samples, QLatin1String("altitude"))));
 
         QString hrmData;
         QTextStream stream(&hrmData);
@@ -1195,7 +1197,7 @@ QStringList TrainingSession::toHRM() const
         stream << "Date="      << startTime.toString(QLatin1String("yyyyMMdd")) << "\r\n";
         stream << "StartTime=" << hrmTime(startTime.time()) << "\r\n";
         stream << "Length="    << hrmTime(firstMap(create.value(QLatin1String("duration")))) << "\r\n";
-        stream << "Interval="  << qRound(recordInterval / 1000.0) << "\r\n";
+        stream << "Interval="  << (rrDataOnly ? 238 : qRound(recordInterval / 1000.0)) << "\r\n";
 
         // In the absence of available training target phases data, just include
         // one of the static target HR zones (better than nothing). We'll use
@@ -1472,28 +1474,34 @@ QStringList TrainingSession::toHRM() const
 
         // [HRData]
         stream << "\r\n[HRData]\r\n";
-        const QVariantList altitude = samples.value(QLatin1String("altitude")).toList();
-        const QVariantList cadence  = samples.value(QLatin1String("cadence")).toList();
-        const QVariantList speed    = samples.value(QLatin1String("speed")).toList();
-        for (int index = 0; index < heartrate.length(); ++index) {
-            stream << ((index < heartrate.length())
-                ? heartrate.at(index).toUInt() : (uint)0);
-            if (haveSpeed) {
-                stream << '\t' << ((index < speed.length())
-                    ? qRound(speed.at(index).toFloat() * 10.0) : ( int)0);
+        if (rrDataOnly) {
+            foreach (const QVariant &sample, rrsamples) {
+                stream << sample.toUInt() << "\r\n";
             }
-            if (haveCadence) {
-                stream << '\t' << ((index < cadence.length())
-                    ? cadence.at(index).toUInt() : (uint)0);
+        } else {
+            const QVariantList altitude = samples.value(QLatin1String("altitude")).toList();
+            const QVariantList cadence  = samples.value(QLatin1String("cadence")).toList();
+            const QVariantList speed    = samples.value(QLatin1String("speed")).toList();
+            for (int index = 0; index < heartrate.length(); ++index) {
+                stream << ((index < heartrate.length())
+                    ? heartrate.at(index).toUInt() : (uint)0);
+                if (haveSpeed) {
+                    stream << '\t' << ((index < speed.length())
+                        ? qRound(speed.at(index).toFloat() * 10.0) : ( int)0);
+                }
+                if (haveCadence) {
+                    stream << '\t' << ((index < cadence.length())
+                        ? cadence.at(index).toUInt() : (uint)0);
+                }
+                if (haveAltitude) {
+                    stream << '\t' << ((index < altitude.length())
+                        ? qRound(altitude.at(index).toFloat()) : ( int)0);
+                }
+                // Power (Watts) - not yet supported by Polar.
+                // Power Balance and Pedalling Index - not yet supported by Polar.
+                // Air pressure - not available in protobuf data.
+                stream << "\r\n";
             }
-            if (haveAltitude) {
-                stream << '\t' << ((index < altitude.length())
-                    ? qRound(altitude.at(index).toFloat()) : ( int)0);
-            }
-            // Power (Watts) - not yet supported by Polar.
-            // Power Balance and Pedalling Index - not yet supported by Polar.
-            // Air pressure - not available in protobuf data.
-            stream << "\r\n";
         }
 
         hrmList.append(hrmData);
@@ -1916,22 +1924,25 @@ bool TrainingSession::writeGPX(QIODevice &device) const
 
 QStringList TrainingSession::writeHRM(const QString &baseName) const
 {
-    QStringList hrm = toHRM();
-    if (hrm.isEmpty()) {
-        qWarning() << "failed to convert to HRM" << baseName;
-        return QStringList();
-    }
-
     QStringList fileNames;
-    for (int index = 0; index < hrm.length(); ++index) {
-        const QString fileName = (hrm.length() == 1)
-            ? QString::fromLatin1("%1.hrm").arg(baseName)
-            : QString::fromLatin1("%1.%2.hrm").arg(baseName).arg(index);
-        QFile file(fileName);
-        if (!file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
-            qWarning() << "failed to open" << QDir::toNativeSeparators(fileName);
-        } else if (file.write(hrm.at(index).toLatin1())) {
-            fileNames.append(fileName);
+    for (int rrDataOnly = 0; rrDataOnly <= 1; ++rrDataOnly) {
+        QStringList hrm = toHRM(rrDataOnly);
+        if (hrm.isEmpty()) {
+            qWarning() << "failed to convert to HRM" << baseName;
+            return QStringList();
+        }
+
+        for (int index = 0; index < hrm.length(); ++index) {
+            const QString extension = QLatin1String((rrDataOnly) ? "rr.hrm" : "hrm");
+            const QString fileName = (hrm.length() == 1)
+                ? QString::fromLatin1("%1.%2").arg(baseName).arg(extension)
+                : QString::fromLatin1("%1.%2.%3").arg(baseName).arg(index).arg(extension);
+            QFile file(fileName);
+            if (!file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+                qWarning() << "failed to open" << QDir::toNativeSeparators(fileName);
+            } else if (file.write(hrm.at(index).toLatin1())) {
+                fileNames.append(fileName);
+            }
         }
     }
     return fileNames;
