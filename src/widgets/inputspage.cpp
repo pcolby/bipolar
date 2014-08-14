@@ -18,14 +18,80 @@
 */
 
 #include "inputspage.h"
+
+#include <QFileDialog>
+#include <QFormLayout>
+#include <QListWidget>
+#include <QListWidgetItem>
+#include <QPushButton>
+#include <QSettings>
 #include <QVBoxLayout>
 
-InputsPage::InputsPage(QWidget *parent) : QWizardPage(parent) {
+InputsPage::InputsPage(QWidget *parent) : QWizardPage(parent)
+{
     setTitle(tr("Input Options"));
     setSubTitle(tr("Select the path(s) containing training sessions to convert."));
 
-    setLayout(new QVBoxLayout());
+    QFormLayout * const form = new QFormLayout;
+
+    {
+        list = new QListWidget(this);
+        list->setAlternatingRowColors(true);
+        list->addItem(tr("test"));
+        load();
+
+        QVBoxLayout * const buttonsBox = new QVBoxLayout();
+        buttonsBox->addWidget(addButton = new QPushButton(tr("+")));
+        buttonsBox->addWidget(removeButton = new QPushButton(tr("-")));
+        buttonsBox->addStretch();
+
+        QHBoxLayout * const hBox = new QHBoxLayout();
+        hBox->addWidget(list);
+        hBox->addItem(buttonsBox);
+        form->addRow(tr("Input Folders:"), hBox);
+    }
+
+    setLayout(form);
+
+    connect(addButton, SIGNAL(clicked()), this, SLOT(browseForFolder()));
+    connect(removeButton, SIGNAL(clicked()), this, SLOT(removeFolder()));
 }
 
 //bool InputPage::isComplete() const {
 //}
+
+// Public slots.
+
+void InputsPage::load()
+{
+    QSettings settings;
+
+    QListWidgetItem * item = new QListWidgetItem(tr("foo"));
+    list->addItem(item);
+}
+
+void InputsPage::save()
+{
+    QSettings settings;
+
+    QStringList folders;
+    for (int index = 0; index < list->count(); ++list) {
+        folders.append(list->item(index)->text());
+    }
+    if (!folders.isEmpty()) {
+        settings.setValue(QLatin1String("inputFolders"), folders);
+    }
+}
+
+// Protected slots.
+
+void InputsPage::browseForFolder()
+{
+    QFileDialog::getExistingDirectory();
+    /// @todo
+}
+
+void InputsPage::removeFolder()
+{
+    /// @todo
+}

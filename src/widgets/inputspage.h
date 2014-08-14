@@ -22,12 +22,27 @@
 
 #include <QWizardPage>
 
+class QListWidget;
+class QPushButton;
+
 class InputsPage : public QWizardPage {
     Q_OBJECT
 
 public:
     InputsPage(QWidget *parent=0);
     //virtual bool isComplete() const;
+
+public slots:
+    void load();
+    void save();
+
+protected:
+    QListWidget * list;
+    QPushButton * addButton, * removeButton;
+
+protected slots:
+    void browseForFolder();
+    void removeFolder();
 
 };
 

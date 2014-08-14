@@ -27,8 +27,14 @@ MainWizard::MainWizard(QWidget *parent, Qt::WindowFlags flags): QWizard(parent,f
         .arg(QApplication::applicationName())
         .arg(QStringList(QApplication::applicationVersion().split(QLatin1Char('.')).mid(0, 3)).join(QLatin1Char('.'))));
 
-    addPage(new InputsPage());
-    addPage(new OutputsPage());
+    InputsPage * const inputsPage = new InputsPage();
+    OutputsPage * const outputsPage = new OutputsPage();
+
+    addPage(inputsPage);
+    addPage(outputsPage);
 
     setButtonText(FinishButton, tr("Convert"));
+
+    connect(this, SIGNAL(accepted()), inputsPage, SLOT(save()));
+  //connect(this, SIGNAL(accepted()), outputsPage, SLOT(save()));
 }
