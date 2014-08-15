@@ -25,6 +25,7 @@
 #include <QListWidgetItem>
 #include <QPushButton>
 #include <QSettings>
+#include <QStandardPaths>
 #include <QVBoxLayout>
 
 InputsPage::InputsPage(QWidget *parent) : QWizardPage(parent)
@@ -37,7 +38,6 @@ InputsPage::InputsPage(QWidget *parent) : QWizardPage(parent)
     {
         list = new QListWidget(this);
         list->setAlternatingRowColors(true);
-        list->addItem(tr("test"));
         load();
 
         QVBoxLayout * const buttonsBox = new QVBoxLayout();
@@ -66,8 +66,17 @@ void InputsPage::load()
 {
     QSettings settings;
 
-    QListWidgetItem * item = new QListWidgetItem(tr("foo"));
-    list->addItem(item);
+    {
+        QStringList folders = settings.value(QLatin1String("inputFolders")).toStringList();
+        if (folders.isEmpty()) {
+            folders.append(hookInputFolder(true));
+        }
+        foreach (const QString &folder, folders) {
+            QListWidgetItem * item = new QListWidgetItem(folder);
+            /// @todo Icon.
+            list->addItem(item);
+        }
+    }
 }
 
 void InputsPage::save()
@@ -75,7 +84,7 @@ void InputsPage::save()
     QSettings settings;
 
     QStringList folders;
-    for (int index = 0; index < list->count(); ++list) {
+    for (int index = 0; index < list->count(); ++index) {
         folders.append(list->item(index)->text());
     }
     if (!folders.isEmpty()) {
@@ -83,12 +92,27 @@ void InputsPage::save()
     }
 }
 
+// Protecte methods.
+
+QString InputsPage::hookInputFolder(const bool native)
+{
+    QString folder =
+        QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) +
+        QLatin1String("/Polar/PolarFlowSync/export");
+    return native ? QDir::toNativeSeparators(folder) : folder;
+}
+
 // Protected slots.
 
 void InputsPage::browseForFolder()
 {
-    QFileDialog::getExistingDirectory();
-    /// @todo
+    const QString dirName = QFileDialog::getExistingDirectory(this);
+    if (!dirName.isEmpty()) {
+        QListWidgetItem * const item = new QListWidgetItem();
+        item->setText(QDir::toNativeSeparators(dirName));
+        item->setData(Qt::UserRole, dirName);
+        list->addItem(item);
+    }
 }
 
 void InputsPage::removeFolder()

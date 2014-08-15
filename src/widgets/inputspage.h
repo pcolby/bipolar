@@ -40,6 +40,8 @@ protected:
     QListWidget * list;
     QPushButton * addButton, * removeButton;
 
+    static QString hookInputFolder(const bool native);
+
 protected slots:
     void browseForFolder();
     void removeFolder();
