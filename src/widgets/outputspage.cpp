@@ -24,16 +24,18 @@
 #include <QFileDialog>
 #include <QFormLayout>
 #include <QPushButton>
+#include <QSettings>
 
-OutputsPage::OutputsPage(QWidget *parent) : QWizardPage(parent) {
+OutputsPage::OutputsPage(QWidget *parent) : QWizardPage(parent)
+{
     setTitle(tr("Output Options"));
 
     QFormLayout * const form = new QFormLayout();
 
-    outputFolder = new QComboBox();
-    outputFolder->addItem(tr("Use the same folder as the input files"));
-
     {
+        outputFolder = new QComboBox();
+        outputFolder->addItem(tr("Use the same folder as the input files"));
+
         QPushButton * const browseButton = new QPushButton();
         browseButton->setFlat(true);
         browseButton->setIcon(style()->standardIcon(QStyle::SP_DirOpenIcon));
@@ -47,16 +49,56 @@ OutputsPage::OutputsPage(QWidget *parent) : QWizardPage(parent) {
         form->addRow(tr("Output Folder:"), hBox);
     }
 
+    {
+        QCheckBox * const gpxCheckBox = new QCheckBox(tr("GPX"));
+        QCheckBox * const hrmCheckBox = new QCheckBox(tr("HRM"));
+        QCheckBox * const tcxCheckBox = new QCheckBox(tr("TCX"));
+
+        QVBoxLayout * vBox = new QVBoxLayout();
+        vBox->addWidget(gpxCheckBox);
+        vBox->addWidget(hrmCheckBox);
+        vBox->addWidget(tcxCheckBox);
+
+        form->addRow(tr("Output Formats:"), vBox);
+
+        registerField(QLatin1String("gpxEnabled"), gpxCheckBox);
+        registerField(QLatin1String("hrmEnabled"), hrmCheckBox);
+        registerField(QLatin1String("tcxEnabled"), tcxCheckBox);
+    }
+
     setLayout(form);
 }
 
-bool OutputsPage::isComplete() const {
+void OutputsPage::initializePage()
+{
+    QSettings settings;
+    setField(QLatin1String("gpxEnabled"), settings.value(QLatin1String("gpxEnabled"), true).toBool());
+    setField(QLatin1String("hrmEnabled"), settings.value(QLatin1String("hrmEnabled"), true).toBool());
+    setField(QLatin1String("tcxEnabled"), settings.value(QLatin1String("tcxEnabled"), true).toBool());
+}
+
+bool OutputsPage::isComplete() const
+{
     return true;//false;
+}
+
+// Public slots.
+
+void OutputsPage::save()
+{
+    QSettings settings;
+    settings.setValue(QLatin1String("outputFolder"),
+        (outputFolder->count() > 1) ? outputFolder->itemData(1).toString() : QString());
+    settings.setValue(QLatin1String("outputFolderIndex"), outputFolder->currentIndex());
+    settings.setValue(QLatin1String("gpxEnabled"), field(QLatin1String("gpxEnabled")).toBool());
+    settings.setValue(QLatin1String("hrmEnabled"), field(QLatin1String("hrmEnabled")).toBool());
+    settings.setValue(QLatin1String("tcxEnabled"), field(QLatin1String("tcxEnabled")).toBool());
 }
 
 // Protected slots.
 
-void OutputsPage::browseForFolder() {
+void OutputsPage::browseForFolder()
+{
     const QString dirName = QFileDialog::getExistingDirectory(this);
     if (!dirName.isEmpty()) {
         if (outputFolder->count() < 2) {

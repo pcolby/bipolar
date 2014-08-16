@@ -28,7 +28,11 @@ class OutputsPage : public QWizardPage {
 
 public:
     OutputsPage(QWidget *parent=0);
+    virtual void initializePage();
     virtual bool isComplete() const;
+
+public slots:
+    void save();
 
 protected:
     QComboBox * outputFolder;

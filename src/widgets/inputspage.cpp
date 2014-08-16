@@ -106,7 +106,7 @@ void InputsPage::save()
     }
 }
 
-// Protecte methods.
+// Protected methods.
 
 QListWidgetItem * InputsPage::addFolder(const QString &path)
 {

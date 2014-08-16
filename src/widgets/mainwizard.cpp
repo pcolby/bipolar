@@ -36,5 +36,5 @@ MainWizard::MainWizard(QWidget *parent, Qt::WindowFlags flags): QWizard(parent,f
     setButtonText(FinishButton, tr("Convert"));
 
     connect(this, SIGNAL(accepted()), inputsPage, SLOT(save()));
-  //connect(this, SIGNAL(accepted()), outputsPage, SLOT(save()));
+    connect(this, SIGNAL(accepted()), outputsPage, SLOT(save()));
 }
