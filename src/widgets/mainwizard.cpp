@@ -28,7 +28,9 @@ MainWizard::MainWizard(QWidget *parent, Qt::WindowFlags flags): QWizard(parent,f
         .arg(QApplication::applicationName())
         .arg(QStringList(QApplication::applicationVersion().split(QLatin1Char('.')).mid(0, 3)).join(QLatin1Char('.'))));
     setOption(QWizard::NoBackButtonOnLastPage);
+    #if (QT_VERSION >= QT_VERSION_CHECK(5, 3, 0))
     setOption(QWizard::NoCancelButtonOnLastPage);
+    #endif
 
     InputsPage * const inputsPage = new InputsPage();
     OutputsPage * const outputsPage = new OutputsPage();
