@@ -32,7 +32,7 @@
 InputsPage::InputsPage(QWidget *parent) : QWizardPage(parent)
 {
     setTitle(tr("Input Options"));
-    setSubTitle(tr("Select the path(s) containing training sessions to convert."));
+    setSubTitle(tr("Add folders containing training sessions to be converted."));
 
     addButton = new QPushButton();
     addButton->setFlat(true);
@@ -50,7 +50,6 @@ InputsPage::InputsPage(QWidget *parent) : QWizardPage(parent)
     inputFoldersList->setSelectionMode(QListWidget::ExtendedSelection);
     load();
 
-    QFormLayout * const form = new QFormLayout;
     {
         QVBoxLayout * const buttonsBox = new QVBoxLayout();
         buttonsBox->addWidget(addButton);
@@ -60,9 +59,8 @@ InputsPage::InputsPage(QWidget *parent) : QWizardPage(parent)
         QHBoxLayout * const hBox = new QHBoxLayout();
         hBox->addWidget(inputFoldersList);
         hBox->addItem(buttonsBox);
-        form->addRow(tr("Input Folders:"), hBox);
+        setLayout(hBox);
     }
-    setLayout(form);
 
     connect(addButton, SIGNAL(clicked()), this, SLOT(browseForFolder()));
     connect(removeButton, SIGNAL(clicked()), this, SLOT(removeFolders()));
