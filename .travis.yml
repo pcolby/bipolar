@@ -12,11 +12,13 @@ install:
   - sudo apt-get install -qq qt5-qmake qtbase5-dev libqt5xmlpatterns5-dev
 
 before_script:
+  - qmake -qt=qt5
   - pushd test
   - qmake -qt=qt5
   - popd
 
 script:
+  - make all
   - pushd test
   - make all && make check
   - popd
