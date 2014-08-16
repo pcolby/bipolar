@@ -20,6 +20,7 @@
 #ifndef __RESULTS_PAGE__
 #define __RESULTS_PAGE__
 
+#include <QStringList>
 #include <QWizardPage>
 
 class QProgressBar;
@@ -31,13 +32,15 @@ class ResultsPage : public QWizardPage {
 
 public:
     ResultsPage(QWidget *parent=0);
-    //virtual void initializePage();
+    virtual void initializePage();
     virtual bool isComplete() const;
 
 protected:
     QProgressBar * progressBar;
     QPushButton * showDetailsButton;
     QTextEdit * detailsBox;
+
+    QStringList sessionBaseNames;
 
 protected slots:
     void showDetails();

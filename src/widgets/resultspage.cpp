@@ -19,8 +19,12 @@
 
 #include "resultspage.h"
 
+#include <QDebug>
+#include <QDir>
 #include <QProgressBar>
 #include <QPushButton>
+#include <QRegExp>
+#include <QSettings>
 #include <QTextEdit>
 #include <QVBoxLayout>
 
@@ -44,6 +48,28 @@ ResultsPage::ResultsPage(QWidget *parent) : QWizardPage(parent)
     setLayout(vBox);
 
     connect(showDetailsButton, SIGNAL(clicked()), this, SLOT(showDetails()));
+}
+
+void ResultsPage::initializePage()
+{
+    QSettings settings;
+
+    QRegExp regex(QLatin1String("(v2-users-[^-]+-training-sessions-[^-]+)-.*"));
+    foreach (const QString &folder,
+             settings.value(QLatin1String("inputFolders")).toStringList()) {
+        QDir dir(folder);
+        foreach (const QFileInfo &info, dir.entryInfoList()) {
+            if (regex.exactMatch(info.fileName())) {
+                const QString baseName = dir.absoluteFilePath(regex.cap());
+                if (!sessionBaseNames.contains(baseName)) {
+                    sessionBaseNames.append(baseName);
+                }
+            }
+        }
+    }
+
+    progressBar->setRange(0, sessionBaseNames.size());
+    progressBar->reset();
 }
 
 bool ResultsPage::isComplete() const
