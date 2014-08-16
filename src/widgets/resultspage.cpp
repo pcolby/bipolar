@@ -68,7 +68,7 @@ void ResultsPage::initializePage()
         QDir dir(folder);
         foreach (const QFileInfo &info, dir.entryInfoList()) {
             if (regex.exactMatch(info.fileName())) {
-                const QString baseName = dir.absoluteFilePath(regex.cap());
+                const QString baseName = dir.absoluteFilePath(regex.cap(1));
                 if (!sessionBaseNames.contains(baseName)) {
                     sessionBaseNames.append(baseName);
                 }
