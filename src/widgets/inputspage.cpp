@@ -82,9 +82,8 @@ void InputsPage::load()
             folders.append(hookInputFolder(true));
         }
         foreach (const QString &folder, folders) {
-            QListWidgetItem * item = new QListWidgetItem(folder);
-            /// @todo Icon.
-            inputFoldersList->addItem(item);
+            addFolder(folder);
+            inputFoldersList->sortItems();
         }
     }
 }
@@ -104,6 +103,15 @@ void InputsPage::save()
 
 // Protecte methods.
 
+QListWidgetItem * InputsPage::addFolder(const QString &path)
+{
+    QListWidgetItem * const item = new QListWidgetItem();
+    item->setText(QDir::toNativeSeparators(path));
+    item->setData(Qt::UserRole, path);
+    inputFoldersList->addItem(item);
+    return item;
+}
+
 QString InputsPage::hookInputFolder(const bool native)
 {
     QString folder =
@@ -118,10 +126,10 @@ void InputsPage::browseForFolder()
 {
     const QString dirName = QFileDialog::getExistingDirectory(this);
     if (!dirName.isEmpty()) {
-        QListWidgetItem * const item = new QListWidgetItem();
-        item->setText(QDir::toNativeSeparators(dirName));
-        item->setData(Qt::UserRole, dirName);
-        inputFoldersList->addItem(item);
+        QListWidgetItem * const item = addFolder(dirName);
+        inputFoldersList->sortItems();
+        inputFoldersList->clearSelection();
+        inputFoldersList->setCurrentItem(item);
     }
 }
 

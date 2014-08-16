@@ -24,6 +24,7 @@
 #include <QWizardPage>
 
 class QListWidget;
+class QListWidgetItem;
 class QPushButton;
 
 class InputsPage : public QWizardPage {
@@ -41,6 +42,7 @@ protected:
     QListWidget * inputFoldersList;
     QPushButton * addButton, * removeButton;
 
+    QListWidgetItem * addFolder(const QString &path);
     static QString hookInputFolder(const bool native);
 
 protected slots:
