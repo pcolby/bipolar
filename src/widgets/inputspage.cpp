@@ -48,7 +48,6 @@ InputsPage::InputsPage(QWidget *parent) : QWizardPage(parent)
     inputFoldersList = new QListWidget(this);
     inputFoldersList->setAlternatingRowColors(true);
     inputFoldersList->setSelectionMode(QListWidget::ExtendedSelection);
-    load();
 
     {
         QVBoxLayout * const buttonsBox = new QVBoxLayout();
@@ -67,20 +66,7 @@ InputsPage::InputsPage(QWidget *parent) : QWizardPage(parent)
     connect(inputFoldersList, SIGNAL(itemSelectionChanged()), this, SLOT(selectionChanged()));
 }
 
-bool InputsPage::isComplete() const {
-    // As long as we have at least one readable folder, we're ready to move on.
-    for (int index = 0; index < inputFoldersList->count(); ++index) {
-        QDir dir(inputFoldersList->item(index)->data(Qt::UserRole).toString());
-        if (dir.isReadable()) {
-            return true;
-        }
-    }
-    return false;
-}
-
-// Public slots.
-
-void InputsPage::load()
+void InputsPage::initializePage()
 {
     QSettings settings;
     QStringList folders = settings.value(QLatin1String("inputFolders")).toStringList();
@@ -93,6 +79,19 @@ void InputsPage::load()
     }
     emit completeChanged();
 }
+
+bool InputsPage::isComplete() const {
+    // As long as we have at least one readable folder, we're ready to move on.
+    for (int index = 0; index < inputFoldersList->count(); ++index) {
+        QDir dir(inputFoldersList->item(index)->data(Qt::UserRole).toString());
+        if (dir.isReadable()) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Public slots.
 
 void InputsPage::save()
 {
