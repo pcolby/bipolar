@@ -22,12 +22,12 @@
 
 #ifdef Q_OS_WIN
 #include "os/flowsynchook.h"
-#include <QIcon>
 #endif
 
 #include <QApplication>
 #include <QDebug>
 #include <QErrorMessage>
+#include <QIcon>
 #include <QMessageBox>
 #include <QTranslator>
 
@@ -52,9 +52,9 @@ int main(int argc, char *argv[]) {
     QErrorMessage::qtHandler();
     //qInstallMessageHandler(messageHandler);
 
-#ifdef Q_OS_WIN
-    QIcon::setThemeName(QLatin1String("oxygen"));
-#endif
+    if (QIcon::themeName().isEmpty()) {
+        QIcon::setThemeName(QLatin1String("oxygen"));
+    }
 
     // Try to load a localised translator.
     QTranslator translator;
