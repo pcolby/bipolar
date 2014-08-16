@@ -20,6 +20,7 @@
 #ifndef __OUTPUTS_PAGE__
 #define __OUTPUTS_PAGE__
 
+#include <QComboBox>
 #include <QWizardPage>
 
 class OutputsPage : public QWizardPage {
@@ -27,7 +28,13 @@ class OutputsPage : public QWizardPage {
 
 public:
     OutputsPage(QWidget *parent=0);
-    //virtual bool isComplete() const;
+    virtual bool isComplete() const;
+
+protected:
+    QComboBox * outputFolder;
+
+protected slots:
+    void browseForFolder();
 
 };
 

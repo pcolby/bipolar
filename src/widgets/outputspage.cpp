@@ -19,28 +19,52 @@
 
 #include "outputspage.h"
 #include <QCheckBox>
+#include <QComboBox>
+#include <QDir>
+#include <QFileDialog>
 #include <QFormLayout>
-#include <QLineEdit>
 #include <QPushButton>
 
 OutputsPage::OutputsPage(QWidget *parent) : QWizardPage(parent) {
     setTitle(tr("Output Options"));
-    setSubTitle(tr("Select the blah blah blah."));
 
     QFormLayout * const form = new QFormLayout();
 
+    outputFolder = new QComboBox();
+    outputFolder->addItem(tr("Use the same folder as the input files"));
+
     {
+        QPushButton * const browseButton = new QPushButton();
+        browseButton->setFlat(true);
+        browseButton->setIcon(style()->standardIcon(QStyle::SP_DirOpenIcon));
+        browseButton->setText(tr("Browse..."));
+        browseButton->setToolTip(tr("Choose output folder"));
+        connect(browseButton, SIGNAL(clicked()), this, SLOT(browseForFolder()));
+
         QHBoxLayout * const hBox = new QHBoxLayout();
-        hBox->addWidget(new QLineEdit());
-        hBox->addWidget(new QPushButton(tr("Browse...")));
-        QVBoxLayout * const vBox = new QVBoxLayout();
-        vBox->addItem(hBox);
-        vBox->addWidget(new QCheckBox(tr("Use input directory")));
-        form->addRow(tr("Output Directory:"), vBox);
+        hBox->addWidget(outputFolder, 1);
+        hBox->addWidget(browseButton);
+        form->addRow(tr("Output Folder:"), hBox);
     }
 
     setLayout(form);
 }
 
-//bool InputPage::isComplete() const {
-//}
+bool OutputsPage::isComplete() const {
+    return true;//false;
+}
+
+// Protected slots.
+
+void OutputsPage::browseForFolder() {
+    const QString dirName = QFileDialog::getExistingDirectory(this);
+    if (!dirName.isEmpty()) {
+        if (outputFolder->count() < 2) {
+            outputFolder->addItem(QDir::toNativeSeparators(dirName), dirName);
+        } else {
+            outputFolder->setItemText(1, QDir::toNativeSeparators(dirName));
+            outputFolder->setItemData(1, dirName);
+        }
+        outputFolder->setCurrentIndex(1);
+    }
+}
