@@ -67,36 +67,41 @@ InputsPage::InputsPage(QWidget *parent) : QWizardPage(parent)
     connect(inputFoldersList, SIGNAL(itemSelectionChanged()), this, SLOT(selectionChanged()));
 }
 
-//bool InputPage::isComplete() const {
-//}
+bool InputsPage::isComplete() const {
+    // As long as we have at least one readable folder, we're ready to move on.
+    for (int index = 0; index < inputFoldersList->count(); ++index) {
+        QDir dir(inputFoldersList->item(index)->data(Qt::UserRole).toString());
+        if (dir.isReadable()) {
+            return true;
+        }
+    }
+    return false;
+}
 
 // Public slots.
 
 void InputsPage::load()
 {
     QSettings settings;
-
-    {
-        QStringList folders = settings.value(QLatin1String("inputFolders")).toStringList();
-        if (folders.isEmpty()) {
-            folders.append(defaultInputFolder(true));
-        }
-        foreach (const QString &folder, folders) {
-            addFolder(folder);
-            inputFoldersList->sortItems();
-        }
+    QStringList folders = settings.value(QLatin1String("inputFolders")).toStringList();
+    if (folders.isEmpty()) {
+        folders.append(defaultInputFolder(true));
     }
+    foreach (const QString &folder, folders) {
+        addFolder(folder);
+        inputFoldersList->sortItems();
+    }
+    emit completeChanged();
 }
 
 void InputsPage::save()
 {
-    QSettings settings;
-
     QStringList folders;
     for (int index = 0; index < inputFoldersList->count(); ++index) {
         folders.append(inputFoldersList->item(index)->text());
     }
     if (!folders.isEmpty()) {
+        QSettings settings;
         settings.setValue(QLatin1String("inputFolders"), folders);
     }
 }
@@ -106,8 +111,9 @@ void InputsPage::save()
 QListWidgetItem * InputsPage::addFolder(const QString &path)
 {
     QListWidgetItem * const item = new QListWidgetItem();
-    item->setText(QDir::toNativeSeparators(path));
     item->setData(Qt::UserRole, path);
+    item->setIcon(style()->standardIcon(QStyle::SP_DirIcon));
+    item->setText(QDir::toNativeSeparators(path));
     inputFoldersList->addItem(item);
     return item;
 }
@@ -131,6 +137,7 @@ void InputsPage::browseForFolder()
         inputFoldersList->clearSelection();
         inputFoldersList->setCurrentItem(item);
     }
+    emit completeChanged();
 }
 
 void InputsPage::removeFolders()
@@ -138,6 +145,7 @@ void InputsPage::removeFolders()
     foreach (QListWidgetItem * const item, inputFoldersList->selectedItems()) {
         delete item;
     }
+    emit completeChanged();
 }
 
 void InputsPage::selectionChanged()

@@ -32,7 +32,7 @@ class InputsPage : public QWizardPage {
 
 public:
     InputsPage(QWidget *parent=0);
-    //virtual bool isComplete() const;
+    virtual bool isComplete() const;
 
 public slots:
     void load();
