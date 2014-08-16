@@ -20,6 +20,7 @@
 #include "mainwizard.h"
 #include "inputspage.h"
 #include "outputspage.h"
+#include "resultspage.h"
 #include <QApplication>
 
 MainWizard::MainWizard(QWidget *parent, Qt::WindowFlags flags): QWizard(parent,flags) {
@@ -32,8 +33,7 @@ MainWizard::MainWizard(QWidget *parent, Qt::WindowFlags flags): QWizard(parent,f
 
     addPage(inputsPage);
     addPage(outputsPage);
-
-    setButtonText(FinishButton, tr("Convert"));
+    addPage(new ResultsPage());
 
     connect(this, SIGNAL(accepted()), inputsPage, SLOT(save()));
     connect(this, SIGNAL(accepted()), outputsPage, SLOT(save()));

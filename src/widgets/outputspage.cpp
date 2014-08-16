@@ -31,6 +31,7 @@
 OutputsPage::OutputsPage(QWidget *parent) : QWizardPage(parent)
 {
     setTitle(tr("Output Options"));
+    setButtonText(QWizard::NextButton, tr("Convert"));
 
     QFormLayout * const form = new QFormLayout();
 
