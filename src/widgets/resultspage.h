@@ -23,6 +23,7 @@
 #include <QStringList>
 #include <QWizardPage>
 
+class ConverterThread;
 class QProgressBar;
 class QPushButton;
 class QTextEdit;
@@ -41,6 +42,7 @@ protected:
     QProgressBar * progressBar;
     QPushButton * showDetailsButton;
     QTextEdit * detailsBox;
+    ConverterThread * converter;
 
     QStringList sessionBaseNames;
 
@@ -52,6 +54,9 @@ protected:
                            const QString &message);
 
 protected slots:
+    void conversionFinished();
+    void conversionProgress(const int index);
+    void conversionStarted();
     void showDetails();
 
 };

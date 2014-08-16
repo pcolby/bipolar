@@ -19,6 +19,8 @@
 
 #include "resultspage.h"
 
+#include "converterthread.h"
+
 #include <QDebug>
 #include <QDateTime>
 #include <QDir>
@@ -44,6 +46,7 @@ ResultsPage::ResultsPage(QWidget *parent)
     detailsBox = new QTextEdit();
     detailsBox->setReadOnly(true);
    //detailsBox->setVisible(false); /// @todo Reinstate this post-dev.
+    connect(showDetailsButton, SIGNAL(clicked()), this, SLOT(showDetails()));
 
     QVBoxLayout * const vBox = new QVBoxLayout;
     vBox->addWidget(progressBar);
@@ -51,7 +54,10 @@ ResultsPage::ResultsPage(QWidget *parent)
     vBox->addWidget(detailsBox);
     setLayout(vBox);
 
-    connect(showDetailsButton, SIGNAL(clicked()), this, SLOT(showDetails()));
+    converter = new ConverterThread;
+    connect(converter, SIGNAL(finished()), this, SLOT(conversionFinished()));
+    connect(converter, SIGNAL(progress(int)), this, SLOT(conversionProgress(int)));
+    connect(converter, SIGNAL(started()), this, SLOT(conversionStarted()));
 }
 
 void ResultsPage::initializePage()
@@ -79,11 +85,13 @@ void ResultsPage::initializePage()
     qDebug() << sessionBaseNames.size() << "training sessions to examine";
     progressBar->setRange(0, sessionBaseNames.size());
     progressBar->reset();
+
+    converter->start();
 }
 
 bool ResultsPage::isComplete() const
 {
-    return false;
+    return ((converter != NULL) && (converter->isFinished()));
 }
 
 // Protected methods.
@@ -115,6 +123,25 @@ void ResultsPage::onMessage(QtMsgType type, const QMessageLogContext &context,
 }
 
 // Protected slots.
+
+void ResultsPage::conversionFinished()
+{
+    qDebug() << "conversion finished";
+    progressBar->setValue(progressBar->maximum());
+    emit completeChanged();
+}
+
+void ResultsPage::conversionProgress(const int index)
+{
+    qDebug() << "conversion progress" << index;
+    progressBar->setValue(index);
+}
+
+void ResultsPage::conversionStarted()
+{
+    qDebug() << "conversion started";
+    emit completeChanged();
+}
 
 void ResultsPage::showDetails()
 {
