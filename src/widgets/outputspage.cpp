@@ -59,11 +59,15 @@ OutputsPage::OutputsPage(QWidget *parent) : QWizardPage(parent)
         infoButton->setWhatsThis(tr("Click this button for information on the filename format."));
         connect(infoButton, SIGNAL(clicked()), this, SLOT(showFileNameFormatHelp()));
 
+        QLineEdit * format = new QLineEdit();
+
         QHBoxLayout * const hBox = new QHBoxLayout();
-        hBox->addWidget(new QLineEdit(QLatin1String("abc")));
+        hBox->addWidget(format);
         hBox->addWidget(infoButton);
 
         form->addRow(tr("Output Filename Format:"), hBox);
+
+        registerField(QLatin1String("filenameFormat"), format);
     }
 
     {
@@ -102,9 +106,11 @@ void OutputsPage::initializePage()
         }
     }
 
-    setField(QLatin1String("gpxEnabled"), settings.value(QLatin1String("gpxEnabled"), true).toBool());
-    setField(QLatin1String("hrmEnabled"), settings.value(QLatin1String("hrmEnabled"), true).toBool());
-    setField(QLatin1String("tcxEnabled"), settings.value(QLatin1String("tcxEnabled"), true).toBool());
+    setField(QLatin1String("filenameFormat"), settings.value(QLatin1String("filenameFormat")));
+
+    setField(QLatin1String("gpxEnabled"), settings.value(QLatin1String("gpxEnabled"), true));
+    setField(QLatin1String("hrmEnabled"), settings.value(QLatin1String("hrmEnabled"), true));
+    setField(QLatin1String("tcxEnabled"), settings.value(QLatin1String("tcxEnabled"), true));
 }
 
 bool OutputsPage::isComplete() const
@@ -120,9 +126,10 @@ void OutputsPage::save()
     settings.setValue(QLatin1String("outputFolder"),
         (outputFolder->count() > 1) ? outputFolder->itemData(1).toString() : QString());
     settings.setValue(QLatin1String("outputFolderIndex"), outputFolder->currentIndex());
-    settings.setValue(QLatin1String("gpxEnabled"), field(QLatin1String("gpxEnabled")).toBool());
-    settings.setValue(QLatin1String("hrmEnabled"), field(QLatin1String("hrmEnabled")).toBool());
-    settings.setValue(QLatin1String("tcxEnabled"), field(QLatin1String("tcxEnabled")).toBool());
+    settings.setValue(QLatin1String("filenameFormat"), field(QLatin1String("filenameFormat")));
+    settings.setValue(QLatin1String("gpxEnabled"), field(QLatin1String("gpxEnabled")));
+    settings.setValue(QLatin1String("hrmEnabled"), field(QLatin1String("hrmEnabled")));
+    settings.setValue(QLatin1String("tcxEnabled"), field(QLatin1String("tcxEnabled")));
 }
 
 // Protected slots.
