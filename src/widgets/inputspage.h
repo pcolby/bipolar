@@ -43,7 +43,7 @@ protected:
     QPushButton * addButton, * removeButton;
 
     QListWidgetItem * addFolder(const QString &path);
-    static QString hookInputFolder(const bool native);
+    static QString defaultInputFolder(const bool native);
 
 protected slots:
     void browseForFolder();

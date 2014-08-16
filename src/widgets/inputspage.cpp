@@ -79,7 +79,7 @@ void InputsPage::load()
     {
         QStringList folders = settings.value(QLatin1String("inputFolders")).toStringList();
         if (folders.isEmpty()) {
-            folders.append(hookInputFolder(true));
+            folders.append(defaultInputFolder(true));
         }
         foreach (const QString &folder, folders) {
             addFolder(folder);
@@ -112,7 +112,7 @@ QListWidgetItem * InputsPage::addFolder(const QString &path)
     return item;
 }
 
-QString InputsPage::hookInputFolder(const bool native)
+QString InputsPage::defaultInputFolder(const bool native)
 {
     QString folder =
         QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) +
