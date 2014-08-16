@@ -22,6 +22,7 @@
 
 #ifdef Q_OS_WIN
 #include "os/flowsynchook.h"
+#include <QIcon>
 #endif
 
 #include <QApplication>
@@ -50,6 +51,10 @@ int main(int argc, char *argv[]) {
     // Install the QErrorMessage class' Qt message handler.
     QErrorMessage::qtHandler();
     //qInstallMessageHandler(messageHandler);
+
+#ifdef Q_OS_WIN
+    QIcon::setThemeName(QLatin1String("oxygen"));
+#endif
 
     // Try to load a localised translator.
     QTranslator translator;

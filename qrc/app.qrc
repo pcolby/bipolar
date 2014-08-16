@@ -1,5 +1,16 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
-  <qresource>
-  </qresource>
+    <qresource prefix="/icons">
+        <file>oxygen/index.theme</file>
+        <file>oxygen/16x16/actions/list-add.png</file>
+        <file>oxygen/22x22/actions/list-add.png</file>
+        <file>oxygen/32x32/actions/list-add.png</file>
+        <file>oxygen/48x48/actions/list-add.png</file>
+        <file>oxygen/16x16/actions/list-remove.png</file>
+        <file>oxygen/22x22/actions/list-remove.png</file>
+        <file>oxygen/32x32/actions/list-remove.png</file>
+        <file>oxygen/48x48/actions/list-remove.png</file>
+        <file>oxygen/64x64/actions/list-remove.png</file>
+        <file>oxygen/128x128/actions/list-remove.png</file>
+    </qresource>
 </RCC>

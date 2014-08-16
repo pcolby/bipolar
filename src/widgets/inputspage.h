@@ -20,6 +20,7 @@
 #ifndef __INPUTS_PAGE__
 #define __INPUTS_PAGE__
 
+#include <QPushButton>
 #include <QWizardPage>
 
 class QListWidget;
@@ -37,14 +38,15 @@ public slots:
     void save();
 
 protected:
-    QListWidget * list;
+    QListWidget * inputFoldersList;
     QPushButton * addButton, * removeButton;
 
     static QString hookInputFolder(const bool native);
 
 protected slots:
     void browseForFolder();
-    void removeFolder();
+    void removeFolders();
+    void selectionChanged();
 
 };
 

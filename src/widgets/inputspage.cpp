@@ -26,6 +26,7 @@
 #include <QPushButton>
 #include <QSettings>
 #include <QStandardPaths>
+#include <QStyle>
 #include <QVBoxLayout>
 
 InputsPage::InputsPage(QWidget *parent) : QWizardPage(parent)
@@ -33,28 +34,39 @@ InputsPage::InputsPage(QWidget *parent) : QWizardPage(parent)
     setTitle(tr("Input Options"));
     setSubTitle(tr("Select the path(s) containing training sessions to convert."));
 
+    addButton = new QPushButton();
+    addButton->setFlat(true);
+    addButton->setIcon(QIcon::fromTheme(QLatin1String("list-add")));
+    addButton->setToolTip(tr("Add folder"));
+
+    removeButton = new QPushButton();
+    removeButton->setEnabled(false);
+    removeButton->setFlat(true);
+    removeButton->setIcon(QIcon::fromTheme(QLatin1String("list-remove")));
+    removeButton->setToolTip(tr("Remove folder"));
+
+    inputFoldersList = new QListWidget(this);
+    inputFoldersList->setAlternatingRowColors(true);
+    inputFoldersList->setSelectionMode(QListWidget::ExtendedSelection);
+    load();
+
     QFormLayout * const form = new QFormLayout;
-
     {
-        list = new QListWidget(this);
-        list->setAlternatingRowColors(true);
-        load();
-
         QVBoxLayout * const buttonsBox = new QVBoxLayout();
-        buttonsBox->addWidget(addButton = new QPushButton(tr("+")));
-        buttonsBox->addWidget(removeButton = new QPushButton(tr("-")));
+        buttonsBox->addWidget(addButton);
+        buttonsBox->addWidget(removeButton);
         buttonsBox->addStretch();
 
         QHBoxLayout * const hBox = new QHBoxLayout();
-        hBox->addWidget(list);
+        hBox->addWidget(inputFoldersList);
         hBox->addItem(buttonsBox);
         form->addRow(tr("Input Folders:"), hBox);
     }
-
     setLayout(form);
 
     connect(addButton, SIGNAL(clicked()), this, SLOT(browseForFolder()));
-    connect(removeButton, SIGNAL(clicked()), this, SLOT(removeFolder()));
+    connect(removeButton, SIGNAL(clicked()), this, SLOT(removeFolders()));
+    connect(inputFoldersList, SIGNAL(itemSelectionChanged()), this, SLOT(selectionChanged()));
 }
 
 //bool InputPage::isComplete() const {
@@ -74,7 +86,7 @@ void InputsPage::load()
         foreach (const QString &folder, folders) {
             QListWidgetItem * item = new QListWidgetItem(folder);
             /// @todo Icon.
-            list->addItem(item);
+            inputFoldersList->addItem(item);
         }
     }
 }
@@ -84,8 +96,8 @@ void InputsPage::save()
     QSettings settings;
 
     QStringList folders;
-    for (int index = 0; index < list->count(); ++index) {
-        folders.append(list->item(index)->text());
+    for (int index = 0; index < inputFoldersList->count(); ++index) {
+        folders.append(inputFoldersList->item(index)->text());
     }
     if (!folders.isEmpty()) {
         settings.setValue(QLatin1String("inputFolders"), folders);
@@ -111,11 +123,18 @@ void InputsPage::browseForFolder()
         QListWidgetItem * const item = new QListWidgetItem();
         item->setText(QDir::toNativeSeparators(dirName));
         item->setData(Qt::UserRole, dirName);
-        list->addItem(item);
+        inputFoldersList->addItem(item);
     }
 }
 
-void InputsPage::removeFolder()
+void InputsPage::removeFolders()
 {
-    /// @todo
+    foreach (QListWidgetItem * const item, inputFoldersList->selectedItems()) {
+        delete item;
+    }
+}
+
+void InputsPage::selectionChanged()
+{
+    removeButton->setEnabled(!inputFoldersList->selectedItems().isEmpty());
 }
