@@ -39,6 +39,7 @@ protected:
 
 protected slots:
     void browseForFolder();
+    void showFileNameFormatHelp();
 
 };
 

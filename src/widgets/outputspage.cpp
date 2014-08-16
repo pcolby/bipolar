@@ -23,6 +23,8 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QFormLayout>
+#include <QLineEdit>
+#include <QMessageBox>
 #include <QPushButton>
 #include <QSettings>
 
@@ -47,6 +49,21 @@ OutputsPage::OutputsPage(QWidget *parent) : QWizardPage(parent)
         hBox->addWidget(outputFolder, 1);
         hBox->addWidget(browseButton);
         form->addRow(tr("Output Folder:"), hBox);
+    }
+
+    {
+        QPushButton * const infoButton = new QPushButton();
+        infoButton->setFlat(true);
+        infoButton->setIcon(style()->standardIcon(QStyle::SP_MessageBoxInformation));
+        infoButton->setToolTip(tr("Filename format information"));
+        infoButton->setWhatsThis(tr("Click this button for information on the filename format."));
+        connect(infoButton, SIGNAL(clicked()), this, SLOT(showFileNameFormatHelp()));
+
+        QHBoxLayout * const hBox = new QHBoxLayout();
+        hBox->addWidget(new QLineEdit(QLatin1String("abc")));
+        hBox->addWidget(infoButton);
+
+        form->addRow(tr("Output Filename Format:"), hBox);
     }
 
     {
@@ -122,4 +139,15 @@ void OutputsPage::browseForFolder()
         }
         outputFolder->setCurrentIndex(1);
     }
+}
+
+void OutputsPage::showFileNameFormatHelp()
+{
+    QMessageBox * const dialog = new QMessageBox();
+    dialog->setIcon(QMessageBox::Information);
+    QFile file(QLatin1String(":/html/filename syntax.html"));
+    file.open(QFile::ReadOnly);
+    dialog->setText(QString::fromUtf8(file.readAll()));
+    dialog->setWindowTitle(tr("Filename Format"));
+    dialog->show();
 }

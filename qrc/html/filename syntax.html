@@ -1,0 +1,52 @@
+<h2>Filename Format</h2>
+<p>
+The output filename may be specified by a format string. The format
+string may use any combination of the following expressions, which
+will be replaced according to the following list:
+</p>
+
+<table>
+<thead><tr><th>Expression</th><th>Output</th></tr></thead>
+<tr>
+<th>$bseName</th>
+<td>the training session's base name (e.g. v2-users-123-training-sessions-456)</td>
+</tr>
+<tr>
+<th>$date</th>
+<td>the training session's local date, in ISO 8601 format (e.g. 2014-08-16)</td>
+</tr>
+<tr>
+<th>$dateUTC</th>
+<td>the training session's UTC date, in ISO 8601 format (e.g. 2014-08-16)</td>
+</tr>
+<tr>
+<th>$time</th>
+<td>the training session's local time, in ISO 8601 format (e.g. 06:30:00)</td>
+</tr>
+<tr>
+<th>$timeUTC</th>
+<td>the training session's UTC time, in ISO 8601 format (e.g. 06:30:00)</td>
+</tr>
+<tr>
+<th>$userId</th>
+<td>the training session's Polar user ID (e.g. 12345678)</td>
+</tr>
+<tr>
+<th>$username</th>
+<td>the name of the current user (e.g. Paul)</td>
+</tr>
+<tr>
+<th>$sessionId</th>
+<td>the training session's ID (e.g. 23456789)</td>
+</tr>
+<tr>
+<th>$sessionName</th>
+<td>the training session's name (e.g. "Running", "Cylink", "Multisport", etc.)</td>
+</tr>
+</table>
+
+<p>
+If no format string is provided, the default is to user the original
+training session's base name (i.e. "$baseName"). A commonly preferred
+variant is: "$date $time $sessionId $sessionName"
+</p>
