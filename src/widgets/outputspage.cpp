@@ -72,6 +72,19 @@ OutputsPage::OutputsPage(QWidget *parent) : QWizardPage(parent)
 void OutputsPage::initializePage()
 {
     QSettings settings;
+
+    {
+        const QString folder = settings.value(QLatin1String("outputFolder")).toString();
+        if (!folder.isEmpty()) {
+            outputFolder->addItem(QDir::toNativeSeparators(folder), folder);
+            outputFolder->setCurrentIndex(1);
+        }
+        const int outputFolderIndex = settings.value(QLatin1String("outputFolderIndex"), 0).toInt();
+        if (outputFolderIndex < outputFolder->count()) {
+            outputFolder->setCurrentIndex(outputFolderIndex);
+        }
+    }
+
     setField(QLatin1String("gpxEnabled"), settings.value(QLatin1String("gpxEnabled"), true).toBool());
     setField(QLatin1String("hrmEnabled"), settings.value(QLatin1String("hrmEnabled"), true).toBool());
     setField(QLatin1String("tcxEnabled"), settings.value(QLatin1String("tcxEnabled"), true).toBool());
