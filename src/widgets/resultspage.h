@@ -36,11 +36,19 @@ public:
     virtual bool isComplete() const;
 
 protected:
+    static ResultsPage * instance;
     QProgressBar * progressBar;
     QPushButton * showDetailsButton;
     QTextEdit * detailsBox;
 
     QStringList sessionBaseNames;
+
+    static void messageHandler(QtMsgType type,
+                               const QMessageLogContext &context,
+                               const QString &message);
+
+    virtual void onMessage(QtMsgType type, const QMessageLogContext &context,
+                           const QString &message);
 
 protected slots:
     void showDetails();

@@ -20,6 +20,7 @@
 #include "resultspage.h"
 
 #include <QDebug>
+#include <QDateTime>
 #include <QDir>
 #include <QProgressBar>
 #include <QPushButton>
@@ -27,6 +28,8 @@
 #include <QSettings>
 #include <QTextEdit>
 #include <QVBoxLayout>
+
+ResultsPage * ResultsPage::instance = NULL;
 
 ResultsPage::ResultsPage(QWidget *parent) : QWizardPage(parent)
 {
@@ -39,7 +42,7 @@ ResultsPage::ResultsPage(QWidget *parent) : QWizardPage(parent)
 
     detailsBox = new QTextEdit();
     detailsBox->setReadOnly(true);
-    detailsBox->setVisible(false);
+   //detailsBox->setVisible(false); /// @todo Reinstate this post-dev.
 
     QVBoxLayout * const vBox = new QVBoxLayout;
     vBox->addWidget(progressBar);
@@ -52,6 +55,10 @@ ResultsPage::ResultsPage(QWidget *parent) : QWizardPage(parent)
 
 void ResultsPage::initializePage()
 {
+    Q_ASSERT(instance == NULL);
+    instance = this;
+    qInstallMessageHandler(&ResultsPage::messageHandler);
+
     QSettings settings;
 
     QRegExp regex(QLatin1String("(v2-users-[^-]+-training-sessions-[^-]+)-.*"));
@@ -68,6 +75,7 @@ void ResultsPage::initializePage()
         }
     }
 
+    qDebug() << sessionBaseNames.size() << "training sessions to examine";
     progressBar->setRange(0, sessionBaseNames.size());
     progressBar->reset();
 }
@@ -75,6 +83,34 @@ void ResultsPage::initializePage()
 bool ResultsPage::isComplete() const
 {
     return false;
+}
+
+// Protected methods.
+
+void ResultsPage::messageHandler(QtMsgType type,
+                                 const QMessageLogContext &context,
+                                 const QString &message)
+{
+    Q_ASSERT(instance != NULL);
+    if (instance) {
+        instance->onMessage(type, context, message);
+    }
+}
+
+void ResultsPage::onMessage(QtMsgType type, const QMessageLogContext &context,
+                            const QString &message)
+{
+    Q_UNUSED(context)
+    QString level(QLatin1String("invalid"));
+    switch (type) {
+    case QtDebugMsg:    level = QLatin1String("Debug");    break;
+    case QtWarningMsg:  level = QLatin1String("Warning");  break;
+    case QtCriticalMsg: level = QLatin1String("Critical"); break;
+    case QtFatalMsg:    level = QLatin1String("Fatal");    break;
+    }
+    detailsBox->append(tr("%1 %2 %3")
+        .arg(QDateTime::currentDateTime().toString())
+        .arg(level).arg(message));
 }
 
 // Protected slots.
