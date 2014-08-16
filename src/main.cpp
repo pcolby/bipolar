@@ -25,14 +25,13 @@
 #endif
 
 #include <QApplication>
-#include <QDebug>
 #include <QErrorMessage>
 #include <QIcon>
 #include <QMessageBox>
 #include <QTranslator>
 
 // Note, these values are used by the QSettings default constructor,
-// so hould not change between versions.
+// so should not change between versions.
 #define APPLICATION_NAME    QLatin1String("Bipolar")
 #define ORGANISATION_NAME   QLatin1String("Paul Colby")
 #define ORGANISATION_DOMAIN QLatin1String("bipolar.colby.id.au")
@@ -50,8 +49,8 @@ int main(int argc, char *argv[]) {
 
     // Install the QErrorMessage class' Qt message handler.
     QErrorMessage::qtHandler();
-    //qInstallMessageHandler(messageHandler);
 
+    // Default to the Oxygen theme, if no other theme is configured yet.
     if (QIcon::themeName().isEmpty()) {
         QIcon::setThemeName(QLatin1String("oxygen"));
     }
