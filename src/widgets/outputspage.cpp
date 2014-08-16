@@ -85,6 +85,10 @@ OutputsPage::OutputsPage(QWidget *parent) : QWizardPage(parent)
         registerField(QLatin1String("gpxEnabled"), gpxCheckBox);
         registerField(QLatin1String("hrmEnabled"), hrmCheckBox);
         registerField(QLatin1String("tcxEnabled"), tcxCheckBox);
+
+        connect(gpxCheckBox, SIGNAL(clicked()), this, SLOT(checkBoxClicked()));
+        connect(hrmCheckBox, SIGNAL(clicked()), this, SLOT(checkBoxClicked()));
+        connect(tcxCheckBox, SIGNAL(clicked()), this, SLOT(checkBoxClicked()));
     }
 
     setLayout(form);
@@ -115,7 +119,9 @@ void OutputsPage::initializePage()
 
 bool OutputsPage::isComplete() const
 {
-    return true;//false;
+    return ((field(QLatin1String("gpxEnabled")).toBool()) ||
+            (field(QLatin1String("hrmEnabled")).toBool()) ||
+            (field(QLatin1String("tcxEnabled")).toBool()));
 }
 
 // Public slots.
@@ -146,6 +152,11 @@ void OutputsPage::browseForFolder()
         }
         outputFolder->setCurrentIndex(1);
     }
+}
+
+void OutputsPage::checkBoxClicked()
+{
+    emit completeChanged();
 }
 
 void OutputsPage::showFileNameFormatHelp()
