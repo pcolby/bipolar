@@ -31,7 +31,8 @@
 
 ResultsPage * ResultsPage::instance = NULL;
 
-ResultsPage::ResultsPage(QWidget *parent) : QWizardPage(parent)
+ResultsPage::ResultsPage(QWidget *parent)
+    : QWizardPage(parent), previousMessageHandler(NULL)
 {
     setTitle(tr("Converting..."));
     setButtonText(QWizard::FinishButton, tr("Close"));
@@ -57,7 +58,7 @@ void ResultsPage::initializePage()
 {
     Q_ASSERT(instance == NULL);
     instance = this;
-    qInstallMessageHandler(&ResultsPage::messageHandler);
+    previousMessageHandler = qInstallMessageHandler(&ResultsPage::messageHandler);
 
     QSettings settings;
 

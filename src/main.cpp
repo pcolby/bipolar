@@ -48,6 +48,7 @@ int main(int argc, char *argv[]) {
     }
 
     // Install the QErrorMessage class' Qt message handler.
+    // Note, this will be replaced by ResultsPage::initializePage.
     QErrorMessage::qtHandler();
 
     // Default to the Oxygen theme, if no other theme is configured yet.

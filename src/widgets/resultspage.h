@@ -37,6 +37,7 @@ public:
 
 protected:
     static ResultsPage * instance;
+    QtMessageHandler previousMessageHandler;
     QProgressBar * progressBar;
     QPushButton * showDetailsButton;
     QTextEdit * detailsBox;
