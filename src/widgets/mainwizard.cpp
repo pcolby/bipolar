@@ -27,6 +27,8 @@ MainWizard::MainWizard(QWidget *parent, Qt::WindowFlags flags): QWizard(parent,f
     setWindowTitle(tr("%1 %2")
         .arg(QApplication::applicationName())
         .arg(QStringList(QApplication::applicationVersion().split(QLatin1Char('.')).mid(0, 3)).join(QLatin1Char('.'))));
+    setOption(QWizard::NoBackButtonOnLastPage);
+    setOption(QWizard::NoCancelButtonOnLastPage);
 
     InputsPage * const inputsPage = new InputsPage();
     OutputsPage * const outputsPage = new OutputsPage();

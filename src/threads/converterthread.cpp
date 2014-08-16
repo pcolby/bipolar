@@ -19,15 +19,30 @@
 
 #include "converterthread.h"
 
-ConverterThread::ConverterThread(QObject * const parent) : QThread(parent)
+ConverterThread::ConverterThread(QObject * const parent)
+    : QThread(parent), cancelled(false)
 {
 
 }
 
+bool ConverterThread::isCancelled() const
+{
+    return cancelled;
+}
+
+// Public slots.
+
+void ConverterThread::cancel()
+{
+    cancelled = true;
+}
+
+// Protoected methods.
+
 void ConverterThread::run()
 {
     // Just a dummy placeholder for now.
-    for (int i = 1; i <= 20; ++i) {
+    for (int i = 1; (i <= 20) && (!cancelled); ++i) {
         emit progress(i);
         QThread::sleep(1);
     }

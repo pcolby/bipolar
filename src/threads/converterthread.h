@@ -24,11 +24,18 @@
 
 class ConverterThread : public QThread {
     Q_OBJECT
+    Q_PROPERTY(bool cancelled READ isCancelled)
 
 public:
     ConverterThread(QObject * const parent = 0);
+    bool isCancelled() const;
+
+public slots:
+    void cancel();
 
 protected:
+    bool cancelled;
+
     virtual void run();
 
 signals:

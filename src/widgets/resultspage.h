@@ -35,6 +35,7 @@ public:
     ResultsPage(QWidget *parent=0);
     virtual void initializePage();
     virtual bool isComplete() const;
+    virtual bool validatePage();
 
 protected:
     static ResultsPage * instance;

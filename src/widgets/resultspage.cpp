@@ -37,7 +37,6 @@ ResultsPage::ResultsPage(QWidget *parent)
     : QWizardPage(parent), previousMessageHandler(NULL)
 {
     setTitle(tr("Converting..."));
-    setButtonText(QWizard::FinishButton, tr("Close"));
 
     progressBar = new QProgressBar();
 
@@ -91,7 +90,17 @@ void ResultsPage::initializePage()
 
 bool ResultsPage::isComplete() const
 {
-    return ((converter != NULL) && (converter->isFinished()));
+    return !(converter && converter->isRunning() && converter->isCancelled());
+}
+
+bool ResultsPage::validatePage()
+{
+    if ((converter) && (converter->isRunning())) {
+        converter->cancel();
+        emit completeChanged();
+        return false;
+    }
+    return true;
 }
 
 // Protected methods.
@@ -128,6 +137,7 @@ void ResultsPage::conversionFinished()
 {
     qDebug() << "conversion finished";
     progressBar->setValue(progressBar->maximum());
+    setButtonText(QWizard::FinishButton, tr("Close"));
     emit completeChanged();
 }
 
@@ -140,6 +150,7 @@ void ResultsPage::conversionProgress(const int index)
 void ResultsPage::conversionStarted()
 {
     qDebug() << "conversion started";
+    setButtonText(QWizard::FinishButton, tr("Cancel"));
     emit completeChanged();
 }
 
