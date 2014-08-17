@@ -57,6 +57,7 @@ protected:
 protected slots:
     void conversionFinished();
     void conversionStarted();
+    void sessionStarted(const int index);
     void showDetails();
 
 };

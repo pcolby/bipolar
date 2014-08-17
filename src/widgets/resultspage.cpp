@@ -22,6 +22,7 @@
 #include "converterthread.h"
 
 #include <QDebug>
+#include <QFileInfo>
 #include <QProgressBar>
 #include <QPushButton>
 #include <QScrollBar>
@@ -36,6 +37,7 @@ ResultsPage::ResultsPage(QWidget *parent)
     : QWizardPage(parent), previousMessageHandler(NULL)
 {
     setTitle(tr("Converting..."));
+    setSubTitle(tr("Conversion will begin in a moment."));
 
     progressBar = new QProgressBar();
 
@@ -54,6 +56,7 @@ ResultsPage::ResultsPage(QWidget *parent)
 
     converter = new ConverterThread;
     connect(converter, SIGNAL(finished()), this, SLOT(conversionFinished()));
+    connect(converter, SIGNAL(progress(int)), this, SLOT(sessionStarted(int)));
     connect(converter, SIGNAL(progress(int)), progressBar, SLOT(setValue(int)));
     connect(converter, SIGNAL(sessionBaseNamesChanged(int)), progressBar, SLOT(setMaximum(int)));
     connect(converter, SIGNAL(started()), this, SLOT(conversionStarted()));
@@ -127,10 +130,14 @@ void ResultsPage::conversionFinished()
     if (converter->isCancelled()) {
         qDebug() << "conversion stopped";
         setTitle(tr("Conversion Cancelled"));
+        setSubTitle(tr("Conversion was cancelled at your request."));
         progressBar->setValue(progressBar->minimum());
         progressBar->setEnabled(false);
     } else {
         qDebug() << "conversion finished";
+        setTitle(tr("Conversion Finished"));
+        /// @todo Indicate if there were any conversion errors here.
+        setSubTitle(tr("Conversion completed successfully."));
         progressBar->setValue(progressBar->maximum());
     }
     setButtonText(QWizard::FinishButton, tr("Close"));
@@ -142,6 +149,13 @@ void ResultsPage::conversionStarted()
     qDebug() << "conversion started";
     setButtonText(QWizard::FinishButton, tr("Cancel"));
     emit completeChanged();
+}
+
+void ResultsPage::sessionStarted(const int index)
+{
+    Q_ASSERT(converter != NULL);
+    Q_ASSERT(index < converter->sessionBaseNames().size());
+    setSubTitle(QFileInfo(converter->sessionBaseNames().at(index)).fileName());
 }
 
 void ResultsPage::showDetails()
