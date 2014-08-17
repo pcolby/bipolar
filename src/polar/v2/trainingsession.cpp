@@ -1034,7 +1034,7 @@ QString TrainingSession::getOutputBaseFileName(const QString &format)
         return inputBaseNameInfo.fileName();
     }
     QRegExp inputFileNameParts(
-        QLatin1String("v2-users-([^-]+)-training-sessions-([^-]+)-.*"));
+        QLatin1String("v2-users-([^-]+)-training-sessions-([^-]+)"));
     if (format.contains(QLatin1String("$userId"   )) ||
         format.contains(QLatin1String("$sessionId"))) {
         if (!inputFileNameParts.exactMatch(inputBaseNameInfo.fileName())) {
@@ -1078,9 +1078,7 @@ QString TrainingSession::getOutputBaseFileName(const QString &format)
     }
 
     if (format.contains(QLatin1String("$userId"))) {
-        fileName.replace(QLatin1String("$userId"),
-             (inputFileNameParts.captureCount() < 2)
-                 ? QString::fromLatin1("invalid") : inputFileNameParts.cap(2));
+        fileName.replace(QLatin1String("$userId"), inputFileNameParts.cap(1));
     }
 
     if (format.contains(QLatin1String("$username"))) {
@@ -1096,9 +1094,7 @@ QString TrainingSession::getOutputBaseFileName(const QString &format)
     }
 
     if (format.contains(QLatin1String("$sessionId"))) {
-        fileName.replace(QLatin1String("$sessionId"),
-            (inputFileNameParts.captureCount() < 1)
-                ? QString::fromLatin1("invalid") : inputFileNameParts.cap(1));
+        fileName.replace(QLatin1String("$sessionId"), inputFileNameParts.cap(2));
     }
 
     fileName.replace(QLatin1String("$sessionName"),

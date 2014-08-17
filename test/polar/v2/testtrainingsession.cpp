@@ -140,10 +140,11 @@ void TestTrainingSession::getOutputBaseFileName_data()
         << QString()
         << QString::fromLatin1("file");
 
-    /*QTest::newRow("training-sessions-19946380-create")
-        << QString::fromLatin1("v2-user-12345678-training-sessions-19946380")
+    // Check all of the fields that depend on a valid session base name.
+    QTest::newRow("v2-users-12345678-training-sessions-23456789")
+        << QString::fromLatin1("v2-users-12345678-training-sessions-23456789")
         << QString::fromLatin1("$userId|$sessionId")
-        << QString::fromLatin1("file");*/
+        << QString::fromLatin1("12345678|23456789");
 
     // Check all of the fields that depend on parsed session-create data.
     QTest::newRow("training-sessions-19946380-create")
