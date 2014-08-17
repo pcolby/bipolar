@@ -22,10 +22,10 @@
 #include "converterthread.h"
 
 #include <QDebug>
-#include <QDateTime>
 #include <QProgressBar>
 #include <QPushButton>
 #include <QSettings>
+#include <QTime>
 #include <QTextEdit>
 #include <QVBoxLayout>
 
@@ -110,7 +110,7 @@ void ResultsPage::onMessage(QtMsgType type, const QMessageLogContext &context,
     case QtFatalMsg:    level = QLatin1String("Fatal");    break;
     }
     detailsBox->append(tr("%1 %2 %3")
-        .arg(QDateTime::currentDateTime().toString())
+        .arg(QTime::currentTime().toString())
         .arg(level).arg(message));
 }
 
