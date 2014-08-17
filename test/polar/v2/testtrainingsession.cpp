@@ -152,7 +152,6 @@ void TestTrainingSession::getOutputBaseFileName_data()
            "|3|$dateUTC"
            "|4|$time"
            "|5|$timeUTC"
-           "|6|$username"
            "|7|$sessionName"
            "|8|$invalid"
            "|9|$$$foo")
@@ -162,7 +161,6 @@ void TestTrainingSession::getOutputBaseFileName_data()
            "|3|2014-07-17"
            "|4|07:48:56"
            "|5|21:48:56"
-           "|6|unknown"
            "|7|Other outdoor"
            "|8|$invalid"
            "|9|$$$foo");
@@ -174,7 +172,6 @@ void TestTrainingSession::getOutputBaseFileName_data()
             "|3|$dateUTC"
             "|4|$time"
             "|5|$timeUTC"
-            "|6|$username"
             "|7|$sessionName"
             "|8|$invalid"
             "|9|$$$foo")
@@ -184,7 +181,6 @@ void TestTrainingSession::getOutputBaseFileName_data()
             "|3|2014-08-07"
             "|4|17:25:01"
             "|5|07:25:01"
-            "|6|unknown"
             "|7|Running"
             "|8|$invalid"
             "|9|$$$foo");

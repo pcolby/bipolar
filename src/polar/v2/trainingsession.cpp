@@ -1084,9 +1084,9 @@ QString TrainingSession::getOutputBaseFileName(const QString &format)
     if (format.contains(QLatin1String("$username"))) {
         const QString user = QProcessEnvironment::systemEnvironment().value(
             #ifdef Q_OS_WIN
-            QLatin1String("USER"),
-            #else
             QLatin1String("USERNAME"),
+            #else
+            QLatin1String("USER"),
             #endif
             QLatin1String("unknown")
         );
