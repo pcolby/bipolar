@@ -19,6 +19,8 @@
 
 #include "converterthread.h"
 
+#include "trainingsession.h"
+
 #include <QDebug>
 #include <QDir>
 #include <QSettings>
@@ -46,7 +48,7 @@ void ConverterThread::cancel()
     cancelled = true;
 }
 
-// Protoected methods.
+// Protected methods.
 
 void ConverterThread::findSessionBaseNames()
 {
@@ -69,13 +71,25 @@ void ConverterThread::findSessionBaseNames()
     emit sessionBaseNamesChanged(baseNames.size());
 }
 
+void ConverterThread::proccessSession(const QString &baseName)
+{
+    if (cancelled) return;
+    qDebug() << QDir::toNativeSeparators(baseName);
+
+    // Parse the training session.
+    polar::v2::TrainingSession session(baseName);
+    if (!session.parse()) {
+        return;
+    }
+
+    /// @todo
+}
+
 void ConverterThread::run()
 {
     findSessionBaseNames();
-
     for (int index = 0; (index < baseNames.size()) && (!cancelled); ++index) {
         emit progress(index);
-        qDebug() << QDir::toNativeSeparators(baseNames.at(index));
-        QThread::msleep(100); // Dummy.
+        proccessSession(baseNames.at(index));
     }
 }

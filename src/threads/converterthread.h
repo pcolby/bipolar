@@ -40,7 +40,8 @@ protected:
     bool cancelled;
     QStringList baseNames;
 
-    virtual void findSessionBaseNames();
+    void findSessionBaseNames();
+    void proccessSession(const QString &baseName);
     virtual void run();
 
 signals:
