@@ -79,6 +79,7 @@ bool ResultsPage::isComplete() const
 bool ResultsPage::validatePage()
 {
     if ((converter) && (converter->isRunning())) {
+        qDebug() << "conversion cancelled";
         converter->cancel();
         emit completeChanged();
         return false;
@@ -118,8 +119,15 @@ void ResultsPage::onMessage(QtMsgType type, const QMessageLogContext &context,
 
 void ResultsPage::conversionFinished()
 {
-    qDebug() << "conversion finished";
-    progressBar->setValue(progressBar->maximum());
+    if (converter->isCancelled()) {
+        qDebug() << "conversion stopped";
+        setTitle(tr("Conversion Cancelled"));
+        progressBar->setValue(progressBar->minimum());
+        progressBar->setEnabled(false);
+    } else {
+        qDebug() << "conversion finished";
+        progressBar->setValue(progressBar->maximum());
+    }
     setButtonText(QWizard::FinishButton, tr("Close"));
     emit completeChanged();
 }
