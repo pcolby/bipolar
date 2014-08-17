@@ -539,7 +539,7 @@ void TestTrainingSession::toGPX()
 
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession session(baseName);
-    QVERIFY(session.parse(baseName));
+    QVERIFY(session.parse());
     QDomDocument gpx = session.toGPX(QDateTime::fromString(
         QLatin1String("2014-07-15T12:34:56Z"), Qt::ISODate));
 
@@ -608,7 +608,7 @@ void TestTrainingSession::toHRM()
 
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession session(baseName);
-    QVERIFY(session.parse(baseName));
+    QVERIFY(session.parse());
     const QStringList hrm = session.toHRM(false);
 
     // Write the result to a text file for optional post-mortem investigations.
@@ -671,7 +671,7 @@ void TestTrainingSession::toHRM_RR()
 
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession session(baseName);
-    QVERIFY(session.parse(baseName));
+    QVERIFY(session.parse());
     const QStringList hrm = session.toHRM(true);
 
     // Write the result to a text file for optional post-mortem investigations.
@@ -725,7 +725,7 @@ void TestTrainingSession::toTCX()
 
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession session(baseName);
-    QVERIFY(session.parse(baseName));
+    QVERIFY(session.parse());
     QDomDocument tcx = session.toTCX(QLatin1String("Jul 17 2014 21:02:38"));
 
     // Write the result to an XML file for optional post-mortem investigations.
