@@ -984,10 +984,10 @@ QString hrmTime(const QVariantMap &map)
         seconds      = map.constFind(QLatin1String("seconds")),
         milliseconds = map.constFind(QLatin1String("milliseconds"));
     return QString::fromLatin1("%1:%2:%3.%4")
-        .arg(first(  hours.value()).toUInt(), 2, 10, QLatin1Char('0'))
-        .arg(first(minutes.value()).toUInt(), 2, 10, QLatin1Char('0'))
-        .arg(first(seconds.value()).toUInt(), 2, 10, QLatin1Char('0'))
-        .arg(qRound(qMin(900u, first(milliseconds.value()).toUInt())/100.0));
+        .arg((hours   == map.constEnd()) ? 0 : first(  hours.value()).toUInt(), 2, 10, QLatin1Char('0'))
+        .arg((minutes == map.constEnd()) ? 0 : first(minutes.value()).toUInt(), 2, 10, QLatin1Char('0'))
+        .arg((seconds == map.constEnd()) ? 0 : first(seconds.value()).toUInt(), 2, 10, QLatin1Char('0'))
+        .arg((milliseconds == map.constEnd()) ? 0.0 : qRound(qMin(900u, first(milliseconds.value()).toUInt())/100.0));
 }
 
 QString hrmTime(const QTime &time)
