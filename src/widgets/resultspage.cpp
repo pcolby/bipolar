@@ -42,20 +42,24 @@ ResultsPage::ResultsPage(QWidget *parent)
     setTitle(tr("Processing Training Sessions..."));
     setSubTitle(tr("Processing will begin in a moment."));
 
-    progressBar = new QProgressBar();
+    QVBoxLayout * const vBox = new QVBoxLayout;
 
-    showDetailsButton = new QPushButton(tr("Show details"));
+    progressBar = new QProgressBar();
+    vBox->addWidget(progressBar);
+
+    {
+        QHBoxLayout * const hBox = new QHBoxLayout();
+        showDetailsButton = new QPushButton(tr("Show details"));
+        hBox->addWidget(showDetailsButton);
+        hBox->addStretch();
+        vBox->addItem(hBox);
+    }
 
     detailsBox = new QTextEdit();
     detailsBox->setReadOnly(true);
-   //detailsBox->setVisible(false); /// @todo Reinstate this post-dev.
+    detailsBox->setVisible(false);
     connect(showDetailsButton, SIGNAL(clicked()), this, SLOT(showDetails()));
-
-    QVBoxLayout * const vBox = new QVBoxLayout;
-    vBox->addWidget(progressBar);
-    vBox->addWidget(showDetailsButton);
     vBox->addWidget(detailsBox);
-    setLayout(vBox);
 
     converter = new ConverterThread;
     connect(converter, SIGNAL(finished()), this, SLOT(conversionFinished()));
@@ -67,6 +71,8 @@ ResultsPage::ResultsPage(QWidget *parent)
     // This signal/slot indirection pipes all log events to the GUI thread.
     connect(this, SIGNAL(newMessage(QString)),
             this, SLOT(appendMessage(QString)), Qt::QueuedConnection);
+
+    setLayout(vBox);
 }
 
 void ResultsPage::initializePage()
