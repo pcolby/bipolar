@@ -1122,7 +1122,20 @@ QStringList TrainingSession::getOutputFileNames(const QString &fileNameFormat,
     }
 
     if (outputFormats & HrmOutput) {
-
+        const QFileInfo fileInfo(this->baseName);
+        const int exerciseCount = fileInfo.dir().entryInfoList(QStringList(
+            fileInfo.fileName() + QLatin1String("-exercises-*-create"))).count();
+        if (exerciseCount == 1) {
+            fileNames.append(baseName + QLatin1String(".hrm"));
+            fileNames.append(baseName + QLatin1String(".rr.hrm"));
+        } else {
+            for (int index = 0; index < exerciseCount; ++index) {
+                fileNames.append(QString::fromLatin1("%1.%2.hrm")
+                    .arg(baseName).arg(index));
+                fileNames.append(QString::fromLatin1("%1.%2.rr.hrm")
+                    .arg(baseName).arg(index));
+            }
+        }
     }
 
     if (outputFormats & TcxOutput) {

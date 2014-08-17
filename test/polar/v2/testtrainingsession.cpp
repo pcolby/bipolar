@@ -214,6 +214,15 @@ void TestTrainingSession::getOutputFileNames_data()
 
     {   // GPX only.
         QStringList list;
+        list.append(QLatin1String("test-dir/training-sessions-19946380.gpx"));
+        QTest::newRow("gpx")
+            << QFINDTESTDATA("testdata/training-sessions-19946380-create")
+            << QString()
+            << QString::fromLatin1("test-dir")
+            << TrainingSession::OutputFormats(TrainingSession::GpxOutput)
+            << list;
+    } {
+        QStringList list;
         list.append(QLatin1String("test-dir/training-sessions-22165267.gpx"));
         QTest::newRow("gpx")
             << QFINDTESTDATA("testdata/training-sessions-22165267-create")
@@ -223,19 +232,38 @@ void TestTrainingSession::getOutputFileNames_data()
             << list;
     }
 
-    /*
     {   // HRM only.
         QStringList list;
+        list.append(QLatin1String("test-dir/training-sessions-19946380.hrm"));
+        list.append(QLatin1String("test-dir/training-sessions-19946380.rr.hrm"));
+        QTest::newRow("hrm")
+            << QFINDTESTDATA("testdata/training-sessions-19946380-create")
+            << QString()
+            << QString::fromLatin1("test-dir")
+            << TrainingSession::OutputFormats(TrainingSession::HrmOutput)
+            << list;
+    } {
+        QStringList list;
         list.append(QLatin1String("test-dir/training-sessions-22165267.hrm"));
+        list.append(QLatin1String("test-dir/training-sessions-22165267.rr.hrm"));
         QTest::newRow("hrm")
             << QFINDTESTDATA("testdata/training-sessions-22165267-create")
             << QString()
             << QString::fromLatin1("test-dir")
             << TrainingSession::OutputFormats(TrainingSession::HrmOutput)
             << list;
-    }*/
+    }
 
     {   // TCX only.
+        QStringList list;
+        list.append(QLatin1String("test-dir/training-sessions-19946380.tcx"));
+        QTest::newRow("tcx")
+            << QFINDTESTDATA("testdata/training-sessions-19946380-create")
+            << QString()
+            << QString::fromLatin1("test-dir")
+            << TrainingSession::OutputFormats(TrainingSession::TcxOutput)
+            << list;
+    } {
         QStringList list;
         list.append(QLatin1String("test-dir/training-sessions-22165267.tcx"));
         QTest::newRow("tcx")
