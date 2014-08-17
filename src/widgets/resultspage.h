@@ -56,7 +56,6 @@ protected:
 
 protected slots:
     void conversionFinished();
-    void conversionProgress(const int index);
     void conversionStarted();
     void showDetails();
 

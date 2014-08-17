@@ -53,7 +53,7 @@ ResultsPage::ResultsPage(QWidget *parent)
 
     converter = new ConverterThread;
     connect(converter, SIGNAL(finished()), this, SLOT(conversionFinished()));
-    connect(converter, SIGNAL(progress(int)), this, SLOT(conversionProgress(int)));
+    connect(converter, SIGNAL(progress(int)), progressBar, SLOT(setValue(int)));
     connect(converter, SIGNAL(sessionBaseNamesChanged(int)), progressBar, SLOT(setMaximum(int)));
     connect(converter, SIGNAL(started()), this, SLOT(conversionStarted()));
 }
@@ -122,12 +122,6 @@ void ResultsPage::conversionFinished()
     progressBar->setValue(progressBar->maximum());
     setButtonText(QWizard::FinishButton, tr("Close"));
     emit completeChanged();
-}
-
-void ResultsPage::conversionProgress(const int index)
-{
-    qDebug() << "conversion progress" << index;
-    progressBar->setValue(index);
 }
 
 void ResultsPage::conversionStarted()
