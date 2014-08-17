@@ -113,7 +113,7 @@ void OutputsPage::initializePage()
     }
 
     setField(QLatin1String("outputFileNameFormat"),
-             settings.value(QLatin1String("outputFileNameFormat")));
+             settings.value(QLatin1String("outputFileNameFormat"), QString()));
 
     setField(QLatin1String("gpxEnabled"), settings.value(QLatin1String("gpxEnabled"), true));
     setField(QLatin1String("hrmEnabled"), settings.value(QLatin1String("hrmEnabled"), true));
