@@ -19,6 +19,7 @@
 
 #include "converterthread.h"
 
+#include <QDebug>
 #include <QDir>
 #include <QSettings>
 
@@ -74,6 +75,7 @@ void ConverterThread::run()
 
     for (int index = 0; (index < baseNames.size()) && (!cancelled); ++index) {
         emit progress(index);
+        qDebug() << QDir::toNativeSeparators(baseNames.at(index));
         QThread::msleep(100); // Dummy.
     }
 }
