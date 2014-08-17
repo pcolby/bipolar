@@ -32,13 +32,7 @@ MainWizard::MainWizard(QWidget *parent, Qt::WindowFlags flags): QWizard(parent,f
     setOption(QWizard::NoCancelButtonOnLastPage);
     #endif
 
-    InputsPage * const inputsPage = new InputsPage();
-    OutputsPage * const outputsPage = new OutputsPage();
-
-    addPage(inputsPage);
-    addPage(outputsPage);
+    addPage(new InputsPage());
+    addPage(new OutputsPage());
     addPage(new ResultsPage());
-
-    connect(this, SIGNAL(accepted()), inputsPage, SLOT(save()));
-    connect(this, SIGNAL(accepted()), outputsPage, SLOT(save()));
 }

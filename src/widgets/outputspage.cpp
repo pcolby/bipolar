@@ -125,9 +125,7 @@ bool OutputsPage::isComplete() const
             (field(QLatin1String("tcxEnabled")).toBool()));
 }
 
-// Public slots.
-
-void OutputsPage::save()
+bool OutputsPage::validatePage()
 {
     QSettings settings;
     settings.setValue(QLatin1String("outputFolder"),
@@ -137,6 +135,7 @@ void OutputsPage::save()
     settings.setValue(QLatin1String("gpxEnabled"), field(QLatin1String("gpxEnabled")));
     settings.setValue(QLatin1String("hrmEnabled"), field(QLatin1String("hrmEnabled")));
     settings.setValue(QLatin1String("tcxEnabled"), field(QLatin1String("tcxEnabled")));
+    return true;
 }
 
 // Protected slots.

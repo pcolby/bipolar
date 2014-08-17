@@ -91,9 +91,7 @@ bool InputsPage::isComplete() const {
     return false;
 }
 
-// Public slots.
-
-void InputsPage::save()
+bool InputsPage::validatePage()
 {
     QStringList folders;
     for (int index = 0; index < inputFoldersList->count(); ++index) {
@@ -103,6 +101,7 @@ void InputsPage::save()
         QSettings settings;
         settings.setValue(QLatin1String("inputFolders"), folders);
     }
+    return true;
 }
 
 // Protected methods.

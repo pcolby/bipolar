@@ -34,9 +34,7 @@ public:
     InputsPage(QWidget *parent=0);
     virtual void initializePage();
     virtual bool isComplete() const;
-
-public slots:
-    void save();
+    virtual bool validatePage();
 
 protected:
     QListWidget * inputFoldersList;
