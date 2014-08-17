@@ -1098,7 +1098,8 @@ QString TrainingSession::getOutputBaseFileName(const QString &format)
     }
 
     fileName.replace(QLatin1String("$sessionName"),
-        first(parsedSession.value(QLatin1String("session-name"))).toString());
+        first(firstMap(parsedSession.value(QLatin1String("session-name")))
+            .value(QLatin1String("text"))).toString());
     return fileName;
 }
 

@@ -172,7 +172,7 @@ void TestTrainingSession::getOutputBaseFileName_data()
            "|4|07:48:56"
            "|5|21:48:56"
            "|6|unknown"
-           "|7|"
+           "|7|Other outdoor"
            "|8|$invalid"
            "|9|$$$foo");
     QTest::newRow("training-sessions-19946380-create")
@@ -194,7 +194,7 @@ void TestTrainingSession::getOutputBaseFileName_data()
             "|4|17:25:01"
             "|5|07:25:01"
             "|6|unknown"
-            "|7|"
+            "|7|Running"
             "|8|$invalid"
             "|9|$$$foo");
 }
