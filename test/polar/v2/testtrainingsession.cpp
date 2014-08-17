@@ -114,18 +114,6 @@ void TestTrainingSession::getOutputBaseFileName_data()
     QTest::addColumn<QString>("format");
     QTest::addColumn<QString>("output");
 
-    /*
-    #define LOAD_TEST_DATA(name, format, output) { \
-        QTest::newRow(name) << QFINDTESTDATA("testdata/" name) \
-            << QString::fromLatin1(format) << QString::fromLatin1(output); \
-    }
-
-    // Empty
-    LOAD_TEST_DATA("training-sessions-19946380-create", "abc", "foo");
-  //LOAD_TEST_DATA("training-sessions-22165267-create");
-*/
-//    #undef LOAD_TEST_DATA
-
     // Empty format strings use the training session base file name.
     QTest::newRow("empty-format-1")
         << QString::fromLatin1("abc")
