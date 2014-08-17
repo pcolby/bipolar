@@ -1904,7 +1904,6 @@ void TrainingSession::addLapStats(QDomDocument &doc, QDomElement &lap,
                                   const double duration,
                                   const double distance) const
 {
-    /// @todo  Sort out trailing duration / distance.
     lap.appendChild(doc.createElement(QLatin1String("TotalTimeSeconds")))
         .appendChild(doc.createTextNode(QString::fromLatin1("%1").arg(qMax(
             duration, getDuration(firstMap(base.value(QLatin1String("duration"))))/1000.0))));
