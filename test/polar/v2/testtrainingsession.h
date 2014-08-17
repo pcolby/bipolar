@@ -23,6 +23,9 @@ class TestTrainingSession : public QObject {
     Q_OBJECT
 
 private slots:
+    void getOutputBaseFileName_data();
+    void getOutputBaseFileName();
+
     void isGzipped_data();
     void isGzipped();
 

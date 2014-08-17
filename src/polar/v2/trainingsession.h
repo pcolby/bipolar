@@ -42,11 +42,23 @@ class TrainingSession : public QObject {
     Q_OBJECT
 
 public:
-    TrainingSession(const QString &baseName = QString());
+    enum OutputFormat {
+        GpxOutput = 0x01,
+        HrmOutput = 0x02,
+        TcxOutput = 0x04,
+        AllOutputs = GpxOutput|HrmOutput|TcxOutput
+    };
+    Q_DECLARE_FLAGS(OutputFormats, OutputFormat)
+
+    TrainingSession(const QString &baseName);
+
+    QStringList getOutputFileNames(const QString &fileNameFormat,
+                                   const OutputFormats outputFormats,
+                                   QString outputDirName = QString());
 
     bool isValid() const;
 
-    bool parse(const QString &baseName = QString());
+    bool parse();
 
     bool writeGPX(const QString &fileName) const;
     bool writeGPX(QIODevice &device) const;
@@ -63,6 +75,7 @@ protected:
     QVariantMap parsedSession;
 
     static QString getTcxSport(const quint64 &polarSportValue);
+    QString getOutputBaseFileName(const QString &format);
 
     static bool isGzipped(const QByteArray &data);
     static bool isGzipped(QIODevice &data);

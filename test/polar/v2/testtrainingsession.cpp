@@ -108,6 +108,102 @@ void compare(const QDomDocument &a, const QDomDocument &b)
     QCOMPARE(a.nodeType(), b.nodeType());
 }
 
+void TestTrainingSession::getOutputBaseFileName_data()
+{
+    QTest::addColumn<QString>("input");
+    QTest::addColumn<QString>("format");
+    QTest::addColumn<QString>("output");
+
+    /*
+    #define LOAD_TEST_DATA(name, format, output) { \
+        QTest::newRow(name) << QFINDTESTDATA("testdata/" name) \
+            << QString::fromLatin1(format) << QString::fromLatin1(output); \
+    }
+
+    // Empty
+    LOAD_TEST_DATA("training-sessions-19946380-create", "abc", "foo");
+  //LOAD_TEST_DATA("training-sessions-22165267-create");
+*/
+//    #undef LOAD_TEST_DATA
+
+    // Empty format strings use the training session base file name.
+    QTest::newRow("empty-format-1")
+        << QString::fromLatin1("abc")
+        << QString()
+        << QString::fromLatin1("abc");
+    QTest::newRow("empty-format-2")
+        << QString::fromLatin1("some/path/to/some/session/file")
+        << QString()
+        << QString::fromLatin1("file");
+    QTest::newRow("empty-format-3")
+        << QString::fromLatin1("/some/path/to/some/session/file")
+        << QString()
+        << QString::fromLatin1("file");
+
+    /*QTest::newRow("training-sessions-19946380-create")
+        << QString::fromLatin1("v2-user-12345678-training-sessions-19946380")
+        << QString::fromLatin1("$userId|$sessionId")
+        << QString::fromLatin1("file");*/
+
+    // Check all of the fields that depend on parsed session-create data.
+    QTest::newRow("training-sessions-19946380-create")
+        << QFINDTESTDATA("testdata/training-sessions-19946380-create")
+        << QString::fromLatin1(
+           "|1|$baseName"
+           "|2|$date"
+           "|3|$dateUTC"
+           "|4|$time"
+           "|5|$timeUTC"
+           "|6|$username"
+           "|7|$sessionName"
+           "|8|$invalid"
+           "|9|$$$foo")
+        << QString::fromLatin1(
+           "|1|training-sessions-19946380"
+           "|2|2014-07-18"
+           "|3|2014-07-17"
+           "|4|07:48:56"
+           "|5|21:48:56"
+           "|6|unknown"
+           "|7|"
+           "|8|$invalid"
+           "|9|$$$foo");
+    QTest::newRow("training-sessions-19946380-create")
+        << QFINDTESTDATA("testdata/training-sessions-22165267-create")
+        << QString::fromLatin1(
+            "|1|$baseName"
+            "|2|$date"
+            "|3|$dateUTC"
+            "|4|$time"
+            "|5|$timeUTC"
+            "|6|$username"
+            "|7|$sessionName"
+            "|8|$invalid"
+            "|9|$$$foo")
+        << QString::fromLatin1(
+            "|1|training-sessions-22165267"
+            "|2|2014-08-07"
+            "|3|2014-08-07"
+            "|4|17:25:01"
+            "|5|07:25:01"
+            "|6|unknown"
+            "|7|"
+            "|8|$invalid"
+            "|9|$$$foo");
+}
+
+void TestTrainingSession::getOutputBaseFileName()
+{
+    QFETCH(QString, input);
+    QFETCH(QString, format);
+    QFETCH(QString, output);
+    if (input.endsWith(QLatin1String("-create"))) {
+        input.chop(7);
+    }
+    polar::v2::TrainingSession session(input);
+    QCOMPARE(session.getOutputBaseFileName(format), output);
+}
+
 void TestTrainingSession::isGzipped_data()
 {
     QTest::addColumn<QByteArray>("data");

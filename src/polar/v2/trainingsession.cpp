@@ -29,6 +29,7 @@
 #include <QDir>
 #include <QDomElement>
 #include <QFileInfo>
+#include <QProcessEnvironment>
 
 #ifdef Q_OS_WIN
 #include <QtZlib/zlib.h>
@@ -49,8 +50,7 @@
 namespace polar {
 namespace v2 {
 
-TrainingSession::TrainingSession(const QString &baseName)
-    : baseName(baseName)
+TrainingSession::TrainingSession(const QString &baseName) : baseName(baseName)
 {
 
 }
@@ -155,24 +155,14 @@ bool TrainingSession::isValid() const
     return !parsedExercises.isEmpty();
 }
 
-bool TrainingSession::parse(const QString &baseName)
+bool TrainingSession::parse()
 {
     parsedExercises.clear();
 
-    if (!baseName.isEmpty()) {
-        this->baseName = baseName;
-    }
-
-    if (this->baseName.isEmpty()) {
-        Q_ASSERT(!baseName.isEmpty());
-        qWarning() << "parse called with no baseName specified";
-        return false;
-    }
-
     parsedPhysicalInformation = parsePhysicalInformation(
-        this->baseName + QLatin1String("-physical-information"));
+        baseName + QLatin1String("-physical-information"));
 
-    parsedSession = parseCreateSession(this->baseName + QLatin1String("-create"));
+    parsedSession = parseCreateSession(baseName + QLatin1String("-create"));
 
     QMap<QString, QMap<QString, QString> > fileNames;
     const QFileInfo fileInfo(this->baseName);
@@ -1034,6 +1024,115 @@ bool haveAnySamples(const QVariantMap &samples, const QString &type)
         }
     }
     return false;
+}
+
+QString TrainingSession::getOutputBaseFileName(const QString &format)
+{
+
+    const QFileInfo inputBaseNameInfo(baseName);
+    if (format.isEmpty()) {
+        return inputBaseNameInfo.fileName();
+    }
+    QRegExp inputFileNameParts(
+        QLatin1String("v2-users-([^-]+)-training-sessions-([^-]+)-.*"));
+    if (format.contains(QLatin1String("$userId"   )) ||
+        format.contains(QLatin1String("$sessionId"))) {
+        if (!inputFileNameParts.exactMatch(inputBaseNameInfo.fileName())) {
+            qWarning() << "baseName does not match format" << baseName;
+            return QString();
+        }
+    }
+
+    QString fileName = format;
+
+    // If any of these placeholders are used, ensure we've parsed the base details.
+    if (format.contains(QLatin1String("$date"       )) ||
+        format.contains(QLatin1String("$dateUTC"    )) ||
+        format.contains(QLatin1String("$time"       )) ||
+        format.contains(QLatin1String("$timeUTC"    )) ||
+        format.contains(QLatin1String("$userId"     )) ||
+        format.contains(QLatin1String("$sessionId"  )) ||
+        format.contains(QLatin1String("$sessionName"))) {
+        if (parsedSession.isEmpty()) {
+            parsedSession = parseCreateSession(baseName + QLatin1String("-create"));
+        }
+    }
+
+    fileName.replace(QLatin1String("$baseName"), inputBaseNameInfo.fileName());
+
+    if (format.contains(QLatin1String("$date"   )) ||
+        format.contains(QLatin1String("$dateUTC")) ||
+        format.contains(QLatin1String("$time"   )) ||
+        format.contains(QLatin1String("$timeUTC")))
+    {
+        const QDateTime startTime =
+            getDateTime(firstMap(parsedSession.value(QLatin1String("start"))));
+        fileName.replace(QLatin1String("$dateUTC"),
+             startTime.toUTC().toString(QLatin1String("yyyy-MM-dd")));
+        fileName.replace(QLatin1String("$date"),
+             startTime.toString(QLatin1String("yyyy-MM-dd")));
+        fileName.replace(QLatin1String("$timeUTC"),
+            startTime.toUTC().toString(QLatin1String("HH:mm:ss")));
+        fileName.replace(QLatin1String("$time"),
+            startTime.toString(QLatin1String("HH:mm:ss")));
+    }
+
+    if (format.contains(QLatin1String("$userId"))) {
+        fileName.replace(QLatin1String("$userId"),
+             (inputFileNameParts.captureCount() < 2)
+                 ? QString::fromLatin1("invalid") : inputFileNameParts.cap(2));
+    }
+
+    if (format.contains(QLatin1String("$username"))) {
+        const QString user = QProcessEnvironment::systemEnvironment().value(
+            #ifdef Q_OS_WIN
+            QLatin1String("USER"),
+            #else
+            QLatin1String("USERNAME"),
+            #endif
+            QLatin1String("unknown")
+        );
+        fileName.replace(QLatin1String("$username"), user);
+    }
+
+    if (format.contains(QLatin1String("$sessionId"))) {
+        fileName.replace(QLatin1String("$sessionId"),
+            (inputFileNameParts.captureCount() < 1)
+                ? QString::fromLatin1("invalid") : inputFileNameParts.cap(1));
+    }
+
+    fileName.replace(QLatin1String("$sessionName"),
+        first(parsedSession.value(QLatin1String("session-name"))).toString());
+    return fileName;
+}
+
+QStringList TrainingSession::getOutputFileNames(const QString &fileNameFormat,
+                                                const OutputFormats outputFormats,
+                                                QString outputDirName)
+{
+    // Default the output directory match the input files, if not specified.
+    if (outputDirName.isEmpty()) {
+        outputDirName = QFileInfo(this->baseName).absoluteDir().absolutePath();
+    }
+
+    const QString baseName = outputDirName + QDir::separator() +
+        getOutputBaseFileName(fileNameFormat);
+
+    QStringList fileNames;
+
+    if (outputFormats & GpxOutput) {
+        fileNames.append(baseName + QLatin1String(".gpx"));
+    }
+
+    if (outputFormats & HrmOutput) {
+
+    }
+
+    if (outputFormats & TcxOutput) {
+        fileNames.append(baseName + QLatin1String(".tcx"));
+    }
+
+    return fileNames;
 }
 
 /// @see http://www.topografix.com/GPX/1/1/gpx.xsd
