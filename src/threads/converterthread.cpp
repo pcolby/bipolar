@@ -123,17 +123,17 @@ void ConverterThread::proccessSession(const QString &baseName)
     // Write the relevant output files.
     if (settings.value(QLatin1String("gpxEnabled")).toBool()) {
         const QString fileName = session.writeGPX(outputFileNameFormat, outputDir);
-        qDebug() << fileName;
+        qDebug() << "wrote" << QDir::toNativeSeparators(fileName);
     }
     if (settings.value(QLatin1String("hrmEnabled")).toBool()) {
         const QStringList fileNames = session.writeHRM(outputFileNameFormat, outputDir);
         foreach (const QString &fileName, fileNames) {
-            qDebug() << fileName;
+            qDebug() << "wrote" << QDir::toNativeSeparators(fileName);
         }
     }
     if (settings.value(QLatin1String("tcxEnabled")).toBool()) {
         const QString fileName = session.writeTCX(outputFileNameFormat, outputDir);
-        qDebug() << fileName;
+        qDebug() << "wrote" << QDir::toNativeSeparators(fileName);
     }
 }
 
