@@ -29,6 +29,9 @@
 #include <QXmlSchema>
 #include <QXmlSchemaValidator>
 
+Q_DECLARE_METATYPE(polar::v2::TrainingSession::OutputFormat)
+Q_DECLARE_METATYPE(polar::v2::TrainingSession::OutputFormats)
+
 // Qt's QDomDocument comparisons are based on references, and always fail when
 // comparing two separate documents.  Additionally, the QDomDocument::toString
 // and toByteArray functions are both non-deterministic. Hence we have to roll
@@ -197,6 +200,68 @@ void TestTrainingSession::getOutputBaseFileName()
     }
     polar::v2::TrainingSession session(input);
     QCOMPARE(session.getOutputBaseFileName(format), output);
+}
+
+void TestTrainingSession::getOutputFileNames_data()
+{
+    QTest::addColumn<QString>("inputBaseName");
+    QTest::addColumn<QString>("outputFileNameFormat");
+    QTest::addColumn<QString>("outputDirName");
+    QTest::addColumn<polar::v2::TrainingSession::OutputFormats>("outputFileFormats");
+    QTest::addColumn<QStringList>("outputFileNames");
+
+    using namespace polar::v2;
+
+    {   // GPX only.
+        QStringList list;
+        list.append(QLatin1String("test-dir/training-sessions-22165267.gpx"));
+        QTest::newRow("gpx")
+            << QFINDTESTDATA("testdata/training-sessions-22165267-create")
+            << QString()
+            << QString::fromLatin1("test-dir")
+            << TrainingSession::OutputFormats(TrainingSession::GpxOutput)
+            << list;
+    }
+
+    /*
+    {   // HRM only.
+        QStringList list;
+        list.append(QLatin1String("test-dir/training-sessions-22165267.hrm"));
+        QTest::newRow("hrm")
+            << QFINDTESTDATA("testdata/training-sessions-22165267-create")
+            << QString()
+            << QString::fromLatin1("test-dir")
+            << TrainingSession::OutputFormats(TrainingSession::HrmOutput)
+            << list;
+    }*/
+
+    {   // TCX only.
+        QStringList list;
+        list.append(QLatin1String("test-dir/training-sessions-22165267.tcx"));
+        QTest::newRow("tcx")
+            << QFINDTESTDATA("testdata/training-sessions-22165267-create")
+            << QString()
+            << QString::fromLatin1("test-dir")
+            << TrainingSession::OutputFormats(TrainingSession::TcxOutput)
+            << list;
+    }
+}
+
+void TestTrainingSession::getOutputFileNames()
+{
+    QFETCH(QString, inputBaseName);
+    QFETCH(QString, outputFileNameFormat);
+    QFETCH(QString, outputDirName);
+    QFETCH(polar::v2::TrainingSession::OutputFormats, outputFileFormats);
+    QFETCH(QStringList, outputFileNames);
+
+    if (inputBaseName.endsWith(QLatin1String("-create"))) {
+        inputBaseName.chop(7);
+    }
+
+    polar::v2::TrainingSession session(inputBaseName);
+    QCOMPARE(session.getOutputFileNames(outputFileNameFormat, outputFileFormats,
+             outputDirName), outputFileNames);
 }
 
 void TestTrainingSession::isGzipped_data()

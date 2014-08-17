@@ -26,6 +26,9 @@ private slots:
     void getOutputBaseFileName_data();
     void getOutputBaseFileName();
 
+    void getOutputFileNames_data();
+    void getOutputFileNames();
+
     void isGzipped_data();
     void isGzipped();
 

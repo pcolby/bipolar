@@ -1112,7 +1112,7 @@ QStringList TrainingSession::getOutputFileNames(const QString &fileNameFormat,
         outputDirName = QFileInfo(this->baseName).absoluteDir().absolutePath();
     }
 
-    const QString baseName = outputDirName + QDir::separator() +
+    const QString baseName = outputDirName + QLatin1Char('/') +
         getOutputBaseFileName(fileNameFormat);
 
     QStringList fileNames;
