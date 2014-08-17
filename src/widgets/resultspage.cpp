@@ -23,10 +23,8 @@
 
 #include <QDebug>
 #include <QDateTime>
-#include <QDir>
 #include <QProgressBar>
 #include <QPushButton>
-#include <QRegExp>
 #include <QSettings>
 #include <QTextEdit>
 #include <QVBoxLayout>
@@ -56,6 +54,7 @@ ResultsPage::ResultsPage(QWidget *parent)
     converter = new ConverterThread;
     connect(converter, SIGNAL(finished()), this, SLOT(conversionFinished()));
     connect(converter, SIGNAL(progress(int)), this, SLOT(conversionProgress(int)));
+    connect(converter, SIGNAL(sessionBaseNamesChanged(int)), progressBar, SLOT(setMaximum(int)));
     connect(converter, SIGNAL(started()), this, SLOT(conversionStarted()));
 }
 
@@ -64,22 +63,6 @@ void ResultsPage::initializePage()
     Q_ASSERT(instance == NULL);
     instance = this;
     previousMessageHandler = qInstallMessageHandler(&ResultsPage::messageHandler);
-
-    QSettings settings;
-
-    QRegExp regex(QLatin1String("(v2-users-[^-]+-training-sessions-[^-]+)-.*"));
-    foreach (const QString &folder,
-             settings.value(QLatin1String("inputFolders")).toStringList()) {
-        QDir dir(folder);
-        foreach (const QFileInfo &info, dir.entryInfoList()) {
-            if (regex.exactMatch(info.fileName())) {
-                const QString baseName = dir.absoluteFilePath(regex.cap(1));
-                if (!sessionBaseNames.contains(baseName)) {
-                    sessionBaseNames.append(baseName);
-                }
-            }
-        }
-    }
 
     qDebug() << sessionBaseNames.size() << "training sessions to examine";
     progressBar->setRange(0, sessionBaseNames.size());

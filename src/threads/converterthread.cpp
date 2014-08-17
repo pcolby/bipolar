@@ -19,6 +19,9 @@
 
 #include "converterthread.h"
 
+#include <QDir>
+#include <QSettings>
+
 ConverterThread::ConverterThread(QObject * const parent)
     : QThread(parent), cancelled(false)
 {
@@ -30,6 +33,11 @@ bool ConverterThread::isCancelled() const
     return cancelled;
 }
 
+const QStringList &ConverterThread::sessionBaseNames() const
+{
+    return baseNames;
+}
+
 // Public slots.
 
 void ConverterThread::cancel()
@@ -39,11 +47,33 @@ void ConverterThread::cancel()
 
 // Protoected methods.
 
+void ConverterThread::findSessionBaseNames()
+{
+    QSettings settings;
+
+    QRegExp regex(QLatin1String("(v2-users-[^-]+-training-sessions-[^-]+)-.*"));
+    foreach (const QString &folder,
+             settings.value(QLatin1String("inputFolders")).toStringList()) {
+        QDir dir(folder);
+        foreach (const QFileInfo &info, dir.entryInfoList()) {
+            if (regex.exactMatch(info.fileName())) {
+                const QString baseName = dir.absoluteFilePath(regex.cap(1));
+                if (!baseNames.contains(baseName)) {
+                    baseNames.append(baseName);
+                }
+            }
+        }
+    }
+
+    emit sessionBaseNamesChanged(baseNames.size());
+}
+
 void ConverterThread::run()
 {
-    // Just a dummy placeholder for now.
-    for (int i = 1; (i <= 20) && (!cancelled); ++i) {
-        emit progress(i);
-        QThread::sleep(1);
+    findSessionBaseNames();
+
+    for (int index = 0; (index < baseNames.size()) && (!cancelled); ++index) {
+        emit progress(index);
+        QThread::msleep(100); // Dummy.
     }
 }

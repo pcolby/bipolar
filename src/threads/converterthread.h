@@ -20,26 +20,32 @@
 #ifndef __CONVERTER_THREAD__
 #define __CONVERTER_THREAD__
 
+#include <QStringList>
 #include <QThread>
 
 class ConverterThread : public QThread {
     Q_OBJECT
     Q_PROPERTY(bool cancelled READ isCancelled)
+    Q_PROPERTY(QStringList baseNames READ sessionBaseNames NOTIFY sessionBaseNamesChanged)
 
 public:
     ConverterThread(QObject * const parent = 0);
     bool isCancelled() const;
+    const QStringList &sessionBaseNames() const;
 
 public slots:
     void cancel();
 
 protected:
     bool cancelled;
+    QStringList baseNames;
 
+    virtual void findSessionBaseNames();
     virtual void run();
 
 signals:
     void progress(const int index);
+    void sessionBaseNamesChanged(const int size);
 
 };
 
