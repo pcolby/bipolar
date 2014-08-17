@@ -29,6 +29,7 @@
 #include <QSettings>
 #include <QTime>
 #include <QTextEdit>
+#include <QTimer>
 #include <QVBoxLayout>
 
 ResultsPage * ResultsPage::instance = NULL;
@@ -72,7 +73,7 @@ void ResultsPage::initializePage()
     progressBar->setRange(0, sessionBaseNames.size());
     progressBar->reset();
 
-    converter->start();
+    QTimer::singleShot(0, converter, SLOT(start()));
 }
 
 bool ResultsPage::isComplete() const
