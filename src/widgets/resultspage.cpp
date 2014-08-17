@@ -24,6 +24,7 @@
 #include <QDebug>
 #include <QProgressBar>
 #include <QPushButton>
+#include <QScrollBar>
 #include <QSettings>
 #include <QTime>
 #include <QTextEdit>
@@ -113,6 +114,10 @@ void ResultsPage::onMessage(QtMsgType type, const QMessageLogContext &context,
     detailsBox->append(tr("%1 %2 %3")
         .arg(QTime::currentTime().toString())
         .arg(level).arg(message));
+    if (detailsBox->verticalScrollBar()) {
+        detailsBox->verticalScrollBar()->setValue(
+            detailsBox->verticalScrollBar()->maximum());
+    }
 }
 
 // Protected slots.
