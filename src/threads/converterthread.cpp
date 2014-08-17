@@ -78,15 +78,15 @@ void ConverterThread::proccessSession(const QString &baseName)
 
     // Build the set of file formats to be exported.
     QSettings settings;
-    polar::v2::TrainingSession::OutputFormats outputFormats;
+    polar::v2::TrainingSession::OutputFormats outputDataFormats;
     if (settings.value(QLatin1String("gpxEnabled")).toBool()) {
-        outputFormats |= polar::v2::TrainingSession::GpxOutput;
+        outputDataFormats |= polar::v2::TrainingSession::GpxOutput;
     }
     if (settings.value(QLatin1String("hrmEnabled")).toBool()) {
-        outputFormats |= polar::v2::TrainingSession::HrmOutput;
+        outputDataFormats |= polar::v2::TrainingSession::HrmOutput;
     }
     if (settings.value(QLatin1String("tcxEnabled")).toBool()) {
-        outputFormats |= polar::v2::TrainingSession::TcxOutput;
+        outputDataFormats |= polar::v2::TrainingSession::TcxOutput;
     }
 
     // Load the output directory setting (empty == auto).
@@ -95,18 +95,18 @@ void ConverterThread::proccessSession(const QString &baseName)
             QString() : settings.value(QLatin1String("outputFolder")).toString();
 
     // Check for pre-existing output files.
+    const QString outputFileNameFormat =
+        settings.value(QLatin1String("outputFileNameFormat")).toString();
     polar::v2::TrainingSession session(baseName);
     {
         QStringList outputFileNames = session.getOutputFileNames(
-            settings.value(QLatin1String("filenameFormat")).toString(),
-            outputFormats, outputDir);
+            outputFileNameFormat, outputDataFormats, outputDir);
         bool foundNonExistentOutputFileName = false;
         for (int index = 0;
              (index < outputFileNames.count()) && (!foundNonExistentOutputFileName);
              ++index)
         {
             if (!QFile::exists(outputFileNames.at(index))) {
-                qDebug() << outputFileNames.at(index);
                 foundNonExistentOutputFileName = true;
             }
         }
@@ -120,7 +120,21 @@ void ConverterThread::proccessSession(const QString &baseName)
         return;
     }
 
-    /// @todo
+    // Write the relevant output files.
+    if (settings.value(QLatin1String("gpxEnabled")).toBool()) {
+        const QString fileName = session.writeGPX(outputFileNameFormat, outputDir);
+        qDebug() << fileName;
+    }
+    if (settings.value(QLatin1String("hrmEnabled")).toBool()) {
+        const QStringList fileNames = session.writeHRM(outputFileNameFormat, outputDir);
+        foreach (const QString &fileName, fileNames) {
+            qDebug() << fileName;
+        }
+    }
+    if (settings.value(QLatin1String("tcxEnabled")).toBool()) {
+        const QString fileName = session.writeTCX(outputFileNameFormat, outputDir);
+        qDebug() << fileName;
+    }
 }
 
 void ConverterThread::run()

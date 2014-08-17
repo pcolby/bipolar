@@ -60,11 +60,14 @@ public:
 
     bool parse();
 
+    QString writeGPX(const QString &fileNameFormat, QString outputDirName);
     bool writeGPX(const QString &fileName) const;
     bool writeGPX(QIODevice &device) const;
 
+    QStringList writeHRM(const QString &fileNameFormat, QString outputDirName);
     QStringList writeHRM(const QString &baseName) const;
 
+    QString writeTCX(const QString &fileNameFormat, QString outputDirName);
     bool writeTCX(const QString &fileName) const;
     bool writeTCX(QIODevice &device) const;
 

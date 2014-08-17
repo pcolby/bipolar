@@ -1028,7 +1028,6 @@ bool haveAnySamples(const QVariantMap &samples, const QString &type)
 
 QString TrainingSession::getOutputBaseFileName(const QString &format)
 {
-
     const QFileInfo inputBaseNameInfo(baseName);
     if (format.isEmpty()) {
         return inputBaseNameInfo.fileName();
@@ -2010,6 +2009,18 @@ QByteArray TrainingSession::unzip(const QByteArray &data,
     return result;
 }
 
+QString TrainingSession::writeGPX(const QString &fileNameFormat,
+                                  QString outputDirName)
+{
+    if (outputDirName.isEmpty()) {
+        outputDirName = QFileInfo(baseName).dir().absolutePath();
+    }
+    const QString fileName = QString::fromLatin1("%1/%2.gpx")
+        .arg(outputDirName).arg(getOutputBaseFileName(fileNameFormat));
+    writeGPX(fileName);
+    return fileName;
+}
+
 bool TrainingSession::writeGPX(const QString &fileName) const
 {
     QFile file(fileName);
@@ -2029,6 +2040,16 @@ bool TrainingSession::writeGPX(QIODevice &device) const
     }
     device.write(gpx.toByteArray());
     return true;
+}
+
+QStringList TrainingSession::writeHRM(const QString &fileNameFormat,
+                                      QString outputDirName)
+{
+    if (outputDirName.isEmpty()) {
+        outputDirName = QFileInfo(baseName).dir().absolutePath();
+    }
+    return writeHRM(QString::fromLatin1("%1/%2")
+        .arg(outputDirName).arg(getOutputBaseFileName(fileNameFormat)));
 }
 
 QStringList TrainingSession::writeHRM(const QString &baseName) const
@@ -2055,6 +2076,18 @@ QStringList TrainingSession::writeHRM(const QString &baseName) const
         }
     }
     return fileNames;
+}
+
+QString TrainingSession::writeTCX(const QString &fileNameFormat,
+                                  QString outputDirName)
+{
+    if (outputDirName.isEmpty()) {
+        outputDirName = QFileInfo(baseName).dir().absolutePath();
+    }
+    const QString fileName = QString::fromLatin1("%1/%2.tcx")
+        .arg(outputDirName).arg(getOutputBaseFileName(fileNameFormat));
+    writeTCX(fileName);
+    return fileName;
 }
 
 bool TrainingSession::writeTCX(const QString &fileName) const

@@ -68,7 +68,7 @@ OutputsPage::OutputsPage(QWidget *parent) : QWizardPage(parent)
 
         form->addRow(tr("Output Filename Format:"), hBox);
 
-        registerField(QLatin1String("filenameFormat"), format);
+        registerField(QLatin1String("outputFileNameFormat"), format);
     }
 
     {
@@ -105,13 +105,15 @@ void OutputsPage::initializePage()
             outputFolder->addItem(QDir::toNativeSeparators(folder), folder);
             outputFolder->setCurrentIndex(1);
         }
-        const int outputFolderIndex = settings.value(QLatin1String("outputFolderIndex"), 0).toInt();
+        const int outputFolderIndex =
+            settings.value(QLatin1String("outputFolderIndex"), 0).toInt();
         if (outputFolderIndex < outputFolder->count()) {
             outputFolder->setCurrentIndex(outputFolderIndex);
         }
     }
 
-    setField(QLatin1String("filenameFormat"), settings.value(QLatin1String("filenameFormat")));
+    setField(QLatin1String("outputFileNameFormat"),
+             settings.value(QLatin1String("outputFileNameFormat")));
 
     setField(QLatin1String("gpxEnabled"), settings.value(QLatin1String("gpxEnabled"), true));
     setField(QLatin1String("hrmEnabled"), settings.value(QLatin1String("hrmEnabled"), true));
@@ -131,7 +133,7 @@ bool OutputsPage::validatePage()
     settings.setValue(QLatin1String("outputFolder"),
         (outputFolder->count() > 1) ? outputFolder->itemData(1).toString() : QString());
     settings.setValue(QLatin1String("outputFolderIndex"), outputFolder->currentIndex());
-    settings.setValue(QLatin1String("filenameFormat"), field(QLatin1String("filenameFormat")));
+    settings.setValue(QLatin1String("outputFileNameFormat"), field(QLatin1String("outputFileNameFormat")));
     settings.setValue(QLatin1String("gpxEnabled"), field(QLatin1String("gpxEnabled")));
     settings.setValue(QLatin1String("hrmEnabled"), field(QLatin1String("hrmEnabled")));
     settings.setValue(QLatin1String("tcxEnabled"), field(QLatin1String("tcxEnabled")));
