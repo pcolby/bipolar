@@ -215,7 +215,7 @@ void TestTrainingSession::getOutputFileNames_data()
     {   // GPX only.
         QStringList list;
         list.append(QLatin1String("test-dir/training-sessions-19946380.gpx"));
-        QTest::newRow("gpx")
+        QTest::newRow("gpx1")
             << QFINDTESTDATA("testdata/training-sessions-19946380-create")
             << QString()
             << QString::fromLatin1("test-dir")
@@ -224,7 +224,7 @@ void TestTrainingSession::getOutputFileNames_data()
     } {
         QStringList list;
         list.append(QLatin1String("test-dir/training-sessions-22165267.gpx"));
-        QTest::newRow("gpx")
+        QTest::newRow("gpx2")
             << QFINDTESTDATA("testdata/training-sessions-22165267-create")
             << QString()
             << QString::fromLatin1("test-dir")
@@ -236,7 +236,7 @@ void TestTrainingSession::getOutputFileNames_data()
         QStringList list;
         list.append(QLatin1String("test-dir/training-sessions-19946380.hrm"));
         list.append(QLatin1String("test-dir/training-sessions-19946380.rr.hrm"));
-        QTest::newRow("hrm")
+        QTest::newRow("hrm1")
             << QFINDTESTDATA("testdata/training-sessions-19946380-create")
             << QString()
             << QString::fromLatin1("test-dir")
@@ -246,7 +246,7 @@ void TestTrainingSession::getOutputFileNames_data()
         QStringList list;
         list.append(QLatin1String("test-dir/training-sessions-22165267.hrm"));
         list.append(QLatin1String("test-dir/training-sessions-22165267.rr.hrm"));
-        QTest::newRow("hrm")
+        QTest::newRow("hrm2")
             << QFINDTESTDATA("testdata/training-sessions-22165267-create")
             << QString()
             << QString::fromLatin1("test-dir")
@@ -257,7 +257,7 @@ void TestTrainingSession::getOutputFileNames_data()
     {   // TCX only.
         QStringList list;
         list.append(QLatin1String("test-dir/training-sessions-19946380.tcx"));
-        QTest::newRow("tcx")
+        QTest::newRow("tcx1")
             << QFINDTESTDATA("testdata/training-sessions-19946380-create")
             << QString()
             << QString::fromLatin1("test-dir")
@@ -266,11 +266,39 @@ void TestTrainingSession::getOutputFileNames_data()
     } {
         QStringList list;
         list.append(QLatin1String("test-dir/training-sessions-22165267.tcx"));
-        QTest::newRow("tcx")
+        QTest::newRow("tcx2")
             << QFINDTESTDATA("testdata/training-sessions-22165267-create")
             << QString()
             << QString::fromLatin1("test-dir")
             << TrainingSession::OutputFormats(TrainingSession::TcxOutput)
+            << list;
+    }
+
+    {   // All output formats together.
+        QStringList list;
+        list.append(QLatin1String("test-dir/training-sessions-19946380.gpx"));
+        list.append(QLatin1String("test-dir/training-sessions-19946380.hrm"));
+        list.append(QLatin1String("test-dir/training-sessions-19946380.rr.hrm"));
+        list.append(QLatin1String("test-dir/training-sessions-19946380.tcx"));
+        QTest::newRow("all")
+            << QFINDTESTDATA("testdata/training-sessions-19946380-create")
+            << QString()
+            << QString::fromLatin1("test-dir")
+            << TrainingSession::OutputFormats(TrainingSession::AllOutputs)
+            << list;
+    }
+
+    {   // Non-default output base file name.
+        QStringList list;
+        list.append(QLatin1String("test-dir/2014-07-18 07:48:56 Other outdoor.gpx"));
+        list.append(QLatin1String("test-dir/2014-07-18 07:48:56 Other outdoor.hrm"));
+        list.append(QLatin1String("test-dir/2014-07-18 07:48:56 Other outdoor.rr.hrm"));
+        list.append(QLatin1String("test-dir/2014-07-18 07:48:56 Other outdoor.tcx"));
+        QTest::newRow("format")
+            << QFINDTESTDATA("testdata/training-sessions-19946380-create")
+            << QString::fromLatin1("$date $time $sessionName")
+            << QString::fromLatin1("test-dir")
+            << TrainingSession::OutputFormats(TrainingSession::AllOutputs)
             << list;
     }
 }
