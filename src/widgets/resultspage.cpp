@@ -137,13 +137,14 @@ void ResultsPage::appendMessage(const QString &message)
 
 void ResultsPage::conversionFinished()
 {
-    qDebug() << "processing stopped";
     if (converter->isCancelled()) {
+        qDebug() << "processing stopped";
         setTitle(tr("Processing Cancelled"));
         setSubTitle(tr("Processing was cancelled at your request."));
         progressBar->setValue(progressBar->minimum());
         progressBar->setEnabled(false);
     } else {
+        qDebug() << "processing finished";
         setTitle(tr("Processing Finished"));
         /// @todo Indicate if there were any conversion errors here.
         setSubTitle(tr("Processing completed successfully."));

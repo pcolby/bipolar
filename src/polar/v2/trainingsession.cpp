@@ -1675,9 +1675,6 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
         const QVariantList heartrate   = samples.value(QLatin1String("heartrate")).toList();
         const QVariantList speed       = samples.value(QLatin1String("speed")).toList();
         const QVariantList temperature = samples.value(QLatin1String("temperature")).toList();
-        qDebug() << "samples sizes:"
-            << altitude.size() << cadence.size() << distance.size()
-            << heartrate.size() << speed.size() << temperature.size();
 
         // Get the "route" samples.
         const QVariantList duration    = route.value(QLatin1String("duration")).toList();
@@ -1685,8 +1682,6 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
         const QVariantList latitude    = route.value(QLatin1String("latitude")).toList();
         const QVariantList longitude   = route.value(QLatin1String("longitude")).toList();
         const QVariantList satellites  = route.value(QLatin1String("satellites")).toList();
-        qDebug() << "route sizes:" << duration.size() << gpsAltitude.size()
-                 << latitude.size() << longitude.size() << satellites.size();
 
         const int maxIndex =
             qMax(altitude.length(),
@@ -1700,7 +1695,6 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
             qMax(latitude.length(),
             qMax(longitude.length(),
             qMax(satellites.length(), 0))))))))));
-        qDebug() << "max index" << maxIndex;
 
         QDomElement activity = doc.createElement(QLatin1String("Activity"));
         if (multiSportSession.isNull()) {
