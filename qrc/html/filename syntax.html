@@ -2,7 +2,7 @@
 <p>
 The output filename may be specified by a format string. The format
 string may use any combination of the following expressions, which
-will be replaced according to the following list:
+will be replaced according to the following table:
 </p>
 
 <table>
@@ -46,7 +46,11 @@ will be replaced according to the following list:
 </table>
 
 <p>
-If no format string is provided, the default is to user the original
+Text not matching any of the above expressions is used verbatim.
+<p>
+
+<p>
+If no format string is provided, the default is to use the original
 training session's base name (i.e. "$baseName"). A commonly preferred
 variant is: "$date $time $sessionId $sessionName"
 </p>
