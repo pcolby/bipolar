@@ -167,7 +167,7 @@ void TestTrainingSession::parseCreateExercise()
     QVERIFY2(!fileName.isEmpty(), "failed to find testdata");
 
     // Parse the route (protobuf) message.
-    const polar::v2::TrainingSession session;
+    const polar::v2::TrainingSession session(QLatin1String("ignored"));
     const QVariantMap result = session.parseCreateExercise(fileName);
 
     // Write the result to files for optional post-mortem investigations.
@@ -207,7 +207,7 @@ void TestTrainingSession::parseCreateSession()
     QVERIFY2(!fileName.isEmpty(), "failed to find testdata");
 
     // Parse the route (protobuf) message.
-    const polar::v2::TrainingSession session;
+    const polar::v2::TrainingSession session(QLatin1String("ignored"));
     const QVariantMap result = session.parseCreateSession(fileName);
 
     // Write the result to files for optional post-mortem investigations.
@@ -249,7 +249,7 @@ void TestTrainingSession::parseLaps()
     QVERIFY2(!fileName.isEmpty(), "failed to find testdata");
 
     // Parse the route (protobuf) message.
-    const polar::v2::TrainingSession session;
+    const polar::v2::TrainingSession session(QLatin1String("ignored"));
     const QVariantMap result = session.parseLaps(fileName);
 
     // Write the result to files for optional post-mortem investigations.
@@ -290,7 +290,7 @@ void TestTrainingSession::parsePhysicalInformation()
     QVERIFY2(!fileName.isEmpty(), "failed to find testdata");
 
     // Parse the route (protobuf) message.
-    const polar::v2::TrainingSession session;
+    const polar::v2::TrainingSession session(QLatin1String("ignored"));
     const QVariantMap result = session.parsePhysicalInformation(fileName);
 
     // Write the result to files for optional post-mortem investigations.
@@ -332,7 +332,7 @@ void TestTrainingSession::parseRoute()
     QVERIFY2(!fileName.isEmpty(), "failed to find testdata");
 
     // Parse the route (protobuf) message.
-    const polar::v2::TrainingSession session;
+    const polar::v2::TrainingSession session(QLatin1String("ignored"));
     const QVariantMap result = session.parseRoute(fileName);
 
     // Write the result to files for optional post-mortem investigations.
@@ -372,7 +372,7 @@ void TestTrainingSession::parseRRSamples()
     QVERIFY2(!fileName.isEmpty(), "failed to find testdata");
 
     // Parse the route (protobuf) message.
-    const polar::v2::TrainingSession session;
+    const polar::v2::TrainingSession session(QLatin1String("ignored"));
     const QVariantMap result = session.parseRRSamples(fileName);
 
     // Write the result to files for optional post-mortem investigations.
@@ -415,7 +415,7 @@ void TestTrainingSession::parseSamples()
     QVERIFY2(!fileName.isEmpty(), "failed to find testdata");
 
     // Parse the route (protobuf) message.
-    const polar::v2::TrainingSession session;
+    const polar::v2::TrainingSession session(QLatin1String("ignored"));
     const QVariantMap result = session.parseSamples(fileName);
 
     // Write the result to files for optional post-mortem investigations.
@@ -456,7 +456,7 @@ void TestTrainingSession::parseStatistics()
     QVERIFY2(!fileName.isEmpty(), "failed to find testdata");
 
     // Parse the route (protobuf) message.
-    const polar::v2::TrainingSession session;
+    const polar::v2::TrainingSession session(QLatin1String("ignored"));
     const QVariantMap result = session.parseStatistics(fileName);
 
     // Write the result to files for optional post-mortem investigations.
@@ -498,7 +498,7 @@ void TestTrainingSession::parseZones()
     QVERIFY2(!fileName.isEmpty(), "failed to find testdata");
 
     // Parse the route (protobuf) message.
-    const polar::v2::TrainingSession session;
+    const polar::v2::TrainingSession session(QLatin1String("ignored"));
     const QVariantMap result = session.parseZones(fileName);
 
     // Write the result to files for optional post-mortem investigations.
@@ -782,7 +782,7 @@ void TestTrainingSession::unzip()
     QVERIFY2(!data.isEmpty(), "failed to load testdata");
     QVERIFY2(!expected.isEmpty(), "failed to load testdata");
 
-    const polar::v2::TrainingSession session;
+    const polar::v2::TrainingSession session(QLatin1String("ignored"));
     QCOMPARE(session.unzip(data), expected);   // Default initial buffer size.
     QCOMPARE(session.unzip(data,1), expected); // Tiny initial buffer size.
 }
