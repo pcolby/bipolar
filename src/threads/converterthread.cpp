@@ -76,8 +76,46 @@ void ConverterThread::proccessSession(const QString &baseName)
     if (cancelled) return;
     qDebug() << QDir::toNativeSeparators(baseName);
 
-    // Parse the training session.
+    // Build the set of file formats to be exported.
+    QSettings settings;
+    polar::v2::TrainingSession::OutputFormats outputFormats;
+    if (settings.value(QLatin1String("gpxEnabled")).toBool()) {
+        outputFormats |= polar::v2::TrainingSession::GpxOutput;
+    }
+    if (settings.value(QLatin1String("hrmEnabled")).toBool()) {
+        outputFormats |= polar::v2::TrainingSession::HrmOutput;
+    }
+    if (settings.value(QLatin1String("tcxEnabled")).toBool()) {
+        outputFormats |= polar::v2::TrainingSession::TcxOutput;
+    }
+
+    // Load the output directory setting (empty == auto).
+    const QString outputDir =
+        (settings.value(QLatin1String("outputFolderIndex")).toInt() == 0) ?
+            QString() : settings.value(QLatin1String("outputFolder")).toString();
+
+    // Check for pre-existing output files.
     polar::v2::TrainingSession session(baseName);
+    {
+        QStringList outputFileNames = session.getOutputFileNames(
+            settings.value(QLatin1String("filenameFormat")).toString(),
+            outputFormats, outputDir);
+        bool foundNonExistentOutputFileName = false;
+        for (int index = 0;
+             (index < outputFileNames.count()) && (!foundNonExistentOutputFileName);
+             ++index)
+        {
+            if (!QFile::exists(outputFileNames.at(index))) {
+                qDebug() << outputFileNames.at(index);
+                foundNonExistentOutputFileName = true;
+            }
+        }
+        if ((!outputFileNames.isEmpty()) && (!foundNonExistentOutputFileName)) {
+            return; // No need to process this training session.
+        }
+    }
+
+    // Parse the training session.
     if (!session.parse()) {
         return;
     }
