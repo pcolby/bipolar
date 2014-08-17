@@ -63,6 +63,10 @@ ResultsPage::ResultsPage(QWidget *parent)
     connect(converter, SIGNAL(progress(int)), progressBar, SLOT(setValue(int)));
     connect(converter, SIGNAL(sessionBaseNamesChanged(int)), progressBar, SLOT(setMaximum(int)));
     connect(converter, SIGNAL(started()), this, SLOT(conversionStarted()));
+
+    // This signal/slot indirection pipes all log events to the GUI thread.
+    connect(this, SIGNAL(newMessage(QString)),
+            this, SLOT(appendMessage(QString)), Qt::QueuedConnection);
 }
 
 void ResultsPage::initializePage()
@@ -70,11 +74,6 @@ void ResultsPage::initializePage()
     Q_ASSERT(instance == NULL);
     instance = this;
     previousMessageHandler = qInstallMessageHandler(&ResultsPage::messageHandler);
-
-    qDebug() << sessionBaseNames.size() << "training sessions to examine";
-    progressBar->setRange(0, sessionBaseNames.size());
-    progressBar->reset();
-
     QTimer::singleShot(0, converter, SLOT(start()));
 }
 
@@ -96,42 +95,45 @@ bool ResultsPage::validatePage()
 
 // Protected methods.
 
+/**
+ * @note This static function will be called by Qt from multiple threads. This
+ *       function then redirects calls to current ResultsPage instance by
+ *       emitting the newMessage signal. However, since this signal is being
+ *       emitted from a thread that is not necessarily the one the instance
+ *       lives in, any slots connected to the newMessage signal will need
+ *       to specifiy Qt::QueuedConnection, since Qt::AutoConnection detection
+ *       will examine the instance's thread, not the true current thread.
+ */
 void ResultsPage::messageHandler(QtMsgType type,
                                  const QMessageLogContext &context,
                                  const QString &message)
 {
+    Q_UNUSED(context)
     Q_ASSERT(instance != NULL);
     if (instance) {
-        instance->onMessage(type, context, message);
-    }
-}
-
-void ResultsPage::onMessage(QtMsgType type, const QMessageLogContext &context,
-                            const QString &message)
-{
-    Q_UNUSED(context)
-    QString level(QLatin1String("invalid"));
-    switch (type) {
-    case QtDebugMsg:    level = QLatin1String("Debug");    break;
-    case QtWarningMsg:  level = QLatin1String("Warning");  break;
-    case QtCriticalMsg: level = QLatin1String("Critical"); break;
-    case QtFatalMsg:    level = QLatin1String("Fatal");    break;
-    }
-
-    {
-        static QMutex mutex;
-        QMutexLocker locker(&mutex);
-        detailsBox->append(tr("%1 %2 %3")
+        QString level(QLatin1String("invalid"));
+        switch (type) {
+        case QtDebugMsg:    level = QLatin1String("Debug");    break;
+        case QtWarningMsg:  level = QLatin1String("Warning");  break;
+        case QtCriticalMsg: level = QLatin1String("Critical"); break;
+        case QtFatalMsg:    level = QLatin1String("Fatal");    break;
+        }
+        emit instance->newMessage(tr("%1 %2 %3")
             .arg(QTime::currentTime().toString())
             .arg(level).arg(message));
-        if (detailsBox->verticalScrollBar()) {
-            detailsBox->verticalScrollBar()->setValue(
-                detailsBox->verticalScrollBar()->maximum());
-        }
     }
 }
 
 // Protected slots.
+
+void ResultsPage::appendMessage(const QString &message)
+{
+    detailsBox->append(message);
+    if (detailsBox->verticalScrollBar()) {
+        detailsBox->verticalScrollBar()->setValue(
+            detailsBox->verticalScrollBar()->maximum());
+    }
+}
 
 void ResultsPage::conversionFinished()
 {

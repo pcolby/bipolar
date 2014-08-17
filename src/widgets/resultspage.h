@@ -45,20 +45,19 @@ protected:
     QTextEdit * detailsBox;
     ConverterThread * converter;
 
-    QStringList sessionBaseNames;
-
     static void messageHandler(QtMsgType type,
                                const QMessageLogContext &context,
                                const QString &message);
 
-    virtual void onMessage(QtMsgType type, const QMessageLogContext &context,
-                           const QString &message);
-
 protected slots:
+    void appendMessage(const QString &message);
     void conversionFinished();
     void conversionStarted();
     void sessionStarted(const int index);
     void showDetails();
+
+signals:
+    void newMessage(const QString &message);
 
 };
 
