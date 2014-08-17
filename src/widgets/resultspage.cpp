@@ -23,6 +23,8 @@
 
 #include <QDebug>
 #include <QFileInfo>
+#include <QMutex>
+#include <QMutexLocker>
 #include <QProgressBar>
 #include <QPushButton>
 #include <QScrollBar>
@@ -115,12 +117,17 @@ void ResultsPage::onMessage(QtMsgType type, const QMessageLogContext &context,
     case QtCriticalMsg: level = QLatin1String("Critical"); break;
     case QtFatalMsg:    level = QLatin1String("Fatal");    break;
     }
-    detailsBox->append(tr("%1 %2 %3")
-        .arg(QTime::currentTime().toString())
-        .arg(level).arg(message));
-    if (detailsBox->verticalScrollBar()) {
-        detailsBox->verticalScrollBar()->setValue(
-            detailsBox->verticalScrollBar()->maximum());
+
+    {
+        static QMutex mutex;
+        QMutexLocker locker(&mutex);
+        detailsBox->append(tr("%1 %2 %3")
+            .arg(QTime::currentTime().toString())
+            .arg(level).arg(message));
+        if (detailsBox->verticalScrollBar()) {
+            detailsBox->verticalScrollBar()->setValue(
+                detailsBox->verticalScrollBar()->maximum());
+        }
     }
 }
 
