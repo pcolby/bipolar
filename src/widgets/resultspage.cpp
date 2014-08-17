@@ -36,8 +36,8 @@ ResultsPage * ResultsPage::instance = NULL;
 ResultsPage::ResultsPage(QWidget *parent)
     : QWizardPage(parent), previousMessageHandler(NULL)
 {
-    setTitle(tr("Converting..."));
-    setSubTitle(tr("Conversion will begin in a moment."));
+    setTitle(tr("Processing Training Sessions..."));
+    setSubTitle(tr("Processing will begin in a moment."));
 
     progressBar = new QProgressBar();
 
@@ -127,17 +127,16 @@ void ResultsPage::onMessage(QtMsgType type, const QMessageLogContext &context,
 
 void ResultsPage::conversionFinished()
 {
+    qDebug() << "processing stopped";
     if (converter->isCancelled()) {
-        qDebug() << "conversion stopped";
-        setTitle(tr("Conversion Cancelled"));
-        setSubTitle(tr("Conversion was cancelled at your request."));
+        setTitle(tr("Processing Cancelled"));
+        setSubTitle(tr("Processing was cancelled at your request."));
         progressBar->setValue(progressBar->minimum());
         progressBar->setEnabled(false);
     } else {
-        qDebug() << "conversion finished";
-        setTitle(tr("Conversion Finished"));
+        setTitle(tr("Processing Finished"));
         /// @todo Indicate if there were any conversion errors here.
-        setSubTitle(tr("Conversion completed successfully."));
+        setSubTitle(tr("Processing completed successfully."));
         progressBar->setValue(progressBar->maximum());
     }
     setButtonText(QWizard::FinishButton, tr("Close"));
