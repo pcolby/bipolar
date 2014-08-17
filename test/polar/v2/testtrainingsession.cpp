@@ -146,6 +146,12 @@ void TestTrainingSession::getOutputBaseFileName_data()
         << QString::fromLatin1("$userId|$sessionId")
         << QString::fromLatin1("12345678|23456789");
 
+    // Check that multiple placeholder instances are replaced appropriately.
+    QTest::newRow("v2-users-12345678-training-sessions-23456789")
+        << QString::fromLatin1("v2-users-12345678-training-sessions-23456789")
+        << QString::fromLatin1("$userId|$userId|$userId|$userId")
+        << QString::fromLatin1("12345678|12345678|12345678|12345678");
+
     // Check all of the fields that depend on parsed session-create data.
     QTest::newRow("training-sessions-19946380-create")
         << QFINDTESTDATA("testdata/training-sessions-19946380-create")
