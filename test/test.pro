@@ -4,7 +4,7 @@ CONFIG += testcase
 SOURCES += test.cpp
 
 # Define the build user (for TCX).
-DEFINES += $$shell_quote(BUILD_USER='"unit tests"')
+DEFINES += $$shell_quote(BUILD_USER=unit tests)
 
 # Disable automatic ASCII conversions (best practice for internationalization).
 DEFINES += QT_NO_CAST_FROM_ASCII QT_NO_CAST_TO_ASCII

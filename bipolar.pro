@@ -8,8 +8,8 @@ QT += widgets xml
 DEFINES += QT_NO_CAST_FROM_ASCII QT_NO_CAST_TO_ASCII
 
 # Define the build user (for TCX).
-win32:DEFINES += $$shell_quote(BUILD_USER='"$$(USERNAME)"')
-else: DEFINES += $$shell_quote(BUILD_USER='"$$(USER)"')
+win32:DEFINES += $$shell_quote(BUILD_USER=$$(USERNAME))
+else: DEFINES += $$shell_quote(BUILD_USER=$$(USER))
 
 # Add the embedded resources.
 RESOURCES = qrc/app.qrc
