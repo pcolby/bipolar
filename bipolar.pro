@@ -14,8 +14,8 @@ else: DEFINES += $$shell_quote(BUILD_USER='"$$(USER)"')
 # Add the embedded resources.
 RESOURCES = qrc/app.qrc
 macx: {
-    ICON  = qrc/icon/Bipolar.icns
-    QMAKE_INFO_PLIST = qrc/Info.plist
+    ICON  = $$PWD/qrc/icon/Bipolar.icns
+    QMAKE_INFO_PLIST = $$PWD/qrc/Info.plist
 }
 win32:RC_FILE = qrc/Bipolar.rc
 
@@ -28,8 +28,8 @@ RCC_DIR = $$DESTDIR/tmp
 UI_DIR = $$DESTDIR/tmp
 
 # Create our custom revbuild target.
-win32:revbuild.commands = qrc\\gitrevision.cmd qrc\\Bipolar.rc.in qrc\\Bipolar.rc
-else:revbuild.commands = qrc/gitrevision.sh qrc/Info.plist.in qrc/Info.plist
+win32:revbuild.commands = $$PWD\\qrc\\gitrevision.cmd $$PWD/qrc\\Bipolar.rc.in $$PWD/qrc\\Bipolar.rc
+else:revbuild.commands = $$PWD/qrc/gitrevision.sh $$PWD/qrc/Info.plist.in $$PWD/qrc/Info.plist
 QMAKE_EXTRA_TARGETS += revbuild
 
 # Hook our revbuild target in between qmake's Makefile update and the actual project target.
@@ -41,7 +41,7 @@ QMAKE_EXTRA_TARGETS += revbuildhook
 
 # Fix an issue where Qt's generated Makefile does not depend on QMAKE_INFO_PLIST.
 macx: {
-    infobuild.target = release/Bipolar.app/Contents/Info.plist
+    infobuild.target = $$PWD/release/Bipolar.app/Contents/Info.plist
     infobuild.depends = $$QMAKE_INFO_PLIST
     QMAKE_EXTRA_TARGETS += infobuild
 }

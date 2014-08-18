@@ -20,7 +20,7 @@
 #include "testmessage.h"
 
 #include "../../src/protobuf/message.h"
-#include "../../tools/variant.h"
+#include "tools/variant.h"
 
 #include <QDebug>
 #include <QFile>
@@ -31,11 +31,7 @@ Q_DECLARE_METATYPE(ProtoBuf::Message::FieldInfoMap)
 ProtoBuf::Message::FieldInfoMap loadFieldInfoMap(const QString &name, const QString &subTest)
 {
     ProtoBuf::Message::FieldInfoMap fields;
-#ifdef Q_OS_WIN
-    QFile file(QString::fromLatin1("protobuf/testdata/%1%2.fields.csv").arg(name).arg(subTest));
-#else
-    QFile file(QString::fromLatin1("../protobuf/testdata/%1%2.fields.csv").arg(name).arg(subTest));
-#endif
+    QFile file(QFINDTESTDATA(QString::fromLatin1("testdata/%1%2.fields.csv").arg(name).arg(subTest)));
     if (file.exists()) {
         file.open(QIODevice::ReadOnly);
         foreach (const QString &line, QString::fromLatin1(file.readAll()).split(QLatin1Char('\n'))) {
