@@ -28,8 +28,9 @@ RCC_DIR = $$DESTDIR/tmp
 UI_DIR = $$DESTDIR/tmp
 
 # Create our custom revbuild target.
-win32:revbuild.commands = $$PWD\\qrc\\gitrevision.cmd $$PWD/qrc\\Bipolar.rc.in $$PWD/qrc\\Bipolar.rc
-else:revbuild.commands = $$PWD/qrc/gitrevision.sh $$PWD/qrc/Info.plist.in $$PWD/qrc/Info.plist
+revbuild.commands = \
+    $$shell_path($$PWD/qrc/gitrevision.cmd) $$shell_path($$PWD/.git) \
+    $$shell_path($$PWD/qrc/Bipolar.rc.in) $$shell_path($$PWD/qrc/Bipolar.rc)
 QMAKE_EXTRA_TARGETS += revbuild
 
 # Hook our revbuild target in between qmake's Makefile update and the actual project target.
