@@ -302,10 +302,10 @@ void TestTrainingSession::getOutputFileNames_data()
 
     {   // Non-default output base file name.
         QStringList list;
-        list.append(QLatin1String("test-dir/2014-07-18 07:48:56 Other outdoor.gpx"));
-        list.append(QLatin1String("test-dir/2014-07-18 07:48:56 Other outdoor.hrm"));
-        list.append(QLatin1String("test-dir/2014-07-18 07:48:56 Other outdoor.rr.hrm"));
-        list.append(QLatin1String("test-dir/2014-07-18 07:48:56 Other outdoor.tcx"));
+        list.append(QLatin1String("test-dir/20140718 074856 Other outdoor.gpx"));
+        list.append(QLatin1String("test-dir/20140718 074856 Other outdoor.hrm"));
+        list.append(QLatin1String("test-dir/20140718 074856 Other outdoor.rr.hrm"));
+        list.append(QLatin1String("test-dir/20140718 074856 Other outdoor.tcx"));
         QTest::newRow("format")
             << QFINDTESTDATA("testdata/training-sessions-19946380-create")
             << QString::fromLatin1("$date $time $sessionName")
