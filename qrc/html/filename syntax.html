@@ -13,19 +13,41 @@ will be replaced according to the following table:
 </tr>
 <tr>
 <th>$date</th>
-<td>the training session's local date, in ISO 8601 format (e.g. 2014-08-16)</td>
+<td>the training session's local date, in ISO 8601 basic format (e.g. 20140816)</td>
+</tr>
+<tr>
+<th>$dateExt</th>
+<td>the training session's local date, in ISO 8601 extended format (e.g. 2014-08-16)</td>
 </tr>
 <tr>
 <th>$dateUTC</th>
-<td>the training session's UTC date, in ISO 8601 format (e.g. 2014-08-16)</td>
+<td>the training session's UTC date, in ISO 8601 basic format (e.g. 20140816)</td>
+</tr>
+<tr>
+<th>$dateExtUTC</th>
+<td>the training session's UTC date, in ISO 8601 extended format (e.g. 2014-08-16)</td>
 </tr>
 <tr>
 <th>$time</th>
-<td>the training session's local time, in ISO 8601 format (e.g. 06:30:00)</td>
+<td>the training session's local time, in ISO 8601 basic format (e.g. 06:30:00)</td>
+</tr>
+<tr>
+<th>$timeExt</th>
+<td>
+the training session's local time, in ISO 8601 extended format (e.g. 06:30:00).
+Warning: not supported on most Windows filesystems.
+</td>
 </tr>
 <tr>
 <th>$timeUTC</th>
-<td>the training session's UTC time, in ISO 8601 format (e.g. 06:30:00)</td>
+<td>the training session's UTC time, in ISO 8601 basic format (e.g. 063000)</td>
+</tr>
+<tr>
+<th>$timeExtUTC</th>
+<td>
+the training session's UTC time, in ISO 8601 extended format (e.g. 06:30:00).
+Warning: not supported on most Windows filesystems.
+</td>
 </tr>
 <tr>
 <th>$userId</th>
@@ -41,7 +63,7 @@ will be replaced according to the following table:
 </tr>
 <tr>
 <th>$sessionName</th>
-<td>the training session's name (e.g. "Running", "Cylink", "Multisport", etc.)</td>
+<td>the training session's name (e.g. "Running", "Cycling", "Multisport", etc.)</td>
 </tr>
 </table>
 
@@ -52,5 +74,5 @@ Text not matching any of the above expressions is used verbatim.
 <p>
 If no format string is provided, the default is to use the original
 training session's base name (i.e. "$baseName"). A commonly preferred
-variant is: "$date $time $sessionId $sessionName"
+variant is: "$date $time $sessionName"
 </p>

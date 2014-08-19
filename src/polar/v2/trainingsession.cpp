@@ -1059,21 +1059,33 @@ QString TrainingSession::getOutputBaseFileName(const QString &format)
 
     fileName.replace(QLatin1String("$baseName"), inputBaseNameInfo.fileName());
 
-    if (format.contains(QLatin1String("$date"   )) ||
-        format.contains(QLatin1String("$dateUTC")) ||
-        format.contains(QLatin1String("$time"   )) ||
-        format.contains(QLatin1String("$timeUTC")))
+    if (format.contains(QLatin1String("$date"      )) ||
+        format.contains(QLatin1String("$dateUTC"   )) ||
+        format.contains(QLatin1String("$dateExt"   )) ||
+        format.contains(QLatin1String("$dateExtUTC")) ||
+        format.contains(QLatin1String("$time"      )) ||
+        format.contains(QLatin1String("$timeUTC"   )) ||
+        format.contains(QLatin1String("$timeExt"   )) ||
+        format.contains(QLatin1String("$timeExtUTC")))
     {
         const QDateTime startTime =
             getDateTime(firstMap(parsedSession.value(QLatin1String("start"))));
-        fileName.replace(QLatin1String("$dateUTC"),
+        fileName.replace(QLatin1String("$dateExtUTC"),
              startTime.toUTC().toString(QLatin1String("yyyy-MM-dd")));
-        fileName.replace(QLatin1String("$date"),
+        fileName.replace(QLatin1String("$dateExt"),
              startTime.toString(QLatin1String("yyyy-MM-dd")));
-        fileName.replace(QLatin1String("$timeUTC"),
+        fileName.replace(QLatin1String("$dateUTC"),
+             startTime.toUTC().toString(QLatin1String("yyyyMMdd")));
+        fileName.replace(QLatin1String("$date"),
+             startTime.toString(QLatin1String("yyyyMMdd")));
+        fileName.replace(QLatin1String("$timeExtUTC"),
             startTime.toUTC().toString(QLatin1String("HH:mm:ss")));
-        fileName.replace(QLatin1String("$time"),
+        fileName.replace(QLatin1String("$timeExt"),
             startTime.toString(QLatin1String("HH:mm:ss")));
+        fileName.replace(QLatin1String("$timeUTC"),
+            startTime.toUTC().toString(QLatin1String("HHmmss")));
+        fileName.replace(QLatin1String("$time"),
+            startTime.toString(QLatin1String("HHmmss")));
     }
 
     if (format.contains(QLatin1String("$userId"))) {
