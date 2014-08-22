@@ -32,22 +32,28 @@
 InputsPage::InputsPage(QWidget *parent) : QWizardPage(parent)
 {
     setTitle(tr("Input Options"));
-    setSubTitle(tr("Add folders containing training sessions to be converted."));
+    setSubTitle(tr("Add folders containing training sessions to process."));
 
     addButton = new QPushButton();
     addButton->setFlat(true);
     addButton->setIcon(QIcon::fromTheme(QLatin1String("list-add")));
     addButton->setToolTip(tr("Add folder"));
+    addButton->setWhatsThis(tr("Click this button to add a folder containing "
+                               "training session files to process."));
 
     removeButton = new QPushButton();
     removeButton->setEnabled(false);
     removeButton->setFlat(true);
     removeButton->setIcon(QIcon::fromTheme(QLatin1String("list-remove")));
     removeButton->setToolTip(tr("Remove folder"));
+    removeButton->setWhatsThis(tr("Click this button to remove the currently "
+                                  "selected folders from the list."));
 
     inputFoldersList = new QListWidget(this);
     inputFoldersList->setAlternatingRowColors(true);
     inputFoldersList->setSelectionMode(QListWidget::ExtendedSelection);
+    inputFoldersList->setWhatsThis(tr("Contains a list of folders that will be "
+                                      "searched for training sessions to process."));
 
     {
         QVBoxLayout * const buttonsBox = new QVBoxLayout();

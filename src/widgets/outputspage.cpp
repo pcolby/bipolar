@@ -38,12 +38,16 @@ OutputsPage::OutputsPage(QWidget *parent) : QWizardPage(parent)
     {
         outputFolder = new QComboBox();
         outputFolder->addItem(tr("Use the same folder as the input files"));
+        outputFolder->setWhatsThis(tr("Use this box to choose where output files "
+                                      "should be written."));
 
         QPushButton * const browseButton = new QPushButton();
         browseButton->setFlat(true);
         browseButton->setIcon(style()->standardIcon(QStyle::SP_DirOpenIcon));
         browseButton->setText(tr("Browse..."));
         browseButton->setToolTip(tr("Choose output folder"));
+        browseButton->setWhatsThis(tr("Click this button to choose a directory "
+                                      "to write all output files to."));
         connect(browseButton, SIGNAL(clicked()), this, SLOT(browseForFolder()));
 
         QHBoxLayout * const hBox = new QHBoxLayout();
@@ -61,6 +65,8 @@ OutputsPage::OutputsPage(QWidget *parent) : QWizardPage(parent)
         connect(infoButton, SIGNAL(clicked()), this, SLOT(showFileNameFormatHelp()));
 
         QLineEdit * format = new QLineEdit();
+        format->setWhatsThis(tr("Use this box to specifiy a format for output "
+                                "file names. May be left empty."));
 
         QHBoxLayout * const hBox = new QHBoxLayout();
         hBox->addWidget(format);
@@ -75,6 +81,14 @@ OutputsPage::OutputsPage(QWidget *parent) : QWizardPage(parent)
         QCheckBox * const gpxCheckBox = new QCheckBox(tr("GPX"));
         QCheckBox * const hrmCheckBox = new QCheckBox(tr("HRM"));
         QCheckBox * const tcxCheckBox = new QCheckBox(tr("TCX"));
+
+        gpxCheckBox->setToolTip(tr("Enable GPX output"));
+        hrmCheckBox->setToolTip(tr("Enable HRM output"));
+        tcxCheckBox->setToolTip(tr("Enable TCX output"));
+
+        gpxCheckBox->setWhatsThis(tr("Check this box to enable GPX output."));
+        hrmCheckBox->setWhatsThis(tr("Check this box to enable HRM output."));
+        tcxCheckBox->setWhatsThis(tr("Check this box to enable TCX output."));
 
         QVBoxLayout * vBox = new QVBoxLayout();
         vBox->addWidget(gpxCheckBox);
