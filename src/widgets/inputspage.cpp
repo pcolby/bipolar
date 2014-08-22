@@ -82,13 +82,18 @@ void InputsPage::initializePage()
 
 bool InputsPage::isComplete() const {
     // As long as we have at least one readable folder, we're ready to move on.
+    bool isReadable = false;
     for (int index = 0; index < inputFoldersList->count(); ++index) {
         QDir dir(inputFoldersList->item(index)->data(Qt::UserRole).toString());
         if (dir.isReadable()) {
-            return true;
+            isReadable = true;
+        } else {
+            QListWidgetItem * const item = inputFoldersList->item(index);
+            item->setIcon(style()->standardIcon(QStyle::SP_MessageBoxWarning));
+            item->setToolTip(tr("Folder does not exist, or is not readable"));
         }
     }
-    return false;
+    return isReadable;
 }
 
 bool InputsPage::validatePage()
