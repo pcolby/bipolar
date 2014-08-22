@@ -40,6 +40,7 @@ namespace v2 {
  */
 class TrainingSession : public QObject {
     Q_OBJECT
+    Q_PROPERTY(int exerciseCount READ exerciseCount)
 
 public:
     enum OutputFormat {
@@ -51,6 +52,8 @@ public:
     Q_DECLARE_FLAGS(OutputFormats, OutputFormat)
 
     TrainingSession(const QString &baseName);
+
+    int exerciseCount() const;
 
     QStringList getOutputFileNames(const QString &fileNameFormat,
                                    const OutputFormats outputFormats,

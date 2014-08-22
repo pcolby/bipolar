@@ -111,35 +111,68 @@ void ConverterThread::proccessSession(const QString &baseName)
             }
         }
         if ((!outputFileNames.isEmpty()) && (!foundNonExistentOutputFileName)) {
+            sessions.skipped++;
             return; // No need to process this training session.
         }
     }
 
     // Parse the training session.
     if (!session.parse()) {
+        sessions.failed++;
         return;
     }
 
     // Write the relevant output files.
+    bool anyFailed = false;
     if (settings.value(QLatin1String("gpxEnabled")).toBool()) {
         const QString fileName = session.writeGPX(outputFileNameFormat, outputDir);
-        qDebug() << "wrote" << QDir::toNativeSeparators(fileName);
+        if (!fileName.isEmpty()) {
+            qDebug() << "wrote" << QDir::toNativeSeparators(fileName);
+            files.written++;
+        } else {
+            anyFailed = true;
+            files.failed++;
+        }
     }
     if (settings.value(QLatin1String("hrmEnabled")).toBool()) {
         const QStringList fileNames = session.writeHRM(outputFileNameFormat, outputDir);
         foreach (const QString &fileName, fileNames) {
             qDebug() << "wrote" << QDir::toNativeSeparators(fileName);
+            files.written++;
+        }
+        const int failedFilesCount = (fileNames.size() - (2 * session.exerciseCount()));
+        if (failedFilesCount > 0) {
+            anyFailed = true;
+            files.failed += failedFilesCount;
         }
     }
     if (settings.value(QLatin1String("tcxEnabled")).toBool()) {
         const QString fileName = session.writeTCX(outputFileNameFormat, outputDir);
-        qDebug() << "wrote" << QDir::toNativeSeparators(fileName);
+        if (!fileName.isEmpty()) {
+            qDebug() << "wrote" << QDir::toNativeSeparators(fileName);
+            files.written++;
+        } else {
+            anyFailed = true;
+            files.failed++;
+        }
+    }
+    if (anyFailed) {
+        sessions.failed++;
+    } else {
+        sessions.processed++;
     }
 }
 
 void ConverterThread::run()
 {
+    // Reset counters.
+    memset(&files,    0, sizeof(files));
+    memset(&sessions, 0, sizeof(sessions));
+
+    // Find the base name of training sessions to consider for processing.
     findSessionBaseNames();
+
+    // Process all found training sessions.
     for (int index = 0; (index < baseNames.size()) && (!cancelled); ++index) {
         emit progress(index);
         proccessSession(baseNames.at(index));

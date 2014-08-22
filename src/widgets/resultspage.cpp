@@ -152,9 +152,23 @@ void ResultsPage::conversionFinished()
     } else {
         qDebug() << "processing finished";
         setTitle(tr("Processing Finished"));
-        /// @todo Indicate if there were any conversion errors here.
-        setSubTitle(tr("Processing completed successfully."));
+        if ((converter->sessions.failed == 0) &&
+            (converter->sessions.processed == 0)) {
+            setSubTitle(tr("Found no new training sessions to process."));
+        } else {
+            setSubTitle(tr("Successfully processed %1 of %2 new training sessions.")
+                        .arg(converter->sessions.processed)
+                        .arg(converter->sessions.processed + converter->sessions.failed));
+        }
         progressBar->setValue(progressBar->maximum());
+        qDebug() << tr("Skipped %1 training sessions processed previsouly.")
+                    .arg(converter->sessions.skipped).toUtf8().constData();
+        qDebug() << tr("Wrote %1 of %2 files for %3 of %4 new training sessions.")
+                    .arg(converter->files.written)
+                    .arg(converter->files.written + converter->files.failed)
+                    .arg(converter->sessions.processed)
+                    .arg(converter->sessions.processed + converter->sessions.failed)
+                    .toUtf8().constData();
     }
     setButtonText(QWizard::FinishButton, tr("Close"));
     emit completeChanged();

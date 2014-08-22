@@ -55,6 +55,11 @@ TrainingSession::TrainingSession(const QString &baseName) : baseName(baseName)
 
 }
 
+int TrainingSession::exerciseCount() const
+{
+    return (isValid()) ? parsedExercises.count() : -1;
+}
+
 /// @see https://github.com/pcolby/bipolar/wiki/Polar-Sport-Types
 QString TrainingSession::getTcxSport(const quint64 &polarSportValue)
 {
