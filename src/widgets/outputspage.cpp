@@ -27,6 +27,7 @@
 #include <QMessageBox>
 #include <QPushButton>
 #include <QSettings>
+#include <QStandardPaths>
 
 OutputsPage::OutputsPage(QWidget *parent) : QWizardPage(parent)
 {
@@ -158,7 +159,9 @@ bool OutputsPage::validatePage()
 
 void OutputsPage::browseForFolder()
 {
-    const QString dirName = QFileDialog::getExistingDirectory(this);
+    const QStringList homeDir = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
+    const QString dirName = QFileDialog::getExistingDirectory(this, QString(),
+        (homeDir.isEmpty()) ? QString() : homeDir.first());
     if (!dirName.isEmpty()) {
         if (outputFolder->count() < 2) {
             outputFolder->addItem(QDir::toNativeSeparators(dirName), dirName);
