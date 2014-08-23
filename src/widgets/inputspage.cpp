@@ -139,7 +139,15 @@ QString InputsPage::defaultInputFolder(const bool native)
 
 void InputsPage::browseForFolder()
 {
-    const QString dirName = QFileDialog::getExistingDirectory(this);
+    // Default to the hook export directory, if it exists, otherwise the home directory.
+    QString initialDirectory = defaultInputFolder(false);
+    if (!QFile::exists(initialDirectory)) {
+        const QStringList homeDir = QStandardPaths::standardLocations(QStandardPaths::HomeLocation);
+        initialDirectory = (homeDir.isEmpty()) ? QString() : homeDir.first();
+    }
+
+    // Browse for the directory to add.
+    const QString dirName = QFileDialog::getExistingDirectory(this, QString(), initialDirectory);
     if (!dirName.isEmpty()) {
         QListWidgetItem * const item = addFolder(dirName);
         inputFoldersList->sortItems();
