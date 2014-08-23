@@ -5,7 +5,7 @@ if [ $# -ne 3 ]; then
     exit 1
 fi
 
-REVISION=`git --git-dire "$1" rev-list --count HEAD`
+REVISION=`git --git-dir "$1" rev-list --count HEAD`
 if [ $? -ne 0 ]; then exit; fi
 
 sed -e "s/\(\([ 0-9]\{1,\}[.,]\)\{3\} *\)0/\1$REVISION/g" "$2" > "$2.tmp"

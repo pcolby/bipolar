@@ -28,7 +28,10 @@ RCC_DIR = $$DESTDIR/tmp
 UI_DIR = $$DESTDIR/tmp
 
 # Create our custom revbuild target.
-revbuild.commands = \
+macx:revbuild.commands = \
+    $$shell_path($$PWD/qrc/gitrevision.sh) $$shell_path($$PWD/.git) \
+    $$shell_path($$PWD/qrc/Info.plist.in) $$shell_path($$PWD/qrc/Info.plist)
+win32:revbuild.commands = \
     $$shell_path($$PWD/qrc/gitrevision.cmd) $$shell_path($$PWD/.git) \
     $$shell_path($$PWD/qrc/Bipolar.rc.in) $$shell_path($$PWD/qrc/Bipolar.rc)
 QMAKE_EXTRA_TARGETS += revbuild
