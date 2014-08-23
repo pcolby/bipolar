@@ -21,6 +21,10 @@
 
 #include "converterthread.h"
 
+#ifdef Q_OS_WIN
+#include "os/flowsynchook.h"
+#endif
+
 #include <QDebug>
 #include <QFileInfo>
 #include <QMutex>
@@ -80,6 +84,15 @@ void ResultsPage::initializePage()
     Q_ASSERT(instance == NULL);
     instance = this;
     previousMessageHandler = qInstallMessageHandler(&ResultsPage::messageHandler);
+#ifdef Q_OS_WIN
+    for (int index = 0; index < 2; ++index) {
+        const QDir dir = (index == 0) ?
+            FlowSyncHook::flowSyncDir() : FlowSyncHook::installableHookDir();
+        const int version = FlowSyncHook::getVersion(dir);
+        qDebug() << QDir::toNativeSeparators(dir.absolutePath())
+                 << "hook version" << version;
+    }
+#endif
     QTimer::singleShot(0, converter, SLOT(start()));
 }
 
