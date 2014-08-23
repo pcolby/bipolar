@@ -27,13 +27,22 @@
 #include <QMessageBox>
 #endif
 
+#include "os/versioninfo.h"
+
 #include <QApplication>
 #include <QTimer>
 
 MainWizard::MainWizard(QWidget *parent, Qt::WindowFlags flags): QWizard(parent,flags) {
     setWindowTitle(tr("%1 %2")
         .arg(QApplication::applicationName())
-        .arg(QStringList(QApplication::applicationVersion().split(QLatin1Char('.')).mid(0, 3)).join(QLatin1Char('.'))));
+        .arg(QStringList(QApplication::applicationVersion().split(QLatin1Char('.')).mid(0, 3)).join(QLatin1Char('.'))));    
+    const VersionInfo versionInfo;
+    const QString specialBuild = (versionInfo.isValid()) ?
+        versionInfo.fileInfo(QLatin1String("SpecialBuild")) : QString();
+    if (!specialBuild.isEmpty()) {
+        setWindowTitle(windowTitle() + QLatin1Char(' ') + specialBuild);
+    }
+
     setOption(QWizard::NoBackButtonOnLastPage);
     #if (QT_VERSION >= QT_VERSION_CHECK(5, 3, 0))
     setOption(QWizard::NoCancelButtonOnLastPage);
