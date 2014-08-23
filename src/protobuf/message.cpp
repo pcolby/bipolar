@@ -47,7 +47,7 @@ QVariantMap Message::parse(QIODevice &data, const QString &tagPathPrefix) const
         // Fetch the next field's tag index and wire type.
         QPair<quint32, quint8> tagAndType = parseTagAndType(data);
         if (tagAndType.first == 0) {
-            qWarning() << "invalid tag:" << tagAndType.first;
+            qWarning() << "Invalid tag:" << tagAndType.first;
             return QVariantMap();
         }
 
@@ -99,7 +99,7 @@ QVariant Message::parseValue(QIODevice &data, const quint8 wireType,
         (wireType != Types::getWireType(scalarType))) {
         qWarning() << tagPath << "wire type" << wireType << "does not match "
             "expected wire type" << Types::getWireType(scalarType) << "for "
-            "scalar type" << scalarType;
+            "scalar type" << scalarType << '.';
     }
 
     switch (wireType) {
@@ -139,7 +139,7 @@ QVariant Message::parseValue(QIODevice &data, const quint8 wireType,
         }
         break;
     }
-    qWarning() << "invalid wireType:" << wireType << "(tagPath:" << tagPath << ')';
+    qWarning() << "Invalid wireType:" << wireType << "(tagPath:" << tagPath << ')';
     return QVariant();
 }
 
@@ -149,7 +149,7 @@ QVariant Message::parseLengthDelimitedValue(QIODevice &data,
 {
     const QVariant value = readLengthDelimitedValue(data);
     if (!value.isValid()) {
-        qWarning() << "failed to read prefix-delimited value";
+        qWarning() << "Failed to read prefix-delimited value.";
         return QVariant();
     }
 
@@ -193,7 +193,7 @@ QVariant Message::readLengthDelimitedValue(QIODevice &data) const
     // I haven't found any Protocl Buffers documentation to support / dispute this.
     const QVariant length = parseUnsignedVarint(data);
     if (!length.isValid()) {
-        qWarning() << "failed to read prefix-delimited length";
+        qWarning() << "Failed to read prefix-delimited length.";
         return QVariant();
     }
     const QByteArray value = data.read(length.toULongLong());
