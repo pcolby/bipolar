@@ -21,7 +21,14 @@
 #include "inputspage.h"
 #include "outputspage.h"
 #include "resultspage.h"
+
+#ifdef Q_OS_WIN
+#include "os/flowsynchook.h"
+#include <QMessageBox>
+#endif
+
 #include <QApplication>
+#include <QTimer>
 
 MainWizard::MainWizard(QWidget *parent, Qt::WindowFlags flags): QWizard(parent,flags) {
     setWindowTitle(tr("%1 %2")
@@ -35,4 +42,50 @@ MainWizard::MainWizard(QWidget *parent, Qt::WindowFlags flags): QWizard(parent,f
     addPage(new InputsPage());
     addPage(new OutputsPage());
     addPage(new ResultsPage());
+}
+
+void MainWizard::checkHook()
+{
+#ifdef Q_OS_WIN
+    const QDir hookDir = FlowSyncHook::installableHookDir();
+    const int availableVersion = FlowSyncHook::getVersion(hookDir);
+    if (availableVersion <= 0) {
+        return;
+    }
+
+    const QDir flowSyncDir = FlowSyncHook::flowSyncDir();
+    if (!flowSyncDir.exists()) {
+        QMessageBox::information(this, QString(),
+            tr("Unable to check if the Bipolar hook has been installed,\n"
+               "because the Polar FlowSync application could not be located."));
+    } else {
+        const int installedVersion = FlowSyncHook::getVersion(flowSyncDir);
+
+        QString message;
+        if (installedVersion <= 0) {
+            message = tr("The Bipolar hook does not appear to be installed.\n\n"
+                         "Would you like to install it now?");
+        } else if (installedVersion < availableVersion) {
+            message = tr("This version of Bipolar includes a newer FlowSync hook.\n\n"
+                         "Would you like to install it now?");
+        }
+
+        if ((!message.isEmpty()) &&
+            (QMessageBox::question(this, QString(), message,
+                QMessageBox::Yes|QMessageBox::No, QMessageBox::No) == QMessageBox::Yes
+            ) && (!FlowSyncHook::install(hookDir, flowSyncDir))) {
+            QMessageBox::warning(this, QString(),
+                tr("Failed to install Bipolar hook into Polar FlowSync.\n\n"
+                   "You may need to re-run this application as an administrator,\n"
+                   "and/or exit Polar FlowSync before trying again.\n"
+                   ));
+        }
+    }
+#endif
+}
+
+void MainWizard::showEvent(QShowEvent * event)
+{
+    QWizard::showEvent(event);
+    QTimer::singleShot(0, this, SLOT(checkHook()));
 }

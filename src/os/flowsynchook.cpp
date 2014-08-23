@@ -40,7 +40,6 @@ QDir FlowSyncHook::flowSyncDir()
             const QDir dir(env.split(QLatin1Char('=')).at(0) +
                            QLatin1String("/Polar/Polar FlowSync"));
             if ((dir.exists()) && (dir.exists(QLatin1String("Qt5Network.dll")))) {
-                qDebug() << "found flowsync" << QDir::toNativeSeparators(dir.path());
                 return dir;
             }
         }
@@ -53,7 +52,6 @@ QDir FlowSyncHook::flowSyncDir()
     foreach (const QString &path, knownPaths) {
         const QDir dir(path + QLatin1String("/Polar/Polar FlowSync"));
         if ((dir.exists()) && (dir.exists(QLatin1String("Qt5Network.dll")))) {
-            qDebug() << "found flowsync" << QDir::toNativeSeparators(dir.path());
             return dir;
         }
     }
@@ -75,23 +73,17 @@ bool FlowSyncHook::install(const QDir &fromDir, QDir toDir)
     // Backup the existing DLL.
     const QString backupFileName = QString::fromLatin1("Qt5Network.dll.%1")
         .arg(QDateTime::currentDateTime().toString(QLatin1String("yyyyMMddHHmmss")));
-    qDebug() << "backing up"
-         << QDir::toNativeSeparators(toDir.filePath(QLatin1String("Qt5Network.dll")))
-         << "to" << QDir::toNativeSeparators(toDir.filePath(backupFileName));
     if (!toDir.rename(QLatin1String("Qt5Network.dll"), backupFileName)) {
-        qWarning() << "failed to backup "
+        qWarning() << "Failed to backup "
             << QDir::toNativeSeparators(toDir.filePath(QLatin1String("Qt5Network.dll")))
             << "to" << QDir::toNativeSeparators(toDir.filePath(backupFileName));
         return false;
     }
 
     // Copy our hook DLL into place.
-    qDebug()
-        << "copying" << QDir::toNativeSeparators(fromDir.filePath(QLatin1String("Qt5Network.dll")))
-        << "to" << QDir::toNativeSeparators(toDir.filePath(QLatin1String("Qt5Network.dll")));
     if (!QFile::copy(fromDir.filePath(QLatin1String("Qt5Network.dll")),
                      toDir.filePath(QLatin1String("Qt5Network.dll")))) {
-        qWarning() << "failed to copy"
+        qWarning() << "Failed to copy"
             << QDir::toNativeSeparators(fromDir.filePath(QLatin1String("Qt5Network.dll")))
             << "to" << QDir::toNativeSeparators(toDir.filePath(QLatin1String("Qt5Network.dll")));
         return false;
@@ -105,22 +97,22 @@ int FlowSyncHook::getVersion(const QDir &dir)
 
     const FileVersionInfo info(dll);
     if (!info.isValid()) {
-        qWarning() << "unabled to read version information for" << dll;
+        qWarning() << "Unabled to read version information for"
+                   << QDir::toNativeSeparators(dll);
         return -1;
     }
 
     const QString internalName = info.fileInfo(QLatin1String("InternalName"));
-    qDebug() << "checking hook" << QDir::toNativeSeparators(dll) << internalName;
     if (!internalName.startsWith(QLatin1String("Bipolar Hook"))) {
         return -2; // Qt5Network.dll is not our hooked version.
     }
 
     const QStringList parts = internalName.split(QLatin1Char(' '), QString::SkipEmptyParts);
     if (parts.length() < 3) {
-        qWarning() << "invalid internal version" << parts;
+        qWarning() << "Invalid internal hook version:" << parts;
         return -3;
     } else if (parts.length() > 3) {
-        qWarning() << "ignoring trailing version information" << parts.mid(3);
+        qWarning() << "Ignoring trailing hook version information:" << parts.mid(3);
     }
     return parts.at(2).toInt();
 }

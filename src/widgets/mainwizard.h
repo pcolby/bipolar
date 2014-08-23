@@ -28,6 +28,12 @@ class MainWizard : public QWizard {
 public:
     MainWizard(QWidget *parent=0, Qt::WindowFlags flags=0);
 
+public slots:
+    void checkHook();
+
+protected:
+    virtual void showEvent(QShowEvent * event);
+
 };
 
 #endif // __MAIN_WIZARD__

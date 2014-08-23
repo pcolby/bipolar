@@ -22,10 +22,10 @@
 
 #ifdef Q_OS_WIN
 #include "os/flowsynchook.h"
+#include <QErrorMessage>
 #endif
 
 #include <QApplication>
-#include <QErrorMessage>
 #include <QIcon>
 #include <QMessageBox>
 #include <QTranslator>
@@ -47,10 +47,6 @@ int main(int argc, char *argv[]) {
         app.setApplicationVersion(versionInfo.fileVersionString());
     }
 
-    // Install the QErrorMessage class' Qt message handler.
-    // Note, this will be replaced by ResultsPage::initializePage.
-    QErrorMessage::qtHandler();
-
     // Default to the Oxygen theme, if no other theme is configured yet.
     if (QIcon::themeName().isEmpty()) {
         QIcon::setThemeName(QLatin1String("oxygen"));
@@ -64,15 +60,16 @@ int main(int argc, char *argv[]) {
 #ifdef Q_OS_WIN
     // Install the hook now, if requested via the command line.
     if (app.arguments().contains(QLatin1Literal("-install-hook"))) {
+        QErrorMessage::qtHandler(); // Expose any internal errors / warnings.
         const QDir fromDir = FlowSyncHook::installableHookDir();
         const QDir toDir = FlowSyncHook::flowSyncDir();
         if (!fromDir.exists(QLatin1String("Qt5Network.dll"))) {
-            QMessageBox::warning(NULL, app.tr(""),
+            QMessageBox::warning(NULL, QString(),
                 app.tr("Installable hook not found."));
             return 1;
         }
         if (!toDir.exists(QLatin1String("Qt5Network.dll"))) {
-            QMessageBox::warning(NULL, app.tr(""),
+            QMessageBox::warning(NULL, QString(),
                 app.tr("Failed to locate Polar FlowSync installation."));
             return 2;
         }
@@ -80,7 +77,7 @@ int main(int argc, char *argv[]) {
         const int toVersion = FlowSyncHook::getVersion(toDir);
         if (fromVersion > toVersion) {
             if (!FlowSyncHook::install(fromDir, toDir)) {
-                QMessageBox::warning(NULL, app.tr(""),
+                QMessageBox::warning(NULL, QString(),
                     app.tr("Failed to install hook DLL."));
                 return 3;
             }
