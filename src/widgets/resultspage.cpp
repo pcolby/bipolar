@@ -69,8 +69,8 @@ ResultsPage::ResultsPage(QWidget *parent)
     connect(converter, SIGNAL(started()), this, SLOT(conversionStarted()));
 
     // This signal/slot indirection pipes all log events to the GUI thread.
-    connect(this, SIGNAL(newMessage(QString)),
-            this, SLOT(appendMessage(QString)), Qt::QueuedConnection);
+    connect(this, SIGNAL(newMessage(QString,QColor)),
+            this, SLOT(appendMessage(QString,QColor)), Qt::QueuedConnection);
 
     setLayout(vBox);
 }
@@ -117,23 +117,25 @@ void ResultsPage::messageHandler(QtMsgType type,
     Q_UNUSED(context)
     Q_ASSERT(instance != NULL);
     if (instance) {
-        QString level(QLatin1String("invalid"));
+        QColor color;
         switch (type) {
-        case QtDebugMsg:    level = QLatin1String("Debug");    break;
-        case QtWarningMsg:  level = QLatin1String("Warning");  break;
-        case QtCriticalMsg: level = QLatin1String("Critical"); break;
-        case QtFatalMsg:    level = QLatin1String("Fatal");    break;
+        case QtDebugMsg:    color = message.startsWith(QLatin1Char('"')) ? Qt::gray : Qt::black; break;
+        case QtWarningMsg:  color = Qt::magenta; break;
+        case QtCriticalMsg: color = Qt::red;     break;
+        case QtFatalMsg:    color = Qt::red;     break;
         }
-        emit instance->newMessage(tr("%1 %2 %3")
-            .arg(QTime::currentTime().toString())
-            .arg(level).arg(message));
+        emit instance->newMessage(tr("%1 %2")
+            .arg(QTime::currentTime().toString()).arg(message), color);
     }
 }
 
 // Protected slots.
 
-void ResultsPage::appendMessage(const QString &message)
+void ResultsPage::appendMessage(const QString &message, const QColor &color)
 {
+    if (color.isValid()) {
+        detailsBox->setTextColor(color);
+    }
     detailsBox->append(message);
     if (detailsBox->verticalScrollBar()) {
         detailsBox->verticalScrollBar()->setValue(

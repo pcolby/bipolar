@@ -50,14 +50,14 @@ protected:
                                const QString &message);
 
 protected slots:
-    void appendMessage(const QString &message);
+    void appendMessage(const QString &message, const QColor &color);
     void conversionFinished();
     void conversionStarted();
     void sessionStarted(const int index);
     void showDetails();
 
 signals:
-    void newMessage(const QString &message);
+    void newMessage(const QString &message, const QColor &color);
 
 };
 
