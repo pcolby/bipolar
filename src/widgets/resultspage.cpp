@@ -25,6 +25,9 @@
 #include "os/flowsynchook.h"
 #endif
 
+#include "os/versioninfo.h"
+
+#include <QApplication>
 #include <QDebug>
 #include <QFileInfo>
 #include <QMutex>
@@ -81,9 +84,20 @@ ResultsPage::ResultsPage(QWidget *parent)
 
 void ResultsPage::initializePage()
 {
+    // Register this instance as the Qt message handler.
     Q_ASSERT(instance == NULL);
     instance = this;
     previousMessageHandler = qInstallMessageHandler(&ResultsPage::messageHandler);
+
+    // Debug log the application version information.
+    VersionInfo versionInfo;
+    if (versionInfo.isValid()) {
+        qDebug() << QApplication::applicationName()
+                 << versionInfo.fileVersionString()
+                 << versionInfo.fileInfo(QLatin1String("SpecialBuild"));
+    }
+
+    // Debug log the hook version information.
 #ifdef Q_OS_WIN
     for (int index = 0; index < 2; ++index) {
         const QDir dir = (index == 0) ?
@@ -93,6 +107,8 @@ void ResultsPage::initializePage()
                  << "hook version" << version;
     }
 #endif
+
+    // Once the application is ready, begin the processing.
     QTimer::singleShot(0, converter, SLOT(start()));
 }
 
