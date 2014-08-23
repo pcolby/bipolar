@@ -127,7 +127,7 @@ void ConverterThread::proccessSession(const QString &baseName)
     if (settings.value(QLatin1String("gpxEnabled")).toBool()) {
         const QString fileName = session.writeGPX(outputFileNameFormat, outputDir);
         if (!fileName.isEmpty()) {
-            qDebug() << "wrote" << QDir::toNativeSeparators(fileName);
+            qDebug() << "Wrote" << QDir::toNativeSeparators(fileName);
             files.written++;
         } else {
             anyFailed = true;
@@ -137,7 +137,7 @@ void ConverterThread::proccessSession(const QString &baseName)
     if (settings.value(QLatin1String("hrmEnabled")).toBool()) {
         const QStringList fileNames = session.writeHRM(outputFileNameFormat, outputDir);
         foreach (const QString &fileName, fileNames) {
-            qDebug() << "wrote" << QDir::toNativeSeparators(fileName);
+            qDebug() << "Wrote" << QDir::toNativeSeparators(fileName);
             files.written++;
         }
         const int failedFilesCount = (fileNames.size() - (2 * session.exerciseCount()));
@@ -149,7 +149,7 @@ void ConverterThread::proccessSession(const QString &baseName)
     if (settings.value(QLatin1String("tcxEnabled")).toBool()) {
         const QString fileName = session.writeTCX(outputFileNameFormat, outputDir);
         if (!fileName.isEmpty()) {
-            qDebug() << "wrote" << QDir::toNativeSeparators(fileName);
+            qDebug() << "Wrote" << QDir::toNativeSeparators(fileName);
             files.written++;
         } else {
             anyFailed = true;

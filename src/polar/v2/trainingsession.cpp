@@ -140,7 +140,7 @@ QString TrainingSession::getTcxSport(const quint64 &polarSportValue)
     }
     QMap<quint64, QString>::ConstIterator iter = map.constFind(polarSportValue);
     if (iter == map.constEnd()) {
-        qWarning() << "unknown polar sport value" << polarSportValue;
+        qWarning() << "Unknown polar sport value" << polarSportValue;
     }
     return (iter == map.constEnd()) ? TCX_OTHER : iter.value();
 }
@@ -314,7 +314,7 @@ QVariantMap TrainingSession::parseCreateExercise(const QString &fileName) const
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
-        qWarning() << "failed to open exercise-create file" << fileName;
+        qWarning() << "Failed to open exercise-create file" << fileName;
         return QVariantMap();
     }
     return parseCreateExercise(file);
@@ -411,7 +411,7 @@ QVariantMap TrainingSession::parseCreateSession(const QString &fileName) const
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
-        qWarning() << "failed to open session-create file" << fileName;
+        qWarning() << "Failed to open session-create file" << fileName;
         return QVariantMap();
     }
     return parseCreateSession(file);
@@ -481,7 +481,7 @@ QVariantMap TrainingSession::parseLaps(const QString &fileName) const
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
-        qWarning() << "failed to open laps file" << fileName;
+        qWarning() << "Failed to open laps file" << fileName;
         return QVariantMap();
     }
     return parseLaps(file);
@@ -654,7 +654,7 @@ QVariantMap TrainingSession::parsePhysicalInformation(const QString &fileName) c
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
-        qWarning() << "failed to open physical information file" << fileName;
+        qWarning() << "Failed to open physical information file" << fileName;
         return QVariantMap();
     }
     return parsePhysicalInformation(file);
@@ -692,7 +692,7 @@ QVariantMap TrainingSession::parseRoute(const QString &fileName) const
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
-        qWarning() << "failed to open route file" << fileName;
+        qWarning() << "Failed to open route file" << fileName;
         return QVariantMap();
     }
     return parseRoute(file);
@@ -716,7 +716,7 @@ QVariantMap TrainingSession::parseRRSamples(const QString &fileName) const
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
-        qWarning() << "failed to open rrsamples file" << fileName;
+        qWarning() << "Failed to open rrsamples file" << fileName;
         return QVariantMap();
     }
     return parseRRSamples(file);
@@ -787,7 +787,7 @@ QVariantMap TrainingSession::parseSamples(const QString &fileName) const
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
-        qWarning() << "failed to open samples file" << fileName;
+        qWarning() << "Failed to open samples file" << fileName;
         return QVariantMap();
     }
     return parseSamples(file);
@@ -844,7 +844,7 @@ QVariantMap TrainingSession::parseStatistics(const QString &fileName) const
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
-        qWarning() << "failed to open stats file" << fileName;
+        qWarning() << "Failed to open stats file" << fileName;
         return QVariantMap();
     }
     return parseStatistics(file);
@@ -908,7 +908,7 @@ QVariantMap TrainingSession::parseZones(const QString &fileName) const
 {
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
-        qWarning() << "failed to open zones file" << fileName;
+        qWarning() << "Failed to open zones file" << fileName;
         return QVariantMap();
     }
     return parseZones(file);
@@ -1010,7 +1010,7 @@ bool sensorOffline(const QVariantList &list, const int index)
         const QVariant endIndex = first(map.value(QLatin1String("start-index")));
         if ((!startIndex.canConvert(QMetaType::Int)) ||
             (!endIndex.canConvert(QMetaType::Int))) {
-            qWarning() << "ignoring invalid 'offline' entry" << entry;
+            qWarning() << "Ignoring invalid 'offline' entry" << entry;
             continue;
         }
         if ((startIndex.toInt() <= index) && (index <= endIndex.toInt())) {
@@ -1042,7 +1042,7 @@ QString TrainingSession::getOutputBaseFileName(const QString &format)
     if (format.contains(QLatin1String("$userId"   )) ||
         format.contains(QLatin1String("$sessionId"))) {
         if (!inputFileNameParts.exactMatch(inputBaseNameInfo.fileName())) {
-            qWarning() << "baseName does not match format" << baseName;
+            qWarning() << "Base name does not match format" << baseName;
             return QString();
         }
     }
@@ -1227,7 +1227,7 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
                 (duration.size() != latitude.size())  ||
                 (duration.size() != longitude.size()) ||
                 (duration.size() != satellites.size())) {
-                qWarning() << "lists not all equal sizes:" << duration.size()
+                qWarning() << "Sample lists not all equal sizes:" << duration.size()
                            << altitude.size() << latitude.size()
                            << longitude.size() << satellites.size();
             }
@@ -1676,7 +1676,7 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
     foreach (const QVariant &exercise, parsedExercises) {
         const QVariantMap map = exercise.toMap();
         if (!map.contains(CREATE)) {
-            qWarning() << "skipping exercise with no 'create' request data";
+            qWarning() << "Skipping exercise with no 'create' request data";
             continue;
         }
         const QVariantMap create  = map.value(CREATE).toMap();
@@ -2040,7 +2040,7 @@ bool TrainingSession::writeGPX(const QString &fileName) const
 {
     QFile file(fileName);
     if (!file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
-        qWarning() << "failed to open" << QDir::toNativeSeparators(fileName);
+        qWarning() << "Failed to open" << QDir::toNativeSeparators(fileName);
         return false;
     }
     return writeGPX(file);
@@ -2050,7 +2050,7 @@ bool TrainingSession::writeGPX(QIODevice &device) const
 {
     QDomDocument gpx = toGPX();
     if (gpx.isNull()) {
-        qWarning() << "failed to convert to GPX" << baseName;
+        qWarning() << "Failed to convert to GPX" << baseName;
         return false;
     }
     device.write(gpx.toByteArray());
@@ -2073,7 +2073,7 @@ QStringList TrainingSession::writeHRM(const QString &baseName) const
     for (int rrDataOnly = 0; rrDataOnly <= 1; ++rrDataOnly) {
         QStringList hrm = toHRM(rrDataOnly);
         if (hrm.isEmpty()) {
-            qWarning() << "failed to convert to HRM" << baseName;
+            qWarning() << "Failed to convert to HRM" << baseName;
             return QStringList();
         }
 
@@ -2084,7 +2084,7 @@ QStringList TrainingSession::writeHRM(const QString &baseName) const
                 : QString::fromLatin1("%1.%2.%3").arg(baseName).arg(index).arg(extension);
             QFile file(fileName);
             if (!file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
-                qWarning() << "failed to open" << QDir::toNativeSeparators(fileName);
+                qWarning() << "Failed to open" << QDir::toNativeSeparators(fileName);
             } else if (file.write(hrm.at(index).toLatin1())) {
                 fileNames.append(fileName);
             }
@@ -2109,7 +2109,7 @@ bool TrainingSession::writeTCX(const QString &fileName) const
 {
     QFile file(fileName);
     if (!file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
-        qWarning() << "failed to open" << QDir::toNativeSeparators(fileName);
+        qWarning() << "Failed to open" << QDir::toNativeSeparators(fileName);
         return false;
     }
     return writeTCX(file);
@@ -2119,7 +2119,7 @@ bool TrainingSession::writeTCX(QIODevice &device) const
 {
     QDomDocument tcx = toTCX();
     if (tcx.isNull()) {
-        qWarning() << "failed to convert to TCX" << baseName;
+        qWarning() << "Failed to convert to TCX" << baseName;
         return false;
     }
     device.write(tcx.toByteArray());

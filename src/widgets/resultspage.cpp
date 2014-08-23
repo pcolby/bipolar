@@ -91,7 +91,7 @@ bool ResultsPage::isComplete() const
 bool ResultsPage::validatePage()
 {
     if ((converter) && (converter->isRunning())) {
-        qDebug() << "conversion cancelled";
+        qDebug() << "Processing cancelled.";
         converter->cancel();
         emit completeChanged();
         return false;
@@ -146,13 +146,13 @@ void ResultsPage::appendMessage(const QString &message, const QColor &color)
 void ResultsPage::conversionFinished()
 {
     if (converter->isCancelled()) {
-        qDebug() << "processing stopped";
+        qDebug() << "Processing stopped.";
         setTitle(tr("Processing Cancelled"));
         setSubTitle(tr("Processing was cancelled at your request."));
         progressBar->setValue(progressBar->minimum());
         progressBar->setEnabled(false);
     } else {
-        qDebug() << "processing finished";
+        qDebug() << "Processing finished.";
         setTitle(tr("Processing Finished"));
         if ((converter->sessions.failed == 0) &&
             (converter->sessions.processed == 0)) {
@@ -178,7 +178,7 @@ void ResultsPage::conversionFinished()
 
 void ResultsPage::conversionStarted()
 {
-    qDebug() << "conversion started";
+    qDebug() << "Processing started.";
     setButtonText(QWizard::FinishButton, tr("Cancel"));
     emit completeChanged();
 }
