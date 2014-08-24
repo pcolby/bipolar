@@ -1,8 +1,8 @@
 ## Bipolar Changelog
 
-### 0.3.0 (_unreleased_)
+### 0.3.0 (2014-08-24)
 Features:
-- basic GUI?
+- wizard-based GUI ([#6](../../issues/6))
 
 ### 0.2.3 (2014-08-13)
 Features:
