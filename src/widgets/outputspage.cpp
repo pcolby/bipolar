@@ -76,6 +76,8 @@ OutputsPage::OutputsPage(QWidget *parent) : QWizardPage(parent)
         form->addRow(tr("Output Filename Format:"), hBox);
 
         registerField(QLatin1String("outputFileNameFormat"), format);
+
+        connect(format, SIGNAL(textChanged(QString)), this, SLOT(formatChanged(QString)));
     }
 
     {
@@ -137,6 +139,17 @@ void OutputsPage::initializePage()
 
 bool OutputsPage::isComplete() const
 {
+    // Make sure the output filename format is unique enough.
+    const QString format = field(QLatin1String("outputFileNameFormat")).toString();
+    const bool uniqueFormat =
+       ((format.contains(QLatin1String("$baseName"))) ||
+        (format.contains(QLatin1String("$sessionId")))||
+        (format.contains(QLatin1String("$date")) && format.contains(QLatin1String("$time"))));
+    if (!uniqueFormat) {
+        return false;
+    }
+
+    // Return true, as long as at least one ouput format is enabled.
     return ((field(QLatin1String("gpxEnabled")).toBool()) ||
             (field(QLatin1String("hrmEnabled")).toBool()) ||
             (field(QLatin1String("tcxEnabled")).toBool()));
@@ -175,6 +188,12 @@ void OutputsPage::browseForFolder()
 
 void OutputsPage::checkBoxClicked()
 {
+    emit completeChanged();
+}
+
+void OutputsPage::formatChanged(const QString &format)
+{
+    Q_UNUSED(format);
     emit completeChanged();
 }
 

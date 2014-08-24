@@ -38,6 +38,7 @@ protected:
 protected slots:
     void browseForFolder();
     void checkBoxClicked();
+    void formatChanged(const QString &format);
     void showFileNameFormatHelp();
 
 };
