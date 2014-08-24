@@ -180,11 +180,12 @@ void OutputsPage::checkBoxClicked()
 
 void OutputsPage::showFileNameFormatHelp()
 {
-    QMessageBox * const dialog = new QMessageBox();
+    QMessageBox * const dialog = new QMessageBox(this);
     dialog->setIcon(QMessageBox::Information);
     QFile file(QLatin1String(":/html/filename syntax.html"));
     file.open(QFile::ReadOnly);
     dialog->setText(QString::fromUtf8(file.readAll()));
     dialog->setWindowTitle(tr("Filename Format"));
+    dialog->setModal(false);
     dialog->show();
 }
