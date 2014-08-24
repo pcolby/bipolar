@@ -182,9 +182,13 @@ void OutputsPage::showFileNameFormatHelp()
 {
     QMessageBox * const dialog = new QMessageBox(this);
     dialog->setIcon(QMessageBox::Information);
-    QFile file(QLatin1String(":/html/filename syntax.html"));
-    file.open(QFile::ReadOnly);
-    dialog->setText(QString::fromUtf8(file.readAll()));
+    dialog->setText(tr(
+        "This version of Bipolar supports the following expressions:\n\n%1")
+        .arg(QLatin1String(
+            "$baseName, $date, $dateExt, $dateUTC, $dateExtUTC, $time, $timeExt, "
+            "$timeUTC, $timeExtUTC, $sessionId, $sessionName, $userId, $username")));
+    dialog->setInformativeText(tr("See the <a href=\"%1\">Bipolar wiki</a> for more details.")
+        .arg(QLatin1String("https://github.com/pcolby/bipolar/wiki/Output-Filenames#filename-format-syntax")));
     dialog->setWindowTitle(tr("Filename Format"));
     dialog->setModal(false);
     dialog->show();

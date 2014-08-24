@@ -1,8 +1,5 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
-    <qresource>
-        <file>html/filename syntax.html</file>
-    </qresource>
     <qresource prefix="/icons">
         <file>oxygen/index.theme</file>
         <file>oxygen/16x16/actions/list-add.png</file>
