@@ -3,10 +3,13 @@
 [![Github Release](http://img.shields.io/github/release/pcolby/bipolar.svg)](https://github.com/pcolby/bipolar/releases/latest)
 [![GPLv3 License](http://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/copyleft/gpl.html)
 
-Bipolar aims to be a convenient GUI application for exporting activity
-and exercise data from Polar's sync software.  Specifically, its intended to
-provide a way to get your own data from Polar's new V800 watch, via Polar
-FlowSync, but works well for the Polar Loop too.
+Bipolar a simple GUI application for exporting training sessions from Polar
+sync software, such as Polar FlowSync.  Currently, the following applications
+and devices are supported:
+
+* Polar FlowSync, on both Mac and Windows.
+* Polar V800
+* Polar Loop
 
 ## Status
 
@@ -17,13 +20,10 @@ The release plans is roughly as follows:
 - [x] 0.2.0 Mac OS support (both hook library, and headless app).
 - [x] 0.2.x Minor features and bug fixes.
 - [x] 0.3.0 Basic GUI.
+- [ ] 0.3.x Minor features and bug fixes.
 
-Note, while the current (0.2.x) release includes a lot of behind-the-scenes code
-for parsing training session data and exporting to GPX and TCX, the GUI has
-been intentionally left ultra-bare at this stage. This, of course, is to allow
-people (like myself) to begin capturing and exporting data as soon as possible,
-while the GUI bells and whistles can wait for a later release (currently planned
-for 0.3.0).
+See the [issue tracker](https://github.com/pcolby/bipolar/issues?state=open)
+for more details / granularity.
 
 ## How it Works
 
