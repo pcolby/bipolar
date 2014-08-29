@@ -38,7 +38,7 @@ public:
 
 protected:
     QListWidget * inputFoldersList;
-    QPushButton * addButton, * removeButton;
+    QPushButton * removeButton;
 
     QListWidgetItem * addFolder(const QString &path);
     static QString defaultInputFolder(const bool native);

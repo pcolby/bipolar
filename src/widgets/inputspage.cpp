@@ -34,7 +34,7 @@ InputsPage::InputsPage(QWidget *parent) : QWizardPage(parent)
     setTitle(tr("Input Options"));
     setSubTitle(tr("Add folders containing training sessions to process."));
 
-    addButton = new QPushButton();
+    QPushButton * const addButton = new QPushButton();
     addButton->setFlat(true);
     addButton->setIcon(QIcon::fromTheme(QLatin1String("list-add")));
     addButton->setToolTip(tr("Add folder"));
