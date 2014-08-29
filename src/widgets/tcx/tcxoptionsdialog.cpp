@@ -29,6 +29,8 @@
 TcxOptionsDialog::TcxOptionsDialog(QWidget *parent, Qt::WindowFlags flags)
     : QDialog(parent, flags)
 {
+    setWindowTitle(tr("TCX Options"));
+
     QTabWidget * const tabs = new QTabWidget();
     tabs->addTab(new GeneralTcxOptions(), tr("General"));
     tabs->addTab(new TcxExtensionsTab(), tr("Extensions"));

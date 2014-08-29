@@ -29,6 +29,8 @@
 GpxOptionsDialog::GpxOptionsDialog(QWidget *parent, Qt::WindowFlags flags)
     : QDialog(parent, flags)
 {
+    setWindowTitle(tr("GPX Options"));
+
     QTabWidget * const tabs = new QTabWidget();
     tabs->addTab(new GeneralGpxOptions(), tr("General"));
     tabs->addTab(new GpxExtensionsTab(), tr("Extensions"));
