@@ -19,7 +19,7 @@
 
 #include "gpxoptionsdialog.h"
 
-#include "generalGpxoptionstab.h"
+#include "generalgpxoptionstab.h"
 #include "gpxextensionstab.h"
 
 #include <QDialogButtonBox>
