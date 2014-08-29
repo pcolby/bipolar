@@ -17,31 +17,17 @@
     along with Bipolar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef __OUTPUTS_PAGE__
-#define __OUTPUTS_PAGE__
+#ifndef __TCX_OPTIONS_DIALOG__
+#define __TCX_OPTIONS_DIALOG__
 
-#include <QComboBox>
-#include <QWizardPage>
+#include <QDialog>
 
-class OutputsPage : public QWizardPage {
+class TcxOptionsDialog : public QDialog {
     Q_OBJECT
 
 public:
-    OutputsPage(QWidget *parent=0);
-    virtual void initializePage();
-    virtual bool isComplete() const;
-    virtual bool validatePage();
-
-protected:
-    QComboBox * outputFolder;
-
-protected slots:
-    void browseForFolder();
-    void checkBoxClicked();
-    void formatChanged(const QString &format);
-    void showAdvancedOptions(const QString &link);
-    void showFileNameFormatHelp();
+    TcxOptionsDialog(QWidget *parent=0, Qt::WindowFlags flags=0);
 
 };
 
-#endif // __OUTPUTS_PAGE__
+#endif // __TCX_OPTIONS_DIALOG__

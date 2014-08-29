@@ -18,11 +18,15 @@
 */
 
 #include "outputspage.h"
+
+#include "tcx/tcxoptionsdialog.h"
+
 #include <QCheckBox>
 #include <QComboBox>
 #include <QDir>
 #include <QFileDialog>
 #include <QFormLayout>
+#include <QLabel>
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QPushButton>
@@ -84,20 +88,42 @@ OutputsPage::OutputsPage(QWidget *parent) : QWizardPage(parent)
         QCheckBox * const gpxCheckBox = new QCheckBox(tr("GPX"));
         QCheckBox * const hrmCheckBox = new QCheckBox(tr("HRM"));
         QCheckBox * const tcxCheckBox = new QCheckBox(tr("TCX"));
-
         gpxCheckBox->setToolTip(tr("Enable GPX output"));
         hrmCheckBox->setToolTip(tr("Enable HRM output"));
         tcxCheckBox->setToolTip(tr("Enable TCX output"));
-
         gpxCheckBox->setWhatsThis(tr("Check this box to enable GPX output."));
         hrmCheckBox->setWhatsThis(tr("Check this box to enable HRM output."));
         tcxCheckBox->setWhatsThis(tr("Check this box to enable TCX output."));
 
-        QVBoxLayout * vBox = new QVBoxLayout();
-        vBox->addWidget(gpxCheckBox);
-        vBox->addWidget(hrmCheckBox);
-        vBox->addWidget(tcxCheckBox);
+        QLabel * const advancedGpxLabel = new QLabel(QString::fromLatin1("<a href='gpx'>%1</a>").arg(tr("advanced...")));
+        QLabel * const advancedHrmLabel = new QLabel(QString::fromLatin1("<a href='hrm'>%1</a>").arg(tr("advanced...")));
+        QLabel * const advancedTcxLabel = new QLabel(QString::fromLatin1("<a href='tcx'>%1</a>").arg(tr("advanced...")));
+        advancedGpxLabel->setToolTip(tr("Choose advanced options for GPX output"));
+        advancedHrmLabel->setToolTip(tr("Choose advanced options for HRM output"));
+        advancedTcxLabel->setToolTip(tr("Choose advanced options for TCX output"));
+        advancedGpxLabel->setWhatsThis(tr("Click this link to choose advanced options for GPX output."));
+        advancedGpxLabel->setWhatsThis(tr("Click this link to choose advanced options for HRM output."));
+        advancedGpxLabel->setWhatsThis(tr("Click this link to choose advanced options for TCX output."));
 
+        QVBoxLayout * const vBox = new QVBoxLayout();
+        {
+            QHBoxLayout * const hBox = new QHBoxLayout();
+            hBox->addWidget(gpxCheckBox);
+            hBox->addWidget(advancedGpxLabel, 1);
+            vBox->addItem(hBox);
+        }
+        {
+            QHBoxLayout * const hBox = new QHBoxLayout();
+            hBox->addWidget(hrmCheckBox);
+            hBox->addWidget(advancedHrmLabel, 1);
+            vBox->addItem(hBox);
+        }
+        {
+            QHBoxLayout * const hBox = new QHBoxLayout();
+            hBox->addWidget(tcxCheckBox);
+            hBox->addWidget(advancedTcxLabel, 1);
+            vBox->addItem(hBox);
+        }
         form->addRow(tr("Output Formats:"), vBox);
 
         registerField(QLatin1String("gpxEnabled"), gpxCheckBox);
@@ -107,6 +133,10 @@ OutputsPage::OutputsPage(QWidget *parent) : QWizardPage(parent)
         connect(gpxCheckBox, SIGNAL(clicked()), this, SLOT(checkBoxClicked()));
         connect(hrmCheckBox, SIGNAL(clicked()), this, SLOT(checkBoxClicked()));
         connect(tcxCheckBox, SIGNAL(clicked()), this, SLOT(checkBoxClicked()));
+
+        connect(advancedGpxLabel, SIGNAL(linkActivated(QString)), this, SLOT(showAdvancedOptions(QString)));
+        connect(advancedHrmLabel, SIGNAL(linkActivated(QString)), this, SLOT(showAdvancedOptions(QString)));
+        connect(advancedTcxLabel, SIGNAL(linkActivated(QString)), this, SLOT(showAdvancedOptions(QString)));
     }
 
     setLayout(form);
@@ -196,6 +226,20 @@ void OutputsPage::formatChanged(const QString &format)
 {
     Q_UNUSED(format);
     emit completeChanged();
+}
+
+void OutputsPage::showAdvancedOptions(const QString &link)
+{
+    if (link == QLatin1String("gpx")) {
+
+    } else if (link == QLatin1String("hrm")) {
+
+    } else if (link == QLatin1String("tcx")) {
+        TcxOptionsDialog dialog;
+        dialog.exec();
+    } else {
+        Q_ASSERT(false);
+    }
 }
 
 void OutputsPage::showFileNameFormatHelp()

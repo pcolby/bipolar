@@ -17,31 +17,21 @@
     along with Bipolar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef __OUTPUTS_PAGE__
-#define __OUTPUTS_PAGE__
+#include "tcxextensionstab.h"
 
-#include <QComboBox>
-#include <QWizardPage>
+#include <QCheckBox>
+#include <QVBoxLayout>
 
-class OutputsPage : public QWizardPage {
-    Q_OBJECT
+TcxExtensionsTab::TcxExtensionsTab(QWidget *parent, Qt::WindowFlags flags)
+    : QWidget(parent, flags)
+{
+    QCheckBox * garminActivityExt = new QCheckBox(tr("Garmin Activity Extension"));
+    QCheckBox * garminCourseExt = new QCheckBox(tr("Garmin Course Extension"));
+    garminActivityExt->setEnabled(false); ///< Not implemented yet.
+    garminCourseExt->setEnabled(false); ///< Not implemented yet.
 
-public:
-    OutputsPage(QWidget *parent=0);
-    virtual void initializePage();
-    virtual bool isComplete() const;
-    virtual bool validatePage();
-
-protected:
-    QComboBox * outputFolder;
-
-protected slots:
-    void browseForFolder();
-    void checkBoxClicked();
-    void formatChanged(const QString &format);
-    void showAdvancedOptions(const QString &link);
-    void showFileNameFormatHelp();
-
-};
-
-#endif // __OUTPUTS_PAGE__
+    QVBoxLayout * const vBox = new QVBoxLayout();
+    vBox->addWidget(garminActivityExt);
+    vBox->addWidget(garminCourseExt);
+    setLayout(vBox);
+}

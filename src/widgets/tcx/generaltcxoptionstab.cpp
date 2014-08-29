@@ -17,31 +17,20 @@
     along with Bipolar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef __OUTPUTS_PAGE__
-#define __OUTPUTS_PAGE__
+#include "generaltcxoptionstab.h"
 
-#include <QComboBox>
-#include <QWizardPage>
+#include <QCheckBox>
+#include <QVBoxLayout>
 
-class OutputsPage : public QWizardPage {
-    Q_OBJECT
+GeneralTcxOptions::GeneralTcxOptions(QWidget *parent, Qt::WindowFlags flags)
+    : QWidget(parent, flags)
+{
+    QCheckBox * const utcOnly = new QCheckBox(tr("Convert timestamps to UTC"));
+    utcOnly->setToolTip(tr("Convert all local timestamps to UTC"));
+    utcOnly->setWhatsThis(tr("Check this box to have all TCX timestamps converted to UTC."));
+    utcOnly->setEnabled(false); ///< Not implemented yet.
 
-public:
-    OutputsPage(QWidget *parent=0);
-    virtual void initializePage();
-    virtual bool isComplete() const;
-    virtual bool validatePage();
-
-protected:
-    QComboBox * outputFolder;
-
-protected slots:
-    void browseForFolder();
-    void checkBoxClicked();
-    void formatChanged(const QString &format);
-    void showAdvancedOptions(const QString &link);
-    void showFileNameFormatHelp();
-
-};
-
-#endif // __OUTPUTS_PAGE__
+    QVBoxLayout * const vBox = new QVBoxLayout();
+    vBox->addWidget(utcOnly);
+    setLayout(vBox);
+}
