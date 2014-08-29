@@ -25,7 +25,7 @@
 HrmExtensionsTab::HrmExtensionsTab(QWidget *parent, Qt::WindowFlags flags)
     : QWidget(parent, flags)
 {
-    QCheckBox * lapNamesExt = new QCheckBox(tr("[LapNames] Section"));
+    QCheckBox * lapNamesExt = new QCheckBox(tr("Include \"LapNames\" section"));
     lapNamesExt->setChecked(true); ///< Always "on" currently.
     lapNamesExt->setEnabled(false); ///< Not implemented yet.
 

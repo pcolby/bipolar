@@ -25,12 +25,14 @@
 GeneralHrmOptions::GeneralHrmOptions(QWidget *parent, Qt::WindowFlags flags)
     : QWidget(parent, flags)
 {
-    QCheckBox * const utcOnly = new QCheckBox(tr("Convert timestamps to UTC"));
-    utcOnly->setToolTip(tr("Convert all local timestamps to UTC"));
-    utcOnly->setWhatsThis(tr("Check this box to have all Hrm timestamps converted to UTC."));
-    utcOnly->setEnabled(false); ///< Not implemented yet.
+    QCheckBox * const rrFiles = new QCheckBox(tr("Export separate R-R files"));
+    rrFiles->setToolTip(tr("Generate spearate HRM files containing R-R data"));
+    rrFiles->setWhatsThis(tr("Check this box to generate matching HRM files containing "
+                             "heart rate variablility data whenever exporting to HRM."));
+    rrFiles->setChecked(true);  ///< Currently always "on".
+    rrFiles->setEnabled(false); ///< Currently always "on".
 
     QVBoxLayout * const vBox = new QVBoxLayout();
-    vBox->addWidget(utcOnly);
+    vBox->addWidget(rrFiles);
     setLayout(vBox);
 }
