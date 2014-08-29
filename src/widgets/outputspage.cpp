@@ -19,6 +19,8 @@
 
 #include "outputspage.h"
 
+#include "gpx/gpxoptionsdialog.h"
+#include "hrm/hrmoptionsdialog.h"
 #include "tcx/tcxoptionsdialog.h"
 
 #include <QCheckBox>
@@ -222,9 +224,11 @@ void OutputsPage::formatChanged(const QString &format)
 void OutputsPage::showAdvancedOptions(const QString &link)
 {
     if (link == QLatin1String("gpx")) {
-
+        GpxOptionsDialog dialog;
+        dialog.exec();
     } else if (link == QLatin1String("hrm")) {
-
+        HrmOptionsDialog dialog;
+        dialog.exec();
     } else if (link == QLatin1String("tcx")) {
         TcxOptionsDialog dialog;
         dialog.exec();
