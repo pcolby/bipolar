@@ -19,7 +19,7 @@
 
 #include "hrmoptionsdialog.h"
 
-#include "generalHrmoptionstab.h"
+#include "generalhrmoptionstab.h"
 #include "hrmextensionstab.h"
 
 #include <QDialogButtonBox>
