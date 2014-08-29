@@ -105,26 +105,17 @@ OutputsPage::OutputsPage(QWidget *parent) : QWizardPage(parent)
         advancedGpxLabel->setWhatsThis(tr("Click this link to choose advanced options for HRM output."));
         advancedGpxLabel->setWhatsThis(tr("Click this link to choose advanced options for TCX output."));
 
-        QVBoxLayout * const vBox = new QVBoxLayout();
-        {
-            QHBoxLayout * const hBox = new QHBoxLayout();
-            hBox->addWidget(gpxCheckBox);
-            hBox->addWidget(advancedGpxLabel, 1);
-            vBox->addItem(hBox);
-        }
-        {
-            QHBoxLayout * const hBox = new QHBoxLayout();
-            hBox->addWidget(hrmCheckBox);
-            hBox->addWidget(advancedHrmLabel, 1);
-            vBox->addItem(hBox);
-        }
-        {
-            QHBoxLayout * const hBox = new QHBoxLayout();
-            hBox->addWidget(tcxCheckBox);
-            hBox->addWidget(advancedTcxLabel, 1);
-            vBox->addItem(hBox);
-        }
-        form->addRow(tr("Output Formats:"), vBox);
+        QGridLayout * const grid = new QGridLayout();
+        grid->addWidget(gpxCheckBox, 0, 0);
+        grid->addWidget(hrmCheckBox, 1, 0);
+        grid->addWidget(tcxCheckBox, 2, 0);
+        grid->addWidget(advancedGpxLabel, 0, 1);
+        grid->addWidget(advancedHrmLabel, 1, 1);
+        grid->addWidget(advancedTcxLabel, 2, 1);
+        QHBoxLayout * const hBox = new QHBoxLayout();
+        hBox->addItem(grid);
+        hBox->addStretch();
+        form->addRow(tr("Output Formats:"), hBox);
 
         registerField(QLatin1String("gpxEnabled"), gpxCheckBox);
         registerField(QLatin1String("hrmEnabled"), hrmCheckBox);
