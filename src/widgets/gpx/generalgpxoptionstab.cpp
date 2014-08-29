@@ -20,12 +20,14 @@
 #include "generalgpxoptionstab.h"
 
 #include <QCheckBox>
+#include <QSettings>
 #include <QVBoxLayout>
 
 GeneralGpxOptions::GeneralGpxOptions(QWidget *parent, Qt::WindowFlags flags)
     : QWidget(parent, flags)
 {
-    // Nothing to here... yet.
+    // Nothing to put here... yet.
+    load();
 }
 
 void GeneralGpxOptions::load()

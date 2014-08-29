@@ -20,15 +20,16 @@
 #include "generaltcxoptionstab.h"
 
 #include <QCheckBox>
+#include <QSettings>
 #include <QVBoxLayout>
 
 GeneralTcxOptions::GeneralTcxOptions(QWidget *parent, Qt::WindowFlags flags)
     : QWidget(parent, flags)
 {
-    QCheckBox * const utcOnly = new QCheckBox(tr("Convert timestamps to UTC"));
+    utcOnly = new QCheckBox(tr("Convert timestamps to UTC"));
     utcOnly->setToolTip(tr("Convert all local timestamps to UTC"));
     utcOnly->setWhatsThis(tr("Check this box to have all TCX timestamps converted to UTC."));
-    utcOnly->setEnabled(false); ///< Not implemented yet.
+    load();
 
     QVBoxLayout * const vBox = new QVBoxLayout();
     vBox->addWidget(utcOnly);
@@ -37,10 +38,14 @@ GeneralTcxOptions::GeneralTcxOptions(QWidget *parent, Qt::WindowFlags flags)
 
 void GeneralTcxOptions::load()
 {
-
+    QSettings settings;
+    settings.beginGroup(QLatin1String("tcx"));
+    utcOnly->setChecked(settings.value(QLatin1String("utcOnly"), true).toBool());
 }
 
 void GeneralTcxOptions::save()
 {
-
+    QSettings settings;
+    settings.beginGroup(QLatin1String("tcx"));
+    settings.setValue(QLatin1String("utcOnly"), utcOnly->isChecked());
 }

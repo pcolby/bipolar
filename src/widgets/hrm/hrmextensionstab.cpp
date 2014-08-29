@@ -20,14 +20,14 @@
 #include "hrmextensionstab.h"
 
 #include <QCheckBox>
+#include <QSettings>
 #include <QVBoxLayout>
 
 HrmExtensionsTab::HrmExtensionsTab(QWidget *parent, Qt::WindowFlags flags)
     : QWidget(parent, flags)
 {
-    QCheckBox * lapNamesExt = new QCheckBox(tr("Include \"LapNames\" section"));
-    lapNamesExt->setChecked(true); ///< Always "on" currently.
-    lapNamesExt->setEnabled(false); ///< Not implemented yet.
+    lapNamesExt = new QCheckBox(tr("Include \"LapNames\" section"));
+    load();
 
     QVBoxLayout * const vBox = new QVBoxLayout();
     vBox->addWidget(lapNamesExt);
@@ -36,10 +36,14 @@ HrmExtensionsTab::HrmExtensionsTab(QWidget *parent, Qt::WindowFlags flags)
 
 void HrmExtensionsTab::load()
 {
-
+    QSettings settings;
+    settings.beginGroup(QLatin1String("hrm"));
+    lapNamesExt->setChecked(settings.value(QLatin1String("lapNamesExt"), true).toBool());
 }
 
 void HrmExtensionsTab::save()
 {
-
+    QSettings settings;
+    settings.beginGroup(QLatin1String("hrm"));
+    settings.setValue(QLatin1String("lapNamesExt"), lapNamesExt->isChecked());
 }

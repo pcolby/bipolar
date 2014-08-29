@@ -20,15 +20,15 @@
 #include "tcxextensionstab.h"
 
 #include <QCheckBox>
+#include <QSettings>
 #include <QVBoxLayout>
 
 TcxExtensionsTab::TcxExtensionsTab(QWidget *parent, Qt::WindowFlags flags)
     : QWidget(parent, flags)
 {
-    QCheckBox * garminActivityExt = new QCheckBox(tr("Garmin Activity Extension"));
-    QCheckBox * garminCourseExt = new QCheckBox(tr("Garmin Course Extension"));
-    garminActivityExt->setEnabled(false); ///< Not implemented yet.
-    garminCourseExt->setEnabled(false); ///< Not implemented yet.
+    garminActivityExt = new QCheckBox(tr("Garmin Activity Extension"));
+    garminCourseExt = new QCheckBox(tr("Garmin Course Extension"));
+    load();
 
     QVBoxLayout * const vBox = new QVBoxLayout();
     vBox->addWidget(garminActivityExt);
@@ -38,10 +38,16 @@ TcxExtensionsTab::TcxExtensionsTab(QWidget *parent, Qt::WindowFlags flags)
 
 void TcxExtensionsTab::load()
 {
-
+    QSettings settings;
+    settings.beginGroup(QLatin1String("tcx"));
+    garminActivityExt->setChecked(settings.value(QLatin1String("garminActivityExt"), true).toBool());
+    garminCourseExt->setChecked(settings.value(QLatin1String("garminCourseExt"), true).toBool());
 }
 
 void TcxExtensionsTab::save()
 {
-
+    QSettings settings;
+    settings.beginGroup(QLatin1String("tcx"));
+    settings.setValue(QLatin1String("garminActivityExt"), garminActivityExt->isChecked());
+    settings.setValue(QLatin1String("garminCourseExt"), garminCourseExt->isChecked());
 }

@@ -22,6 +22,8 @@
 
 #include <QWidget>
 
+class QCheckBox;
+
 class GpxExtensionsTab : public QWidget {
     Q_OBJECT
 
@@ -31,6 +33,10 @@ public:
 public slots:
     void load();
     void save();
+
+protected:
+    QCheckBox * cluetrustGpxExt;
+    QCheckBox * garminTrackPointExt;
 
 };
 

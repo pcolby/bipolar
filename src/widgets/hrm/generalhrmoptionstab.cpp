@@ -20,17 +20,17 @@
 #include "generalhrmoptionstab.h"
 
 #include <QCheckBox>
+#include <QSettings>
 #include <QVBoxLayout>
 
 GeneralHrmOptions::GeneralHrmOptions(QWidget *parent, Qt::WindowFlags flags)
     : QWidget(parent, flags)
 {
-    QCheckBox * const rrFiles = new QCheckBox(tr("Export separate R-R files"));
+    rrFiles = new QCheckBox(tr("Export separate R-R files"));
     rrFiles->setToolTip(tr("Generate spearate HRM files containing R-R data"));
     rrFiles->setWhatsThis(tr("Check this box to generate matching HRM files containing "
                              "heart rate variablility data whenever exporting to HRM."));
-    rrFiles->setChecked(true);  ///< Currently always "on".
-    rrFiles->setEnabled(false); ///< Currently always "on".
+    load();
 
     QVBoxLayout * const vBox = new QVBoxLayout();
     vBox->addWidget(rrFiles);
@@ -39,10 +39,14 @@ GeneralHrmOptions::GeneralHrmOptions(QWidget *parent, Qt::WindowFlags flags)
 
 void GeneralHrmOptions::load()
 {
-
+    QSettings settings;
+    settings.beginGroup(QLatin1String("hrm"));
+    rrFiles->setChecked(settings.value(QLatin1String("rrFiles"), true).toBool());
 }
 
 void GeneralHrmOptions::save()
 {
-
+    QSettings settings;
+    settings.beginGroup(QLatin1String("hrm"));
+    settings.setValue(QLatin1String("rrFiles"), rrFiles->isChecked());
 }

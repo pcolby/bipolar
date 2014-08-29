@@ -22,6 +22,8 @@
 
 #include <QWidget>
 
+class QCheckBox;
+
 class GeneralGpxOptions : public QWidget {
     Q_OBJECT
 

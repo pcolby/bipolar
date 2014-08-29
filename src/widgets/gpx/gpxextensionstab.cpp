@@ -20,15 +20,15 @@
 #include "gpxextensionstab.h"
 
 #include <QCheckBox>
+#include <QSettings>
 #include <QVBoxLayout>
 
 GpxExtensionsTab::GpxExtensionsTab(QWidget *parent, Qt::WindowFlags flags)
     : QWidget(parent, flags)
 {
-    QCheckBox * cluetrustGpxExt = new QCheckBox(tr("Cluetrust GPX Extension"));
-    QCheckBox * garminTrackPointExt = new QCheckBox(tr("Garmin TrackPoint Extension"));
-    cluetrustGpxExt->setEnabled(false); ///< Not implemented yet.
-    garminTrackPointExt->setEnabled(false); ///< Not implemented yet.
+    cluetrustGpxExt = new QCheckBox(tr("Cluetrust GPX Extension"));
+    garminTrackPointExt = new QCheckBox(tr("Garmin TrackPoint Extension"));
+    load();
 
     QVBoxLayout * const vBox = new QVBoxLayout();
     vBox->addWidget(cluetrustGpxExt);
@@ -38,10 +38,16 @@ GpxExtensionsTab::GpxExtensionsTab(QWidget *parent, Qt::WindowFlags flags)
 
 void GpxExtensionsTab::load()
 {
-
+    QSettings settings;
+    settings.beginGroup(QLatin1String("gpx"));
+    cluetrustGpxExt->setChecked(settings.value(QLatin1String("cluetrustGpxExt"), true).toBool());
+    garminTrackPointExt->setChecked(settings.value(QLatin1String("garminTrackPointExt"), true).toBool());
 }
 
 void GpxExtensionsTab::save()
 {
-
+    QSettings settings;
+    settings.beginGroup(QLatin1String("gpx"));
+    settings.setValue(QLatin1String("cluetrustGpxExt"), cluetrustGpxExt->isChecked());
+    settings.setValue(QLatin1String("garminTrackPointExt"), garminTrackPointExt->isChecked());
 }

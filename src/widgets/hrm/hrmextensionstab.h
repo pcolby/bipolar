@@ -22,6 +22,8 @@
 
 #include <QWidget>
 
+class QCheckBox;
+
 class HrmExtensionsTab : public QWidget {
     Q_OBJECT
 
@@ -31,6 +33,9 @@ public:
 public slots:
     void load();
     void save();
+
+protected:
+    QCheckBox * lapNamesExt;
 
 };
 
