@@ -34,3 +34,13 @@ GeneralTcxOptions::GeneralTcxOptions(QWidget *parent, Qt::WindowFlags flags)
     vBox->addWidget(utcOnly);
     setLayout(vBox);
 }
+
+void GeneralTcxOptions::load()
+{
+
+}
+
+void GeneralTcxOptions::save()
+{
+
+}

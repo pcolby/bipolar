@@ -36,3 +36,13 @@ GeneralHrmOptions::GeneralHrmOptions(QWidget *parent, Qt::WindowFlags flags)
     vBox->addWidget(rrFiles);
     setLayout(vBox);
 }
+
+void GeneralHrmOptions::load()
+{
+
+}
+
+void GeneralHrmOptions::save()
+{
+
+}

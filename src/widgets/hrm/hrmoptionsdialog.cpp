@@ -31,9 +31,14 @@ HrmOptionsDialog::HrmOptionsDialog(QWidget *parent, Qt::WindowFlags flags)
 {
     setWindowTitle(tr("HRM Options"));
 
+    GeneralHrmOptions * const generalOptionsTab = new GeneralHrmOptions();
+    HrmExtensionsTab * const extensionsTab = new HrmExtensionsTab();
+    connect(this, SIGNAL(accepted()), generalOptionsTab, SLOT(save()));
+    connect(this, SIGNAL(accepted()), extensionsTab, SLOT(save()));
+
     QTabWidget * const tabs = new QTabWidget();
-    tabs->addTab(new GeneralHrmOptions(), tr("General"));
-    tabs->addTab(new HrmExtensionsTab(), tr("Extensions"));
+    tabs->addTab(generalOptionsTab, tr("General"));
+    tabs->addTab(extensionsTab, tr("Extensions"));
 
     QDialogButtonBox * const buttons = new QDialogButtonBox(
         QDialogButtonBox::Ok|QDialogButtonBox::Cancel);

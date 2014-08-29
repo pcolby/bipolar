@@ -35,3 +35,13 @@ GpxExtensionsTab::GpxExtensionsTab(QWidget *parent, Qt::WindowFlags flags)
     vBox->addWidget(garminTrackPointExt);
     setLayout(vBox);
 }
+
+void GpxExtensionsTab::load()
+{
+
+}
+
+void GpxExtensionsTab::save()
+{
+
+}

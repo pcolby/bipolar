@@ -28,6 +28,10 @@ class GpxExtensionsTab : public QWidget {
 public:
     GpxExtensionsTab(QWidget *parent=0, Qt::WindowFlags flags=0);
 
+public slots:
+    void load();
+    void save();
+
 };
 
 #endif // __GPX_EXTENSIONS_TAB__

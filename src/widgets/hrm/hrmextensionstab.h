@@ -28,6 +28,10 @@ class HrmExtensionsTab : public QWidget {
 public:
     HrmExtensionsTab(QWidget *parent=0, Qt::WindowFlags flags=0);
 
+public slots:
+    void load();
+    void save();
+
 };
 
 #endif // __HRM_EXTENSIONS_TAB__

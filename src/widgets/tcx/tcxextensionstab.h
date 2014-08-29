@@ -28,6 +28,10 @@ class TcxExtensionsTab : public QWidget {
 public:
     TcxExtensionsTab(QWidget *parent=0, Qt::WindowFlags flags=0);
 
+public slots:
+    void load();
+    void save();
+
 };
 
 #endif // __TCX_EXTENSIONS_TAB__

@@ -31,9 +31,14 @@ TcxOptionsDialog::TcxOptionsDialog(QWidget *parent, Qt::WindowFlags flags)
 {
     setWindowTitle(tr("TCX Options"));
 
+    GeneralTcxOptions * const generalOptionsTab = new GeneralTcxOptions();
+    TcxExtensionsTab * const extensionsTab = new TcxExtensionsTab();
+    connect(this, SIGNAL(accepted()), generalOptionsTab, SLOT(save()));
+    connect(this, SIGNAL(accepted()), extensionsTab, SLOT(save()));
+
     QTabWidget * const tabs = new QTabWidget();
-    tabs->addTab(new GeneralTcxOptions(), tr("General"));
-    tabs->addTab(new TcxExtensionsTab(), tr("Extensions"));
+    tabs->addTab(generalOptionsTab, tr("General"));
+    tabs->addTab(extensionsTab, tr("Extensions"));
 
     QDialogButtonBox * const buttons = new QDialogButtonBox(
         QDialogButtonBox::Ok|QDialogButtonBox::Cancel);

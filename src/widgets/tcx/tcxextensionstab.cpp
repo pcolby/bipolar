@@ -35,3 +35,13 @@ TcxExtensionsTab::TcxExtensionsTab(QWidget *parent, Qt::WindowFlags flags)
     vBox->addWidget(garminCourseExt);
     setLayout(vBox);
 }
+
+void TcxExtensionsTab::load()
+{
+
+}
+
+void TcxExtensionsTab::save()
+{
+
+}

@@ -27,3 +27,13 @@ GeneralGpxOptions::GeneralGpxOptions(QWidget *parent, Qt::WindowFlags flags)
 {
     // Nothing to here... yet.
 }
+
+void GeneralGpxOptions::load()
+{
+
+}
+
+void GeneralGpxOptions::save()
+{
+
+}

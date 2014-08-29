@@ -28,6 +28,10 @@ class GeneralTcxOptions : public QWidget {
 public:
     GeneralTcxOptions(QWidget *parent=0, Qt::WindowFlags flags=0);
 
+public slots:
+    void load();
+    void save();
+
 };
 
 #endif // __GENERAL_TCX_OPTIONS_TAB__

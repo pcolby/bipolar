@@ -28,6 +28,10 @@ class GeneralGpxOptions : public QWidget {
 public:
     GeneralGpxOptions(QWidget *parent=0, Qt::WindowFlags flags=0);
 
+public slots:
+    void load();
+    void save();
+
 };
 
 #endif // __GENERAL_GPX_OPTIONS_TAB__

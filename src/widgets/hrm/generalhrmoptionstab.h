@@ -28,6 +28,10 @@ class GeneralHrmOptions : public QWidget {
 public:
     GeneralHrmOptions(QWidget *parent=0, Qt::WindowFlags flags=0);
 
+public slots:
+    void load();
+    void save();
+
 };
 
 #endif // __GENERAL_HRM_OPTIONS_TAB__

@@ -33,3 +33,13 @@ HrmExtensionsTab::HrmExtensionsTab(QWidget *parent, Qt::WindowFlags flags)
     vBox->addWidget(lapNamesExt);
     setLayout(vBox);
 }
+
+void HrmExtensionsTab::load()
+{
+
+}
+
+void HrmExtensionsTab::save()
+{
+
+}
