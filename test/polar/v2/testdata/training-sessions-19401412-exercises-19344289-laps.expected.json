@@ -391,11 +391,11 @@
             ],
             "best-duration": [
                 {
-                    "4": [
-                        500
-                    ],
                     "hours": [
                         0
+                    ],
+                    "milliseconds": [
+                        500
                     ],
                     "minutes": [
                         3

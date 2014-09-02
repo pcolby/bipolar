@@ -461,7 +461,7 @@ QVariantMap TrainingSession::parseLaps(QIODevice &data) const
     ADD_FIELD_INFO("2/1/1",    "hours",            Uint32);
     ADD_FIELD_INFO("2/1/2",    "minutes",          Uint32);
     ADD_FIELD_INFO("2/1/3",    "seconds",          Uint32);
-    ADD_FIELD_INFO("2/1.4",    "milliseconds",     Uint32);
+    ADD_FIELD_INFO("2/1/4",    "milliseconds",     Uint32);
     ADD_FIELD_INFO("2/2",      "average-duration", EmbeddedMessage);
     ADD_FIELD_INFO("2/2/1",    "hours",            Uint32);
     ADD_FIELD_INFO("2/2/2",    "minutes",          Uint32);
@@ -805,14 +805,14 @@ QVariantMap TrainingSession::parseStatistics(QIODevice &data) const
     ADD_FIELD_INFO("2/2",  "maximum",        Float);
     ADD_FIELD_INFO("3",    "cadence",        EmbeddedMessage);
     ADD_FIELD_INFO("3/1",  "average",        Uint32);
-    ADD_FIELD_INFO("3/1",  "maximum",        Uint32);
+    ADD_FIELD_INFO("3/2",  "maximum",        Uint32);
     ADD_FIELD_INFO("4",    "altitude",       EmbeddedMessage);
     ADD_FIELD_INFO("4/1",  "minimum",        Float);
     ADD_FIELD_INFO("4/2",  "average",        Float);
     ADD_FIELD_INFO("4/3",  "maximum",        Float);
     ADD_FIELD_INFO("5",    "power",          EmbeddedMessage);
     ADD_FIELD_INFO("5/1",  "average",        Uint32);
-    ADD_FIELD_INFO("5/1",  "maximum",        Uint32);
+    ADD_FIELD_INFO("5/2",  "maximum",        Uint32);
     ADD_FIELD_INFO("6",    "lr_balance",     EmbeddedMessage);
     ADD_FIELD_INFO("6/1",  "average",        Float);
     ADD_FIELD_INFO("7",    "temperature",    EmbeddedMessage);
@@ -823,13 +823,13 @@ QVariantMap TrainingSession::parseStatistics(QIODevice &data) const
     ADD_FIELD_INFO("8/1",  "average",        Float);
     ADD_FIELD_INFO("9",    "stride",         EmbeddedMessage);
     ADD_FIELD_INFO("9/1",  "average",        Uint32);
-    ADD_FIELD_INFO("9/1",  "maximum",        Uint32);
+    ADD_FIELD_INFO("9/2",  "maximum",        Uint32);
     ADD_FIELD_INFO("10",   "include",        EmbeddedMessage);
     ADD_FIELD_INFO("10/1", "average",        Float);
-    ADD_FIELD_INFO("10/1", "maximum",        Float);
+    ADD_FIELD_INFO("10/2", "maximum",        Float);
     ADD_FIELD_INFO("11",   "declince",       EmbeddedMessage);
     ADD_FIELD_INFO("11/1", "average",        Float);
-    ADD_FIELD_INFO("11/1", "maximum",        Float);
+    ADD_FIELD_INFO("11/2", "maximum",        Float);
     ProtoBuf::Message parser(fieldInfo);
 
     if (isGzipped(data)) {

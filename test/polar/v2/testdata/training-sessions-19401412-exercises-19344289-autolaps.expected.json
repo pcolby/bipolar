@@ -98,11 +98,11 @@
             ],
             "best-duration": [
                 {
-                    "4": [
-                        750
-                    ],
                     "hours": [
                         1
+                    ],
+                    "milliseconds": [
+                        750
                     ],
                     "minutes": [
                         27
