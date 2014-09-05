@@ -3,4 +3,5 @@
 *.result.*.hrm
 *.result.json
 *.result.tcx
+*.result.*.tcx
 *.result.var

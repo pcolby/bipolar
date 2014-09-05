@@ -1140,13 +1140,14 @@ void TestTrainingSession::toTCX_UTC()
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession session(baseName);
     QVERIFY(session.parse());
+    session.setTcxOption(polar::v2::TrainingSession::ForceTcxUTC);
     QDomDocument tcx = session.toTCX(QLatin1String("Jul 17 2014 21:02:38"));
 
     // Write the result to an XML file for optional post-mortem investigations.
 #ifdef Q_OS_WIN
-    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.tcx")
+    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.utc.tcx")
 #else
-    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.tcx")
+    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.utc.tcx")
 #endif
         .arg(QString::fromLatin1(QTest::currentDataTag())));
     if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
