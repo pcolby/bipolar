@@ -1714,9 +1714,12 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
     QDomElement multiSportSession;
     if ((parsedExercises.size() > 1) && (!parsedSession.isEmpty())) {
         multiSportSession = doc.createElement(QLatin1String("MultiSportSession"));
+        QDateTime id = getDateTime(firstMap(parsedSession.value(QLatin1String("start"))));
+        if (tcxOptions.testFlag(ForceTcxUTC)) {
+            id = id.toUTC();
+        }
         multiSportSession.appendChild(doc.createElement(QLatin1String("Id")))
-            .appendChild(doc.createTextNode(getDateTime(firstMap(parsedSession
-                .value(QLatin1String("start")))).toString(Qt::ISODate)));
+            .appendChild(doc.createTextNode(id.toString(Qt::ISODate)));
         activities.appendChild(multiSportSession);
     }
 
@@ -1780,7 +1783,10 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                 .value(QLatin1String("value"))).toULongLong()));
 
         // Get the starting time.
-        const QDateTime startTime = getDateTime(firstMap(create.value(QLatin1String("start"))));
+        QDateTime startTime = getDateTime(firstMap(create.value(QLatin1String("start"))));
+        if (tcxOptions.testFlag(ForceTcxUTC)) {
+            startTime = startTime.toUTC();
+        }
         activity.appendChild(doc.createElement(QLatin1String("Id")))
             .appendChild(doc.createTextNode(startTime.toString(Qt::ISODate)));
 
@@ -1840,12 +1846,15 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
 
                 // Create the Lap element, and set its StartTime attribute.
                 #if (QT_VERSION >= QT_VERSION_CHECK(5, 2, 0))
-                const QDateTime lapStartTime = startTime.addMSecs(index * recordInterval);
+                QDateTime lapStartTime = startTime.addMSecs(index * recordInterval);
                 #else /// @todo Remove this hack when Qt 5.2+ is available on Travis CI.
                 QDateTime lapStartTime = startTime.toUTC()
                     .addMSecs(index * recordInterval).addSecs(startTime.utcOffset());
                 lapStartTime.setUtcOffset(startTime.utcOffset());
                 #endif
+                if (tcxOptions.testFlag(ForceTcxUTC)) {
+                    lapStartTime = lapStartTime.toUTC();
+                }
                 lap = doc.createElement(QLatin1String("Lap"));
                 lap.setAttribute(QLatin1String("StartTime"),
                     lapStartTime.toString(Qt::ISODate));
@@ -1900,6 +1909,9 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                     .addMSecs(index * recordInterval).addSecs(startTime.utcOffset());
                 trackPointTime.setUtcOffset(startTime.utcOffset());
                 #endif
+                if (tcxOptions.testFlag(ForceTcxUTC)) {
+                    trackPointTime = trackPointTime.toUTC();
+                }
                 trackPoint.insertBefore(doc.createElement(QLatin1String("Time")), QDomNode())
                     .appendChild(doc.createTextNode(trackPointTime.toString(Qt::ISODate)));
                 track.appendChild(trackPoint);
