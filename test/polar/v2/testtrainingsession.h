@@ -65,6 +65,12 @@ private slots:
     void toHRM_data();
     void toHRM();
 
+    void toHRM_LapNames_data();
+    void toHRM_LapNames();
+
+    void toHRM_LapNames_RR_data();
+    void toHRM_LapNames_RR();
+
     void toHRM_RR_data();
     void toHRM_RR();
 
