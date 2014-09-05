@@ -914,6 +914,48 @@ QVariantMap TrainingSession::parseZones(const QString &fileName) const
     return parseZones(file);
 }
 
+void TrainingSession::setGpxOption(const GpxOption option, const bool enabled)
+{
+    if (enabled) {
+        gpxOptions |= option;
+    } else {
+        gpxOptions &= ~option;
+    }
+}
+
+void TrainingSession::setGpxOptions(const GpxOptions options)
+{
+    gpxOptions = options;
+}
+
+void TrainingSession::setHrmOption(const HrmOption option, const bool enabled)
+{
+    if (enabled) {
+        hrmOptions |= option;
+    } else {
+        hrmOptions &= ~option;
+    }
+}
+
+void TrainingSession::setHrmOptions(const HrmOptions options)
+{
+    hrmOptions = options;
+}
+
+void TrainingSession::setTcxOption(const TcxOption option, const bool enabled)
+{
+    if (enabled) {
+        tcxOptions |= option;
+    } else {
+        tcxOptions &= ~option;
+    }
+}
+
+void TrainingSession::setTcxOptions(const TcxOptions options)
+{
+    tcxOptions = options;
+}
+
 /**
  * @brief Fetch the first item from a list contained within a QVariant.
  *
@@ -1143,13 +1185,17 @@ QStringList TrainingSession::getOutputFileNames(const QString &fileNameFormat,
             fileInfo.fileName() + QLatin1String("-exercises-*-create"))).count();
         if (exerciseCount == 1) {
             fileNames.append(baseName + QLatin1String(".hrm"));
-            fileNames.append(baseName + QLatin1String(".rr.hrm"));
+            if (hrmOptions.testFlag(RrFiles)) {
+                fileNames.append(baseName + QLatin1String(".rr.hrm"));
+            }
         } else {
             for (int index = 0; index < exerciseCount; ++index) {
                 fileNames.append(QString::fromLatin1("%1.%2.hrm")
                     .arg(baseName).arg(index));
-                fileNames.append(QString::fromLatin1("%1.%2.rr.hrm")
-                    .arg(baseName).arg(index));
+                if (hrmOptions.testFlag(RrFiles)) {
+                    fileNames.append(QString::fromLatin1("%1.%2.rr.hrm")
+                        .arg(baseName).arg(index));
+                }
             }
         }
     }
@@ -2070,7 +2116,7 @@ QStringList TrainingSession::writeHRM(const QString &fileNameFormat,
 QStringList TrainingSession::writeHRM(const QString &baseName) const
 {
     QStringList fileNames;
-    for (int rrDataOnly = 0; rrDataOnly <= 1; ++rrDataOnly) {
+    for (int rrDataOnly = 0; rrDataOnly <= (hrmOptions.testFlag(RrFiles) ? 1 : 0); ++rrDataOnly) {
         QStringList hrm = toHRM(rrDataOnly);
         if (hrm.isEmpty()) {
             qWarning() << "Failed to convert to HRM" << baseName;

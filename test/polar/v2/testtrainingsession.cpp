@@ -328,6 +328,7 @@ void TestTrainingSession::getOutputFileNames()
     }
 
     polar::v2::TrainingSession session(inputBaseName);
+    session.setHrmOption(polar::v2::TrainingSession::RrFiles);
     QCOMPARE(session.getOutputFileNames(outputFileNameFormat, outputFileFormats,
              outputDirName), outputFileNames);
 }
