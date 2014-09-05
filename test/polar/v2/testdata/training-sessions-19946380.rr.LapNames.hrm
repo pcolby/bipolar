@@ -1,0 +1,65 @@
+[Params]
+Version=106
+Monitor=1
+SMode=000000000
+Date=20140718
+StartTime=07:48:56.0
+Length=01:05:00.3
+Interval=238
+Upper1=111
+Lower1=93
+Upper2=0
+Lower2=0
+Upper3=0
+Lower3=0
+Timer1=00:21:21.0
+Timer2=00:00:00.0
+Timer3=00:00:00.0
+ActiveLimit=0
+MaxHR=185
+RestHR=55
+StartDelay=0
+VO2max=48
+Weight=72
+
+[Note]
+Other outdoor
+
+[HRZones]
+167
+148
+130
+111
+93
+0
+0
+0
+0
+0
+0
+[SwapTimes]
+
+[Summary-123]
+3901	0	0	3073	754	74
+0	0	0	0	0	0
+0	0	0	0
+0	0	0	0	0	0
+0	0	0	0
+0	3901
+
+[Summary-TH]
+3901	0	0	1185	2642	74
+185	167	139	55
+0	3901
+
+[Trip]
+46
+335
+3900
+369
+529
+540
+1074
+0
+
+[HRData]
