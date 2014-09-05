@@ -1,5 +1,10 @@
 ## Bipolar Changelog
 
+### 0.3.1 (_unreleased_)
+Features:
+- option to disable R-R HRM output.
+- UTC TCX timestamps by default ([#36](../../issues/36))
+
 ### 0.3.0 (2014-08-24)
 Features:
 - wizard-based GUI ([#6](../../issues/6))
