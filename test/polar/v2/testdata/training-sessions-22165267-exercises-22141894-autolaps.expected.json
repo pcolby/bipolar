@@ -867,10 +867,10 @@
             ],
             "best-duration": [
                 {
-                    "4": [
+                    "hours": [
                         0
                     ],
-                    "hours": [
+                    "milliseconds": [
                         0
                     ],
                     "minutes": [
