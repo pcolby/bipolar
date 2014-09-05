@@ -77,6 +77,9 @@ private slots:
     void toTCX_data();
     void toTCX();
 
+    void toTCX_UTC_data();
+    void toTCX_UTC();
+
     void unzip_data();
     void unzip();
 
