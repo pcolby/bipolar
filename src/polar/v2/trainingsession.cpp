@@ -50,7 +50,8 @@
 namespace polar {
 namespace v2 {
 
-TrainingSession::TrainingSession(const QString &baseName) : baseName(baseName)
+TrainingSession::TrainingSession(const QString &baseName)
+    : baseName(baseName), hrmOptions(LapNames)
 {
 
 }
@@ -1561,7 +1562,7 @@ QStringList TrainingSession::toHRM(const bool rrDataOnly) const
         }
 
         // [LapNames] This HRM section is undocumented, but supported by PPT5.
-        if (!laps.isEmpty()) {
+        if ((hrmOptions.testFlag(LapNames)) && (!laps.isEmpty())) {
             stream << "\r\n[LapNames]\r\n";
             const QStringList keys = laps.keys();
             for (int index = 0; index < keys.length(); ++index) {
