@@ -108,6 +108,9 @@ OutputsPage::OutputsPage(QWidget *parent) : QWizardPage(parent)
         advancedGpxLabel->setWhatsThis(tr("Click this link to choose advanced options for TCX output."));
 
         QGridLayout * const grid = new QGridLayout();
+        #ifdef Q_OS_MAC
+        grid->setHorizontalSpacing(12);
+        #endif
         grid->addWidget(gpxCheckBox, 0, 0);
         grid->addWidget(hrmCheckBox, 1, 0);
         grid->addWidget(tcxCheckBox, 2, 0);
