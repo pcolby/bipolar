@@ -98,6 +98,7 @@ void ConverterThread::proccessSession(const QString &baseName)
     const QString outputFileNameFormat =
         settings.value(QLatin1String("outputFileNameFormat")).toString();
     polar::v2::TrainingSession session(baseName);
+    setTrainingSessionOptions(&session);
     {
         QStringList outputFileNames = session.getOutputFileNames(
             outputFileNameFormat, outputDataFormats, outputDir);
@@ -177,4 +178,25 @@ void ConverterThread::run()
         emit progress(index);
         proccessSession(baseNames.at(index));
     }
+}
+
+void ConverterThread::setTrainingSessionOptions(polar::v2::TrainingSession * const session)
+{
+    Q_CHECK_PTR(session);
+    QSettings settings;
+
+    settings.beginGroup(QLatin1String("gpx"));
+    settings.endGroup();
+
+    settings.beginGroup(QLatin1String("hrm"));
+    session->setHrmOption(polar::v2::TrainingSession::RrFiles,
+        settings.value(QLatin1String("rrFiles"), true).toBool());
+    session->setHrmOption(polar::v2::TrainingSession::LapNames,
+        settings.value(QLatin1String("lapNamesExt"), true).toBool());
+    settings.endGroup();
+
+    settings.beginGroup(QLatin1String("tcx"));
+    session->setTcxOption(polar::v2::TrainingSession::ForceTcxUTC,
+        settings.value(QLatin1String("utcOnly"), true).toBool());
+    settings.endGroup();
 }

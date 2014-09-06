@@ -23,6 +23,8 @@
 #include <QStringList>
 #include <QThread>
 
+namespace polar { namespace v2 { class TrainingSession; } }
+
 class ConverterThread : public QThread {
     Q_OBJECT
     Q_PROPERTY(bool cancelled READ isCancelled)
@@ -46,6 +48,7 @@ protected:
     void findSessionBaseNames();
     void proccessSession(const QString &baseName);
     virtual void run();
+    virtual void setTrainingSessionOptions(polar::v2::TrainingSession * const session);
 
 signals:
     void progress(const int index);
