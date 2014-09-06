@@ -1,9 +1,9 @@
 ## Bipolar Changelog
 
-### 0.3.1 (_unreleased_)
+### 0.3.1 (2014-09-06)
 Features:
 - option to enable/disable R-R HRM output.
-- option to enable/disable the HRM "LapNames" exension.
+- option to enable/disable the HRM "LapNames" extension.
 - option to use UTC timestamps in TCX output ([#36](../../issues/36))
 
 ### 0.3.0 (2014-08-24)
