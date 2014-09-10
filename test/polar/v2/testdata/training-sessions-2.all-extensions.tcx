@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TrainingCenterDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" xsi:schemaLocation="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd">
+  <Author xsi:type="Application_t">
+    <Name>Bipolar</Name>
+    <Build>
+      <Version>
+        <VersionMajor>1</VersionMajor>
+        <VersionMinor>2</VersionMinor>
+        <BuildMajor>3</BuildMajor>
+        <BuildMinor>4</BuildMinor>
+      </Version>
+      <Type>Release</Type>
+      <Time>Jul 17 2014 21:02:38</Time>
+      <Builder>unit tests</Builder>
+    </Build>
+    <LangID>EN</LangID>
+    <PartNumber>434-F4C42-59</PartNumber>
+  </Author>
+</TrainingCenterDatabase>
