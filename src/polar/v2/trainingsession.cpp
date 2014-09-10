@@ -1882,6 +1882,53 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
 
                 track = doc.createElement(QLatin1String("Track"));
                 lap.appendChild(track);
+
+                // Add any enabled extensions.
+                if (tcxOptions.testFlag(GarminActivityExtension)) {
+                    QDomElement extensions = doc.createElement(QLatin1String("Extensions"));
+                    lap.appendChild(extensions);
+
+                    // Add the Garmin Activity Extension.
+                    if (tcxOptions.testFlag(GarminActivityExtension)) {
+                        QDomElement lx = doc.createElement(QLatin1String("LX"));
+                        lx.setAttribute(QLatin1String("xmlns"),
+                            QLatin1String("http://www.garmin.com/xmlschemas/ActivityExtension/v2"));
+                        extensions.appendChild(lx);
+
+                        if (stats.contains(QLatin1String("speed"))) {
+                            lx.appendChild(doc.createElement(QLatin1String("AvgSpeed")))
+                                .appendChild(doc.createTextNode(QString::fromLatin1("%1")
+                                    .arg(first(firstMap(stats.value(QLatin1String("speed")))
+                                        .value(QLatin1String("average"))).toDouble())));
+                        }
+
+                        if (stats.contains(QLatin1String("cadence"))) {
+                            const QVariantMap cadence = firstMap(stats.value(QLatin1String("cadence")));
+
+                            const QString sensor = getTcxCadenceSensor(
+                                first(firstMap(create.value(QLatin1String("sport")))
+                                                .value(QLatin1String("value"))).toULongLong());
+
+                            if (sensor != QLatin1String("Footpod")) {
+                                lx.appendChild(doc.createElement(QLatin1String("MaxBikeCadence")))
+                                    .appendChild(doc.createTextNode(QString::fromLatin1("%1")
+                                        .arg(first(cadence.value(QLatin1String("maximum"))).toUInt())));
+                            }
+
+                            lx.appendChild(doc.createElement(QLatin1String("AvgRunCadence")))
+                                .appendChild(doc.createTextNode(QString::fromLatin1("%1")
+                                    .arg(first(cadence.value(QLatin1String("average"))).toUInt())));
+
+                            if (sensor == QLatin1String("Footpod")) {
+                                lx.appendChild(doc.createElement(QLatin1String("MaxRunCadence")))
+                                    .appendChild(doc.createTextNode(QString::fromLatin1("%1")
+                                        .arg(first(cadence.value(QLatin1String("maximum"))).toUInt())));
+                            }
+
+                            /// @todo AvgWatts and MaxWatts when power data is available.
+                        }
+                    }
+                }
             }
 
             QDomElement trackPoint = doc.createElement(QLatin1String("Trackpoint"));
@@ -2063,7 +2110,6 @@ void TrainingSession::addLapStats(QDomDocument &doc, QDomElement &lap,
     lap.appendChild(doc.createElement(QLatin1String("Intensity")))
         .appendChild(doc.createTextNode(QString::fromLatin1("Active")));
 
-    // Cadence is only available per exercise, not per lap.
     if (stats.contains(QLatin1String("cadence"))) {
         lap.appendChild(doc.createElement(QLatin1String("Cadence")))
             .appendChild(doc.createTextNode(QString::fromLatin1("%1")

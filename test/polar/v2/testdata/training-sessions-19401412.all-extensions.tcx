@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<TrainingCenterDatabase xsi:schemaLocation="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" xmlns:ax2="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+<TrainingCenterDatabase xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" xsi:schemaLocation="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd" xmlns:ax2="http://www.garmin.com/xmlschemas/ActivityExtension/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Activities>
     <Activity Sport="Running">
       <Id>2014-07-13T07:26:23+10:00</Id>
@@ -27078,6 +27078,11 @@
             </Extensions>
           </Trackpoint>
         </Track>
+        <Extensions>
+          <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+            <AvgSpeed>5.87056</AvgSpeed>
+          </LX>
+        </Extensions>
       </Lap>
       <Lap StartTime="2014-07-13T07:56:27+10:00">
         <TotalTimeSeconds>1492.25</TotalTimeSeconds>
@@ -49489,6 +49494,11 @@
             </Extensions>
           </Trackpoint>
         </Track>
+        <Extensions>
+          <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+            <AvgSpeed>4.90671</AvgSpeed>
+          </LX>
+        </Extensions>
       </Lap>
       <Lap StartTime="2014-07-13T08:21:20+10:00">
         <TotalTimeSeconds>227.5</TotalTimeSeconds>
@@ -52910,6 +52920,11 @@
             </Extensions>
           </Trackpoint>
         </Track>
+        <Extensions>
+          <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+            <AvgSpeed>8.38207</AvgSpeed>
+          </LX>
+        </Extensions>
       </Lap>
       <Lap StartTime="2014-07-13T08:25:07+10:00">
         <TotalTimeSeconds>1561.62</TotalTimeSeconds>
@@ -76356,6 +76371,11 @@
             </Extensions>
           </Trackpoint>
         </Track>
+        <Extensions>
+          <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+            <AvgSpeed>5.982</AvgSpeed>
+          </LX>
+        </Extensions>
       </Lap>
       <Lap StartTime="2014-07-13T08:51:09+10:00">
         <TotalTimeSeconds>153.5</TotalTimeSeconds>
@@ -78667,6 +78687,11 @@
             </Extensions>
           </Trackpoint>
         </Track>
+        <Extensions>
+          <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+            <AvgSpeed>9.00117</AvgSpeed>
+          </LX>
+        </Extensions>
       </Lap>
     </Activity>
   </Activities>
