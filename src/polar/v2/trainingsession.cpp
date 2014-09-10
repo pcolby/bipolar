@@ -61,12 +61,24 @@ int TrainingSession::exerciseCount() const
     return (isValid()) ? parsedExercises.count() : -1;
 }
 
+#define TCX_RUNNING QLatin1String("Running")
+#define TCX_BIKING  QLatin1String("Biking")
+#define TCX_OTHER   QLatin1String("Other")
+
+QString TrainingSession::getTcxCadenceSensor(const quint64 &polarSportValue)
+{
+    const QString tcxSport = getTcxSport(polarSportValue);
+    if (tcxSport == TCX_BIKING) {
+        return QLatin1String("Bike");
+    } else if (tcxSport == TCX_RUNNING) {
+        return QLatin1String("Footpod");
+    }
+    return QString();
+}
+
 /// @see https://github.com/pcolby/bipolar/wiki/Polar-Sport-Types
 QString TrainingSession::getTcxSport(const quint64 &polarSportValue)
 {
-    #define TCX_RUNNING QLatin1String("Running")
-    #define TCX_BIKING  QLatin1String("Biking")
-    #define TCX_OTHER   QLatin1String("Other")
     static QMap<quint64, QString> map;
     if (map.isEmpty()) {
         map.insert( 1, TCX_RUNNING); // Running
@@ -1707,6 +1719,10 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
     tcx.setAttribute(QLatin1String("xsi:schemaLocation"),
                      QLatin1String("http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 "
                                    "http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd"));
+    if (tcxOptions.testFlag(GarminActivityExtension)) {
+        tcx.setAttribute(QLatin1String("xmlns:ax2"),
+                         QLatin1String("http://www.garmin.com/xmlschemas/ActivityExtension/v2"));
+    }
     doc.appendChild(tcx);
 
     QDomElement activities = doc.createElement(QLatin1String("Activities"));
@@ -1899,6 +1915,34 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                 (!sensorOffline(samples.value(QLatin1String("cadence-offline")).toList(), index))) {
                 trackPoint.appendChild(doc.createElement(QLatin1String("Cadence")))
                     .appendChild(doc.createTextNode(cadence.at(index).toString()));
+            }
+
+            if (tcxOptions.testFlag(GarminActivityExtension)) {
+                QDomElement tpx = doc.createElement(QLatin1String("TPX"));
+                tpx.setAttribute(QLatin1String("xmlns"),
+                    QLatin1String("http://www.garmin.com/xmlschemas/ActivityExtension/v2"));
+                trackPoint.appendChild(doc.createElement(QLatin1String("Extensions")))
+                    .appendChild(tpx);
+
+                if ((index < cadence.length()) && (cadence.at(index).toInt() >= 0) &&
+                    (!sensorOffline(samples.value(QLatin1String("speed-offline")).toList(), index))) {
+                    tpx.appendChild(doc.createElement(QLatin1String("Speed")))
+                        .appendChild(doc.createTextNode(speed.at(index).toString()));
+                }
+
+                if ((index < cadence.length()) && (cadence.at(index).toInt() >= 0) &&
+                    (!sensorOffline(samples.value(QLatin1String("cadence-offline")).toList(), index))) {
+                    const QString sensor = getTcxCadenceSensor(
+                        first(firstMap(create.value(QLatin1String("sport")))
+                                        .value(QLatin1String("value"))).toULongLong());
+                    if (!sensor.isEmpty()) {
+                        tpx.setAttribute(QLatin1String("CadenceSensor"), sensor);
+                    }
+                    if (sensor == QLatin1String("Footpod")) {
+                        tpx.appendChild(doc.createElement(QLatin1String("RunCadence")))
+                            .appendChild(doc.createTextNode(cadence.at(index).toString()));
+                    }
+                }
             }
 
             if (trackPoint.hasChildNodes()) {

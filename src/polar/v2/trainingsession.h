@@ -110,6 +110,7 @@ protected:
     HrmOptions hrmOptions;
     TcxOptions tcxOptions;
 
+    static QString getTcxCadenceSensor(const quint64 &polarSportValue);
     static QString getTcxSport(const quint64 &polarSportValue);
     QString getOutputBaseFileName(const QString &format);
 

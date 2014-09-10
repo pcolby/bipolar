@@ -855,6 +855,9 @@ void TestTrainingSession::toGPX_AllExtensions()
     QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
     QXmlSchemaValidator validator(schema);
     QVERIFY(validator.validate(gpx.toByteArray()));
+
+    // The individual extension schemas will each be verified by their own
+    // respective test functions, such as toGPX_Cluetrust.
 }
 
 void TestTrainingSession::toGPX_Cluetrust_data()
@@ -1352,6 +1355,9 @@ void TestTrainingSession::toTCX_AllExtensions()
     QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
     QXmlSchemaValidator validator(schema);
     QVERIFY(validator.validate(tcx.toByteArray()));
+
+    // The individual extension schemas will each be verified by their own
+    // respective test functions, such as toTCX_GarminActivity.
 }
 
 void TestTrainingSession::toTCX_GarminActivity_data()
@@ -1406,12 +1412,44 @@ void TestTrainingSession::toTCX_GarminActivity()
 
     // Validate the generated document against the relevant XML schema.
     tcx.documentElement().removeAttribute(QLatin1String("xsi:schemaLocation"));
-    QFile xsd(QFINDTESTDATA("schemata/TrainingCenterDatabasev2.xsd"));
-    QVERIFY(xsd.open(QIODevice::ReadOnly));
-    QXmlSchema schema;
-    QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
-    QXmlSchemaValidator validator(schema);
-    QVERIFY(validator.validate(tcx.toByteArray()));
+    {   // The base TCX V2 schema.
+        QFile xsd(QFINDTESTDATA("schemata/TrainingCenterDatabasev2.xsd"));
+        QVERIFY(xsd.open(QIODevice::ReadOnly));
+        QXmlSchema schema;
+        QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
+        QXmlSchemaValidator validator(schema);
+        QVERIFY(validator.validate(tcx.toByteArray()));
+    }
+
+    {   // The Garmin Activity Extension V2 schema's TPX elements.
+        const QDomNodeList tpxNodes = tcx.elementsByTagName(QLatin1String("TPX"));
+        QFile xsd(QFINDTESTDATA("schemata/ActivityExtensionv2.xsd"));
+        QVERIFY(xsd.open(QIODevice::ReadOnly));
+        QXmlSchema schema;
+        QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
+        QXmlSchemaValidator validator(schema);
+        for (int index = 0; index < tpxNodes.length(); ++index) {
+            QByteArray byteArray;
+            QTextStream stream(&byteArray);
+            stream << tpxNodes.at(index);
+            QVERIFY(validator.validate(byteArray));
+        }
+    }
+
+    {   // The Garmin Activity Extension V2 schema's LX elements.
+        const QDomNodeList lxNodes = tcx.elementsByTagName(QLatin1String("LX"));
+        QFile xsd(QFINDTESTDATA("schemata/ActivityExtensionv2.xsd"));
+        QVERIFY(xsd.open(QIODevice::ReadOnly));
+        QXmlSchema schema;
+        QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
+        QXmlSchemaValidator validator(schema);
+        for (int index = 0; index < lxNodes.length(); ++index) {
+            QByteArray byteArray;
+            QTextStream stream(&byteArray);
+            stream << lxNodes.at(index);
+            QVERIFY(validator.validate(byteArray));
+        }
+    }
 }
 
 void TestTrainingSession::toTCX_UTC_data()
