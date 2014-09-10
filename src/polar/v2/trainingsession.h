@@ -66,7 +66,7 @@ public:
     enum TcxOption {
         ForceTcxUTC = 0x0001,
         GarminActivityExtension = 0x1001,
-        GarminCourceExtension   = 0x1002,
+        GarminCourseExtension   = 0x1002,
     };
     Q_DECLARE_FLAGS(TcxOptions, TcxOption)
 
