@@ -62,6 +62,15 @@ private slots:
     void toGPX_data();
     void toGPX();
 
+    void toGPX_AllExtensions_data();
+    void toGPX_AllExtensions();
+
+    void toGPX_Cluetrust_data();
+    void toGPX_Cluetrust();
+
+    void toGPX_GarminTrackPoint_data();
+    void toGPX_GarminTrackPoint();
+
     void toHRM_data();
     void toHRM();
 
@@ -76,6 +85,12 @@ private slots:
 
     void toTCX_data();
     void toTCX();
+
+    void toTCX_AllExtensions_data();
+    void toTCX_AllExtensions();
+
+    void toTCX_GarminActivity_data();
+    void toTCX_GarminActivity();
 
     void toTCX_UTC_data();
     void toTCX_UTC();

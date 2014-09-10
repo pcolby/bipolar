@@ -44,16 +44,16 @@ class TrainingSession : public QObject {
 
 public:
     enum OutputFormat {
-        GpxOutput = 0x01,
-        HrmOutput = 0x02,
-        TcxOutput = 0x04,
+        GpxOutput = 0x0001,
+        HrmOutput = 0x0002,
+        TcxOutput = 0x0004,
         AllOutputs = GpxOutput|HrmOutput|TcxOutput
     };
     Q_DECLARE_FLAGS(OutputFormats, OutputFormat)
 
     enum GpxOption {
-        CluetrustGpxExtension     = 0x1001,
-        GarminTrackPointExtension = 0x1002,
+        CluetrustGpxExtension     = 0x0100,
+        GarminTrackPointExtension = 0x0200,
     };
     Q_DECLARE_FLAGS(GpxOptions, GpxOption)
 
@@ -65,8 +65,8 @@ public:
 
     enum TcxOption {
         ForceTcxUTC = 0x0001,
-        GarminActivityExtension = 0x1001,
-        GarminCourseExtension   = 0x1002,
+        GarminActivityExtension = 0x0100,
+      //GarminCourseExtension   = 0x0200, //< Needs power support.
     };
     Q_DECLARE_FLAGS(TcxOptions, TcxOption)
 
