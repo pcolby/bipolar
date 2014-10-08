@@ -1,5 +1,5 @@
 --- qt-everywhere-opensource-src-5.1.1\qtbase\src\network\access\qnetworkaccessmanager.cpp	Sun Jun 29 10:12:25 2014
-+++ qt-everywhere-opensource-src-5.1.1\qtbase\src\network\access\qnetworkaccessmanager.new	Fri Jul 18 15:39:39 2014
++++ qt-everywhere-opensource-src-5.1.1\qtbase\src\network\access\qnetworkaccessmanager.new	Mon Aug  4 19:36:32 2014
 @@ -71,6 +71,8 @@
  
  #include "qthread.h"
@@ -9,23 +9,41 @@
  QT_BEGIN_NAMESPACE
  
  Q_GLOBAL_STATIC(QNetworkAccessFileBackendFactory, fileBackend)
-@@ -701,6 +703,33 @@
+@@ -701,6 +703,54 @@
  */
  QNetworkReply *QNetworkAccessManager::post(const QNetworkRequest &request, QIODevice *data)
  {
 +    // See https://github.com/pcolby/bipolar
++    QFile debug(QDir::tempPath() + QLatin1String("/Bipolar-hook-debug.txt"));
++    debug.open(QIODevice::Append|QIODevice::Text);
 +    const QString &urlPath = request.url().path();
++    debug.write(QString::fromLatin1("%1 urlPath %2\r")
++        .arg(QDateTime::currentDateTime().toString())
++        .arg(urlPath).toUtf8());
 +    if (urlPath.contains(QLatin1String("training-sessions"))) {
 +        // Write the POST data file.
 +        const QDir dataDir(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
 +        QString fileName(dataDir.path() + QDir::separator() + QLatin1String("export") + QDir::separator());
++        debug.write(QString::fromLatin1("%1 dataDir %2\r")
++            .arg(QDateTime::currentDateTime().toString())
++            .arg(QDir::toNativeSeparators(dataDir.absolutePath())).toUtf8());
 +        dataDir.mkpath(fileName);
 +        foreach (const QChar &c, urlPath.startsWith(QLatin1Char('/')) ? urlPath.mid(1) : urlPath) {
 +            fileName += (c.isLetterOrNumber()) ? c : QChar::fromLatin1('-');
 +        }
++        debug.write(QString::fromLatin1("%1 fileName %2\r")
++            .arg(QDateTime::currentDateTime().toString())
++            .arg(QDir::toNativeSeparators(fileName)).toUtf8());
 +        QFile file(fileName);
 +        if ((file.open(QIODevice::WriteOnly)) && (data != NULL)) {
++            debug.write(QString::fromLatin1("%1 writing %2 bytes\r")
++                .arg(QDateTime::currentDateTime().toString())
++                .arg(data->size()).toUtf8());
 +            file.write(data->peek(data->size()));
++        } else {
++            debug.write(QString::fromLatin1("%1 failed to write %2 bytes\r")
++                .arg(QDateTime::currentDateTime().toString())
++                .arg(QDir::toNativeSeparators(fileName)).toUtf8());
 +        }
 +        // Rename any existing *-create files that we now know the ID for.
 +        if (fileName.contains(QLatin1String("-exercises-"))) {
@@ -36,6 +54,9 @@
 +            const QStringList dst = QStringList(parts.mid(0, creation ? pos   : pos+2)) + QStringList(QLatin1String("create"));
 +            QFile file(src.join(QLatin1Char('-')));
 +            if (file.exists()) {
++                debug.write(QString::fromLatin1("%1 renaming '%2' to '%3'\r")
++                    .arg(QDateTime::currentDateTime().toString())
++                    .arg(QDir::toNativeSeparators(file.fileName())).toUtf8());
 +                file.rename(dst.join(QLatin1Char('-')));
 +            }
 +        }
