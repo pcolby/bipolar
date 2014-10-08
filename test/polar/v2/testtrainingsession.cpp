@@ -974,12 +974,30 @@ void TestTrainingSession::toGPX_GarminTrackPoint()
 
     // Validate the generated document against the relevant XML schema.
     gpx.documentElement().removeAttribute(QLatin1String("xsi:schemaLocation"));
-    QFile xsd(QFINDTESTDATA("schemata/gpx.xsd"));
-    QVERIFY(xsd.open(QIODevice::ReadOnly));
-    QXmlSchema schema;
-    QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
-    QXmlSchemaValidator validator(schema);
-    QVERIFY(validator.validate(gpx.toByteArray()));
+    {   // The base GPX schema.
+        QFile xsd(QFINDTESTDATA("schemata/gpx.xsd"));
+        QVERIFY(xsd.open(QIODevice::ReadOnly));
+        QXmlSchema schema;
+        QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
+        QXmlSchemaValidator validator(schema);
+        QVERIFY(validator.validate(gpx.toByteArray()));
+    }
+
+    {   // The Garmin TrackPoint Extension.
+        const QDomNodeList extensionNodes =
+            gpx.elementsByTagName(QLatin1String("TrackPointExtension"));
+        QFile xsd(QFINDTESTDATA("schemata/TrackPointExtensionv1.xsd"));
+        QVERIFY(xsd.open(QIODevice::ReadOnly));
+        QXmlSchema schema;
+        QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
+        QXmlSchemaValidator validator(schema);
+        for (int index = 0; index < extensionNodes.length(); ++index) {
+            QByteArray byteArray;
+            QTextStream stream(&byteArray);
+            stream << extensionNodes.at(index);
+            QVERIFY(validator.validate(byteArray));
+        }
+    }
 }
 
 void TestTrainingSession::toHRM_data()
