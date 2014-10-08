@@ -2,7 +2,7 @@
 
 ### 0.3.2 (_unreleased_)
 Features:
-- hook debug logging ([d5e970f](../../commit/d5e970fcb0b66446fde8a28670483ab5ac43bc79)
+- hook debug logging ([d5e970f](../../commit/d5e970fcb0b66446fde8a28670483ab5ac43bc79))
 - Garmin Activity Extension ([#31](../../issues/31))
 - activity and fitness test data ([#39](../../issues/39))
 
