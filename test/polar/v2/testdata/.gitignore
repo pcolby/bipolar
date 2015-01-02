@@ -1,4 +1,5 @@
 *.result.gpx
+*.result.*.gpx
 *.result.hrm
 *.result.*.hrm
 *.result.json

@@ -842,9 +842,9 @@ void TestTrainingSession::toGPX_AllExtensions()
 
     // Write the result to an XML file for optional post-mortem investigations.
 #ifdef Q_OS_WIN
-    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.gpx")
+    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.all-extensions.gpx")
 #else
-    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.gpx")
+    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.all-extensions.gpx")
 #endif
         .arg(QString::fromLatin1(QTest::currentDataTag())));
     if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
@@ -907,9 +907,9 @@ void TestTrainingSession::toGPX_Cluetrust()
 
     // Write the result to an XML file for optional post-mortem investigations.
 #ifdef Q_OS_WIN
-    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.gpx")
+    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.cluetrust.gpx")
 #else
-    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.gpx")
+    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.cluetrust.gpx")
 #endif
         .arg(QString::fromLatin1(QTest::currentDataTag())));
     if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
@@ -969,9 +969,9 @@ void TestTrainingSession::toGPX_GarminTrackPoint()
 
     // Write the result to an XML file for optional post-mortem investigations.
 #ifdef Q_OS_WIN
-    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.gpx")
+    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.garmin-trackpoint.gpx")
 #else
-    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.gpx")
+    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.garmin-trackpoint.gpx")
 #endif
         .arg(QString::fromLatin1(QTest::currentDataTag())));
     if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
@@ -1131,7 +1131,7 @@ void TestTrainingSession::toHRM_LapNames()
         if (hrm.length() != 1) {
             fileName += QString::fromLatin1(".%1").arg(index);
         }
-        fileName += QString::fromLatin1(".hrm");
+        fileName += QString::fromLatin1(".LapNames.hrm");
         QFile file(fileName);
         if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
             file.write(hrm.at(index).toLatin1());
@@ -1196,7 +1196,7 @@ void TestTrainingSession::toHRM_LapNames_RR()
         if (hrm.length() != 1) {
             fileName += QString::fromLatin1(".%1").arg(index);
         }
-        fileName += QString::fromLatin1(".rr.hrm");
+        fileName += QString::fromLatin1(".rr.LapNames.hrm");
         QFile file(fileName);
         if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
             file.write(hrm.at(index).toLatin1());
@@ -1368,9 +1368,9 @@ void TestTrainingSession::toTCX_AllExtensions()
 
     // Write the result to an XML file for optional post-mortem investigations.
 #ifdef Q_OS_WIN
-    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.tcx")
+    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.all-extensions.tcx")
 #else
-    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.tcx")
+    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.all-extensions.tcx")
 #endif
         .arg(QString::fromLatin1(QTest::currentDataTag())));
     if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
@@ -1432,9 +1432,9 @@ void TestTrainingSession::toTCX_GarminActivity()
 
     // Write the result to an XML file for optional post-mortem investigations.
 #ifdef Q_OS_WIN
-    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.tcx")
+    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.garmin-activity.tcx")
 #else
-    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.tcx")
+    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.garmin-activity.tcx")
 #endif
         .arg(QString::fromLatin1(QTest::currentDataTag())));
     if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
