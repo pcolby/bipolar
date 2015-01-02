@@ -1,80 +1,4 @@
 {
-    "22": [
-        "0800100218edc401204628d80130da0238a201",
-        "0800100218edc401204628d80130da0238a201",
-        "0800100218edc401",
-        "0800100218edc401",
-        "0800100218edc401",
-        "0800100318abeb01204728d50130c502385e40d801481b",
-        "080c100418e3f50120b501289301309002386b40c4014812",
-        "081e1005188c810220af0128d70130b002387540d3014818",
-        "081e1005188c810220af0128d70130b002387540d3014818",
-        "080a100618d18d0220b10128a70130a002386d40c1014818",
-        "0832100718819a02204d28f40130c30238830140f8014818",
-        "0832100718819a02204d28f40130c30238830140f8014818",
-        "0851100918b1aa02204f288c0230b702386540df01481f",
-        "083e100a18b9b102206928ed01309e02386340d3014818",
-        "0830100b18aeb802209f0128dd01308d02386140d4014814",
-        "08e8ffffffffffffffff01100c1885bc02203928f3ffffffffffffffff01300d382d",
-        "0813100d18bfc402202b285230dd02389101408e024823",
-        "084c100e18a7cc02201f28f50130c702385a40e2014817",
-        "08421010189cda02203128cf0130db02385c40a0024821",
-        "0847101118dce002203528c80130cd02385940fc01481c",
-        "08411012188de702202f28c70130b102386340df014824",
-        "083a101318b0ed02203128a40130db02385e40dd01481e",
-        "083f101518d5f902203328ac0130d402386640d3014810",
-        "083e101618e1ff02204f28be01308802387040dd014819",
-        "082c101718ed8503205728a201309302387b40d2014824",
-        "082d101918dc9203207d28a901309f02387040dd014819",
-        "0800101a18a19a0320a701286530fa01386e40c5014816",
-        "0800101a18a19a0320a701286530fa01386e40c5014816",
-        "0805101c1892ad03209502286f30d40238800140dc014816",
-        "089e01101e18d6ba0320890128bf0430cb02387a40d701481d",
-        "088c01101f18bdbf0320cd0128e80330c40238830140d6014815",
-        "08850110211897c80320f10128c102309002385840d301481b",
-        "082f1023189ed103208101288c0130a202385b40e9014821",
-        "0800102418f6d20320632819300638d20140e901488301",
-        "0800102418f6d203",
-        "0800102518f0e70320b50128c3ffffffffffffffff01301c38d302"
-    ],
-    "24": [
-        "0800100118f352",
-        "0800100118f352",
-        "0800100118f352",
-        "0800100218e9dd01209b01289e0230c802386940d7014830",
-        "081e100318d8e701206d28a50130a502386b40e201481b",
-        "0819100418eff10120990128a50130b102387f40e3014817",
-        "0819100418eff10120990128a50130b102387f40e3014817",
-        "0819100418eff10120990128a50130b102387f40e3014817",
-        "081f100518a0fd0120a70128de0130b302387a40e201481c",
-        "0815100618d0890220b30128ad0130bf02387840df014822",
-        "0815100618d0890220b30128ad0130bf02387840df014822",
-        "083310071893960220830128db0230c202387940f801482f",
-        "083d100818e99e02203728aa0230e302387540f8014828",
-        "083d100818e99e02203728aa0230e302387540f8014828",
-        "0847100918c3a602203528f80130aa02386e40f6014829",
-        "0847100a18d0ad02203528ee0130fe01387540eb014818",
-        "083a100b18b4b402203928ca01308f02386a40e801481c",
-        "081d100c18bdc002203b28a801301438970140d002484b",
-        "0846100d1886c802200f28d6013003387d40c8024826",
-        "0846100d1886c802200f28d6013003387d40c8024826",
-        "084d101218a0e902200f28bb01309e02387240f401481e",
-        "084a101318acef02201128ae01309d02387940f2014822",
-        "0841101418c6f5022025289e0130a602387e40e6014829",
-        "084a101518b3fb02201d28a30130b202387f4084024824",
-        "0845101718d28703200b2896013097023879408102481f",
-        "0806101818af8e0320c501285d309f02387c40e401482d",
-        "080f101918fa950320ad01287230a002386640da014820",
-        "0813101a18da9e032083012872309702386540db014819",
-        "0858101b18eda80320950128c30330a60238810140d8014819",
-        "0871101c1894b003206928b90430c80238950140db01483a",
-        "089301101d1884b603207728aa043008388f0140e9014835",
-        "0874101f189fbf0320a10128df02309602386640d8014829",
-        "082f10211889c8032077288201308a02386e40ed014833",
-        "0800102318abce032039281830e60238d2014098024833",
-        "0800102318abce032039281830e60238d2014098024833",
-        "0800102318abce03"
-    ],
     "28": [
         "0a039f9902",
         "12150a080800100018002000120908001000182320e707"
@@ -223,10 +147,1934 @@
             ]
         }
     ],
+    "left-pedal-power": [
+        {
+            "cumulative-revolutions": [
+                2
+            ],
+            "cumulative-timestamp": [
+                25197
+            ],
+            "current-power": [
+                0
+            ],
+            "max-force": [
+                216
+            ],
+            "max-force-angle": [
+                162
+            ],
+            "min-force": [
+                35
+            ],
+            "min-force-angle": [
+                346
+            ]
+        },
+        {
+            "cumulative-revolutions": [
+                2
+            ],
+            "cumulative-timestamp": [
+                25197
+            ],
+            "current-power": [
+                0
+            ],
+            "max-force": [
+                216
+            ],
+            "max-force-angle": [
+                162
+            ],
+            "min-force": [
+                35
+            ],
+            "min-force-angle": [
+                346
+            ]
+        },
+        {
+            "cumulative-revolutions": [
+                2
+            ],
+            "cumulative-timestamp": [
+                25197
+            ],
+            "current-power": [
+                0
+            ]
+        },
+        {
+            "cumulative-revolutions": [
+                2
+            ],
+            "cumulative-timestamp": [
+                25197
+            ],
+            "current-power": [
+                0
+            ]
+        },
+        {
+            "cumulative-revolutions": [
+                2
+            ],
+            "cumulative-timestamp": [
+                25197
+            ],
+            "current-power": [
+                0
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                216
+            ],
+            "cumulative-revolutions": [
+                3
+            ],
+            "cumulative-timestamp": [
+                30123
+            ],
+            "current-power": [
+                0
+            ],
+            "max-force": [
+                213
+            ],
+            "max-force-angle": [
+                94
+            ],
+            "min-force": [
+                -36
+            ],
+            "min-force-angle": [
+                325
+            ],
+            "top-dead-spot": [
+                27
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                196
+            ],
+            "cumulative-revolutions": [
+                4
+            ],
+            "cumulative-timestamp": [
+                31459
+            ],
+            "current-power": [
+                12
+            ],
+            "max-force": [
+                147
+            ],
+            "max-force-angle": [
+                107
+            ],
+            "min-force": [
+                -91
+            ],
+            "min-force-angle": [
+                272
+            ],
+            "top-dead-spot": [
+                18
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                211
+            ],
+            "cumulative-revolutions": [
+                5
+            ],
+            "cumulative-timestamp": [
+                32908
+            ],
+            "current-power": [
+                30
+            ],
+            "max-force": [
+                215
+            ],
+            "max-force-angle": [
+                117
+            ],
+            "min-force": [
+                -88
+            ],
+            "min-force-angle": [
+                304
+            ],
+            "top-dead-spot": [
+                24
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                211
+            ],
+            "cumulative-revolutions": [
+                5
+            ],
+            "cumulative-timestamp": [
+                32908
+            ],
+            "current-power": [
+                30
+            ],
+            "max-force": [
+                215
+            ],
+            "max-force-angle": [
+                117
+            ],
+            "min-force": [
+                -88
+            ],
+            "min-force-angle": [
+                304
+            ],
+            "top-dead-spot": [
+                24
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                193
+            ],
+            "cumulative-revolutions": [
+                6
+            ],
+            "cumulative-timestamp": [
+                34513
+            ],
+            "current-power": [
+                10
+            ],
+            "max-force": [
+                167
+            ],
+            "max-force-angle": [
+                109
+            ],
+            "min-force": [
+                -89
+            ],
+            "min-force-angle": [
+                288
+            ],
+            "top-dead-spot": [
+                24
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                248
+            ],
+            "cumulative-revolutions": [
+                7
+            ],
+            "cumulative-timestamp": [
+                36097
+            ],
+            "current-power": [
+                50
+            ],
+            "max-force": [
+                244
+            ],
+            "max-force-angle": [
+                131
+            ],
+            "min-force": [
+                -39
+            ],
+            "min-force-angle": [
+                323
+            ],
+            "top-dead-spot": [
+                24
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                248
+            ],
+            "cumulative-revolutions": [
+                7
+            ],
+            "cumulative-timestamp": [
+                36097
+            ],
+            "current-power": [
+                50
+            ],
+            "max-force": [
+                244
+            ],
+            "max-force-angle": [
+                131
+            ],
+            "min-force": [
+                -39
+            ],
+            "min-force-angle": [
+                323
+            ],
+            "top-dead-spot": [
+                24
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                223
+            ],
+            "cumulative-revolutions": [
+                9
+            ],
+            "cumulative-timestamp": [
+                38193
+            ],
+            "current-power": [
+                81
+            ],
+            "max-force": [
+                268
+            ],
+            "max-force-angle": [
+                101
+            ],
+            "min-force": [
+                -40
+            ],
+            "min-force-angle": [
+                311
+            ],
+            "top-dead-spot": [
+                31
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                211
+            ],
+            "cumulative-revolutions": [
+                10
+            ],
+            "cumulative-timestamp": [
+                39097
+            ],
+            "current-power": [
+                62
+            ],
+            "max-force": [
+                237
+            ],
+            "max-force-angle": [
+                99
+            ],
+            "min-force": [
+                -53
+            ],
+            "min-force-angle": [
+                286
+            ],
+            "top-dead-spot": [
+                24
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                212
+            ],
+            "cumulative-revolutions": [
+                11
+            ],
+            "cumulative-timestamp": [
+                39982
+            ],
+            "current-power": [
+                48
+            ],
+            "max-force": [
+                221
+            ],
+            "max-force-angle": [
+                97
+            ],
+            "min-force": [
+                -80
+            ],
+            "min-force-angle": [
+                269
+            ],
+            "top-dead-spot": [
+                20
+            ]
+        },
+        {
+            "cumulative-revolutions": [
+                12
+            ],
+            "cumulative-timestamp": [
+                40453
+            ],
+            "current-power": [
+                -24
+            ],
+            "max-force": [
+                1.8446744073709552e+19
+            ],
+            "max-force-angle": [
+                45
+            ],
+            "min-force": [
+                -29
+            ],
+            "min-force-angle": [
+                13
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                270
+            ],
+            "cumulative-revolutions": [
+                13
+            ],
+            "cumulative-timestamp": [
+                41535
+            ],
+            "current-power": [
+                19
+            ],
+            "max-force": [
+                82
+            ],
+            "max-force-angle": [
+                145
+            ],
+            "min-force": [
+                -22
+            ],
+            "min-force-angle": [
+                349
+            ],
+            "top-dead-spot": [
+                35
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                226
+            ],
+            "cumulative-revolutions": [
+                14
+            ],
+            "cumulative-timestamp": [
+                42535
+            ],
+            "current-power": [
+                76
+            ],
+            "max-force": [
+                245
+            ],
+            "max-force-angle": [
+                90
+            ],
+            "min-force": [
+                -16
+            ],
+            "min-force-angle": [
+                327
+            ],
+            "top-dead-spot": [
+                23
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                288
+            ],
+            "cumulative-revolutions": [
+                16
+            ],
+            "cumulative-timestamp": [
+                44316
+            ],
+            "current-power": [
+                66
+            ],
+            "max-force": [
+                207
+            ],
+            "max-force-angle": [
+                92
+            ],
+            "min-force": [
+                -25
+            ],
+            "min-force-angle": [
+                347
+            ],
+            "top-dead-spot": [
+                33
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                252
+            ],
+            "cumulative-revolutions": [
+                17
+            ],
+            "cumulative-timestamp": [
+                45148
+            ],
+            "current-power": [
+                71
+            ],
+            "max-force": [
+                200
+            ],
+            "max-force-angle": [
+                89
+            ],
+            "min-force": [
+                -27
+            ],
+            "min-force-angle": [
+                333
+            ],
+            "top-dead-spot": [
+                28
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                223
+            ],
+            "cumulative-revolutions": [
+                18
+            ],
+            "cumulative-timestamp": [
+                45965
+            ],
+            "current-power": [
+                65
+            ],
+            "max-force": [
+                199
+            ],
+            "max-force-angle": [
+                99
+            ],
+            "min-force": [
+                -24
+            ],
+            "min-force-angle": [
+                305
+            ],
+            "top-dead-spot": [
+                36
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                221
+            ],
+            "cumulative-revolutions": [
+                19
+            ],
+            "cumulative-timestamp": [
+                46768
+            ],
+            "current-power": [
+                58
+            ],
+            "max-force": [
+                164
+            ],
+            "max-force-angle": [
+                94
+            ],
+            "min-force": [
+                -25
+            ],
+            "min-force-angle": [
+                347
+            ],
+            "top-dead-spot": [
+                30
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                211
+            ],
+            "cumulative-revolutions": [
+                21
+            ],
+            "cumulative-timestamp": [
+                48341
+            ],
+            "current-power": [
+                63
+            ],
+            "max-force": [
+                172
+            ],
+            "max-force-angle": [
+                102
+            ],
+            "min-force": [
+                -26
+            ],
+            "min-force-angle": [
+                340
+            ],
+            "top-dead-spot": [
+                16
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                221
+            ],
+            "cumulative-revolutions": [
+                22
+            ],
+            "cumulative-timestamp": [
+                49121
+            ],
+            "current-power": [
+                62
+            ],
+            "max-force": [
+                190
+            ],
+            "max-force-angle": [
+                112
+            ],
+            "min-force": [
+                -40
+            ],
+            "min-force-angle": [
+                264
+            ],
+            "top-dead-spot": [
+                25
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                210
+            ],
+            "cumulative-revolutions": [
+                23
+            ],
+            "cumulative-timestamp": [
+                49901
+            ],
+            "current-power": [
+                44
+            ],
+            "max-force": [
+                162
+            ],
+            "max-force-angle": [
+                123
+            ],
+            "min-force": [
+                -44
+            ],
+            "min-force-angle": [
+                275
+            ],
+            "top-dead-spot": [
+                36
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                221
+            ],
+            "cumulative-revolutions": [
+                25
+            ],
+            "cumulative-timestamp": [
+                51548
+            ],
+            "current-power": [
+                45
+            ],
+            "max-force": [
+                169
+            ],
+            "max-force-angle": [
+                112
+            ],
+            "min-force": [
+                -63
+            ],
+            "min-force-angle": [
+                287
+            ],
+            "top-dead-spot": [
+                25
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                197
+            ],
+            "cumulative-revolutions": [
+                26
+            ],
+            "cumulative-timestamp": [
+                52513
+            ],
+            "current-power": [
+                0
+            ],
+            "max-force": [
+                101
+            ],
+            "max-force-angle": [
+                110
+            ],
+            "min-force": [
+                -84
+            ],
+            "min-force-angle": [
+                250
+            ],
+            "top-dead-spot": [
+                22
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                197
+            ],
+            "cumulative-revolutions": [
+                26
+            ],
+            "cumulative-timestamp": [
+                52513
+            ],
+            "current-power": [
+                0
+            ],
+            "max-force": [
+                101
+            ],
+            "max-force-angle": [
+                110
+            ],
+            "min-force": [
+                -84
+            ],
+            "min-force-angle": [
+                250
+            ],
+            "top-dead-spot": [
+                22
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                220
+            ],
+            "cumulative-revolutions": [
+                28
+            ],
+            "cumulative-timestamp": [
+                54930
+            ],
+            "current-power": [
+                5
+            ],
+            "max-force": [
+                111
+            ],
+            "max-force-angle": [
+                128
+            ],
+            "min-force": [
+                -139
+            ],
+            "min-force-angle": [
+                340
+            ],
+            "top-dead-spot": [
+                22
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                215
+            ],
+            "cumulative-revolutions": [
+                30
+            ],
+            "cumulative-timestamp": [
+                56662
+            ],
+            "current-power": [
+                158
+            ],
+            "max-force": [
+                575
+            ],
+            "max-force-angle": [
+                122
+            ],
+            "min-force": [
+                -69
+            ],
+            "min-force-angle": [
+                331
+            ],
+            "top-dead-spot": [
+                29
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                214
+            ],
+            "cumulative-revolutions": [
+                31
+            ],
+            "cumulative-timestamp": [
+                57277
+            ],
+            "current-power": [
+                140
+            ],
+            "max-force": [
+                488
+            ],
+            "max-force-angle": [
+                131
+            ],
+            "min-force": [
+                -103
+            ],
+            "min-force-angle": [
+                324
+            ],
+            "top-dead-spot": [
+                21
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                211
+            ],
+            "cumulative-revolutions": [
+                33
+            ],
+            "cumulative-timestamp": [
+                58391
+            ],
+            "current-power": [
+                133
+            ],
+            "max-force": [
+                321
+            ],
+            "max-force-angle": [
+                88
+            ],
+            "min-force": [
+                -121
+            ],
+            "min-force-angle": [
+                272
+            ],
+            "top-dead-spot": [
+                27
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                233
+            ],
+            "cumulative-revolutions": [
+                35
+            ],
+            "cumulative-timestamp": [
+                59550
+            ],
+            "current-power": [
+                47
+            ],
+            "max-force": [
+                140
+            ],
+            "max-force-angle": [
+                91
+            ],
+            "min-force": [
+                -65
+            ],
+            "min-force-angle": [
+                290
+            ],
+            "top-dead-spot": [
+                33
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                233
+            ],
+            "cumulative-revolutions": [
+                36
+            ],
+            "cumulative-timestamp": [
+                59766
+            ],
+            "current-power": [
+                0
+            ],
+            "max-force": [
+                25
+            ],
+            "max-force-angle": [
+                210
+            ],
+            "min-force": [
+                -50
+            ],
+            "min-force-angle": [
+                6
+            ],
+            "top-dead-spot": [
+                131
+            ]
+        },
+        {
+            "cumulative-revolutions": [
+                36
+            ],
+            "cumulative-timestamp": [
+                59766
+            ],
+            "current-power": [
+                0
+            ]
+        },
+        {
+            "cumulative-revolutions": [
+                37
+            ],
+            "cumulative-timestamp": [
+                62448
+            ],
+            "current-power": [
+                0
+            ],
+            "max-force": [
+                1.8446744073709552e+19
+            ],
+            "max-force-angle": [
+                339
+            ],
+            "min-force": [
+                -91
+            ],
+            "min-force-angle": [
+                28
+            ]
+        }
+    ],
     "record-interval": [
         {
             "seconds": [
                 1
+            ]
+        }
+    ],
+    "right-pedal-power": [
+        {
+            "cumulative-revolutions": [
+                1
+            ],
+            "cumulative-timestamp": [
+                10611
+            ],
+            "current-power": [
+                0
+            ]
+        },
+        {
+            "cumulative-revolutions": [
+                1
+            ],
+            "cumulative-timestamp": [
+                10611
+            ],
+            "current-power": [
+                0
+            ]
+        },
+        {
+            "cumulative-revolutions": [
+                1
+            ],
+            "cumulative-timestamp": [
+                10611
+            ],
+            "current-power": [
+                0
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                215
+            ],
+            "cumulative-revolutions": [
+                2
+            ],
+            "cumulative-timestamp": [
+                28393
+            ],
+            "current-power": [
+                0
+            ],
+            "max-force": [
+                286
+            ],
+            "max-force-angle": [
+                105
+            ],
+            "min-force": [
+                -78
+            ],
+            "min-force-angle": [
+                328
+            ],
+            "top-dead-spot": [
+                48
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                226
+            ],
+            "cumulative-revolutions": [
+                3
+            ],
+            "cumulative-timestamp": [
+                29656
+            ],
+            "current-power": [
+                30
+            ],
+            "max-force": [
+                165
+            ],
+            "max-force-angle": [
+                107
+            ],
+            "min-force": [
+                -55
+            ],
+            "min-force-angle": [
+                293
+            ],
+            "top-dead-spot": [
+                27
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                227
+            ],
+            "cumulative-revolutions": [
+                4
+            ],
+            "cumulative-timestamp": [
+                30959
+            ],
+            "current-power": [
+                25
+            ],
+            "max-force": [
+                165
+            ],
+            "max-force-angle": [
+                127
+            ],
+            "min-force": [
+                -77
+            ],
+            "min-force-angle": [
+                305
+            ],
+            "top-dead-spot": [
+                23
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                227
+            ],
+            "cumulative-revolutions": [
+                4
+            ],
+            "cumulative-timestamp": [
+                30959
+            ],
+            "current-power": [
+                25
+            ],
+            "max-force": [
+                165
+            ],
+            "max-force-angle": [
+                127
+            ],
+            "min-force": [
+                -77
+            ],
+            "min-force-angle": [
+                305
+            ],
+            "top-dead-spot": [
+                23
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                227
+            ],
+            "cumulative-revolutions": [
+                4
+            ],
+            "cumulative-timestamp": [
+                30959
+            ],
+            "current-power": [
+                25
+            ],
+            "max-force": [
+                165
+            ],
+            "max-force-angle": [
+                127
+            ],
+            "min-force": [
+                -77
+            ],
+            "min-force-angle": [
+                305
+            ],
+            "top-dead-spot": [
+                23
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                226
+            ],
+            "cumulative-revolutions": [
+                5
+            ],
+            "cumulative-timestamp": [
+                32416
+            ],
+            "current-power": [
+                31
+            ],
+            "max-force": [
+                222
+            ],
+            "max-force-angle": [
+                122
+            ],
+            "min-force": [
+                -84
+            ],
+            "min-force-angle": [
+                307
+            ],
+            "top-dead-spot": [
+                28
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                223
+            ],
+            "cumulative-revolutions": [
+                6
+            ],
+            "cumulative-timestamp": [
+                34000
+            ],
+            "current-power": [
+                21
+            ],
+            "max-force": [
+                173
+            ],
+            "max-force-angle": [
+                120
+            ],
+            "min-force": [
+                -90
+            ],
+            "min-force-angle": [
+                319
+            ],
+            "top-dead-spot": [
+                34
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                223
+            ],
+            "cumulative-revolutions": [
+                6
+            ],
+            "cumulative-timestamp": [
+                34000
+            ],
+            "current-power": [
+                21
+            ],
+            "max-force": [
+                173
+            ],
+            "max-force-angle": [
+                120
+            ],
+            "min-force": [
+                -90
+            ],
+            "min-force-angle": [
+                319
+            ],
+            "top-dead-spot": [
+                34
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                248
+            ],
+            "cumulative-revolutions": [
+                7
+            ],
+            "cumulative-timestamp": [
+                35603
+            ],
+            "current-power": [
+                51
+            ],
+            "max-force": [
+                347
+            ],
+            "max-force-angle": [
+                121
+            ],
+            "min-force": [
+                -66
+            ],
+            "min-force-angle": [
+                322
+            ],
+            "top-dead-spot": [
+                47
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                248
+            ],
+            "cumulative-revolutions": [
+                8
+            ],
+            "cumulative-timestamp": [
+                36713
+            ],
+            "current-power": [
+                61
+            ],
+            "max-force": [
+                298
+            ],
+            "max-force-angle": [
+                117
+            ],
+            "min-force": [
+                -28
+            ],
+            "min-force-angle": [
+                355
+            ],
+            "top-dead-spot": [
+                40
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                248
+            ],
+            "cumulative-revolutions": [
+                8
+            ],
+            "cumulative-timestamp": [
+                36713
+            ],
+            "current-power": [
+                61
+            ],
+            "max-force": [
+                298
+            ],
+            "max-force-angle": [
+                117
+            ],
+            "min-force": [
+                -28
+            ],
+            "min-force-angle": [
+                355
+            ],
+            "top-dead-spot": [
+                40
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                246
+            ],
+            "cumulative-revolutions": [
+                9
+            ],
+            "cumulative-timestamp": [
+                37699
+            ],
+            "current-power": [
+                71
+            ],
+            "max-force": [
+                248
+            ],
+            "max-force-angle": [
+                110
+            ],
+            "min-force": [
+                -27
+            ],
+            "min-force-angle": [
+                298
+            ],
+            "top-dead-spot": [
+                41
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                235
+            ],
+            "cumulative-revolutions": [
+                10
+            ],
+            "cumulative-timestamp": [
+                38608
+            ],
+            "current-power": [
+                71
+            ],
+            "max-force": [
+                238
+            ],
+            "max-force-angle": [
+                117
+            ],
+            "min-force": [
+                -27
+            ],
+            "min-force-angle": [
+                254
+            ],
+            "top-dead-spot": [
+                24
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                232
+            ],
+            "cumulative-revolutions": [
+                11
+            ],
+            "cumulative-timestamp": [
+                39476
+            ],
+            "current-power": [
+                58
+            ],
+            "max-force": [
+                202
+            ],
+            "max-force-angle": [
+                106
+            ],
+            "min-force": [
+                -29
+            ],
+            "min-force-angle": [
+                271
+            ],
+            "top-dead-spot": [
+                28
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                336
+            ],
+            "cumulative-revolutions": [
+                12
+            ],
+            "cumulative-timestamp": [
+                41021
+            ],
+            "current-power": [
+                29
+            ],
+            "max-force": [
+                168
+            ],
+            "max-force-angle": [
+                151
+            ],
+            "min-force": [
+                -30
+            ],
+            "min-force-angle": [
+                20
+            ],
+            "top-dead-spot": [
+                75
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                328
+            ],
+            "cumulative-revolutions": [
+                13
+            ],
+            "cumulative-timestamp": [
+                41990
+            ],
+            "current-power": [
+                70
+            ],
+            "max-force": [
+                214
+            ],
+            "max-force-angle": [
+                125
+            ],
+            "min-force": [
+                -8
+            ],
+            "min-force-angle": [
+                3
+            ],
+            "top-dead-spot": [
+                38
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                328
+            ],
+            "cumulative-revolutions": [
+                13
+            ],
+            "cumulative-timestamp": [
+                41990
+            ],
+            "current-power": [
+                70
+            ],
+            "max-force": [
+                214
+            ],
+            "max-force-angle": [
+                125
+            ],
+            "min-force": [
+                -8
+            ],
+            "min-force-angle": [
+                3
+            ],
+            "top-dead-spot": [
+                38
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                244
+            ],
+            "cumulative-revolutions": [
+                18
+            ],
+            "cumulative-timestamp": [
+                46240
+            ],
+            "current-power": [
+                77
+            ],
+            "max-force": [
+                187
+            ],
+            "max-force-angle": [
+                114
+            ],
+            "min-force": [
+                -8
+            ],
+            "min-force-angle": [
+                286
+            ],
+            "top-dead-spot": [
+                30
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                242
+            ],
+            "cumulative-revolutions": [
+                19
+            ],
+            "cumulative-timestamp": [
+                47020
+            ],
+            "current-power": [
+                74
+            ],
+            "max-force": [
+                174
+            ],
+            "max-force-angle": [
+                121
+            ],
+            "min-force": [
+                -9
+            ],
+            "min-force-angle": [
+                285
+            ],
+            "top-dead-spot": [
+                34
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                230
+            ],
+            "cumulative-revolutions": [
+                20
+            ],
+            "cumulative-timestamp": [
+                47814
+            ],
+            "current-power": [
+                65
+            ],
+            "max-force": [
+                158
+            ],
+            "max-force-angle": [
+                126
+            ],
+            "min-force": [
+                -19
+            ],
+            "min-force-angle": [
+                294
+            ],
+            "top-dead-spot": [
+                41
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                260
+            ],
+            "cumulative-revolutions": [
+                21
+            ],
+            "cumulative-timestamp": [
+                48563
+            ],
+            "current-power": [
+                74
+            ],
+            "max-force": [
+                163
+            ],
+            "max-force-angle": [
+                127
+            ],
+            "min-force": [
+                -15
+            ],
+            "min-force-angle": [
+                306
+            ],
+            "top-dead-spot": [
+                36
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                257
+            ],
+            "cumulative-revolutions": [
+                23
+            ],
+            "cumulative-timestamp": [
+                50130
+            ],
+            "current-power": [
+                69
+            ],
+            "max-force": [
+                150
+            ],
+            "max-force-angle": [
+                121
+            ],
+            "min-force": [
+                -6
+            ],
+            "min-force-angle": [
+                279
+            ],
+            "top-dead-spot": [
+                31
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                228
+            ],
+            "cumulative-revolutions": [
+                24
+            ],
+            "cumulative-timestamp": [
+                50991
+            ],
+            "current-power": [
+                6
+            ],
+            "max-force": [
+                93
+            ],
+            "max-force-angle": [
+                124
+            ],
+            "min-force": [
+                -99
+            ],
+            "min-force-angle": [
+                287
+            ],
+            "top-dead-spot": [
+                45
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                218
+            ],
+            "cumulative-revolutions": [
+                25
+            ],
+            "cumulative-timestamp": [
+                51962
+            ],
+            "current-power": [
+                15
+            ],
+            "max-force": [
+                114
+            ],
+            "max-force-angle": [
+                102
+            ],
+            "min-force": [
+                -87
+            ],
+            "min-force-angle": [
+                288
+            ],
+            "top-dead-spot": [
+                32
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                219
+            ],
+            "cumulative-revolutions": [
+                26
+            ],
+            "cumulative-timestamp": [
+                53082
+            ],
+            "current-power": [
+                19
+            ],
+            "max-force": [
+                114
+            ],
+            "max-force-angle": [
+                101
+            ],
+            "min-force": [
+                -66
+            ],
+            "min-force-angle": [
+                279
+            ],
+            "top-dead-spot": [
+                25
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                216
+            ],
+            "cumulative-revolutions": [
+                27
+            ],
+            "cumulative-timestamp": [
+                54381
+            ],
+            "current-power": [
+                88
+            ],
+            "max-force": [
+                451
+            ],
+            "max-force-angle": [
+                129
+            ],
+            "min-force": [
+                -75
+            ],
+            "min-force-angle": [
+                294
+            ],
+            "top-dead-spot": [
+                25
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                219
+            ],
+            "cumulative-revolutions": [
+                28
+            ],
+            "cumulative-timestamp": [
+                55316
+            ],
+            "current-power": [
+                113
+            ],
+            "max-force": [
+                569
+            ],
+            "max-force-angle": [
+                149
+            ],
+            "min-force": [
+                -53
+            ],
+            "min-force-angle": [
+                328
+            ],
+            "top-dead-spot": [
+                58
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                233
+            ],
+            "cumulative-revolutions": [
+                29
+            ],
+            "cumulative-timestamp": [
+                56068
+            ],
+            "current-power": [
+                147
+            ],
+            "max-force": [
+                554
+            ],
+            "max-force-angle": [
+                143
+            ],
+            "min-force": [
+                -60
+            ],
+            "min-force-angle": [
+                8
+            ],
+            "top-dead-spot": [
+                53
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                216
+            ],
+            "cumulative-revolutions": [
+                31
+            ],
+            "cumulative-timestamp": [
+                57247
+            ],
+            "current-power": [
+                116
+            ],
+            "max-force": [
+                351
+            ],
+            "max-force-angle": [
+                102
+            ],
+            "min-force": [
+                -81
+            ],
+            "min-force-angle": [
+                278
+            ],
+            "top-dead-spot": [
+                41
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                237
+            ],
+            "cumulative-revolutions": [
+                33
+            ],
+            "cumulative-timestamp": [
+                58377
+            ],
+            "current-power": [
+                47
+            ],
+            "max-force": [
+                130
+            ],
+            "max-force-angle": [
+                110
+            ],
+            "min-force": [
+                -60
+            ],
+            "min-force-angle": [
+                266
+            ],
+            "top-dead-spot": [
+                51
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                280
+            ],
+            "cumulative-revolutions": [
+                35
+            ],
+            "cumulative-timestamp": [
+                59179
+            ],
+            "current-power": [
+                0
+            ],
+            "max-force": [
+                24
+            ],
+            "max-force-angle": [
+                210
+            ],
+            "min-force": [
+                -29
+            ],
+            "min-force-angle": [
+                358
+            ],
+            "top-dead-spot": [
+                51
+            ]
+        },
+        {
+            "bottom-dead-spot": [
+                280
+            ],
+            "cumulative-revolutions": [
+                35
+            ],
+            "cumulative-timestamp": [
+                59179
+            ],
+            "current-power": [
+                0
+            ],
+            "max-force": [
+                24
+            ],
+            "max-force-angle": [
+                210
+            ],
+            "min-force": [
+                -29
+            ],
+            "min-force-angle": [
+                358
+            ],
+            "top-dead-spot": [
+                51
+            ]
+        },
+        {
+            "cumulative-revolutions": [
+                35
+            ],
+            "cumulative-timestamp": [
+                59179
+            ],
+            "current-power": [
+                0
             ]
         }
     ],
