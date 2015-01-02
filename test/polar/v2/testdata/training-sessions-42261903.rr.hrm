@@ -1,0 +1,65 @@
+[Params]
+Version=106
+Monitor=1
+SMode=000000000
+Date=20141229
+StartTime=12:58:44.0
+Length=00:00:35.8
+Interval=238
+Upper1=187
+Lower1=168
+Upper2=0
+Lower2=0
+Upper3=0
+Lower3=0
+Timer1=00:00:00.0
+Timer2=00:00:00.0
+Timer3=00:00:00.0
+ActiveLimit=0
+MaxHR=187
+RestHR=45
+StartDelay=0
+VO2max=54
+Weight=78
+
+[Note]
+Inomhuscykling
+
+[HRZones]
+168
+150
+131
+112
+94
+0
+0
+0
+0
+0
+0
+[SwapTimes]
+
+[Summary-123]
+36	0	0	0	0	36
+0	0	0	0	0	0
+0	0	0	0
+0	0	0	0	0	0
+0	0	0	0
+0	36
+
+[Summary-TH]
+36	0	0	0	0	36
+187	163	136	45
+0	36
+
+[Trip]
+0
+0
+36
+0
+0
+0
+0
+0
+
+[HRData]

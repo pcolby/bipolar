@@ -1,0 +1,277 @@
+{
+    "11": [
+        0
+    ],
+    "heartrate": [
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        0
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        112
+                    ],
+                    "low": [
+                        94
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        0
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        131
+                    ],
+                    "low": [
+                        112
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        0
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        150
+                    ],
+                    "low": [
+                        131
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        0
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        168
+                    ],
+                    "low": [
+                        150
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        0
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        187
+                    ],
+                    "low": [
+                        168
+                    ]
+                }
+            ]
+        }
+    ],
+    "heartrate-source": [
+        0
+    ],
+    "power": [
+        {
+            "duration": [
+                {
+                    "4": [
+                        0
+                    ],
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        0
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        175
+                    ],
+                    "low": [
+                        150
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "4": [
+                        0
+                    ],
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        0
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        200
+                    ],
+                    "low": [
+                        175
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "4": [
+                        0
+                    ],
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        0
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        225
+                    ],
+                    "low": [
+                        200
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "4": [
+                        0
+                    ],
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        1
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        250
+                    ],
+                    "low": [
+                        225
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "4": [
+                        0
+                    ],
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        2
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        2000
+                    ],
+                    "low": [
+                        250
+                    ]
+                }
+            ]
+        }
+    ]
+}

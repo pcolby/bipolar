@@ -1,0 +1,396 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TrainingCenterDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" xsi:schemaLocation="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd" xmlns:ax2="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+  <Activities>
+    <Activity Sport="Biking">
+      <Id>2014-12-29T12:58:44+01:00</Id>
+      <Lap StartTime="2014-12-29T12:58:44+01:00">
+        <TotalTimeSeconds>35.75</TotalTimeSeconds>
+        <DistanceMeters>0</DistanceMeters>
+        <Calories>2</Calories>
+        <Intensity>Active</Intensity>
+        <Cadence>62</Cadence>
+        <TriggerMethod>Manual</TriggerMethod>
+        <Track>
+          <Trackpoint>
+            <Time>2014-12-29T12:58:44+01:00</Time>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2"/>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:58:45+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>0</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:58:46+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>0</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:58:47+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>0</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:58:48+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>0</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:58:49+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>0</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:58:50+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>0</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:58:51+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>0</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:58:52+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>0</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:58:53+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>39</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:58:54+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>39</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:58:55+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>39</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:58:56+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>47</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:58:57+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>47</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:58:58+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>55</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:58:59+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>61</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:59:00+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>66</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:59:01+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>53</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:59:02+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>58</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:59:03+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>58</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:59:04+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>75</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:59:05+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>77</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:59:06+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>77</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:59:07+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>80</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:59:08+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>79</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:59:09+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>75</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:59:10+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>69</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:59:11+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>62</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:59:12+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>55</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:59:13+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>60</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:59:14+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>71</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:59:15+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>96</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:59:16+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>106</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:59:17+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>106</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:59:18+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>51</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+          <Trackpoint>
+            <Time>2014-12-29T12:59:19+01:00</Time>
+            <DistanceMeters>0</DistanceMeters>
+            <Cadence>26</Cadence>
+            <Extensions>
+              <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
+          </Trackpoint>
+        </Track>
+        <Extensions>
+          <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+            <MaxBikeCadence>106</MaxBikeCadence>
+            <AvgRunCadence>62</AvgRunCadence>
+          </LX>
+        </Extensions>
+      </Lap>
+    </Activity>
+  </Activities>
+  <Author xsi:type="Application_t">
+    <Name>Bipolar</Name>
+    <Build>
+      <Version>
+        <VersionMajor>1</VersionMajor>
+        <VersionMinor>2</VersionMinor>
+        <BuildMajor>3</BuildMajor>
+        <BuildMinor>4</BuildMinor>
+      </Version>
+      <Type>Release</Type>
+      <Time>Jul 17 2014 21:02:38</Time>
+      <Builder>unit tests</Builder>
+    </Build>
+    <LangID>EN</LangID>
+    <PartNumber>434-F4C42-59</PartNumber>
+  </Author>
+</TrainingCenterDatabase>
