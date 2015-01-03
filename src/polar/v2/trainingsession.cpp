@@ -1390,9 +1390,13 @@ QStringList TrainingSession::toHRM(const bool rrDataOnly) const
 
         const QVariantList rrsamples  = map.value(RRSAMPLES).toMap().value(QLatin1String("value")).toList();
 
-        const bool haveAltitude = ((!rrDataOnly) && (haveAnySamples(samples, QLatin1String("speed"))));
-        const bool haveCadence  = ((!rrDataOnly) && (haveAnySamples(samples, QLatin1String("cadence"))));
-        const bool haveSpeed    = ((!rrDataOnly) && (haveAnySamples(samples, QLatin1String("altitude"))));
+        const bool haveAltitude     = ((!rrDataOnly) && (haveAnySamples(samples, QLatin1String("speed"))));
+        const bool haveCadence      = ((!rrDataOnly) && (haveAnySamples(samples, QLatin1String("cadence"))));
+        const bool havePowerLeft    = ((!rrDataOnly) && (haveAnySamples(samples, QLatin1String("left-pedal-power"))));
+        const bool havePowerRight   = ((!rrDataOnly) && (haveAnySamples(samples, QLatin1String("right-pedal-power"))));
+        const bool havePower        = (havePowerLeft || havePowerRight);
+        const bool havePowerBalance = (havePowerLeft && havePowerRight);
+        const bool haveSpeed        = ((!rrDataOnly) && (haveAnySamples(samples, QLatin1String("altitude"))));
 
         QString hrmData;
         QTextStream stream(&hrmData);
@@ -1403,13 +1407,13 @@ QStringList TrainingSession::toHRM(const bool rrDataOnly) const
             "Version=106\r\n"
             "Monitor=1\r\n"
             "SMode=";
-        stream << (haveSpeed    ? '1' : '0'); // a) Speed
-        stream << (haveCadence  ? '1' : '0'); // b) Cadence
-        stream << (haveAltitude ? '1' : '0'); // c) Altitude
+        stream << (haveSpeed        ? '1' : '0'); // a) Speed
+        stream << (haveCadence      ? '1' : '0'); // b) Cadence
+        stream << (haveAltitude     ? '1' : '0'); // c) Altitude
+        stream << (havePower        ? '1' : '0'); // d) Power
+        stream << (havePowerBalance ? '1' : '0'); // e) Power Left Right Balance
         stream <<
-            "0" // d) Power (not supported by V800 yet).
-            "0" // e) Power Left Right Ballance (not supported by V800 yet).
-            "0" // f) Power Pedalling Index (not supported by V800 yet).
+            "0" // f) Power Pedalling Index (does not appear to be supported by FlowSync).
             "0" // g) HR/CC data (available only with Polar XTrainer Plus).
             "0" // h) US / Euro unit (always metric).
             "0" // i) Air pressure (not available).
@@ -1545,7 +1549,7 @@ QStringList TrainingSession::toHRM(const bool rrDataOnly) const
                 stream << '\t' << first(hrStats.value(QLatin1String("maximum"))).toUInt();
                 stream << "\r\n";
                 // Row 2
-                stream << "28";
+                stream << "28"; // All three "extra data" fields present (on row 3).
                 stream << "\t0"; // Recovery time (seconds); data not available.
                 stream << "\t0"; // Recovery HR (bpm); data not available.
                 stream << "\t" << qRound(first(firstMap(stats.value(QLatin1String("speed")))
@@ -1554,8 +1558,14 @@ QStringList TrainingSession::toHRM(const bool rrDataOnly) const
                     .value(QLatin1String("maximum"))).toUInt();
                 stream << "\t0"; // Momentary altitude; not available per lap.
                 stream << "\r\n";
-                // Row 3
-                stream << qRound(first(header.value(QLatin1String("descent"))).toFloat() * 10.0);
+                // Row 3: HRM allows up to three "extra data" fields. Here we
+                // choose to leave out descent if power is available.
+                if (havePower) {
+                    stream << first(firstMap(header.value(QLatin1String("power")))
+                        .value(QLatin1String("average"))).toUInt() * 10;
+                } else {
+                    stream << qRound(first(header.value(QLatin1String("descent"))).toFloat() * 10.0);
+                }
                 stream << '\t' << (first(firstMap(stats.value(QLatin1String("pedaling")))
                     .value(QLatin1String("average"))).toUInt() * 10);
                 stream << '\t' << qRound(first(firstMap(stats.value(QLatin1String("incline")))
@@ -1607,7 +1617,11 @@ QStringList TrainingSession::toHRM(const bool rrDataOnly) const
         // all multiplied by 10, to extra data can hold 0..300 units.
         if (!laps.isEmpty()) {
             stream << "\r\n[ExtraData]\r\n";
-            stream << "Descent\r\nMeters\t1000\t0\r\n";
+            if (havePower) {
+                stream << "Power\r\nW\t3000\t0\r\n";
+            } else {
+                stream << "Descent\r\nMeters\t1000\t0\r\n";
+            }
             stream << "Pedaling Index\r\n%\t100\t0\r\n";
             stream << "Max Incline\r\nDegrees\t90\t0\r\n";
         }
@@ -1702,15 +1716,17 @@ QStringList TrainingSession::toHRM(const bool rrDataOnly) const
                 stream << sample.toUInt() << "\r\n";
             }
         } else {
-            const QVariantList altitude = samples.value(QLatin1String("altitude")).toList();
-            const QVariantList cadence  = samples.value(QLatin1String("cadence")).toList();
-            const QVariantList speed    = samples.value(QLatin1String("speed")).toList();
+            const QVariantList altitude   = samples.value(QLatin1String("altitude")).toList();
+            const QVariantList cadence    = samples.value(QLatin1String("cadence")).toList();
+            const QVariantList speed      = samples.value(QLatin1String("speed")).toList();
+            const QVariantList powerLeft  = samples.value(QLatin1String("left-pedal-power")).toList();
+            const QVariantList powerRight = samples.value(QLatin1String("right-pedal-power")).toList();
             for (int index = 0; index < heartrate.length(); ++index) {
                 stream << ((index < heartrate.length())
                     ? heartrate.at(index).toUInt() : (uint)0);
                 if (haveSpeed) {
                     stream << '\t' << ((index < speed.length())
-                        ? qRound(speed.at(index).toFloat() * 10.0) : ( int)0);
+                        ? qRound(speed.at(index).toFloat() * 10.0) : (int)0);
                 }
                 if (haveCadence) {
                     stream << '\t' << ((index < cadence.length())
@@ -1718,10 +1734,26 @@ QStringList TrainingSession::toHRM(const bool rrDataOnly) const
                 }
                 if (haveAltitude) {
                     stream << '\t' << ((index < altitude.length())
-                        ? qRound(altitude.at(index).toFloat()) : ( int)0);
+                        ? qRound(altitude.at(index).toFloat()) : (int)0);
                 }
-                // Power (Watts) - not yet supported by Polar.
-                // Power Balance and Pedalling Index - not yet supported by Polar.
+                if (havePower) {
+                    const int currentPowerLeft = (index < powerLeft.length()) ?
+                        first(powerLeft.at(index).toMap().value(QLatin1String("current-power"))).toInt() : 0;
+                    const int currentPowerRight = (index < powerRight.length()) ?
+                        first(powerRight.at(index).toMap().value(QLatin1String("current-power"))).toInt() : 0;
+                    const int currentPower = currentPowerLeft + currentPowerRight;
+                    stream << '\t' << currentPower;
+                    if (havePowerBalance) {
+                        // Convert the left and right powers into a left-right balance percentage.
+                        const int leftBalance = (currentPower == 0) ? 0 :
+                            qRound(100.0 * (float)currentPowerLeft / (float)currentPower);
+                        if (leftBalance > 100) {
+                            qWarning() << "leftBalance of " << leftBalance << "% is greater than 100%";
+                        }
+                        /// @todo Include Pedalling Index here, if/when available.
+                        stream << '\t' << qMax(qMin(leftBalance, 255), 0);
+                    }
+                }
                 // Air pressure - not available in protobuf data.
                 stream << "\r\n";
             }
