@@ -1490,6 +1490,84 @@ void TestTrainingSession::toTCX_GarminActivity()
     }
 }
 
+void TestTrainingSession::toTCX_GarminCourse_data()
+{
+    QTest::addColumn<QString>("baseName");
+    QTest::addColumn<QByteArray>("expected");
+
+    #define LOAD_TEST_DATA(name) { \
+        QFile expectedFile(QFINDTESTDATA("testdata/" name ".garmin-course.tcx")); \
+        QString baseName(expectedFile.fileName()); \
+        baseName.chop(18); \
+        expectedFile.open(QIODevice::ReadOnly); \
+        QTest::newRow(name) << baseName << expectedFile.readAll(); \
+    }
+
+    LOAD_TEST_DATA("training-sessions-1");
+    LOAD_TEST_DATA("training-sessions-2");
+    LOAD_TEST_DATA("training-sessions-19401412");
+    LOAD_TEST_DATA("training-sessions-19946380");
+    LOAD_TEST_DATA("training-sessions-22165267");
+    LOAD_TEST_DATA("training-sessions-42261903");
+
+    #undef LOAD_TEST_DATA
+}
+
+void TestTrainingSession::toTCX_GarminCourse()
+{
+    QFETCH(QString, baseName);
+    QFETCH(QByteArray, expected);
+
+    // Parse the route (protobuf) message.
+    polar::v2::TrainingSession session(baseName);
+    QVERIFY(session.parse());
+    session.setTcxOption(polar::v2::TrainingSession::GarminCourseExtension);
+    QDomDocument tcx = session.toTCX(QLatin1String("Jul 17 2014 21:02:38"));
+
+    // Write the result to an XML file for optional post-mortem investigations.
+#ifdef Q_OS_WIN
+    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.garmin-course.tcx")
+#else
+    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.garmin-course.tcx")
+#endif
+        .arg(QString::fromLatin1(QTest::currentDataTag())));
+    if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+        file.write(tcx.toByteArray(2));
+    }
+    file.close();
+
+    // Compare the generated document against the expected result.
+    QDomDocument expectedDoc;
+    expectedDoc.setContent(expected);
+    compare(tcx, expectedDoc);
+
+    // Validate the generated document against the relevant XML schema.
+    tcx.documentElement().removeAttribute(QLatin1String("xsi:schemaLocation"));
+    {   // The base TCX V2 schema.
+        QFile xsd(QFINDTESTDATA("schemata/TrainingCenterDatabasev2.xsd"));
+        QVERIFY(xsd.open(QIODevice::ReadOnly));
+        QXmlSchema schema;
+        QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
+        QXmlSchemaValidator validator(schema);
+        QVERIFY(validator.validate(tcx.toByteArray()));
+    }
+
+    {   // The Garmin Course Extension V1 schema's CX elements.
+        const QDomNodeList cxNodes = tcx.elementsByTagName(QLatin1String("CX"));
+        QFile xsd(QFINDTESTDATA("schemata/CourseExtensionv1.xsd"));
+        QVERIFY(xsd.open(QIODevice::ReadOnly));
+        QXmlSchema schema;
+        QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
+        QXmlSchemaValidator validator(schema);
+        for (int index = 0; index < cxNodes.length(); ++index) {
+            QByteArray byteArray;
+            QTextStream stream(&byteArray);
+            stream << cxNodes.at(index);
+            QVERIFY(validator.validate(byteArray));
+        }
+    }
+}
+
 void TestTrainingSession::toTCX_UTC_data()
 {
     QTest::addColumn<QString>("baseName");

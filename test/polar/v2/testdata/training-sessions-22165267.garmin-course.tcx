@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<TrainingCenterDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" xsi:schemaLocation="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd">
+<TrainingCenterDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" xsi:schemaLocation="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd" xmlns:cx1="http://www.garmin.com/xmlschemas/CourseExtension/v1">
   <Activities>
     <Activity Sport="Running">
       <Id>2014-08-07T17:25:01+10:00</Id>
@@ -3125,6 +3125,7 @@
             <Cadence>84</Cadence>
           </Trackpoint>
         </Track>
+        <Extensions/>
       </Lap>
       <Lap StartTime="2014-08-07T17:29:00+10:00">
         <TotalTimeSeconds>242</TotalTimeSeconds>
@@ -6288,6 +6289,7 @@
             <Cadence>82</Cadence>
           </Trackpoint>
         </Track>
+        <Extensions/>
       </Lap>
       <Lap StartTime="2014-08-07T17:33:02+10:00">
         <TotalTimeSeconds>237.5</TotalTimeSeconds>
@@ -9399,6 +9401,7 @@
             <Cadence>83</Cadence>
           </Trackpoint>
         </Track>
+        <Extensions/>
       </Lap>
       <Lap StartTime="2014-08-07T17:37:00+10:00">
         <TotalTimeSeconds>175</TotalTimeSeconds>
@@ -11691,6 +11694,7 @@
             <Cadence>86</Cadence>
           </Trackpoint>
         </Track>
+        <Extensions/>
       </Lap>
       <Lap StartTime="2014-08-07T17:39:55+10:00">
         <TotalTimeSeconds>264.5</TotalTimeSeconds>
@@ -15140,6 +15144,7 @@
             <Cadence>82</Cadence>
           </Trackpoint>
         </Track>
+        <Extensions/>
       </Lap>
       <Lap StartTime="2014-08-07T17:44:19+10:00">
         <TotalTimeSeconds>257.5</TotalTimeSeconds>
@@ -18511,6 +18516,7 @@
             <Cadence>83</Cadence>
           </Trackpoint>
         </Track>
+        <Extensions/>
       </Lap>
       <Lap StartTime="2014-08-07T17:48:37+10:00">
         <TotalTimeSeconds>186</TotalTimeSeconds>
@@ -20946,6 +20952,7 @@
             <Cadence>84</Cadence>
           </Trackpoint>
         </Track>
+        <Extensions/>
       </Lap>
       <Lap StartTime="2014-08-07T17:51:43+10:00">
         <TotalTimeSeconds>269.5</TotalTimeSeconds>
@@ -24460,6 +24467,7 @@
             <Cadence>82</Cadence>
           </Trackpoint>
         </Track>
+        <Extensions/>
       </Lap>
       <Lap StartTime="2014-08-07T17:56:12+10:00">
         <TotalTimeSeconds>234.5</TotalTimeSeconds>
@@ -27532,6 +27540,7 @@
             <Cadence>83</Cadence>
           </Trackpoint>
         </Track>
+        <Extensions/>
       </Lap>
       <Lap StartTime="2014-08-07T18:00:07+10:00">
         <TotalTimeSeconds>25.125</TotalTimeSeconds>
@@ -27866,6 +27875,7 @@
             <Cadence>0</Cadence>
           </Trackpoint>
         </Track>
+        <Extensions/>
       </Lap>
     </Activity>
   </Activities>

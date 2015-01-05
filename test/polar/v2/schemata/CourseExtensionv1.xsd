@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+     <xsd:schema xmlns="http://www.garmin.com/xmlschemas/CourseExtension/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                 xmlns:cx1="http://www.garmin.com/xmlschemas/CourseExtension/v1"  targetNamespace="http://www.garmin.com/xmlschemas/CourseExtension/v1"
+       elementFormDefault="qualified">
+       <xsd:element name="CX" type="CourseLapExtension_t"/>
+       <xsd:complexType name="CourseLapExtension_t">
+           <xsd:sequence>
+               <xsd:element name="AvgWatts" type="xsd:unsignedShort" minOccurs="0"/>
+               <xsd:element name="Extensions" type="Extensions_t" minOccurs="0">
+                   <xsd:annotation>
+                       <xsd:documentation>You can extend Training Center by adding your own elements from another schema here.</xsd:documentation>
+                   </xsd:annotation>
+               </xsd:element>
+           </xsd:sequence>
+       </xsd:complexType>
+       <xsd:complexType name="Extensions_t">
+             <xsd:sequence>
+                 <xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded">
+                     <xsd:annotation>
+                         <xsd:documentation>You can extend Training Center by adding your own elements from another schema here.</xsd:documentation>
+                     </xsd:annotation>
+                 </xsd:any>
+             </xsd:sequence>
+       </xsd:complexType>       
+   </xsd:schema>
