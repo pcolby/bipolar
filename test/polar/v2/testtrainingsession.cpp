@@ -925,14 +925,12 @@ void TestTrainingSession::toGPX_Cluetrust()
 
     // Validate the generated document against the relevant XML schema.
     gpx.documentElement().removeAttribute(QLatin1String("xsi:schemaLocation"));
-    QFile xsd(QFINDTESTDATA("schemata/gpx.xsd"));
+    QFile xsd(QFINDTESTDATA("schemata/gpxdata10.xsd")); // Imports gpx.xsd too.
     QVERIFY(xsd.open(QIODevice::ReadOnly));
     QXmlSchema schema;
     QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
     QXmlSchemaValidator validator(schema);
     QVERIFY(validator.validate(gpx.toByteArray()));
-
-    /// @todo Validate against Cluetrust GPXData schema.
 }
 
 void TestTrainingSession::toGPX_GarminAcceleration_data()
@@ -972,7 +970,7 @@ void TestTrainingSession::toGPX_GarminAcceleration()
 
     // Write the result to an XML file for optional post-mortem investigations.
 #ifdef Q_OS_WIN
-    QFile file(QString::fromLatin1("polar/v2/testdata/%1.garmin-acceleration.gpx")
+    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.garmin-acceleration.gpx")
 #else
     QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.garmin-acceleration.gpx")
 #endif
