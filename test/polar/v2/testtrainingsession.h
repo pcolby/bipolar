@@ -68,6 +68,9 @@ private slots:
     void toGPX_Cluetrust_data();
     void toGPX_Cluetrust();
 
+    void toGPX_GarminAcceleration_data();
+    void toGPX_GarminAcceleration();
+
     void toGPX_GarminTrackPoint_data();
     void toGPX_GarminTrackPoint();
 

@@ -835,7 +835,8 @@ void TestTrainingSession::toGPX_AllExtensions()
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession session(baseName);
     QVERIFY(session.parse());
-    session.setGpxOption(polar::v2::TrainingSession::CluetrustGpxExtension);
+    session.setGpxOption(polar::v2::TrainingSession::CluetrustGpxDataExtension);
+    session.setGpxOption(polar::v2::TrainingSession::GarminAccelerationExtension);
     session.setGpxOption(polar::v2::TrainingSession::GarminTrackPointExtension);
     QDomDocument gpx = session.toGPX(QDateTime::fromString(
         QLatin1String("2014-07-15T12:34:56Z"), Qt::ISODate));
@@ -901,7 +902,7 @@ void TestTrainingSession::toGPX_Cluetrust()
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession session(baseName);
     QVERIFY(session.parse());
-    session.setGpxOption(polar::v2::TrainingSession::CluetrustGpxExtension);
+    session.setGpxOption(polar::v2::TrainingSession::CluetrustGpxDataExtension);
     QDomDocument gpx = session.toGPX(QDateTime::fromString(
         QLatin1String("2014-07-15T12:34:56Z"), Qt::ISODate));
 
@@ -930,6 +931,72 @@ void TestTrainingSession::toGPX_Cluetrust()
     QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
     QXmlSchemaValidator validator(schema);
     QVERIFY(validator.validate(gpx.toByteArray()));
+
+    /// @todo Validate against Cluetrust GPXData schema.
+}
+
+void TestTrainingSession::toGPX_GarminAcceleration_data()
+{
+    QTest::addColumn<QString>("baseName");
+    QTest::addColumn<QByteArray>("expected");
+
+    #define LOAD_TEST_DATA(name) { \
+        QFile expectedFile(QFINDTESTDATA("testdata/" name ".garmin-acceleration.gpx")); \
+        QString baseName(expectedFile.fileName()); \
+        baseName.chop(24); \
+        expectedFile.open(QIODevice::ReadOnly); \
+        QTest::newRow(name) << baseName << expectedFile.readAll(); \
+    }
+
+    LOAD_TEST_DATA("training-sessions-1");
+    LOAD_TEST_DATA("training-sessions-2");
+    LOAD_TEST_DATA("training-sessions-19401412");
+    LOAD_TEST_DATA("training-sessions-19946380");
+    LOAD_TEST_DATA("training-sessions-22165267");
+    LOAD_TEST_DATA("training-sessions-42261903");
+
+    #undef LOAD_TEST_DATA
+}
+
+void TestTrainingSession::toGPX_GarminAcceleration()
+{
+    QFETCH(QString, baseName);
+    QFETCH(QByteArray, expected);
+
+    // Parse the route (protobuf) message.
+    polar::v2::TrainingSession session(baseName);
+    QVERIFY(session.parse());
+    session.setGpxOption(polar::v2::TrainingSession::GarminAccelerationExtension);
+    QDomDocument gpx = session.toGPX(QDateTime::fromString(
+        QLatin1String("2014-07-15T12:34:56Z"), Qt::ISODate));
+
+    // Write the result to an XML file for optional post-mortem investigations.
+#ifdef Q_OS_WIN
+    QFile file(QString::fromLatin1("polar/v2/testdata/%1.garmin-acceleration.gpx")
+#else
+    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.garmin-acceleration.gpx")
+#endif
+        .arg(QString::fromLatin1(QTest::currentDataTag())));
+    if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+        file.write(gpx.toByteArray(2));
+    }
+    file.close();
+
+    // Compare the generated document against the expected result.
+    QDomDocument expectedDoc;
+    expectedDoc.setContent(expected);
+    compare(gpx, expectedDoc);
+
+    // Validate the generated document against the relevant XML schema.
+    gpx.documentElement().removeAttribute(QLatin1String("xsi:schemaLocation"));
+    QFile xsd(QFINDTESTDATA("schemata/gpx.xsd"));
+    QVERIFY(xsd.open(QIODevice::ReadOnly));
+    QXmlSchema schema;
+    QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
+    QXmlSchemaValidator validator(schema);
+    QVERIFY(validator.validate(gpx.toByteArray()));
+
+    /// @todo Validate against Garmin Acceleration Extension schema.
 }
 
 void TestTrainingSession::toGPX_GarminTrackPoint_data()
