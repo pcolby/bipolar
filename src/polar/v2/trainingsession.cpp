@@ -1794,6 +1794,10 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
         tcx.setAttribute(QLatin1String("xmlns:ax2"),
                          QLatin1String("http://www.garmin.com/xmlschemas/ActivityExtension/v2"));
     }
+    if (tcxOptions.testFlag(GarminCourseExtension)) {
+        tcx.setAttribute(QLatin1String("xmlns:cx1"),
+                         QLatin1String("http://www.garmin.com/xmlschemas/CourseExtension/v1"));
+    }
     doc.appendChild(tcx);
 
     QDomElement activities = doc.createElement(QLatin1String("Activities"));
@@ -1825,6 +1829,8 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
         // Get the "samples" samples.
         const QVariantList altitude    = samples.value(QLatin1String("altitude")).toList();
         const QVariantList cadence     = samples.value(QLatin1String("cadence")).toList();
+        const QVariantList powerLeft   = samples.value(QLatin1String("left-pedal-power")).toList();
+        const QVariantList powerRight  = samples.value(QLatin1String("right-pedal-power")).toList();
         const QVariantList distance    = samples.value(QLatin1String("distance")).toList();
         const QVariantList heartrate   = samples.value(QLatin1String("heartrate")).toList();
         const QVariantList speed       = samples.value(QLatin1String("speed")).toList();
@@ -1955,7 +1961,9 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                 lap.appendChild(track);
 
                 // Add any enabled extensions.
-                if (tcxOptions.testFlag(GarminActivityExtension)) {
+                if (tcxOptions.testFlag(GarminActivityExtension) ||
+                    tcxOptions.testFlag(GarminCourseExtension))
+                {
                     QDomElement extensions = doc.createElement(QLatin1String("Extensions"));
                     lap.appendChild(extensions);
 
@@ -1996,7 +2004,37 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                                         .arg(first(cadence.value(QLatin1String("maximum"))).toUInt())));
                             }
 
-                            /// @todo AvgWatts and MaxWatts when power data is available.
+                            /// @todo Steps
+
+                            // Note, AvgWatts is defined by both the Garmin Activity
+                            // Extension and the Garmin Course Extension schemas.
+                            const QVariantMap power = firstMap(base.value(QLatin1String("power")));
+                            if (power.contains(QLatin1String("average"))) {
+                                lx.appendChild(doc.createElement(QLatin1String("AvgWatts")))
+                                    .appendChild(doc.createTextNode(QString::fromLatin1("%1")
+                                        .arg(first(power.value(QLatin1String("average"))).toUInt())));
+                            }
+                            if (power.contains(QLatin1String("maximum"))) {
+                                lx.appendChild(doc.createElement(QLatin1String("MaxWatts")))
+                                    .appendChild(doc.createTextNode(QString::fromLatin1("%1")
+                                        .arg(first(power.value(QLatin1String("maximum"))).toUInt())));
+                            }
+                        }
+
+                        if (tcxOptions.testFlag(GarminCourseExtension)) {
+                            QDomElement cx = doc.createElement(QLatin1String("CX"));
+                            cx.setAttribute(QLatin1String("xmlns"),
+                                QLatin1String("http://www.garmin.com/xmlschemas/CourseExtension/v1"));
+                            extensions.appendChild(cx);
+
+                            // Note, AvgWatts is defined by both the Garmin Activity
+                            // Extension and the Garmin Course Extension schemas.
+                            const QVariantMap power = firstMap(base.value(QLatin1String("power")));
+                            if (power.contains(QLatin1String("average"))) {
+                                cx.appendChild(doc.createElement(QLatin1String("AvgWatts")))
+                                    .appendChild(doc.createTextNode(QString::fromLatin1("%1")
+                                        .arg(first(power.value(QLatin1String("average"))).toUInt())));
+                            }
                         }
                     }
                 }
@@ -2060,6 +2098,17 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                         tpx.appendChild(doc.createElement(QLatin1String("RunCadence")))
                             .appendChild(doc.createTextNode(cadence.at(index).toString()));
                     }
+                }
+
+                const int currentPowerLeft = (index < powerLeft.length()) ?
+                    first(powerLeft.at(index).toMap().value(QLatin1String("current-power"))).toInt() : 0;
+                const int currentPowerRight = (index < powerRight.length()) ?
+                    first(powerRight.at(index).toMap().value(QLatin1String("current-power"))).toInt() : 0;
+                const int currentPower = currentPowerLeft + currentPowerRight;
+                if (currentPower != 0) {
+                    tpx.appendChild(doc.createElement(QLatin1String("Watts")))
+                        .appendChild(doc.createTextNode(QString::fromLatin1("%1")
+                            .arg(currentPower)));
                 }
             }
 

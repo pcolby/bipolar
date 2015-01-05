@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<TrainingCenterDatabase xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" xsi:schemaLocation="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd" xmlns:ax2="http://www.garmin.com/xmlschemas/ActivityExtension/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<TrainingCenterDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" xsi:schemaLocation="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd" xmlns:ax2="http://www.garmin.com/xmlschemas/ActivityExtension/v2" xmlns:cx1="http://www.garmin.com/xmlschemas/CourseExtension/v1">
   <Activities>
     <Activity Sport="Running">
       <Id>2014-08-07T17:25:01+10:00</Id>
@@ -4565,6 +4565,7 @@
             <AvgRunCadence>80</AvgRunCadence>
             <MaxRunCadence>84</MaxRunCadence>
           </LX>
+          <CX xmlns="http://www.garmin.com/xmlschemas/CourseExtension/v1"/>
         </Extensions>
       </Lap>
       <Lap StartTime="2014-08-07T17:29:00+10:00">
@@ -9187,6 +9188,7 @@
             <AvgRunCadence>83</AvgRunCadence>
             <MaxRunCadence>85</MaxRunCadence>
           </LX>
+          <CX xmlns="http://www.garmin.com/xmlschemas/CourseExtension/v1"/>
         </Extensions>
       </Lap>
       <Lap StartTime="2014-08-07T17:33:02+10:00">
@@ -13733,6 +13735,7 @@
             <AvgRunCadence>83</AvgRunCadence>
             <MaxRunCadence>86</MaxRunCadence>
           </LX>
+          <CX xmlns="http://www.garmin.com/xmlschemas/CourseExtension/v1"/>
         </Extensions>
       </Lap>
       <Lap StartTime="2014-08-07T17:37:00+10:00">
@@ -17082,6 +17085,7 @@
             <AvgRunCadence>85</AvgRunCadence>
             <MaxRunCadence>89</MaxRunCadence>
           </LX>
+          <CX xmlns="http://www.garmin.com/xmlschemas/CourseExtension/v1"/>
         </Extensions>
       </Lap>
       <Lap StartTime="2014-08-07T17:39:55+10:00">
@@ -22122,6 +22126,7 @@
             <AvgRunCadence>81</AvgRunCadence>
             <MaxRunCadence>84</MaxRunCadence>
           </LX>
+          <CX xmlns="http://www.garmin.com/xmlschemas/CourseExtension/v1"/>
         </Extensions>
       </Lap>
       <Lap StartTime="2014-08-07T17:44:19+10:00">
@@ -27048,6 +27053,7 @@
             <AvgRunCadence>82</AvgRunCadence>
             <MaxRunCadence>85</MaxRunCadence>
           </LX>
+          <CX xmlns="http://www.garmin.com/xmlschemas/CourseExtension/v1"/>
         </Extensions>
       </Lap>
       <Lap StartTime="2014-08-07T17:48:37+10:00">
@@ -30606,6 +30612,7 @@
             <AvgRunCadence>84</AvgRunCadence>
             <MaxRunCadence>86</MaxRunCadence>
           </LX>
+          <CX xmlns="http://www.garmin.com/xmlschemas/CourseExtension/v1"/>
         </Extensions>
       </Lap>
       <Lap StartTime="2014-08-07T17:51:43+10:00">
@@ -35741,6 +35748,7 @@
             <AvgRunCadence>81</AvgRunCadence>
             <MaxRunCadence>83</MaxRunCadence>
           </LX>
+          <CX xmlns="http://www.garmin.com/xmlschemas/CourseExtension/v1"/>
         </Extensions>
       </Lap>
       <Lap StartTime="2014-08-07T17:56:12+10:00">
@@ -40230,6 +40238,7 @@
             <AvgRunCadence>81</AvgRunCadence>
             <MaxRunCadence>84</MaxRunCadence>
           </LX>
+          <CX xmlns="http://www.garmin.com/xmlschemas/CourseExtension/v1"/>
         </Extensions>
       </Lap>
       <Lap StartTime="2014-08-07T18:00:07+10:00">
@@ -40717,6 +40726,7 @@
         </Track>
         <Extensions>
           <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2"/>
+          <CX xmlns="http://www.garmin.com/xmlschemas/CourseExtension/v1"/>
         </Extensions>
       </Lap>
     </Activity>

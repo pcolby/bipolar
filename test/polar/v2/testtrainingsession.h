@@ -92,6 +92,10 @@ private slots:
     void toTCX_GarminActivity_data();
     void toTCX_GarminActivity();
 
+    /// @todo Include Garmin Course Extension tests.
+  //void toTCX_GarminCourse_data();
+  //void toTCX_GarminCourse();
+
     void toTCX_UTC_data();
     void toTCX_UTC();
 

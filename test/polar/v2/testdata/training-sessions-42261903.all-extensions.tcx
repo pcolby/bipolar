@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<TrainingCenterDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" xsi:schemaLocation="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd" xmlns:ax2="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+<TrainingCenterDatabase xmlns:ax2="http://www.garmin.com/xmlschemas/ActivityExtension/v2" xmlns:cx1="http://www.garmin.com/xmlschemas/CourseExtension/v1" xsi:schemaLocation="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2">
   <Activities>
     <Activity Sport="Biking">
       <Id>2014-12-29T12:58:44+01:00</Id>
@@ -54,6 +54,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>30</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -64,6 +65,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>25</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -74,6 +76,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>37</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -84,6 +87,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>55</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -94,6 +98,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>61</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -104,6 +109,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>31</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -114,6 +120,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>71</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -124,6 +131,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>101</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -134,6 +142,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>142</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -144,6 +153,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>123</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -154,6 +164,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>119</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -164,6 +175,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>47</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -174,6 +186,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>77</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -184,6 +197,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>105</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -194,6 +208,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>136</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -204,6 +219,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>141</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -214,6 +230,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>142</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -224,6 +241,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>132</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -234,6 +252,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>128</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -244,6 +263,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>136</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -254,6 +274,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>113</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -264,6 +285,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>51</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -274,6 +296,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>15</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -284,6 +307,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>19</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -294,6 +318,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>93</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -304,6 +329,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>271</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -314,6 +340,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>287</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -324,6 +351,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>249</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -334,6 +362,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
+                <Watts>94</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>
@@ -373,6 +402,7 @@
             <MaxBikeCadence>106</MaxBikeCadence>
             <AvgRunCadence>62</AvgRunCadence>
           </LX>
+          <CX xmlns="http://www.garmin.com/xmlschemas/CourseExtension/v1"/>
         </Extensions>
       </Lap>
     </Activity>

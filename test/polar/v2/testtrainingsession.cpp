@@ -1364,6 +1364,7 @@ void TestTrainingSession::toTCX_AllExtensions()
     polar::v2::TrainingSession session(baseName);
     QVERIFY(session.parse());
     session.setTcxOption(polar::v2::TrainingSession::GarminActivityExtension);
+    session.setTcxOption(polar::v2::TrainingSession::GarminCourseExtension);
     QDomDocument tcx = session.toTCX(QLatin1String("Jul 17 2014 21:02:38"));
 
     // Write the result to an XML file for optional post-mortem investigations.

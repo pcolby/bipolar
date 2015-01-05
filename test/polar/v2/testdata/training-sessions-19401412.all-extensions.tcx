@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<TrainingCenterDatabase xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" xsi:schemaLocation="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd" xmlns:ax2="http://www.garmin.com/xmlschemas/ActivityExtension/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<TrainingCenterDatabase xmlns:ax2="http://www.garmin.com/xmlschemas/ActivityExtension/v2" xmlns:cx1="http://www.garmin.com/xmlschemas/CourseExtension/v1" xsi:schemaLocation="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2">
   <Activities>
     <Activity Sport="Running">
       <Id>2014-07-13T07:26:23+10:00</Id>
@@ -27082,6 +27082,7 @@
           <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
             <AvgSpeed>5.87056</AvgSpeed>
           </LX>
+          <CX xmlns="http://www.garmin.com/xmlschemas/CourseExtension/v1"/>
         </Extensions>
       </Lap>
       <Lap StartTime="2014-07-13T07:56:27+10:00">
@@ -49498,6 +49499,7 @@
           <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
             <AvgSpeed>4.90671</AvgSpeed>
           </LX>
+          <CX xmlns="http://www.garmin.com/xmlschemas/CourseExtension/v1"/>
         </Extensions>
       </Lap>
       <Lap StartTime="2014-07-13T08:21:20+10:00">
@@ -52924,6 +52926,7 @@
           <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
             <AvgSpeed>8.38207</AvgSpeed>
           </LX>
+          <CX xmlns="http://www.garmin.com/xmlschemas/CourseExtension/v1"/>
         </Extensions>
       </Lap>
       <Lap StartTime="2014-07-13T08:25:07+10:00">
@@ -76375,6 +76378,7 @@
           <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
             <AvgSpeed>5.982</AvgSpeed>
           </LX>
+          <CX xmlns="http://www.garmin.com/xmlschemas/CourseExtension/v1"/>
         </Extensions>
       </Lap>
       <Lap StartTime="2014-07-13T08:51:09+10:00">
@@ -78691,6 +78695,7 @@
           <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
             <AvgSpeed>9.00117</AvgSpeed>
           </LX>
+          <CX xmlns="http://www.garmin.com/xmlschemas/CourseExtension/v1"/>
         </Extensions>
       </Lap>
     </Activity>
