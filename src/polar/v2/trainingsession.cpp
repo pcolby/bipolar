@@ -1279,6 +1279,10 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
     gpx.setAttribute(QLatin1String("xsi:schemaLocation"),
                      QLatin1String("http://www.topografix.com/GPX/1/1 "
                                    "http://www.topografix.com/GPX/1/1/gpx.xsd"));
+    if (gpxOptions.testFlag(CluetrustGpxDataExtension)) {
+        gpx.setAttribute(QLatin1String("xmlns:gpxdata"),
+                         QLatin1String("http://www.cluetrust.com/XML/GPXDATA/1/0"));
+    }
     doc.appendChild(gpx);
 
     QDomElement metaData = doc.createElement(QLatin1String("metadata"));
@@ -1315,7 +1319,14 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
             const QDateTime startTime = getDateTime(firstMap(
                 route.value(QLatin1String("timestamp"))));
 
-            // Get the number of samples.
+            // Get the "samples" samples.
+            const QVariantMap samples = map.value(SAMPLES).toMap();
+            const QVariantList cadence     = samples.value(QLatin1String("cadence")).toList();
+            const QVariantList distance    = samples.value(QLatin1String("distance")).toList();
+            const QVariantList heartrate   = samples.value(QLatin1String("heartrate")).toList();
+            const QVariantList temperature = samples.value(QLatin1String("temperature")).toList();
+
+            // Get the "route" samples.
             const QVariantList altitude   = route.value(QLatin1String("altitude")).toList();
             const QVariantList duration   = route.value(QLatin1String("duration")).toList();
             const QVariantList latitude   = route.value(QLatin1String("latitude")).toList();
@@ -1367,6 +1378,45 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
                         timeOffset).toString(Qt::ISODate)));
                 trkpt.appendChild(doc.createElement(QLatin1String("sat")))
                     .appendChild(doc.createTextNode(satellites.at(index).toString()));
+
+                if (gpxOptions.testFlag(CluetrustGpxDataExtension)   ||
+                    gpxOptions.testFlag(GarminAccelerationExtension) ||
+                    gpxOptions.testFlag(GarminTrackPointExtension))
+                {
+                    QDomElement extensions = doc.createElement(QLatin1String("extensions"));
+
+                    if (gpxOptions.testFlag(CluetrustGpxDataExtension)) {
+                        if ((index < heartrate.length()) &&
+                            (!sensorOffline(samples.value(QLatin1String("heartrate-offline")).toList(), index))) {
+                            extensions.appendChild(doc.createElement(QLatin1String("gpxdata:hr")))
+                                .appendChild(doc.createTextNode(QString::fromLatin1("%1")
+                                    .arg(heartrate.at(index).toUInt())));
+                        }
+
+                        if ((index < cadence.length()) &&
+                            (!sensorOffline(samples.value(QLatin1String("altitude-offline")).toList(), index))) {
+                            extensions.appendChild(doc.createElement(QLatin1String("gpxdata:cadence")))
+                                .appendChild(doc.createTextNode(QString::fromLatin1("%1")
+                                    .arg(cadence.at(index).toUInt())));
+                        }
+
+                        if (index < temperature.length()) {
+                            extensions.appendChild(doc.createElement(QLatin1String("gpxdata:temp")))
+                                .appendChild(doc.createTextNode(QString::fromLatin1("%1")
+                                    .arg(temperature.at(index).toFloat())));
+                        }
+
+                        if ((index < distance.length()) &&
+                            (!sensorOffline(samples.value(QLatin1String("distance-offline")).toList(), index))) {
+                            /// @todo  Include optional gpxdata:sensor="wheel|pedometer" attribute.
+                            extensions.appendChild(doc.createElement(QLatin1String("gpxdata:distance")))
+                                .appendChild(doc.createTextNode(QString::fromLatin1("%1")
+                                    .arg(distance.at(index).toUInt())));
+                        }
+                    }
+
+                    trkpt.appendChild(extensions);
+                }
                 trkseg.appendChild(trkpt);
             }
         }
