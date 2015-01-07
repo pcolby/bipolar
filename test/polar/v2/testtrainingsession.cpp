@@ -925,12 +925,40 @@ void TestTrainingSession::toGPX_Cluetrust()
 
     // Validate the generated document against the relevant XML schema.
     gpx.documentElement().removeAttribute(QLatin1String("xsi:schemaLocation"));
-    QFile xsd(QFINDTESTDATA("schemata/gpxdata10.xsd")); // Imports gpx.xsd too.
-    QVERIFY(xsd.open(QIODevice::ReadOnly));
-    QXmlSchema schema;
-    QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
-    QXmlSchemaValidator validator(schema);
-    QVERIFY(validator.validate(gpx.toByteArray()));
+    {   // The base GPX schema.
+        QFile xsd(QFINDTESTDATA("schemata/gpx.xsd"));
+        QVERIFY(xsd.open(QIODevice::ReadOnly));
+        QXmlSchema schema;
+        QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
+        QXmlSchemaValidator validator(schema);
+        QVERIFY(validator.validate(gpx.toByteArray()));
+    }
+
+    {   // The Cluetrust GPXData Extension.
+        const QDomNodeList extensionNodes =
+            gpx.elementsByTagName(QLatin1String("extensions"));
+        QFile xsd(QFINDTESTDATA("schemata/gpxdata10.xsd"));
+        QVERIFY(xsd.open(QIODevice::ReadOnly));
+        QXmlSchema schema;
+        /// @todo  Set a custom network access manager to prevent
+        ///        QXmlSchema::load fetching the GPX schema (gpx.xsd) remotely.
+        //schema.setNetworkAccessManager(...);
+        QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
+        QXmlSchemaValidator validator(schema);
+        for (int index = 0; index < extensionNodes.length(); ++index) {
+            const QDomNodeList &extensions = extensionNodes.at(index).childNodes();
+            for (int index = 0; index < extensions.length(); ++index) {
+                QDomElement node = extensions.at(index).toElement();
+                QVERIFY(node.nodeName().startsWith(QLatin1String("gpxdata")));
+                node.setAttribute(QLatin1String("xmlns:gpxdata"),
+                                  QLatin1String("http://www.cluetrust.com/XML/GPXDATA/1/0"));
+                QByteArray byteArray;
+                QTextStream stream(&byteArray);
+                stream << node;
+                QVERIFY(validator.validate(byteArray));
+            }
+        }
+    }
 }
 
 void TestTrainingSession::toGPX_GarminAcceleration_data()
