@@ -52,9 +52,9 @@ public:
     Q_DECLARE_FLAGS(OutputFormats, OutputFormat)
 
     enum GpxOption {
-        CluetrustGpxDataExtension   = 0x0100, /// @todo Implement support (#29).
-        GarminAccelerationExtension = 0x0200, /// @todo Implement support (#32).
-        GarminTrackPointExtension   = 0x0400, /// @todo Implement support (#30).
+        CluetrustGpxDataExtension   = 0x0100,
+        GarminAccelerationExtension = 0x0200,
+        GarminTrackPointExtension   = 0x0400,
     };
     Q_DECLARE_FLAGS(GpxOptions, GpxOption)
 
