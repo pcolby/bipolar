@@ -1015,14 +1015,34 @@ void TestTrainingSession::toGPX_GarminAcceleration()
 
     // Validate the generated document against the relevant XML schema.
     gpx.documentElement().removeAttribute(QLatin1String("xsi:schemaLocation"));
-    QFile xsd(QFINDTESTDATA("schemata/gpx.xsd"));
-    QVERIFY(xsd.open(QIODevice::ReadOnly));
-    QXmlSchema schema;
-    QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
-    QXmlSchemaValidator validator(schema);
-    QVERIFY(validator.validate(gpx.toByteArray()));
+    {   // The base GPX schema.
+        QFile xsd(QFINDTESTDATA("schemata/gpx.xsd"));
+        QVERIFY(xsd.open(QIODevice::ReadOnly));
+        QXmlSchema schema;
+        QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
+        QXmlSchemaValidator validator(schema);
+        QVERIFY(validator.validate(gpx.toByteArray()));
+    }
 
-    /// @todo Validate against Garmin Acceleration Extension schema.
+    {   // The Garmin Acceleration Extension.
+        const QDomNodeList extensionNodes =
+            gpx.elementsByTagName(QLatin1String("gpxax:AccelerationExtension"));
+        QFile xsd(QFINDTESTDATA("schemata/AccelerationExtensionv1.xsd"));
+        QVERIFY(xsd.open(QIODevice::ReadOnly));
+        QXmlSchema schema;
+        QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
+        QXmlSchemaValidator validator(schema);
+        for (int index = 0; index < extensionNodes.length(); ++index) {
+            QDomElement node = extensionNodes.at(index).toElement();
+            QVERIFY(node.nodeName().startsWith(QLatin1String("gpxax")));
+            node.setAttribute(QLatin1String("xmlns:gpxax"),
+                              QLatin1String("http://www.garmin.com/xmlschemas/AccelerationExtension/v1"));
+            QByteArray byteArray;
+            QTextStream stream(&byteArray);
+            stream << node;
+            QVERIFY(validator.validate(byteArray));
+        }
+    }
 }
 
 void TestTrainingSession::toGPX_GarminTrackPoint_data()

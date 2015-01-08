@@ -1283,6 +1283,10 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
         gpx.setAttribute(QLatin1String("xmlns:gpxdata"),
                          QLatin1String("http://www.cluetrust.com/XML/GPXDATA/1/0"));
     }
+    if (gpxOptions.testFlag(GarminAccelerationExtension)) {
+        gpx.setAttribute(QLatin1String("xmlns:gpxax"),
+                         QLatin1String("http://www.garmin.com/xmlschemas/AccelerationExtension/v1"));
+    }
     if (gpxOptions.testFlag(GarminTrackPointExtension)) {
         gpx.setAttribute(QLatin1String("xmlns:gpxtpx"),
                          QLatin1String("http://www.garmin.com/xmlschemas/TrackPointExtension/v1"));
@@ -1325,10 +1329,11 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
 
             // Get the "samples" samples.
             const QVariantMap samples = map.value(SAMPLES).toMap();
-            const QVariantList cadence     = samples.value(QLatin1String("cadence")).toList();
-            const QVariantList distance    = samples.value(QLatin1String("distance")).toList();
-            const QVariantList heartrate   = samples.value(QLatin1String("heartrate")).toList();
-            const QVariantList temperature = samples.value(QLatin1String("temperature")).toList();
+            const QVariantList cadence             = samples.value(QLatin1String("cadence")).toList();
+            const QVariantList distance            = samples.value(QLatin1String("distance")).toList();
+            const QVariantList forwardAcceleration = samples.value(QLatin1String("fwd-acceleration")).toList();
+            const QVariantList heartrate           = samples.value(QLatin1String("heartrate")).toList();
+            const QVariantList temperature         = samples.value(QLatin1String("temperature")).toList();
 
             // Get the "route" samples.
             const QVariantList altitude   = route.value(QLatin1String("altitude")).toList();
@@ -1417,6 +1422,23 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
                                 .appendChild(doc.createTextNode(QString::fromLatin1("%1")
                                     .arg(distance.at(index).toUInt())));
                         }
+                    }
+
+                    if (gpxOptions.testFlag(GarminAccelerationExtension)) {
+                        QDomElement accelerationExtension = doc.createElement(
+                            QLatin1String("gpxax:AccelerationExtension"));
+
+                        if ((index < forwardAcceleration.length()) &&
+                            (!sensorOffline(samples.value(QLatin1String("fwd-acceleration-offline")).toList(), index))) {
+                            QDomElement accel = doc.createElement(QLatin1String("gpxax:accel"));
+                            accel.setAttribute(QLatin1String("x"), QString::fromLatin1("%1")
+                                .arg(forwardAcceleration.at(index).toFloat()));
+                            accel.setAttribute(QLatin1String("y"), QLatin1String("0"));
+                            accel.setAttribute(QLatin1String("z"), QLatin1String("0"));
+                            accelerationExtension.appendChild(accel);
+                        }
+
+                        extensions.appendChild(accelerationExtension);
                     }
 
                     if (gpxOptions.testFlag(GarminTrackPointExtension)) {

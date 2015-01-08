@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<xsd:schema targetNamespace="http://www.garmin.com/xmlschemas/AccelerationExtension/v1"
+    elementFormDefault="qualified"
+    xmlns="http://www.garmin.com/xmlschemas/AccelerationExtension/v1"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    
+    <xsd:annotation><xsd:documentation>
+        This schema defines Garmin extensions to be used with the GPX 1.1 schema.
+        The root element defined by this schema is intended to be used as a child
+        element of the "extensions" elements in the trkpt element in the GPX 1.1 schema. 
+        The GPX 1.1 schema is available at http://www.topografix.com/GPX/1/1/gpx.xsd.
+    </xsd:documentation></xsd:annotation>
+    
+    <xsd:element name="AccelerationExtension" type="AccelerationExtension_t" />
+    
+    <xsd:complexType name="AccelerationExtension_t">
+        <xsd:annotation><xsd:documentation>
+            This type contains data fields that cannot
+            be represented in track points in GPX 1.1 instances.
+        </xsd:documentation></xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="accel" type="AccelerationType_t" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="AccelerationType_t">
+        <xsd:annotation><xsd:documentation>
+            This type contains data fields for acceleration.
+        </xsd:documentation></xsd:annotation>
+        <xsd:attribute name="offset" type="xsd:nonNegativeInteger" use="optional">
+            <xsd:annotation>
+                <xsd:documentation> 
+                    Time offset from the time of the track point measured in milliseconds.
+                    If no offset is provided equal distribution to next track point is assumed.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="x" type="xsd:float" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Horizonal acceleration value measured in acceleration due to gravity or g.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>        
+        <xsd:attribute name="y" type="xsd:float" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Vertical acceleration value measured in acceleration due to gravity or g.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="z" type="xsd:float" use="required">
+            <xsd:annotation>
+                <xsd:documentation>
+                    Depth acceleration value measured in acceleration due to gravity or g.
+                </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+        
+    </xsd:complexType>
+    
+</xsd:schema>
