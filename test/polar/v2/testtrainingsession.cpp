@@ -1090,16 +1090,20 @@ void TestTrainingSession::toGPX_GarminTrackPoint()
 
     {   // The Garmin TrackPoint Extension.
         const QDomNodeList extensionNodes =
-            gpx.elementsByTagName(QLatin1String("TrackPointExtension"));
+            gpx.elementsByTagName(QLatin1String("gpxtpx:TrackPointExtension"));
         QFile xsd(QFINDTESTDATA("schemata/TrackPointExtensionv1.xsd"));
         QVERIFY(xsd.open(QIODevice::ReadOnly));
         QXmlSchema schema;
         QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
         QXmlSchemaValidator validator(schema);
         for (int index = 0; index < extensionNodes.length(); ++index) {
+            QDomElement node = extensionNodes.at(index).toElement();
+            QVERIFY(node.nodeName().startsWith(QLatin1String("gpxtpx")));
+            node.setAttribute(QLatin1String("xmlns:gpxtpx"),
+                              QLatin1String("http://www.garmin.com/xmlschemas/TrackPointExtension/v1"));
             QByteArray byteArray;
             QTextStream stream(&byteArray);
-            stream << extensionNodes.at(index);
+            stream << node;
             QVERIFY(validator.validate(byteArray));
         }
     }

@@ -1283,6 +1283,10 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
         gpx.setAttribute(QLatin1String("xmlns:gpxdata"),
                          QLatin1String("http://www.cluetrust.com/XML/GPXDATA/1/0"));
     }
+    if (gpxOptions.testFlag(GarminTrackPointExtension)) {
+        gpx.setAttribute(QLatin1String("xmlns:gpxtpx"),
+                         QLatin1String("http://www.garmin.com/xmlschemas/TrackPointExtension/v1"));
+    }
     doc.appendChild(gpx);
 
     QDomElement metaData = doc.createElement(QLatin1String("metadata"));
@@ -1413,6 +1417,37 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
                                 .appendChild(doc.createTextNode(QString::fromLatin1("%1")
                                     .arg(distance.at(index).toUInt())));
                         }
+                    }
+
+                    if (gpxOptions.testFlag(GarminTrackPointExtension)) {
+                        QDomElement trackPointExtension = doc.createElement(
+                            QLatin1String("gpxtpx:TrackPointExtension"));
+
+                        if (index < temperature.length()) {
+                            trackPointExtension.appendChild(doc.createElement(QLatin1String("gpxtpx:atemp")))
+                                .appendChild(doc.createTextNode(QString::fromLatin1("%1")
+                                    .arg(temperature.at(index).toFloat())));
+                        }
+
+                        if ((index < heartrate.length()) &&
+                            (!sensorOffline(samples.value(QLatin1String("heartrate-offline")).toList(), index))) {
+                            const uint hr = heartrate.at(index).toUInt();
+                            if ((hr >= 1) && (hr <= 255)) { // Schema enforced.
+                                trackPointExtension.appendChild(doc.createElement(QLatin1String("gpxtpx:hr")))
+                                    .appendChild(doc.createTextNode(QString::fromLatin1("%1").arg(hr)));
+                            }
+                        }
+
+                        if ((index < cadence.length()) &&
+                            (!sensorOffline(samples.value(QLatin1String("altitude-offline")).toList(), index))) {
+                            const uint cad = cadence.at(index).toUInt();
+                            if (cad <= 254) { // Schema enforced.
+                            trackPointExtension.appendChild(doc.createElement(QLatin1String("gpxtpx:cad")))
+                                .appendChild(doc.createTextNode(QString::fromLatin1("%1").arg(cad)));
+                            }
+                        }
+
+                        extensions.appendChild(trackPointExtension);
                     }
 
                     trkpt.appendChild(extensions);
