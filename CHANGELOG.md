@@ -2,14 +2,17 @@
 
 ### 0.4.1 (_unreleased_)
 Features:
-- Garmin Acceleration Extension ([#32](../../issues/32))
+- fitness test data ([#39](../../issues/39))
 
 ### 0.4.0 (_unreleased_)
 Features:
 - hook debug logging ([d5e970f](../../commit/d5e970fcb0b66446fde8a28670483ab5ac43bc79))
-- Garmin Activity Extension ([#31](../../issues/31))
-- fitness test data ([#39](../../issues/39))
-- power support ([#43](../../issues/43))
+- Cluetrust GPXData Extension ([#29](../../issues/29))
+- Garmin (GPX) Acceleration Extension ([#32](../../issues/32))
+- Garmin (GPX) Trackpoint Extension ([#30](../../issues/30))
+- Garmin (TCX) Activity Extension ([#31](../../issues/31))
+- Garmin (TCX) Course Extension ([#47](../../issues/47))
+- power data support ([#43](../../issues/43))
 
 ### 0.3.1 (2014-09-06)
 Features:
