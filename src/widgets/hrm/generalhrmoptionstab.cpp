@@ -23,6 +23,10 @@
 #include <QSettings>
 #include <QVBoxLayout>
 
+const QString GeneralHrmOptions::ExportRrFilesSettingsKey = QLatin1String("rrFiles");
+
+const bool GeneralHrmOptions::ExportRrFilesDefaultSetting = true;
+
 GeneralHrmOptions::GeneralHrmOptions(QWidget *parent, Qt::WindowFlags flags)
     : QWidget(parent, flags)
 {
@@ -41,12 +45,12 @@ void GeneralHrmOptions::load()
 {
     QSettings settings;
     settings.beginGroup(QLatin1String("hrm"));
-    rrFiles->setChecked(settings.value(QLatin1String("rrFiles"), true).toBool());
+    rrFiles->setChecked(settings.value(ExportRrFilesSettingsKey, ExportRrFilesDefaultSetting).toBool());
 }
 
 void GeneralHrmOptions::save()
 {
     QSettings settings;
     settings.beginGroup(QLatin1String("hrm"));
-    settings.setValue(QLatin1String("rrFiles"), rrFiles->isChecked());
+    settings.setValue(ExportRrFilesSettingsKey, rrFiles->isChecked());
 }

@@ -28,6 +28,10 @@ class GeneralTcxOptions : public QWidget {
     Q_OBJECT
 
 public:
+    static const QString UtcOnlySettingsKey;
+
+    static const bool UtcOnlyDefaultSetting;
+
     GeneralTcxOptions(QWidget *parent=0, Qt::WindowFlags flags=0);
 
 public slots:

@@ -23,6 +23,10 @@
 #include <QSettings>
 #include <QVBoxLayout>
 
+const QString GeneralTcxOptions::UtcOnlySettingsKey = QLatin1String("garminActivityExt");
+
+const bool GeneralTcxOptions::UtcOnlyDefaultSetting = true;
+
 GeneralTcxOptions::GeneralTcxOptions(QWidget *parent, Qt::WindowFlags flags)
     : QWidget(parent, flags)
 {
@@ -40,12 +44,12 @@ void GeneralTcxOptions::load()
 {
     QSettings settings;
     settings.beginGroup(QLatin1String("tcx"));
-    utcOnly->setChecked(settings.value(QLatin1String("utcOnly"), true).toBool());
+    utcOnly->setChecked(settings.value(UtcOnlySettingsKey, UtcOnlyDefaultSetting).toBool());
 }
 
 void GeneralTcxOptions::save()
 {
     QSettings settings;
     settings.beginGroup(QLatin1String("tcx"));
-    settings.setValue(QLatin1String("utcOnly"), utcOnly->isChecked());
+    settings.setValue(UtcOnlySettingsKey, utcOnly->isChecked());
 }

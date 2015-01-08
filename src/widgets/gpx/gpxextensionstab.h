@@ -28,6 +28,14 @@ class GpxExtensionsTab : public QWidget {
     Q_OBJECT
 
 public:
+    static const QString CluetrustGpxExtSettingsKey;
+    static const QString GarminAccelerationExtSettingsKey;
+    static const QString GarminTrackPointExtSettingsKey;
+
+    static const bool CluetrustGpxExtDefaultSetting;
+    static const bool GarminAccelerationExtDefaultSetting;
+    static const bool GarminTrackPointExtDefaultSetting;
+
     GpxExtensionsTab(QWidget *parent=0, Qt::WindowFlags flags=0);
 
 public slots:

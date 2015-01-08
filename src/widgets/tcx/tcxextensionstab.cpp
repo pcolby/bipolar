@@ -23,6 +23,12 @@
 #include <QSettings>
 #include <QVBoxLayout>
 
+const QString TcxExtensionsTab::GarminActivityExtSettingsKey = QLatin1String("garminActivityExt");
+const QString TcxExtensionsTab::GarminCourseExtSettingsKey   = QLatin1String("garminCourseExt");
+
+const bool TcxExtensionsTab::GarminActivityExtDefaultSetting = true;
+const bool TcxExtensionsTab::GarminCourseExtDefaultSetting   = true;
+
 TcxExtensionsTab::TcxExtensionsTab(QWidget *parent, Qt::WindowFlags flags)
     : QWidget(parent, flags)
 {
@@ -40,14 +46,14 @@ void TcxExtensionsTab::load()
 {
     QSettings settings;
     settings.beginGroup(QLatin1String("tcx"));
-    garminActivityExt->setChecked(settings.value(QLatin1String("garminActivityExt"), true).toBool());
-    garminCourseExt->setChecked(settings.value(QLatin1String("garminCourseExt"), true).toBool());
+    garminActivityExt->setChecked(settings.value(GarminActivityExtSettingsKey, GarminActivityExtDefaultSetting).toBool());
+    garminCourseExt->setChecked(settings.value(GarminCourseExtSettingsKey, GarminCourseExtDefaultSetting).toBool());
 }
 
 void TcxExtensionsTab::save()
 {
     QSettings settings;
     settings.beginGroup(QLatin1String("tcx"));
-    settings.setValue(QLatin1String("garminActivityExt"), garminActivityExt->isChecked());
-    settings.setValue(QLatin1String("garminCourseExt"), garminCourseExt->isChecked());
+    settings.setValue(GarminActivityExtSettingsKey, garminActivityExt->isChecked());
+    settings.setValue(GarminCourseExtSettingsKey, garminCourseExt->isChecked());
 }

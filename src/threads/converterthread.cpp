@@ -19,6 +19,11 @@
 
 #include "converterthread.h"
 
+#include "gpx/gpxextensionstab.h"
+#include "hrm/hrmextensionstab.h"
+#include "hrm/generalhrmoptionstab.h"
+#include "tcx/generaltcxoptionstab.h"
+#include "tcx/tcxextensionstab.h"
 #include "trainingsession.h"
 
 #include <QDebug>
@@ -188,31 +193,36 @@ void ConverterThread::setTrainingSessionOptions(polar::v2::TrainingSession * con
     // Here we load from QSettings, and apply to our TrainingSession instance.
     QSettings settings;
 
-    /// @todo Replace all of the following setting-name string literals with
-    ///       constants in the relevant options classes. Probably the defaults too.
-
     settings.beginGroup(QLatin1String("gpx"));
     session->setGpxOption(polar::v2::TrainingSession::CluetrustGpxDataExtension,
-        settings.value(QLatin1String("cluetrustGpxExt"), true).toBool());
+        settings.value(GpxExtensionsTab::CluetrustGpxExtSettingsKey,
+                       GpxExtensionsTab::CluetrustGpxExtDefaultSetting).toBool());
     session->setGpxOption(polar::v2::TrainingSession::GarminAccelerationExtension,
-        settings.value(QLatin1String("garminAccelerationExt"), true).toBool());
+        settings.value(GpxExtensionsTab::GarminAccelerationExtSettingsKey,
+                       GpxExtensionsTab::GarminAccelerationExtDefaultSetting).toBool());
     session->setGpxOption(polar::v2::TrainingSession::GarminTrackPointExtension,
-        settings.value(QLatin1String("garminTrackPointExt"), true).toBool());
+        settings.value(GpxExtensionsTab::GarminTrackPointExtSettingsKey,
+                       GpxExtensionsTab::GarminTrackPointExtDefaultSetting).toBool());
     settings.endGroup();
 
     settings.beginGroup(QLatin1String("hrm"));
     session->setHrmOption(polar::v2::TrainingSession::RrFiles,
-        settings.value(QLatin1String("rrFiles"), true).toBool());
+        settings.value(GeneralHrmOptions::ExportRrFilesSettingsKey,
+                       GeneralHrmOptions::ExportRrFilesDefaultSetting).toBool());
     session->setHrmOption(polar::v2::TrainingSession::LapNames,
-        settings.value(QLatin1String("lapNamesExt"), true).toBool());
+        settings.value(HrmExtensionsTab::LapNamesExtSettingsKey,
+                       HrmExtensionsTab::LapNamesExtDefaultSetting).toBool());
     settings.endGroup();
 
     settings.beginGroup(QLatin1String("tcx"));
     session->setTcxOption(polar::v2::TrainingSession::ForceTcxUTC,
-        settings.value(QLatin1String("utcOnly"), true).toBool());
+        settings.value(GeneralTcxOptions::UtcOnlySettingsKey,
+                       GeneralTcxOptions::UtcOnlyDefaultSetting).toBool());
     session->setTcxOption(polar::v2::TrainingSession::GarminActivityExtension,
-        settings.value(QLatin1String("garminActivityExt"), true).toBool());
+        settings.value(TcxExtensionsTab::GarminActivityExtSettingsKey,
+                       TcxExtensionsTab::GarminActivityExtDefaultSetting).toBool());
     session->setTcxOption(polar::v2::TrainingSession::GarminCourseExtension,
-        settings.value(QLatin1String("garminCourseExt"), true).toBool());
+        settings.value(TcxExtensionsTab::GarminCourseExtSettingsKey,
+                       TcxExtensionsTab::GarminCourseExtDefaultSetting).toBool());
     settings.endGroup();
 }

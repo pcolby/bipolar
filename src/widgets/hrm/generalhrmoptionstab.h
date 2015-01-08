@@ -28,6 +28,10 @@ class GeneralHrmOptions : public QWidget {
     Q_OBJECT
 
 public:
+    static const QString ExportRrFilesSettingsKey;
+
+    static const bool ExportRrFilesDefaultSetting;
+
     GeneralHrmOptions(QWidget *parent=0, Qt::WindowFlags flags=0);
 
 public slots:

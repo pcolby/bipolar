@@ -28,6 +28,10 @@ class HrmExtensionsTab : public QWidget {
     Q_OBJECT
 
 public:
+    static const QString LapNamesExtSettingsKey;
+
+    static const bool LapNamesExtDefaultSetting;
+
     HrmExtensionsTab(QWidget *parent=0, Qt::WindowFlags flags=0);
 
 public slots:

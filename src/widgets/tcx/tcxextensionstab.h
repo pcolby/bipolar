@@ -28,6 +28,12 @@ class TcxExtensionsTab : public QWidget {
     Q_OBJECT
 
 public:
+    static const QString GarminActivityExtSettingsKey;
+    static const QString GarminCourseExtSettingsKey;
+
+    static const bool GarminActivityExtDefaultSetting;
+    static const bool GarminCourseExtDefaultSetting;
+
     TcxExtensionsTab(QWidget *parent=0, Qt::WindowFlags flags=0);
 
 public slots:

@@ -23,6 +23,10 @@
 #include <QSettings>
 #include <QVBoxLayout>
 
+const QString HrmExtensionsTab::LapNamesExtSettingsKey = QLatin1String("lapNamesExt");
+
+const bool HrmExtensionsTab::LapNamesExtDefaultSetting = true;
+
 HrmExtensionsTab::HrmExtensionsTab(QWidget *parent, Qt::WindowFlags flags)
     : QWidget(parent, flags)
 {
@@ -38,12 +42,12 @@ void HrmExtensionsTab::load()
 {
     QSettings settings;
     settings.beginGroup(QLatin1String("hrm"));
-    lapNamesExt->setChecked(settings.value(QLatin1String("lapNamesExt"), true).toBool());
+    lapNamesExt->setChecked(settings.value(LapNamesExtSettingsKey, LapNamesExtDefaultSetting).toBool());
 }
 
 void HrmExtensionsTab::save()
 {
     QSettings settings;
     settings.beginGroup(QLatin1String("hrm"));
-    settings.setValue(QLatin1String("lapNamesExt"), lapNamesExt->isChecked());
+    settings.setValue(LapNamesExtSettingsKey, lapNamesExt->isChecked());
 }

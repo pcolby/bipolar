@@ -23,6 +23,14 @@
 #include <QSettings>
 #include <QVBoxLayout>
 
+const QString GpxExtensionsTab::CluetrustGpxExtSettingsKey       = QLatin1String("cluetrustGpxExt");
+const QString GpxExtensionsTab::GarminAccelerationExtSettingsKey = QLatin1String("garminAccelerationExt");
+const QString GpxExtensionsTab::GarminTrackPointExtSettingsKey   = QLatin1String("garminTrackPointExt");
+
+const bool GpxExtensionsTab::CluetrustGpxExtDefaultSetting       = true;
+const bool GpxExtensionsTab::GarminAccelerationExtDefaultSetting = true;
+const bool GpxExtensionsTab::GarminTrackPointExtDefaultSetting   = true;
+
 GpxExtensionsTab::GpxExtensionsTab(QWidget *parent, Qt::WindowFlags flags)
     : QWidget(parent, flags)
 {
@@ -42,16 +50,16 @@ void GpxExtensionsTab::load()
 {
     QSettings settings;
     settings.beginGroup(QLatin1String("gpx"));
-    cluetrustGpxExt->setChecked(settings.value(QLatin1String("cluetrustGpxExt"), true).toBool());
-    garminAccelerationExt->setChecked(settings.value(QLatin1String("garminAccelerationExt"), true).toBool());
-    garminTrackPointExt->setChecked(settings.value(QLatin1String("garminTrackPointExt"), true).toBool());
+    cluetrustGpxExt->setChecked(settings.value(CluetrustGpxExtSettingsKey, CluetrustGpxExtDefaultSetting).toBool());
+    garminAccelerationExt->setChecked(settings.value(GarminAccelerationExtSettingsKey, GarminAccelerationExtDefaultSetting).toBool());
+    garminTrackPointExt->setChecked(settings.value(GarminTrackPointExtSettingsKey, GarminTrackPointExtDefaultSetting).toBool());
 }
 
 void GpxExtensionsTab::save()
 {
     QSettings settings;
     settings.beginGroup(QLatin1String("gpx"));
-    settings.setValue(QLatin1String("cluetrustGpxExt"), cluetrustGpxExt->isChecked());
-    settings.setValue(QLatin1String("garminAccelerationExt"), garminAccelerationExt->isChecked());
-    settings.setValue(QLatin1String("garminTrackPointExt"), garminTrackPointExt->isChecked());
+    settings.setValue(CluetrustGpxExtSettingsKey, cluetrustGpxExt->isChecked());
+    settings.setValue(GarminAccelerationExtSettingsKey, garminAccelerationExt->isChecked());
+    settings.setValue(GarminTrackPointExtSettingsKey, garminTrackPointExt->isChecked());
 }
