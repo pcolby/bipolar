@@ -27,11 +27,13 @@ GpxExtensionsTab::GpxExtensionsTab(QWidget *parent, Qt::WindowFlags flags)
     : QWidget(parent, flags)
 {
     cluetrustGpxExt = new QCheckBox(tr("Cluetrust GPX Extension"));
+    garminAccelerationExt = new QCheckBox(tr("Garmin Acceleration Extension"));
     garminTrackPointExt = new QCheckBox(tr("Garmin TrackPoint Extension"));
     load();
 
     QVBoxLayout * const vBox = new QVBoxLayout();
     vBox->addWidget(cluetrustGpxExt);
+    vBox->addWidget(garminAccelerationExt);
     vBox->addWidget(garminTrackPointExt);
     setLayout(vBox);
 }
@@ -41,6 +43,7 @@ void GpxExtensionsTab::load()
     QSettings settings;
     settings.beginGroup(QLatin1String("gpx"));
     cluetrustGpxExt->setChecked(settings.value(QLatin1String("cluetrustGpxExt"), true).toBool());
+    garminAccelerationExt->setChecked(settings.value(QLatin1String("garminAccelerationExt"), true).toBool());
     garminTrackPointExt->setChecked(settings.value(QLatin1String("garminTrackPointExt"), true).toBool());
 }
 
@@ -49,5 +52,6 @@ void GpxExtensionsTab::save()
     QSettings settings;
     settings.beginGroup(QLatin1String("gpx"));
     settings.setValue(QLatin1String("cluetrustGpxExt"), cluetrustGpxExt->isChecked());
+    settings.setValue(QLatin1String("garminAccelerationExt"), garminAccelerationExt->isChecked());
     settings.setValue(QLatin1String("garminTrackPointExt"), garminTrackPointExt->isChecked());
 }

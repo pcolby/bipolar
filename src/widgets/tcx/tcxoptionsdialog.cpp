@@ -38,7 +38,7 @@ TcxOptionsDialog::TcxOptionsDialog(QWidget *parent, Qt::WindowFlags flags)
 
     QTabWidget * const tabs = new QTabWidget();
     tabs->addTab(generalOptionsTab, tr("General"));
-  //tabs->addTab(extensionsTab, tr("Extensions")); No TCX extensions implemented yet.
+    tabs->addTab(extensionsTab, tr("Extensions"));
 
     QDialogButtonBox * const buttons = new QDialogButtonBox(
         QDialogButtonBox::Ok|QDialogButtonBox::Cancel);

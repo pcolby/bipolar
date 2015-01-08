@@ -36,6 +36,7 @@ public slots:
 
 protected:
     QCheckBox * cluetrustGpxExt;
+    QCheckBox * garminAccelerationExt;
     QCheckBox * garminTrackPointExt;
 
 };

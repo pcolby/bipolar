@@ -31,13 +31,13 @@ GpxOptionsDialog::GpxOptionsDialog(QWidget *parent, Qt::WindowFlags flags)
 {
     setWindowTitle(tr("GPX Options"));
 
-    GeneralGpxOptions * const generalOptionsTab = new GeneralGpxOptions();
+  //GeneralGpxOptions * const generalOptionsTab = new GeneralGpxOptions();
     GpxExtensionsTab * const extensionsTab = new GpxExtensionsTab();
-    connect(this, SIGNAL(accepted()), generalOptionsTab, SLOT(save()));
+  //connect(this, SIGNAL(accepted()), generalOptionsTab, SLOT(save()));
     connect(this, SIGNAL(accepted()), extensionsTab, SLOT(save()));
 
     QTabWidget * const tabs = new QTabWidget();
-    tabs->addTab(generalOptionsTab, tr("General"));
+  //tabs->addTab(generalOptionsTab, tr("General"));
     tabs->addTab(extensionsTab, tr("Extensions"));
 
     QDialogButtonBox * const buttons = new QDialogButtonBox(

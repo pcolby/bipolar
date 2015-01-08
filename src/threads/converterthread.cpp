@@ -183,9 +183,21 @@ void ConverterThread::run()
 void ConverterThread::setTrainingSessionOptions(polar::v2::TrainingSession * const session)
 {
     Q_CHECK_PTR(session);
+
+    // The src/widgets/*/*Tabs widgets load/save options from/to QSettings.
+    // Here we load from QSettings, and apply to our TrainingSession instance.
     QSettings settings;
 
+    /// @todo Replace all of the following setting-name string literals with
+    ///       constants in the relevant options classes. Probably the defaults too.
+
     settings.beginGroup(QLatin1String("gpx"));
+    session->setGpxOption(polar::v2::TrainingSession::CluetrustGpxDataExtension,
+        settings.value(QLatin1String("cluetrustGpxExt"), true).toBool());
+    session->setGpxOption(polar::v2::TrainingSession::GarminAccelerationExtension,
+        settings.value(QLatin1String("garminAccelerationExt"), true).toBool());
+    session->setGpxOption(polar::v2::TrainingSession::GarminTrackPointExtension,
+        settings.value(QLatin1String("garminTrackPointExt"), true).toBool());
     settings.endGroup();
 
     settings.beginGroup(QLatin1String("hrm"));
@@ -198,5 +210,9 @@ void ConverterThread::setTrainingSessionOptions(polar::v2::TrainingSession * con
     settings.beginGroup(QLatin1String("tcx"));
     session->setTcxOption(polar::v2::TrainingSession::ForceTcxUTC,
         settings.value(QLatin1String("utcOnly"), true).toBool());
+    session->setTcxOption(polar::v2::TrainingSession::GarminActivityExtension,
+        settings.value(QLatin1String("garminActivityExt"), true).toBool());
+    session->setTcxOption(polar::v2::TrainingSession::GarminCourseExtension,
+        settings.value(QLatin1String("garminCourseExt"), true).toBool());
     settings.endGroup();
 }

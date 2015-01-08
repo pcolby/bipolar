@@ -114,7 +114,7 @@ OutputsPage::OutputsPage(QWidget *parent) : QWizardPage(parent)
         grid->addWidget(gpxCheckBox, 0, 0);
         grid->addWidget(hrmCheckBox, 1, 0);
         grid->addWidget(tcxCheckBox, 2, 0);
-      //grid->addWidget(advancedGpxLabel, 0, 1); No advaned GPX options implemented yet.
+        grid->addWidget(advancedGpxLabel, 0, 1);
         grid->addWidget(advancedHrmLabel, 1, 1);
         grid->addWidget(advancedTcxLabel, 2, 1);
         QHBoxLayout * const hBox = new QHBoxLayout();
