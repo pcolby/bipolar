@@ -4,26 +4,51 @@
 [![GPLv3 License](http://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/copyleft/gpl.html)
 
 Bipolar a simple GUI application for exporting training sessions from Polar
-sync software, such as Polar FlowSync.  Currently, the following applications
+sync software, such as [Polar FlowSync].  Currently, the following applications
 and devices are supported:
 
-* Polar FlowSync, on both Mac and Windows.
-* Polar V800
-* Polar Loop
+* [Polar FlowSync], on both Mac and Windows.
+* [Polar V800]
+* [Polar Loop]
 
-## Status
+## Installing Bipolar
 
-The release plans is roughly as follows:
+### Mac OS X
 
-- [x] 0.0.1 Working hook DLL for extracting data from Polar FlowSync on Windows.
-- [x] 0.1.0 Export to both GPX and TCX, in a headless mode (no GUI yet).
-- [x] 0.2.0 Mac OS support (both hook library, and headless app).
-- [x] 0.2.x Minor features and bug fixes.
-- [x] 0.3.0 Basic GUI.
-- [ ] 0.3.x Minor features and bug fixes.
+1. Install [Polar FlowSync], if you haven't already.
+2. Close FlowSync, if it's already running.
+3. Download the [latest Bipolar release] - you'll want the
+   `Bipolar-<version>.dmg` file for OS X.
+4. Open the downloaded `Bipolar-<version>.dmg` file.
+5. Read the includes `README.txt` file.
+6. Enter the `Hook` folder.
+7. Run the `install.command` script.
 
-See the [issue tracker](https://github.com/pcolby/bipolar/issues?state=open)
-for more details / granularity.
+See the [How it Works](#how-it-works) for more information about the Hook that
+gets installed in that last step.
+
+### Windows
+
+1. Install [Polar FlowSync], if you haven't already.
+2. Close FlowSync, if it's already running.
+3. Download the [latest Bipolar release] - you'll want the
+   `Bipolar-<version>.exe` file for Windows.
+4. Run the downloaded `Bipolar-<version>.exe` installer.
+5. Follow the usual install wizard prompts.
+
+See the [How it Works](#how-it-works) for more information about the Hook that
+gets installed in that last step.
+
+## Using Bipolar
+
+Once installed (see above), the usage pattern is pretty simple:
+1. Record some activities on a supported Polar device.
+2. Use FlowSync to upload your activities to [flow.polar.com] as usual.
+3. Run the Bipolar application, and follow the GUI prompts. Depending on the
+   options selected, this will generate GPX, HRM, and/or TCX versions of all
+   activities seen.
+4. Open/upload the generated GPX, HRM, and/or TCX files to your favorite website
+   or application.
 
 ## How it Works
 
@@ -60,13 +85,20 @@ not make any significant use of this project, nor the Polar V800 in general.
 
 ## Contact
 
-The [Bipolar Google Group](http://groups.google.com/d/forum/bipolar-app) is
-available for general discussion, questions, comments, suggestions,
-announcements etc.  Email bipolar-app@googlegroups.com to subscribe.
+The [issue tracker] is the preferred place for reporting issues, asking basic
+questions, making comments and suggestions, etc.
 
-Of course, the [issue tracker](https://github.com/pcolby/bipolar/issues?state=open)
-is also available for reporting issues, asking questions, making comments and
-suggestions, etc.
+There's also a [Bipolar Google Group] available for general discussion,
+questions, comments, suggestions, announcements etc.  Email
+bipolar-app@googlegroups.com to subscribe.
 
-There's also a bit of Bipolar-related chatter on the
-[Polar forums](http://forum.polar.fi/showthread.php?t=29092).
+Additionally, there's a
+[Bipolar open-source project](http://forum.polar.fi/showthread.php?t=29092)
+topic on the Polar forums, which contains quite a bit of relevant information.
+
+[Bipolar Google Group]: http://groups.google.com/d/forum/bipolar-app
+[issue tracker]: https://github.com/pcolby/bipolar/issues?state=open
+[latest Bipolar release]: https://github.com/pcolby/bipolar/releases/latest
+[Polar FlowSync]: https://flow.polar.com/start
+[Polar Loop]: http://www.polarloop.com/
+[Polar V800]: http://www.polarv800.com/
