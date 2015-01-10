@@ -10,6 +10,8 @@ Features:
 - Garmin (TCX) Course Extension ([#47](../../issues/47))
 - power data support ([#43](../../issues/43))
 
+Special thanks to @profanum429 and @trimathias for helping with this release.
+
 ### 0.3.1 (2014-09-06)
 Features:
 - option to enable/disable R-R HRM output.
