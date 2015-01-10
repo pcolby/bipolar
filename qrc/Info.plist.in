@@ -33,6 +33,6 @@
 	    it should be one of: Internal, Alpha, Beta, or Release.
 	-->
 	<key>SpecialBuild</key>
-	<string>Internal</string>
+	<string>Beta</string>
 </dict>
 </plist>

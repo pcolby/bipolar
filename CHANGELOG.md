@@ -1,10 +1,6 @@
 ## Bipolar Changelog
 
-### 0.4.1 (_unreleased_)
-Features:
-- fitness test data ([#39](../../issues/39))
-
-### 0.4.0 (_unreleased_)
+### 0.4.0 (2015-01-10)
 Features:
 - hook debug logging ([d5e970f](../../commit/d5e970fcb0b66446fde8a28670483ab5ac43bc79))
 - Cluetrust GPXData Extension ([#29](../../issues/29))
