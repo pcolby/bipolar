@@ -1,5 +1,8 @@
 ## Bipolar Changelog
 
+### 0.4.1 (_unreleased_)
+
+
 ### 0.4.0 (2015-01-10)
 Features:
 - hook debug logging ([d5e970f](../../commit/d5e970fcb0b66446fde8a28670483ab5ac43bc79))
@@ -10,7 +13,7 @@ Features:
 - Garmin (TCX) Course Extension ([#47](../../issues/47))
 - power data support ([#43](../../issues/43))
 
-Special thanks to @profanum429 and @trimathias for helping with this release.
+Special thanks to @profanum429 and @trimathias for contributing to this release.
 
 ### 0.3.1 (2014-09-06)
 Features:
