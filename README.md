@@ -42,6 +42,7 @@ gets installed in that last step.
 ## Using Bipolar
 
 Once installed (see above), the usage pattern is pretty simple:
+
 1. Record some activities on a supported Polar device.
 2. Use FlowSync to upload your activities to [flow.polar.com] as usual.
 3. Run the Bipolar application, and follow the GUI prompts. Depending on the
