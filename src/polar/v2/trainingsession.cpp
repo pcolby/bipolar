@@ -150,6 +150,7 @@ QString TrainingSession::getTcxSport(const quint64 &polarSportValue)
         map.insert(71, TCX_OTHER);   // Off-road duathlon
         map.insert(82, TCX_OTHER);   // Multisport
         map.insert(83, TCX_OTHER);   // Other indoor
+        map.insert(103, TCX_OTHER);  // Pool swimming
     }
     QMap<quint64, QString>::ConstIterator iter = map.constFind(polarSportValue);
     if (iter == map.constEnd()) {

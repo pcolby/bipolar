@@ -3,6 +3,10 @@
 ### 0.4.x (_unreleased_)
 - upgrade to Qt 5.4.0 (from 5.3.1, 5.3.2)
 
+### 0.4.1 (_unreleased_)
+Features:
+- Pool swimming sport type ([#50](../../issues/50))
+
 ### 0.4.0 (2015-01-10)
 Features:
 - hook debug logging ([d5e970f](../../commit/d5e970fcb0b66446fde8a28670483ab5ac43bc79))
