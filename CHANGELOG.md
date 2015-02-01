@@ -1,7 +1,7 @@
 ## Bipolar Changelog
 
-### 0.4.1 (_unreleased_)
-
+### 0.4.x (_unreleased_)
+- upgrade to Qt 5.4.0 (from 5.3.1, 5.3.2)
 
 ### 0.4.0 (2015-01-10)
 Features:
@@ -12,6 +12,7 @@ Features:
 - Garmin (TCX) Activity Extension ([#31](../../issues/31))
 - Garmin (TCX) Course Extension ([#47](../../issues/47))
 - power data support ([#43](../../issues/43))
+- Windows only: upgrade to Qt 5.3.2 (from 5.3.1)
 
 Special thanks to @profanum429 and @trimathias for contributing to this release.
 
