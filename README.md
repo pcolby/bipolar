@@ -1,4 +1,6 @@
 # [![PMDA++](qrc/icon/bipolar30.png)](#) Bipolar
+
+[![Join the chat at https://gitter.im/pcolby/bipolar](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/pcolby/bipolar?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](http://api.travis-ci.org/pcolby/bipolar.svg?branch=master)](https://travis-ci.org/pcolby/bipolar)
 [![Github Release](http://img.shields.io/github/release/pcolby/bipolar.svg)](https://github.com/pcolby/bipolar/releases/latest)
 [![GPLv3 License](http://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/copyleft/gpl.html)
