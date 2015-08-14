@@ -1,7 +1,8 @@
 version: '{branch}-{build}'
 
 install:
-  - choco install openssl.light -version 1.0.1.20140411
+  - ps: (new-object net.webclient).DownloadFile('http://code.x2go.org/releases/binary-win32/3rd-party/Win32OpenSSL/Win32OpenSSL-1_0_1g.exe', 'Win32OpenSSL-1_0_1g.exe')
+  - Win32OpenSSL-1_0_1g.exe /silent
 
 build_script:
   - build.cmd
