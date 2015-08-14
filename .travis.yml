@@ -14,15 +14,9 @@ install:
 before_script:
   - cppcheck --error-exitcode=1 --quiet .
   - qmake -qt=qt5
-  - pushd test
-  - qmake -qt=qt5
-  - popd
 
 script:
-  - make all
-  - pushd test
   - make all && make check
-  - popd
 
 after_failure:
   - pushd test/protobuf/testdata/
