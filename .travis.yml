@@ -3,7 +3,8 @@ language: cpp
 os: osx
 
 install:
-  - sudo updatedb
+  - find / -type d -name SDKs
+  - find / -type d -name SDK -exec ls {}\;
   - locate SDKs
   - ls /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
   - ls /Volumes
