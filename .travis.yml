@@ -1,8 +1,6 @@
 language: cpp
 
-compiler:
-  - clang
-  - gcc
+os: osx
 
 script:
   - ./build.sh
