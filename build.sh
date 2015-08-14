@@ -60,6 +60,7 @@ function configure {
     ${MKDIR} "$SELF_DIR/build"
     pushd "$SELF_DIR/build"
     pushd "$SELF_DIR/build"
+    "../$QT_NAME/configure" --help ; exit 1
     "../$QT_NAME/configure" \
         -confirm-license \
         -framework \
