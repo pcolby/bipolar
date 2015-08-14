@@ -1,5 +1,8 @@
 version: '{branch}-{build}'
 
+install:
+  - choco install openssl.light -version 1.0.1.20140411
+
 build_script:
   - build.cmd
 
