@@ -5,6 +5,7 @@ os: osx
 install:
   - ls /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
   - ls /Volumes
+  - ls '/Volumes/VMware Shared Folders'
   - sudo cp -a
     /Volumes/Xcode/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk
     /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
