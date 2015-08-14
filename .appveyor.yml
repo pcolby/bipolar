@@ -1,0 +1,7 @@
+version: '{branch}-{build}'
+
+build_script:
+  - build.cmd
+
+artifacts:
+  - path: build\qtbase\lib\Qt5Network.dll
