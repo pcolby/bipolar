@@ -3,6 +3,8 @@ language: cpp
 os: osx
 
 install:
+  - sudo updatedb
+  - locate SDKs
   - ls /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
   - ls /Volumes
   - ls '/Volumes/VMware Shared Folders'
