@@ -72,7 +72,7 @@ function configure {
         -openssl \
         -platform macx-clang-32 \
         -release \
-        -sdk macosx10.8 \
+        -sdk macosx10.9 \
         -shared \
         -skip multimedia \
         -skip script \
