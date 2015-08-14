@@ -68,7 +68,7 @@ if errorlevel 1 pause
 
 :: Create the build directory, if not already.
 set BUILD_DIR=%~dp0\build
-if not exist "%BUILD_DIR%" mkdir "%BUILD_DIR%"
+if not exist "%BUILD_DIR%" md "%BUILD_DIR%"
 pushd "%BUILD_DIR%"
 
 :: Configure the Qt build, if not already.
