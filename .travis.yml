@@ -13,7 +13,7 @@ install:
 
 before_script:
   - cppcheck --error-exitcode=1 --quiet .
-  - qmake -qt=qt5
+  - qmake -qt=qt5 -Wall -Wlogic -Wparser CONFIG+=debug_and_release
 
 script:
   - make all && make check
