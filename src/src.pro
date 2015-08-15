@@ -3,7 +3,12 @@ TARGET = Bipolar
 TEMPLATE = app
 CONFIG += warn_on
 QT += widgets xml
+
 VERSION = 0.4.1
+if (isEmpty(VER_BUILD)): VER_BUILD = $$(APPVEYOR_BUILD_NUMBER)
+if (isEmpty(VER_BUILD)): VER_BUILD = 0
+VERSION = $$VERSION"."$$VER_BUILD
+message($$VER_BUILD)
 
 # Disable automatic ASCII conversions (best practice for internationalization).
 DEFINES += QT_NO_CAST_FROM_ASCII QT_NO_CAST_TO_ASCII
