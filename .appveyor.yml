@@ -36,7 +36,7 @@ build_script:
 after_build:
   # Add a link to the build output within the source directory. This is needed because AppVeyor does
   # not support extracting artifacts from out-of-source build directories. See 'artifacts' below.
-  - mklink %APPVEYOR_BUILD_FOLDER%\Bipolar.exe %APPVEYOR_BUILD_FOLDER%-build\%CONFIGURATION%\Bipolar.exe
+  - mklink %APPVEYOR_BUILD_FOLDER%\Bipolar.exe %APPVEYOR_BUILD_FOLDER%-build\src\%CONFIGURATION%\Bipolar.exe
 
 test_script:
   - if not %CONFIGURATION%==debug %make% check TESTARGS=-silent
