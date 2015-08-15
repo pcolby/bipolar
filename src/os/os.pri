@@ -1,4 +1,4 @@
-DEPENDPATH += src/os
+INCLUDEPATH += $$PWD
 VPATH += $$PWD
 
 HEADERS += abstractversioninfo.h   versioninfo.h

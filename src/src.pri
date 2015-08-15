@@ -1,4 +1,4 @@
-INCLUDEPATH += src
+INCLUDEPATH += $$PWD
 VPATH += $$PWD
 SOURCES += main.cpp
 include(os/os.pri)
