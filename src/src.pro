@@ -20,11 +20,11 @@ else: DEFINES += $$shell_quote(BUILD_USER=$$(USER))
 RESOURCES = ../qrc/app.qrc
 macx: {
     ICON  = $$PWD/../qrc/icon/Bipolar.icns
-    QMAKE_INFO_PLIST = $$PWD/../qrc/Info.plist
+    QMAKE_INFO_PLIST = $$OUT_PWD/../qrc/Info.plist
     QMAKE_SUBSTITUTES += ../qrc/Info.plist.in
 }
 win32: {
-    RC_FILE = ../qrc/Bipolar.rc
+    RC_FILE = $$OUT_PWD/../qrc/Bipolar.rc
     QMAKE_SUBSTITUTES += ../qrc/Bipolar.rc.in
 }
 
