@@ -1,8 +1,8 @@
 // See http://msdn.microsoft.com/en-us/library/windows/desktop/aa381058.aspx
 
-IDI_ICON1 ICON DISCARDABLE "..\\\\qrc\\\\icon\\\\bipolar.ico"
+IDI_ICON1 ICON DISCARDABLE \"..\\\\qrc\\\\icon\\\\bipolar.ico\"
 
-1 TYPELIB "Bipolar.rc"
+1 TYPELIB \"Bipolar.rc\"
 
 1 VERSIONINFO
  FILEVERSION $$VER_MAJ,$$VER_MIN,$$VER_PAT,$$VER_BUILD
@@ -17,9 +17,9 @@ IDI_ICON1 ICON DISCARDABLE "..\\\\qrc\\\\icon\\\\bipolar.ico"
  FILETYPE 0x2L
  FILESUBTYPE 0x0L
 BEGIN
-    BLOCK "StringFileInfo"
+    BLOCK \"StringFileInfo\"
     BEGIN
-        BLOCK "040904e4"
+        BLOCK \"040904e4\"
         BEGIN
             VALUE \"Comments\", \"https://github.com/pcolby/bipolar\\0\"
             VALUE \"CompanyName\", \"Paul Colby\\0\"
