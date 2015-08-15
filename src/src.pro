@@ -27,27 +27,4 @@ OBJECTS_DIR = $$DESTDIR/tmp
 RCC_DIR = $$DESTDIR/tmp
 UI_DIR = $$DESTDIR/tmp
 
-# Create our custom revbuild target.
-macx:revbuild.commands = \
-    $$shell_path($$PWD/../qrc/gitrevision.sh) $$shell_path($$PWD/.git) \
-    $$shell_path($$PWD/../qrc/Info.plist.in) $$shell_path($$PWD/../qrc/Info.plist)
-win32:revbuild.commands = \
-    $$shell_path($$PWD/../qrc/gitrevision.cmd) $$shell_path($$PWD/.git) \
-    $$shell_path($$PWD/../qrc/Bipolar.rc.in) $$shell_path($$PWD/../qrc/Bipolar.rc)
-QMAKE_EXTRA_TARGETS += revbuild
-
-# Hook our revbuild target in between qmake's Makefile update and the actual project target.
-revbuildhook.depends = revbuild
-CONFIG(debug,debug|release):revbuildhook.target = Makefile.Debug
-CONFIG(release,debug|release):revbuildhook.target = Makefile.Release
-macx:revbuildhook.target = Makefile
-QMAKE_EXTRA_TARGETS += revbuildhook
-
-# Fix an issue where Qt's generated Makefile does not depend on QMAKE_INFO_PLIST.
-macx: {
-    infobuild.target = $$PWD/release/Bipolar.app/Contents/Info.plist
-    infobuild.depends = $$QMAKE_INFO_PLIST
-    QMAKE_EXTRA_TARGETS += infobuild
-}
-
 include(src.pri)
