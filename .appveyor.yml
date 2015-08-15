@@ -1,7 +1,7 @@
 version: '{branch}-{build}'
 
 install:
-  - choco install openssl
+  - choco install openssl -version 1.0.2.20150731
 
 build_script:
   - build.cmd
