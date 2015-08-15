@@ -3,6 +3,7 @@ TARGET = Bipolar
 TEMPLATE = app
 CONFIG += warn_on
 QT += widgets xml
+VERSION = 0.4.1
 
 # Disable automatic ASCII conversions (best practice for internationalization).
 DEFINES += QT_NO_CAST_FROM_ASCII QT_NO_CAST_TO_ASCII
@@ -13,6 +14,8 @@ else: DEFINES += $$shell_quote(BUILD_USER=$$(USER))
 
 # Add the embedded resources.
 RESOURCES = ../qrc/app.qrc
+QMAKE_SUBSTITUTES += ../qrc/Bipolar.rc.in
+QMAKE_SUBSTITUTES += ../qrc/Info.plist.in
 macx: {
     ICON  = $$PWD/../qrc/icon/Bipolar.icns
     QMAKE_INFO_PLIST = $$PWD/../qrc/Info.plist

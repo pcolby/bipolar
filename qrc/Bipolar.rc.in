@@ -1,12 +1,12 @@
 // See http://msdn.microsoft.com/en-us/library/windows/desktop/aa381058.aspx
 
-IDI_ICON1 ICON DISCARDABLE "..\\qrc\\icon\\bipolar.ico"
+IDI_ICON1 ICON DISCARDABLE "..\\\\qrc\\\\icon\\\\bipolar.ico"
 
 1 TYPELIB "Bipolar.rc"
 
 1 VERSIONINFO
- FILEVERSION 0,4,1,0
- PRODUCTVERSION 0,4,1,0
+ FILEVERSION $$VER_MAJ,$$VER_MIN,$$VER_PAT,0
+ PRODUCTVERSION $$VER_MAJ,$$VER_MIN,$$VER_PAT,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -21,23 +21,23 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "Comments", "https://github.com/pcolby/bipolar\0"
-            VALUE "CompanyName", "Paul Colby\0"
-            VALUE "FileDescription", "Bipolar application\0"
-            VALUE "FileVersion", "0.4.1.0\0"
-            VALUE "InternalName", "Bipolar\0"
-            VALUE "LegalCopyright", "2014-2015 Paul Colby\0"
-            VALUE "OriginalFilename", "Bipolar.exe\0"
-          //VALUE "PrivateBuild", "\0"
-            VALUE "ProductName", "Bipolar\0"
-            VALUE "ProductVersion", "0.4.1.0\0"
+            VALUE \"Comments\", \"https://github.com/pcolby/bipolar\\0\"
+            VALUE \"CompanyName\", \"Paul Colby\\0\"
+            VALUE \"FileDescription\", \"Bipolar application\\0\"
+            VALUE \"FileVersion\", \"$$VERSION\\0\"
+            VALUE \"InternalName\", \"Bipolar\\0\"
+            VALUE \"LegalCopyright\", \"2014-2015 Paul Colby\\0\"
+            VALUE \"OriginalFilename\", \"Bipolar.exe\\0\"
+          //VALUE \"PrivateBuild\", \"\\0\"
+            VALUE \"ProductName\", \"Bipolar\\0\"
+            VALUE \"ProductVersion\", \"$$VERSION\\0\"
             // Because we embed the following value in TCX files, if set,
             // it should be one of: Internal, Alpha, Beta, or Release.
-            VALUE "SpecialBuild", "Internal\0"
+            VALUE \"SpecialBuild\", \"Internal\\0\"
         END
     END
-    BLOCK "VarFileInfo"
+    BLOCK \"VarFileInfo\"
     BEGIN
-        VALUE "Translation", 0x409, 1252
+        VALUE \"Translation\", 0x409, 1252
     END
 END
