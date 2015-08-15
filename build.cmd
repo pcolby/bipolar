@@ -5,7 +5,7 @@
 :: * OpenSSL (ideally version 1.0.1g, or ABI compatible), headers and binaries installed.
 ::    * http://slproweb.com/download/Win32OpenSSL-1_0_1g.exe
 :: * Qt 5.1.1 source, in the "src" subdirectory.
-::    * http://download.qt-project.org/archive/qt/5.1/5.1.1/single/
+::    * http://download.qt.io/archive/qt/5.1/5.1.1/single
 
 :: The following are all required; adjust to match your setup.
 set MSVC=C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC

@@ -21,7 +21,7 @@ function fetchSource {
     if [ ! -e "$SELF_DIR/$QT_NAME.tar.gz" ]; then
         echo "Fetching $QT_NAME.tar.gz"
         "$CURL" --location \
-            "http://download.qt-project.org/official_releases/qt/5.1/$QT_VERSION/single/$QT_NAME.tar.gz" \
+            "http://download.qt.io/official_releases/qt/5.1/$QT_VERSION/single/$QT_NAME.tar.gz" \
             --output "$QT_NAME.tar.gz"
     fi
 }
