@@ -1,6 +1,6 @@
 // See http://msdn.microsoft.com/en-us/library/windows/desktop/aa381058.aspx
 
-IDI_ICON1 ICON DISCARDABLE \"..\\\\qrc\\\\icon\\\\bipolar.ico\"
+IDI_ICON1 ICON DISCARDABLE \"$$_PRO_FILE_PWD_\\\\..\\\\qrc\\\\icon\\\\bipolar.ico\"
 
 1 TYPELIB \"Bipolar.rc\"
 
