@@ -1,0 +1,46 @@
+version: '{branch}-{build}'
+
+environment:
+  VSVER: 12.0 # Visual Studio 2013
+  matrix:
+    - QTDIR: C:\Qt\5.5\mingw492_32
+    - QTDIR: C:\Qt\5.5\msvc2013
+    - QTDIR: C:\Qt\5.5\msvc2013_64
+
+configuration:
+  - debug
+  - release
+
+install:
+  # Setup the build toolchains.
+  - '%QTDIR%\bin\qtenv2.bat'
+  - qmake -v
+  - if %QTDIR:_64=%==%QTDIR% ( set ARCH=x86 ) else set ARCH=x64
+  - if %QTDIR:msvc=%==%QTDIR% g++ --version
+  - if %QTDIR:msvc=%==%QTDIR% set make=mingw32-make.exe
+  - if %QTDIR:msvc=%==%QTDIR% %make% --version
+  - if not %QTDIR:msvc=%==%QTDIR% call "%ProgramFiles(x86)%\Microsoft Visual Studio %VSVER%\VC\vcvarsall.bat" %ARCH%
+  - if not %QTDIR:msvc=%==%QTDIR% set make=nmake.exe
+  - if not %QTDIR:msvc=%==%QTDIR% %make% /? > nul
+
+before_build:
+  # Prepare the out-of-source build directory.
+  - mkdir %APPVEYOR_BUILD_FOLDER%-build
+  - cd %APPVEYOR_BUILD_FOLDER%-build
+  - qmake -Wall -Wlogic -Wparser CONFIG+=%CONFIGURATION% %APPVEYOR_BUILD_FOLDER%
+
+build_script:
+  - '%make%'
+  # @todo Build NSIS installer.
+
+after_build:
+  # Add a link to the build output within the source directory. This is needed because AppVeyor does
+  # not support extracting artifacts from out-of-source build directories. See 'artifacts' below.
+  - mklink %APPVEYOR_BUILD_FOLDER%\Bipolar.exe %APPVEYOR_BUILD_FOLDER%-build\%CONFIGURATION%\Bipolar.exe
+
+test_script:
+  - if not %CONFIGURATION%==debug %make% check TESTARGS=-silent
+
+artifacts:
+  - path: Bipolar.exe
+  # @todo Add NSIS installer.
