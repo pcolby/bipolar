@@ -2,6 +2,7 @@ version: '{branch}-{build}'
 
 install:
   - choco install openssl -ia '/DIR=C:\OpenSSL-Win32' -version 1.0.2.20150731 --x86
+  - appveyor DownloadFile http://download.qt.io/archive/qt/5.1/5.1.1/single/qt-everywhere-opensource-src-5.1.1.7z
 
 build_script:
   - build.cmd
