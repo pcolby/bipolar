@@ -1,8 +1,7 @@
 version: '{branch}-{build}'
 
 install:
-  - ps: (new-object net.webclient).DownloadFile('http://code.x2go.org/releases/binary-win32/3rd-party/Win32OpenSSL/Win32OpenSSL-1_0_1g.exe', 'Win32OpenSSL-1_0_1g.exe')
-  - Win32OpenSSL-1_0_1g.exe /silent /verysilent /sp- /suppressmsgboxes /DIR=C:\OpenSSL-Win32
+  - choco install openssl
 
 build_script:
   - build.cmd
