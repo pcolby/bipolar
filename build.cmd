@@ -74,7 +74,7 @@ pushd "%BUILD_DIR%"
 :: Configure the Qt build, if not already.
 if not exist "%BUILD_DIR%\Makefile" (
   call "%SRC_DIR%\configure.bat"^
-   -opensource^
+   -confirm-license^
    -no-gui^
    -no-opengl^
    -no-openvg^
@@ -82,6 +82,7 @@ if not exist "%BUILD_DIR%\Makefile" (
    -nomake examples^
    -nomake tools^
    -openssl -I C:\OpenSSL-Win32\include -L C:\OpenSSL-Win32\lib^
+   -opensource^
    -platform win32-msvc2010^
    -release^
    -shared^
