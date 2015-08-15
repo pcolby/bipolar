@@ -4,6 +4,9 @@
 # bumps. Note, this uses GNU sed, so use it on *nix, not OSX.
 #
 
+# @todo This script can probably go if we use QMAKE_SUBSTITUTES also process
+# the NSIS and OSX package scripts to apply the project's $$VERSION variable.
+
 if [ $# -ne 2 ]; then
     echo "Usage: `basename $0` from-version to-version" 2>&1
     exit 1
