@@ -96,4 +96,4 @@ if not exist "%BUILD_DIR%\Makefile" (
 nmake.exe module-qtbase
 dir "%BUILD_DIR%\qtbase\lib\Qt5Network.dll"
 popd
-pause
+rem pause
