@@ -1,7 +1,8 @@
 version: '{branch}-{build}'
 
 install:
-  - choco install openssl -version 1.0.2.20150731
+  - choco install openssl -version 1.0.2.20150731 --x86
+  - copy "C:\Program Files\OpenSSL\bin\openssl.cfg" con
 
 build_script:
   - build.cmd
