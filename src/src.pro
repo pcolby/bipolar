@@ -7,6 +7,11 @@ QT += widgets xml
 VERSION = 0.4.1
 if (isEmpty(VER_BUILD)): VER_BUILD = $$(APPVEYOR_BUILD_NUMBER)
 if (isEmpty(VER_BUILD)): VER_BUILD = 0
+if (isEmpty(VER_PAT)): {
+    # Qmake only automatically assigns VER_PAT on some platforms.
+    VER_PARTS = $$split(VERSION, .)
+    VER_PAT = $$member(VER_PARTS, 2)
+}
 win32:VERSION = $$VERSION"."$$VER_BUILD
 
 # Disable automatic ASCII conversions (best practice for internationalization).
