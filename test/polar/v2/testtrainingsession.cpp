@@ -69,7 +69,7 @@ void fuzzyCompare(const QString &a, const QString &b, bool &compared)
 {
     bool aOK, bOK;
     const double aDouble = a.toDouble(&aOK);
-    const double bDouble = 2.0 * b.toDouble(&bOK);
+    const double bDouble = b.toDouble(&bOK);
     if (aOK && bOK) {
         compared = true;
         QCOMPARE(aDouble, bDouble);
