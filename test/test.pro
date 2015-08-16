@@ -20,6 +20,9 @@ OBJECTS_DIR = $$DESTDIR/tmp
 RCC_DIR = $$DESTDIR/tmp
 UI_DIR = $$DESTDIR/tmp
 
+QMAKE_CXXFLAGS += /STACK:107374182400
+QMAKE_LFLAGS += /STACK:107374182400
+
 # Code coverage reporting (for Linux at least).
 unix {
     # Enable gcov compile and link flags.
