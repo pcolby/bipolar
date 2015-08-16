@@ -1365,8 +1365,11 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
                     splits.append(splitTime);
                 }
             }
-//            std::sort(splits.begin(), splits.end());
-            qSort(splits);
+            #if defined Q_CC_MSVC && defined Q_OS_WIN64 && (QT_VERSION == QT_VERSION_CHECK(5, 3, 0))
+            qSort(splits); // Deprecated by Qt, but std::sort has warnings on Qt 5.3 with 64-bit MSVC.
+            #else
+            std::sort(splits.begin(), splits.end());
+            #endif
 
             // Add trkseg elements containing the actual GPS data.
             QDomElement trkseg = doc.createElement(QLatin1String("trkseg"));
