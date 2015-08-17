@@ -31,7 +31,7 @@ before_script:
   - qmake $QMAKE_VER -r -Wall -Wlogic -Wparser CONFIG+=debug_and_release
 
 script:
-  - make all && make check
+  - make all && make check TESTARGS=-silent
 
 notifications:
   webhooks:
