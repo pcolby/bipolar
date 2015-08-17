@@ -1,7 +1,7 @@
 language: cpp
 
 os:
-  - linux
+ #- linux
   - osx
 
 compiler:
@@ -20,7 +20,7 @@ env:
 matrix:
   allow_failures:
     - env: QTVER=55 # Qt 5.5 not supported yet (issue #56).
-    - os: osx # Work in progress.
+    #- os: osx # Work in progress.
   exclude:
     - compiler: clang # QTBUG-32100
       env: QTVER=ust
