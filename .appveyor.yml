@@ -51,9 +51,7 @@ after_build:
   - mklink %APPVEYOR_BUILD_FOLDER%\Bipolar.exe %APPVEYOR_BUILD_FOLDER%-build\src\%CONFIGURATION%\Bipolar.exe
 
 test_script:
-  - test\release\test.exe -v2
-  #- if not %CONFIGURATION%==debug %make% check TESTARGS=-silent
-  - if not %CONFIGURATION%==debug %make% check
+  - if not %CONFIGURATION%==debug %make% check TESTARGS=-silent
 
 artifacts:
   - path: Bipolar.exe
