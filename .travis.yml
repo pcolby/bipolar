@@ -30,6 +30,7 @@ install:
 
 before_script:
   - cppcheck --error-exitcode=1 --quiet .
+  - if [ "$CXX" == clang++ ]; then export QMAKESPEC=linux-clang; fi
   - if [ $QTVER == ust ]; then export QMAKE_VER=-qt=qt5; fi
   - if [ $QTVER == 502 ]; then export SHORT_VER=5; fi
   - '[ $QTVER == ust ] || . /opt/qt$SHORT_VER/bin/qt$SHORT_VER-env.sh'
