@@ -27,7 +27,7 @@ install:
 before_script:
   - cppcheck --error-exitcode=1 --quiet .
   - if [ $QTVER == ust ]; then export QMAKE_VER=-qt=qt5; fi
-  - [ QTVER == ust ] || . /opt/qt$PKG_VER/bin/qt$PKG_VER-env.sh
+  - '[ $QTVER == ust ] || . /opt/qt$PKG_VER/bin/qt$PKG_VER-env.sh'
   - qmake $QMAKE_VER -r -Wall -Wlogic -Wparser CONFIG+=debug_and_release
 
 script:
