@@ -14,8 +14,8 @@ env:
   - QTVER=55
 
 before_install:
-  - '[ $QTVER == ust ] || sudo add-apt-repository -y ppa:ubuntu-sdk-team/ppa'
-  - '[ $QTVER != ust ] || sudo add-apt-repository -y ppa:beineri/opt-qt$QTVER'
+  - '[ $QTVER == ust ] || sudo add-apt-repository -y ppa:beineri/opt-qt$QTVER'
+  - '[ $QTVER != ust ] || sudo add-apt-repository -y ppa:ubuntu-sdk-team/ppa'
   - sudo apt-get -qy update
 
 install:
