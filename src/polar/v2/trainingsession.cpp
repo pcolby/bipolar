@@ -1365,8 +1365,8 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
                     splits.append(splitTime);
                 }
             }
-            #if defined Q_CC_MSVC && defined Q_OS_WIN64 && (QT_VERSION == QT_VERSION_CHECK(5, 3, 0))
-            qSort(splits); // Deprecated by Qt, but std::sort has warnings on Qt 5.3 with 64-bit MSVC.
+            #if defined Q_CC_MSVC && defined Q_OS_WIN64 && (QT_VERSION <= QT_VERSION_CHECK(5, 4, 0))
+            qSort(splits); // QTBUG-41092
             #else
             std::sort(splits.begin(), splits.end());
             #endif
