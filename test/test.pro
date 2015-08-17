@@ -6,7 +6,7 @@ CONFIG += testcase
 SOURCES += test.cpp
 
 # Define the build user (for TCX).
-DEFINES += BUILD_USER=$$shell_quote(\"unit tests\")
+DEFINES += BUILD_USER=$$shell_quote(unit_testx)
 
 # Add the embedded resources.
 RESOURCES = $$TOPDIR/qrc/app.qrc
