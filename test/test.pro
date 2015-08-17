@@ -1,12 +1,23 @@
 include(../common.pri)
 
+# Unset the VERSION variable for MinGW only. Unfortunately, this is necessary
+# due to a limitation in MinGW's windres Windows resource compiler, that means
+# it cannot handle defines containing spaces. The presence of VERSION variable
+# triggers qmake's automatic generation of a Windows resource file, which we
+# wish to avoid for MinGW. Note, we don't really *need* spaces in our defines,
+# however these unit tests intentionally set the BUILD_USER to 'unit tests' to
+# test / verify exactly this sort of behaviour. This also implies that anyone
+# building the Bipolar.exe appliction, should either not have spaces in their
+# username, or manually override the BUILD_USER value, or use MSVC not MinGW.
+win32-g++:unset(VERSION)
+
 TEMPLATE = app
 QT += testlib widgets xml xmlpatterns
 CONFIG += testcase
 SOURCES += test.cpp
 
 # Define the build user (for TCX).
-DEFINES += BUILD_USER=$$shell_quote(unit_testx)
+DEFINES += BUILD_USER=$$shell_quote(unit tests)
 
 # Add the embedded resources.
 RESOURCES = $$TOPDIR/qrc/app.qrc
