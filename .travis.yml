@@ -26,7 +26,6 @@ matrix:
       env: QTVER=ust
     - compiler: clang # QTBUG-32100
       env: QTVER=502
-    - os: linux # Just for now.
 
 before_install:
   - '[[ "$TRAVIS_OS_NAME" != linux || $QTVER == ust || sudo add-apt-repository -y ppa:beineri/opt-qt$QTVER ]]'
