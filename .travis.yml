@@ -13,6 +13,10 @@ env:
   - QTVER=541
   - QTVER=55
 
+matrix:
+  allow_failures:
+    - env: QTVER=55 # Qt 5.5 not supported yet (issue #56).
+
 before_install:
   - '[ $QTVER == ust ] || sudo add-apt-repository -y ppa:beineri/opt-qt$QTVER'
   - '[ $QTVER != ust ] || sudo add-apt-repository -y ppa:ubuntu-sdk-team/ppa'
