@@ -39,10 +39,14 @@ before_script:
   - if [ $QTVER == ust ]; then export QMAKE_VER=-qt=qt5; fi
   - if [ $QTVER == 502 ]; then export SHORT_VER=5; fi
   - '[ $QTVER == ust ] || . /opt/qt$SHORT_VER/bin/qt$SHORT_VER-env.sh'
-  - qmake $QMAKE_VER -r -Wall -Wlogic -Wparser CONFIG+=debug_and_release
+  - mkdir -p "$TRAVIS_BUILD_DIR-build"
+  - pushd "$TRAVIS_BUILD_DIR-build"
+  - qmake $QMAKE_VER -r -Wall -Wlogic -Wparser CONFIG+=debug_and_release "$TRAVIS_BUILD_DIR"
+  - popd
 
 script:
-  - make all && make check TESTARGS=-silent
+  - make -C "$TRAVIS_BUILD_DIR-build" -j2 all
+  - make -C "$TRAVIS_BUILD_DIR-build" -j2 check TESTARGS=-silent
 
 notifications:
   webhooks:
