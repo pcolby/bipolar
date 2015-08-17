@@ -1,4 +1,6 @@
-!define VCRDIR "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\redist\x86\Microsoft.VC120.CRT"
+!define /ifndef VCRDIR "$%VCINSTALLDIR%\redist\x86\Microsoft.VC120.CRT"
+!define /ifndef VERSION "0.0.0.0"
+!define /ifndef SPECIAL_BUILD "Internal"
 
 SetCompressor lzma
 !include "DumpLog.nsh"
@@ -7,7 +9,7 @@ SetCompressor lzma
 # Installer Attributes: General Attributes.
 InstallDir "$PROGRAMFILES\Bipolar"
 Name "Bipolar"
-OutFile Bipolar-0.4.1.0.exe
+OutFile Bipolar-${VERSION}.exe
 RequestExecutionLevel highest # Required for Windows Vista+
 XPStyle on
 
@@ -65,7 +67,7 @@ Section "application"
     # Windows' add/remove programs information.
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Bipolar" "DisplayName" "Bipolar"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Bipolar" "DisplayIcon" "$\"$INSTDIR\Bipolar.exe$\",0"
-    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Bipolar" "DisplayVersion" "0.4.1.0"
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Bipolar" "DisplayVersion" "${VERSION}"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Bipolar" "Publisher" "Paul Colby"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Bipolar" "URLInfoAbout" "https://github.com/pcolby/bipolar"
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Bipolar" "UninstallString" "$\"$INSTDIR\uninstall.exe$\""
@@ -145,16 +147,16 @@ Section "un.application"
 SectionEnd
 
 # Installer Attributes: Version Information.
-VIProductVersion "0.4.1.0"
+VIProductVersion "${VERSION}"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "Comments" "https://github.com/pcolby/bipolar"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "CompanyName" "Paul Colby"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "Bipolar installer"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "0.4.1.0"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "InternalName" "Bipolar-0.4.1.0"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "${VERSION}"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "InternalName" "Bipolar-${VERSION}"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalCopyright" "2014-2015 Paul Colby"
 #VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalTrademarks" ""
-VIAddVersionKey /LANG=${LANG_ENGLISH} "OriginalFilename" "Bipolar-0.4.1.0.exe"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "OriginalFilename" "Bipolar-${VERSION}.exe"
 #VIAddVersionKey /LANG=${LANG_ENGLISH} "PrivateBuild" ""
 VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductName" "Bipolar"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductVersion" "0.4.1.0"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "SpecialBuild" "Internal"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductVersion" "${VERSION}"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "SpecialBuild" "${SPECIAL_BUILD}"
