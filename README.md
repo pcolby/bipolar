@@ -1,5 +1,6 @@
 # [![PMDA++](qrc/icon/bipolar30.png)](#) Bipolar
-[![Build Status](http://api.travis-ci.org/pcolby/bipolar.svg?branch=master)](https://travis-ci.org/pcolby/bipolar)
+[![Build Status](https://img.shields.io/travis/pcolby/bipolar/master.svg "Linux (Travis CI)")](https://travis-ci.org/pcolby/bipolar)
+[![Build Status](https://img.shields.io/appveyor/ci/pcolby/bipolar.svg "Windows (AppVeyor)")](https://ci.appveyor.com/project/pcolby/bipolar)
 [![Github Release](http://img.shields.io/github/release/pcolby/bipolar.svg)](https://github.com/pcolby/bipolar/releases/latest)
 [![GPLv3 License](http://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/copyleft/gpl.html)
 [![Chat](https://img.shields.io/badge/gitter-chat-45cba1.svg "Join the chat")](https://gitter.im/pcolby/bipolar)
