@@ -1,3 +1,5 @@
+include(../common.pri)
+
 TEMPLATE = app
 QT += testlib widgets xml xmlpatterns
 CONFIG += testcase
@@ -6,19 +8,8 @@ SOURCES += test.cpp
 # Define the build user (for TCX).
 DEFINES += $$shell_quote(BUILD_USER=unit tests)
 
-# Disable automatic ASCII conversions (best practice for internationalization).
-DEFINES += QT_NO_CAST_FROM_ASCII QT_NO_CAST_TO_ASCII
-
 # Add the embedded resources.
-RESOURCES = ../qrc/app.qrc
-
-# Neaten the output directories.
-CONFIG(debug,debug|release) DESTDIR = debug
-CONFIG(release,debug|release) DESTDIR = release
-MOC_DIR = $$DESTDIR/tmp
-OBJECTS_DIR = $$DESTDIR/tmp
-RCC_DIR = $$DESTDIR/tmp
-UI_DIR = $$DESTDIR/tmp
+RESOURCES = $$TOPDIR/qrc/app.qrc
 
 # Code coverage reporting (for Linux at least).
 unix {
@@ -60,8 +51,8 @@ unix {
 win32:equals(QT_ARCH, x86_64):contains(QT_VERSION, ^5\\.3\\..*):QMAKE_LFLAGS += /STACK:2097152
 
 INCLUDEPATH += $$PWD
-INCLUDEPATH += ../src
+INCLUDEPATH += $$TOPDIR/src
 include(polar/v2/v2.pri)
 include(protobuf/protobuf.pri)
 include(tools/tools.pri)
-include(../src/os/os.pri)
+include($$TOPDIR/src/os/os.pri)

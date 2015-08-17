@@ -1,0 +1,5 @@
+!define VERSION \"$$VERSION\"
+!define SPECIAL_BUILD \"$$SPECIAL_BUILD\"
+
+!addincludedir \"$$_PRO_FILE_PWD_\"
+!include \"win32.nsi\"

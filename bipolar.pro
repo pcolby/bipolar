@@ -1,3 +1,3 @@
 TEMPLATE = subdirs
-SUBDIRS += src test
+SUBDIRS += src test pkg
 CONFIG += ordered
