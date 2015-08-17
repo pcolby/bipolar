@@ -1,5 +1,6 @@
 # [![PMDA++](qrc/icon/bipolar30.png)](#) Bipolar
-[![Build Status](http://api.travis-ci.org/pcolby/bipolar.svg?branch=master)](https://travis-ci.org/pcolby/bipolar)
+[![Build Status](https://img.shields.io/travis/pcolby/bipolar/master.svg "Linux (Travis CI)")](https://travis-ci.org/pcolby/bipolar)
+[![Build Status](https://img.shields.io/appveyor/ci/pcolby/bipolar.svg "Windows (AppVeyor)")](https://ci.appveyor.com/project/pcolby/bipolar)
 [![Github Release](http://img.shields.io/github/release/pcolby/bipolar.svg)](https://github.com/pcolby/bipolar/releases/latest)
 [![GPLv3 License](http://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/copyleft/gpl.html)
 [![Chat](https://img.shields.io/badge/gitter-chat-45cba1.svg "Join the chat")](https://gitter.im/pcolby/bipolar)
@@ -90,15 +91,19 @@ not make any significant use of this project, nor the Polar V800 in general.
 The [issue tracker] is the preferred place for reporting issues, asking basic
 questions, making comments and suggestions, etc.
 
-There's also a [Bipolar Google Group] available for general discussion,
+There's also a [Gitter chat room] that _may_ become the preferred place for
+general discussion, etc.  It's under evaluation, but looks promising.
+
+There's an older [Bipolar Google Group] available for general discussion,
 questions, comments, suggestions, announcements etc.  Email
 bipolar-app@googlegroups.com to subscribe.
 
-Additionally, there's a
+And finally, there's a
 [Bipolar open-source project](http://forum.polar.fi/showthread.php?t=29092)
 topic on the Polar forums, which contains quite a bit of relevant information.
 
 [Bipolar Google Group]: http://groups.google.com/d/forum/bipolar-app
+[Gitter chat room]: https://gitter.im/pcolby/bipolar
 [issue tracker]: https://github.com/pcolby/bipolar/issues?state=open
 [latest Bipolar release]: https://github.com/pcolby/bipolar/releases/latest
 [Polar FlowSync]: https://flow.polar.com/start
