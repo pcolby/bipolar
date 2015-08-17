@@ -31,9 +31,7 @@ BEGIN
           //VALUE \"PrivateBuild\", \"\\0\"
             VALUE \"ProductName\", \"Bipolar\\0\"
             VALUE \"ProductVersion\", \"$$VERSION\\0\"
-            // Because we embed the following value in TCX files, if set,
-            // it should be one of: Internal, Alpha, Beta, or Release.
-            VALUE \"SpecialBuild\", \"Internal\\0\"
+            VALUE \"SpecialBuild\", \"$$SPECIAL_BUILD\\0\"
         END
     END
     BLOCK \"VarFileInfo\"

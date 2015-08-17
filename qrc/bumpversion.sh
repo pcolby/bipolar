@@ -28,4 +28,4 @@ sed -i -re "s/$SRC_FILTER/$DST_FILTER/g" \
     ../pkg/nsis/win32.nsi.in \
     ../pkg/osx/build.sh || exit
 
-echo "Tip: Don't forget the SpecialBuild in Bipolar.rc.in, Info.plist.in and win32.nsi.in"
+echo "Tip: Don't forget the SpecialBuild in src.pro and win32.nsi.in"
