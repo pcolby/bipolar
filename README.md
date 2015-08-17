@@ -90,15 +90,19 @@ not make any significant use of this project, nor the Polar V800 in general.
 The [issue tracker] is the preferred place for reporting issues, asking basic
 questions, making comments and suggestions, etc.
 
-There's also a [Bipolar Google Group] available for general discussion,
+There's also a [Gitter chat room] that _may_ become the preferred place for
+general discussion, etc.  It's under evaluation, but looks promising.
+
+There's an older [Bipolar Google Group] available for general discussion,
 questions, comments, suggestions, announcements etc.  Email
 bipolar-app@googlegroups.com to subscribe.
 
-Additionally, there's a
+And finally, there's a
 [Bipolar open-source project](http://forum.polar.fi/showthread.php?t=29092)
 topic on the Polar forums, which contains quite a bit of relevant information.
 
 [Bipolar Google Group]: http://groups.google.com/d/forum/bipolar-app
+[Gitter chat room]: https://gitter.im/pcolby/bipolar
 [issue tracker]: https://github.com/pcolby/bipolar/issues?state=open
 [latest Bipolar release]: https://github.com/pcolby/bipolar/releases/latest
 [Polar FlowSync]: https://flow.polar.com/start
