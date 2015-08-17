@@ -27,8 +27,8 @@ SPECIAL_BUILD = Internal
 DEFINES += QT_NO_CAST_FROM_ASCII QT_NO_CAST_TO_ASCII
 
 # Define the build user (for TCX).
-win32:DEFINES += $$shell_quote(BUILD_USER=$$(USERNAME))
-else: DEFINES += $$shell_quote(BUILD_USER=$$(USER))
+win32:DEFINES += BUILD_USER=$$shell_quote($$(USERNAME))
+else: DEFINES += BUILD_USER=$$shell_quote($$(USER))
 
 # Add the embedded resources.
 RESOURCES = ../qrc/app.qrc
