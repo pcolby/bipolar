@@ -80,10 +80,8 @@ int main(int argc, char *argv[]) {
     }
 
     // Otherwise, execute all registered test classes.
-    fprintf(stderr, "executing %d test classes\n", testFactory.uniqueKeys().size());
     QList<QByteArray> failedClassNames;
     foreach (const QByteArray &className, testFactory.uniqueKeys()) {
-        fprintf(stderr, "fetching test class %s\n", className.constData());
         QObject * testObject = testFactory.createObject<QObject>(className);
         if ((!testObject) || (QTest::qExec(testObject, argc, argv) != 0)) {
             failedClassNames.append(className);
