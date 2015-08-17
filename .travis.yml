@@ -21,7 +21,7 @@ before_install:
 install:
   - sudo apt-get -qy install cppcheck
   - if [ $QTVER != '502' ]; then export PKG_VER=`echo $QT_VER | cut -b1-2`; fi
-  - '[ $QTVER == ust ] || sudo apt-get -qy install qt${PKG_VER}base qt${PKG_VER}xmlpatterns; fi'
+  - '[ $QTVER == ust ] || sudo apt-get -qy install qt${PKG_VER}base qt${PKG_VER}xmlpatterns'
   - '[ $QTVER != ust ] || sudo apt-get -qy install qt5-qmake qtbase5-dev libqt5xmlpatterns5-dev'
 
 before_script:
