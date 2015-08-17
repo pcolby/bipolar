@@ -11,7 +11,7 @@ win32:DEFINES += $$shell_quote(BUILD_USER=$$(USERNAME))
 else: DEFINES += $$shell_quote(BUILD_USER=$$(USER))
 
 # Add the embedded resources.
-RESOURCES = ../qrc/app.qrc
+RESOURCES = $$TOPDIR/qrc/app.qrc
 macx {
     ICON  = $$TOPDIR/qrc/icon/Bipolar.icns
     QMAKE_INFO_PLIST = $$OUT_PWD/../qrc/Info.plist
