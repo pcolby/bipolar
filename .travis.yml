@@ -32,7 +32,7 @@ before_script:
   - cppcheck --error-exitcode=1 --quiet .
   - if [ $QTVER == ust ]; then export QMAKE_VER=-qt=qt5; fi
   - if [ $QTVER == 502 ]; then export SHORT_VER=5; fi
-  - '[ $QTVER == ust ] || . /opt/qt$SHOR_VER/bin/qt$SHORT_VER-env.sh'
+  - '[ $QTVER == ust ] || . /opt/qt$SHORT_VER/bin/qt$SHORT_VER-env.sh'
   - qmake $QMAKE_VER -r -Wall -Wlogic -Wparser CONFIG+=debug_and_release
 
 script:
