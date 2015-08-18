@@ -29,7 +29,7 @@ matrix:
     - { os: osx,   env: QTVER=511 }
     - { os: osx,   env: QTVER=521 }
     - { os: osx,   env: QTVER=532 }
-    - { os: osx,   env: QTVER=542 }
+    - { os: osx,   env: QTVER=541 }
     - { compiler: clang, env: QTVER=ust } # QTBUG-32100
     - { compiler: clang, env: QTVER=502 } # QTBUG-32100
 
