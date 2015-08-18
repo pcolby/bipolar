@@ -41,11 +41,12 @@ before_install:
   - '[[ "$TRAVIS_OS_NAME" != osx   ]] || brew upgrade --quiet'
 
 install:
+  - brew options qt5
   - '[[ "$TRAVIS_OS_NAME" != linux ]] || sudo apt-get -qy install cppcheck'
   - if [ $QTVER != 502 ]; then export SHORT_VER=`echo $QTVER | cut -b1-2`; fi
   - '[[ "$TRAVIS_OS_NAME" != linux || $QTVER == ust ]] || sudo apt-get -qy install qt${SHORT_VER}base qt${SHORT_VER}xmlpatterns'
   - '[[ "$TRAVIS_OS_NAME" != linux || $QTVER != ust ]] || sudo apt-get -qy install qt5-qmake qtbase5-dev libqt5xmlpatterns5-dev'
-  - '[[ "$TRAVIS_OS_NAME" != osx   ]] || brew install --quiet cppcheck qt5 && brew linkapps qt5'
+  - '[[ "$TRAVIS_OS_NAME" != osx   ]] || brew install --quiet cppcheck qt5 --with-developer && brew linkapps qt5'
   - find /usr -name 'qmake*'
   - find /Applications -name 'qmake*'
 
