@@ -1,7 +1,7 @@
 language: cpp
 
 os:
- #- linux
+  - linux
   - osx
 
 compiler:
@@ -21,7 +21,6 @@ env:
 matrix:
   allow_failures:
     - env: QTVER=55 # Qt 5.5 not supported yet (issue #56).
-    #- os: osx # Work in progress.
   exclude:
     - { os: linux, env: QTVER=osx }
     - { os: osx,   env: QTVER=ust }
