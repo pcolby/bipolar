@@ -37,13 +37,17 @@ before_install:
   - '[[ "$TRAVIS_OS_NAME" != linux || $QTVER == ust ]] || sudo add-apt-repository -y ppa:beineri/opt-qt$QTVER'
   - '[[ "$TRAVIS_OS_NAME" != linux || $QTVER != ust ]] || sudo add-apt-repository -y ppa:ubuntu-sdk-team/ppa'
   - '[[ "$TRAVIS_OS_NAME" != linux ]] || sudo apt-get -qy update'
+  - echo "1|$TRAVIS_OS_NAME|"
   - '[[ "$TRAVIS_OS_NAME" != osx   ]] || brew upgrade --quiet'
+  - echo "2|$TRAVIS_OS_NAME|"
 
 install:
   - '[[ "$TRAVIS_OS_NAME" != linux ]] || sudo apt-get -qy install cppcheck'
   - if [ $QTVER != 502 ]; then export SHORT_VER=`echo $QTVER | cut -b1-2`; fi
   - '[[ "$TRAVIS_OS_NAME" != linux || $QTVER == ust ]] || sudo apt-get -qy install qt${SHORT_VER}base qt${SHORT_VER}xmlpatterns'
+  - echo "3|$TRAVIS_OS_NAME|"
   - '[[ "$TRAVIS_OS_NAME" != linux || $QTVER != ust ]] || sudo apt-get -qy install qt5-qmake qtbase5-dev libqt5xmlpatterns5-dev'
+  - echo "4|$TRAVIS_OS_NAME|"
   - '[[ "$TRAVIS_OS_NAME" != osx   ]] || brew install --quiet cppcheck qt5 && brew link --force qt5'
 
 before_script:
