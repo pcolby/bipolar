@@ -46,7 +46,8 @@ install:
   - '[[ "$TRAVIS_OS_NAME" != linux || $QTVER == ust ]] || sudo apt-get -qy install qt${SHORT_VER}base qt${SHORT_VER}xmlpatterns'
   - '[[ "$TRAVIS_OS_NAME" != linux || $QTVER != ust ]] || sudo apt-get -qy install qt5-qmake qtbase5-dev libqt5xmlpatterns5-dev'
   - '[[ "$TRAVIS_OS_NAME" != osx   ]] || brew install --quiet cppcheck qt5 && brew linkapps qt5'
-  - find /Applications -name qmake
+  - find /usr -name 'qmake*'
+  - find /Applications -name 'qmake*'
 
 before_script:
   - cppcheck --error-exitcode=1 --quiet .
