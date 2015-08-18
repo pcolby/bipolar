@@ -9,6 +9,7 @@ compiler:
   - gcc
 
 env:
+  - QTVER=osx # Whatever version brew provides.
   - QTVER=ust # Ubuntu SDK Team (Qt 5.x).
   - QTVER=502
   - QTVER=511
@@ -22,10 +23,15 @@ matrix:
     - env: QTVER=55 # Qt 5.5 not supported yet (issue #56).
     #- os: osx # Work in progress.
   exclude:
-    - compiler: clang # QTBUG-32100
-      env: QTVER=ust
-    - compiler: clang # QTBUG-32100
-      env: QTVER=502
+    - { os: linux, env: QTVER=osx }
+    - { os: osx,   env: QTVER=ust }
+    - { os: osx,   env: QTVER=502 }
+    - { os: osx,   env: QTVER=511 }
+    - { os: osx,   env: QTVER=521 }
+    - { os: osx,   env: QTVER=532 }
+    - { os: osx,   env: QTVER=542 }
+    - { compiler: clang, env: QTVER=ust } # QTBUG-32100
+    - { compiler: clang, env: QTVER=502 } # QTBUG-32100
 
 before_install:
   - '[[ "$TRAVIS_OS_NAME" != linux || $QTVER == ust ]] || sudo add-apt-repository -y ppa:beineri/opt-qt$QTVER'
