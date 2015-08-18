@@ -28,17 +28,17 @@ matrix:
       env: QTVER=502
 
 before_install:
-  - '[[ "$TRAVIS_OS_NAME" != linux || $QTVER == ust || sudo add-apt-repository -y ppa:beineri/opt-qt$QTVER ]]'
-  - '[[ "$TRAVIS_OS_NAME" != linux || $QTVER != ust || sudo add-apt-repository -y ppa:ubuntu-sdk-team/ppa ]]'
-  - '[[ "$TRAVIS_OS_NAME" != linux || sudo apt-get -qy update ]]'
-  - '[[ "$TRAVIS_OS_NAME" != osx   || brew upgrade ]]'
+  - '[[ "$TRAVIS_OS_NAME" != linux || $QTVER == ust ]] || sudo add-apt-repository -y ppa:beineri/opt-qt$QTVER'
+  - '[[ "$TRAVIS_OS_NAME" != linux || $QTVER != ust ]] || sudo add-apt-repository -y ppa:ubuntu-sdk-team/ppa'
+  - '[[ "$TRAVIS_OS_NAME" != linux ]] || sudo apt-get -qy update'
+  - '[[ "$TRAVIS_OS_NAME" != osx   ]] || brew upgrade'
 
 install:
-  - '[[ "$TRAVIS_OS_NAME" != linux || sudo apt-get -qy install cppcheck ]]'
+  - '[[ "$TRAVIS_OS_NAME" != linux ]] || sudo apt-get -qy install cppcheck'
   - if [ $QTVER != 502 ]; then export SHORT_VER=`echo $QTVER | cut -b1-2`; fi
-  - '[[ "$TRAVIS_OS_NAME" != linux || $QTVER == ust || sudo apt-get -qy install qt${SHORT_VER}base qt${SHORT_VER}xmlpatterns ]]'
-  - '[[ "$TRAVIS_OS_NAME" != linux || $QTVER != ust || sudo apt-get -qy install qt5-qmake qtbase5-dev libqt5xmlpatterns5-dev ]]'
-  - '[[ "$TRAVIS_OS_NAME" != osx   || brew install cppcheck qt5 ]]'
+  - '[[ "$TRAVIS_OS_NAME" != linux || $QTVER == ust ]] || sudo apt-get -qy install qt${SHORT_VER}base qt${SHORT_VER}xmlpatterns'
+  - '[[ "$TRAVIS_OS_NAME" != linux || $QTVER != ust ]] || sudo apt-get -qy install qt5-qmake qtbase5-dev libqt5xmlpatterns5-dev'
+  - '[[ "$TRAVIS_OS_NAME" != osx   ]] || brew install cppcheck qt5'
 
 before_script:
   - cppcheck --error-exitcode=1 --quiet .
@@ -48,7 +48,7 @@ before_script:
   - if [[ "$TRAVIS_OS_NAME" == osx   && "$CXX" == gcc     ]; then export QMAKESPEC=macx-g++;    fi
   - if [[ "$TRAVIS_OS_NAME" == linux && $QTVER == ust ]]; then export QMAKE_VER=-qt=qt5; fi
   - if [[ "$TRAVIS_OS_NAME" == linux && $QTVER == 502 ]]; then export SHORT_VER=5; fi
-  - '[[ "$TRAVIS_OS_NAME" != linux || $QTVER == ust || . /opt/qt$SHORT_VER/bin/qt$SHORT_VER-env.sh ]]'
+  - '[[ "$TRAVIS_OS_NAME" != linux || $QTVER == ust ]] || . /opt/qt$SHORT_VER/bin/qt$SHORT_VER-env.sh'
   - mkdir -p "$TRAVIS_BUILD_DIR-build"
   - pushd "$TRAVIS_BUILD_DIR-build"
   - qmake $QMAKE_VER -r -Wall -Wlogic -Wparser CONFIG+=debug_and_release "$TRAVIS_BUILD_DIR"
