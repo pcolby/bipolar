@@ -23,20 +23,25 @@
 #include <QDebug>
 #include <QtEndian>
 
+// See also  google/protobuf::src/google/protobuf/stubs/casts.h::bit_cast
+template<typename Src, typename Dst> inline Dst copyAligned(const Src src)
+{
+    Q_STATIC_ASSERT(sizeof(Src) == sizeof(Dst)); // Guarantees alignment.
+    Dst dst;
+    memcpy(&dst, &src, sizeof(dst));
+    return dst;
+}
+
 // Template specialisation for double (not included in Qt).
 template<> double qFromLittleEndian<double>(const uchar * src)
 {
-    Q_ASSERT(sizeof(double) == sizeof(quint64));
-    const quint64 value = qFromLittleEndian<quint64>(src);
-    return *reinterpret_cast<const double *>(&value);
+    return copyAligned<quint64, double>(qFromLittleEndian<quint64>(src));
 }
 
 // Template specialisation for float (not included in Qt).
 template<> float qFromLittleEndian<float>(const uchar * src)
 {
-    Q_ASSERT(sizeof(float) == sizeof(quint32));
-    const quint32 value = qFromLittleEndian<quint32>(src);
-    return *reinterpret_cast<const float *>(&value);
+    return copyAligned<quint32, float>(qFromLittleEndian<quint32>(src));
 }
 
 namespace ProtoBuf {
