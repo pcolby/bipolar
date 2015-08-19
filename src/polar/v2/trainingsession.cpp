@@ -2369,7 +2369,8 @@ QByteArray TrainingSession::unzip(const QByteArray &data,
     result.resize(initialBufferSize);
 
     // Prepare a zlib stream structure.
-    z_stream stream = {};
+    z_stream stream;
+    memset(&stream, 0, sizeof(stream));
     stream.next_in = (Bytef *) data.data();
     stream.avail_in = data.length();
     stream.next_out = (Bytef *) result.data();
