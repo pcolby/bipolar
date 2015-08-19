@@ -41,6 +41,10 @@
 #include <QTimer>
 #include <QVBoxLayout>
 
+#if (QT_VERSION < QT_VERSION_CHECK(5, 5, 0))
+#define qInfo qDebug
+#endif
+
 ResultsPage * ResultsPage::instance = NULL;
 
 ResultsPage::ResultsPage(QWidget *parent)
@@ -148,7 +152,12 @@ void ResultsPage::messageHandler(QtMsgType type,
     if (instance) {
         QColor color;
         switch (type) {
+        #if (QT_VERSION < QT_VERSION_CHECK(5, 5, 0))
         case QtDebugMsg:    color = message.startsWith(QLatin1Char('"')) ? Qt::gray : Qt::black; break;
+        #else
+        case QtDebugMsg:    color = Qt::gray;    break;
+        case QtInfoMsg:     color = Qt::black;   break; // QtInfoMsg was added in Qt 5.5.
+        #endif
         case QtWarningMsg:  color = Qt::magenta; break;
         case QtCriticalMsg: color = Qt::red;     break;
         case QtFatalMsg:    color = Qt::red;     break;
@@ -192,9 +201,9 @@ void ResultsPage::conversionFinished()
                         .arg(converter->sessions.processed + converter->sessions.failed));
         }
         progressBar->setValue(progressBar->maximum());
-        qDebug() << tr("Skipped %1 training sessions processed previsouly.")
+        qInfo()  << tr("Skipped %1 training sessions processed previsouly.")
                     .arg(converter->sessions.skipped).toUtf8().constData();
-        qDebug() << tr("Wrote %1 of %2 files for %3 of %4 new training sessions.")
+        qInfo()  << tr("Wrote %1 of %2 files for %3 of %4 new training sessions.")
                     .arg(converter->files.written)
                     .arg(converter->files.written + converter->files.failed)
                     .arg(converter->sessions.processed)
