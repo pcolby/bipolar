@@ -20,7 +20,12 @@ win32:VERSION = $$VERSION"."$$VER_BUILD
 # Disable automatic ASCII conversions (best practice for internationalization).
 DEFINES += QT_NO_CAST_FROM_ASCII QT_NO_CAST_TO_ASCII
 
-# @todo Enable warnings.
+# Enable all warnings for all targets.
+CONFIG += warn_on
+
+# Treat warnings as errors.
+win32-msvc*:QMAKE_CXXFLAGS_WARN_ON += /WX
+else:       QMAKE_CXXFLAGS_WARN_ON += -Werror
 
 # Neaten the output directories.
 CONFIG(debug,debug|release) DESTDIR = debug
