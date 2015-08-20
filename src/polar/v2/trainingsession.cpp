@@ -2165,9 +2165,6 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
 
             if ((index < altitude.length()) &&
                 (!sensorOffline(samples.value(QLatin1String("altitude-offline")).toList(), index))) {
-                qDebug() << "AltitudeMeters" << index << altitude.at(index).typeName()
-                         << QString::fromLatin1("%1").arg(altitude.at(index).toDouble(), 0, 'f', 20)
-                         << altitude.at(index).toString();
                 trackPoint.appendChild(doc.createElement(QLatin1String("AltitudeMeters")))
                     .appendChild(doc.createTextNode(altitude.at(index).toString()));
             }

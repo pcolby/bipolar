@@ -71,9 +71,6 @@ void fuzzyCompare(const QString &a, const QString &b, bool &compared)
     const double aDouble = a.toDouble(&aOK);
     const double bDouble = b.toDouble(&bOK);
     if (aOK && bOK) {
-        qDebug() << "string:" << a << b;
-        qDebug() << "double:" << QString::fromLatin1("%1").arg(aDouble, 0, 'f', 20)
-                 << "double:" << QString::fromLatin1("%1").arg(bDouble, 0, 'f', 20);
         compared = true;
         QCOMPARE(aDouble, bDouble);
     }
@@ -88,9 +85,7 @@ void compare(const QDomNode &a, const QDomNode &b)
     QCOMPARE(a.nodeName(), b.nodeName());
     QCOMPARE(a.nodeType(), b.nodeType());
     bool compared = false;
-    qDebug() << "PRE" << a.nodeName();
     fuzzyCompare(a.nodeValue(), b.nodeValue(), compared);
-    qDebug() << "POST" << a.nodeName();
     if (!compared) {
         QCOMPARE(a.nodeValue(), b.nodeValue());
     }
