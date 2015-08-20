@@ -71,6 +71,8 @@ void fuzzyCompare(const QString &a, const QString &b, bool &compared)
     const double aDouble = a.toDouble(&aOK);
     const double bDouble = b.toDouble(&bOK);
     if (aOK && bOK) {
+        qDebug() << "string:" << a << b;
+        qDebug() << "double:" << QString::fromLatin1("%1").arg(aDouble, 0, 'f', 20) << bDouble;
         compared = true;
         QCOMPARE(aDouble, bDouble);
     }
