@@ -17,12 +17,6 @@ configuration:
   - debug
   - release
 
-matrix:
-  allow_failures:
-    - QTDIR: C:\Qt\5.5\mingw492_32
-    - QTDIR: C:\Qt\5.5\msvc2013
-    - QTDIR: C:\Qt\5.5\msvc2013_64
-
 install:
   # Setup the build toolchains.
   - '%QTDIR%\bin\qtenv2.bat'

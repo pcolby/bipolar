@@ -19,8 +19,6 @@ env:
   - QTVER=55
 
 matrix:
-  allow_failures:
-    - env: QTVER=55 # Qt 5.5 not supported yet (issue #56).
   exclude:
     - { os: linux, env: QTVER=osx }
     - { os: osx,   env: QTVER=ust }
