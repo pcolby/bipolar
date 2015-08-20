@@ -6,6 +6,7 @@
 ### 0.4.1 (_unreleased_)
 Features:
 - Pool swimming sport type ([#50](../../issues/50))
+- Enhanced output precision ([70822af](../../commit/70822af249429f5e67ead43e36cde6367651b205))
 
 ### 0.4.0 (2015-01-10)
 Features:
