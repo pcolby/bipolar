@@ -2,19 +2,19 @@ language: cpp
 
 os:
   - linux
-  #- osx
+  - osx
 
 compiler:
-  #- clang
+  - clang
   - gcc
 
 env:
-  #- QTVER=osx # Whatever version brew provides.
-  #- QTVER=ust # Ubuntu SDK Team (Qt 5.x).
-  #- QTVER=502
-  #- QTVER=511
-  #- QTVER=521
-  #- QTVER=532
+  - QTVER=osx # Whatever version brew provides.
+  - QTVER=ust # Ubuntu SDK Team (Qt 5.x).
+  - QTVER=502
+  - QTVER=511
+  - QTVER=521
+  - QTVER=532
   - QTVER=541
   - QTVER=55
 
