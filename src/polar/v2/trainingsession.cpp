@@ -37,6 +37,29 @@
 #include <zlib.h>
 #endif
 
+// As of Qt 5.5 increased the accuracy of QVariant::toString output for
+// doubles and floats (see qtproject/qtbase@8153386).  Here replicate
+// that behaviour for pre-5.5 for a) better accuracy in older Qt versions
+// and b) consistent output (eg in unit tests) across all Qt 5.x versions.
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 5, 0))
+    #define VARIANT_TO_STRING(v) v.toString()
+#else // Fallback implementation based closely on Qt 5.5's qvariant.h
+    #ifndef DBL_MANT_DIG
+    #define DBL_MANT_DIG  53
+    #endif
+    #ifndef FLT_MANT_DIG
+    #define FLT_MANT_DIG  24
+    #endif
+    #define DBL_MAX_DIGITS10 (DBL_MANT_DIG * 30103) / 100000 + 2
+    #define FLT_MAX_DIGITS10 (FLT_MANT_DIG * 30103) / 100000 + 2
+    #define VARIANT_TO_STRING(v) \
+        (static_cast<QMetaType::Type>(v.type()) == QMetaType::Double)      \
+            ? QString::number(v.toDouble(), 'g', DBL_MAX_DIGITS10)         \
+            : (static_cast<QMetaType::Type>(v.type()) == QMetaType::Float) \
+                ? QString::number(v.toFloat(), 'g', FLT_MAX_DIGITS10)      \
+                : v.toString()
+#endif
+
 // These constants match those used by Polar's V2 API.
 #define AUTOLAPS   QLatin1String("autolaps")
 #define CREATE     QLatin1String("create")
@@ -1386,12 +1409,12 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
                 trkpt.setAttribute(QLatin1String("lat"), latitude.at(index).toDouble());
                 trkpt.setAttribute(QLatin1String("lon"), longitude.at(index).toDouble());
                 trkpt.appendChild(doc.createElement(QLatin1String("ele")))
-                    .appendChild(doc.createTextNode(altitude.at(index).toString()));
+                    .appendChild(doc.createTextNode(VARIANT_TO_STRING(altitude.at(index))));
                 trkpt.appendChild(doc.createElement(QLatin1String("time")))
                     .appendChild(doc.createTextNode(startTime.addMSecs(
                         timeOffset).toString(Qt::ISODate)));
                 trkpt.appendChild(doc.createElement(QLatin1String("sat")))
-                    .appendChild(doc.createTextNode(satellites.at(index).toString()));
+                    .appendChild(doc.createTextNode(VARIANT_TO_STRING(satellites.at(index))));
 
                 if (gpxOptions.testFlag(CluetrustGpxDataExtension)   ||
                     gpxOptions.testFlag(GarminAccelerationExtension) ||
@@ -2157,32 +2180,32 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
             if ((index < latitude.length()) && (index < longitude.length())) {
                 QDomElement position = doc.createElement(QLatin1String("Position"));
                 position.appendChild(doc.createElement(QLatin1String("LatitudeDegrees")))
-                    .appendChild(doc.createTextNode(latitude.at(index).toString()));
+                    .appendChild(doc.createTextNode(VARIANT_TO_STRING(latitude.at(index))));
                 position.appendChild(doc.createElement(QLatin1String("LongitudeDegrees")))
-                    .appendChild(doc.createTextNode(longitude.at(index).toString()));
+                    .appendChild(doc.createTextNode(VARIANT_TO_STRING(longitude.at(index))));
                 trackPoint.appendChild(position);
             }
 
             if ((index < altitude.length()) &&
                 (!sensorOffline(samples.value(QLatin1String("altitude-offline")).toList(), index))) {
                 trackPoint.appendChild(doc.createElement(QLatin1String("AltitudeMeters")))
-                    .appendChild(doc.createTextNode(altitude.at(index).toString()));
+                    .appendChild(doc.createTextNode(VARIANT_TO_STRING(altitude.at(index))));
             }
             if ((index < distance.length()) &&
                 (!sensorOffline(samples.value(QLatin1String("distance-offline")).toList(), index))) {
                 trackPoint.appendChild(doc.createElement(QLatin1String("DistanceMeters")))
-                    .appendChild(doc.createTextNode(distance.at(index).toString()));
+                    .appendChild(doc.createTextNode(VARIANT_TO_STRING(distance.at(index))));
             }
             if ((index < heartrate.length()) && (heartrate.at(index).toInt() > 0) &&
                 (!sensorOffline(samples.value(QLatin1String("heartrate-offline")).toList(), index))) {
                 trackPoint.appendChild(doc.createElement(QLatin1String("HeartRateBpm")))
                     .appendChild(doc.createElement(QLatin1String("Value")))
-                    .appendChild(doc.createTextNode(heartrate.at(index).toString()));
+                    .appendChild(doc.createTextNode(VARIANT_TO_STRING(heartrate.at(index))));
             }
             if ((index < cadence.length()) && (cadence.at(index).toInt() >= 0) &&
                 (!sensorOffline(samples.value(QLatin1String("cadence-offline")).toList(), index))) {
                 trackPoint.appendChild(doc.createElement(QLatin1String("Cadence")))
-                    .appendChild(doc.createTextNode(cadence.at(index).toString()));
+                    .appendChild(doc.createTextNode(VARIANT_TO_STRING(cadence.at(index))));
             }
 
             if (tcxOptions.testFlag(GarminActivityExtension)) {
@@ -2195,7 +2218,7 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                 if ((index < cadence.length()) && (cadence.at(index).toInt() >= 0) &&
                     (!sensorOffline(samples.value(QLatin1String("speed-offline")).toList(), index))) {
                     tpx.appendChild(doc.createElement(QLatin1String("Speed")))
-                        .appendChild(doc.createTextNode(speed.at(index).toString()));
+                        .appendChild(doc.createTextNode(VARIANT_TO_STRING(speed.at(index))));
                 }
 
                 if ((index < cadence.length()) && (cadence.at(index).toInt() >= 0) &&
@@ -2208,7 +2231,7 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                     }
                     if (sensor == QLatin1String("Footpod")) {
                         tpx.appendChild(doc.createElement(QLatin1String("RunCadence")))
-                            .appendChild(doc.createTextNode(cadence.at(index).toString()));
+                            .appendChild(doc.createTextNode(VARIANT_TO_STRING(cadence.at(index))));
                     }
                 }
 
