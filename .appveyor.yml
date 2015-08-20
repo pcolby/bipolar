@@ -51,7 +51,7 @@ after_build:
   - mklink %APPVEYOR_BUILD_FOLDER%\Bipolar.exe %APPVEYOR_BUILD_FOLDER%-build\src\%CONFIGURATION%\Bipolar.exe
 
 test_script:
-  - if not %CONFIGURATION%==debug %make% check TESTARGS="-maxwarnings 0"
+  - if not %CONFIGURATION%==debug %make% check TESTARGS="-maxwarnings 0 TestTrainingSession toTCX"
 
 artifacts:
   - path: Bipolar.exe
