@@ -63,7 +63,7 @@ before_script:
 
 script:
   - make -C "$TRAVIS_BUILD_DIR-build" -j2 all
-  - make -C "$TRAVIS_BUILD_DIR-build" -j2 check TESTARGS="-maxwarnings 0 TestTrainingSession toTCX"
+  - make -C "$TRAVIS_BUILD_DIR-build" -j2 check
 
 notifications:
   webhooks:
