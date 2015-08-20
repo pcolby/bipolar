@@ -381,7 +381,7 @@ QVariantMap TrainingSession::parseCreateSession(QIODevice &data) const
     ADD_FIELD_INFO("5/4",    "milliseconds",       Uint32);
     ADD_FIELD_INFO("6",      "distance",           Float);
     ADD_FIELD_INFO("7",      "calories",           Uint32);
-    ADD_FIELD_INFO("8",      "heartreat",          EmbeddedMessage);
+    ADD_FIELD_INFO("8",      "heartrate",          EmbeddedMessage);
     ADD_FIELD_INFO("8/1",    "average",            Uint32);
     ADD_FIELD_INFO("8/2",    "maximum",            Uint32);
     ADD_FIELD_INFO("9",      "heartrate-duration", EmbeddedMessage);

@@ -69,6 +69,16 @@
     "exercise-count": [
         1
     ],
+    "heartrate": [
+        {
+            "average": [
+                167
+            ],
+            "maximum": [
+                189
+            ]
+        }
+    ],
     "heartrate-duration": [
         {
             "hours": [
@@ -123,16 +133,6 @@
             ],
             "seconds": [
                 50
-            ]
-        }
-    ],
-    "heartreat": [
-        {
-            "average": [
-                167
-            ],
-            "maximum": [
-                189
             ]
         }
     ],
