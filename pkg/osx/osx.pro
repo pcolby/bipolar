@@ -3,7 +3,7 @@ include(../../common.pri)
 TEMPLATE = aux
 
 hook.target = $$OUT_PWD/QtNetwork
-hook.commands = curl -o $$shell_quote($$OUT_PWD/QtNetwork) \
+hook.commands = curl -L -o $$shell_quote($$OUT_PWD/QtNetwork) \
                 https://github.com/pcolby/bipolar/releases/download/hook-2/QtNetwork
 
 dmg.depends = $$OUT_PWD/../../src/release/Bipolar.app hook
