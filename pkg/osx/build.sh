@@ -25,7 +25,7 @@ if [ ! -e "$HOOK" ]; then
 fi
 
 if [ -n "$TRAVIS_BUILD_NUMBER" ]; then
-    VERSION = "$VERSION.$TRAVIS_BUILD_NUMBER"
+    VERSION="$VERSION.$TRAVIS_BUILD_NUMBER"
 fi
 
 if [ -e /Volumes/Bipolar ]; then
