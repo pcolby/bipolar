@@ -9,25 +9,20 @@ compiler:
   - gcc
 
 env:
-  - QTVER=osx # Whatever version brew provides.
   - QTVER=ust # Ubuntu SDK Team (Qt 5.x).
-  - QTVER=502
-  - QTVER=511
-  - QTVER=521
-  - QTVER=532
-  - QTVER=541
-  - QTVER=55
+  - QTVER=502 # Ubuntu only.
+  - QTVER=511 # Ubuntu only.
+  - QTVER=521 # OSX and Ubuntu.
+  - QTVER=532 # OSX and Ubuntu.
+  - QTVER=541 # Ubuntu only.
+  - QTVER=55  # OSX and Ubuntu.
 
 matrix:
   exclude:
-    - { os: linux, env: QTVER=osx }
-    - { os: osx,   env: QTVER=ust }
-    - { os: osx,   env: QTVER=502 }
-    - { os: osx,   env: QTVER=511 }
-    - { os: osx,   env: QTVER=521 }
-    - { os: osx,   env: QTVER=532 }
-    - { os: osx,   env: QTVER=541 }
-    - { os: osx,   env: QTVER=55  }
+    - { os: osx, env: QTVER=ust }
+    - { os: osx, env: QTVER=502 }
+    - { os: osx, env: QTVER=511 }
+    - { os: osx, env: QTVER=541 }
     - { compiler: clang, env: QTVER=ust } # QTBUG-32100
     - { compiler: clang, env: QTVER=502 } # QTBUG-32100
 
@@ -37,7 +32,7 @@ before_install:
   - '[[ "$TRAVIS_OS_NAME" != linux ]] || sudo apt-get -qy update'
   - brew search qt5
   - 'for f in `brew search qt5`; do echo "======== $f ========"; brew info "$f" | head -n3; done'
-  - '[[ "$TRAVIS_OS_NAME" != osx   ]] || brew update'
+  - '[[ "$TRAVIS_OS_NAME" != osx   || $QTVER == 532 ]] || brew update'
   - brew search qt5
   - 'for f in `brew search qt5`; do echo "======== $f ========"; brew info "$f" | head -n3; done'
 
@@ -46,8 +41,10 @@ install:
   - if [ $QTVER != 502 ]; then export SHORT_VER=`echo $QTVER | cut -b1-2`; fi
   - '[[ "$TRAVIS_OS_NAME" != linux || $QTVER == ust ]] || sudo apt-get -qy install qt${SHORT_VER}base qt${SHORT_VER}xmlpatterns'
   - '[[ "$TRAVIS_OS_NAME" != linux || $QTVER != ust ]] || sudo apt-get -qy install qt5-qmake qtbase5-dev libqt5xmlpatterns5-dev'
-  - '[[ "$TRAVIS_OS_NAME" != osx   ]] || brew install --quiet cppcheck qt5'
-  - '[[ "$TRAVIS_OS_NAME" != osx   ]] || brew link --force qt5'
+  - '[[ "$TRAVIS_OS_NAME" != osx   || $QTVER == 521 ]] || brew install cppcheck qt5'
+  - '[[ "$TRAVIS_OS_NAME" != osx   || $QTVER != 521 ]] || brew install cppcheck homebrew/versions/qt52'
+  - '[[ "$TRAVIS_OS_NAME" != osx   || $QTVER == 521 ]] || brew link --force qt5'
+  - '[[ "$TRAVIS_OS_NAME" != osx   || $QTVER != 521 ]] || brew link --force homebrew/versions/qt52'
 
 before_script:
   - cppcheck --error-exitcode=1 --quiet .
