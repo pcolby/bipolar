@@ -1,10 +1,31 @@
 #!/bin/bash
 
-HOOK=../../hook/qt/build/qtbase/lib/QtNetwork.framework/Versions/5/QtNetwork
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --app)     APP="$2"     ; shift ;;
+    --hook)    HOOK="$2"    ; shift ;;
+    --version) VERSION="$2" ; shift ;;
+  esac
+  shift
+done
+
+if [[ -z "$APP" || -z "$HOOK" || -z "$VERSION" ]]; then
+    echo "Usage: $0 --app <path> --hook <path> --version <a.b.c>" >&2
+    exit 1
+fi
+
+if [ ! -e "$APP" ]; then
+    echo "App not found: $APP" 2>&1
+    exit 1
+fi
 
 if [ ! -e "$HOOK" ]; then
     echo "Hook not found: $HOOK" 2>&1
     exit 1
+fi
+
+if [ -n "$TRAVIS_BUILD_NUMBER" ]; then
+    VERSION = "$VERSION.$TRAVIS_BUILD_NUMBER"
 fi
 
 if [ -e /Volumes/Bipolar ]; then
@@ -22,11 +43,8 @@ if [ -e Bipolar.app ]; then
     fi
 fi
 
-REVISION=`git rev-list --count HEAD`
-if [ $? -ne 0 ]; then exit; fi
-
 echo 'Copying Bipolar.app'
-cp -a ../../release/Bipolar.app .
+cp -a "$APP" .
 
 echo 'Running macdeployqt'
 macdeployqt Bipolar.app -dmg || exit
@@ -52,7 +70,7 @@ cp README.txt /Volumes/Bipolar/  || exit
 hdiutil detach /Volumes/Bipolar/ || exit
 
 echo 'Converting final disk image'
-FINALNAME="Bipolar-0.4.1.$REVISION.dmg"
+FINALNAME="Bipolar-$VERSION.dmg"
 [ -e "$FINALNAME" ] && rm -f "$FINALNAME"
 hdiutil convert Bipolar-rw.dmg -format UDZO -o "$FINALNAME"
 
