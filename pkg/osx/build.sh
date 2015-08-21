@@ -54,9 +54,11 @@ echo 'Coverting disk image to read/writable'
 hdiutil convert Bipolar.dmg -format UDRW -o Bipolar-rw.dmg
 
 echo 'Adding hook to disk image'
-hdiutil attach Bipolar-rw.dmg   || exit
-mkdir /Volumes/Bipolar/Hook     || exit
-cp $HOOK /Volumes/Bipolar/Hook/ || exit
+pwd
+ls -l
+hdiutil attach Bipolar-rw.dmg     || exit
+mkdir /Volumes/Bipolar/Hook       || exit
+cp "$HOOK" /Volumes/Bipolar/Hook/ || exit
 install_name_tool -id \
     '@executable_path/../Frameworks/QtNetwork.framework/Versions/5/QtNetwork' \
     '/Volumes/Bipolar/Hook/QtNetwork'
