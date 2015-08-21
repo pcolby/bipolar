@@ -15,6 +15,6 @@ dmg.commands = $$shell_quote($$PWD/build.sh) \
 
 QMAKE_EXTRA_TARGETS = hook dmg
 
-files.input = install.command.in README.txt.in
-files.config = verbatim
-QMAKE_SUBSTITUTES.config = files
+QMAKE_SUBSTITUTES = install.command.in README.txt.in
+install.command.in.CONFIG = verbatim
+README.txt.in.CONFIG = verbatim
