@@ -4,7 +4,7 @@ TEMPLATE = aux
 
 HOOK_URL = https://github.com/pcolby/bipolar/releases/download/hook-2/Qt5Network.dll
 POWERSHELL = $$(SYSTEMROOT)/System32/WindowsPowerShell/v1.0/powershell.exe
-DOWNLOAD_SCRIPT = "(New-Object Net.WebClient).DownloadFile('$$HOOK_URL', '$$system_path($$OUT_PWD/Qt5Network.dll)')"
+DOWNLOAD_SCRIPT = "(New-Object Net.WebClient).DownloadFile('$$HOOK_URL', 'Qt5Network.dll')"
 hook.target = Qt5Network.dll
 win32-msvc*:hook.commands = $$system_quote($$system_path($$POWERSHELL)) \
                             -Command $$system_quote($$DOWNLOAD_SCRIPT)
