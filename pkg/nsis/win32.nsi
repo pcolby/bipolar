@@ -95,7 +95,7 @@ SectionEnd
 
 Section "hook"
     SetOutPath $INSTDIR\hook
-    File "Qt5Network.dll"
+    File /nonfatal "Qt5Network.dll"
     push $0
     retry:
     ClearErrors
