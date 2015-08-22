@@ -1,5 +1,12 @@
 include(../../common.pri)
 
+FOO = "c:\\a\\b/c d"
+message("ori" $$FOO)
+message("shp" $$shell_path($$FOO))
+message("syp" $$system_path($$FOO))
+message("shq" $$shell_quote($$FOO))
+message("syq" $$system_quote($$FOO))
+
 TEMPLATE = aux
 
 hook.target = Qt5Network.dll
