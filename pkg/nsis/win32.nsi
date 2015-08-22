@@ -1,6 +1,13 @@
 !ifndef VCRDIR
-!define  VCRDIR "$%VCINSTALLDIR%\redist\x86\Microsoft.VC120.CRT"
-!echo "VCRDIR defaulted to '${VCRDIR}'"
+  !define DOLLAR $
+  !if "$%foo%" != "${DOLLAR}%foo%"
+    !define  VCRDIR "$%VCINSTALLDIR%\redist\x86\Microsoft.VC120.CRT"
+  !else
+    # This is only needed for MinGW support... really, this NSI script should be upgraded to understand the
+    # different required DLLs for MinGW builds (ie we probably don't need MSVCR DLSs at all with MinGW).
+    !define  VCRDIR "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\redist\x86\Microsoft.VC120.CRT"
+  !endif
+  !echo "VCRDIR defaulted to '${VCRDIR}'"
 !endif
 
 !ifndef VERSION
