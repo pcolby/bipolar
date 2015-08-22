@@ -45,13 +45,18 @@ after_build:
   # Add a link to the build output within the source directory. This is needed because AppVeyor does
   # not support extracting artifacts from out-of-source build directories. See 'artifacts' below.
   - mklink %APPVEYOR_BUILD_FOLDER%\Bipolar.exe %APPVEYOR_BUILD_FOLDER%-build\src\%CONFIGURATION%\Bipolar.exe
+  - mklink /D %APPVEYOR_BUILD_FOLDER%\nsis %APPVEYOR_BUILD_FOLDER%-build\pkg\nsis
 
 test_script:
   - if not %CONFIGURATION%==debug %make% check TESTARGS=-silent
+  - echo $(build)
+  - echo $(APPVEYOR_BUILD_NUMBER)
 
 artifacts:
   - path: Bipolar.exe
-  # @todo Add NSIS installer.
+    name: Application
+  - path: nsis\Bipolar-*.build.exe
+    name: Installer
 
 notifications:
   - provider: Webhook
