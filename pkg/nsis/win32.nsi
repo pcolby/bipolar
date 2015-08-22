@@ -1,6 +1,16 @@
-!define /ifndef VCRDIR "$%VCINSTALLDIR%\redist\x86\Microsoft.VC120.CRT"
-!define /ifndef VERSION "0.0.0.0"
+!ifndef VCRDIR
+!define  VCRDIR "$%VCINSTALLDIR%\redist\x86\Microsoft.VC120.CRT"
+!echo "VCRDIR defaulted to '${VCRDIR}'"
+!endif
+
+!ifndef VERSION
+!error "VERSION not defined"
+!endif
+
+!ifndef SPECIAL_BUILD
 !define /ifndef SPECIAL_BUILD "Internal"
+!echo "SPECIAL_BUILD defaulted to '${VCRDIR}'"
+!endif
 
 SetCompressor lzma
 !include "DumpLog.nsh"
@@ -51,7 +61,7 @@ Var StartMenuFolder
 Section "application"
     # Files to install.
     SetOutPath $INSTDIR
-    File "..\..\release\Bipolar.exe"
+    File "..\..\src\release\Bipolar.exe"
     File "${VCRDIR}\msvcp120.dll"
     File "${VCRDIR}\msvcr120.dll"
     File /r "qtlibs\*"
@@ -78,7 +88,7 @@ SectionEnd
 
 Section "hook"
     SetOutPath $INSTDIR\hook
-    File "..\..\hook\qt\build\qtbase\lib\Qt5Network.dll"
+    File "Qt5Network.dll"
     push $0
     retry:
     ClearErrors
