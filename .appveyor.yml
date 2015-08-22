@@ -38,7 +38,7 @@ before_build:
 build_script:
   - '%make%'
   - cd %APPVEYOR_BUILD_FOLDER%-build/pkg/nsis
-  - '%make% nsis'
+  - if not %CONFIGURATION%==debug %make% nsis
 
 after_build:
   # Add a link to the build output within the source directory. This is needed because AppVeyor does
