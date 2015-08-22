@@ -18,8 +18,7 @@ qtlibs.commands = windeployqt.exe --dir qtlibs \
 
 nsis.depends = $$OUT_PWD/../../src/release/Bipolar.exe qtlibs hook
 nsis.target = nsis
-nsis.commands = $$shell_quote($$system_path(C:/Program Files (x86)/NSIS/makensis.exe)) \
-                /NOCD Bipolar.nsi
+nsis.commands = $$shell_quote($$shell_path(C:/Program Files (x86)/NSIS/makensis.exe)) Bipolar.nsi
 
 QMAKE_EXTRA_TARGETS = hook nsis qtlibs
 
