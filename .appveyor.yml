@@ -54,7 +54,7 @@ test_script:
 artifacts:
   - path: Bipolar.exe
     name: Application
-  - path: nsis\Bipolar-*.{build}.exe
+  - path: nsis\Bipolar-*.exe
     name: Installer
 
 notifications:
