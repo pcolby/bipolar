@@ -8,9 +8,9 @@ DOWNLOAD_SCRIPT = "(New-Object Net.WebClient).DownloadFile('$$HOOK_URL', 'Qt5Net
 hook.target = Qt5Network.dll
 win32-msvc*:hook.commands = $$system_quote($$system_path($$POWERSHELL)) \
                             -Command $$system_quote($$DOWNLOAD_SCRIPT)
-else:hook.commands = $$shell_quote($$shell_path($$POWERSHELL) \
-                     -Command $$shell_quote($$system_quote($$DOWNLOAD_SCRIPT)))
-                     
+else:hook.commands = $$shell_quote($$shell_path($$POWERSHELL)) \
+                     -Command $$shell_quote($$system_quote($$DOWNLOAD_SCRIPT))
+
 qtlibs.depends = $$OUT_PWD/../../src/release/Bipolar.exe
 qtlibs.target = qtlibs
 qtlibs.commands = windeployqt.exe --dir qtlibs \
