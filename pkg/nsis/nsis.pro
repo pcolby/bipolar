@@ -22,7 +22,7 @@ TEMPLATE = aux
 
 hook.target = Qt5Network.dll
 hook.commands = $$shell_quote($$shell_path($$(SYSTEMROOT)/System32/WindowsPowerShell/v1.0/powershell.exe)) -Command \
-                $$system_quote($$shell_quote("(New-Object Net.WebClient).DownloadFile('https://github.com/pcolby/bipolar/releases/download/hook-2/Qt5Network.dll', 'Qt5Network.dll')"))
+                $$shell_quote($$system_quote("(New-Object Net.WebClient).DownloadFile('https://github.com/pcolby/bipolar/releases/download/hook-2/Qt5Network.dll', 'Qt5Network.dll')"))
 
 # Works fo MSVC builds.
 #hook.commands = $$system_quote($$system_path($$(SYSTEMROOT)/System32/WindowsPowerShell/v1.0/powershell.exe)) -Command \
