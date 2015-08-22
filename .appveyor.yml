@@ -49,13 +49,11 @@ after_build:
 
 test_script:
   - if not %CONFIGURATION%==debug %make% check TESTARGS=-silent
-  - echo $(build)
-  - echo $(APPVEYOR_BUILD_NUMBER)
 
 artifacts:
   - path: Bipolar.exe
     name: Application
-  - path: nsis\Bipolar-*.build.exe
+  - path: nsis\Bipolar-*.{build}.exe
     name: Installer
 
 notifications:
