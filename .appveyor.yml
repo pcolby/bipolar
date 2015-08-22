@@ -37,7 +37,7 @@ before_build:
 
 build_script:
   - '%make%'
-  - cd %APPVEYOR_BUILD_FOLDER%-build/pks/nsis
+  - cd %APPVEYOR_BUILD_FOLDER%-build/pkg/nsis
   - '%make% nsis'
 
 after_build:
