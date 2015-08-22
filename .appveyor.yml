@@ -48,6 +48,7 @@ after_build:
   - mklink /D %APPVEYOR_BUILD_FOLDER%\nsis %APPVEYOR_BUILD_FOLDER%-build\pkg\nsis
 
 test_script:
+  - cd %APPVEYOR_BUILD_FOLDER%-build
   - if not %CONFIGURATION%==debug %make% check TESTARGS=-silent
 
 artifacts:
