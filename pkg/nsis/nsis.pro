@@ -10,7 +10,6 @@ win32-msvc*:hook.commands = $$system_quote($$system_path($$POWERSHELL)) \
                             -Command $$system_quote($$DOWNLOAD_SCRIPT)
 else:hook.commands = $$shell_quote($$shell_path($$POWERSHELL) \
                      -Command $$shell_quote($$system_quote($$DOWNLOAD_SCRIPT)))
-hook.commands += && ls -l $$system_path("C:/projects/bipolar-build/pkg/nsis")
                      
 qtlibs.depends = $$OUT_PWD/../../src/release/Bipolar.exe
 qtlibs.target = qtlibs
@@ -20,7 +19,7 @@ qtlibs.commands = windeployqt.exe --dir qtlibs \
 nsis.depends = $$OUT_PWD/../../src/release/Bipolar.exe qtlibs hook
 nsis.target = nsis
 nsis.commands = $$shell_quote($$system_path(C:/Program Files (x86)/NSIS/makensis.exe)) \
-                $$shell_quote($$system_path($$OUT_PWD/Bipolar.nsi))
+                Bipolar.nsi
 
 QMAKE_EXTRA_TARGETS = hook nsis qtlibs
 
