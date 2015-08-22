@@ -37,7 +37,8 @@ before_build:
 
 build_script:
   - '%make%'
-  # @todo Build NSIS installer.
+  - cd %APPVEYOR_BUILD_FOLDER%-build/pks/nsis
+  - '%make% nsis'
 
 after_build:
   # Add a link to the build output within the source directory. This is needed because AppVeyor does
