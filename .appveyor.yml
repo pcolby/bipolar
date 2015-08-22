@@ -18,6 +18,7 @@ configuration:
   - release
 
 install:
+  - choco install nsis -pre
   # Setup the build toolchains.
   - '%QTDIR%\bin\qtenv2.bat'
   - qmake -v
