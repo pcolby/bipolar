@@ -18,9 +18,7 @@ configuration:
   - release
 
 install:
-  - '"%ProgramFiles(x86)%\NSIS\makensis.exe" /CMDHELP || true'
   - choco install nsis -pre
-  - '"%ProgramFiles(x86)%\NSIS\makensis.exe" /CMDHELP || true'
   # Setup the build toolchains.
   - '%QTDIR%\bin\qtenv2.bat'
   - qmake -v
