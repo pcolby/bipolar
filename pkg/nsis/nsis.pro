@@ -15,9 +15,14 @@ message("syq" $$system_quote($$BAR))
 
 TEMPLATE = aux
 
+#                     MinGW   MSVC
+# shell|shell|shell  BAD'\''  GOOD"
+# sys  | sys | sys   BAD'     GOOD"
+# MinGW runs through Git/bin/sh?
+
 hook.target = Qt5Network.dll
 hook.commands = $$shell_quote($$shell_path($$(SYSTEMROOT)/System32/WindowsPowerShell/v1.0/powershell.exe)) -Command \
-                $$shell_quote("(New-Object Net.WebClient).DownloadFile('https://github.com/pcolby/bipolar/releases/download/hook-2/Qt5Network.dll', 'Qt5Network.dll')")
+                $$system_quote($$shell_quote("(New-Object Net.WebClient).DownloadFile('https://github.com/pcolby/bipolar/releases/download/hook-2/Qt5Network.dll', 'Qt5Network.dll')"))
 
 # Works fo MSVC builds.
 #hook.commands = $$system_quote($$system_path($$(SYSTEMROOT)/System32/WindowsPowerShell/v1.0/powershell.exe)) -Command \
