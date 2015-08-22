@@ -14,7 +14,7 @@ environment:
     - QTDIR: C:\Qt\5.5\msvc2013_64
 
 configuration:
-  - debug
+ #- debug
   - release
 
 install:
