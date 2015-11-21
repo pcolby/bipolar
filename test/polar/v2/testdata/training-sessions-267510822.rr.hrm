@@ -1,0 +1,65 @@
+[Params]
+Version=106
+Monitor=1
+SMode=000000000
+Date=20151101
+StartTime=12:17:52.0
+Length=01:42:07.3
+Interval=238
+Upper1=156
+Lower1=125
+Upper2=0
+Lower2=0
+Upper3=0
+Lower3=0
+Timer1=01:14:59.0
+Timer2=00:00:00.0
+Timer3=00:00:00.0
+ActiveLimit=0
+MaxHR=196
+RestHR=46
+StartDelay=0
+VO2max=65
+Weight=81.2
+
+[Note]
+Mountainbiken
+
+[HRZones]
+185
+172
+156
+125
+95
+0
+0
+0
+0
+0
+0
+[SwapTimes]
+
+[Summary-123]
+6128	0	0	5828	298	2
+0	0	0	0	0	0
+0	0	0	0
+0	0	0	0	0	0
+0	0	0	0
+0	6128
+
+[Summary-TH]
+6128	0	0	3876	2250	2
+196	182	147	46
+0	6128
+
+[Trip]
+428
+319
+6127
+397
+529
+3219
+7795
+0
+
+[HRData]

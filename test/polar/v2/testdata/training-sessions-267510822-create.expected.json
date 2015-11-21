@@ -1,0 +1,220 @@
+{
+    "benefit": [
+        16
+    ],
+    "calories": [
+        1638
+    ],
+    "device": [
+        "951AE11B"
+    ],
+    "distance": [
+        42809.30078125
+    ],
+    "duration": [
+        {
+            "hours": [
+                1
+            ],
+            "milliseconds": [
+                250
+            ],
+            "minutes": [
+                42
+            ],
+            "seconds": [
+                7
+            ]
+        }
+    ],
+    "end": [
+        {
+            "3": [
+                0
+            ],
+            "date": [
+                {
+                    "day": [
+                        1
+                    ],
+                    "month": [
+                        11
+                    ],
+                    "year": [
+                        2015
+                    ]
+                }
+            ],
+            "offset": [
+                60
+            ],
+            "time": [
+                {
+                    "hour": [
+                        14
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minute": [
+                        0
+                    ],
+                    "seconds": [
+                        5
+                    ]
+                }
+            ]
+        }
+    ],
+    "exercise-count": [
+        1
+    ],
+    "heartrate": [
+        {
+            "average": [
+                149
+            ],
+            "maximum": [
+                175
+            ]
+        }
+    ],
+    "heartrate-duration": [
+        {
+            "hours": [
+                0
+            ],
+            "minutes": [
+                4
+            ],
+            "seconds": [
+                17
+            ]
+        },
+        {
+            "hours": [
+                1
+            ],
+            "minutes": [
+                14
+            ],
+            "seconds": [
+                59
+            ]
+        },
+        {
+            "hours": [
+                0
+            ],
+            "minutes": [
+                20
+            ],
+            "seconds": [
+                31
+            ]
+        },
+        {
+            "hours": [
+                0
+            ],
+            "minutes": [
+                1
+            ],
+            "seconds": [
+                47
+            ]
+        },
+        {
+            "hours": [
+                0
+            ],
+            "minutes": [
+                0
+            ],
+            "seconds": [
+                0
+            ]
+        }
+    ],
+    "model": [
+        "Polar V800"
+    ],
+    "session-name": [
+        {
+            "text": [
+                "Mountainbiken"
+            ]
+        }
+    ],
+    "start": [
+        {
+            "3": [
+                0
+            ],
+            "date": [
+                {
+                    "day": [
+                        1
+                    ],
+                    "month": [
+                        11
+                    ],
+                    "year": [
+                        2015
+                    ]
+                }
+            ],
+            "offset": [
+                60
+            ],
+            "time": [
+                {
+                    "hour": [
+                        12
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minute": [
+                        17
+                    ],
+                    "seconds": [
+                        52
+                    ]
+                }
+            ]
+        }
+    ],
+    "training-load": [
+        {
+            "carbs": [
+                64
+            ],
+            "fat": [
+                30
+            ],
+            "load-value": [
+                246
+            ],
+            "protein": [
+                6
+            ],
+            "recovery-time": [
+                {
+                    "hours": [
+                        18
+                    ],
+                    "milliseconds": [
+                        650
+                    ],
+                    "minutes": [
+                        54
+                    ],
+                    "seconds": [
+                        0
+                    ]
+                }
+            ]
+        }
+    ]
+}

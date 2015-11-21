@@ -1,0 +1,542 @@
+{
+    "12": [
+        "080312160a0708df0f100a181b120908131012181d20cd031800"
+    ],
+    "13": [
+        {
+            "13/1": [
+                81.912300109863281
+            ],
+            "modified": [
+                {
+                    "3": [
+                        0
+                    ],
+                    "date": [
+                        {
+                            "day": [
+                                26
+                            ],
+                            "month": [
+                                10
+                            ],
+                            "year": [
+                                2015
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                18
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minute": [
+                                26
+                            ],
+                            "seconds": [
+                                42
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "15": [
+        "08c40212160a0708df0f100a181b120908131012181d20cd0318001802"
+    ],
+    "aerobic-threshold": [
+        {
+            "modified": [
+                {
+                    "3": [
+                        0
+                    ],
+                    "date": [
+                        {
+                            "day": [
+                                27
+                            ],
+                            "month": [
+                                10
+                            ],
+                            "year": [
+                                2015
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                19
+                            ],
+                            "milliseconds": [
+                                461
+                            ],
+                            "minute": [
+                                18
+                            ],
+                            "seconds": [
+                                29
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "source": [
+                2
+            ],
+            "value": [
+                147
+            ]
+        }
+    ],
+    "anaerobic-threshold": [
+        {
+            "modified": [
+                {
+                    "3": [
+                        0
+                    ],
+                    "date": [
+                        {
+                            "day": [
+                                27
+                            ],
+                            "month": [
+                                10
+                            ],
+                            "year": [
+                                2015
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                19
+                            ],
+                            "milliseconds": [
+                                461
+                            ],
+                            "minute": [
+                                18
+                            ],
+                            "seconds": [
+                                29
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "source": [
+                2
+            ],
+            "value": [
+                182
+            ]
+        }
+    ],
+    "birthday": [
+        {
+            "modified": [
+                {
+                    "3": [
+                        0
+                    ],
+                    "date": [
+                        {
+                            "day": [
+                                27
+                            ],
+                            "month": [
+                                10
+                            ],
+                            "year": [
+                                2015
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                19
+                            ],
+                            "milliseconds": [
+                                461
+                            ],
+                            "minute": [
+                                18
+                            ],
+                            "seconds": [
+                                29
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "value": [
+                {
+                    "day": [
+                        3
+                    ],
+                    "month": [
+                        5
+                    ],
+                    "year": [
+                        1976
+                    ]
+                }
+            ]
+        }
+    ],
+    "gender": [
+        {
+            "modified": [
+                {
+                    "3": [
+                        0
+                    ],
+                    "date": [
+                        {
+                            "day": [
+                                27
+                            ],
+                            "month": [
+                                10
+                            ],
+                            "year": [
+                                2015
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                19
+                            ],
+                            "milliseconds": [
+                                461
+                            ],
+                            "minute": [
+                                18
+                            ],
+                            "seconds": [
+                                29
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "value": [
+                1
+            ]
+        }
+    ],
+    "height": [
+        {
+            "modified": [
+                {
+                    "3": [
+                        0
+                    ],
+                    "date": [
+                        {
+                            "day": [
+                                27
+                            ],
+                            "month": [
+                                10
+                            ],
+                            "year": [
+                                2015
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                19
+                            ],
+                            "milliseconds": [
+                                461
+                            ],
+                            "minute": [
+                                18
+                            ],
+                            "seconds": [
+                                29
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "value": [
+                181
+            ]
+        }
+    ],
+    "maximum-heartrate": [
+        {
+            "modified": [
+                {
+                    "3": [
+                        0
+                    ],
+                    "date": [
+                        {
+                            "day": [
+                                27
+                            ],
+                            "month": [
+                                10
+                            ],
+                            "year": [
+                                2015
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                19
+                            ],
+                            "milliseconds": [
+                                461
+                            ],
+                            "minute": [
+                                18
+                            ],
+                            "seconds": [
+                                29
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "source": [
+                2
+            ],
+            "value": [
+                196
+            ]
+        }
+    ],
+    "modified": [
+        {
+            "3": [
+                1
+            ],
+            "date": [
+                {
+                    "day": [
+                        27
+                    ],
+                    "month": [
+                        10
+                    ],
+                    "year": [
+                        2015
+                    ]
+                }
+            ],
+            "time": [
+                {
+                    "hour": [
+                        19
+                    ],
+                    "milliseconds": [
+                        461
+                    ],
+                    "minute": [
+                        18
+                    ],
+                    "seconds": [
+                        29
+                    ]
+                }
+            ]
+        }
+    ],
+    "resting-heartrate": [
+        {
+            "modified": [
+                {
+                    "3": [
+                        0
+                    ],
+                    "date": [
+                        {
+                            "day": [
+                                27
+                            ],
+                            "month": [
+                                10
+                            ],
+                            "year": [
+                                2015
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                19
+                            ],
+                            "milliseconds": [
+                                461
+                            ],
+                            "minute": [
+                                18
+                            ],
+                            "seconds": [
+                                29
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "source": [
+                2
+            ],
+            "value": [
+                46
+            ]
+        }
+    ],
+    "training-background": [
+        {
+            "modified": [
+                {
+                    "3": [
+                        0
+                    ],
+                    "date": [
+                        {
+                            "day": [
+                                25
+                            ],
+                            "month": [
+                                11
+                            ],
+                            "year": [
+                                2014
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                19
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minute": [
+                                33
+                            ],
+                            "seconds": [
+                                50
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "value": [
+                50
+            ]
+        }
+    ],
+    "vo2max": [
+        {
+            "modified": [
+                {
+                    "3": [
+                        0
+                    ],
+                    "date": [
+                        {
+                            "day": [
+                                27
+                            ],
+                            "month": [
+                                10
+                            ],
+                            "year": [
+                                2015
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                19
+                            ],
+                            "milliseconds": [
+                                461
+                            ],
+                            "minute": [
+                                18
+                            ],
+                            "seconds": [
+                                29
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "source": [
+                2
+            ],
+            "value": [
+                65
+            ]
+        }
+    ],
+    "weight": [
+        {
+            "modified": [
+                {
+                    "3": [
+                        0
+                    ],
+                    "date": [
+                        {
+                            "day": [
+                                27
+                            ],
+                            "month": [
+                                10
+                            ],
+                            "year": [
+                                2015
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                19
+                            ],
+                            "milliseconds": [
+                                461
+                            ],
+                            "minute": [
+                                18
+                            ],
+                            "seconds": [
+                                29
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "value": [
+                81.199996948242188
+            ]
+        }
+    ]
+}

@@ -1,0 +1,133 @@
+{
+    "ascent": [
+        319.12945556640625
+    ],
+    "calories": [
+        1638
+    ],
+    "descent": [
+        444.0989990234375
+    ],
+    "distance": [
+        42809.30078125
+    ],
+    "duration": [
+        {
+            "hours": [
+                1
+            ],
+            "milliseconds": [
+                250
+            ],
+            "minutes": [
+                42
+            ],
+            "seconds": [
+                7
+            ]
+        }
+    ],
+    "sensors": [
+        1,
+        2,
+        3,
+        4,
+        20,
+        21,
+        6,
+        7,
+        8,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        26,
+        27,
+        6,
+        28,
+        29,
+        6
+    ],
+    "sport": [
+        {
+            "value": [
+                5
+            ]
+        }
+    ],
+    "start": [
+        {
+            "3": [
+                0
+            ],
+            "date": [
+                {
+                    "day": [
+                        1
+                    ],
+                    "month": [
+                        11
+                    ],
+                    "year": [
+                        2015
+                    ]
+                }
+            ],
+            "offset": [
+                60
+            ],
+            "time": [
+                {
+                    "hour": [
+                        12
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minute": [
+                        17
+                    ],
+                    "seconds": [
+                        52
+                    ]
+                }
+            ]
+        }
+    ],
+    "training-load": [
+        {
+            "carbs": [
+                64
+            ],
+            "fat": [
+                30
+            ],
+            "load-value": [
+                246
+            ],
+            "protein": [
+                6
+            ],
+            "recovery-time": [
+                {
+                    "hours": [
+                        18
+                    ],
+                    "milliseconds": [
+                        650
+                    ],
+                    "minutes": [
+                        54
+                    ],
+                    "seconds": [
+                        0
+                    ]
+                }
+            ]
+        }
+    ]
+}

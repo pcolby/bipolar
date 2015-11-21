@@ -1,0 +1,434 @@
+{
+    "11": [
+        1
+    ],
+    "heartrate": [
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        4
+                    ],
+                    "seconds": [
+                        17
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        125
+                    ],
+                    "low": [
+                        95
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "hours": [
+                        1
+                    ],
+                    "minutes": [
+                        14
+                    ],
+                    "seconds": [
+                        59
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        156
+                    ],
+                    "low": [
+                        125
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        20
+                    ],
+                    "seconds": [
+                        31
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        172
+                    ],
+                    "low": [
+                        156
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        1
+                    ],
+                    "seconds": [
+                        47
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        185
+                    ],
+                    "low": [
+                        172
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        0
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        196
+                    ],
+                    "low": [
+                        185
+                    ]
+                }
+            ]
+        }
+    ],
+    "heartrate-source": [
+        2
+    ],
+    "power": [
+        {
+            "duration": [
+                {
+                    "4": [
+                        0
+                    ],
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        19
+                    ],
+                    "seconds": [
+                        35
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        227
+                    ],
+                    "low": [
+                        195
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "4": [
+                        0
+                    ],
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        10
+                    ],
+                    "seconds": [
+                        57
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        260
+                    ],
+                    "low": [
+                        227
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "4": [
+                        0
+                    ],
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        6
+                    ],
+                    "seconds": [
+                        10
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        292
+                    ],
+                    "low": [
+                        260
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "4": [
+                        0
+                    ],
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        4
+                    ],
+                    "seconds": [
+                        21
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        324
+                    ],
+                    "low": [
+                        292
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "4": [
+                        0
+                    ],
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        6
+                    ],
+                    "seconds": [
+                        28
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        2000
+                    ],
+                    "low": [
+                        324
+                    ]
+                }
+            ]
+        }
+    ],
+    "speed": [
+        {
+            "distance": [
+                3460
+            ],
+            "duration": [
+                {
+                    "4": [
+                        0
+                    ],
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        14
+                    ],
+                    "seconds": [
+                        23
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        20
+                    ],
+                    "low": [
+                        10
+                    ]
+                }
+            ]
+        },
+        {
+            "distance": [
+                31127.30078125
+            ],
+            "duration": [
+                {
+                    "4": [
+                        0
+                    ],
+                    "hours": [
+                        1
+                    ],
+                    "minutes": [
+                        12
+                    ],
+                    "seconds": [
+                        0
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        30
+                    ],
+                    "low": [
+                        20
+                    ]
+                }
+            ]
+        },
+        {
+            "distance": [
+                6560.7001953125
+            ],
+            "duration": [
+                {
+                    "4": [
+                        0
+                    ],
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        12
+                    ],
+                    "seconds": [
+                        16
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        39
+                    ],
+                    "low": [
+                        30
+                    ]
+                }
+            ]
+        },
+        {
+            "distance": [
+                120.69999694824219
+            ],
+            "duration": [
+                {
+                    "4": [
+                        0
+                    ],
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        11
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        41
+                    ],
+                    "low": [
+                        39
+                    ]
+                }
+            ]
+        },
+        {
+            "distance": [
+                1510.9000244140625
+            ],
+            "duration": [
+                {
+                    "4": [
+                        0
+                    ],
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        1
+                    ],
+                    "seconds": [
+                        47
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        399
+                    ],
+                    "low": [
+                        41
+                    ]
+                }
+            ]
+        }
+    ]
+}
