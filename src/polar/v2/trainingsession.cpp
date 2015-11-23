@@ -2235,16 +2235,24 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                     }
                 }
 
-                const int currentPowerLeft = (index < powerLeft.length()) ?
-                    first(powerLeft.at(index).toMap().value(QLatin1String("current-power"))).toInt() : 0;
-                const int currentPowerRight = (index < powerRight.length()) ?
-                    first(powerRight.at(index).toMap().value(QLatin1String("current-power"))).toInt() : 0;
-                const int currentPower = currentPowerLeft + currentPowerRight;
-                if (currentPower != 0) {
+                const QVariant currentPowerLeft = (index < powerLeft.length()) ?
+                    first(powerLeft.at(index).toMap().value(QLatin1String("current-power"))) : QVariant();
+                const QVariant currentPowerRight = (index < powerRight.length()) ?
+                    first(powerRight.at(index).toMap().value(QLatin1String("current-power"))) : QVariant();
+
+                const QVariant currentPower =
+                    (currentPowerLeft.isValid() && currentPowerRight.isValid())
+                        ? currentPowerLeft.toInt() + currentPowerRight.toInt()
+                        : currentPowerLeft.isValid() ? currentPowerLeft.toInt() * 2
+                        : currentPowerRight.isValid() ? currentPowerRight.toInt() * 2
+                        : QVariant();
+
+                if (currentPower.isValid()) {
                     tpx.appendChild(doc.createElement(QLatin1String("Watts")))
                         .appendChild(doc.createTextNode(QString::fromLatin1("%1")
-                            .arg(currentPower)));
+                            .arg(currentPower.toInt())));
                 }
+
             }
 
             if (trackPoint.hasChildNodes()) {
