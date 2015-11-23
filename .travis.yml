@@ -14,7 +14,7 @@ env:
   - QTVER=511 # Ubuntu only.
   - QTVER=521 # OSX and Ubuntu.
   - QTVER=532 # OSX and Ubuntu.
-  - QTVER=541 # Ubuntu only.
+  - QTVER=542 # Ubuntu only.
   - QTVER=55  # OSX and Ubuntu.
 
 matrix:
@@ -22,7 +22,7 @@ matrix:
     - { os: osx, env: QTVER=ust }
     - { os: osx, env: QTVER=502 }
     - { os: osx, env: QTVER=511 }
-    - { os: osx, env: QTVER=541 }
+    - { os: osx, env: QTVER=542 }
     - { compiler: clang, env: QTVER=ust } # QTBUG-32100
     - { compiler: clang, env: QTVER=502 } # QTBUG-32100
 
