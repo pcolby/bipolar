@@ -1530,7 +1530,7 @@ QStringList TrainingSession::toHRM(const bool rrDataOnly) const
         const bool havePowerLeft    = ((!rrDataOnly) && (haveAnySamples(samples, QLatin1String("left-pedal-power"))));
         const bool havePowerRight   = ((!rrDataOnly) && (haveAnySamples(samples, QLatin1String("right-pedal-power"))));
         const bool havePower        = (havePowerLeft || havePowerRight);
-        const bool havePowerBalance = (havePowerLeft && havePowerRight);
+        const bool havePowerBalance = havePower;
         const bool haveSpeed        = ((!rrDataOnly) && (haveAnySamples(samples, QLatin1String("altitude"))));
 
         QString hrmData;
@@ -1876,12 +1876,16 @@ QStringList TrainingSession::toHRM(const bool rrDataOnly) const
                         first(powerLeft.at(index).toMap().value(QLatin1String("current-power"))).toInt() : 0;
                     const int currentPowerRight = (index < powerRight.length()) ?
                         first(powerRight.at(index).toMap().value(QLatin1String("current-power"))).toInt() : 0;
-                    const int currentPower = currentPowerLeft + currentPowerRight;
+                    const int currentPower = (havePowerLeft && havePowerRight)
+                        ? currentPowerLeft + currentPowerRight
+                        : (havePowerLeft ? currentPowerLeft : currentPowerRight) * 2;
                     stream << '\t' << currentPower;
                     if (havePowerBalance) {
+                        // In case we only have right power, not left.
+                        const int powerLeft = havePowerLeft ? currentPowerLeft : currentPower - currentPowerRight;
                         // Convert the left and right powers into a left-right balance percentage.
                         const int leftBalance = (currentPower == 0) ? 0 :
-                            qRound(100.0 * (float)currentPowerLeft / (float)currentPower);
+                            qRound(100.0 * (float)powerLeft / (float)currentPower);
                         if (leftBalance > 100) {
                             qWarning() << "leftBalance of " << leftBalance << "% is greater than 100%";
                         }
