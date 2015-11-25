@@ -413,7 +413,7 @@ void TestTrainingSession::parseCreateExercise()
     // Write the result to files for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
         tools::variant::writeAll(result,
-            QString::fromLatin1("%1/%2.result").arg(outputDirPath)
+            QString::fromLatin1("%1/%2").arg(outputDirPath)
                 .arg(QString::fromLatin1(QTest::currentDataTag())));
     }
 
@@ -457,7 +457,7 @@ void TestTrainingSession::parseCreateSession()
     // Write the result to files for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
         tools::variant::writeAll(result,
-            QString::fromLatin1("%1/%2.result").arg(outputDirPath)
+            QString::fromLatin1("%1/%2").arg(outputDirPath)
                 .arg(QString::fromLatin1(QTest::currentDataTag())));
     }
 
@@ -503,7 +503,7 @@ void TestTrainingSession::parseLaps()
     // Write the result to files for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
         tools::variant::writeAll(result,
-            QString::fromLatin1("%1/%2.result").arg(outputDirPath)
+            QString::fromLatin1("%1/%2").arg(outputDirPath)
                 .arg(QString::fromLatin1(QTest::currentDataTag())));
     }
 
@@ -548,7 +548,7 @@ void TestTrainingSession::parsePhysicalInformation()
     // Write the result to files for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
         tools::variant::writeAll(result,
-            QString::fromLatin1("%1/%2.result").arg(outputDirPath)
+            QString::fromLatin1("%1/%2").arg(outputDirPath)
                 .arg(QString::fromLatin1(QTest::currentDataTag())));
     }
 
@@ -593,7 +593,7 @@ void TestTrainingSession::parseRoute()
     // Write the result to files for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
         tools::variant::writeAll(result,
-            QString::fromLatin1("%1/%2.result").arg(outputDirPath)
+            QString::fromLatin1("%1/%2").arg(outputDirPath)
                 .arg(QString::fromLatin1(QTest::currentDataTag())));
     }
 
@@ -635,7 +635,7 @@ void TestTrainingSession::parseRRSamples()
     // Write the result to files for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
         tools::variant::writeAll(result,
-            QString::fromLatin1("%1/%2.result").arg(outputDirPath)
+            QString::fromLatin1("%1/%2").arg(outputDirPath)
                  .arg(QString::fromLatin1(QTest::currentDataTag())));
     }
 
@@ -682,7 +682,7 @@ void TestTrainingSession::parseSamples()
     // Write the result to files for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
         tools::variant::writeAll(result,
-            QString::fromLatin1("%1/%2.result").arg(outputDirPath)
+            QString::fromLatin1("%1/%2").arg(outputDirPath)
                  .arg(QString::fromLatin1(QTest::currentDataTag())));
     }
 
@@ -727,7 +727,7 @@ void TestTrainingSession::parseStatistics()
     // Write the result to files for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
         tools::variant::writeAll(result,
-            QString::fromLatin1("%1/%2.result").arg(outputDirPath)
+            QString::fromLatin1("%1/%2").arg(outputDirPath)
                  .arg(QString::fromLatin1(QTest::currentDataTag())));
     }
 
@@ -773,7 +773,7 @@ void TestTrainingSession::parseZones()
     // Write the result to files for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
         tools::variant::writeAll(result,
-            QString::fromLatin1("%1/%2.result").arg(outputDirPath)
+            QString::fromLatin1("%1/%2").arg(outputDirPath)
                 .arg(QString::fromLatin1(QTest::currentDataTag())));
     }
 
@@ -818,7 +818,7 @@ void TestTrainingSession::toGPX()
 
     // Write the result to an XML file for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
-        QFile file(QString::fromLatin1("%1/%2.result.gpx")
+        QFile file(QString::fromLatin1("%1/%2.gpx")
             .arg(outputDirPath).arg(QString::fromLatin1(QTest::currentDataTag())));
         if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
             file.write(gpx.toByteArray(2));
@@ -880,7 +880,7 @@ void TestTrainingSession::toGPX_AllExtensions()
 
     // Write the result to an XML file for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
-        QFile file(QString::fromLatin1("%1/%2.result.all-extensions.gpx")
+        QFile file(QString::fromLatin1("%1/%2.all-extensions.gpx")
             .arg(outputDirPath).arg(QString::fromLatin1(QTest::currentDataTag())));
         if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
             file.write(gpx.toByteArray(2));
@@ -943,7 +943,7 @@ void TestTrainingSession::toGPX_Cluetrust()
 
     // Write the result to an XML file for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
-        QFile file(QString::fromLatin1("%1/%2.result.cluetrust.gpx")
+        QFile file(QString::fromLatin1("%1/%2.cluetrust.gpx")
             .arg(outputDirPath).arg(QString::fromLatin1(QTest::currentDataTag())));
         if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
             file.write(gpx.toByteArray(2));
@@ -1031,7 +1031,7 @@ void TestTrainingSession::toGPX_GarminAcceleration()
 
     // Write the result to an XML file for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
-        QFile file(QString::fromLatin1("%1/%2.result.garmin-acceleration.gpx")
+        QFile file(QString::fromLatin1("%1/%2.garmin-acceleration.gpx")
             .arg(outputDirPath).arg(QString::fromLatin1(QTest::currentDataTag())));
         if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
             file.write(gpx.toByteArray(2));
@@ -1113,7 +1113,7 @@ void TestTrainingSession::toGPX_GarminTrackPoint()
 
     // Write the result to an XML file for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
-        QFile file(QString::fromLatin1("%1/%2.result.garmin-trackpoint.gpx")
+        QFile file(QString::fromLatin1("%1/%2.garmin-trackpoint.gpx")
             .arg(outputDirPath).arg(QString::fromLatin1(QTest::currentDataTag())));
         if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
             file.write(gpx.toByteArray(2));
@@ -1204,7 +1204,7 @@ void TestTrainingSession::toHRM()
     // Write the result to a text file for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
         for (int index = 0; index < hrm.length(); ++index) {
-            QString fileName = QString::fromLatin1("%1/%2.result")
+            QString fileName = QString::fromLatin1("%1/%2")
                 .arg(outputDirPath).arg(QLatin1String(QTest::currentDataTag()));
             if (hrm.length() != 1) {
                 fileName += QString::fromLatin1(".%1").arg(index);
@@ -1268,7 +1268,7 @@ void TestTrainingSession::toHRM_LapNames()
     // Write the result to a text file for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
         for (int index = 0; index < hrm.length(); ++index) {
-            QString fileName = QString::fromLatin1("%1/%2.result")
+            QString fileName = QString::fromLatin1("%1/%2")
                 .arg(outputDirPath).arg(QLatin1String(QTest::currentDataTag()));
             if (hrm.length() != 1) {
                 fileName += QString::fromLatin1(".%1").arg(index);
@@ -1332,7 +1332,7 @@ void TestTrainingSession::toHRM_LapNames_RR()
     // Write the result to a text file for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
         for (int index = 0; index < hrm.length(); ++index) {
-            QString fileName = QString::fromLatin1("%1/%2.result")
+            QString fileName = QString::fromLatin1("%1/%2")
                 .arg(outputDirPath).arg(QLatin1String(QTest::currentDataTag()));
             if (hrm.length() != 1) {
                 fileName += QString::fromLatin1(".%1").arg(index);
@@ -1396,7 +1396,7 @@ void TestTrainingSession::toHRM_RR()
     // Write the result to a text file for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
         for (int index = 0; index < hrm.length(); ++index) {
-            QString fileName = QString::fromLatin1("%1/%2.result")
+            QString fileName = QString::fromLatin1("%1/%2")
                 .arg(QLatin1String(QTest::currentDataTag()));
             if (hrm.length() != 1) {
                 fileName += QString::fromLatin1(".%1").arg(index);
@@ -1449,7 +1449,7 @@ void TestTrainingSession::toTCX()
 
     // Write the result to an XML file for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
-        QFile file(QString::fromLatin1("%1/%2.result.tcx")
+        QFile file(QString::fromLatin1("%1/%2.tcx")
             .arg(outputDirPath).arg(QString::fromLatin1(QTest::currentDataTag())));
         if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
             file.write(tcx.toByteArray(2));
@@ -1509,7 +1509,7 @@ void TestTrainingSession::toTCX_AllExtensions()
 
     // Write the result to an XML file for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
-        QFile file(QString::fromLatin1("%1/%2.result.all-extensions.tcx")
+        QFile file(QString::fromLatin1("%1/%2.all-extensions.tcx")
             .arg(outputDirPath).arg(QString::fromLatin1(QTest::currentDataTag())));
         if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
             file.write(tcx.toByteArray(2));
@@ -1571,7 +1571,7 @@ void TestTrainingSession::toTCX_GarminActivity()
 
     // Write the result to an XML file for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
-        QFile file(QString::fromLatin1("%1/%2.result.garmin-activity.tcx")
+        QFile file(QString::fromLatin1("%1/%2.garmin-activity.tcx")
             .arg(outputDirPath).arg(QString::fromLatin1(QTest::currentDataTag())));
         if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
             file.write(tcx.toByteArray(2));
@@ -1662,7 +1662,7 @@ void TestTrainingSession::toTCX_GarminCourse()
 
     // Write the result to an XML file for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
-        QFile file(QString::fromLatin1("%1/%2.result.garmin-course.tcx")
+        QFile file(QString::fromLatin1("%1/%2.garmin-course.tcx")
             .arg(outputDirPath).arg(QString::fromLatin1(QTest::currentDataTag())));
         if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
             file.write(tcx.toByteArray(2));
@@ -1738,7 +1738,7 @@ void TestTrainingSession::toTCX_UTC()
 
     // Write the result to an XML file for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
-        QFile file(QString::fromLatin1("%1/%2.result.utc.tcx")
+        QFile file(QString::fromLatin1("%1/%2.utc.tcx")
             .arg(outputDirPath).arg(QString::fromLatin1(QTest::currentDataTag())));
         if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
             file.write(tcx.toByteArray(2));

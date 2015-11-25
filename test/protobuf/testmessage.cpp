@@ -129,7 +129,7 @@ void TestMessage::parse()
     // Write the result to files for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
         tools::variant::writeAll(result,
-            QString::fromLatin1("%1/%2.result").arg(outputDirPath)
+            QString::fromLatin1("%1/%2").arg(outputDirPath)
                  .arg(QString::fromLatin1(QTest::currentDataTag())));
     }
 
