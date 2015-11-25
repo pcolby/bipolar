@@ -23,6 +23,7 @@
 #include "../../tools/variant.h"
 
 #include <QDebug>
+#include <QDir>
 #include <QDomDocument>
 #include <QFile>
 #include <QTest>
@@ -109,6 +110,18 @@ void compare(const QDomDocument &a, const QDomDocument &b)
     compare(a.doctype(), b.doctype());
     compare(a.documentElement(), b.documentElement());
     QCOMPARE(a.nodeType(), b.nodeType());
+}
+
+void TestTrainingSession::initTestCase()
+{
+    outputDirPath = QString::fromLatin1("%1/%2").arg(QDir::tempPath())
+        .arg(QString::fromLocal8Bit(metaObject()->className()));
+    qDebug() << "output directory" << QDir::toNativeSeparators(outputDirPath);
+    QDir dir;
+    if (!dir.mkpath(outputDirPath)) {
+        qWarning() << "failed to create output directory" << QDir::toNativeSeparators(outputDirPath);
+        outputDirPath.clear();
+    }
 }
 
 void TestTrainingSession::getOutputBaseFileName_data()
@@ -398,9 +411,11 @@ void TestTrainingSession::parseCreateExercise()
     const QVariantMap result = session.parseCreateExercise(fileName);
 
     // Write the result to files for optional post-mortem investigations.
-    tools::variant::writeAll(result,
-        QString::fromLatin1("polar/v2/testdata/%1.result")
-            .arg(QString::fromLatin1(QTest::currentDataTag())));
+    if (!outputDirPath.isNull()) {
+        tools::variant::writeAll(result,
+            QString::fromLatin1("%1/%2.result").arg(outputDirPath)
+                .arg(QString::fromLatin1(QTest::currentDataTag())));
+    }
 
     // Compare the result.
     QCOMPARE(result, expected);
@@ -440,9 +455,11 @@ void TestTrainingSession::parseCreateSession()
     const QVariantMap result = session.parseCreateSession(fileName);
 
     // Write the result to files for optional post-mortem investigations.
-    tools::variant::writeAll(result,
-        QString::fromLatin1("polar/v2/testdata/%1.result")
-            .arg(QString::fromLatin1(QTest::currentDataTag())));
+    if (!outputDirPath.isNull()) {
+        tools::variant::writeAll(result,
+            QString::fromLatin1("%1/%2.result").arg(outputDirPath)
+                .arg(QString::fromLatin1(QTest::currentDataTag())));
+    }
 
     // Compare the result.
     QCOMPARE(result, expected);
@@ -484,9 +501,11 @@ void TestTrainingSession::parseLaps()
     const QVariantMap result = session.parseLaps(fileName);
 
     // Write the result to files for optional post-mortem investigations.
-    tools::variant::writeAll(result,
-        QString::fromLatin1("polar/v2/testdata/%1.result")
-            .arg(QString::fromLatin1(QTest::currentDataTag())));
+    if (!outputDirPath.isNull()) {
+        tools::variant::writeAll(result,
+            QString::fromLatin1("%1/%2.result").arg(outputDirPath)
+                .arg(QString::fromLatin1(QTest::currentDataTag())));
+    }
 
     // Compare the result.
     QCOMPARE(result, expected);
@@ -527,9 +546,11 @@ void TestTrainingSession::parsePhysicalInformation()
     const QVariantMap result = session.parsePhysicalInformation(fileName);
 
     // Write the result to files for optional post-mortem investigations.
-    tools::variant::writeAll(result,
-        QString::fromLatin1("polar/v2/testdata/%1.result")
-            .arg(QString::fromLatin1(QTest::currentDataTag())));
+    if (!outputDirPath.isNull()) {
+        tools::variant::writeAll(result,
+            QString::fromLatin1("%1/%2.result").arg(outputDirPath)
+                .arg(QString::fromLatin1(QTest::currentDataTag())));
+    }
 
     // Compare the result.
     QCOMPARE(result, expected);
@@ -570,9 +591,11 @@ void TestTrainingSession::parseRoute()
     const QVariantMap result = session.parseRoute(fileName);
 
     // Write the result to files for optional post-mortem investigations.
-    tools::variant::writeAll(result,
-        QString::fromLatin1("polar/v2/testdata/%1.result")
-            .arg(QString::fromLatin1(QTest::currentDataTag())));
+    if (!outputDirPath.isNull()) {
+        tools::variant::writeAll(result,
+            QString::fromLatin1("%1/%2.result").arg(outputDirPath)
+                .arg(QString::fromLatin1(QTest::currentDataTag())));
+    }
 
     // Compare the result.
     QCOMPARE(result, expected);
@@ -610,9 +633,11 @@ void TestTrainingSession::parseRRSamples()
     const QVariantMap result = session.parseRRSamples(fileName);
 
     // Write the result to files for optional post-mortem investigations.
-    tools::variant::writeAll(result,
-        QString::fromLatin1("polar/v2/testdata/%1.result")
-             .arg(QString::fromLatin1(QTest::currentDataTag())));
+    if (!outputDirPath.isNull()) {
+        tools::variant::writeAll(result,
+            QString::fromLatin1("%1/%2.result").arg(outputDirPath)
+                 .arg(QString::fromLatin1(QTest::currentDataTag())));
+    }
 
     // Compare the result.
     QCOMPARE(result, expected);
@@ -655,9 +680,11 @@ void TestTrainingSession::parseSamples()
     const QVariantMap result = session.parseSamples(fileName);
 
     // Write the result to files for optional post-mortem investigations.
-    tools::variant::writeAll(result,
-        QString::fromLatin1("polar/v2/testdata/%1.result")
-             .arg(QString::fromLatin1(QTest::currentDataTag())));
+    if (!outputDirPath.isNull()) {
+        tools::variant::writeAll(result,
+            QString::fromLatin1("%1/%2.result").arg(outputDirPath)
+                 .arg(QString::fromLatin1(QTest::currentDataTag())));
+    }
 
     // Compare the result.
     QCOMPARE(result, expected);
@@ -698,9 +725,11 @@ void TestTrainingSession::parseStatistics()
     const QVariantMap result = session.parseStatistics(fileName);
 
     // Write the result to files for optional post-mortem investigations.
-    tools::variant::writeAll(result,
-        QString::fromLatin1("polar/v2/testdata/%1.result")
-             .arg(QString::fromLatin1(QTest::currentDataTag())));
+    if (!outputDirPath.isNull()) {
+        tools::variant::writeAll(result,
+            QString::fromLatin1("%1/%2.result").arg(outputDirPath)
+                 .arg(QString::fromLatin1(QTest::currentDataTag())));
+    }
 
     // Compare the result.
     QCOMPARE(result, expected);
@@ -742,9 +771,11 @@ void TestTrainingSession::parseZones()
     const QVariantMap result = session.parseZones(fileName);
 
     // Write the result to files for optional post-mortem investigations.
-    tools::variant::writeAll(result,
-        QString::fromLatin1("polar/v2/testdata/%1.result")
-            .arg(QString::fromLatin1(QTest::currentDataTag())));
+    if (!outputDirPath.isNull()) {
+        tools::variant::writeAll(result,
+            QString::fromLatin1("%1/%2.result").arg(outputDirPath)
+                .arg(QString::fromLatin1(QTest::currentDataTag())));
+    }
 
     // Compare the result.
     QCOMPARE(result, expected);
@@ -786,16 +817,13 @@ void TestTrainingSession::toGPX()
         QLatin1String("2014-07-15T12:34:56Z"), Qt::ISODate));
 
     // Write the result to an XML file for optional post-mortem investigations.
-#ifdef Q_OS_WIN
-    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.gpx")
-#else
-    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.gpx")
-#endif
-        .arg(QString::fromLatin1(QTest::currentDataTag())));
-    if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
-        file.write(gpx.toByteArray(2));
+    if (!outputDirPath.isNull()) {
+        QFile file(QString::fromLatin1("%1/%2.result.gpx")
+            .arg(outputDirPath).arg(QString::fromLatin1(QTest::currentDataTag())));
+        if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+            file.write(gpx.toByteArray(2));
+        }
     }
-    file.close();
 
     // Compare the generated document against the expected result.
     QDomDocument expectedDoc;
@@ -851,16 +879,13 @@ void TestTrainingSession::toGPX_AllExtensions()
         QLatin1String("2014-07-15T12:34:56Z"), Qt::ISODate));
 
     // Write the result to an XML file for optional post-mortem investigations.
-#ifdef Q_OS_WIN
-    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.all-extensions.gpx")
-#else
-    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.all-extensions.gpx")
-#endif
-        .arg(QString::fromLatin1(QTest::currentDataTag())));
-    if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
-        file.write(gpx.toByteArray(2));
+    if (!outputDirPath.isNull()) {
+        QFile file(QString::fromLatin1("%1/%2.result.all-extensions.gpx")
+            .arg(outputDirPath).arg(QString::fromLatin1(QTest::currentDataTag())));
+        if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+            file.write(gpx.toByteArray(2));
+        }
     }
-    file.close();
 
     // Compare the generated document against the expected result.
     QDomDocument expectedDoc;
@@ -917,16 +942,13 @@ void TestTrainingSession::toGPX_Cluetrust()
         QLatin1String("2014-07-15T12:34:56Z"), Qt::ISODate));
 
     // Write the result to an XML file for optional post-mortem investigations.
-#ifdef Q_OS_WIN
-    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.cluetrust.gpx")
-#else
-    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.cluetrust.gpx")
-#endif
-        .arg(QString::fromLatin1(QTest::currentDataTag())));
-    if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
-        file.write(gpx.toByteArray(2));
+    if (!outputDirPath.isNull()) {
+        QFile file(QString::fromLatin1("%1/%2.result.cluetrust.gpx")
+            .arg(outputDirPath).arg(QString::fromLatin1(QTest::currentDataTag())));
+        if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+            file.write(gpx.toByteArray(2));
+        }
     }
-    file.close();
 
     // Compare the generated document against the expected result.
     QDomDocument expectedDoc;
@@ -1008,16 +1030,13 @@ void TestTrainingSession::toGPX_GarminAcceleration()
         QLatin1String("2014-07-15T12:34:56Z"), Qt::ISODate));
 
     // Write the result to an XML file for optional post-mortem investigations.
-#ifdef Q_OS_WIN
-    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.garmin-acceleration.gpx")
-#else
-    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.garmin-acceleration.gpx")
-#endif
-        .arg(QString::fromLatin1(QTest::currentDataTag())));
-    if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
-        file.write(gpx.toByteArray(2));
+    if (!outputDirPath.isNull()) {
+        QFile file(QString::fromLatin1("%1/%2.result.garmin-acceleration.gpx")
+            .arg(outputDirPath).arg(QString::fromLatin1(QTest::currentDataTag())));
+        if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+            file.write(gpx.toByteArray(2));
+        }
     }
-    file.close();
 
     // Compare the generated document against the expected result.
     QDomDocument expectedDoc;
@@ -1093,16 +1112,13 @@ void TestTrainingSession::toGPX_GarminTrackPoint()
         QLatin1String("2014-07-15T12:34:56Z"), Qt::ISODate));
 
     // Write the result to an XML file for optional post-mortem investigations.
-#ifdef Q_OS_WIN
-    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.garmin-trackpoint.gpx")
-#else
-    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.garmin-trackpoint.gpx")
-#endif
-        .arg(QString::fromLatin1(QTest::currentDataTag())));
-    if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
-        file.write(gpx.toByteArray(2));
+    if (!outputDirPath.isNull()) {
+        QFile file(QString::fromLatin1("%1/%2.result.garmin-trackpoint.gpx")
+            .arg(outputDirPath).arg(QString::fromLatin1(QTest::currentDataTag())));
+        if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+            file.write(gpx.toByteArray(2));
+        }
     }
-    file.close();
 
     // Compare the generated document against the expected result.
     QDomDocument expectedDoc;
@@ -1186,20 +1202,18 @@ void TestTrainingSession::toHRM()
     const QStringList hrm = session.toHRM(false);
 
     // Write the result to a text file for optional post-mortem investigations.
-    for (int index = 0; index < hrm.length(); ++index) {
-        QString fileName;
-#ifndef Q_OS_WIN
-        fileName = QLatin1String("../");
-#endif
-        fileName += QString::fromLatin1("polar/v2/testdata/%1.result")
-            .arg(QLatin1String(QTest::currentDataTag()));
-        if (hrm.length() != 1) {
-            fileName += QString::fromLatin1(".%1").arg(index);
-        }
-        fileName += QString::fromLatin1(".hrm");
-        QFile file(fileName);
-        if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
-            file.write(hrm.at(index).toLatin1());
+    if (!outputDirPath.isNull()) {
+        for (int index = 0; index < hrm.length(); ++index) {
+            QString fileName = QString::fromLatin1("%1/%2.result")
+                .arg(outputDirPath).arg(QLatin1String(QTest::currentDataTag()));
+            if (hrm.length() != 1) {
+                fileName += QString::fromLatin1(".%1").arg(index);
+            }
+            fileName += QString::fromLatin1(".hrm");
+            QFile file(fileName);
+            if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+                file.write(hrm.at(index).toLatin1());
+            }
         }
     }
 
@@ -1252,20 +1266,18 @@ void TestTrainingSession::toHRM_LapNames()
     const QStringList hrm = session.toHRM(false);
 
     // Write the result to a text file for optional post-mortem investigations.
-    for (int index = 0; index < hrm.length(); ++index) {
-        QString fileName;
-#ifndef Q_OS_WIN
-        fileName = QLatin1String("../");
-#endif
-        fileName += QString::fromLatin1("polar/v2/testdata/%1.result")
-            .arg(QLatin1String(QTest::currentDataTag()));
-        if (hrm.length() != 1) {
-            fileName += QString::fromLatin1(".%1").arg(index);
-        }
-        fileName += QString::fromLatin1(".LapNames.hrm");
-        QFile file(fileName);
-        if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
-            file.write(hrm.at(index).toLatin1());
+    if (!outputDirPath.isNull()) {
+        for (int index = 0; index < hrm.length(); ++index) {
+            QString fileName = QString::fromLatin1("%1/%2.result")
+                .arg(outputDirPath).arg(QLatin1String(QTest::currentDataTag()));
+            if (hrm.length() != 1) {
+                fileName += QString::fromLatin1(".%1").arg(index);
+            }
+            fileName += QString::fromLatin1(".LapNames.hrm");
+            QFile file(fileName);
+            if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+                file.write(hrm.at(index).toLatin1());
+            }
         }
     }
 
@@ -1318,20 +1330,18 @@ void TestTrainingSession::toHRM_LapNames_RR()
     const QStringList hrm = session.toHRM(true);
 
     // Write the result to a text file for optional post-mortem investigations.
-    for (int index = 0; index < hrm.length(); ++index) {
-        QString fileName;
-#ifndef Q_OS_WIN
-        fileName = QLatin1String("../");
-#endif
-        fileName += QString::fromLatin1("polar/v2/testdata/%1.result")
-            .arg(QLatin1String(QTest::currentDataTag()));
-        if (hrm.length() != 1) {
-            fileName += QString::fromLatin1(".%1").arg(index);
-        }
-        fileName += QString::fromLatin1(".rr.LapNames.hrm");
-        QFile file(fileName);
-        if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
-            file.write(hrm.at(index).toLatin1());
+    if (!outputDirPath.isNull()) {
+        for (int index = 0; index < hrm.length(); ++index) {
+            QString fileName = QString::fromLatin1("%1/%2.result")
+                .arg(outputDirPath).arg(QLatin1String(QTest::currentDataTag()));
+            if (hrm.length() != 1) {
+                fileName += QString::fromLatin1(".%1").arg(index);
+            }
+            fileName += QString::fromLatin1(".rr.LapNames.hrm");
+            QFile file(fileName);
+            if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+                file.write(hrm.at(index).toLatin1());
+            }
         }
     }
 
@@ -1384,20 +1394,18 @@ void TestTrainingSession::toHRM_RR()
     const QStringList hrm = session.toHRM(true);
 
     // Write the result to a text file for optional post-mortem investigations.
-    for (int index = 0; index < hrm.length(); ++index) {
-        QString fileName;
-#ifndef Q_OS_WIN
-        fileName = QLatin1String("../");
-#endif
-        fileName += QString::fromLatin1("polar/v2/testdata/%1.result")
-            .arg(QLatin1String(QTest::currentDataTag()));
-        if (hrm.length() != 1) {
-            fileName += QString::fromLatin1(".%1").arg(index);
-        }
-        fileName += QString::fromLatin1(".rr.hrm");
-        QFile file(fileName);
-        if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
-            file.write(hrm.at(index).toLatin1());
+    if (!outputDirPath.isNull()) {
+        for (int index = 0; index < hrm.length(); ++index) {
+            QString fileName = QString::fromLatin1("%1/%2.result")
+                .arg(QLatin1String(QTest::currentDataTag()));
+            if (hrm.length() != 1) {
+                fileName += QString::fromLatin1(".%1").arg(index);
+            }
+            fileName += QString::fromLatin1(".rr.hrm");
+            QFile file(fileName);
+            if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+                file.write(hrm.at(index).toLatin1());
+            }
         }
     }
 
@@ -1440,16 +1448,13 @@ void TestTrainingSession::toTCX()
     QDomDocument tcx = session.toTCX(QLatin1String("Jul 17 2014 21:02:38"));
 
     // Write the result to an XML file for optional post-mortem investigations.
-#ifdef Q_OS_WIN
-    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.tcx")
-#else
-    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.tcx")
-#endif
-        .arg(QString::fromLatin1(QTest::currentDataTag())));
-    if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
-        file.write(tcx.toByteArray(2));
+    if (!outputDirPath.isNull()) {
+        QFile file(QString::fromLatin1("%1/%2.result.tcx")
+            .arg(outputDirPath).arg(QString::fromLatin1(QTest::currentDataTag())));
+        if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+            file.write(tcx.toByteArray(2));
+        }
     }
-    file.close();
 
     // Compare the generated document against the expected result.
     QDomDocument expectedDoc;
@@ -1503,16 +1508,13 @@ void TestTrainingSession::toTCX_AllExtensions()
     QDomDocument tcx = session.toTCX(QLatin1String("Jul 17 2014 21:02:38"));
 
     // Write the result to an XML file for optional post-mortem investigations.
-#ifdef Q_OS_WIN
-    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.all-extensions.tcx")
-#else
-    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.all-extensions.tcx")
-#endif
-        .arg(QString::fromLatin1(QTest::currentDataTag())));
-    if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
-        file.write(tcx.toByteArray(2));
+    if (!outputDirPath.isNull()) {
+        QFile file(QString::fromLatin1("%1/%2.result.all-extensions.tcx")
+            .arg(outputDirPath).arg(QString::fromLatin1(QTest::currentDataTag())));
+        if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+            file.write(tcx.toByteArray(2));
+        }
     }
-    file.close();
 
     // Compare the generated document against the expected result.
     QDomDocument expectedDoc;
@@ -1568,16 +1570,13 @@ void TestTrainingSession::toTCX_GarminActivity()
     QDomDocument tcx = session.toTCX(QLatin1String("Jul 17 2014 21:02:38"));
 
     // Write the result to an XML file for optional post-mortem investigations.
-#ifdef Q_OS_WIN
-    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.garmin-activity.tcx")
-#else
-    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.garmin-activity.tcx")
-#endif
-        .arg(QString::fromLatin1(QTest::currentDataTag())));
-    if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
-        file.write(tcx.toByteArray(2));
+    if (!outputDirPath.isNull()) {
+        QFile file(QString::fromLatin1("%1/%2.result.garmin-activity.tcx")
+            .arg(outputDirPath).arg(QString::fromLatin1(QTest::currentDataTag())));
+        if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+            file.write(tcx.toByteArray(2));
+        }
     }
-    file.close();
 
     // Compare the generated document against the expected result.
     QDomDocument expectedDoc;
@@ -1662,16 +1661,13 @@ void TestTrainingSession::toTCX_GarminCourse()
     QDomDocument tcx = session.toTCX(QLatin1String("Jul 17 2014 21:02:38"));
 
     // Write the result to an XML file for optional post-mortem investigations.
-#ifdef Q_OS_WIN
-    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.garmin-course.tcx")
-#else
-    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.garmin-course.tcx")
-#endif
-        .arg(QString::fromLatin1(QTest::currentDataTag())));
-    if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
-        file.write(tcx.toByteArray(2));
+    if (!outputDirPath.isNull()) {
+        QFile file(QString::fromLatin1("%1/%2.result.garmin-course.tcx")
+            .arg(outputDirPath).arg(QString::fromLatin1(QTest::currentDataTag())));
+        if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+            file.write(tcx.toByteArray(2));
+        }
     }
-    file.close();
 
     // Compare the generated document against the expected result.
     QDomDocument expectedDoc;
@@ -1741,16 +1737,13 @@ void TestTrainingSession::toTCX_UTC()
     QDomDocument tcx = session.toTCX(QLatin1String("Jul 17 2014 21:02:38"));
 
     // Write the result to an XML file for optional post-mortem investigations.
-#ifdef Q_OS_WIN
-    QFile file(QString::fromLatin1("polar/v2/testdata/%1.result.utc.tcx")
-#else
-    QFile file(QString::fromLatin1("../polar/v2/testdata/%1.result.utc.tcx")
-#endif
-        .arg(QString::fromLatin1(QTest::currentDataTag())));
-    if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
-        file.write(tcx.toByteArray(2));
+    if (!outputDirPath.isNull()) {
+        QFile file(QString::fromLatin1("%1/%2.result.utc.tcx")
+            .arg(outputDirPath).arg(QString::fromLatin1(QTest::currentDataTag())));
+        if (file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
+            file.write(tcx.toByteArray(2));
+        }
     }
-    file.close();
 
     // Compare the generated document against the expected result.
     QDomDocument expectedDoc;

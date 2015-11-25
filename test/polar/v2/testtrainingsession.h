@@ -22,7 +22,12 @@
 class TestTrainingSession : public QObject {
     Q_OBJECT
 
+private:
+    QString outputDirPath;
+
 private slots:
+    void initTestCase();
+
     void getOutputBaseFileName_data();
     void getOutputBaseFileName();
 

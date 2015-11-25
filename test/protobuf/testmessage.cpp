@@ -23,6 +23,7 @@
 #include "tools/variant.h"
 
 #include <QDebug>
+#include <QDir>
 #include <QFile>
 #include <QTest>
 
@@ -71,6 +72,18 @@ ProtoBuf::Message::FieldInfoMap loadFieldInfoMap(const QString &name, const QStr
     return fields;
 }
 
+void TestMessage::initTestCase()
+{
+    outputDirPath = QString::fromLatin1("%1/%2").arg(QDir::tempPath())
+        .arg(QString::fromLocal8Bit(metaObject()->className()));
+    qDebug() << "output directory" << QDir::toNativeSeparators(outputDirPath);
+    QDir dir;
+    if (!dir.mkpath(outputDirPath)) {
+        qWarning() << "failed to create output directory" << QDir::toNativeSeparators(outputDirPath);
+        outputDirPath.clear();
+    }
+}
+
 void TestMessage::parse_data()
 {
     QTest::addColumn<QByteArray>("data");
@@ -114,9 +127,11 @@ void TestMessage::parse()
     const QVariantMap result = message.parse(data);
 
     // Write the result to files for optional post-mortem investigations.
-    tools::variant::writeAll(result,
-        QString::fromLatin1("protobuf/testdata/%1.result")
-             .arg(QString::fromLatin1(QTest::currentDataTag())));
+    if (!outputDirPath.isNull()) {
+        tools::variant::writeAll(result,
+            QString::fromLatin1("%1/%2.result").arg(outputDirPath)
+                 .arg(QString::fromLatin1(QTest::currentDataTag())));
+    }
 
     // Compare the result.
     QCOMPARE(result, expected);

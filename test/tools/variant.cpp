@@ -72,11 +72,7 @@ bool writeAll(const QVariantMap &variant, const QString &fileName)
 
 bool writeData(const QVariantMap &variant, const QString &fileName)
 {
-#ifdef Q_OS_WIN
     QFile file(fileName);
-#else
-    QFile file(QString::fromLatin1("../") + fileName);
-#endif
     if (!file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
         return false;
     }
@@ -87,11 +83,7 @@ bool writeData(const QVariantMap &variant, const QString &fileName)
 
 bool writeJson(const QVariantMap &variant, const QString &fileName)
 {
-#ifdef Q_OS_WIN
     QFile file(fileName);
-#else
-    QFile file(QString::fromLatin1("../") + fileName);
-#endif
     if (!file.open(QIODevice::WriteOnly|QIODevice::Truncate)) {
         return false;
     }

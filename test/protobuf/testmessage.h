@@ -22,7 +22,12 @@
 class TestMessage : public QObject {
     Q_OBJECT
 
+private:
+    QString outputDirPath;
+
 private slots:
+    void initTestCase();
+
     void parse_data();
     void parse();
 
