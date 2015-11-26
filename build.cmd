@@ -15,6 +15,9 @@ set QT_VERSION=5.1.1
 set ZIP7=%PROGRAMFILES%\7-zip\7z.exe
 
 patch -v
+where patch
+cd \
+dir /s /b patch.exe
 
 :: Check the pre-requisites.
 if not exist "%OPENSSL%" (
