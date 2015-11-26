@@ -14,6 +14,8 @@ set PATCH=C:\Program Files (x86)\Git\bin\patch.exe
 set QT_VERSION=5.1.1
 set ZIP7=%PROGRAMFILES%\7-zip\7z.exe
 
+patch -v
+
 :: Check the pre-requisites.
 if not exist "%OPENSSL%" (
   echo OpenSSL not found. Have you installed OpenSSL for Windows?
