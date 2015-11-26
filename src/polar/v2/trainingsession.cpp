@@ -1547,8 +1547,11 @@ QStringList TrainingSession::toHRM(const bool rrDataOnly) const
         stream << (haveAltitude     ? '1' : '0'); // c) Altitude
         stream << (havePower        ? '1' : '0'); // d) Power
         stream << (havePowerBalance ? '1' : '0'); // e) Power Left Right Balance
+        // Note, we're forcing Power Pedalling Index on when we have power data,
+        // even though we have no such pedalling index data. This is for PPT5's
+        // benefit.  See issue #57 - https://github.com/pcolby/bipolar/issues/57
+        stream << (havePowerBalance ? '1' : '0'); // f) Power Pedalling Index
         stream <<
-            "0" // f) Power Pedalling Index (does not appear to be supported by FlowSync).
             "0" // g) HR/CC data (available only with Polar XTrainer Plus).
             "0" // h) US / Euro unit (always metric).
             "0" // i) Air pressure (not available).

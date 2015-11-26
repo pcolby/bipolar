@@ -1,7 +1,7 @@
 [Params]
 Version=106
 Monitor=1
-SMode=111110000
+SMode=111111000
 Date=20151101
 StartTime=12:17:52.0
 Length=01:42:07.3
