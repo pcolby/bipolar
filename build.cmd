@@ -59,6 +59,9 @@ echo 2
 dir "%SRC_DIR%\qtbase\src\network\access"
 echo 3
 pwd
+dir "qt-everywhere-opensource-src-5.1.1"
+dir "qt-everywhere-opensource-src-5.1.1\qtbase\src\network\access"
+dir "qt-everywhere-opensource-src-5.1.1\qtbase\src\network\access\qnetworkaccessmanager.cpp"
 
 :: Apply our hook and build patches.
 if not exist "%SRC_DIR%\qtbase\src\network\access\qnetworkaccessmanager.ori" (
