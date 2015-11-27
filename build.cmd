@@ -53,16 +53,6 @@ if not exist "%SRC_DIR%" (
   )
 )
 
-echo 1
-dir
-echo 2
-dir "%SRC_DIR%\qtbase\src\network\access"
-echo 3
-pwd
-dir "qt-everywhere-opensource-src-5.1.1"
-dir "qt-everywhere-opensource-src-5.1.1\qtbase\src\network\access"
-dir "qt-everywhere-opensource-src-5.1.1\qtbase\src\network\access\qnetworkaccessmanager.cpp"
-
 :: Apply our hook and build patches.
 if not exist "%SRC_DIR%\qtbase\src\network\access\qnetworkaccessmanager.ori" (
   copy "%SRC_DIR%\qtbase\src\network\access\qnetworkaccessmanager.cpp"^
@@ -74,7 +64,7 @@ if not exist "%SRC_DIR%\qtbase\qmake\generators\win32\winmakefile.ori" (
 )
 "%PATCH%" -N -p0 -i qnetworkaccessmanager.patch
 if errorlevel 1 pause
-"%PATCH%" -Ni winmakefile.patch
+"%PATCH%" -N -p0 -i winmakefile.patch
 if errorlevel 1 pause
 
 :: Create the build directory, if not already.
