@@ -2,6 +2,8 @@ language: cpp
 
 os: osx
 
+xcode_sdk: macosx10.8
+
 before_script:
   - xcodebuild -showsdks
 
