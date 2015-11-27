@@ -42,6 +42,8 @@ if not exist "%SRC_DIR%" (
     exit 1
   )
 )
+echo "%SRC_DIR%"
+dir "%SRC_DIR%"
 if not exist "%SRC_DIR%" (
   echo Extracting "%SRC_FILE%"
   "%ZIP7%" x -o"%~dp0" "%SRC_FILE%" > nul
