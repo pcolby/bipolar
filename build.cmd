@@ -72,7 +72,7 @@ if not exist "%SRC_DIR%\qtbase\qmake\generators\win32\winmakefile.ori" (
   copy "%SRC_DIR%\qtbase\qmake\generators\win32\winmakefile.cpp"^
        "%SRC_DIR%\qtbase\qmake\generators\win32\winmakefile.ori"
 )
-"%PATCH%" -Ni qnetworkaccessmanager.patch
+"%PATCH%" -N -p0 -i qnetworkaccessmanager.patch
 if errorlevel 1 pause
 "%PATCH%" -Ni winmakefile.patch
 if errorlevel 1 pause
