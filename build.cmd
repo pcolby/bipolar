@@ -53,6 +53,13 @@ if not exist "%SRC_DIR%" (
   )
 )
 
+echo 1
+dir
+echo 2
+dir "%SRC_DIR%\qtbase\src\network\access"
+echo 3
+pwd
+
 :: Apply our hook and build patches.
 if not exist "%SRC_DIR%\qtbase\src\network\access\qnetworkaccessmanager.ori" (
   copy "%SRC_DIR%\qtbase\src\network\access\qnetworkaccessmanager.cpp"^
