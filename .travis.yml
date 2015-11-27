@@ -2,5 +2,8 @@ language: cpp
 
 os: osx
 
+before_script:
+  - xcodebuild -showsdks
+
 script:
   - ./build.sh
