@@ -1,5 +1,5 @@
---- qt-everywhere-opensource-src-5.1.1\qtbase\src\network\access\qnetworkaccessmanager.cpp	Mon Aug 26 04:03:34 2013
-+++ qt-everywhere-opensource-src-5.1.1\qtbase\src\network\access\qnetworkaccessmanager.new	Wed Oct  8 19:36:54 2014
+--- qtbase\src\network\access\qnetworkaccessmanager.cpp	Mon Aug 26 04:03:34 2013
++++ qtbase\src\network\access\qnetworkaccessmanager.new	Wed Oct  8 19:36:54 2014
 @@ -71,6 +71,8 @@
  
  #include "qthread.h"

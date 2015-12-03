@@ -62,9 +62,9 @@ if not exist "%SRC_DIR%\qtbase\qmake\generators\win32\winmakefile.ori" (
   copy "%SRC_DIR%\qtbase\qmake\generators\win32\winmakefile.cpp"^
        "%SRC_DIR%\qtbase\qmake\generators\win32\winmakefile.ori"
 )
-"%PATCH%" -N -p0 -i qnetworkaccessmanager.patch
+"%PATCH%" -d "%SRC_DIR%" -N -p0 -i qnetworkaccessmanager.patch
 if errorlevel 1 pause
-"%PATCH%" -N -p0 -i winmakefile.patch
+"%PATCH%" -d "%SRC_DIR%" -N -p0 -i winmakefile.patch
 if errorlevel 1 pause
 
 :: Create the build directory, if not already.

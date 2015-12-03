@@ -48,7 +48,7 @@ function patchSource {
     fi
     echo "Applying qnetworkaccessmanager.patch"
     "$SED" -e '1,2 s/\\/\//g' "$SELF_DIR/qnetworkaccessmanager.patch" | \
-        "$PATCH" --forward --strip 0
+        "$PATCH" --directory "$SELF_DIR/$QT_NAME" --forward --strip 0
     if [ $? -eq 1 ]; then
         echo 'Assuming patch is already applied and continuing.'
     fi
