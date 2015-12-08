@@ -1,12 +1,12 @@
 ## Bipolar Changelog
 
-### 0.4.x (_unreleased_)
-- upgrade to Qt 5.4.0 (from 5.3.1, 5.3.2)
-
 ### 0.4.1 (_unreleased_)
 Features:
 - Pool swimming sport type ([#50](../../issues/50))
 - Enhanced output precision ([70822af](../../commit/70822af249429f5e67ead43e36cde6367651b205))
+- Stages Power meter support ([#57](../../issues/57))
+- upgrade to Qt 5.5.1 (from 5.3.1, 5.3.2)
+- Windows only: hook for Qt 5.5.1 / FlowSync 2.6.2+ ([#60](../../issues/60))
 
 ### 0.4.0 (2015-01-10)
 Features:
