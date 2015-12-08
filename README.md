@@ -5,5 +5,5 @@
 
 This `hook` branch contains the Bipolar project's hook for Polar FlowSync.
 
-See the master [README.md](https://github.com/pcolby/bipolar) file understand
-what this is all about.
+See the master [README.md](https://github.com/pcolby/bipolar) file to
+understand what this is all about.
