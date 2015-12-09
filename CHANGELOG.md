@@ -2,7 +2,7 @@
 
 ### 0.4.1 (_unreleased_)
 Features:
-- Pool swimming sport type ([#50](../../issues/50))
+- additional Polar sport types ([#50](../../issues/50))
 - Enhanced output precision ([70822af](../../commit/70822af249429f5e67ead43e36cde6367651b205))
 - Stages Power meter support ([#57](../../issues/57))
 - upgrade to Qt 5.5.1 (from 5.3.1, 5.3.2)

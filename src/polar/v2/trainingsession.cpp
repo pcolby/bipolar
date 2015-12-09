@@ -124,19 +124,23 @@ QString TrainingSession::getTcxSport(const quint64 &polarSportValue)
         map.insert(18, TCX_BIKING);  // Indoor cycling
         map.insert(19, TCX_RUNNING); // Road running
         map.insert(20, TCX_OTHER);   // Circuit training
+      //map.insert(21, TCX_
         map.insert(22, TCX_OTHER);   // Snowboarding
         map.insert(23, TCX_OTHER);   // Swimming
         map.insert(24, TCX_OTHER);   // Freestyle XC skiing
         map.insert(25, TCX_OTHER);   // Classic XC skiing
+      //map.insert(26, TCX_
         map.insert(27, TCX_RUNNING); // Trail running
         map.insert(28, TCX_OTHER);   // Ice skating
         map.insert(29, TCX_OTHER);   // Inline skating
         map.insert(30, TCX_OTHER);   // Roller skating
+      //map.insert(31, TCX_
         map.insert(32, TCX_OTHER);   // Group exercise
         map.insert(33, TCX_OTHER);   // Yoga
         map.insert(34, TCX_OTHER);   // Crossfit
         map.insert(35, TCX_OTHER);   // Golf
         map.insert(36, TCX_RUNNING); // Track&field running
+      //map.insert(37, TCX_
         map.insert(38, TCX_BIKING);  // Road biking
         map.insert(39, TCX_OTHER);   // Soccer
         map.insert(40, TCX_OTHER);   // Cricket
@@ -171,9 +175,61 @@ QString TrainingSession::getTcxSport(const quint64 &polarSportValue)
         map.insert(69, TCX_OTHER);   // Duathlon
         map.insert(70, TCX_OTHER);   // Off-road triathlon
         map.insert(71, TCX_OTHER);   // Off-road duathlon
+      //map.insert(72, TCX_
+      //map.insert(73, TCX_
+      //map.insert(74, TCX_
+      //map.insert(75, TCX_
+      //map.insert(76, TCX_
+      //map.insert(77, TCX_
+      //map.insert(78, TCX_
+      //map.insert(79, TCX_
+      //map.insert(80, TCX_
+      //map.insert(81, TCX_
         map.insert(82, TCX_OTHER);   // Multisport
         map.insert(83, TCX_OTHER);   // Other indoor
+        map.insert(84, TCX_OTHER);   // Orienteering
+        map.insert(85, TCX_OTHER);   // Ski orienteering
+        map.insert(86, TCX_BIKING);  // Mountain bike orienteering
+        map.insert(87, TCX_OTHER);   // Biathlon
+        map.insert(88, TCX_OTHER);   // Sailing
+        map.insert(89, TCX_OTHER);   // Wheelchair racing
+        map.insert(90, TCX_OTHER);   // Disc golf
+        map.insert(91, TCX_OTHER);   // Table tennis
+        map.insert(92, TCX_RUNNING); // Ultra running
+        map.insert(94, TCX_OTHER);   // Climbing (indoor)
+      //map.insert(93, TCX_
+        map.insert(95, TCX_OTHER);   // Kayaking
+        map.insert(96, TCX_OTHER);   // Canoeing
+      //map.insert(97, TCX_
+      //map.insert(98, TCX_
+      //map.insert(99, TCX_
+        map.insert(100, TCX_OTHER);  // Kitesurfing
+        map.insert(101, TCX_OTHER);  // Windsurfing
+        map.insert(102, TCX_OTHER);  // Surfing
         map.insert(103, TCX_OTHER);  // Pool swimming
+        map.insert(104, TCX_OTHER);  // Finnish baseball
+        map.insert(105, TCX_OTHER);  // Open water swimming
+      //map.insert(106, TCX
+        map.insert(107, TCX_OTHER);  // Wakeboarding
+        map.insert(108, TCX_OTHER);  // Water skiing
+        map.insert(109, TCX_OTHER);  // Boxing
+        map.insert(110, TCX_OTHER);  // Kickboxing
+      //map.insert(111, TCX
+        map.insert(112, TCX_OTHER);  // Telemark skiing
+        map.insert(113, TCX_OTHER);  // Backcountry skiing
+        map.insert(114, TCX_OTHER);  // Gymnastics
+        map.insert(115, TCX_OTHER);  // Judo
+        map.insert(116, TCX_OTHER);  // Snowshoe trekking
+        map.insert(117, TCX_OTHER);  // Indoor rowing
+        map.insert(118, TCX_BIKING); // Spinning
+        map.insert(119, TCX_OTHER);  // Street
+        map.insert(120, TCX_OTHER);  // Latin
+        map.insert(121, TCX_OTHER);  // Show
+        map.insert(122, TCX_OTHER);  // Ballet
+        map.insert(123, TCX_OTHER);  // Jazz
+        map.insert(124, TCX_OTHER);  // Modern
+        map.insert(125, TCX_OTHER);  // Ballroom
+        map.insert(126, TCX_OTHER);  // Core
     }
     QMap<quint64, QString>::ConstIterator iter = map.constFind(polarSportValue);
     if (iter == map.constEnd()) {
