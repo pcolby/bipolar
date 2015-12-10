@@ -61,6 +61,9 @@ script:
   - make -C "$TRAVIS_BUILD_DIR-build" -j2 check
   - '[ "$TRAVIS_OS_NAME" != osx ] || make -C "$TRAVIS_BUILD_DIR-build/pkg/osx" dmg'
 
+before_deploy:
+  - 'ls "$TRAVIS_BUILD_DIR-build/pkg/$TRAVIS_OS_NAME/Bipolar-0.4.1.$TRAVIS_BUILD_NUMBER.dmg"'
+
 deploy:
   provider: releases
   api_key: $RELEASES_API_KEY
