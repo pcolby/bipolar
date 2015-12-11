@@ -67,7 +67,6 @@ deploy:
   file: $TRAVIS_BUILD_DIR-build/pkg/$TRAVIS_OS_NAME/Bipolar-0.4.1.$TRAVIS_BUILD_NUMBER.dmg
   on:
     condition: '"$TRAVIS_OS_NAME" == osx && "$CXX" == clang++ && "$QTVER" == 55'
-    tags: true
 
 notifications:
   webhooks:
