@@ -69,7 +69,7 @@ before_deploy:
 deploy:
   provider: releases
   api_key: $RELEASES_API_KEY
-  file: '"Bipolar-0.4.1.$TRAVIS_BUILD_NUMBER.dmg"'
+  file: $TRAVIS_BUILD_DIR-build/pkg/$TRAVIS_OS_NAME/Bipolar-0.4.1.$TRAVIS_BUILD_NUMBER.dmg
   skip_cleanup: true
   on:
     condition: '"$TRAVIS_OS_NAME" == osx'
