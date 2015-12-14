@@ -62,6 +62,16 @@ artifacts:
   - path: nsis\Bipolar-*.exe
     name: Installer
 
+deploy:
+  - provider: GitHub
+    artifact: nsis\Bipolar-*.exe
+    auth_token:
+      secure: d5mVeOvqlPCzZHF7yx8seNWDzICvIwNtpZqmbMpzOGp8DLKP/SDl4AD8i6UX068c
+    on:
+      appveyor_repo_tag: true
+      configuration: release
+      QTDIR: C:\Qt\5.5\msvc2013_64
+
 notifications:
   - provider: Webhook
     url: https://webhooks.gitter.im/e/99c9fd317df850e7beb8
