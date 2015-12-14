@@ -64,7 +64,7 @@ artifacts:
 
 deploy:
   - provider: GitHub
-    artifact: nsis\Bipolar-*.exe
+    artifact: Installer
     auth_token:
       secure: d5mVeOvqlPCzZHF7yx8seNWDzICvIwNtpZqmbMpzOGp8DLKP/SDl4AD8i6UX068c
     on:
