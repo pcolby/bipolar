@@ -1,12 +1,14 @@
 ## Bipolar Changelog
 
-### 0.4.1 (_unreleased_)
+### 0.5.0 (2015-12-16)
 Features:
 - additional Polar sport types ([#50](../../issues/50))
 - Enhanced output precision ([70822af](../../commit/70822af249429f5e67ead43e36cde6367651b205))
 - Stages Power meter support ([#57](../../issues/57))
 - upgrade to Qt 5.5.1 (from 5.3.1, 5.3.2)
 - Windows only: hook for Qt 5.5.1 / FlowSync 2.6.2+ ([#60](../../issues/60))
+- numerous build system improvements, including support for out-of-source builds
+- automated builds / releases via AppVeyor (Windows) and Travis CI (OS X)
 
 ### 0.4.0 (2015-01-10)
 Features:
