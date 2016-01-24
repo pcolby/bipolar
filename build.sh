@@ -71,7 +71,7 @@ function configure {
         -openssl \
         -platform macx-clang-32 \
         -release \
-        -sdk macosx10.8 \
+        -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk \
         -shared \
         -skip multimedia \
         -skip script \
