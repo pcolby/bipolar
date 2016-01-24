@@ -1,5 +1,7 @@
 ## Bipolar Changelog
 
+### 0.5.1 (_unreleased_)
+
 ### 0.5.0 (2015-12-16)
 Features:
 - additional Polar sport types ([#50](../../issues/50))

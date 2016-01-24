@@ -26,7 +26,7 @@ class FlowSyncHook {
 
 public:
 
-    static QDir flowSyncDir();
+    static QDir flowSyncDir(bool *found = NULL);
 
     static QDir installableHookDir();
 

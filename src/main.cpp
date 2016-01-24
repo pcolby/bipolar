@@ -62,16 +62,22 @@ int main(int argc, char *argv[]) {
     if (app.arguments().contains(QLatin1Literal("-install-hook"))) {
         QErrorMessage::qtHandler(); // Expose any internal errors / warnings.
         const QDir fromDir = FlowSyncHook::installableHookDir();
-        const QDir toDir = FlowSyncHook::flowSyncDir();
+        bool toDirFound = false;
+        const QDir toDir = FlowSyncHook::flowSyncDir(&toDirFound);
         if (!fromDir.exists(QLatin1String("Qt5Network.dll"))) {
             QMessageBox::warning(NULL, QString(),
                 app.tr("Installable hook not found."));
             return 1;
         }
-        if (!toDir.exists(QLatin1String("Qt5Network.dll"))) {
+        if (!toDirFound) {
             QMessageBox::warning(NULL, QString(),
                 app.tr("Failed to locate Polar FlowSync installation."));
             return 2;
+        }
+        if (!toDir.exists(QLatin1String("Qt5Network.dll"))) {
+            QMessageBox::warning(NULL, QString(),
+                app.tr("Failed to locate network library in Polar FlowSync installation."));
+            return 3;
         }
         const int fromVersion = FlowSyncHook::getVersion(fromDir);
         const int toVersion = FlowSyncHook::getVersion(toDir);

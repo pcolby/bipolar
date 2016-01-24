@@ -29,7 +29,7 @@
 #endif
 
 /// @brief Find out where Polar FlowSync is installed.
-QDir FlowSyncHook::flowSyncDir()
+QDir FlowSyncHook::flowSyncDir(bool *found)
 {
 #ifdef Q_OS_WIN
     // Try the %ProgramFiles% style locations first.
@@ -40,6 +40,7 @@ QDir FlowSyncHook::flowSyncDir()
             const QDir dir(env.split(QLatin1Char('=')).at(0) +
                            QLatin1String("/Polar/Polar FlowSync"));
             if ((dir.exists()) && (dir.exists(QLatin1String("Qt5Network.dll")))) {
+                if (found != NULL) *found = true;
                 return dir;
             }
         }
@@ -52,12 +53,14 @@ QDir FlowSyncHook::flowSyncDir()
     foreach (const QString &path, knownPaths) {
         const QDir dir(path + QLatin1String("/Polar/Polar FlowSync"));
         if ((dir.exists()) && (dir.exists(QLatin1String("Qt5Network.dll")))) {
+            if (found != NULL) *found = true;
             return dir;
         }
     }
 #endif
 
     qWarning() << "failed to locate flowsync";
+    if (found != NULL) *found = false;
     return QDir();
 }
 

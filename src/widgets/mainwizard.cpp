@@ -62,8 +62,9 @@ void MainWizard::checkHook()
         return;
     }
 
-    const QDir flowSyncDir = FlowSyncHook::flowSyncDir();
-    if (!flowSyncDir.exists()) {
+    bool flowSyncDirFound = false;
+    const QDir flowSyncDir = FlowSyncHook::flowSyncDir(&flowSyncDirFound);
+    if ((!flowSyncDirFound) || (!flowSyncDir.exists())) {
         QMessageBox::information(this, QString(),
             tr("Unable to check if the Bipolar hook has been installed,\n"
                "because the Polar FlowSync application could not be located."));
