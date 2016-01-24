@@ -4,13 +4,17 @@ os: osx
 
 xcode_sdk: macosx10.8
 
+before_install:
+  - xcodebuild -showsdks
+
+install:
+  - pushd /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
+  - wget https://github.com/phracker/MacOSX-SDKs/releases/download/MacOSX10.11.sdk/MacOSX10.8.sdk.tar.xz
+  - tar xvJf MacOSX10.8.sdk.tar.xz
+  - popd
+
 before_script:
   - xcodebuild -showsdks
-  - ls -l /Applications/Xcode.app/Contents/Developer
-  - ls -l /Applications/Xcode.app/Contents/Developer/Platforms
-  - ls -l /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform
-  - ls -l /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer
-  - ls -l /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
 
 script:
   - ./build.sh
