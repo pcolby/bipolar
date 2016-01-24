@@ -6,7 +6,11 @@ xcode_sdk: macosx10.8
 
 before_script:
   - xcodebuild -showsdks
-  - ls -l /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/S‌​DKs
+  - ls -l /Applications/Xcode.app/Contents/Developer
+  - ls -l /Applications/Xcode.app/Contents/Developer/Platforms
+  - ls -l /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform
+  - ls -l /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer
+  - ls -l /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
 
 script:
   - ./build.sh
