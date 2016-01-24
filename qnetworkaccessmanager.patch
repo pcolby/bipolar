@@ -20,7 +20,8 @@
 +    debug.write(QString::fromLatin1("%1 urlPath %2\r")
 +        .arg(QDateTime::currentDateTime().toString())
 +        .arg(urlPath).toUtf8());
-+    if (urlPath.contains(QLatin1String("tests")) ||
++    if (urlPath.contains(QLatin1String("activities")) ||
++        urlPath.contains(QLatin1String("tests")) ||
 +        urlPath.contains(QLatin1String("training-sessions")))
 +    {
 +        // Write the POST data file.
