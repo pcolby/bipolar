@@ -2,6 +2,8 @@ language: cpp
 
 os: osx
 
+compiler: clang
+
 xcode_sdk: macosx10.8
 
 before_install:
