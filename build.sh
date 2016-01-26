@@ -65,6 +65,7 @@ function configure {
         -framework \
         -no-gui \
         -no-opengl \
+        -no-openvg \
         -no-widgets \
         -nomake examples \
         -nomake tools \
