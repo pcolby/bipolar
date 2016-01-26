@@ -12,8 +12,7 @@ before_install:
 
 install:
   - pushd /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
-  - wget https://github.com/phracker/MacOSX-SDKs/releases/download/MacOSX10.11.sdk/MacOSX10.8.sdk.tar.xz
-  - tar xJf MacOSX10.8.sdk.tar.xz
+  - curl -L https://github.com/AaronWallace/MacOSX_SDKs/tarball/master | tar xvz MacOSX10.8.sdk
   - popd
   - 'find /Applications/Xcode.app/Contents/Developer/Platforms -name *crt1*'
 
