@@ -43,15 +43,16 @@ function patchSource {
         echo "Backing up $NETWORK_ACCESS_DIR/qnetworkaccessmanager.cpp"
         "$CP" -a \
             "$NETWORK_ACCESS_DIR/qnetworkaccessmanager.cpp" \
-            "$NETWORK_ACCESS_DIR/qnetworkaccessmanager.ori"
-        if [ $? -ne 0 ]; then return; fi
+            "$NETWORK_ACCESS_DIR/qnetworkaccessmanager.ori" || return
     fi
     echo "Applying qnetworkaccessmanager.patch"
     "$SED" -e '1,2 s/\\/\//g' "$SELF_DIR/qnetworkaccessmanager.patch" | \
-        "$PATCH" --directory "$SELF_DIR/$QT_NAME" --forward --strip 0
-    if [ $? -eq 1 ]; then
+        "$PATCH" --directory "$SELF_DIR/$QT_NAME" --forward --strip 0 ; RC=$?
+    if [ $RC -eq 1 ]; then
         echo 'Assuming patch is already applied and continuing.'
+        return 0
     fi
+    return $RC
 }
 
 # Configure the Qt build.
