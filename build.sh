@@ -60,7 +60,6 @@ function configure {
     ${MKDIR} "$SELF_DIR/build"
     pushd "$SELF_DIR/build"
     "../$QT_NAME/configure" \
-        -v \
         -confirm-license \
         -framework \
         -no-gui \
