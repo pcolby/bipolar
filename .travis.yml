@@ -4,16 +4,15 @@ os: osx
 
 compiler: clang
 
-xcode_sdk: macosx10.8
-
 before_install:
   - xcodebuild -showsdks
   - env
 
 install:
-  - pushd /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
-  - curl -L https://github.com/AaronWallace/MacOSX_SDKs/tarball/master | tar xvz MacOSX10.8.sdk
-  - popd
+  - >
+    curl -sL https://github.com/AaronWallace/MacOSX_SDKs/tarball/ba4d5b3 | tar xvz
+    --directory /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
+    --strip-components=1 AaronWallace-MacOSX_SDKs-ba4d5b3/MacOSX10.8.sdk
   - 'find /Applications/Xcode.app/Contents/Developer/Platforms -name *crt1*'
 
 before_script:
