@@ -10,7 +10,7 @@ before_install:
 
 install:
   - >
-    curl -sL https://github.com/AaronWallace/MacOSX_SDKs/tarball/ba4d5b3 | tar xvz
+    curl -sL https://github.com/AaronWallace/MacOSX_SDKs/tarball/ba4d5b3 | tar xz
     --directory /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
     --strip-components=1 AaronWallace-MacOSX_SDKs-ba4d5b3/MacOSX10.8.sdk
   - 'find /Applications/Xcode.app/Contents/Developer/Platforms -name *crt1*'
