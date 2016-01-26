@@ -20,4 +20,6 @@ before_script:
   - /usr/bin/xcodebuild -sdk macosx10.8 -version
 
 script:
+  - export C_INCLUDE_PATH=/Developer/SDKs/MacOSX10.8.sdk/usr/include
+  - export LIBRARY_PATH=/Developer/SDKs/MacOSX10.8.sdk/usr/lib
   - ./build.sh
