@@ -1,5 +1,5 @@
---- qtbase\src\network\access\qnetworkaccessmanager.cpp	Mon Aug 26 04:03:34 2013
-+++ qtbase\src\network\access\qnetworkaccessmanager.new	Wed Oct  8 19:36:54 2014
+--- qtbase\src\network\access\qnetworkaccessmanager.cpp	2013-08-26 04:03:34.000000000 +1000
++++ qtbase\src\network\access\qnetworkaccessmanager.new	2016-01-27 13:24:14.382664262 +1100
 @@ -71,6 +71,8 @@
  
  #include "qthread.h"
@@ -9,7 +9,7 @@
  QT_BEGIN_NAMESPACE
  
  Q_GLOBAL_STATIC(QNetworkAccessFileBackendFactory, fileBackend)
-@@ -701,6 +703,66 @@
+@@ -701,6 +703,67 @@
  */
  QNetworkReply *QNetworkAccessManager::post(const QNetworkRequest &request, QIODevice *data)
  {
