@@ -15,8 +15,6 @@ install:
 
 before_script:
   - xcodebuild -showsdks
-  - /usr/bin/xcodebuild -sdk macosx10.8 -version Path
-  - /usr/bin/xcodebuild -sdk macosx10.8 -version
 
 script:
   - ./build.sh
