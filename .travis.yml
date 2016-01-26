@@ -6,6 +6,7 @@ xcode_sdk: macosx10.8
 
 before_install:
   - xcodebuild -showsdks
+  - env
 
 install:
   - pushd /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
