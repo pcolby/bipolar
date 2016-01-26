@@ -7,16 +7,15 @@ compiler: clang
 xcode_sdk: macosx10.8
 
 before_install:
-  - brew update
   - xcodebuild -showsdks
   - env
 
 install:
-  - brew install libjpeg libpng
   - pushd /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
   - wget https://github.com/phracker/MacOSX-SDKs/releases/download/MacOSX10.11.sdk/MacOSX10.8.sdk.tar.xz
   - tar xJf MacOSX10.8.sdk.tar.xz
   - popd
+  - 'find /Applications/Xcode.app/Contents/Developer/Platforms -name *crt1*'
 
 before_script:
   - xcodebuild -showsdks
