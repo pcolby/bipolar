@@ -26,13 +26,36 @@
 #ifdef Q_OS_WIN
 #include "fileversioninfo.h"
 #include <QProcess>
+#include <QSettings>
 #endif
 
 /// @brief Find out where Polar FlowSync is installed.
 QDir FlowSyncHook::flowSyncDir(bool *found)
 {
 #ifdef Q_OS_WIN
-    // Try the %ProgramFiles% style locations first.
+    // Try the FlowSync installer's registry entries.
+    #define REGISTRY_KEY_NAME "%1/Microsoft/Windows/CurrentVersion/Uninstall/{A1538F5C-7B65-4DB6-9FFB-FFC0DF2E85D8}_is1"
+    QStringList keyPrefixes;
+    keyPrefixes << QLatin1String("HKEY_CURRENT_USER/Software")
+                << QLatin1String("HKEY_CURRENT_USER/Software/WOW6432Node")
+                << QLatin1String("HKEY_LOCAL_MACHINE/Software")
+                << QLatin1String("HKEY_LOCAL_MACHINE/Software/WOW6432Node");
+    foreach (const QString &keyPrefix, keyPrefixes) {
+        const QString keyName = QString::fromLatin1(REGISTRY_KEY_NAME).arg(keyPrefix);
+        const QSettings settings(keyName, QSettings::NativeFormat);
+        const QVariant installLocation = settings.value(QLatin1String("InstallLocation"));
+        if (installLocation.isValid()) {
+            qDebug() << keyName << installLocation;
+            const QDir dir(installLocation.toString());
+            if ((dir.exists()) && (dir.exists(QLatin1String("Qt5Network.dll")))) {
+                if (found != NULL) *found = true;
+                return dir;
+            }
+        }
+    }
+    #undef REGISTRY_KEY_NAME
+
+    // Try the standard %ProgramFiles% style locations.
     foreach (const QString &env, QProcess::systemEnvironment()) {
         // eg %ProgramFiles%, %ProgramFiles(x86)%, %ProgramW6432%
         if (env.startsWith(QLatin1String("%ProgramFiles"),  Qt::CaseInsensitive) ||
