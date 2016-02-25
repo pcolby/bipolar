@@ -1,5 +1,8 @@
 ## Bipolar Changelog
 
+### 0.5.2 (_unreleased_)
+???
+
 ### 0.5.1 (2016-02-25)
 Bugs:
 - improved FlowSync hook detection on Windows ([#63](../../issues/63))
