@@ -16,6 +16,7 @@ env:
   - QTVER=532 # OSX and Ubuntu.
   - QTVER=542 # Ubuntu only.
   - QTVER=551 # OSX and Ubuntu.
+  - QTVER=56
 
 matrix:
   exclude:
