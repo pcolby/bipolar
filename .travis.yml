@@ -56,6 +56,7 @@ before_script:
   - '[[ "$TRAVIS_OS_NAME" != linux || $QTVER == ust ]] || . /opt/qt$SHORT_VER/bin/qt$SHORT_VER-env.sh'
   - mkdir -p "$TRAVIS_BUILD_DIR-build"
   - pushd "$TRAVIS_BUILD_DIR-build"
+  - qmake $QMAKE_VER -v
   - qmake $QMAKE_VER -r -Wall -Wlogic -Wparser CONFIG+=debug_and_release "$TRAVIS_BUILD_DIR"
   - popd
 
