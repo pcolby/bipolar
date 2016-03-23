@@ -42,10 +42,10 @@ install:
 
 before_script:
   - cppcheck --error-exitcode=1 --quiet .
-  - if [[ "$TRAVIS_OS_NAME" == linux && "$CXX" == clang++ ]]; then export QMAKESPEC=linux-clang; fi
-  - if [[ "$TRAVIS_OS_NAME" == linux && "$CXX" == g++     ]]; then export QMAKESPEC=linux-g++;   fi
-  - if [[ "$TRAVIS_OS_NAME" == osx   && "$CXX" == clang++ ]]; then export QMAKESPEC=macx-clang;  fi
-  - if [[ "$TRAVIS_OS_NAME" == osx   && "$CXX" == g++     ]]; then export QMAKESPEC=macx-g++;    fi
+  - '[[ "$TRAVIS_OS_NAME" != linux || "$CXX" != clang++ ]] || export QMAKESPEC=linux-clang'
+  - '[[ "$TRAVIS_OS_NAME" != linux || "$CXX" != g++     ]] || export QMAKESPEC=linux-g++'
+  - '[[ "$TRAVIS_OS_NAME" != osx   || "$CXX" != clang++ ]] || export QMAKESPEC=macx-clang'
+  - '[[ "$TRAVIS_OS_NAME" != osx   || "$CXX" != g++     ]] || export QMAKESPEC=macx-g++'
   - '[[ "$TRAVIS_OS_NAME" != linux || "$PPA" != */opt-* ]] || . /opt/qt$QT/bin/qt$QT-env.sh'
   - '[[ "$TRAVIS_OS_NAME" != linux || "$PPA" == */opt-* ]] || export QT_SELECT=qt5'
   - mkdir -p "$TRAVIS_BUILD_DIR-build"
