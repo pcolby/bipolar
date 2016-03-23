@@ -22,7 +22,7 @@ env:
 
 matrix:
   exclude:
-    - { os: osx, env: QT=5 BREW=ex PPA=ubuntu-sdk-team/ppa QT_SELECT=qt }
+    - { os: osx, env: QT=5  BREW=ex PPA=ubuntu-sdk-team/ppa QT_SELECT=qt5 }
     - { os: osx, env: QT=51 BREW=ex PPA=beineri/opt-qt511-trusty }
     - { os: osx, env: QT=53 BREW=ex PPA=beineri/opt-qt532-trusty }
     - { os: osx, env: QT=54 BREW=ex PPA=beineri/opt-qt542-trusty }
