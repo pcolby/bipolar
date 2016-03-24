@@ -2375,7 +2375,7 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                 .appendChild(doc.createTextNode(buildType));
             build.appendChild(doc.createElement(QLatin1String("Time")))
                 .appendChild(doc.createTextNode(
-                    buildTime.isEmpty() ? QString::fromLatin1(__DATE__" "__TIME__) : buildTime));
+                    buildTime.isEmpty() ? QString::fromLatin1(__DATE__ " " __TIME__) : buildTime));
             #ifdef BUILD_USER
             #define BIPOLAR_STRINGIFY(string) #string
             #define BIPOLAR_EXPAND_AND_STRINGIFY(macro) BIPOLAR_STRINGIFY(macro)
