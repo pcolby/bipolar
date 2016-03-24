@@ -39,6 +39,7 @@ install:
   - '[[ "$TRAVIS_OS_NAME" != linux || "$PPA" != */opt-* ]] || sudo apt-get -qy install qt${QT}base qt${QT}xmlpatterns'
   - '[[ "$TRAVIS_OS_NAME" != linux || "$PPA" == */opt-* ]] || sudo apt-get -qy install qt5-qmake qtbase5-dev libqt5xmlpatterns5-dev'
   - '[ "$TRAVIS_OS_NAME" != osx ] || brew install cppcheck qt$BREW'
+  - '[ "$TRAVIS_OS_NAME" != osx ] || brew link --force qt$BREW'
 
 before_script:
   - cppcheck --error-exitcode=1 --quiet .
