@@ -33,7 +33,7 @@ before_install:
   - '[[ "$TRAVIS_OS_NAME" != linux || -z "$PPA" ]] || sudo add-apt-repository -y ppa:$PPA'
   - '[ "$TRAVIS_OS_NAME" != linux ] || sudo apt-get -qy update'
   - '[ "$TRAVIS_OS_NAME" != osx ] || brew update'
-  - '[ "$TRAVIS_OS_NAME" != osx ] || brew versions qt5'
+  - '[ "$TRAVIS_OS_NAME" != osx ] || brew tap homebrew/boneyard && brew versions qt5'
 # - '[ "$TRAVIS_OS_NAME" != osx ] || brew search qt5' # Causes Homebrew API rate-limit issues.
 
 install:
