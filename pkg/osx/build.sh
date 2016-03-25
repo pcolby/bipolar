@@ -47,11 +47,13 @@ echo 'Copying Bipolar.app'
 cp -a "$APP" .
 
 echo 'Running macdeployqt'
-macdeployqt Bipolar.app -dmg || exit
+ls -l
+macdeployqt Bipolar.app -dmg -verbose=2 || exit
+ls -l
 
 echo 'Coverting disk image to read/writable'
 [ -e Bipolar-rw.dmg ] && rm -f Bipolar-rw.dmg
-hdiutil convert Bipolar.dmg -format UDRW -o Bipolar-rw.dmg
+hdiutil convert Bipolar.dmg -format UDRW -o Bipolar-rw.dmg || exit
 
 echo 'Adding hook to disk image'
 hdiutil attach Bipolar-rw.dmg     || exit
