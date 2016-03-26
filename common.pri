@@ -1,5 +1,5 @@
 VERSION = 0.5.2
-SPECIAL_BUILD = Release
+SPECIAL_BUILD = Internal
 TOPDIR = $$PWD
 
 # Setup build number, where available.
