@@ -1,7 +1,8 @@
 ## Bipolar Changelog
 
-### 0.5.2 (_unreleased_)
-???
+### 0.5.2 (2016-03-26)
+Bugs:
+- Qt 5.6 / C++11 support ([3bb2f60](../../commit/3bb2f60e693ecc84ba4dd6fed1638543a7b88d99))
 
 ### 0.5.1 (2016-02-25)
 Bugs:
