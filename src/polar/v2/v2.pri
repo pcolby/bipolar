@@ -4,3 +4,4 @@ HEADERS += trainingsession.h
 SOURCES += trainingsession.cpp
 
 unix:LIBS += -lz
+win32-g++:LIBX += -lz
