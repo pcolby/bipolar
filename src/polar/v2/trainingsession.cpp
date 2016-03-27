@@ -31,7 +31,7 @@
 #include <QFileInfo>
 #include <QProcessEnvironment>
 
-#ifdef Q_OS_WIN
+#ifdef Q_CC_MSVC
 #include <QtZlib/zlib.h>
 #else
 #include <zlib.h>
