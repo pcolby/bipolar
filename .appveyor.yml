@@ -2,15 +2,15 @@ version: '{branch}-{build}'
 
 environment:
   matrix:
-    #- QTDIR: C:\Qt\5.3\mingw482_32
-    #- QTDIR: C:\Qt\5.3\msvc2013_opengl
-    #- QTDIR: C:\Qt\5.3\msvc2013_64_opengl
-    #- QTDIR: C:\Qt\5.4\mingw491_32
-    #- QTDIR: C:\Qt\5.4\msvc2013_opengl
-    #- QTDIR: C:\Qt\5.4\msvc2013_64_opengl
-    #- QTDIR: C:\Qt\5.5\mingw492_32
-    #- QTDIR: C:\Qt\5.5\msvc2013
-    #- QTDIR: C:\Qt\5.5\msvc2013_64
+    - QTDIR: C:\Qt\5.3\mingw482_32
+    - QTDIR: C:\Qt\5.3\msvc2013_opengl
+    - QTDIR: C:\Qt\5.3\msvc2013_64_opengl
+    - QTDIR: C:\Qt\5.4\mingw491_32
+    - QTDIR: C:\Qt\5.4\msvc2013_opengl
+    - QTDIR: C:\Qt\5.4\msvc2013_64_opengl
+    - QTDIR: C:\Qt\5.5\mingw492_32
+    - QTDIR: C:\Qt\5.5\msvc2013
+    - QTDIR: C:\Qt\5.5\msvc2013_64
     - QTDIR: C:\Qt\5.6\mingw49_32
     - QTDIR: C:\Qt\5.6\msvc2013
     - QTDIR: C:\Qt\5.6\msvc2013_64
