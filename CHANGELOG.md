@@ -1,5 +1,9 @@
 ## Bipolar Changelog
 
+### 0.5.2 (_unreleased_)
+Features:
+- msvc2016 support in NSIS installer? ([#64](../../issues/64))
+
 ### 0.5.2 (2016-03-29)
 Bugs:
 - Qt 5.6 / C++11 support ([3bb2f60](../../commit/3bb2f60e693ecc84ba4dd6fed1638543a7b88d99))
