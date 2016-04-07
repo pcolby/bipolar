@@ -16,7 +16,7 @@
 
 !ifndef SPECIAL_BUILD
 !define /ifndef SPECIAL_BUILD "Internal"
-!echo "SPECIAL_BUILD defaulted to '${VCRDIR}'"
+!echo "SPECIAL_BUILD defaulted to '${SPECIAL_BUILD}'"
 !endif
 
 SetCompressor lzma
