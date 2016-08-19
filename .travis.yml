@@ -18,14 +18,16 @@ env:
   - QT=53 BREW=5  PPA=beineri/opt-qt532-trusty
   - QT=54 BREW=ex PPA=beineri/opt-qt542-trusty
   - QT=55 BREW=55 PPA=beineri/opt-qt551-trusty
-  - QT=56 BREW=ex PPA=beineri/opt-qt56-trusty
+  - QT=56 BREW=ex PPA=beineri/opt-qt561-trusty
+  - QT=57 BREW=ex PPA=beineri/opt-qt57-trusty
 
 matrix:
   exclude:
     - { os: osx, env: QT=5  BREW=ex PPA=ubuntu-sdk-team/ppa      }
     - { os: osx, env: QT=51 BREW=ex PPA=beineri/opt-qt511-trusty }
     - { os: osx, env: QT=54 BREW=ex PPA=beineri/opt-qt542-trusty }
-    - { os: osx, env: QT=56 BREW=ex PPA=beineri/opt-qt56-trusty  }
+    - { os: osx, env: QT=56 BREW=ex PPA=beineri/opt-qt561-trusty }
+    - { os: osx, env: QT=57 BREW=ex PPA=beineri/opt-qt57-trusty  }
     - { os: osx, compiler: gcc, env: QT=5  BREW=5 } # Qt 5.6 no longer supports gcc on OS X.
 
 before_install:
@@ -38,7 +40,6 @@ install:
   - '[ "$TRAVIS_OS_NAME" != linux ] || sudo apt-get -qy install cppcheck'
   - '[[ "$TRAVIS_OS_NAME" != linux || "$PPA" != */opt-* ]] || sudo apt-get -qy install qt${QT}base qt${QT}xmlpatterns'
   - '[[ "$TRAVIS_OS_NAME" != linux || "$PPA" == */opt-* ]] || sudo apt-get -qy install qt5-qmake qtbase5-dev libqt5xmlpatterns5-dev'
-  - export QTVER=532
   - '[ "$TRAVIS_OS_NAME" != osx ] || brew install cppcheck qt$BREW'
   - '[ "$TRAVIS_OS_NAME" != osx ] || brew link --force qt$BREW'
 
