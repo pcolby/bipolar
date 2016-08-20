@@ -152,7 +152,7 @@ private:
 
     void addLapStats(QDomDocument &doc, QDomElement &lap,
                      const QVariantMap &base, const QVariantMap &stats,
-                     const double duration = 0, const double distance = 0) const;
+                     const quint64 duration = 0, const double distance = 0) const;
 
 };
 
