@@ -4,7 +4,7 @@
     <Activity Sport="Running">
       <Id>2014-07-13T07:26:23+10:00</Id>
       <Lap StartTime="2014-07-13T07:26:23+10:00">
-        <TotalTimeSeconds>1803.88</TotalTimeSeconds>
+        <TotalTimeSeconds>1803.875</TotalTimeSeconds>
         <DistanceMeters>2941.6</DistanceMeters>
         <MaximumSpeed>13.896</MaximumSpeed>
         <Calories>0</Calories>
@@ -42340,7 +42340,7 @@
         </Track>
       </Lap>
       <Lap StartTime="2014-07-13T08:25:07+10:00">
-        <TotalTimeSeconds>1561.62</TotalTimeSeconds>
+        <TotalTimeSeconds>1561.625</TotalTimeSeconds>
         <DistanceMeters>2594.9</DistanceMeters>
         <MaximumSpeed>12.888</MaximumSpeed>
         <Calories>0</Calories>
