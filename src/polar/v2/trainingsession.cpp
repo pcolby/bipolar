@@ -37,13 +37,25 @@
 #include <zlib.h>
 #endif
 
-// As of Qt 5.5 increased the accuracy of QVariant::toString output for
-// doubles and floats (see qtproject/qtbase@8153386).  Here replicate
-// that behaviour for pre-5.5 for a) better accuracy in older Qt versions
-// and b) consistent output (eg in unit tests) across all Qt 5.x versions.
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 5, 0))
+// Qt 5.5 increased the accuracy of QVariant::toString output for floats and
+// doubles (see qtproject/qtbase@8153386), resulting in slightly different
+// output, and QCOMPARE unit test failures.
+// https://github.com/qt/qtbase/commit/8153386397087ce4f5c8997992edf5c1fd38b8db
+//
+// Qt 5.7 added QLocale::FloatingPointShortest (see qt/qtbase@726fed0), and
+// updated QVariant to use that (instead of the Qt 5.5 change above) when
+// converting floats and doubles to string, again resulting in slightly
+// different output, and QCOMPARE unit test failures.
+// https://github.com/qt/qtbase/commit/726fed0d67013cbfac7921d3d4613ca83406fb0f
+//
+// So, QVariant floats and doubles convert (and compare) differently between
+// Qt 5.[0-4], 5.[5,6], and 5.7+.  Here we use the Qt 5.5 / 5.6 implementation
+// because its at least as accurate as 5.7+, and implementing a 5.7-compatible
+// fallback would be a major undertaking (needing to duplicate the third-party
+// double-conversion code Qt borrows from the V8 project).
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)) && (QT_VERSION < QT_VERSION_CHECK(5, 7, 0))
     #define VARIANT_TO_STRING(v) v.toString()
-#else // Fallback implementation based closely on Qt 5.5's qvariant.h
+#else // Fallback implementation based closely on Qt 5.5's qvariant.cpp
     #ifndef DBL_MANT_DIG
     #define DBL_MANT_DIG  53
     #endif

@@ -66,15 +66,31 @@ void compare(const QDomNodeList &a, const QDomNodeList &b)
     }
 }
 
-void fuzzyCompare(const QString &a, const QString &b, bool &compared)
+void fuzzyCompare(const QString &a, const QString &b)
 {
-    bool aOK, bOK;
-    const double aDouble = a.toDouble(&aOK);
-    const double bDouble = b.toDouble(&bOK);
-    if (aOK && bOK) {
-        compared = true;
-        QCOMPARE(aDouble, bDouble);
+    // Only consider fuzzy comparisons for floating point numbers.
+    if ((a.contains(QLatin1Char('.'))) || (a.contains(QLatin1Char('.')))) {
+        if ((a.length() <= 10) && (b.length() <= 10)) { // float precision.
+            bool aOK, bOK;
+            const float aFloat = a.toFloat(&aOK);
+            const float bFloat = b.toFloat(&bOK);
+            if (aOK && bOK) {
+                QCOMPARE(aFloat, bFloat);
+                return;
+            }
+        } else { // double precision.
+            bool aOK, bOK;
+            const double aDouble = a.toDouble(&aOK);
+            const double bDouble = b.toDouble(&bOK);
+            if (aOK && bOK) {
+                QCOMPARE(aDouble, bDouble);
+                return;
+            }
+        }
     }
+
+    // Either value was not a floating point number, so compare literal strings.
+    QCOMPARE(a, b);
 }
 
 void compare(const QDomNode &a, const QDomNode &b)
@@ -85,11 +101,7 @@ void compare(const QDomNode &a, const QDomNode &b)
     QCOMPARE(a.namespaceURI(), b.namespaceURI());
     QCOMPARE(a.nodeName(), b.nodeName());
     QCOMPARE(a.nodeType(), b.nodeType());
-    bool compared = false;
-    fuzzyCompare(a.nodeValue(), b.nodeValue(), compared);
-    if (!compared) {
-        QCOMPARE(a.nodeValue(), b.nodeValue());
-    }
+    fuzzyCompare(a.nodeValue(), b.nodeValue());
     QCOMPARE(a.prefix(), b.prefix());
 }
 
