@@ -5,6 +5,10 @@ Features:
 - msvc2016 support in NSIS installer? ([#64](../../issues/64))
 
 ### 0.5.3 (_unreleased_)
+Features:
+- Qt 5.7 support ([5e2b270](5e2b2704015a05784f37ac0bbe69d68677d2ed49),
+  [8a09bfb](8a09bfb2979d1a4845cf2d6c68f07eb7c61e578b))
+
 Bugs:
 - preserve TotalTimeSeconds precision ([4cc2ac9](../../commit/4cc2ac9de031e93ba70d2487a449978c2afab9b8))
 
