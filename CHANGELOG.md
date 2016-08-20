@@ -1,8 +1,12 @@
 ## Bipolar Changelog
 
-### 0.5.2 (_unreleased_)
+### 0.5.4 (_unreleased_)
 Features:
 - msvc2016 support in NSIS installer? ([#64](../../issues/64))
+
+### 0.5.3 (_unreleased_)
+Bugs:
+- preserve TotalTimeSeconds precision ([4cc2ac9](../../commit/4cc2ac9de031e93ba70d2487a449978c2afab9b8))
 
 ### 0.5.2 (2016-03-29)
 Bugs:
