@@ -1474,8 +1474,8 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
                 }
 
                 QDomElement trkpt = doc.createElement(QLatin1String("trkpt"));
-                trkpt.setAttribute(QLatin1String("lat"), latitude.at(index).toDouble());
-                trkpt.setAttribute(QLatin1String("lon"), longitude.at(index).toDouble());
+                trkpt.setAttribute(QLatin1String("lat"), VARIANT_TO_STRING(latitude.at(index)));
+                trkpt.setAttribute(QLatin1String("lon"), VARIANT_TO_STRING(longitude.at(index)));
                 trkpt.appendChild(doc.createElement(QLatin1String("ele")))
                     .appendChild(doc.createTextNode(VARIANT_TO_STRING(altitude.at(index))));
                 trkpt.appendChild(doc.createElement(QLatin1String("time")))

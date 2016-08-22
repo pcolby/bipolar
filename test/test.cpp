@@ -24,6 +24,7 @@
 
 #include <QTest>
 
+#include <locale.h>
 #include <stdio.h>
 
 typedef QObject * (*ObjectConstructor)();
@@ -52,6 +53,19 @@ int main(int argc, char *argv[]) {
     QCoreApplication app(argc, argv);
     app.setApplicationVersion(QLatin1String("1.2.3.4"));
     app.setAttribute(Qt::AA_Use96Dpi, true);
+
+    // If the BIPOLAR_TEST_LOCALE environment variable is set, then set this
+    // test application's locale accordingly.  The same can be done other ways,
+    // but its near impossible to acheive externally on AppVeyor, and at least
+    // here we get to bail if the setlocale call fails.
+    const QByteArray locale = qgetenv("BIPOLAR_TEST_LOCALE");
+    if (!locale.isEmpty()) {
+        if (setlocale(LC_ALL, locale.data()) == NULL) {
+            fprintf(stderr, "failed to set locale '%s'\n", locale.data());
+            return EXIT_FAILURE;
+        }
+        fprintf(stdout, "set locale '%s'\n", locale.data());
+    }
 
     // Setup our tests factory object.
     ObjectFactory testFactory;

@@ -66,6 +66,8 @@ after_build:
 test_script:
   - cd %APPVEYOR_BUILD_FOLDER%-build
   - if not %CONFIGURATION%==debug %make% check TESTARGS=-silent
+  - if %QTDIR:msvc=%==%QTDIR% ( set "BIPOLAR_TEST_LOCALE=german" ) else set "BIPOLAR_TEST_LOCALE=de-DE"
+  - if not %CONFIGURATION%==debug %make% check TESTARGS=-silent
 
 artifacts:
   - path: Bipolar.exe
