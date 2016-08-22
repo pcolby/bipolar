@@ -226,7 +226,7 @@ QString TrainingSession::getTcxSport(const quint64 &polarSportValue)
         map.insert(108, TCX_OTHER);  // Water skiing
         map.insert(109, TCX_OTHER);  // Boxing
         map.insert(110, TCX_OTHER);  // Kickboxing
-      //map.insert(111, TCX
+        map.insert(111, TCX_OTHER);  // Mobility (dynamic)
         map.insert(112, TCX_OTHER);  // Telemark skiing
         map.insert(113, TCX_OTHER);  // Backcountry skiing
         map.insert(114, TCX_OTHER);  // Gymnastics
@@ -242,6 +242,7 @@ QString TrainingSession::getTcxSport(const quint64 &polarSportValue)
         map.insert(124, TCX_OTHER);  // Modern
         map.insert(125, TCX_OTHER);  // Ballroom
         map.insert(126, TCX_OTHER);  // Core
+        map.insert(127, TCX_OTHER);  // Mobility (static)
     }
     QMap<quint64, QString>::ConstIterator iter = map.constFind(polarSportValue);
     if (iter == map.constEnd()) {
