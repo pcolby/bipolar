@@ -8,9 +8,11 @@ Features:
 Features:
 - Qt 5.7 support ([5e2b270](../../commit/5e2b2704015a05784f37ac0bbe69d68677d2ed49),
   [8a09bfb](../../commit/8a09bfb2979d1a4845cf2d6c68f07eb7c61e578b))
+- new Polar sport types ([a5f67bd](../../commit/a5f67bd15e5b54250037132c397b2ca4339135aa))
 
 Bugs:
 - preserve TotalTimeSeconds precision ([4cc2ac9](../../commit/4cc2ac9de031e93ba70d2487a449978c2afab9b8))
+- locale independent GPX lat/lon ([af7e80d](../../commit/af7e80db712a23c3323f03e1e3c43dccda0acd3b))
 
 ### 0.5.2 (2016-03-29)
 Bugs:
