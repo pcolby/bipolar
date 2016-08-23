@@ -139,6 +139,20 @@ void compare(const QDomDocument &a, const QDomDocument &b)
 
 #undef XCOMPARE
 
+polar::v2::TrainingSession * TestTrainingSession::getTrainingSession(const QString &baseName)
+{
+    QMap<QString, polar::v2::TrainingSession *>::const_iterator iter = trainingSessions.find(baseName);
+    if (iter == trainingSessions.end()) {
+        polar::v2::TrainingSession * const session = new polar::v2::TrainingSession(baseName);
+        Q_CHECK_PTR(session);
+        iter = trainingSessions.insert(baseName, session);
+    }
+    iter.value()->setGpxOptions(0);
+    iter.value()->setHrmOptions(0);
+    iter.value()->setTcxOptions(0);
+    return iter.value();
+}
+
 void TestTrainingSession::initTestCase()
 {
     outputDirPath = QString::fromLatin1("%1/%2").arg(QDir::tempPath())
@@ -149,6 +163,14 @@ void TestTrainingSession::initTestCase()
         qWarning() << "failed to create output directory" << QDir::toNativeSeparators(outputDirPath);
         outputDirPath.clear();
     }
+}
+
+void TestTrainingSession::cleanupTestCase()
+{
+    foreach (polar::v2::TrainingSession * const session, trainingSessions) {
+        delete session;
+    }
+    trainingSessions.clear();
 }
 
 void TestTrainingSession::getOutputBaseFileName_data()
@@ -838,9 +860,9 @@ void TestTrainingSession::toGPX()
     QFETCH(QByteArray, expected);
 
     // Parse the route (protobuf) message.
-    polar::v2::TrainingSession session(baseName);
-    QVERIFY(session.parse());
-    QDomDocument gpx = session.toGPX(QDateTime::fromString(
+    polar::v2::TrainingSession * const session = getTrainingSession(baseName);
+    QVERIFY(session->isValid() || session->parse());
+    QDomDocument gpx = session->toGPX(QDateTime::fromString(
         QLatin1String("2014-07-15T12:34:56Z"), Qt::ISODate));
 
     // Write the result to an XML file for optional post-mortem investigations.
@@ -900,12 +922,12 @@ void TestTrainingSession::toGPX_AllExtensions()
     QFETCH(QByteArray, expected);
 
     // Parse the route (protobuf) message.
-    polar::v2::TrainingSession session(baseName);
-    QVERIFY(session.parse());
-    session.setGpxOption(polar::v2::TrainingSession::CluetrustGpxDataExtension);
-    session.setGpxOption(polar::v2::TrainingSession::GarminAccelerationExtension);
-    session.setGpxOption(polar::v2::TrainingSession::GarminTrackPointExtension);
-    QDomDocument gpx = session.toGPX(QDateTime::fromString(
+    polar::v2::TrainingSession * const session = getTrainingSession(baseName);
+    QVERIFY(session->isValid() || session->parse());
+    session->setGpxOption(polar::v2::TrainingSession::CluetrustGpxDataExtension);
+    session->setGpxOption(polar::v2::TrainingSession::GarminAccelerationExtension);
+    session->setGpxOption(polar::v2::TrainingSession::GarminTrackPointExtension);
+    QDomDocument gpx = session->toGPX(QDateTime::fromString(
         QLatin1String("2014-07-15T12:34:56Z"), Qt::ISODate));
 
     // Write the result to an XML file for optional post-mortem investigations.
@@ -968,10 +990,10 @@ void TestTrainingSession::toGPX_Cluetrust()
     QFETCH(QByteArray, expected);
 
     // Parse the route (protobuf) message.
-    polar::v2::TrainingSession session(baseName);
-    QVERIFY(session.parse());
-    session.setGpxOption(polar::v2::TrainingSession::CluetrustGpxDataExtension);
-    QDomDocument gpx = session.toGPX(QDateTime::fromString(
+    polar::v2::TrainingSession * const session = getTrainingSession(baseName);
+    QVERIFY(session->isValid() || session->parse());
+    session->setGpxOption(polar::v2::TrainingSession::CluetrustGpxDataExtension);
+    QDomDocument gpx = session->toGPX(QDateTime::fromString(
         QLatin1String("2014-07-15T12:34:56Z"), Qt::ISODate));
 
     // Write the result to an XML file for optional post-mortem investigations.
@@ -1059,10 +1081,10 @@ void TestTrainingSession::toGPX_GarminAcceleration()
     QFETCH(QByteArray, expected);
 
     // Parse the route (protobuf) message.
-    polar::v2::TrainingSession session(baseName);
-    QVERIFY(session.parse());
-    session.setGpxOption(polar::v2::TrainingSession::GarminAccelerationExtension);
-    QDomDocument gpx = session.toGPX(QDateTime::fromString(
+    polar::v2::TrainingSession * const session = getTrainingSession(baseName);
+    QVERIFY(session->isValid() || session->parse());
+    session->setGpxOption(polar::v2::TrainingSession::GarminAccelerationExtension);
+    QDomDocument gpx = session->toGPX(QDateTime::fromString(
         QLatin1String("2014-07-15T12:34:56Z"), Qt::ISODate));
 
     // Write the result to an XML file for optional post-mortem investigations.
@@ -1144,10 +1166,10 @@ void TestTrainingSession::toGPX_GarminTrackPoint()
     QFETCH(QByteArray, expected);
 
     // Parse the route (protobuf) message.
-    polar::v2::TrainingSession session(baseName);
-    QVERIFY(session.parse());
-    session.setGpxOption(polar::v2::TrainingSession::GarminTrackPointExtension);
-    QDomDocument gpx = session.toGPX(QDateTime::fromString(
+    polar::v2::TrainingSession * const session = getTrainingSession(baseName);
+    QVERIFY(session->isValid() || session->parse());
+    session->setGpxOption(polar::v2::TrainingSession::GarminTrackPointExtension);
+    QDomDocument gpx = session->toGPX(QDateTime::fromString(
         QLatin1String("2014-07-15T12:34:56Z"), Qt::ISODate));
 
     // Write the result to an XML file for optional post-mortem investigations.
@@ -1238,10 +1260,10 @@ void TestTrainingSession::toHRM()
     qDebug() << baseName;
 
     // Parse the route (protobuf) message.
-    polar::v2::TrainingSession session(baseName);
-    QVERIFY(session.parse());
-    session.setHrmOption(polar::v2::TrainingSession::LapNames, false);
-    const QStringList hrm = session.toHRM(false);
+    polar::v2::TrainingSession * const session = getTrainingSession(baseName);
+    QVERIFY(session->isValid() || session->parse());
+    session->setHrmOption(polar::v2::TrainingSession::LapNames, false);
+    const QStringList hrm = session->toHRM(false);
 
     // Write the result to a text file for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
@@ -1302,10 +1324,10 @@ void TestTrainingSession::toHRM_LapNames()
     qDebug() << baseName;
 
     // Parse the route (protobuf) message.
-    polar::v2::TrainingSession session(baseName);
-    QVERIFY(session.parse());
-    session.setHrmOption(polar::v2::TrainingSession::LapNames);
-    const QStringList hrm = session.toHRM(false);
+    polar::v2::TrainingSession * const session = getTrainingSession(baseName);
+    QVERIFY(session->isValid() || session->parse());
+    session->setHrmOption(polar::v2::TrainingSession::LapNames);
+    const QStringList hrm = session->toHRM(false);
 
     // Write the result to a text file for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
@@ -1366,10 +1388,10 @@ void TestTrainingSession::toHRM_LapNames_RR()
     qDebug() << baseName;
 
     // Parse the route (protobuf) message.
-    polar::v2::TrainingSession session(baseName);
-    QVERIFY(session.parse());
-    session.setHrmOption(polar::v2::TrainingSession::LapNames);
-    const QStringList hrm = session.toHRM(true);
+    polar::v2::TrainingSession * const session = getTrainingSession(baseName);
+    QVERIFY(session->isValid() || session->parse());
+    session->setHrmOption(polar::v2::TrainingSession::LapNames);
+    const QStringList hrm = session->toHRM(true);
 
     // Write the result to a text file for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
@@ -1430,10 +1452,10 @@ void TestTrainingSession::toHRM_RR()
     qDebug() << baseName;
 
     // Parse the route (protobuf) message.
-    polar::v2::TrainingSession session(baseName);
-    QVERIFY(session.parse());
-    session.setHrmOption(polar::v2::TrainingSession::LapNames, false);
-    const QStringList hrm = session.toHRM(true);
+    polar::v2::TrainingSession * const session = getTrainingSession(baseName);
+    QVERIFY(session->isValid() || session->parse());
+    session->setHrmOption(polar::v2::TrainingSession::LapNames, false);
+    const QStringList hrm = session->toHRM(true);
 
     // Write the result to a text file for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
@@ -1485,9 +1507,9 @@ void TestTrainingSession::toTCX()
     QFETCH(QByteArray, expected);
 
     // Parse the route (protobuf) message.
-    polar::v2::TrainingSession session(baseName);
-    QVERIFY(session.parse());
-    QDomDocument tcx = session.toTCX(QLatin1String("Jul 17 2014 21:02:38"));
+    polar::v2::TrainingSession * const session = getTrainingSession(baseName);
+    QVERIFY(session->isValid() || session->parse());
+    QDomDocument tcx = session->toTCX(QLatin1String("Jul 17 2014 21:02:38"));
 
     // Write the result to an XML file for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
@@ -1546,11 +1568,11 @@ void TestTrainingSession::toTCX_AllExtensions()
     QFETCH(QByteArray, expected);
 
     // Parse the route (protobuf) message.
-    polar::v2::TrainingSession session(baseName);
-    QVERIFY(session.parse());
-    session.setTcxOption(polar::v2::TrainingSession::GarminActivityExtension);
-    session.setTcxOption(polar::v2::TrainingSession::GarminCourseExtension);
-    QDomDocument tcx = session.toTCX(QLatin1String("Jul 17 2014 21:02:38"));
+    polar::v2::TrainingSession * const session = getTrainingSession(baseName);
+    QVERIFY(session->isValid() || session->parse());
+    session->setTcxOption(polar::v2::TrainingSession::GarminActivityExtension);
+    session->setTcxOption(polar::v2::TrainingSession::GarminCourseExtension);
+    QDomDocument tcx = session->toTCX(QLatin1String("Jul 17 2014 21:02:38"));
 
     // Write the result to an XML file for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
@@ -1612,10 +1634,10 @@ void TestTrainingSession::toTCX_GarminActivity()
     QFETCH(QByteArray, expected);
 
     // Parse the route (protobuf) message.
-    polar::v2::TrainingSession session(baseName);
-    QVERIFY(session.parse());
-    session.setTcxOption(polar::v2::TrainingSession::GarminActivityExtension);
-    QDomDocument tcx = session.toTCX(QLatin1String("Jul 17 2014 21:02:38"));
+    polar::v2::TrainingSession * const session = getTrainingSession(baseName);
+    QVERIFY(session->isValid() || session->parse());
+    session->setTcxOption(polar::v2::TrainingSession::GarminActivityExtension);
+    QDomDocument tcx = session->toTCX(QLatin1String("Jul 17 2014 21:02:38"));
 
     // Write the result to an XML file for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
@@ -1706,10 +1728,10 @@ void TestTrainingSession::toTCX_GarminCourse()
     QFETCH(QByteArray, expected);
 
     // Parse the route (protobuf) message.
-    polar::v2::TrainingSession session(baseName);
-    QVERIFY(session.parse());
-    session.setTcxOption(polar::v2::TrainingSession::GarminCourseExtension);
-    QDomDocument tcx = session.toTCX(QLatin1String("Jul 17 2014 21:02:38"));
+    polar::v2::TrainingSession * const session = getTrainingSession(baseName);
+    QVERIFY(session->isValid() || session->parse());
+    session->setTcxOption(polar::v2::TrainingSession::GarminCourseExtension);
+    QDomDocument tcx = session->toTCX(QLatin1String("Jul 17 2014 21:02:38"));
 
     // Write the result to an XML file for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {
@@ -1785,10 +1807,10 @@ void TestTrainingSession::toTCX_UTC()
     QFETCH(QByteArray, expected);
 
     // Parse the route (protobuf) message.
-    polar::v2::TrainingSession session(baseName);
-    QVERIFY(session.parse());
-    session.setTcxOption(polar::v2::TrainingSession::ForceTcxUTC);
-    QDomDocument tcx = session.toTCX(QLatin1String("Jul 17 2014 21:02:38"));
+    polar::v2::TrainingSession * const session = getTrainingSession(baseName);
+    QVERIFY(session->isValid() || session->parse());
+    session->setTcxOption(polar::v2::TrainingSession::ForceTcxUTC);
+    QDomDocument tcx = session->toTCX(QLatin1String("Jul 17 2014 21:02:38"));
 
     // Write the result to an XML file for optional post-mortem investigations.
     if (!outputDirPath.isNull()) {

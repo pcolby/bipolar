@@ -17,16 +17,23 @@
     along with Bipolar.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <QMap>
 #include <QObject>
+
+namespace polar { namespace v2 { class TrainingSession; }}
 
 class TestTrainingSession : public QObject {
     Q_OBJECT
 
 private:
     QString outputDirPath;
+    QMap<QString, polar::v2::TrainingSession *> trainingSessions;
+
+    polar::v2::TrainingSession * getTrainingSession(const QString &baseName);
 
 private slots:
     void initTestCase();
+    void cleanupTestCase();
 
     void getOutputBaseFileName_data();
     void getOutputBaseFileName();
