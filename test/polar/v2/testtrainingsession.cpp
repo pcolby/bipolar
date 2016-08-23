@@ -38,22 +38,35 @@ Q_DECLARE_METATYPE(polar::v2::TrainingSession::OutputFormats)
 // and toByteArray functions are both non-deterministic. Hence we have to roll
 // our own QDomDocument comparison functions :(
 
+// Much the same as QCOMPARE, execept that we check QTest::currentTestFailed
+// (qFail would have already been called), and report a::nodeName() on failure.
+#define XCOMPARE(actual, expected) \
+do {\
+    compare(actual, expected);\
+    if (QTest::currentTestFailed()) {\
+        qInfo() << "Failed node path" << a.nodeName();\
+        return;\
+    }\
+} while(0)
+
 void compare(const QDomNode &a, const QDomNode &b);
 
+// Find 'a' within 'b' by node name, and compare the two nodes.
 void compare(const QDomNode &a, const QDomNamedNodeMap &b)
 {
     if (a.namespaceURI().isEmpty()) {
-        compare(a, b.namedItem(a.nodeName()));
+        XCOMPARE(a, b.namedItem(a.nodeName()));
     } else {
-        compare(a, b.namedItemNS(a.namespaceURI(), a.localName()));
+        XCOMPARE(a, b.namedItemNS(a.namespaceURI(), a.localName()));
     }
 }
 
 void compare(const QDomNamedNodeMap &a, const QDomNamedNodeMap &b)
 {
     QCOMPARE(a.length(), b.length());
-    for (int i = 0; i < a.length(); ++i) {
+    for (int i = 0; (i < a.length()) && (!QTest::currentTestFailed()); ++i) {
         compare(a.item(i), b);
+        if (QTest::currentTestFailed()) continue;
         compare(b.item(i), a);
     }
 }
@@ -61,12 +74,12 @@ void compare(const QDomNamedNodeMap &a, const QDomNamedNodeMap &b)
 void compare(const QDomNodeList &a, const QDomNodeList &b)
 {
     QCOMPARE(a.length(), b.length());
-    for (int i = 0; i < a.length(); ++i) {
+    for (int i = 0; (i < a.length()) && (!QTest::currentTestFailed()); ++i) {
         compare(a.at(i), b.at(i));
     }
 }
 
-void fuzzyCompare(const QString &a, const QString &b)
+void compare(const QString &a, const QString &b)
 {
     // Only consider fuzzy comparisons for floating point numbers.
     if ((a.contains(QLatin1Char('.'))) || (a.contains(QLatin1Char('.')))) {
@@ -95,34 +108,36 @@ void fuzzyCompare(const QString &a, const QString &b)
 
 void compare(const QDomNode &a, const QDomNode &b)
 {
-    compare(a.attributes(), b.attributes());
-    compare(a.childNodes(), b.childNodes());
+    XCOMPARE(a.attributes(), b.attributes());
+    XCOMPARE(a.childNodes(), b.childNodes());
     QCOMPARE(a.localName(), b.localName());
     QCOMPARE(a.namespaceURI(), b.namespaceURI());
     QCOMPARE(a.nodeName(), b.nodeName());
     QCOMPARE(a.nodeType(), b.nodeType());
-    fuzzyCompare(a.nodeValue(), b.nodeValue());
+    XCOMPARE(a.nodeValue(), b.nodeValue());
     QCOMPARE(a.prefix(), b.prefix());
 }
 
 void compare(const QDomDocumentType &a, const QDomDocumentType &b)
 {
-    compare(static_cast<const QDomNode &>(a), static_cast<const QDomNode &>(b));
-    compare(a.entities(), b.entities());
+    XCOMPARE(static_cast<const QDomNode &>(a), static_cast<const QDomNode &>(b));
+    XCOMPARE(a.entities(), b.entities());
     QCOMPARE(a.internalSubset(), b.internalSubset());
     QCOMPARE(a.name(), b.name());
     QCOMPARE(a.nodeType(), b.nodeType());
-    compare(a.notations(), b.notations());
+    XCOMPARE(a.notations(), b.notations());
     QCOMPARE(a.publicId(), b.publicId());
     QCOMPARE(a.systemId(), b.systemId());
 }
 
 void compare(const QDomDocument &a, const QDomDocument &b)
 {
-    compare(a.doctype(), b.doctype());
-    compare(a.documentElement(), b.documentElement());
+    XCOMPARE(a.doctype(), b.doctype());
+    XCOMPARE(a.documentElement(), b.documentElement());
     QCOMPARE(a.nodeType(), b.nodeType());
 }
+
+#undef XCOMPARE
 
 void TestTrainingSession::initTestCase()
 {
@@ -841,6 +856,9 @@ void TestTrainingSession::toGPX()
     QDomDocument expectedDoc;
     expectedDoc.setContent(expected);
     compare(gpx, expectedDoc);
+    if (QTest::currentTestFailed()) {
+        return;
+    }
 
     // Validate the generated document against the relevant XML schema.
     gpx.documentElement().removeAttribute(QLatin1String("xsi:schemaLocation"));
@@ -903,6 +921,9 @@ void TestTrainingSession::toGPX_AllExtensions()
     QDomDocument expectedDoc;
     expectedDoc.setContent(expected);
     compare(gpx, expectedDoc);
+    if (QTest::currentTestFailed()) {
+        return;
+    }
 
     // Validate the generated document against the relevant XML schema.
     gpx.documentElement().removeAttribute(QLatin1String("xsi:schemaLocation"));
@@ -966,6 +987,9 @@ void TestTrainingSession::toGPX_Cluetrust()
     QDomDocument expectedDoc;
     expectedDoc.setContent(expected);
     compare(gpx, expectedDoc);
+    if (QTest::currentTestFailed()) {
+        return;
+    }
 
     // Validate the generated document against the relevant XML schema.
     gpx.documentElement().removeAttribute(QLatin1String("xsi:schemaLocation"));
@@ -1054,6 +1078,9 @@ void TestTrainingSession::toGPX_GarminAcceleration()
     QDomDocument expectedDoc;
     expectedDoc.setContent(expected);
     compare(gpx, expectedDoc);
+    if (QTest::currentTestFailed()) {
+        return;
+    }
 
     // Validate the generated document against the relevant XML schema.
     gpx.documentElement().removeAttribute(QLatin1String("xsi:schemaLocation"));
@@ -1136,6 +1163,9 @@ void TestTrainingSession::toGPX_GarminTrackPoint()
     QDomDocument expectedDoc;
     expectedDoc.setContent(expected);
     compare(gpx, expectedDoc);
+    if (QTest::currentTestFailed()) {
+        return;
+    }
 
     // Validate the generated document against the relevant XML schema.
     gpx.documentElement().removeAttribute(QLatin1String("xsi:schemaLocation"));
@@ -1472,6 +1502,9 @@ void TestTrainingSession::toTCX()
     QDomDocument expectedDoc;
     expectedDoc.setContent(expected);
     compare(tcx, expectedDoc);
+    if (QTest::currentTestFailed()) {
+        return;
+    }
 
     // Validate the generated document against the relevant XML schema.
     tcx.documentElement().removeAttribute(QLatin1String("xsi:schemaLocation"));
@@ -1532,6 +1565,9 @@ void TestTrainingSession::toTCX_AllExtensions()
     QDomDocument expectedDoc;
     expectedDoc.setContent(expected);
     compare(tcx, expectedDoc);
+    if (QTest::currentTestFailed()) {
+        return;
+    }
 
     // Validate the generated document against the relevant XML schema.
     tcx.documentElement().removeAttribute(QLatin1String("xsi:schemaLocation"));
@@ -1594,6 +1630,9 @@ void TestTrainingSession::toTCX_GarminActivity()
     QDomDocument expectedDoc;
     expectedDoc.setContent(expected);
     compare(tcx, expectedDoc);
+    if (QTest::currentTestFailed()) {
+        return;
+    }
 
     // Validate the generated document against the relevant XML schema.
     tcx.documentElement().removeAttribute(QLatin1String("xsi:schemaLocation"));
@@ -1685,6 +1724,9 @@ void TestTrainingSession::toTCX_GarminCourse()
     QDomDocument expectedDoc;
     expectedDoc.setContent(expected);
     compare(tcx, expectedDoc);
+    if (QTest::currentTestFailed()) {
+        return;
+    }
 
     // Validate the generated document against the relevant XML schema.
     tcx.documentElement().removeAttribute(QLatin1String("xsi:schemaLocation"));
@@ -1761,6 +1803,9 @@ void TestTrainingSession::toTCX_UTC()
     QDomDocument expectedDoc;
     expectedDoc.setContent(expected);
     compare(tcx, expectedDoc);
+    if (QTest::currentTestFailed()) {
+        return;
+    }
 
     // Validate the generated document against the relevant XML schema.
     tcx.documentElement().removeAttribute(QLatin1String("xsi:schemaLocation"));
