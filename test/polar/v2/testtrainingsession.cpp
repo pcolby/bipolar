@@ -30,6 +30,11 @@
 #include <QXmlSchema>
 #include <QXmlSchemaValidator>
 
+// qInfo was added in Qt 5.5; for earlier versions we just use qDebug instead.
+#if (QT_VERSION < QT_VERSION_CHECK(5, 5, 0)) && !defined(qInfo)
+#define qInfo qDebug
+#endif
+
 Q_DECLARE_METATYPE(polar::v2::TrainingSession::OutputFormat)
 Q_DECLARE_METATYPE(polar::v2::TrainingSession::OutputFormats)
 
