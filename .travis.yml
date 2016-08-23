@@ -68,7 +68,7 @@ deploy:
   api_key: $RELEASES_API_KEY
   file: $TRAVIS_BUILD_DIR-build/pkg/$TRAVIS_OS_NAME/Bipolar-0.5.3.$TRAVIS_BUILD_NUMBER.dmg
   on:
-    condition: '"$TRAVIS_OS_NAME" == osx && "$CXX" == clang++ && "$QT" == 5'
+    condition: '"$TRAVIS_OS_NAME" == osx && "$CXX" == clang++ && "$QT" == 55'
     tags: true
 
 notifications:
