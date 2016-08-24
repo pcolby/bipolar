@@ -66,7 +66,8 @@ script:
 deploy:
   provider: releases
   api_key: $RELEASES_API_KEY
-  file: $TRAVIS_BUILD_DIR-build/pkg/$TRAVIS_OS_NAME/Bipolar-0.5.4.$TRAVIS_BUILD_NUMBER.dmg
+  file_glob: true
+  file: $TRAVIS_BUILD_DIR-build/pkg/$TRAVIS_OS_NAME/Bipolar-*.$TRAVIS_BUILD_NUMBER.dmg
   on:
     condition: '"$TRAVIS_OS_NAME" == osx && "$CXX" == clang++ && "$QT" == 55'
     tags: true
