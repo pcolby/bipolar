@@ -80,7 +80,7 @@ deploy:
     on:
       appveyor_repo_tag: true
       configuration: release
-      QTDIR: C:\Qt\5.7\msvc2013_64
+      QTDIR: C:\Qt\5.7\msvc2015_64
 
 notifications:
   - provider: Webhook
