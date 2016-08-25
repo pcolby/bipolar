@@ -1,3 +1,4 @@
+!define CONFIGURATION \"$$(CONFIGURATION)\"
 !define VERSION \"$$VERSION\"
 !define SPECIAL_BUILD \"$$SPECIAL_BUILD\"
 

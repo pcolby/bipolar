@@ -1,13 +1,6 @@
-!ifndef VCRDIR
-  !define DOLLAR $
-  !if "$%foo%" != "${DOLLAR}%foo%"
-    !define  VCRDIR "$%VCINSTALLDIR%\redist\x86\Microsoft.VC120.CRT"
-  !else
-    # This is only needed for MinGW support... really, this NSI script should be upgraded to understand the
-    # different required DLLs for MinGW builds (ie we probably don't need MSVCR DLSs at all with MinGW).
-    !define  VCRDIR "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\redist\x86\Microsoft.VC120.CRT"
-  !endif
-  !echo "VCRDIR defaulted to '${VCRDIR}'"
+!ifndef CONFIGURATION
+!define /ifndef CONFIGURATION "release"
+!echo "CONFIGURATION defaulted to '${CONFIGURATION}'"
 !endif
 
 !ifndef VERSION
@@ -20,8 +13,8 @@
 !endif
 
 SetCompressor lzma
-!include "DumpLog.nsh"
 !include "MUI2.nsh"
+!include "DumpLog.nsh"
 
 # Installer Attributes: General Attributes.
 InstallDir "$PROGRAMFILES\Bipolar"
@@ -53,7 +46,7 @@ Var StartMenuFolder
 !define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "startMenuFolder"
 !insertmacro MUI_PAGE_STARTMENU Application $StartMenuFolder
 !insertmacro MUI_PAGE_INSTFILES
-  
+
 # Modern UI2 Uninstall Pages.
 !insertmacro MUI_UNPAGE_CONFIRM
 !insertmacro MUI_UNPAGE_INSTFILES
@@ -68,9 +61,7 @@ Var StartMenuFolder
 Section "application"
     # Files to install.
     SetOutPath $INSTDIR
-    File "..\..\src\release\Bipolar.exe"
-    File "${VCRDIR}\msvcp120.dll"
-    File "${VCRDIR}\msvcr120.dll"
+    File "..\..\src\${CONFIGURATION}\Bipolar.exe"
     File /r "qtlibs\*"
     WriteRegStr HKCU "Software\Software\Paul Colby\Bipolar" "" $INSTDIR
     WriteUninstaller $INSTDIR\Uninstall.exe
@@ -93,6 +84,45 @@ Section "application"
     WriteRegDword HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Bipolar" "NoRepair" 1
 SectionEnd
 
+Function installMicrosoftRuntime
+    exch $R0
+    push $0
+    retry:
+    ClearErrors
+    DetailPrint "Installing Microsoft Visual C++ Redistributable [$R0]"
+    ExecWait '"$R0" /norestart /q' $0
+    ${If} ${Errors}
+        MessageBox MB_ABORTRETRYIGNORE \
+            "The Microsoft Visual C++ Redistributable package failed to execute." \
+            /SD IDIGNORE IDRETRY retry IDIGNORE ignore
+            Abort
+    ${Else}
+        DetailPrint "$R0 returned exit code $0"
+        ${If} $0 == 0
+            DetailPrint "Microsoft Visual C++ Redistributable installed successfully"
+        ${Else}
+            MessageBox MB_ABORTRETRYIGNORE \
+                "The Microsoft Visual C++ Redistributable failed to install." \
+                /SD IDIGNORE IDRETRY retry IDIGNORE ignore
+                Abort
+        ${EndIf}
+    ${EndIf}
+    ignore:
+    pop $0
+    pop $R0
+FunctionEnd
+
+Section "-vcredist"
+    ${If} ${FileExists} "$INSTDIR\vcredist_x86.exe"
+        push "$INSTDIR\vcredist_x86.exe"
+        call installMicrosoftRuntime
+    ${EndIf}
+    ${If} ${FileExists} "$INSTDIR\vcredist_x64.exe"
+        push "$INSTDIR\vcredist_x64.exe"
+        call installMicrosoftRuntime
+    ${EndIf}
+SectionEnd
+
 Section "hook"
     SetOutPath $INSTDIR\hook
     File "Qt5Network.dll"
@@ -104,7 +134,7 @@ Section "hook"
         MessageBox MB_ABORTRETRYIGNORE \
             "The Polar FlowSync hook could not be installed.$\n$\nPlease ensure Polar FlowSync is not running before trying again." \
             /SD IDIGNORE IDRETRY retry IDIGNORE ignore
-            Abort    
+            Abort
     ${Else}
         DetailPrint "Bipolar returned exit code $0 while installing hook"
         ${If} $0 == 0
@@ -113,7 +143,7 @@ Section "hook"
             MessageBox MB_ABORTRETRYIGNORE \
                 "The Polar FlowSync hook could not be installed.$\n$\nPlease ensure Polar FlowSync is not running before trying again." \
                 /SD IDIGNORE IDRETRY retry IDIGNORE ignore
-                Abort    
+                Abort
         ${EndIf}
     ${EndIf}
     ignore:
@@ -148,9 +178,14 @@ Section "un.application"
     Delete $INSTDIR\D3Dcompiler_*.dll
     Delete $INSTDIR\icu*.dll
     Delete $INSTDIR\libEGL.dll
+    Delete $INSTDIR\libgcc*.dll
     Delete $INSTDIR\libGLESv2.dll
+    Delete $INSTDIR\libstdc++*.dll
+    Delete $INSTDIR\libwinpthread*.dll
     Delete $INSTDIR\Install.log
     Delete $INSTDIR\msvc*.dll
+    Delete $INSTDIR\msvc*.exe
+    Delete $INSTDIR\opengl*.dll
     Delete $INSTDIR\Qt5*.dll
     Delete $INSTDIR\qt_*.qm
     Delete $INSTDIR\Uninstall.exe
@@ -158,6 +193,7 @@ Section "un.application"
     RMDir /r $INSTDIR\iconengines
     RMDir /r $INSTDIR\imageformats
     RMDir /r $INSTDIR\platforms
+    RMDir /r $INSTDIR\translations
     RMDir $INSTDIR
     DeleteRegKey /ifempty HKCU "Software\Paul Colby\Bipolar"
     DeleteRegKey /ifempty HKCU "Software\Paul Colby"

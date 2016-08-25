@@ -1,8 +1,12 @@
 # The following code has been taken, verbatim, from http://nsis.sourceforge.net/Dump_log_to_file
 # See also http://nsis.sourceforge.net/Docs/AppendixD.html#D.4 for more information.
 
+!ifndef LVM_GETITEMCOUNT
 !define LVM_GETITEMCOUNT 0x1004
+!endif
+!ifndef LVM_GETITEMTEXT
 !define LVM_GETITEMTEXT 0x102D
+!endif
 
 Function DumpLog
   Exch $5
@@ -12,7 +16,7 @@ Function DumpLog
   Push $3
   Push $4
   Push $6
- 
+
   FindWindow $0 "#32770" "" $HWNDPARENT
   GetDlgItem $0 $0 1016
   StrCmp $0 0 exit

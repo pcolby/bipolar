@@ -32,9 +32,6 @@ configuration:
   - release
 
 install:
-  - dir C:\Qt
-  - appveyor-retry choco install nsis --force --version 2.46.0.20150406
-  # Setup the build toolchains.
   - '%QTDIR%\bin\qtenv2.bat'
   - qmake -v
   - if %QTDIR:_64=%==%QTDIR% ( set ARCH=x86 ) else set ARCH=x64
@@ -55,7 +52,7 @@ before_build:
 build_script:
   - '%make%'
   - cd %APPVEYOR_BUILD_FOLDER%-build/pkg/nsis
-  - if not %CONFIGURATION%==debug %make% nsis
+  - '%make% nsis'
 
 after_build:
   # Add a link to the build output within the source directory. This is needed because AppVeyor does
