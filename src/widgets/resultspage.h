@@ -32,7 +32,7 @@ class ResultsPage : public QWizardPage {
     Q_OBJECT
 
 public:
-    ResultsPage(QWidget *parent=0);
+    explicit ResultsPage(QWidget *parent=0);
     virtual void initializePage();
     virtual bool isComplete() const;
     virtual bool validatePage();

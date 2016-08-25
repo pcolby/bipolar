@@ -38,8 +38,8 @@ typedef FileVersionInfo VersionInfo;
 class VersionInfo : public AbstractVersionInfo {
 
 public:
-    VersionInfo(const QString &fileName = QString()) { Q_UNUSED(fileName);}
-    virtual ~VersionInfo() { };
+    explicit VersionInfo(const QString &fileName = QString()) { Q_UNUSED(fileName) }
+    virtual ~VersionInfo() { }
 
     virtual bool isValid() const { return false; }
 

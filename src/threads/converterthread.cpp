@@ -33,7 +33,8 @@
 ConverterThread::ConverterThread(QObject * const parent)
     : QThread(parent), cancelled(false)
 {
-
+    memset(&files,    0, sizeof(files));
+    memset(&sessions, 0, sizeof(sessions));
 }
 
 bool ConverterThread::isCancelled() const

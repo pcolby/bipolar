@@ -34,7 +34,7 @@ public:
     struct { int failed, written; } files;
     struct { int failed, processed, skipped; } sessions;
 
-    ConverterThread(QObject * const parent = 0);
+    explicit ConverterThread(QObject * const parent = 0);
     bool isCancelled() const;
     const QStringList &sessionBaseNames() const;
 
