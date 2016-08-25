@@ -31,7 +31,7 @@ class InputsPage : public QWizardPage {
     Q_OBJECT
 
 public:
-    InputsPage(QWidget *parent=0);
+    explicit InputsPage(QWidget *parent=0);
     virtual void initializePage();
     virtual bool isComplete() const;
     virtual bool validatePage();

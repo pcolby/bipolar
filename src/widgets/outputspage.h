@@ -27,7 +27,7 @@ class OutputsPage : public QWizardPage {
     Q_OBJECT
 
 public:
-    OutputsPage(QWidget *parent=0);
+    explicit OutputsPage(QWidget *parent=0);
     virtual void initializePage();
     virtual bool isComplete() const;
     virtual bool validatePage();

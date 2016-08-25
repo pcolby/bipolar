@@ -31,7 +31,7 @@
 #include <QSettings>
 
 ConverterThread::ConverterThread(QObject * const parent)
-    : QThread(parent), cancelled(false)
+    : QThread(parent), files{ 0, 0 }, sessions{ 0, 0, 0 }, cancelled(false)
 {
 
 }
