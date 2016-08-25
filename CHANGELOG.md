@@ -2,7 +2,7 @@
 
 ### 0.5.4 (_unreleased_)
 Features:
-- msvc2015 support in NSIS installer? ([#64](../../issues/64))
+- numerous Windows installer improvements ([ecffb9b](../../commit/ecffb9be6c202e028a5760d6d942b5c5c4bb9825))
 
 ### 0.5.3 (2016-08-23)
 Features:
