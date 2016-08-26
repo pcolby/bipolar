@@ -58,8 +58,13 @@ unix {
     QMAKE_DISTCLEAN += -r coverage_html
 }
 
-# Qt 5.3 MSVC 64-bit (on AppVeyor at least) needs a stack larger than the 1MB default.
-win32:equals(QT_ARCH, x86_64):contains(QT_VERSION, ^5\\.3\\..*):QMAKE_LFLAGS += /STACK:2097152
+# Qt 5.3 with MSVC (on AppVeyor at least) needs a stack larger than the 1MB default.
+win32:equals(QMAKE_CXX,cl) {
+    equals(QT_MAJOR_VERSION,5):equals(QT_MINOR_VERSION,3) {
+        message(Setting explicit stack size for $$QMAKE_CXX with $$QT_VERSION)
+        QMAKE_LFLAGS += /STACK:2097152
+    }
+}
 
 INCLUDEPATH += $$PWD
 INCLUDEPATH += $$TOPDIR/src

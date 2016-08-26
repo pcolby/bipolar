@@ -22,11 +22,6 @@ environment:
     - QTDIR: C:\Qt\5.7\msvc2015
     - QTDIR: C:\Qt\5.7\msvc2015_64
 
-matrix:
-  allow_failures:
-    - QTDIR: C:\Qt\5.3\msvc2013_opengl
-      configuration: release
-
 configuration:
   - debug
   - release
@@ -62,7 +57,7 @@ after_build:
 
 test_script:
   - cd %APPVEYOR_BUILD_FOLDER%-build
-  - if not %CONFIGURATION%==debug %make% check TESTARGS=-silent
+  - if not %CONFIGURATION%==debug %make% check
   - if %QTDIR:msvc=%==%QTDIR% ( set "BIPOLAR_TEST_LOCALE=german" ) else set "BIPOLAR_TEST_LOCALE=de-DE"
   - if not %CONFIGURATION%==debug %make% check TESTARGS=-silent
 
