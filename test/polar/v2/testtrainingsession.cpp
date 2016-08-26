@@ -274,9 +274,13 @@ void TestTrainingSession::getOutputBaseFileName()
     QFETCH(QString, input);
     QFETCH(QString, format);
     QFETCH(QString, output);
+
+    QVERIFY2(!input.isEmpty(), "failed to find testdata");
+
     if (input.endsWith(QLatin1String("-create"))) {
         input.chop(7);
     }
+
     polar::v2::TrainingSession session(input);
     QCOMPARE(session.getOutputBaseFileName(format), output);
 }
@@ -389,6 +393,8 @@ void TestTrainingSession::getOutputFileNames()
     QFETCH(QString, outputDirName);
     QFETCH(polar::v2::TrainingSession::OutputFormats, outputFileFormats);
     QFETCH(QStringList, outputFileNames);
+
+    QVERIFY2(!inputBaseName.isEmpty(), "failed to find testdata");
 
     if (inputBaseName.endsWith(QLatin1String("-create"))) {
         inputBaseName.chop(7);
@@ -864,6 +870,8 @@ void TestTrainingSession::toGPX()
     QFETCH(QString, baseName);
     QFETCH(QByteArray, expected);
 
+    QVERIFY2(!baseName.isEmpty(), "failed to find testdata");
+
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession * const session = getTrainingSession(baseName);
     QVERIFY(session->isValid() || session->parse());
@@ -925,6 +933,8 @@ void TestTrainingSession::toGPX_AllExtensions()
 {
     QFETCH(QString, baseName);
     QFETCH(QByteArray, expected);
+
+    QVERIFY2(!baseName.isEmpty(), "failed to find testdata");
 
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession * const session = getTrainingSession(baseName);
@@ -993,6 +1003,8 @@ void TestTrainingSession::toGPX_Cluetrust()
 {
     QFETCH(QString, baseName);
     QFETCH(QByteArray, expected);
+
+    QVERIFY2(!baseName.isEmpty(), "failed to find testdata");
 
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession * const session = getTrainingSession(baseName);
@@ -1085,6 +1097,8 @@ void TestTrainingSession::toGPX_GarminAcceleration()
     QFETCH(QString, baseName);
     QFETCH(QByteArray, expected);
 
+    QVERIFY2(!baseName.isEmpty(), "failed to find testdata");
+
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession * const session = getTrainingSession(baseName);
     QVERIFY(session->isValid() || session->parse());
@@ -1169,6 +1183,8 @@ void TestTrainingSession::toGPX_GarminTrackPoint()
 {
     QFETCH(QString, baseName);
     QFETCH(QByteArray, expected);
+
+    QVERIFY2(!baseName.isEmpty(), "failed to find testdata");
 
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession * const session = getTrainingSession(baseName);
@@ -1262,7 +1278,8 @@ void TestTrainingSession::toHRM()
 {
     QFETCH(QString, baseName);
     QFETCH(QStringList, expected);
-    qDebug() << baseName;
+
+    QVERIFY2(!baseName.isEmpty(), "failed to find testdata");
 
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession * const session = getTrainingSession(baseName);
@@ -1326,7 +1343,8 @@ void TestTrainingSession::toHRM_LapNames()
 {
     QFETCH(QString, baseName);
     QFETCH(QStringList, expected);
-    qDebug() << baseName;
+
+    QVERIFY2(!baseName.isEmpty(), "failed to find testdata");
 
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession * const session = getTrainingSession(baseName);
@@ -1390,7 +1408,8 @@ void TestTrainingSession::toHRM_LapNames_RR()
 {
     QFETCH(QString, baseName);
     QFETCH(QStringList, expected);
-    qDebug() << baseName;
+
+    QVERIFY2(!baseName.isEmpty(), "failed to find testdata");
 
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession * const session = getTrainingSession(baseName);
@@ -1454,7 +1473,8 @@ void TestTrainingSession::toHRM_RR()
 {
     QFETCH(QString, baseName);
     QFETCH(QStringList, expected);
-    qDebug() << baseName;
+
+    QVERIFY2(!baseName.isEmpty(), "failed to find testdata");
 
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession * const session = getTrainingSession(baseName);
@@ -1511,6 +1531,8 @@ void TestTrainingSession::toTCX()
     QFETCH(QString, baseName);
     QFETCH(QByteArray, expected);
 
+    QVERIFY2(!baseName.isEmpty(), "failed to find testdata");
+
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession * const session = getTrainingSession(baseName);
     QVERIFY(session->isValid() || session->parse());
@@ -1540,6 +1562,8 @@ void TestTrainingSession::toTCX()
     QXmlSchema schema;
     QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
     QXmlSchemaValidator validator(schema);
+    const QByteArray a = tcx.toByteArray();
+    QVERIFY(!a.isEmpty());
     QVERIFY(validator.validate(tcx.toByteArray()));
 }
 
@@ -1571,6 +1595,8 @@ void TestTrainingSession::toTCX_AllExtensions()
 {
     QFETCH(QString, baseName);
     QFETCH(QByteArray, expected);
+
+    QVERIFY2(!baseName.isEmpty(), "failed to find testdata");
 
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession * const session = getTrainingSession(baseName);
@@ -1637,6 +1663,8 @@ void TestTrainingSession::toTCX_GarminActivity()
 {
     QFETCH(QString, baseName);
     QFETCH(QByteArray, expected);
+
+    QVERIFY2(!baseName.isEmpty(), "failed to find testdata");
 
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession * const session = getTrainingSession(baseName);
@@ -1732,6 +1760,8 @@ void TestTrainingSession::toTCX_GarminCourse()
     QFETCH(QString, baseName);
     QFETCH(QByteArray, expected);
 
+    QVERIFY2(!baseName.isEmpty(), "failed to find testdata");
+
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession * const session = getTrainingSession(baseName);
     QVERIFY(session->isValid() || session->parse());
@@ -1810,6 +1840,8 @@ void TestTrainingSession::toTCX_UTC()
 {
     QFETCH(QString, baseName);
     QFETCH(QByteArray, expected);
+
+    QVERIFY2(!baseName.isEmpty(), "failed to find testdata");
 
     // Parse the route (protobuf) message.
     polar::v2::TrainingSession * const session = getTrainingSession(baseName);
