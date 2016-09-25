@@ -1,5 +1,8 @@
 ## Bipolar Changelog
 
+### 0.5.5 (_unreleased_)
+??
+
 ### 0.5.4 (2016-09-25)
 Features:
 - numerous Windows installer improvements ([ecffb9b](../../commit/ecffb9be6c202e028a5760d6d942b5c5c4bb9825))
