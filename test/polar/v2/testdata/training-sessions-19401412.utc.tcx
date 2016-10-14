@@ -6,7 +6,7 @@
       <Lap StartTime="2014-07-12T21:26:23Z">
         <TotalTimeSeconds>1803.88</TotalTimeSeconds>
         <DistanceMeters>2941.6</DistanceMeters>
-        <MaximumSpeed>13.896</MaximumSpeed>
+        <MaximumSpeed>3.86</MaximumSpeed>
         <Calories>0</Calories>
         <AverageHeartRateBpm>
           <Value>153</Value>
@@ -21670,7 +21670,7 @@
       <Lap StartTime="2014-07-12T21:56:27Z">
         <TotalTimeSeconds>1492.25</TotalTimeSeconds>
         <DistanceMeters>2033.9</DistanceMeters>
-        <MaximumSpeed>10.476</MaximumSpeed>
+        <MaximumSpeed>2.91</MaximumSpeed>
         <Calories>0</Calories>
         <AverageHeartRateBpm>
           <Value>165</Value>
@@ -39602,7 +39602,7 @@
       <Lap StartTime="2014-07-12T22:21:20Z">
         <TotalTimeSeconds>227.5</TotalTimeSeconds>
         <DistanceMeters>529.7</DistanceMeters>
-        <MaximumSpeed>9.684</MaximumSpeed>
+        <MaximumSpeed>2.69</MaximumSpeed>
         <Calories>0</Calories>
         <AverageHeartRateBpm>
           <Value>144</Value>
@@ -42342,7 +42342,7 @@
       <Lap StartTime="2014-07-12T22:25:07Z">
         <TotalTimeSeconds>1561.62</TotalTimeSeconds>
         <DistanceMeters>2594.9</DistanceMeters>
-        <MaximumSpeed>12.888</MaximumSpeed>
+        <MaximumSpeed>3.58</MaximumSpeed>
         <Calories>0</Calories>
         <AverageHeartRateBpm>
           <Value>172</Value>
@@ -61102,7 +61102,7 @@
       <Lap StartTime="2014-07-12T22:51:09Z">
         <TotalTimeSeconds>153.5</TotalTimeSeconds>
         <DistanceMeters>383.8</DistanceMeters>
-        <MaximumSpeed>11.088</MaximumSpeed>
+        <MaximumSpeed>3.08</MaximumSpeed>
         <Calories>0</Calories>
         <AverageHeartRateBpm>
           <Value>158</Value>

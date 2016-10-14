@@ -6,7 +6,7 @@
       <Lap StartTime="2015-11-01T12:17:52+01:00">
         <TotalTimeSeconds>6127.25</TotalTimeSeconds>
         <DistanceMeters>42809.3</DistanceMeters>
-        <MaximumSpeed>60.9</MaximumSpeed>
+        <MaximumSpeed>16.9167</MaximumSpeed>
         <Calories>1638</Calories>
         <AverageHeartRateBpm>
           <Value>149</Value>
@@ -91934,7 +91934,7 @@
         </Track>
         <Extensions>
           <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
-            <AvgSpeed>25.1521</AvgSpeed>
+            <AvgSpeed>6.98671</AvgSpeed>
             <MaxBikeCadence>114</MaxBikeCadence>
             <AvgRunCadence>90</AvgRunCadence>
           </LX>

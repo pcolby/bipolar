@@ -6,7 +6,7 @@
       <Lap StartTime="2014-07-13T07:26:23+10:00">
         <TotalTimeSeconds>1803.88</TotalTimeSeconds>
         <DistanceMeters>2941.6</DistanceMeters>
-        <MaximumSpeed>13.896</MaximumSpeed>
+        <MaximumSpeed>3.86</MaximumSpeed>
         <Calories>0</Calories>
         <AverageHeartRateBpm>
           <Value>153</Value>
@@ -27080,7 +27080,7 @@
         </Track>
         <Extensions>
           <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
-            <AvgSpeed>5.87056</AvgSpeed>
+            <AvgSpeed>1.63071</AvgSpeed>
           </LX>
           <CX xmlns="http://www.garmin.com/xmlschemas/CourseExtension/v1"/>
         </Extensions>
@@ -27088,7 +27088,7 @@
       <Lap StartTime="2014-07-13T07:56:27+10:00">
         <TotalTimeSeconds>1492.25</TotalTimeSeconds>
         <DistanceMeters>2033.9</DistanceMeters>
-        <MaximumSpeed>10.476</MaximumSpeed>
+        <MaximumSpeed>2.91</MaximumSpeed>
         <Calories>0</Calories>
         <AverageHeartRateBpm>
           <Value>165</Value>
@@ -49497,7 +49497,7 @@
         </Track>
         <Extensions>
           <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
-            <AvgSpeed>4.90671</AvgSpeed>
+            <AvgSpeed>1.36298</AvgSpeed>
           </LX>
           <CX xmlns="http://www.garmin.com/xmlschemas/CourseExtension/v1"/>
         </Extensions>
@@ -49505,7 +49505,7 @@
       <Lap StartTime="2014-07-13T08:21:20+10:00">
         <TotalTimeSeconds>227.5</TotalTimeSeconds>
         <DistanceMeters>529.7</DistanceMeters>
-        <MaximumSpeed>9.684</MaximumSpeed>
+        <MaximumSpeed>2.69</MaximumSpeed>
         <Calories>0</Calories>
         <AverageHeartRateBpm>
           <Value>144</Value>
@@ -52924,7 +52924,7 @@
         </Track>
         <Extensions>
           <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
-            <AvgSpeed>8.38207</AvgSpeed>
+            <AvgSpeed>2.32835</AvgSpeed>
           </LX>
           <CX xmlns="http://www.garmin.com/xmlschemas/CourseExtension/v1"/>
         </Extensions>
@@ -52932,7 +52932,7 @@
       <Lap StartTime="2014-07-13T08:25:07+10:00">
         <TotalTimeSeconds>1561.62</TotalTimeSeconds>
         <DistanceMeters>2594.9</DistanceMeters>
-        <MaximumSpeed>12.888</MaximumSpeed>
+        <MaximumSpeed>3.58</MaximumSpeed>
         <Calories>0</Calories>
         <AverageHeartRateBpm>
           <Value>172</Value>
@@ -76376,7 +76376,7 @@
         </Track>
         <Extensions>
           <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
-            <AvgSpeed>5.982</AvgSpeed>
+            <AvgSpeed>1.66167</AvgSpeed>
           </LX>
           <CX xmlns="http://www.garmin.com/xmlschemas/CourseExtension/v1"/>
         </Extensions>
@@ -76384,7 +76384,7 @@
       <Lap StartTime="2014-07-13T08:51:09+10:00">
         <TotalTimeSeconds>153.5</TotalTimeSeconds>
         <DistanceMeters>383.8</DistanceMeters>
-        <MaximumSpeed>11.088</MaximumSpeed>
+        <MaximumSpeed>3.08</MaximumSpeed>
         <Calories>0</Calories>
         <AverageHeartRateBpm>
           <Value>158</Value>
@@ -78693,7 +78693,7 @@
         </Track>
         <Extensions>
           <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
-            <AvgSpeed>9.00117</AvgSpeed>
+            <AvgSpeed>2.50033</AvgSpeed>
           </LX>
           <CX xmlns="http://www.garmin.com/xmlschemas/CourseExtension/v1"/>
         </Extensions>

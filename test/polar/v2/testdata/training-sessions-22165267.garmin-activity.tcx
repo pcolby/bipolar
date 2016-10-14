@@ -6,7 +6,7 @@
       <Lap StartTime="2014-08-07T17:25:01+10:00">
         <TotalTimeSeconds>238.5</TotalTimeSeconds>
         <DistanceMeters>664</DistanceMeters>
-        <MaximumSpeed>11.3721</MaximumSpeed>
+        <MaximumSpeed>3.15893</MaximumSpeed>
         <Calories>0</Calories>
         <AverageHeartRateBpm>
           <Value>153</Value>
@@ -4561,7 +4561,7 @@
         </Track>
         <Extensions>
           <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
-            <AvgSpeed>10.0226</AvgSpeed>
+            <AvgSpeed>2.78407</AvgSpeed>
             <AvgRunCadence>80</AvgRunCadence>
             <MaxRunCadence>84</MaxRunCadence>
           </LX>
@@ -4570,7 +4570,7 @@
       <Lap StartTime="2014-08-07T17:29:00+10:00">
         <TotalTimeSeconds>242</TotalTimeSeconds>
         <DistanceMeters>662</DistanceMeters>
-        <MaximumSpeed>10.6787</MaximumSpeed>
+        <MaximumSpeed>2.96631</MaximumSpeed>
         <Calories>0</Calories>
         <AverageHeartRateBpm>
           <Value>160</Value>
@@ -9183,7 +9183,7 @@
         </Track>
         <Extensions>
           <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
-            <AvgSpeed>9.84793</AvgSpeed>
+            <AvgSpeed>2.73554</AvgSpeed>
             <AvgRunCadence>83</AvgRunCadence>
             <MaxRunCadence>85</MaxRunCadence>
           </LX>
@@ -9192,7 +9192,7 @@
       <Lap StartTime="2014-08-07T17:33:02+10:00">
         <TotalTimeSeconds>237.5</TotalTimeSeconds>
         <DistanceMeters>665.2</DistanceMeters>
-        <MaximumSpeed>11.1641</MaximumSpeed>
+        <MaximumSpeed>3.10114</MaximumSpeed>
         <Calories>0</Calories>
         <AverageHeartRateBpm>
           <Value>166</Value>
@@ -13729,7 +13729,7 @@
         </Track>
         <Extensions>
           <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
-            <AvgSpeed>10.083</AvgSpeed>
+            <AvgSpeed>2.80084</AvgSpeed>
             <AvgRunCadence>83</AvgRunCadence>
             <MaxRunCadence>86</MaxRunCadence>
           </LX>
@@ -13738,7 +13738,7 @@
       <Lap StartTime="2014-08-07T17:37:00+10:00">
         <TotalTimeSeconds>175</TotalTimeSeconds>
         <DistanceMeters>662.1</DistanceMeters>
-        <MaximumSpeed>14.1458</MaximumSpeed>
+        <MaximumSpeed>3.9294</MaximumSpeed>
         <Calories>0</Calories>
         <AverageHeartRateBpm>
           <Value>184</Value>
@@ -17078,7 +17078,7 @@
         </Track>
         <Extensions>
           <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
-            <AvgSpeed>13.6203</AvgSpeed>
+            <AvgSpeed>3.78343</AvgSpeed>
             <AvgRunCadence>85</AvgRunCadence>
             <MaxRunCadence>89</MaxRunCadence>
           </LX>
@@ -17087,7 +17087,7 @@
       <Lap StartTime="2014-08-07T17:39:55+10:00">
         <TotalTimeSeconds>264.5</TotalTimeSeconds>
         <DistanceMeters>668</DistanceMeters>
-        <MaximumSpeed>13.8685</MaximumSpeed>
+        <MaximumSpeed>3.85235</MaximumSpeed>
         <Calories>0</Calories>
         <AverageHeartRateBpm>
           <Value>169</Value>
@@ -22118,7 +22118,7 @@
         </Track>
         <Extensions>
           <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
-            <AvgSpeed>9.09187</AvgSpeed>
+            <AvgSpeed>2.52552</AvgSpeed>
             <AvgRunCadence>81</AvgRunCadence>
             <MaxRunCadence>84</MaxRunCadence>
           </LX>
@@ -22127,7 +22127,7 @@
       <Lap StartTime="2014-08-07T17:44:19+10:00">
         <TotalTimeSeconds>257.5</TotalTimeSeconds>
         <DistanceMeters>659.2</DistanceMeters>
-        <MaximumSpeed>10.1933</MaximumSpeed>
+        <MaximumSpeed>2.83148</MaximumSpeed>
         <Calories>0</Calories>
         <AverageHeartRateBpm>
           <Value>165</Value>
@@ -27044,7 +27044,7 @@
         </Track>
         <Extensions>
           <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
-            <AvgSpeed>9.216</AvgSpeed>
+            <AvgSpeed>2.56</AvgSpeed>
             <AvgRunCadence>82</AvgRunCadence>
             <MaxRunCadence>85</MaxRunCadence>
           </LX>
@@ -27053,7 +27053,7 @@
       <Lap StartTime="2014-08-07T17:48:37+10:00">
         <TotalTimeSeconds>186</TotalTimeSeconds>
         <DistanceMeters>673.6</DistanceMeters>
-        <MaximumSpeed>13.6604</MaximumSpeed>
+        <MaximumSpeed>3.79456</MaximumSpeed>
         <Calories>0</Calories>
         <AverageHeartRateBpm>
           <Value>182</Value>
@@ -30602,7 +30602,7 @@
         </Track>
         <Extensions>
           <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
-            <AvgSpeed>13.0374</AvgSpeed>
+            <AvgSpeed>3.62151</AvgSpeed>
             <AvgRunCadence>84</AvgRunCadence>
             <MaxRunCadence>86</MaxRunCadence>
           </LX>
@@ -30611,7 +30611,7 @@
       <Lap StartTime="2014-08-07T17:51:43+10:00">
         <TotalTimeSeconds>269.5</TotalTimeSeconds>
         <DistanceMeters>670.6</DistanceMeters>
-        <MaximumSpeed>13.175</MaximumSpeed>
+        <MaximumSpeed>3.65973</MaximumSpeed>
         <Calories>0</Calories>
         <AverageHeartRateBpm>
           <Value>167</Value>
@@ -35737,7 +35737,7 @@
         </Track>
         <Extensions>
           <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
-            <AvgSpeed>8.95792</AvgSpeed>
+            <AvgSpeed>2.48831</AvgSpeed>
             <AvgRunCadence>81</AvgRunCadence>
             <MaxRunCadence>83</MaxRunCadence>
           </LX>
@@ -35746,7 +35746,7 @@
       <Lap StartTime="2014-08-07T17:56:12+10:00">
         <TotalTimeSeconds>234.5</TotalTimeSeconds>
         <DistanceMeters>676</DistanceMeters>
-        <MaximumSpeed>11.6495</MaximumSpeed>
+        <MaximumSpeed>3.23597</MaximumSpeed>
         <Calories>0</Calories>
         <AverageHeartRateBpm>
           <Value>169</Value>
@@ -40226,7 +40226,7 @@
         </Track>
         <Extensions>
           <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
-            <AvgSpeed>10.3778</AvgSpeed>
+            <AvgSpeed>2.88273</AvgSpeed>
             <AvgRunCadence>81</AvgRunCadence>
             <MaxRunCadence>84</MaxRunCadence>
           </LX>

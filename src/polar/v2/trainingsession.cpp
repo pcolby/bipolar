@@ -2189,7 +2189,7 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                             lx.appendChild(doc.createElement(QLatin1String("AvgSpeed")))
                                 .appendChild(doc.createTextNode(QString::fromLatin1("%1")
                                     .arg(first(firstMap(stats.value(QLatin1String("speed")))
-                                        .value(QLatin1String("average"))).toDouble())));
+                                        .value(QLatin1String("average"))).toDouble() / 3.6)));
                         }
 
                         if (stats.contains(QLatin1String("cadence"))) {
@@ -2435,7 +2435,7 @@ void TrainingSession::addLapStats(QDomDocument &doc, QDomElement &lap,
         lap.appendChild(doc.createElement(QLatin1String("MaximumSpeed")))
             .appendChild(doc.createTextNode(QString::fromLatin1("%1")
                 .arg(first(firstMap(stats.value(QLatin1String("speed")))
-                    .value(QLatin1String("maximum"))).toDouble())));
+                    .value(QLatin1String("maximum"))).toDouble() / 3.6)));
     }
 
     // Calories is only available per exercise, not per lap, but it is required

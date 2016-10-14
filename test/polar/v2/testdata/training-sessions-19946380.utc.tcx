@@ -6,7 +6,7 @@
       <Lap StartTime="2014-07-17T21:48:56Z">
         <TotalTimeSeconds>3900.25</TotalTimeSeconds>
         <DistanceMeters>4571.6</DistanceMeters>
-        <MaximumSpeed>8.388</MaximumSpeed>
+        <MaximumSpeed>2.33</MaximumSpeed>
         <Calories>537</Calories>
         <AverageHeartRateBpm>
           <Value>119</Value>
