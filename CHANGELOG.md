@@ -1,7 +1,8 @@
 ## Bipolar Changelog
 
 ### 0.5.5 (_unreleased_)
-??
+Bugs:
+- use metres-per-second for TCX speeds ([#74](../../issues/74))
 
 ### 0.5.4 (2016-09-25)
 Features:
