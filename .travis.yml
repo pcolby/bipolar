@@ -14,7 +14,7 @@ env:
   - QT=5  BREW=5
   - QT=5  BREW=ex PPA=ubuntu-sdk-team/ppa
   - QT=51 BREW=ex PPA=beineri/opt-qt511-trusty
-  - QT=52 BREW=52 PPA=beineri/opt-qt521-trusty
+  - QT=52 BREW=ex PPA=beineri/opt-qt521-trusty
   - QT=53 BREW=ex PPA=beineri/opt-qt532-trusty
   - QT=54 BREW=ex PPA=beineri/opt-qt542-trusty
   - QT=55 BREW=55 PPA=beineri/opt-qt551-trusty
@@ -25,6 +25,7 @@ matrix:
   exclude:
     - { os: osx, env: QT=5  BREW=ex PPA=ubuntu-sdk-team/ppa      }
     - { os: osx, env: QT=51 BREW=ex PPA=beineri/opt-qt511-trusty }
+    - { os: osx, env: QT=52 BREW=ex PPA=beineri/opt-qt521-trusty }
     - { os: osx, env: QT=53 BREW=ex PPA=beineri/opt-qt532-trusty }
     - { os: osx, env: QT=54 BREW=ex PPA=beineri/opt-qt542-trusty }
     - { os: osx, env: QT=57 BREW=ex PPA=beineri/opt-qt57-trusty  }
