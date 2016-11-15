@@ -136,10 +136,10 @@
         {
             "duration": [
                 {
-                    "4": [
+                    "hours": [
                         0
                     ],
-                    "hours": [
+                    "milliseconds": [
                         0
                     ],
                     "minutes": [
@@ -164,10 +164,10 @@
         {
             "duration": [
                 {
-                    "4": [
+                    "hours": [
                         0
                     ],
-                    "hours": [
+                    "milliseconds": [
                         0
                     ],
                     "minutes": [
@@ -192,10 +192,10 @@
         {
             "duration": [
                 {
-                    "4": [
+                    "hours": [
                         0
                     ],
-                    "hours": [
+                    "milliseconds": [
                         0
                     ],
                     "minutes": [
@@ -220,10 +220,10 @@
         {
             "duration": [
                 {
-                    "4": [
+                    "hours": [
                         0
                     ],
-                    "hours": [
+                    "milliseconds": [
                         0
                     ],
                     "minutes": [
@@ -248,10 +248,10 @@
         {
             "duration": [
                 {
-                    "4": [
+                    "hours": [
                         0
                     ],
-                    "hours": [
+                    "milliseconds": [
                         0
                     ],
                     "minutes": [
@@ -281,10 +281,10 @@
             ],
             "duration": [
                 {
-                    "4": [
+                    "hours": [
                         0
                     ],
-                    "hours": [
+                    "milliseconds": [
                         0
                     ],
                     "minutes": [
@@ -312,11 +312,11 @@
             ],
             "duration": [
                 {
-                    "4": [
-                        0
-                    ],
                     "hours": [
                         1
+                    ],
+                    "milliseconds": [
+                        0
                     ],
                     "minutes": [
                         12
@@ -343,10 +343,10 @@
             ],
             "duration": [
                 {
-                    "4": [
+                    "hours": [
                         0
                     ],
-                    "hours": [
+                    "milliseconds": [
                         0
                     ],
                     "minutes": [
@@ -374,10 +374,10 @@
             ],
             "duration": [
                 {
-                    "4": [
+                    "hours": [
                         0
                     ],
-                    "hours": [
+                    "milliseconds": [
                         0
                     ],
                     "minutes": [
@@ -405,10 +405,10 @@
             ],
             "duration": [
                 {
-                    "4": [
+                    "hours": [
                         0
                     ],
-                    "hours": [
+                    "milliseconds": [
                         0
                     ],
                     "minutes": [
