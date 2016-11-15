@@ -1,8 +1,4 @@
 {
-    "28": [
-        "0a039f9902",
-        "12150a080800100018002000120908001000182320e707"
-    ],
     "cadence": [
         0,
         0,
@@ -144,6 +140,51 @@
             ],
             "stop-index": [
                 35
+            ]
+        }
+    ],
+    "heartrate-variability": [
+        {
+            "intervals": [
+                35999
+            ]
+        },
+        {
+            "offline": [
+                {
+                    "duration": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                999
+                            ],
+                            "minutes": [
+                                0
+                            ],
+                            "seconds": [
+                                35
+                            ]
+                        }
+                    ],
+                    "starttime": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minutes": [
+                                0
+                            ],
+                            "seconds": [
+                                0
+                            ]
+                        }
+                    ]
+                }
             ]
         }
     ],

@@ -918,6 +918,19 @@ QVariantMap TrainingSession::parseSamples(QIODevice &data) const
     ADD_FIELD_INFO("27/2",  "value",                    Float);
     ADD_FIELD_INFO("27/3",  "operation",                Enumerator);
     ADD_FIELD_INFO("27/4",  "cause",                    Enumerator);
+    ADD_FIELD_INFO("28"  ,    "heartrate-variability",  EmbeddedMessage);
+    ADD_FIELD_INFO("28/1",    "intervals",              Uint32);
+    ADD_FIELD_INFO("28/2",    "offline",                EmbeddedMessage);
+    ADD_FIELD_INFO("28/2/1",  "starttime",              EmbeddedMessage);
+    ADD_FIELD_INFO("28/2/1/1","hours",                  Uint32);
+    ADD_FIELD_INFO("28/2/1/2","minutes",                Uint32);
+    ADD_FIELD_INFO("28/2/1/3","seconds",                Uint32);
+    ADD_FIELD_INFO("28/2/1/4","milliseconds",           Uint32);
+    ADD_FIELD_INFO("28/2/2"  ,"duration",               EmbeddedMessage);
+    ADD_FIELD_INFO("28/2/2/1","hours",                  Uint32);
+    ADD_FIELD_INFO("28/2/2/2","minutes",                Uint32);
+    ADD_FIELD_INFO("28/2/2/3","seconds",                Uint32);
+    ADD_FIELD_INFO("28/2/2/4","milliseconds",           Uint32);
     ProtoBuf::Message parser(fieldInfo);
 
     if (isGzipped(data)) {
