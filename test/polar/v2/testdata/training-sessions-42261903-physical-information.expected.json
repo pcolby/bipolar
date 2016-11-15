@@ -1,50 +1,4 @@
 {
-    "13": [
-        {
-            "13/1": [
-                30
-            ],
-            "modified": [
-                {
-                    "3": [
-                        0
-                    ],
-                    "date": [
-                        {
-                            "day": [
-                                18
-                            ],
-                            "month": [
-                                12
-                            ],
-                            "year": [
-                                2014
-                            ]
-                        }
-                    ],
-                    "time": [
-                        {
-                            "hour": [
-                                18
-                            ],
-                            "milliseconds": [
-                                0
-                            ],
-                            "minute": [
-                                33
-                            ],
-                            "seconds": [
-                                4
-                            ]
-                        }
-                    ]
-                }
-            ]
-        }
-    ],
-    "15": [
-        "08fa0112150a0708de0f100c181d1208080b10161834200018001802"
-    ],
     "aerobic-threshold": [
         {
             "modified": [
@@ -187,6 +141,52 @@
                         1974
                     ]
                 }
+            ]
+        }
+    ],
+    "functional-threshold-power": [
+        {
+            "modified": [
+                {
+                    "3": [
+                        0
+                    ],
+                    "date": [
+                        {
+                            "day": [
+                                29
+                            ],
+                            "month": [
+                                12
+                            ],
+                            "year": [
+                                2014
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                11
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minute": [
+                                22
+                            ],
+                            "seconds": [
+                                52
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "source": [
+                2
+            ],
+            "value": [
+                250
             ]
         }
     ],
@@ -490,6 +490,49 @@
             ],
             "value": [
                 54
+            ]
+        }
+    ],
+    "weekly-recovery": [
+        {
+            "modified": [
+                {
+                    "3": [
+                        0
+                    ],
+                    "date": [
+                        {
+                            "day": [
+                                18
+                            ],
+                            "month": [
+                                12
+                            ],
+                            "year": [
+                                2014
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                18
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minute": [
+                                33
+                            ],
+                            "seconds": [
+                                4
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "value": [
+                30
             ]
         }
     ],

@@ -1,47 +1,4 @@
 {
-    "13": [
-        {
-            "13/1": [
-                40.104343414306641
-            ],
-            "modified": [
-                {
-                    "3": [
-                        0
-                    ],
-                    "date": [
-                        {
-                            "day": [
-                                4
-                            ],
-                            "month": [
-                                8
-                            ],
-                            "year": [
-                                2014
-                            ]
-                        }
-                    ],
-                    "time": [
-                        {
-                            "hour": [
-                                8
-                            ],
-                            "milliseconds": [
-                                0
-                            ],
-                            "minute": [
-                                50
-                            ],
-                            "seconds": [
-                                40
-                            ]
-                        }
-                    ]
-                }
-            ]
-        }
-    ],
     "aerobic-threshold": [
         {
             "modified": [
@@ -487,6 +444,49 @@
             ],
             "value": [
                 48
+            ]
+        }
+    ],
+    "weekly-recovery": [
+        {
+            "modified": [
+                {
+                    "3": [
+                        0
+                    ],
+                    "date": [
+                        {
+                            "day": [
+                                4
+                            ],
+                            "month": [
+                                8
+                            ],
+                            "year": [
+                                2014
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                8
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minute": [
+                                50
+                            ],
+                            "seconds": [
+                                40
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "value": [
+                40.10434341430664
             ]
         }
     ],

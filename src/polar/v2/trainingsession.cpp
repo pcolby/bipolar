@@ -406,6 +406,12 @@ QVariantMap TrainingSession::parseCreateExercise(QIODevice &data) const
     ADD_FIELD_INFO("16",       "exercise-counters", EmbeddedMessage);
     ADD_FIELD_INFO("16/1",     "sprint-count",      Uint32);
     ADD_FIELD_INFO("17", "speed-calibration-offset", Float);
+    ADD_FIELD_INFO("18",       "walking-distance",  Float);
+    ADD_FIELD_INFO("19",       "walking-diration",  EmbeddedMessage);
+    ADD_FIELD_INFO("19/1",     "hours",             Uint32);
+    ADD_FIELD_INFO("19/2",     "minutes",           Uint32);
+    ADD_FIELD_INFO("19/3",     "seconds",           Uint32);
+    ADD_FIELD_INFO("19/4",     "milliseconds",      Uint32);
     ProtoBuf::Message parser(fieldInfo);
 
     if (isGzipped(data)) {
@@ -503,6 +509,13 @@ QVariantMap TrainingSession::parseCreateSession(QIODevice &data) const
     ADD_FIELD_INFO("20/2/3", "seconds",            Uint32);
     ADD_FIELD_INFO("20/2/4", "milliseconds",       Uint32);
     ADD_FIELD_INFO("20/4",   "offset",             Int32);
+    ADD_FIELD_INFO("21",     "favorite-id",        EmbeddedMessage);
+    ADD_FIELD_INFO("21/1",   "value",              Uint64);
+    ADD_FIELD_INFO("21/2",   "last-modified",      EmbeddedMessage);
+    ADD_FIELD_INFO("21/2/1",   "date",             EmbeddedMessage);
+    ADD_FIELD_INFO("21/2/1/1", "year",             Uint32);
+    ADD_FIELD_INFO("21/2/1/2", "month",            Uint32);
+    ADD_FIELD_INFO("21/2/1/3", "day",              Uint32);
     ProtoBuf::Message parser(fieldInfo);
 
     if (isGzipped(data)) {
@@ -562,6 +575,12 @@ QVariantMap TrainingSession::parseLaps(QIODevice &data) const
     ADD_FIELD_INFO("1/2/6/1",  "average",          Float);
     ADD_FIELD_INFO("1/2/7",    "stride",           EmbeddedMessage);
     ADD_FIELD_INFO("1/2/7/1",  "average",          Uint32);
+    ADD_FIELD_INFO("1/2/8",    "swimming",         EmbeddedMessage);
+    ADD_FIELD_INFO("1/2/8/1",  "strokes",          Uint32);
+    ADD_FIELD_INFO("1/2/8/1",  "pool-count",       Uint32);
+    ADD_FIELD_INFO("1/2/8/1",  "average-duration", Float);
+    ADD_FIELD_INFO("1/2/9",    "left-right-balance", EmbeddedMessage);
+    ADD_FIELD_INFO("1/2/9/1",  "average",          Float);
     ADD_FIELD_INFO("2",        "summary",          EmbeddedMessage);
     ADD_FIELD_INFO("2/1",      "best-duration",    EmbeddedMessage);
     ADD_FIELD_INFO("2/1/1",    "hours",            Uint32);
@@ -724,8 +743,20 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("11/2/2/2", "minute",              Uint32);
     ADD_FIELD_INFO("11/2/2/3", "seconds",             Uint32);
     ADD_FIELD_INFO("11/2/2/4", "milliseconds",        Uint32);
-    ADD_FIELD_INFO("13",       "13",                  EmbeddedMessage); // ???
-    ADD_FIELD_INFO("13/1",     "13/1",                Float);           // ???
+    ADD_FIELD_INFO("12",       "typical-day",         EmbeddedMessage);
+    ADD_FIELD_INFO("12/1",     "value",               Enumerator);
+    ADD_FIELD_INFO("12/2",     "modified",            EmbeddedMessage);
+    ADD_FIELD_INFO("12/2/1",   "date",                EmbeddedMessage);
+    ADD_FIELD_INFO("12/2/1/1", "year",                Uint32);
+    ADD_FIELD_INFO("12/2/1/2", "month",               Uint32);
+    ADD_FIELD_INFO("12/2/1/3", "day",                 Uint32);
+    ADD_FIELD_INFO("12/2/2",   "time",                EmbeddedMessage);
+    ADD_FIELD_INFO("12/2/2/1", "hour",                Uint32);
+    ADD_FIELD_INFO("12/2/2/2", "minute",              Uint32);
+    ADD_FIELD_INFO("12/2/2/3", "seconds",             Uint32);
+    ADD_FIELD_INFO("12/2/2/4", "milliseconds",        Uint32);
+    ADD_FIELD_INFO("13",       "weekly-recovery",     EmbeddedMessage);
+    ADD_FIELD_INFO("13/1",     "value",               Float);
     ADD_FIELD_INFO("13/2",     "modified",            EmbeddedMessage);
     ADD_FIELD_INFO("13/2/1",   "date",                EmbeddedMessage);
     ADD_FIELD_INFO("13/2/1/1", "year",                Uint32);
@@ -736,6 +767,31 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("13/2/2/2", "minute",              Uint32);
     ADD_FIELD_INFO("13/2/2/3", "seconds",             Uint32);
     ADD_FIELD_INFO("13/2/2/4", "milliseconds",        Uint32);
+    ADD_FIELD_INFO("14",       "speed-calibration-offset", EmbeddedMessage);
+    ADD_FIELD_INFO("14/1",     "value",               Float);
+    ADD_FIELD_INFO("14/2",     "modified",            EmbeddedMessage);
+    ADD_FIELD_INFO("14/2/1",   "date",                EmbeddedMessage);
+    ADD_FIELD_INFO("14/2/1/1", "year",                Uint32);
+    ADD_FIELD_INFO("14/2/1/2", "month",               Uint32);
+    ADD_FIELD_INFO("14/2/1/3", "day",                 Uint32);
+    ADD_FIELD_INFO("14/2/2",   "time",                EmbeddedMessage);
+    ADD_FIELD_INFO("14/2/2/1", "hour",                Uint32);
+    ADD_FIELD_INFO("14/2/2/2", "minute",              Uint32);
+    ADD_FIELD_INFO("14/2/2/3", "seconds",             Uint32);
+    ADD_FIELD_INFO("14/2/2/4", "milliseconds",        Uint32);
+    ADD_FIELD_INFO("15",       "functional-threshold-power", EmbeddedMessage);
+    ADD_FIELD_INFO("15/1",     "value",               Uint32);
+    ADD_FIELD_INFO("15/2",     "modified",            EmbeddedMessage);
+    ADD_FIELD_INFO("15/2/1",   "date",                EmbeddedMessage);
+    ADD_FIELD_INFO("15/2/1/1", "year",                Uint32);
+    ADD_FIELD_INFO("15/2/1/2", "month",               Uint32);
+    ADD_FIELD_INFO("15/2/1/3", "day",                 Uint32);
+    ADD_FIELD_INFO("15/2/2",   "time",                EmbeddedMessage);
+    ADD_FIELD_INFO("15/2/2/1", "hour",                Uint32);
+    ADD_FIELD_INFO("15/2/2/2", "minute",              Uint32);
+    ADD_FIELD_INFO("15/2/2/3", "seconds",             Uint32);
+    ADD_FIELD_INFO("15/2/2/4", "milliseconds",        Uint32);
+    ADD_FIELD_INFO("15/3",     "source",              Enumerator);
     ADD_FIELD_INFO("100",      "modified",            EmbeddedMessage);
     ADD_FIELD_INFO("100/1",    "date",                EmbeddedMessage);
     ADD_FIELD_INFO("100/1/1",  "year",                Uint32);
@@ -746,6 +802,18 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("100/2/2",  "minute",              Uint32);
     ADD_FIELD_INFO("100/2/3",  "seconds",             Uint32);
     ADD_FIELD_INFO("100/2/4",  "milliseconds",        Uint32);
+    ADD_FIELD_INFO("101",      "snapshot-start-time", EmbeddedMessage);
+    ADD_FIELD_INFO("101/1",    "date",                EmbeddedMessage);
+    ADD_FIELD_INFO("101/1/1",  "year",                Uint32);
+    ADD_FIELD_INFO("101/1/2",  "month",               Uint32);
+    ADD_FIELD_INFO("101/1/3",  "day",                 Uint32);
+    ADD_FIELD_INFO("101/2",    "time",                EmbeddedMessage);
+    ADD_FIELD_INFO("101/2/1",  "hour",                Uint32);
+    ADD_FIELD_INFO("101/2/2",  "minute",              Uint32);
+    ADD_FIELD_INFO("101/2/3",  "seconds",             Uint32);
+    ADD_FIELD_INFO("101/2/4",  "milliseconds",        Uint32);
+    ADD_FIELD_INFO("101/3",    "trusted",             Bool);
+    ADD_FIELD_INFO("101/4",    "timezone-offset",     Int32);
     ProtoBuf::Message parser(fieldInfo);
 
     if (isGzipped(data)) {
@@ -774,6 +842,20 @@ QVariantMap TrainingSession::parseRoute(QIODevice &data) const
     ADD_FIELD_INFO("3",     "longitude",    Double);
     ADD_FIELD_INFO("4",     "altitude",     Sint32);
     ADD_FIELD_INFO("5",     "satellites",   Uint32);
+    ADD_FIELD_INFO("6",     "fix",          Bool);            // Obsolete?
+    ADD_FIELD_INFO("7",     "gps-offline",  EmbeddedMessage); // Obsolete?
+    ADD_FIELD_INFO("7/1",   "start-index",  Uint32);
+    ADD_FIELD_INFO("7/2",   "stop-index",   Uint32);
+    ADD_FIELD_INFO("8",     "gps-time",     EmbeddedMessage); // Obsolete?
+    ADD_FIELD_INFO("8/1",   "date",         EmbeddedMessage);
+    ADD_FIELD_INFO("8/1/1", "year",         Uint32);
+    ADD_FIELD_INFO("8/1/2", "month",        Uint32);
+    ADD_FIELD_INFO("8/1/3", "day",          Uint32);
+    ADD_FIELD_INFO("8/2",   "time",         EmbeddedMessage);
+    ADD_FIELD_INFO("8/2/1", "hour",         Uint32);
+    ADD_FIELD_INFO("8/2/2", "minute",       Uint32);
+    ADD_FIELD_INFO("8/2/3", "seconds",      Uint32);
+    ADD_FIELD_INFO("8/2/4", "milliseconds", Uint32);
     ADD_FIELD_INFO("9",     "timestamp",    EmbeddedMessage);
     ADD_FIELD_INFO("9/1",   "date",         EmbeddedMessage);
     ADD_FIELD_INFO("9/1/1", "year",         Uint32);
