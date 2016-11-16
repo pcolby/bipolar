@@ -1,7 +1,4 @@
 {
-    "11": [
-        1
-    ],
     "heartrate": [
         {
             "duration": [
@@ -273,6 +270,9 @@
                 }
             ]
         }
+    ],
+    "power-source": [
+        1
     ],
     "speed": [
         {
