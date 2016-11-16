@@ -345,6 +345,7 @@ QVariantMap TrainingSession::parseCreateExercise(QIODevice &data) const
     ADD_FIELD_INFO("1/2/2", "minute",        Uint32);
     ADD_FIELD_INFO("1/2/3", "seconds",       Uint32);
     ADD_FIELD_INFO("1/2/4", "milliseconds",  Uint32);
+    ADD_FIELD_INFO("1/3",   "trusted",       Bool);
     ADD_FIELD_INFO("1/4",   "offset",        Int32);
     ADD_FIELD_INFO("2",     "duration",      EmbeddedMessage);
     ADD_FIELD_INFO("2/1",   "hours",         Uint32);
@@ -445,6 +446,7 @@ QVariantMap TrainingSession::parseCreateSession(QIODevice &data) const
     ADD_FIELD_INFO("1/2/2",  "minute",             Uint32);
     ADD_FIELD_INFO("1/2/3",  "seconds",            Uint32);
     ADD_FIELD_INFO("1/2/4",  "milliseconds",       Uint32);
+    ADD_FIELD_INFO("1/3",    "trusted",            Bool);
     ADD_FIELD_INFO("1/4",    "offset",             Int32);
     ADD_FIELD_INFO("2",      "exercise-count",     Uint32);
     ADD_FIELD_INFO("3",      "device",             String);
@@ -498,6 +500,7 @@ QVariantMap TrainingSession::parseCreateSession(QIODevice &data) const
     ADD_FIELD_INFO("19/2/2/2", "minute",           Uint32);
     ADD_FIELD_INFO("19/2/2/3", "seconds",          Uint32);
     ADD_FIELD_INFO("19/2/2/4", "milliseconds",     Uint32);
+    ADD_FIELD_INFO("19/2/3",   "trusted",          Bool);
     ADD_FIELD_INFO("20",     "end",                EmbeddedMessage);
     ADD_FIELD_INFO("20/1",   "date",               EmbeddedMessage);
     ADD_FIELD_INFO("20/1/1", "year",               Uint32);
@@ -508,6 +511,7 @@ QVariantMap TrainingSession::parseCreateSession(QIODevice &data) const
     ADD_FIELD_INFO("20/2/2", "minute",             Uint32);
     ADD_FIELD_INFO("20/2/3", "seconds",            Uint32);
     ADD_FIELD_INFO("20/2/4", "milliseconds",       Uint32);
+    ADD_FIELD_INFO("20/3",   "trusted",            Bool);
     ADD_FIELD_INFO("20/4",   "offset",             Int32);
     ADD_FIELD_INFO("21",     "favorite-id",        EmbeddedMessage);
     ADD_FIELD_INFO("21/1",   "value",              Uint64);
@@ -630,6 +634,7 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("1/2/2/2",  "minute",              Uint32);
     ADD_FIELD_INFO("1/2/2/3",  "seconds",             Uint32);
     ADD_FIELD_INFO("1/2/2/4",  "milliseconds",        Uint32);
+    ADD_FIELD_INFO("1/2/3",    "trusted",             Bool);
     ADD_FIELD_INFO("2",        "gender",              EmbeddedMessage);
     ADD_FIELD_INFO("2/1",      "value",               Enumerator);
     ADD_FIELD_INFO("2/2",      "modified",            EmbeddedMessage);
@@ -642,6 +647,7 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("2/2/2/2",  "minute",              Uint32);
     ADD_FIELD_INFO("2/2/2/3",  "seconds",             Uint32);
     ADD_FIELD_INFO("2/2/2/4",  "milliseconds",        Uint32);
+    ADD_FIELD_INFO("2/2/3",    "trusted",             Bool);
     ADD_FIELD_INFO("3",        "weight",              EmbeddedMessage);
     ADD_FIELD_INFO("3/1",      "value",               Float);
     ADD_FIELD_INFO("3/2",      "modified",            EmbeddedMessage);
@@ -654,6 +660,7 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("3/2/2/2",  "minute",              Uint32);
     ADD_FIELD_INFO("3/2/2/3",  "seconds",             Uint32);
     ADD_FIELD_INFO("3/2/2/4",  "milliseconds",        Uint32);
+    ADD_FIELD_INFO("3/2/3",    "trusted",             Bool);
     ADD_FIELD_INFO("4",        "height",              EmbeddedMessage);
     ADD_FIELD_INFO("4/1",      "value",               Float);
     ADD_FIELD_INFO("4/2",      "modified",            EmbeddedMessage);
@@ -666,6 +673,7 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("4/2/2/2",  "minute",              Uint32);
     ADD_FIELD_INFO("4/2/2/3",  "seconds",             Uint32);
     ADD_FIELD_INFO("4/2/2/4",  "milliseconds",        Uint32);
+    ADD_FIELD_INFO("4/2/3",    "trusted",             Bool);
     ADD_FIELD_INFO("5",        "maximum-heartrate",   EmbeddedMessage);
     ADD_FIELD_INFO("5/1",      "value",               Uint32);
     ADD_FIELD_INFO("5/2",      "modified",            EmbeddedMessage);
@@ -678,6 +686,7 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("5/2/2/2",  "minute",              Uint32);
     ADD_FIELD_INFO("5/2/2/3",  "seconds",             Uint32);
     ADD_FIELD_INFO("5/2/2/4",  "milliseconds",        Uint32);
+    ADD_FIELD_INFO("5/2/3",    "trusted",             Bool);
     ADD_FIELD_INFO("5/3",      "source",              Enumerator);
     ADD_FIELD_INFO("6",        "resting-heartrate",   EmbeddedMessage);
     ADD_FIELD_INFO("6/1",      "value",               Uint32);
@@ -691,6 +700,7 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("6/2/2/2",  "minute",              Uint32);
     ADD_FIELD_INFO("6/2/2/3",  "seconds",             Uint32);
     ADD_FIELD_INFO("6/2/2/4",  "milliseconds",        Uint32);
+    ADD_FIELD_INFO("6/2/3",    "trusted",             Bool);
     ADD_FIELD_INFO("6/3",      "source",              Enumerator);
     ADD_FIELD_INFO("8",        "aerobic-threshold",   EmbeddedMessage);
     ADD_FIELD_INFO("8/1",      "value",               Uint32);
@@ -704,6 +714,7 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("8/2/2/2",  "minute",              Uint32);
     ADD_FIELD_INFO("8/2/2/3",  "seconds",             Uint32);
     ADD_FIELD_INFO("8/2/2/4",  "milliseconds",        Uint32);
+    ADD_FIELD_INFO("8/2/3",    "trusted",             Bool);
     ADD_FIELD_INFO("8/3",      "source",              Enumerator);
     ADD_FIELD_INFO("9",        "anaerobic-threshold", EmbeddedMessage);
     ADD_FIELD_INFO("9/1",      "value",               Uint32);
@@ -717,6 +728,7 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("9/2/2/2",  "minute",              Uint32);
     ADD_FIELD_INFO("9/2/2/3",  "seconds",             Uint32);
     ADD_FIELD_INFO("9/2/2/4",  "milliseconds",        Uint32);
+    ADD_FIELD_INFO("9/2/3",    "trusted",             Bool);
     ADD_FIELD_INFO("9/3",      "source",              Enumerator);
     ADD_FIELD_INFO("10",       "vo2max",              EmbeddedMessage);
     ADD_FIELD_INFO("10/1",     "value",               Uint32);
@@ -730,6 +742,7 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("10/2/2/2", "minute",              Uint32);
     ADD_FIELD_INFO("10/2/2/3", "seconds",             Uint32);
     ADD_FIELD_INFO("10/2/2/4", "milliseconds",        Uint32);
+    ADD_FIELD_INFO("10/2/3",   "trusted",             Bool);
     ADD_FIELD_INFO("10/3",     "source",              Enumerator);
     ADD_FIELD_INFO("11",       "training-background", EmbeddedMessage);
     ADD_FIELD_INFO("11/1",     "value",               Enumerator);
@@ -743,6 +756,7 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("11/2/2/2", "minute",              Uint32);
     ADD_FIELD_INFO("11/2/2/3", "seconds",             Uint32);
     ADD_FIELD_INFO("11/2/2/4", "milliseconds",        Uint32);
+    ADD_FIELD_INFO("11/2/3",   "trusted",             Bool);
     ADD_FIELD_INFO("12",       "typical-day",         EmbeddedMessage);
     ADD_FIELD_INFO("12/1",     "value",               Enumerator);
     ADD_FIELD_INFO("12/2",     "modified",            EmbeddedMessage);
@@ -755,6 +769,7 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("12/2/2/2", "minute",              Uint32);
     ADD_FIELD_INFO("12/2/2/3", "seconds",             Uint32);
     ADD_FIELD_INFO("12/2/2/4", "milliseconds",        Uint32);
+    ADD_FIELD_INFO("12/2/3",   "trusted",             Bool);
     ADD_FIELD_INFO("13",       "weekly-recovery",     EmbeddedMessage);
     ADD_FIELD_INFO("13/1",     "value",               Float);
     ADD_FIELD_INFO("13/2",     "modified",            EmbeddedMessage);
@@ -767,6 +782,7 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("13/2/2/2", "minute",              Uint32);
     ADD_FIELD_INFO("13/2/2/3", "seconds",             Uint32);
     ADD_FIELD_INFO("13/2/2/4", "milliseconds",        Uint32);
+    ADD_FIELD_INFO("13/2/3",   "trusted",             Bool);
     ADD_FIELD_INFO("14",       "speed-calibration-offset", EmbeddedMessage);
     ADD_FIELD_INFO("14/1",     "value",               Float);
     ADD_FIELD_INFO("14/2",     "modified",            EmbeddedMessage);
@@ -779,6 +795,7 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("14/2/2/2", "minute",              Uint32);
     ADD_FIELD_INFO("14/2/2/3", "seconds",             Uint32);
     ADD_FIELD_INFO("14/2/2/4", "milliseconds",        Uint32);
+    ADD_FIELD_INFO("14/2/3",   "trusted",             Bool);
     ADD_FIELD_INFO("15",       "functional-threshold-power", EmbeddedMessage);
     ADD_FIELD_INFO("15/1",     "value",               Uint32);
     ADD_FIELD_INFO("15/2",     "modified",            EmbeddedMessage);
@@ -791,6 +808,7 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("15/2/2/2", "minute",              Uint32);
     ADD_FIELD_INFO("15/2/2/3", "seconds",             Uint32);
     ADD_FIELD_INFO("15/2/2/4", "milliseconds",        Uint32);
+    ADD_FIELD_INFO("15/2/3",   "trusted",             Bool);
     ADD_FIELD_INFO("15/3",     "source",              Enumerator);
     ADD_FIELD_INFO("100",      "modified",            EmbeddedMessage);
     ADD_FIELD_INFO("100/1",    "date",                EmbeddedMessage);
@@ -802,6 +820,7 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("100/2/2",  "minute",              Uint32);
     ADD_FIELD_INFO("100/2/3",  "seconds",             Uint32);
     ADD_FIELD_INFO("100/2/4",  "milliseconds",        Uint32);
+    ADD_FIELD_INFO("100/3",    "trusted",             Bool);
     ADD_FIELD_INFO("101",      "snapshot-start-time", EmbeddedMessage);
     ADD_FIELD_INFO("101/1",    "date",                EmbeddedMessage);
     ADD_FIELD_INFO("101/1/1",  "year",                Uint32);
@@ -856,6 +875,7 @@ QVariantMap TrainingSession::parseRoute(QIODevice &data) const
     ADD_FIELD_INFO("8/2/2", "minute",       Uint32);
     ADD_FIELD_INFO("8/2/3", "seconds",      Uint32);
     ADD_FIELD_INFO("8/2/4", "milliseconds", Uint32);
+    ADD_FIELD_INFO("8/3",   "trusted",      Bool);
     ADD_FIELD_INFO("9",     "timestamp",    EmbeddedMessage);
     ADD_FIELD_INFO("9/1",   "date",         EmbeddedMessage);
     ADD_FIELD_INFO("9/1/1", "year",         Uint32);
@@ -866,6 +886,7 @@ QVariantMap TrainingSession::parseRoute(QIODevice &data) const
     ADD_FIELD_INFO("9/2/2", "minute",       Uint32);
     ADD_FIELD_INFO("9/2/3", "seconds",      Uint32);
     ADD_FIELD_INFO("9/2/4", "milliseconds", Uint32);
+    ADD_FIELD_INFO("9/3",   "trusted",      Bool);
     ProtoBuf::Message parser(fieldInfo);
 
     if (isGzipped(data)) {
