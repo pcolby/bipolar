@@ -832,7 +832,7 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("101/2/3",  "seconds",             Uint32);
     ADD_FIELD_INFO("101/2/4",  "milliseconds",        Uint32);
     ADD_FIELD_INFO("101/3",    "trusted",             Bool);
-    ADD_FIELD_INFO("101/4",    "timezone-offset",     Int32);
+    ADD_FIELD_INFO("101/4",    "offset",              Int32);
     ProtoBuf::Message parser(fieldInfo);
 
     if (isGzipped(data)) {
