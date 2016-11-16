@@ -2483,7 +2483,8 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                 if ((index < cadence.length()) && (cadence.at(index).toInt() >= 0) &&
                     (!sensorOffline(samples.value(QLatin1String("speed-offline")).toList(), index))) {
                     tpx.appendChild(doc.createElement(QLatin1String("Speed")))
-                        .appendChild(doc.createTextNode(VARIANT_TO_STRING(speed.at(index))));
+                        .appendChild(doc.createTextNode(QString::fromLatin1("%1")
+                            .arg(speed.at(index).toDouble() / 3.6)));
                 }
 
                 if ((index < cadence.length()) && (cadence.at(index).toInt() >= 0) &&
