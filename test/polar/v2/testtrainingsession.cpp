@@ -1486,7 +1486,7 @@ void TestTrainingSession::toHRM_RR()
     if (!outputDirPath.isNull()) {
         for (int index = 0; index < hrm.length(); ++index) {
             QString fileName = QString::fromLatin1("%1/%2")
-                .arg(QLatin1String(QTest::currentDataTag()));
+                .arg(outputDirPath).arg(QLatin1String(QTest::currentDataTag()));
             if (hrm.length() != 1) {
                 fileName += QString::fromLatin1(".%1").arg(index);
             }

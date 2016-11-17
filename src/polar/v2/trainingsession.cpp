@@ -1767,6 +1767,25 @@ QDomDocument TrainingSession::toGPX(const QDateTime &creationTime) const
     return doc;
 }
 
+// Sometimes Polar devices generate a separate rrsamples data file which is just
+// a flat list of R-R intervals.  However, other times, Polar devices include HRV
+// data interspersed with other exercise sample data - which is a bit odd considering
+// that R-R intervals are, by there very nature, not sampled at regular intervals as
+// all of the other exercise sample data is.  Anyway, toHRM will use rrsamples if
+// available, and fallback to exercise sample HRM values if not. To assist in the
+// latter case, this funciton flattens the exercise sample HRV data into a list
+// of intervals the same as the rrsample data files would, making both sources look
+// the same throughout the toHRM function.
+QVariantList flattenHrvSamplesForHrm(const QVariantMap &samples)
+{
+    QVariantList rrsamples;
+    foreach (const QVariant &hrv, samples.value(QLatin1String("heartrate-variability")).toList()) {
+        rrsamples.append(hrv.toMap().value(QLatin1String("intervals")).toList());
+        // Note, ignorig hrv["offline"] values - no way to apply them to HRM.
+    }
+    return rrsamples;
+}
+
 /// @see http://www.polar.com/files/Polar_HRM_file%20format.pdf
 QStringList TrainingSession::toHRM(const bool rrDataOnly) const
 {
@@ -1781,7 +1800,9 @@ QStringList TrainingSession::toHRM(const bool rrDataOnly) const
         const QVariantMap stats      = map.value(STATISTICS).toMap();
         const QVariantMap zones      = map.value(ZONES).toMap();
 
-        const QVariantList rrsamples  = map.value(RRSAMPLES).toMap().value(QLatin1String("value")).toList();
+        const QVariantList rrsamples = map.contains(RRSAMPLES)
+            ? map.value(RRSAMPLES).toMap().value(QLatin1String("value")).toList()
+            : flattenHrvSamplesForHrm(samples);
 
         const bool haveAltitude     = ((!rrDataOnly) && (haveAnySamples(samples, QLatin1String("speed"))));
         const bool haveCadence      = ((!rrDataOnly) && (haveAnySamples(samples, QLatin1String("cadence"))));
