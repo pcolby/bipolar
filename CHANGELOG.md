@@ -1,7 +1,11 @@
 ## Bipolar Changelog
 
 ### 0.5.6 (_unreleased_)
-??
+Features:
+* fallback to exercise HRV data ([#42](../../issues/42))
+
+Bugs:
+- use metres-per-second for TCX TPX Speed values ([#74](../../issues/74))
 
 ### 0.5.5 (2016-10-19)
 Bugs:
