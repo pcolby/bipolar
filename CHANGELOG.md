@@ -1,6 +1,6 @@
 ## Bipolar Changelog
 
-### 0.5.6 (_unreleased_)
+### 0.5.6 (2016-12-17)
 Features:
 * fallback to exercise HRV data ([#42](../../issues/42))
 
