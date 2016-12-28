@@ -408,7 +408,7 @@ QVariantMap TrainingSession::parseCreateExercise(QIODevice &data) const
     ADD_FIELD_INFO("16/1",     "sprint-count",      Uint32);
     ADD_FIELD_INFO("17", "speed-calibration-offset", Float);
     ADD_FIELD_INFO("18",       "walking-distance",  Float);
-    ADD_FIELD_INFO("19",       "walking-diration",  EmbeddedMessage);
+    ADD_FIELD_INFO("19",       "walking-duration",  EmbeddedMessage);
     ADD_FIELD_INFO("19/1",     "hours",             Uint32);
     ADD_FIELD_INFO("19/2",     "minutes",           Uint32);
     ADD_FIELD_INFO("19/3",     "seconds",           Uint32);
