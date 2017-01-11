@@ -1,5 +1,5 @@
 /*
-    Copyright 2014-2016 Paul Colby
+    Copyright 2014-2017 Paul Colby
 
     This file is part of Bipolar.
 
