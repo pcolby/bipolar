@@ -243,6 +243,21 @@ QString TrainingSession::getTcxSport(const quint64 &polarSportValue)
         map.insert(125, TCX_OTHER);  // Ballroom
         map.insert(126, TCX_OTHER);  // Core
         map.insert(127, TCX_OTHER);  // Mobility (static)
+        map.insert(128, TCX_OTHER);  // LES MILLS BODYPUMP
+        map.insert(129, TCX_OTHER);  // LES MILLS BODYATTACK
+        map.insert(130, TCX_OTHER);  // LES MILLS BODYCOMBAT
+        map.insert(131, TCX_OTHER);  // LES MILLS GRIT Cardio
+        map.insert(132, TCX_OTHER);  // LES MILLS GRIT Strength
+        map.insert(133, TCX_OTHER);  // LES MILLS GRIT Plyo
+        map.insert(134, TCX_OTHER);  // LES MILLS SH'BAM
+        map.insert(135, TCX_BIKING); // LES MILLS RPM
+        map.insert(136, TCX_OTHER);  // LES MILLS BODYJAM
+        map.insert(137, TCX_OTHER);  // LES MILLS BODYSTEP
+        map.insert(138, TCX_BIKING); // LES MILLS SPRINT
+        map.insert(139, TCX_OTHER);  // LES MILLS BODYVIVE
+        map.insert(140, TCX_OTHER);  // LES MILLS BODYBALANCE
+        map.insert(141, TCX_BIKING); // LES MILLS THE TRIP
+        map.insert(142, TCX_OTHER);  // LES MILLS CXWORX
     }
     QMap<quint64, QString>::ConstIterator iter = map.constFind(polarSportValue);
     if (iter == map.constEnd()) {
