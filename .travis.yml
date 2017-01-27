@@ -20,6 +20,7 @@ env:
   - QT=55 BREW=55 PPA=beineri/opt-qt551-trusty
   - QT=56 BREW=5  PPA=beineri/opt-qt562-trusty
   - QT=57 BREW=ex PPA=beineri/opt-qt571-trusty
+  - QT=58 BREW=ex PPA=beineri/opt-qt58-trusty
 
 matrix:
   allow_failures:
@@ -30,7 +31,8 @@ matrix:
     - { os: osx, env: QT=52 BREW=ex PPA=beineri/opt-qt521-trusty }
     - { os: osx, env: QT=53 BREW=ex PPA=beineri/opt-qt532-trusty }
     - { os: osx, env: QT=54 BREW=ex PPA=beineri/opt-qt542-trusty }
-    - { os: osx, env: QT=57 BREW=ex PPA=beineri/opt-qt571-trusty  }
+    - { os: osx, env: QT=57 BREW=ex PPA=beineri/opt-qt571-trusty }
+    - { os: osx, env: QT=58 BREW=ex PPA=beineri/opt-qt58-trusty  }
     - { os: osx, compiler: gcc, env: QT=5  BREW=5 } # Qt 5.6 no longer supports gcc on OS X.
     - { os: osx, compiler: gcc, env: QT=56 BREW=5  PPA=beineri/opt-qt562-trusty } # Qt 5.6 no longer supports gcc on OS X.
 
