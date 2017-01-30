@@ -34,6 +34,7 @@ matrix:
       configuration: debug
 
 install:
+  - C:\cygwin\bin\find C:\Qt -maxdepth 2 -type d
   - '%QTDIR%\bin\qtenv2.bat'
   - qmake -v
   - if %QTDIR:_64=%==%QTDIR% ( set ARCH=x86 ) else set ARCH=x64
