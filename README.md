@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d82823a8995945a0937b3fe2887fc7d5)](https://www.codacy.com/app/pcolby/bipolar?utm_source=github.com&utm_medium=referral&utm_content=pcolby/bipolar&utm_campaign=badger)
 # [![PMDA++](qrc/icon/bipolar30.png)](#) Bipolar
 [![Build Status](https://img.shields.io/travis/pcolby/bipolar/master.svg "Linux (Travis CI)")](https://travis-ci.org/pcolby/bipolar)
 [![Build Status](https://img.shields.io/appveyor/ci/pcolby/bipolar.svg "Windows (AppVeyor)")](https://ci.appveyor.com/project/pcolby/bipolar)
