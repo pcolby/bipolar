@@ -1,8 +1,8 @@
 language: cpp
 
 os:
-  - linux
-  #- osx
+  #- linux
+  - osx
 
 dist: trusty
 
@@ -11,18 +11,18 @@ compiler:
   - gcc
 
 env:
-  #- QT=5  BREW=
+  - QT=5  BREW=
   #- QT=5  BREW=ex   PPA=ubuntu-sdk-team/ppa
   #- QT=51 BREW=ex   PPA=beineri/opt-qt511-trusty
   #- QT=52 BREW=ex   PPA=beineri/opt-qt521-trusty
   #- QT=53 BREW=ex   PPA=beineri/opt-qt532-trusty
   #- QT=54 BREW=ex   PPA=beineri/opt-qt542-trusty
-  #- QT=55 BREW=AT55 PPA=beineri/opt-qt551-trusty
+  - QT=55 BREW=AT55 PPA=beineri/opt-qt551-trusty
   #- QT=56 BREW=ex   PPA=beineri/opt-qt562-trusty
-  #- QT=57 BREW=AT57 PPA=beineri/opt-qt571-trusty
+  - QT=57 BREW=AT57 PPA=beineri/opt-qt571-trusty
   #- QT=58 BREW=ex   PPA=beineri/opt-qt58-trusty
-  - QT=59 BREW=ex   PPA=beineri/opt-qt59-trusty
-  - QT=59 BREW=ex   PPA=beineri/opt-qt591-trusty
+  #- QT=59 BREW=ex   PPA=beineri/opt-qt59-trusty
+  #- QT=59 BREW=ex   PPA=beineri/opt-qt591-trusty
 
 matrix:
   allow_failures:
