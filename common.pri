@@ -47,7 +47,7 @@ macx-g++:contains(CONFIG, c++11) {
         message(Adding '-stdlib=libc++' flag for C++11 with $$QMAKE_CXX and $$QT_VERSION)
         QMAKE_CXXFLAGS += -stdlib=libc++
     }
-    equals(QT_MAJOR_VERSION,5):equals(QT_MINOR_VERSION,5) {
+    equals(QT_MAJOR_VERSION,5):equals(QT_MINOR_VERSION,7) {
         message(Adding '-stdlib=libc++' flag for C++11 with $$QMAKE_CXX and $$QT_VERSION)
         QMAKE_CXXFLAGS += -stdlib=libc++
     }
