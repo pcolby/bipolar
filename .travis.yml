@@ -11,16 +11,18 @@ compiler:
   - gcc
 
 env:
-  - QT=5  BREW=5
-  - QT=5  BREW=ex PPA=ubuntu-sdk-team/ppa
-  - QT=51 BREW=ex PPA=beineri/opt-qt511-trusty
-  - QT=52 BREW=ex PPA=beineri/opt-qt521-trusty
-  - QT=53 BREW=ex PPA=beineri/opt-qt532-trusty
-  - QT=54 BREW=ex PPA=beineri/opt-qt542-trusty
-  - QT=55 BREW=55 PPA=beineri/opt-qt551-trusty
-  - QT=56 BREW=5  PPA=beineri/opt-qt562-trusty
-  - QT=57 BREW=ex PPA=beineri/opt-qt571-trusty
-  - QT=58 BREW=ex PPA=beineri/opt-qt58-trusty
+  - QT=5  BREW=
+  - QT=5  BREW=ex   PPA=ubuntu-sdk-team/ppa
+  - QT=51 BREW=ex   PPA=beineri/opt-qt511-trusty
+  - QT=52 BREW=ex   PPA=beineri/opt-qt521-trusty
+  - QT=53 BREW=ex   PPA=beineri/opt-qt532-trusty
+  - QT=54 BREW=ex   PPA=beineri/opt-qt542-trusty
+  - QT=55 BREW=AT55 PPA=beineri/opt-qt551-trusty
+  - QT=56 BREW=ex   PPA=beineri/opt-qt562-trusty
+  - QT=57 BREW=AT57 PPA=beineri/opt-qt571-trusty
+  - QT=58 BREW=ex   PPA=beineri/opt-qt58-trusty
+  - QT=59 BREW=ex   PPA=beineri/opt-qt59-trusty
+  - QT=591 BREW=ex  PPA=beineri/opt-qt591-trusty
 
 matrix:
   allow_failures:
@@ -31,16 +33,16 @@ matrix:
     - { os: osx, env: QT=52 BREW=ex PPA=beineri/opt-qt521-trusty }
     - { os: osx, env: QT=53 BREW=ex PPA=beineri/opt-qt532-trusty }
     - { os: osx, env: QT=54 BREW=ex PPA=beineri/opt-qt542-trusty }
-    - { os: osx, env: QT=57 BREW=ex PPA=beineri/opt-qt571-trusty }
     - { os: osx, env: QT=58 BREW=ex PPA=beineri/opt-qt58-trusty  }
-    - { os: osx, compiler: gcc, env: QT=5  BREW=5 } # Qt 5.6 no longer supports gcc on OS X.
-    - { os: osx, compiler: gcc, env: QT=56 BREW=5  PPA=beineri/opt-qt562-trusty } # Qt 5.6 no longer supports gcc on OS X.
+    - { os: osx, env: QT=57 BREW=ex PPA=beineri/opt-qt571-trusty }
+    - { os: osx, env: QT=57 BREW=ex PPA=beineri/opt-qt571-trusty }
+   #- { os: osx, compiler: gcc, env: QT=5  BREW=5 } # Qt 5.6 no longer supports gcc on OS X.
 
 before_install:
   - '[[ "$TRAVIS_OS_NAME" != linux || -z "$PPA" ]] || sudo add-apt-repository -y ppa:$PPA'
   - '[ "$TRAVIS_OS_NAME" != linux ] || sudo apt-get -qy update'
   - '[ "$TRAVIS_OS_NAME" != osx ] || brew update'
-# - '[ "$TRAVIS_OS_NAME" != osx ] || brew search qt5' # Causes Homebrew API rate-limit issues.
+  - '[ "$TRAVIS_OS_NAME" != osx ] || brew search qt5' # Causes Homebrew API rate-limit issues.
 
 install:
   - '[ "$TRAVIS_OS_NAME" != linux ] || sudo apt-get -qy install cppcheck'
