@@ -21,6 +21,15 @@ environment:
     - QTDIR: C:\Qt\5.7\msvc2013_64
     - QTDIR: C:\Qt\5.7\msvc2015
     - QTDIR: C:\Qt\5.7\msvc2015_64
+    - QTDIR: C:\Qt\5.8\mingw53_32
+    - QTDIR: C:\Qt\5.8\msvc2013
+    - QTDIR: C:\Qt\5.8\msvc2013_64
+    - QTDIR: C:\Qt\5.8\msvc2015
+    - QTDIR: C:\Qt\5.8\msvc2015_64
+    - QTDIR: C:\Qt\5.9.1\mingw53_32
+    - QTDIR: C:\Qt\5.9.1\msvc2013_64
+    - QTDIR: C:\Qt\5.9.1\msvc2015
+    - QTDIR: C:\Qt\5.9.1\msvc2015_64
 
 configuration:
   - debug
@@ -83,7 +92,7 @@ deploy:
     on:
       appveyor_repo_tag: true
       configuration: release
-      QTDIR: C:\Qt\5.7\msvc2015_64
+      QTDIR: C:\Qt\5.9.1\msvc2015_64
 
 notifications:
   - provider: Webhook
