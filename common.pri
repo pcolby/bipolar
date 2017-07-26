@@ -53,3 +53,9 @@ macx-g++:contains(CONFIG, c++11) {
         QMAKE_CXXFLAGS += -stdlib=libc++
     }
 }
+
+# Workaround LLVM bug https://llvm.org/bugs/show_bug.cgi?id=26396 https://bugreports.qt.io/browse/QTBUG-52134
+macx:equals(QT_MAJOR_VERSION,5):equals(QT_MINOR_VERSION,5) {
+    message(Adding '-Wno-return-stack-address' flag $$QT_VERSION)
+    QMAKE_CXXFLAGS += -Wno-return-stack-address
+}
