@@ -42,8 +42,6 @@ before_install:
   - '[[ "$TRAVIS_OS_NAME" != linux || -z "$PPA" ]] || sudo add-apt-repository -y ppa:$PPA'
   - '[ "$TRAVIS_OS_NAME" != linux ] || sudo apt-get -qy update'
   - '[ "$TRAVIS_OS_NAME" != osx ] || brew update'
-  - '[ "$TRAVIS_OS_NAME" != osx ] || brew versions cppcheck'
-  - '[ "$TRAVIS_OS_NAME" != osx ] || brew versions qt'
 # - '[ "$TRAVIS_OS_NAME" != osx ] || brew search qt' # Causes Homebrew API rate-limit issues.
 
 install:
