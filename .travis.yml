@@ -1,14 +1,14 @@
 language: cpp
 
 os:
-  #- linux
+  - linux
   - osx
 
 dist: trusty
 
 compiler:
   - clang
-  #- gcc
+  - gcc
 
 env:
   - QT=5  BREW=
@@ -21,8 +21,8 @@ env:
   - QT=56 BREW=ex   PPA=beineri/opt-qt562-trusty
   - QT=57 BREW=@5.7 PPA=beineri/opt-qt571-trusty
   - QT=58 BREW=ex   PPA=beineri/opt-qt58-trusty
-  #- QT=59 BREW=@5.9 PPA=beineri/opt-qt59-trusty
-  - QT=59 BREW=@5.9.1 PPA=beineri/opt-qt591-trusty
+  - QT=59 BREW=@5.9 PPA=beineri/opt-qt59-trusty
+  - QT=59 BREW=ex   PPA=beineri/opt-qt591-trusty
 
 matrix:
   allow_failures:
@@ -35,7 +35,6 @@ matrix:
     - { os: osx, env: QT=54 BREW=ex   PPA=beineri/opt-qt542-trusty }
     - { os: osx, env: QT=56 BREW=ex   PPA=beineri/opt-qt562-trusty }
     - { os: osx, env: QT=58 BREW=ex   PPA=beineri/opt-qt58-trusty  }
-    - { os: osx, env: QT=59 BREW=ex   PPA=beineri/opt-qt59-trusty  }
     - { os: osx, env: QT=59 BREW=ex   PPA=beineri/opt-qt591-trusty }
 
 before_install:
