@@ -25,8 +25,6 @@ env:
   #- QT=59 BREW=ex   PPA=beineri/opt-qt591-trusty
 
 matrix:
-  allow_failures:
-    - { os: osx, env: QT=55 BREW=@5.5 PPA=beineri/opt-qt551-trusty } # https://llvm.org/bugs/show_bug.cgi?id=26396
   exclude:
     - { os: osx, env: QT=5  BREW=ex   PPA=ubuntu-sdk-team/ppa      }
     - { os: osx, env: QT=51 BREW=ex   PPA=beineri/opt-qt511-trusty }
