@@ -19,6 +19,7 @@ env:
   - QT=54 BREW=ex   PPA=beineri/opt-qt542-trusty
   - QT=55 BREW=@5.5 PPA=beineri/opt-qt551-trusty
   - QT=56 BREW=ex   PPA=beineri/opt-qt562-trusty
+  - QT=56 BREW=ex   PPA=beineri/opt-qt563-trusty
   - QT=57 BREW=@5.7 PPA=beineri/opt-qt571-trusty
   - QT=58 BREW=ex   PPA=beineri/opt-qt58-trusty
   - QT=59 BREW=@5.9 PPA=beineri/opt-qt591-trusty
@@ -31,6 +32,7 @@ matrix:
     - { os: osx, env: QT=53 BREW=ex   PPA=beineri/opt-qt532-trusty }
     - { os: osx, env: QT=54 BREW=ex   PPA=beineri/opt-qt542-trusty }
     - { os: osx, env: QT=56 BREW=ex   PPA=beineri/opt-qt562-trusty }
+    - { os: osx, env: QT=56 BREW=ex   PPA=beineri/opt-qt563-trusty }
     - { os: osx, env: QT=58 BREW=ex   PPA=beineri/opt-qt58-trusty  }
 
 before_install:
