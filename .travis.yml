@@ -29,8 +29,10 @@ matrix:
   # https://bugreports.qt.io/browse/QTBUG-62531
   allow_failures:
     - os: osx
+      compiler: gcc
       env: QT=5  BREW=
     - os: osx
+      compiler: gcc
       env: QT=59 BREW=@5.9 PPA=beineri/opt-qt591-trusty
   exclude:
     - { os: osx, env: QT=5  BREW=ex   PPA=ubuntu-sdk-team/ppa      }
