@@ -1,0 +1,434 @@
+{
+    "heartrate": [
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        31
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        110
+                    ],
+                    "low": [
+                        92
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        1
+                    ],
+                    "seconds": [
+                        38
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        128
+                    ],
+                    "low": [
+                        110
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        0
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        146
+                    ],
+                    "low": [
+                        128
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        0
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        165
+                    ],
+                    "low": [
+                        146
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        0
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        183
+                    ],
+                    "low": [
+                        165
+                    ]
+                }
+            ]
+        }
+    ],
+    "heartrate-source": [
+        0
+    ],
+    "power": [
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        8
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        147
+                    ],
+                    "low": [
+                        126
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        48
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        168
+                    ],
+                    "low": [
+                        147
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        8
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        189
+                    ],
+                    "low": [
+                        168
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        0
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        210
+                    ],
+                    "low": [
+                        189
+                    ]
+                }
+            ]
+        },
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        2
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        2000
+                    ],
+                    "low": [
+                        210
+                    ]
+                }
+            ]
+        }
+    ],
+    "power-source": [
+        0
+    ],
+    "speed": [
+        {
+            "distance": [
+                25.299999237060547
+            ],
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        6
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        20
+                    ],
+                    "low": [
+                        10
+                    ]
+                }
+            ]
+        },
+        {
+            "distance": [
+                176.6999969482422
+            ],
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        23
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        30
+                    ],
+                    "low": [
+                        20
+                    ]
+                }
+            ]
+        },
+        {
+            "distance": [
+                869.4000244140625
+            ],
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minutes": [
+                        1
+                    ],
+                    "seconds": [
+                        42
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        40
+                    ],
+                    "low": [
+                        30
+                    ]
+                }
+            ]
+        },
+        {
+            "distance": [
+                0
+            ],
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        0
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        50
+                    ],
+                    "low": [
+                        40
+                    ]
+                }
+            ]
+        },
+        {
+            "distance": [
+                0
+            ],
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        0
+                    ]
+                }
+            ],
+            "limits": [
+                {
+                    "high": [
+                        399
+                    ],
+                    "low": [
+                        50
+                    ]
+                }
+            ]
+        }
+    ]
+}

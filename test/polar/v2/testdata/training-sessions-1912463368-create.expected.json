@@ -1,0 +1,217 @@
+{
+    "calories": [
+        19
+    ],
+    "device": [
+        "A374391F"
+    ],
+    "distance": [
+        1073.5
+    ],
+    "duration": [
+        {
+            "hours": [
+                0
+            ],
+            "milliseconds": [
+                125
+            ],
+            "minutes": [
+                3
+            ],
+            "seconds": [
+                0
+            ]
+        }
+    ],
+    "end": [
+        {
+            "date": [
+                {
+                    "day": [
+                        5
+                    ],
+                    "month": [
+                        11
+                    ],
+                    "year": [
+                        2017
+                    ]
+                }
+            ],
+            "offset": [
+                60
+            ],
+            "time": [
+                {
+                    "hour": [
+                        14
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minute": [
+                        35
+                    ],
+                    "seconds": [
+                        27
+                    ]
+                }
+            ],
+            "trusted": [
+                0
+            ]
+        }
+    ],
+    "exercise-count": [
+        1
+    ],
+    "heartrate": [
+        {
+            "average": [
+                103
+            ],
+            "maximum": [
+                125
+            ]
+        }
+    ],
+    "heartrate-duration": [
+        {
+            "hours": [
+                0
+            ],
+            "minutes": [
+                0
+            ],
+            "seconds": [
+                31
+            ]
+        },
+        {
+            "hours": [
+                0
+            ],
+            "minutes": [
+                1
+            ],
+            "seconds": [
+                38
+            ]
+        },
+        {
+            "hours": [
+                0
+            ],
+            "minutes": [
+                0
+            ],
+            "seconds": [
+                0
+            ]
+        },
+        {
+            "hours": [
+                0
+            ],
+            "minutes": [
+                0
+            ],
+            "seconds": [
+                0
+            ]
+        },
+        {
+            "hours": [
+                0
+            ],
+            "minutes": [
+                0
+            ],
+            "seconds": [
+                0
+            ]
+        }
+    ],
+    "model": [
+        "Polar V800"
+    ],
+    "session-name": [
+        {
+            "text": [
+                "Radfahren"
+            ]
+        }
+    ],
+    "start": [
+        {
+            "date": [
+                {
+                    "day": [
+                        5
+                    ],
+                    "month": [
+                        11
+                    ],
+                    "year": [
+                        2017
+                    ]
+                }
+            ],
+            "offset": [
+                60
+            ],
+            "time": [
+                {
+                    "hour": [
+                        14
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minute": [
+                        32
+                    ],
+                    "seconds": [
+                        12
+                    ]
+                }
+            ],
+            "trusted": [
+                0
+            ]
+        }
+    ],
+    "training-load": [
+        {
+            "carbs": [
+                50
+            ],
+            "fat": [
+                49
+            ],
+            "load-value": [
+                1
+            ],
+            "protein": [
+                1
+            ],
+            "recovery-time": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minutes": [
+                        8
+                    ],
+                    "seconds": [
+                        0
+                    ]
+                }
+            ]
+        }
+    ]
+}
