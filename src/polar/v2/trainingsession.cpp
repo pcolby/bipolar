@@ -2169,9 +2169,13 @@ QStringList TrainingSession::toHRM(const bool rrDataOnly) const
                         ? qRound(altitude.at(index).toFloat()) : (int)0);
                 }
                 if (havePower) {
-                    const int currentPowerLeft = (index < powerLeft.length()) ?
+                    const int currentPowerLeft =
+                            ((index < powerLeft.length()) &&
+                             (!sensorOffline(samples.value(QLatin1String("left-pedal-power-offline")).toList(), index))) ?
                         first(powerLeft.at(index).toMap().value(QLatin1String("current-power"))).toInt() : 0;
-                    const int currentPowerRight = (index < powerRight.length()) ?
+                    const int currentPowerRight =
+                            ((index < powerRight.length()) &&
+                             (!sensorOffline(samples.value(QLatin1String("right-pedal-power-offline")).toList(), index))) ?
                         first(powerRight.at(index).toMap().value(QLatin1String("current-power"))).toInt() : 0;
                     const int currentPower = (havePowerLeft && havePowerRight)
                         ? currentPowerLeft + currentPowerRight
