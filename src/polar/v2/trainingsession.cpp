@@ -2185,8 +2185,9 @@ QStringList TrainingSession::toHRM(const bool rrDataOnly) const
                         // In case we only have right power, not left.
                         const int powerLeft = havePowerLeft ? currentPowerLeft : currentPower - currentPowerRight;
                         // Convert the left and right powers into a left-right balance percentage.
-                        const int leftBalance = (currentPower == 0) ? 0 :
-                            qRound(100.0 * (float)powerLeft / (float)currentPower);
+                        const int leftBalance = (currentPower == 0)
+                            ? (currentPowerLeft == currentPowerRight) ? 50 : (currentPowerLeft < currentPowerRight) ? 0 : 100
+                            : qRound(100.0 * (float)powerLeft / (float)currentPower);
                         if (leftBalance > 100) {
                             qWarning() << "leftBalance of " << leftBalance << "% is greater than 100%";
                         }
