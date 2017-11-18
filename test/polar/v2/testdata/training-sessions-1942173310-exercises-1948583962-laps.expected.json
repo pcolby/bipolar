@@ -1,0 +1,283 @@
+{
+    "laps": [
+        {
+            "header": [
+                {
+                    "distance": [
+                        50
+                    ],
+                    "duration": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                875
+                            ],
+                            "minutes": [
+                                1
+                            ],
+                            "seconds": [
+                                29
+                            ]
+                        }
+                    ],
+                    "split-time": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                875
+                            ],
+                            "minutes": [
+                                1
+                            ],
+                            "seconds": [
+                                29
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "stats": [
+                {
+                    "heartrate": [
+                        {
+                            "average": [
+                                138
+                            ],
+                            "maximum": [
+                                148
+                            ],
+                            "minimum": [
+                                102
+                            ]
+                        }
+                    ],
+                    "speed": [
+                        {
+                            "average": [
+                                2.025202512741089
+                            ],
+                            "maximum": [
+                                2.146946668624878
+                            ]
+                        }
+                    ],
+                    "swimming": [
+                        {
+                            "2": [
+                                2
+                            ],
+                            "3": [
+                                "8fc23142"
+                            ],
+                            "average-duration": [
+                                46
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "header": [
+                {
+                    "distance": [
+                        50
+                    ],
+                    "duration": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                375
+                            ],
+                            "minutes": [
+                                1
+                            ],
+                            "seconds": [
+                                31
+                            ]
+                        }
+                    ],
+                    "split-time": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                250
+                            ],
+                            "minutes": [
+                                3
+                            ],
+                            "seconds": [
+                                1
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "stats": [
+                {
+                    "heartrate": [
+                        {
+                            "average": [
+                                150
+                            ],
+                            "maximum": [
+                                152
+                            ],
+                            "minimum": [
+                                146
+                            ]
+                        }
+                    ],
+                    "speed": [
+                        {
+                            "average": [
+                                1.299451231956482
+                            ],
+                            "maximum": [
+                                1.9867550134658813
+                            ]
+                        }
+                    ],
+                    "swimming": [
+                        {
+                            "2": [
+                                2
+                            ],
+                            "3": [
+                                "1f858a42"
+                            ],
+                            "average-duration": [
+                                65
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "header": [
+                {
+                    "distance": [
+                        50
+                    ],
+                    "duration": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                125
+                            ],
+                            "minutes": [
+                                1
+                            ],
+                            "seconds": [
+                                30
+                            ]
+                        }
+                    ],
+                    "split-time": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                375
+                            ],
+                            "minutes": [
+                                4
+                            ],
+                            "seconds": [
+                                31
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "stats": [
+                {
+                    "heartrate": [
+                        {
+                            "average": [
+                                154
+                            ],
+                            "maximum": [
+                                159
+                            ],
+                            "minimum": [
+                                150
+                            ]
+                        }
+                    ],
+                    "speed": [
+                        {
+                            "average": [
+                                1.970227599143982
+                            ],
+                            "maximum": [
+                                1.9858781099319458
+                            ]
+                        }
+                    ],
+                    "swimming": [
+                        {
+                            "2": [
+                                2
+                            ],
+                            "3": [
+                                "52b83642"
+                            ],
+                            "average-duration": [
+                                42
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "summary": [
+        {
+            "average-duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "milliseconds": [
+                        625
+                    ],
+                    "minutes": [
+                        1
+                    ],
+                    "seconds": [
+                        30
+                    ]
+                }
+            ],
+            "best-duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "milliseconds": [
+                        875
+                    ],
+                    "minutes": [
+                        1
+                    ],
+                    "seconds": [
+                        29
+                    ]
+                }
+            ]
+        }
+    ]
+}

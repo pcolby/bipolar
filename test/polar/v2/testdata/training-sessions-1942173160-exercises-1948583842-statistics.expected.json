@@ -1,0 +1,112 @@
+{
+    "heartrate": [
+        {
+            "average": [
+                149
+            ],
+            "maximum": [
+                163
+            ],
+            "minimum": [
+                82
+            ]
+        }
+    ],
+    "speed": [
+        {
+            "average": [
+                2.34619402885437
+            ],
+            "maximum": [
+                2.528090000152588
+            ]
+        }
+    ],
+    "swimming": [
+        {
+            "breaststroke": [
+                {
+                    "average-heartrate": [
+                        152
+                    ],
+                    "average-swolf": [
+                        "90c26742"
+                    ],
+                    "distance": [
+                        150
+                    ],
+                    "duration": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                640
+                            ],
+                            "minutes": [
+                                3
+                            ],
+                            "seconds": [
+                                51
+                            ]
+                        }
+                    ],
+                    "maximum-heartate": [
+                        163
+                    ],
+                    "pool-time": [
+                        {
+                            "hours": [
+                                0
+                            ],
+                            "milliseconds": [
+                                600
+                            ],
+                            "minutes": [
+                                0
+                            ],
+                            "seconds": [
+                                35
+                            ]
+                        }
+                    ],
+                    "strokes": [
+                        116
+                    ]
+                }
+            ],
+            "distance": [
+                150
+            ],
+            "pool-info": [
+                {
+                    "length": [
+                        25
+                    ],
+                    "units": [
+                        0
+                    ]
+                }
+            ],
+            "pools": [
+                6
+            ],
+            "strokes": [
+                116
+            ]
+        }
+    ],
+    "temperature": [
+        {
+            "average": [
+                31.18060302734375
+            ],
+            "maximum": [
+                31.549999237060547
+            ],
+            "minimum": [
+                31.049999237060547
+            ]
+        }
+    ]
+}

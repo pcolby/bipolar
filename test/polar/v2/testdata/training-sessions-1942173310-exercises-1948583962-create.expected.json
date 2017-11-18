@@ -1,0 +1,128 @@
+{
+    "calories": [
+        63
+    ],
+    "distance": [
+        150
+    ],
+    "duration": [
+        {
+            "hours": [
+                0
+            ],
+            "milliseconds": [
+                375
+            ],
+            "minutes": [
+                4
+            ],
+            "seconds": [
+                31
+            ]
+        }
+    ],
+    "sensors": [
+        1,
+        2,
+        3,
+        4,
+        20,
+        21,
+        6,
+        7,
+        8,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        26,
+        27,
+        6,
+        28,
+        29,
+        6,
+        31
+    ],
+    "sport": [
+        {
+            "value": [
+                103
+            ]
+        }
+    ],
+    "start": [
+        {
+            "date": [
+                {
+                    "day": [
+                        17
+                    ],
+                    "month": [
+                        11
+                    ],
+                    "year": [
+                        2017
+                    ]
+                }
+            ],
+            "offset": [
+                60
+            ],
+            "time": [
+                {
+                    "hour": [
+                        16
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minute": [
+                        5
+                    ],
+                    "seconds": [
+                        29
+                    ]
+                }
+            ],
+            "trusted": [
+                0
+            ]
+        }
+    ],
+    "training-load": [
+        {
+            "carbs": [
+                76
+            ],
+            "fat": [
+                23
+            ],
+            "load-value": [
+                10
+            ],
+            "protein": [
+                1
+            ],
+            "recovery-time": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minutes": [
+                        26
+                    ],
+                    "seconds": [
+                        30
+                    ]
+                }
+            ]
+        }
+    ]
+}

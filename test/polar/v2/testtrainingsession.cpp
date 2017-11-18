@@ -456,6 +456,8 @@ void TestTrainingSession::parseCreateExercise_data()
     LOAD_TEST_DATA("training-sessions-42261903-exercises-42415131-create");
     LOAD_TEST_DATA("training-sessions-267510822-exercises-269166030-create");
     LOAD_TEST_DATA("training-sessions-1912463368-exercises-1918826764-create");
+    LOAD_TEST_DATA("training-sessions-1942173160-exercises-1948583842-create");
+    LOAD_TEST_DATA("training-sessions-1942173310-exercises-1948583962-create");
 
     #undef LOAD_TEST_DATA
 }
@@ -501,6 +503,8 @@ void TestTrainingSession::parseCreateSession_data()
     LOAD_TEST_DATA("training-sessions-42261903-create");
     LOAD_TEST_DATA("training-sessions-267510822-create");
     LOAD_TEST_DATA("training-sessions-1912463368-create");
+    LOAD_TEST_DATA("training-sessions-1942173160-create");
+    LOAD_TEST_DATA("training-sessions-1942173310-create");
 
     #undef LOAD_TEST_DATA
 }
@@ -548,6 +552,8 @@ void TestTrainingSession::parseLaps_data()
     LOAD_TEST_DATA("training-sessions-42261903-exercises-42415131-laps");
     LOAD_TEST_DATA("training-sessions-267510822-exercises-269166030-laps");
     LOAD_TEST_DATA("training-sessions-1912463368-exercises-1918826764-laps");
+    LOAD_TEST_DATA("training-sessions-1942173160-exercises-1948583842-laps");
+    LOAD_TEST_DATA("training-sessions-1942173310-exercises-1948583962-laps");
 
     #undef LOAD_TEST_DATA
 }
@@ -594,6 +600,8 @@ void TestTrainingSession::parsePhysicalInformation_data()
     LOAD_TEST_DATA("training-sessions-42261903-physical-information");
     LOAD_TEST_DATA("training-sessions-267510822-physical-information");
     LOAD_TEST_DATA("training-sessions-1912463368-physical-information");
+    LOAD_TEST_DATA("training-sessions-1942173160-physical-information");
+    LOAD_TEST_DATA("training-sessions-1942173310-physical-information");
 
     #undef LOAD_TEST_DATA
 }
@@ -640,6 +648,8 @@ void TestTrainingSession::parseRoute_data()
     LOAD_TEST_DATA("training-sessions-22165267-exercises-22141894-route");
     LOAD_TEST_DATA("training-sessions-42261903-exercises-42415131-route");
     LOAD_TEST_DATA("training-sessions-1912463368-exercises-1918826764-route");
+    LOAD_TEST_DATA("training-sessions-1942173160-exercises-1948583842-route");
+    LOAD_TEST_DATA("training-sessions-1942173310-exercises-1948583962-route");
 
     #undef LOAD_TEST_DATA
 }
@@ -730,6 +740,8 @@ void TestTrainingSession::parseSamples_data()
     LOAD_TEST_DATA("training-sessions-42261903-exercises-42415131-samples");
     LOAD_TEST_DATA("training-sessions-267510822-exercises-269166030-samples");
     LOAD_TEST_DATA("training-sessions-1912463368-exercises-1918826764-samples");
+    LOAD_TEST_DATA("training-sessions-1942173160-exercises-1948583842-samples");
+    LOAD_TEST_DATA("training-sessions-1942173310-exercises-1948583962-samples");
 
     #undef LOAD_TEST_DATA
 }
@@ -776,6 +788,8 @@ void TestTrainingSession::parseStatistics_data()
     LOAD_TEST_DATA("training-sessions-42261903-exercises-42415131-statistics");
     LOAD_TEST_DATA("training-sessions-267510822-exercises-269166030-statistics");
     LOAD_TEST_DATA("training-sessions-1912463368-exercises-1918826764-statistics");
+    LOAD_TEST_DATA("training-sessions-1942173160-exercises-1948583842-statistics");
+    LOAD_TEST_DATA("training-sessions-1942173310-exercises-1948583962-statistics");
 
     #undef LOAD_TEST_DATA
 }
@@ -823,6 +837,8 @@ void TestTrainingSession::parseZones_data()
     LOAD_TEST_DATA("training-sessions-42261903-exercises-42415131-zones");
     LOAD_TEST_DATA("training-sessions-267510822-exercises-269166030-zones");
     LOAD_TEST_DATA("training-sessions-1912463368-exercises-1918826764-zones");
+    LOAD_TEST_DATA("training-sessions-1942173160-exercises-1948583842-zones");
+    LOAD_TEST_DATA("training-sessions-1942173310-exercises-1948583962-zones");
 
     #undef LOAD_TEST_DATA
 }
@@ -870,6 +886,8 @@ void TestTrainingSession::toGPX_data()
     LOAD_TEST_DATA("training-sessions-42261903");
     LOAD_TEST_DATA("training-sessions-267510822");
     LOAD_TEST_DATA("training-sessions-1912463368");
+    LOAD_TEST_DATA("training-sessions-1942173160");
+    LOAD_TEST_DATA("training-sessions-1942173310");
 
     #undef LOAD_TEST_DATA
 }
@@ -935,6 +953,8 @@ void TestTrainingSession::toGPX_AllExtensions_data()
     LOAD_TEST_DATA("training-sessions-42261903");
     LOAD_TEST_DATA("training-sessions-267510822");
     LOAD_TEST_DATA("training-sessions-1912463368");
+    LOAD_TEST_DATA("training-sessions-1942173160");
+    LOAD_TEST_DATA("training-sessions-1942173310");
 
     #undef LOAD_TEST_DATA
 }
@@ -1006,6 +1026,8 @@ void TestTrainingSession::toGPX_Cluetrust_data()
     LOAD_TEST_DATA("training-sessions-42261903");
     LOAD_TEST_DATA("training-sessions-267510822");
     LOAD_TEST_DATA("training-sessions-1912463368");
+    LOAD_TEST_DATA("training-sessions-1942173160");
+    LOAD_TEST_DATA("training-sessions-1942173310");
 
     #undef LOAD_TEST_DATA
 }
@@ -1100,6 +1122,8 @@ void TestTrainingSession::toGPX_GarminAcceleration_data()
     LOAD_TEST_DATA("training-sessions-42261903");
     LOAD_TEST_DATA("training-sessions-267510822");
     LOAD_TEST_DATA("training-sessions-1912463368");
+    LOAD_TEST_DATA("training-sessions-1942173160");
+    LOAD_TEST_DATA("training-sessions-1942173310");
 
     #undef LOAD_TEST_DATA
 }
@@ -1188,6 +1212,8 @@ void TestTrainingSession::toGPX_GarminTrackPoint_data()
     LOAD_TEST_DATA("training-sessions-42261903");
     LOAD_TEST_DATA("training-sessions-267510822");
     LOAD_TEST_DATA("training-sessions-1912463368");
+    LOAD_TEST_DATA("training-sessions-1942173160");
+    LOAD_TEST_DATA("training-sessions-1942173310");
 
     #undef LOAD_TEST_DATA
 }
@@ -1284,6 +1310,8 @@ void TestTrainingSession::toHRM_data()
     LOAD_TEST_DATA("training-sessions-42261903", 1);
     LOAD_TEST_DATA("training-sessions-267510822", 1);
     LOAD_TEST_DATA("training-sessions-1912463368", 1);
+    LOAD_TEST_DATA("training-sessions-1942173160", 1);
+    LOAD_TEST_DATA("training-sessions-1942173310", 1);
 
     #undef LOAD_TEST_DATA
 }
@@ -1350,6 +1378,8 @@ void TestTrainingSession::toHRM_LapNames_data()
     LOAD_TEST_DATA("training-sessions-42261903", 1);
     LOAD_TEST_DATA("training-sessions-267510822", 1);
     LOAD_TEST_DATA("training-sessions-1912463368", 1);
+    LOAD_TEST_DATA("training-sessions-1942173160", 1);
+    LOAD_TEST_DATA("training-sessions-1942173310", 1);
 
     #undef LOAD_TEST_DATA
 }
@@ -1416,6 +1446,8 @@ void TestTrainingSession::toHRM_LapNames_RR_data()
     LOAD_TEST_DATA("training-sessions-42261903", 1);
     LOAD_TEST_DATA("training-sessions-267510822", 1);
     LOAD_TEST_DATA("training-sessions-1912463368", 1);
+    LOAD_TEST_DATA("training-sessions-1942173160", 1);
+    LOAD_TEST_DATA("training-sessions-1942173310", 1);
 
     #undef LOAD_TEST_DATA
 }
@@ -1482,6 +1514,8 @@ void TestTrainingSession::toHRM_RR_data()
     LOAD_TEST_DATA("training-sessions-42261903", 1);
     LOAD_TEST_DATA("training-sessions-267510822", 1);
     LOAD_TEST_DATA("training-sessions-1912463368", 1);
+    LOAD_TEST_DATA("training-sessions-1942173160", 1);
+    LOAD_TEST_DATA("training-sessions-1942173310", 1);
 
     #undef LOAD_TEST_DATA
 }
@@ -1540,6 +1574,8 @@ void TestTrainingSession::toTCX_data()
     LOAD_TEST_DATA("training-sessions-42261903");
     LOAD_TEST_DATA("training-sessions-267510822");
     LOAD_TEST_DATA("training-sessions-1912463368");
+    LOAD_TEST_DATA("training-sessions-1942173160");
+    LOAD_TEST_DATA("training-sessions-1942173310");
 
     #undef LOAD_TEST_DATA
 }
@@ -1606,6 +1642,8 @@ void TestTrainingSession::toTCX_AllExtensions_data()
     LOAD_TEST_DATA("training-sessions-42261903");
     LOAD_TEST_DATA("training-sessions-267510822");
     LOAD_TEST_DATA("training-sessions-1912463368");
+    LOAD_TEST_DATA("training-sessions-1942173160");
+    LOAD_TEST_DATA("training-sessions-1942173310");
 
     #undef LOAD_TEST_DATA
 }
@@ -1675,6 +1713,8 @@ void TestTrainingSession::toTCX_GarminActivity_data()
     LOAD_TEST_DATA("training-sessions-42261903");
     LOAD_TEST_DATA("training-sessions-267510822");
     LOAD_TEST_DATA("training-sessions-1912463368");
+    LOAD_TEST_DATA("training-sessions-1942173160");
+    LOAD_TEST_DATA("training-sessions-1942173310");
 
     #undef LOAD_TEST_DATA
 }
@@ -1772,6 +1812,8 @@ void TestTrainingSession::toTCX_GarminCourse_data()
     LOAD_TEST_DATA("training-sessions-42261903");
     LOAD_TEST_DATA("training-sessions-267510822");
     LOAD_TEST_DATA("training-sessions-1912463368");
+    LOAD_TEST_DATA("training-sessions-1942173160");
+    LOAD_TEST_DATA("training-sessions-1942173310");
 
     #undef LOAD_TEST_DATA
 }
@@ -1854,6 +1896,8 @@ void TestTrainingSession::toTCX_UTC_data()
     LOAD_TEST_DATA("training-sessions-42261903");
     LOAD_TEST_DATA("training-sessions-267510822");
     LOAD_TEST_DATA("training-sessions-1912463368");
+    LOAD_TEST_DATA("training-sessions-1942173160");
+    LOAD_TEST_DATA("training-sessions-1942173310");
 
     #undef LOAD_TEST_DATA
 }

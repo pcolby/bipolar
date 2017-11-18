@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<TrainingCenterDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" xsi:schemaLocation="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd">
+<TrainingCenterDatabase xmlns:ax2="http://www.garmin.com/xmlschemas/ActivityExtension/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" xsi:schemaLocation="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd">
   <Activities>
     <Activity Sport="Other">
       <Id>2017-11-17T16:05:29+01:00</Id>
@@ -23,6 +23,11 @@
             <HeartRateBpm>
               <Value>102</Value>
             </HeartRateBpm>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:30+01:00</Time>
@@ -31,6 +36,11 @@
               <Value>102</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:31+01:00</Time>
@@ -39,6 +49,11 @@
               <Value>102</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:32+01:00</Time>
@@ -46,6 +61,11 @@
             <HeartRateBpm>
               <Value>102</Value>
             </HeartRateBpm>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:33+01:00</Time>
@@ -54,6 +74,11 @@
               <Value>102</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:34+01:00</Time>
@@ -62,76 +87,151 @@
               <Value>102</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:35+01:00</Time>
             <DistanceMeters>0</DistanceMeters>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:36+01:00</Time>
             <DistanceMeters>0</DistanceMeters>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:37+01:00</Time>
             <DistanceMeters>0</DistanceMeters>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:38+01:00</Time>
             <DistanceMeters>0</DistanceMeters>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:39+01:00</Time>
             <DistanceMeters>0</DistanceMeters>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:40+01:00</Time>
             <DistanceMeters>0</DistanceMeters>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:41+01:00</Time>
             <DistanceMeters>0</DistanceMeters>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:42+01:00</Time>
             <DistanceMeters>0</DistanceMeters>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:43+01:00</Time>
             <DistanceMeters>0</DistanceMeters>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:44+01:00</Time>
             <DistanceMeters>0</DistanceMeters>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:45+01:00</Time>
             <DistanceMeters>25</DistanceMeters>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:46+01:00</Time>
             <DistanceMeters>25</DistanceMeters>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:47+01:00</Time>
             <DistanceMeters>25</DistanceMeters>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:48+01:00</Time>
             <DistanceMeters>25</DistanceMeters>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:49+01:00</Time>
@@ -140,6 +240,11 @@
               <Value>124</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:50+01:00</Time>
@@ -148,6 +253,11 @@
               <Value>124</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:51+01:00</Time>
@@ -156,6 +266,11 @@
               <Value>125</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:52+01:00</Time>
@@ -164,6 +279,11 @@
               <Value>126</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:53+01:00</Time>
@@ -172,6 +292,11 @@
               <Value>127</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:54+01:00</Time>
@@ -180,6 +305,11 @@
               <Value>128</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:55+01:00</Time>
@@ -188,6 +318,11 @@
               <Value>130</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:56+01:00</Time>
@@ -196,6 +331,11 @@
               <Value>131</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:57+01:00</Time>
@@ -204,6 +344,11 @@
               <Value>132</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:58+01:00</Time>
@@ -212,6 +357,11 @@
               <Value>134</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:05:59+01:00</Time>
@@ -220,6 +370,11 @@
               <Value>135</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:00+01:00</Time>
@@ -228,6 +383,11 @@
               <Value>136</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:01+01:00</Time>
@@ -236,6 +396,11 @@
               <Value>137</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:02+01:00</Time>
@@ -244,6 +409,11 @@
               <Value>138</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:03+01:00</Time>
@@ -252,6 +422,11 @@
               <Value>138</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:04+01:00</Time>
@@ -260,6 +435,11 @@
               <Value>138</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:05+01:00</Time>
@@ -268,6 +448,11 @@
               <Value>139</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:06+01:00</Time>
@@ -276,6 +461,11 @@
               <Value>139</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:07+01:00</Time>
@@ -284,6 +474,11 @@
               <Value>139</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:08+01:00</Time>
@@ -292,6 +487,11 @@
               <Value>139</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:09+01:00</Time>
@@ -300,6 +500,11 @@
               <Value>139</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:10+01:00</Time>
@@ -308,6 +513,11 @@
               <Value>139</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:11+01:00</Time>
@@ -316,6 +526,11 @@
               <Value>138</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:12+01:00</Time>
@@ -324,6 +539,11 @@
               <Value>138</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:13+01:00</Time>
@@ -332,6 +552,11 @@
               <Value>138</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:14+01:00</Time>
@@ -340,6 +565,11 @@
               <Value>138</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:15+01:00</Time>
@@ -348,6 +578,11 @@
               <Value>138</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:16+01:00</Time>
@@ -356,6 +591,11 @@
               <Value>138</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:17+01:00</Time>
@@ -364,6 +604,11 @@
               <Value>138</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:18+01:00</Time>
@@ -372,6 +617,11 @@
               <Value>138</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:19+01:00</Time>
@@ -380,6 +630,11 @@
               <Value>138</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:20+01:00</Time>
@@ -388,6 +643,11 @@
               <Value>138</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:21+01:00</Time>
@@ -396,6 +656,11 @@
               <Value>138</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:22+01:00</Time>
@@ -404,6 +669,11 @@
               <Value>138</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:23+01:00</Time>
@@ -412,6 +682,11 @@
               <Value>139</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:24+01:00</Time>
@@ -420,6 +695,11 @@
               <Value>140</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:25+01:00</Time>
@@ -428,6 +708,11 @@
               <Value>140</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.537403</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:26+01:00</Time>
@@ -436,6 +721,11 @@
               <Value>141</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.537403</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:27+01:00</Time>
@@ -444,6 +734,11 @@
               <Value>141</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.537403</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:28+01:00</Time>
@@ -452,6 +747,11 @@
               <Value>142</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:29+01:00</Time>
@@ -460,6 +760,11 @@
               <Value>143</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:30+01:00</Time>
@@ -468,6 +773,11 @@
               <Value>143</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:31+01:00</Time>
@@ -476,6 +786,11 @@
               <Value>144</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:32+01:00</Time>
@@ -484,6 +799,11 @@
               <Value>145</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:33+01:00</Time>
@@ -492,6 +812,11 @@
               <Value>145</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:34+01:00</Time>
@@ -500,6 +825,11 @@
               <Value>146</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:35+01:00</Time>
@@ -508,6 +838,11 @@
               <Value>146</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:36+01:00</Time>
@@ -516,6 +851,11 @@
               <Value>147</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:37+01:00</Time>
@@ -524,6 +864,11 @@
               <Value>147</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:38+01:00</Time>
@@ -532,6 +877,11 @@
               <Value>148</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:39+01:00</Time>
@@ -540,6 +890,11 @@
               <Value>148</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:40+01:00</Time>
@@ -548,6 +903,11 @@
               <Value>148</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:41+01:00</Time>
@@ -556,6 +916,11 @@
               <Value>148</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:42+01:00</Time>
@@ -564,6 +929,11 @@
               <Value>148</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:43+01:00</Time>
@@ -572,6 +942,11 @@
               <Value>148</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:44+01:00</Time>
@@ -580,6 +955,11 @@
               <Value>147</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:45+01:00</Time>
@@ -588,6 +968,11 @@
               <Value>147</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:46+01:00</Time>
@@ -596,6 +981,11 @@
               <Value>147</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:47+01:00</Time>
@@ -604,6 +994,11 @@
               <Value>147</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:48+01:00</Time>
@@ -612,6 +1007,11 @@
               <Value>146</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:49+01:00</Time>
@@ -620,6 +1020,11 @@
               <Value>146</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:50+01:00</Time>
@@ -628,6 +1033,11 @@
               <Value>146</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:51+01:00</Time>
@@ -636,6 +1046,11 @@
               <Value>146</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:52+01:00</Time>
@@ -644,6 +1059,11 @@
               <Value>145</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:53+01:00</Time>
@@ -652,6 +1072,11 @@
               <Value>145</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:54+01:00</Time>
@@ -660,6 +1085,11 @@
               <Value>145</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:55+01:00</Time>
@@ -668,6 +1098,11 @@
               <Value>145</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:56+01:00</Time>
@@ -676,6 +1111,11 @@
               <Value>145</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:57+01:00</Time>
@@ -684,6 +1124,11 @@
               <Value>145</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:06:58+01:00</Time>
@@ -692,8 +1137,18 @@
               <Value>146</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
         </Track>
+        <Extensions>
+          <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+            <AvgSpeed>0.562556</AvgSpeed>
+          </LX>
+        </Extensions>
       </Lap>
       <Lap StartTime="2017-11-17T16:06:59+01:00">
         <TotalTimeSeconds>91.375</TotalTimeSeconds>
@@ -716,6 +1171,11 @@
               <Value>146</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:00+01:00</Time>
@@ -724,6 +1184,11 @@
               <Value>146</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:01+01:00</Time>
@@ -732,6 +1197,11 @@
               <Value>146</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:02+01:00</Time>
@@ -740,6 +1210,11 @@
               <Value>148</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:03+01:00</Time>
@@ -748,6 +1223,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:04+01:00</Time>
@@ -756,6 +1236,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.596374</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:05+01:00</Time>
@@ -764,6 +1249,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.555309</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:06+01:00</Time>
@@ -772,6 +1262,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.555309</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:07+01:00</Time>
@@ -780,6 +1275,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.555309</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:08+01:00</Time>
@@ -788,6 +1288,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.555309</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:09+01:00</Time>
@@ -796,6 +1301,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.555309</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:10+01:00</Time>
@@ -804,6 +1314,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.555309</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:11+01:00</Time>
@@ -812,6 +1327,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.555309</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:12+01:00</Time>
@@ -820,6 +1340,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.555309</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:13+01:00</Time>
@@ -828,6 +1353,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:14+01:00</Time>
@@ -836,6 +1366,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:15+01:00</Time>
@@ -844,6 +1379,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:16+01:00</Time>
@@ -852,6 +1392,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:17+01:00</Time>
@@ -860,6 +1405,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:18+01:00</Time>
@@ -868,6 +1418,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:19+01:00</Time>
@@ -876,6 +1431,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:20+01:00</Time>
@@ -884,6 +1444,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:21+01:00</Time>
@@ -892,6 +1457,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:22+01:00</Time>
@@ -900,6 +1470,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:23+01:00</Time>
@@ -908,6 +1483,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:24+01:00</Time>
@@ -916,6 +1496,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:25+01:00</Time>
@@ -924,6 +1509,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:26+01:00</Time>
@@ -932,6 +1522,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:27+01:00</Time>
@@ -940,6 +1535,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:28+01:00</Time>
@@ -948,6 +1548,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:29+01:00</Time>
@@ -956,6 +1561,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:30+01:00</Time>
@@ -964,6 +1574,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:31+01:00</Time>
@@ -972,6 +1587,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:32+01:00</Time>
@@ -980,6 +1600,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:33+01:00</Time>
@@ -988,6 +1613,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:34+01:00</Time>
@@ -996,6 +1626,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:35+01:00</Time>
@@ -1004,6 +1639,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:36+01:00</Time>
@@ -1012,6 +1652,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:37+01:00</Time>
@@ -1020,6 +1665,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:38+01:00</Time>
@@ -1028,6 +1678,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:39+01:00</Time>
@@ -1036,6 +1691,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:40+01:00</Time>
@@ -1044,6 +1704,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:41+01:00</Time>
@@ -1052,6 +1717,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:42+01:00</Time>
@@ -1060,6 +1730,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:43+01:00</Time>
@@ -1068,6 +1743,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:44+01:00</Time>
@@ -1076,6 +1756,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:45+01:00</Time>
@@ -1084,6 +1769,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:46+01:00</Time>
@@ -1092,6 +1782,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:47+01:00</Time>
@@ -1100,6 +1795,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:48+01:00</Time>
@@ -1108,6 +1808,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:49+01:00</Time>
@@ -1116,6 +1821,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:50+01:00</Time>
@@ -1124,6 +1834,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:51+01:00</Time>
@@ -1132,6 +1847,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:52+01:00</Time>
@@ -1140,6 +1860,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:53+01:00</Time>
@@ -1148,6 +1873,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.523889</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:54+01:00</Time>
@@ -1156,6 +1886,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.523889</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:55+01:00</Time>
@@ -1164,6 +1899,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.523889</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:56+01:00</Time>
@@ -1172,6 +1912,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.523889</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:57+01:00</Time>
@@ -1180,6 +1925,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.523889</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:58+01:00</Time>
@@ -1188,6 +1938,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.523889</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:07:59+01:00</Time>
@@ -1196,6 +1951,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:00+01:00</Time>
@@ -1204,6 +1964,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:01+01:00</Time>
@@ -1212,6 +1977,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:02+01:00</Time>
@@ -1220,6 +1990,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:03+01:00</Time>
@@ -1228,6 +2003,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:04+01:00</Time>
@@ -1236,6 +2016,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:05+01:00</Time>
@@ -1244,6 +2029,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:06+01:00</Time>
@@ -1252,6 +2042,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:07+01:00</Time>
@@ -1260,6 +2055,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:08+01:00</Time>
@@ -1268,6 +2068,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:09+01:00</Time>
@@ -1276,6 +2081,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:10+01:00</Time>
@@ -1284,6 +2094,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:11+01:00</Time>
@@ -1292,6 +2107,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:12+01:00</Time>
@@ -1300,6 +2120,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:13+01:00</Time>
@@ -1308,6 +2133,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:14+01:00</Time>
@@ -1316,6 +2146,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:15+01:00</Time>
@@ -1324,6 +2159,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:16+01:00</Time>
@@ -1332,6 +2172,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:17+01:00</Time>
@@ -1340,6 +2185,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:18+01:00</Time>
@@ -1348,6 +2198,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:19+01:00</Time>
@@ -1356,6 +2211,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:20+01:00</Time>
@@ -1364,6 +2224,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:21+01:00</Time>
@@ -1372,6 +2237,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:22+01:00</Time>
@@ -1380,6 +2250,11 @@
               <Value>149</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:23+01:00</Time>
@@ -1388,6 +2263,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:24+01:00</Time>
@@ -1396,6 +2276,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:25+01:00</Time>
@@ -1404,6 +2289,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:26+01:00</Time>
@@ -1412,6 +2302,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:27+01:00</Time>
@@ -1420,6 +2315,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:28+01:00</Time>
@@ -1428,6 +2328,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:29+01:00</Time>
@@ -1436,6 +2341,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:30+01:00</Time>
@@ -1444,8 +2354,18 @@
               <Value>152</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
         </Track>
+        <Extensions>
+          <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+            <AvgSpeed>0.360959</AvgSpeed>
+          </LX>
+        </Extensions>
       </Lap>
       <Lap StartTime="2017-11-17T16:08:31+01:00">
         <TotalTimeSeconds>90.125</TotalTimeSeconds>
@@ -1468,6 +2388,11 @@
               <Value>152</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:32+01:00</Time>
@@ -1476,6 +2401,11 @@
               <Value>152</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:33+01:00</Time>
@@ -1484,6 +2414,11 @@
               <Value>152</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:34+01:00</Time>
@@ -1492,6 +2427,11 @@
               <Value>152</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:35+01:00</Time>
@@ -1500,6 +2440,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551876</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:36+01:00</Time>
@@ -1508,6 +2453,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.557787</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:37+01:00</Time>
@@ -1516,6 +2466,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.557787</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:38+01:00</Time>
@@ -1524,6 +2479,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.557787</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:39+01:00</Time>
@@ -1532,6 +2492,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.557787</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:40+01:00</Time>
@@ -1540,6 +2505,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.557787</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:41+01:00</Time>
@@ -1548,6 +2518,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.557787</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:42+01:00</Time>
@@ -1556,6 +2531,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.557787</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:43+01:00</Time>
@@ -1564,6 +2544,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.557787</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:44+01:00</Time>
@@ -1572,6 +2557,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:45+01:00</Time>
@@ -1580,6 +2570,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:46+01:00</Time>
@@ -1588,6 +2583,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:47+01:00</Time>
@@ -1596,6 +2596,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:48+01:00</Time>
@@ -1604,6 +2609,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:49+01:00</Time>
@@ -1612,6 +2622,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:50+01:00</Time>
@@ -1620,6 +2635,11 @@
               <Value>152</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:51+01:00</Time>
@@ -1628,6 +2648,11 @@
               <Value>152</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:52+01:00</Time>
@@ -1636,6 +2661,11 @@
               <Value>152</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:53+01:00</Time>
@@ -1644,6 +2674,11 @@
               <Value>152</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:54+01:00</Time>
@@ -1652,6 +2687,11 @@
               <Value>152</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:55+01:00</Time>
@@ -1660,6 +2700,11 @@
               <Value>152</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:56+01:00</Time>
@@ -1668,6 +2713,11 @@
               <Value>152</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:57+01:00</Time>
@@ -1676,6 +2726,11 @@
               <Value>152</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:58+01:00</Time>
@@ -1684,6 +2739,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:08:59+01:00</Time>
@@ -1692,6 +2752,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:00+01:00</Time>
@@ -1700,6 +2765,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:01+01:00</Time>
@@ -1708,6 +2778,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:02+01:00</Time>
@@ -1716,6 +2791,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:03+01:00</Time>
@@ -1724,6 +2804,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:04+01:00</Time>
@@ -1732,6 +2817,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:05+01:00</Time>
@@ -1740,6 +2830,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:06+01:00</Time>
@@ -1748,6 +2843,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:07+01:00</Time>
@@ -1756,6 +2856,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:08+01:00</Time>
@@ -1764,6 +2869,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:09+01:00</Time>
@@ -1772,6 +2882,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:10+01:00</Time>
@@ -1780,6 +2895,11 @@
               <Value>150</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:11+01:00</Time>
@@ -1788,6 +2908,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:12+01:00</Time>
@@ -1796,6 +2921,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:13+01:00</Time>
@@ -1804,6 +2934,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:14+01:00</Time>
@@ -1812,6 +2947,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:15+01:00</Time>
@@ -1820,6 +2960,11 @@
               <Value>152</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:16+01:00</Time>
@@ -1828,6 +2973,11 @@
               <Value>152</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:17+01:00</Time>
@@ -1836,6 +2986,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:18+01:00</Time>
@@ -1844,6 +2999,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:19+01:00</Time>
@@ -1852,6 +3012,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:20+01:00</Time>
@@ -1860,6 +3025,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.543006</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:21+01:00</Time>
@@ -1868,6 +3038,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.56281</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:22+01:00</Time>
@@ -1876,6 +3051,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.56281</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:23+01:00</Time>
@@ -1884,6 +3064,11 @@
               <Value>151</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.56281</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:24+01:00</Time>
@@ -1892,6 +3077,11 @@
               <Value>152</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.56281</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:25+01:00</Time>
@@ -1900,6 +3090,11 @@
               <Value>152</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.56281</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:26+01:00</Time>
@@ -1908,6 +3103,11 @@
               <Value>153</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.56281</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:27+01:00</Time>
@@ -1916,6 +3116,11 @@
               <Value>153</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.56281</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:28+01:00</Time>
@@ -1924,6 +3129,11 @@
               <Value>154</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:29+01:00</Time>
@@ -1932,6 +3142,11 @@
               <Value>155</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:30+01:00</Time>
@@ -1940,6 +3155,11 @@
               <Value>155</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:31+01:00</Time>
@@ -1948,6 +3168,11 @@
               <Value>156</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:32+01:00</Time>
@@ -1956,6 +3181,11 @@
               <Value>157</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:33+01:00</Time>
@@ -1964,6 +3194,11 @@
               <Value>158</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:34+01:00</Time>
@@ -1972,6 +3207,11 @@
               <Value>158</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:35+01:00</Time>
@@ -1980,6 +3220,11 @@
               <Value>158</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:36+01:00</Time>
@@ -1988,6 +3233,11 @@
               <Value>159</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:37+01:00</Time>
@@ -1996,6 +3246,11 @@
               <Value>159</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:38+01:00</Time>
@@ -2004,6 +3259,11 @@
               <Value>159</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:39+01:00</Time>
@@ -2012,6 +3272,11 @@
               <Value>159</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:40+01:00</Time>
@@ -2020,6 +3285,11 @@
               <Value>159</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:41+01:00</Time>
@@ -2028,6 +3298,11 @@
               <Value>158</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:42+01:00</Time>
@@ -2036,6 +3311,11 @@
               <Value>158</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:43+01:00</Time>
@@ -2044,6 +3324,11 @@
               <Value>157</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:44+01:00</Time>
@@ -2052,6 +3337,11 @@
               <Value>157</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:45+01:00</Time>
@@ -2060,6 +3350,11 @@
               <Value>157</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:46+01:00</Time>
@@ -2068,6 +3363,11 @@
               <Value>156</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:47+01:00</Time>
@@ -2076,6 +3376,11 @@
               <Value>156</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:48+01:00</Time>
@@ -2084,6 +3389,11 @@
               <Value>156</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:49+01:00</Time>
@@ -2092,6 +3402,11 @@
               <Value>157</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:50+01:00</Time>
@@ -2100,6 +3415,11 @@
               <Value>157</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:51+01:00</Time>
@@ -2108,6 +3428,11 @@
               <Value>157</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:52+01:00</Time>
@@ -2116,6 +3441,11 @@
               <Value>157</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:53+01:00</Time>
@@ -2124,6 +3454,11 @@
               <Value>158</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:54+01:00</Time>
@@ -2132,6 +3467,11 @@
               <Value>158</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:55+01:00</Time>
@@ -2140,6 +3480,11 @@
               <Value>158</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:56+01:00</Time>
@@ -2148,6 +3493,11 @@
               <Value>158</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:57+01:00</Time>
@@ -2156,6 +3506,11 @@
               <Value>159</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:58+01:00</Time>
@@ -2164,6 +3519,11 @@
               <Value>159</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:09:59+01:00</Time>
@@ -2172,6 +3532,11 @@
               <Value>159</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
           <Trackpoint>
             <Time>2017-11-17T16:10:00+01:00</Time>
@@ -2180,8 +3545,18 @@
               <Value>159</Value>
             </HeartRateBpm>
             <Cadence>0</Cadence>
+            <Extensions>
+              <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+                <Speed>0.551633</Speed>
+              </TPX>
+            </Extensions>
           </Trackpoint>
         </Track>
+        <Extensions>
+          <LX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
+            <AvgSpeed>0.547285</AvgSpeed>
+          </LX>
+        </Extensions>
       </Lap>
     </Activity>
   </Activities>
