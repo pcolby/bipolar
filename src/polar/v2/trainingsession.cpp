@@ -596,8 +596,8 @@ QVariantMap TrainingSession::parseLaps(QIODevice &data) const
     ADD_FIELD_INFO("1/2/7/1",  "average",          Uint32);
     ADD_FIELD_INFO("1/2/8",    "swimming",         EmbeddedMessage);
     ADD_FIELD_INFO("1/2/8/1",  "strokes",          Uint32);
-    ADD_FIELD_INFO("1/2/8/1",  "pool-count",       Uint32);
-    ADD_FIELD_INFO("1/2/8/1",  "average-duration", Float);
+    ADD_FIELD_INFO("1/2/8/2",  "pool-count",       Uint32);
+    ADD_FIELD_INFO("1/2/8/3",  "average-duration", Float);
     ADD_FIELD_INFO("1/2/9",    "left-right-balance", EmbeddedMessage);
     ADD_FIELD_INFO("1/2/9/1",  "average",          Float);
     ADD_FIELD_INFO("2",        "summary",          EmbeddedMessage);
@@ -1150,7 +1150,7 @@ QVariantMap TrainingSession::parseStatistics(QIODevice &data) const
     ADD_FIELD_INFO("12/4/3/4", "milliseconds",      Uint32);
     ADD_FIELD_INFO("12/4/4",   "average-heartrate", Uint32);
     ADD_FIELD_INFO("12/4/5",   "maximum-heartate",  Uint32);
-    ADD_FIELD_INFO("12/4/6",   "average-swolf",     Uint32);
+    ADD_FIELD_INFO("12/4/6",   "average-swolf",     Float);
     ADD_FIELD_INFO("12/4/7",   "pool-time",         EmbeddedMessage);
     ADD_FIELD_INFO("12/4/7/1", "hours",             Uint32);
     ADD_FIELD_INFO("12/4/7/2", "minutes",           Uint32);

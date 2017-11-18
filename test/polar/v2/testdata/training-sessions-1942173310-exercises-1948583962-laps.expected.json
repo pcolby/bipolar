@@ -67,13 +67,13 @@
                     ],
                     "swimming": [
                         {
-                            "2": [
+                            "average-duration": [
+                                44.439998626708984
+                            ],
+                            "pool-count": [
                                 2
                             ],
-                            "3": [
-                                "8fc23142"
-                            ],
-                            "average-duration": [
+                            "strokes": [
                                 46
                             ]
                         }
@@ -148,13 +148,13 @@
                     ],
                     "swimming": [
                         {
-                            "2": [
+                            "average-duration": [
+                                69.26000213623047
+                            ],
+                            "pool-count": [
                                 2
                             ],
-                            "3": [
-                                "1f858a42"
-                            ],
-                            "average-duration": [
+                            "strokes": [
                                 65
                             ]
                         }
@@ -229,13 +229,13 @@
                     ],
                     "swimming": [
                         {
-                            "2": [
+                            "average-duration": [
+                                45.68000030517578
+                            ],
+                            "pool-count": [
                                 2
                             ],
-                            "3": [
-                                "52b83642"
-                            ],
-                            "average-duration": [
+                            "strokes": [
                                 42
                             ]
                         }
