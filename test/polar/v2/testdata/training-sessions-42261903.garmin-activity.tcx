@@ -180,7 +180,7 @@
             <Extensions>
               <TPX CadenceSensor="Bike" xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2">
                 <Speed>0</Speed>
-                <Watts>47</Watts>
+                <Watts>71</Watts>
               </TPX>
             </Extensions>
           </Trackpoint>

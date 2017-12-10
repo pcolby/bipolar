@@ -2177,22 +2177,33 @@ QStringList TrainingSession::toHRM(const bool rrDataOnly) const
                             ((index < powerRight.length()) &&
                              (!sensorOffline(samples.value(QLatin1String("right-pedal-power-offline")).toList(), index))) ?
                         first(powerRight.at(index).toMap().value(QLatin1String("current-power"))).toInt() : 0;
+                    if (currentPowerLeft < 0) {
+                        qWarning() << "Negative left power sample at index" << index << ":" << currentPowerLeft;
+                    }
+                    if (currentPowerRight < 0) {
+                        qWarning() << "Negative right power sample at index" << index << ":" << currentPowerRight;
+                    }
                     const int currentPower = (havePowerLeft && havePowerRight)
-                        ? currentPowerLeft + currentPowerRight
-                        : (havePowerLeft ? currentPowerLeft : currentPowerRight) * 2;
+                        ? qMax(currentPowerLeft, 0) + qMax(currentPowerRight, 0)
+                        : qMax((havePowerLeft ? currentPowerLeft : currentPowerRight) * 2, 0);
+                    Q_ASSERT(currentPower >= 0); // None of the above branches can yield a negative power.
+                    Q_ASSERT(currentPower >= qMax(currentPowerLeft, 0));
+                    Q_ASSERT(currentPower >= qMax(currentPowerRight, 0));
                     stream << '\t' << currentPower;
                     if (havePowerBalance) {
                         // In case we only have right power, not left.
-                        const int powerLeft = havePowerLeft ? currentPowerLeft : currentPower - currentPowerRight;
+                        const int powerLeft = havePowerLeft ? qMax(currentPowerLeft, 0) : currentPower - qMax(currentPowerRight, 0);
+                        Q_ASSERT(powerLeft >= 0); // Guaranteed by the previous statement, in conjunction with the Q_ASSERTs above.
                         // Convert the left and right powers into a left-right balance percentage.
                         const int leftBalance = (currentPower == 0)
                             ? (currentPowerLeft == currentPowerRight) ? 50 : (currentPowerLeft < currentPowerRight) ? 0 : 100
                             : qRound(100.0 * (float)powerLeft / (float)currentPower);
-                        if (leftBalance > 100) {
-                            qWarning() << "leftBalance of " << leftBalance << "% is greater than 100%";
+                        if ((0 > leftBalance) || (leftBalance > 100)) {
+                            qWarning() << "leftBalance of" << leftBalance << "is outside the range 0..100%";
+                            // We enforce the range [0..100] below.
                         }
                         /// @todo Include Pedalling Index here, if/when available.
-                        stream << '\t' << qMax(qMin(leftBalance, 255), 0);
+                        stream << '\t' << qMax(qMin(leftBalance, 100), 0);
                     }
                 }
                 // Air pressure - not available in protobuf data.
@@ -2546,18 +2557,25 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                     first(powerLeft.at(index).toMap().value(QLatin1String("current-power"))) : QVariant();
                 const QVariant currentPowerRight = (index < powerRight.length()) ?
                     first(powerRight.at(index).toMap().value(QLatin1String("current-power"))) : QVariant();
+                if ((currentPowerLeft.isValid()) && (currentPowerLeft.toInt() < 0)) {
+                    qWarning() << "Negative left power sample at index" << index << ":" << currentPowerLeft.toInt();
+                }
+                if ((currentPowerRight.isValid()) && (currentPowerRight.toInt() < 0)) {
+                    qWarning() << "Negative right power sample at index" << index << ":" << currentPowerRight.toInt();
+                }
 
                 const QVariant currentPower =
                     (currentPowerLeft.isValid() && currentPowerRight.isValid())
-                        ? currentPowerLeft.toInt() + currentPowerRight.toInt()
-                        : currentPowerLeft.isValid() ? currentPowerLeft.toInt() * 2
-                        : currentPowerRight.isValid() ? currentPowerRight.toInt() * 2
+                        ? qMax(currentPowerLeft.toInt(), 0) + qMax(currentPowerRight.toInt(), 0)
+                        : currentPowerLeft.isValid() ? qMax(currentPowerLeft.toInt() * 2, 0)
+                        : currentPowerRight.isValid() ? qMax(currentPowerRight.toInt() * 2, 0)
                         : QVariant();
+                Q_ASSERT(currentPower >= 0);
 
                 if (currentPower.isValid()) {
                     tpx.appendChild(doc.createElement(QLatin1String("Watts")))
                         .appendChild(doc.createTextNode(QString::fromLatin1("%1")
-                            .arg(currentPower.toInt())));
+                            .arg(qMax(currentPower.toInt(), 0))));
                 }
 
             }
