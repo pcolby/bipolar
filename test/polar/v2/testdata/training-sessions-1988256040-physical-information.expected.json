@@ -1,0 +1,588 @@
+{
+    "16": [
+        "08081500000000"
+    ],
+    "aerobic-threshold": [
+        {
+            "modified": [
+                {
+                    "date": [
+                        {
+                            "day": [
+                                27
+                            ],
+                            "month": [
+                                11
+                            ],
+                            "year": [
+                                2017
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                20
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minute": [
+                                29
+                            ],
+                            "seconds": [
+                                53
+                            ]
+                        }
+                    ],
+                    "trusted": [
+                        1
+                    ]
+                }
+            ],
+            "source": [
+                0
+            ],
+            "value": [
+                137
+            ]
+        }
+    ],
+    "anaerobic-threshold": [
+        {
+            "modified": [
+                {
+                    "date": [
+                        {
+                            "day": [
+                                27
+                            ],
+                            "month": [
+                                11
+                            ],
+                            "year": [
+                                2017
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                20
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minute": [
+                                29
+                            ],
+                            "seconds": [
+                                53
+                            ]
+                        }
+                    ],
+                    "trusted": [
+                        1
+                    ]
+                }
+            ],
+            "source": [
+                0
+            ],
+            "value": [
+                165
+            ]
+        }
+    ],
+    "birthday": [
+        {
+            "modified": [
+                {
+                    "date": [
+                        {
+                            "day": [
+                                4
+                            ],
+                            "month": [
+                                11
+                            ],
+                            "year": [
+                                2017
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                10
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minute": [
+                                50
+                            ],
+                            "seconds": [
+                                18
+                            ]
+                        }
+                    ],
+                    "trusted": [
+                        0
+                    ]
+                }
+            ],
+            "value": [
+                {
+                    "day": [
+                        1
+                    ],
+                    "month": [
+                        1
+                    ],
+                    "year": [
+                        1980
+                    ]
+                }
+            ]
+        }
+    ],
+    "functional-threshold-power": [
+        {
+            "modified": [
+                {
+                    "date": [
+                        {
+                            "day": [
+                                4
+                            ],
+                            "month": [
+                                11
+                            ],
+                            "year": [
+                                2017
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                10
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minute": [
+                                50
+                            ],
+                            "seconds": [
+                                18
+                            ]
+                        }
+                    ],
+                    "trusted": [
+                        0
+                    ]
+                }
+            ],
+            "source": [
+                2
+            ],
+            "value": [
+                210
+            ]
+        }
+    ],
+    "gender": [
+        {
+            "modified": [
+                {
+                    "date": [
+                        {
+                            "day": [
+                                4
+                            ],
+                            "month": [
+                                11
+                            ],
+                            "year": [
+                                2017
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                10
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minute": [
+                                50
+                            ],
+                            "seconds": [
+                                18
+                            ]
+                        }
+                    ],
+                    "trusted": [
+                        0
+                    ]
+                }
+            ],
+            "value": [
+                1
+            ]
+        }
+    ],
+    "height": [
+        {
+            "modified": [
+                {
+                    "date": [
+                        {
+                            "day": [
+                                4
+                            ],
+                            "month": [
+                                11
+                            ],
+                            "year": [
+                                2017
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                10
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minute": [
+                                50
+                            ],
+                            "seconds": [
+                                18
+                            ]
+                        }
+                    ],
+                    "trusted": [
+                        0
+                    ]
+                }
+            ],
+            "value": [
+                170
+            ]
+        }
+    ],
+    "maximum-heartrate": [
+        {
+            "modified": [
+                {
+                    "date": [
+                        {
+                            "day": [
+                                27
+                            ],
+                            "month": [
+                                11
+                            ],
+                            "year": [
+                                2017
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                20
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minute": [
+                                29
+                            ],
+                            "seconds": [
+                                53
+                            ]
+                        }
+                    ],
+                    "trusted": [
+                        1
+                    ]
+                }
+            ],
+            "source": [
+                1
+            ],
+            "value": [
+                183
+            ]
+        }
+    ],
+    "modified": [
+        {
+            "date": [
+                {
+                    "day": [
+                        27
+                    ],
+                    "month": [
+                        11
+                    ],
+                    "year": [
+                        2017
+                    ]
+                }
+            ],
+            "time": [
+                {
+                    "hour": [
+                        20
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minute": [
+                        29
+                    ],
+                    "seconds": [
+                        53
+                    ]
+                }
+            ],
+            "trusted": [
+                1
+            ]
+        }
+    ],
+    "resting-heartrate": [
+        {
+            "modified": [
+                {
+                    "date": [
+                        {
+                            "day": [
+                                27
+                            ],
+                            "month": [
+                                11
+                            ],
+                            "year": [
+                                2017
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                20
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minute": [
+                                29
+                            ],
+                            "seconds": [
+                                53
+                            ]
+                        }
+                    ],
+                    "trusted": [
+                        1
+                    ]
+                }
+            ],
+            "source": [
+                0
+            ],
+            "value": [
+                55
+            ]
+        }
+    ],
+    "training-background": [
+        {
+            "modified": [
+                {
+                    "date": [
+                        {
+                            "day": [
+                                4
+                            ],
+                            "month": [
+                                11
+                            ],
+                            "year": [
+                                2017
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                10
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minute": [
+                                50
+                            ],
+                            "seconds": [
+                                18
+                            ]
+                        }
+                    ],
+                    "trusted": [
+                        0
+                    ]
+                }
+            ],
+            "value": [
+                20
+            ]
+        }
+    ],
+    "vo2max": [
+        {
+            "modified": [
+                {
+                    "date": [
+                        {
+                            "day": [
+                                27
+                            ],
+                            "month": [
+                                11
+                            ],
+                            "year": [
+                                2017
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                20
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minute": [
+                                29
+                            ],
+                            "seconds": [
+                                53
+                            ]
+                        }
+                    ],
+                    "trusted": [
+                        1
+                    ]
+                }
+            ],
+            "source": [
+                1
+            ],
+            "value": [
+                50
+            ]
+        }
+    ],
+    "weekly-recovery": [
+        {
+            "modified": [
+                {
+                    "date": [
+                        {
+                            "day": [
+                                4
+                            ],
+                            "month": [
+                                11
+                            ],
+                            "year": [
+                                2017
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                10
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minute": [
+                                36
+                            ],
+                            "seconds": [
+                                15
+                            ]
+                        }
+                    ],
+                    "trusted": [
+                        0
+                    ]
+                }
+            ],
+            "value": [
+                20
+            ]
+        }
+    ],
+    "weight": [
+        {
+            "3": [
+                3
+            ],
+            "modified": [
+                {
+                    "date": [
+                        {
+                            "day": [
+                                4
+                            ],
+                            "month": [
+                                11
+                            ],
+                            "year": [
+                                2017
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                10
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minute": [
+                                50
+                            ],
+                            "seconds": [
+                                18
+                            ]
+                        }
+                    ],
+                    "trusted": [
+                        0
+                    ]
+                }
+            ],
+            "value": [
+                70
+            ]
+        }
+    ]
+}
