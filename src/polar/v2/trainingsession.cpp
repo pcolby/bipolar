@@ -2570,7 +2570,7 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                         : currentPowerLeft.isValid() ? qMax(currentPowerLeft.toInt() * 2, 0)
                         : currentPowerRight.isValid() ? qMax(currentPowerRight.toInt() * 2, 0)
                         : QVariant();
-                Q_ASSERT(currentPower >= 0);
+                Q_ASSERT(currentPower.toInt() >= 0);
 
                 if (currentPower.isValid()) {
                     tpx.appendChild(doc.createElement(QLatin1String("Watts")))
