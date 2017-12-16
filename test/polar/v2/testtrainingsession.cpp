@@ -1090,11 +1090,18 @@ void TestTrainingSession::toGPX_Cluetrust()
             gpx.elementsByTagName(QLatin1String("extensions"));
         QFile xsd(QFINDTESTDATA("schemata/gpxdata10.xsd"));
         QVERIFY(xsd.open(QIODevice::ReadOnly));
+
+        // Load the XSD contents, and update the included GPX schemaLocation URL
+        // to point to our local copy, so tests don't depend on network access.
+        QByteArray xsdData = xsd.readAll();
+        QVERIFY(!xsdData.isEmpty());
+        const QString gpxXsdFileName = QFINDTESTDATA("schemata/gpx.xsd");
+        QVERIFY(!gpxXsdFileName.isEmpty());
+        xsdData.replace("http://www.topografix.com/GPX/1/1/gpx.xsd",
+            QUrl::fromLocalFile(gpxXsdFileName).toEncoded(QUrl::FullyEncoded));
+
         QXmlSchema schema;
-        /// @todo  Set a custom network access manager to prevent
-        ///        QXmlSchema::load fetching the GPX schema (gpx.xsd) remotely.
-        //schema.setNetworkAccessManager(...);
-        QVERIFY(schema.load(&xsd, QUrl::fromLocalFile(xsd.fileName())));
+        QVERIFY(schema.load(xsdData, QUrl::fromLocalFile(xsd.fileName())));
         QXmlSchemaValidator validator(schema);
         for (int index = 0; index < extensionNodes.length(); ++index) {
             const QDomNodeList &extensions = extensionNodes.at(index).childNodes();
