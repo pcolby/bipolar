@@ -1,12 +1,21 @@
 ## Bipolar Changelog
 
 ### 0.5.7 (_unreleased_)
+Features:
+- Les Mills activity types ([b68cccd](../../commit/b68cccdf5990a7ef5ccdb35bcacaaaec565781a4))
+
 Bugs:
-- @todo ([#63](../../issues/81))
+- sanitise power samples ([#81](../../issues/81))
+
+Other:
+- new test data: laps with power ([#46](../../issues/46))
+- new test data: swimming ([#75](../../issues/75))
+
+Special thanks to @remifreiwald for contributing to this release.
 
 ### 0.5.6 (2016-12-17)
 Features:
-* fallback to exercise HRV data ([#42](../../issues/42))
+- fallback to exercise HRV data ([#42](../../issues/42))
 
 Bugs:
 - use metres-per-second for TCX TPX Speed values ([#74](../../issues/74))
