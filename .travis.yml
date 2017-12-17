@@ -81,7 +81,7 @@ deploy:
   file_glob: true
   file: $TRAVIS_BUILD_DIR-build/pkg/$TRAVIS_OS_NAME/Bipolar-*.$TRAVIS_BUILD_NUMBER.dmg
   on:
-    condition: '"$TRAVIS_OS_NAME" == osx && "$CXX" == clang++ && "$QT" == 56'
+    condition: '"$TRAVIS_OS_NAME" == osx && "$CXX" == clang++ && "$QT" == 5'
     tags: true
 
 notifications:
