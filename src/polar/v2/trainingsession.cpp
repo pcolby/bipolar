@@ -2196,7 +2196,7 @@ QStringList TrainingSession::toHRM(const bool rrDataOnly) const
                         Q_ASSERT(powerLeft >= 0); // Guaranteed by the previous statement, in conjunction with the Q_ASSERTs above.
                         // Convert the left and right powers into a left-right balance percentage.
                         const int leftBalance = (currentPower == 0)
-                            ? (currentPowerLeft == currentPowerRight) ? 50 : (currentPowerLeft < currentPowerRight) ? 0 : 100
+                            ? (powerLeft == qMax(currentPowerRight, 0)) ? 50 : (powerLeft < currentPowerRight) ? 0 : 100
                             : qRound(100.0 * (float)powerLeft / (float)currentPower);
                         if ((0 > leftBalance) || (leftBalance > 100)) {
                             qWarning() << "leftBalance of" << leftBalance << "is outside the range 0..100%";
