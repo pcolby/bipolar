@@ -1,5 +1,8 @@
 ## Bipolar Changelog
 
+### 0.5.8 (_unreleased_)
+???
+
 ### 0.5.7 (2017-12-17)
 Features:
 - Les Mills activity types ([b68cccd](../../commit/b68cccdf5990a7ef5ccdb35bcacaaaec565781a4))
