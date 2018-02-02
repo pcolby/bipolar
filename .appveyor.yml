@@ -26,10 +26,14 @@ environment:
     - QTDIR: C:\Qt\5.8\msvc2013_64
     - QTDIR: C:\Qt\5.8\msvc2015
     - QTDIR: C:\Qt\5.8\msvc2015_64
-    - QTDIR: C:\Qt\5.9.2\mingw53_32
-    - QTDIR: C:\Qt\5.9.2\msvc2013_64
-    - QTDIR: C:\Qt\5.9.2\msvc2015
-    - QTDIR: C:\Qt\5.9.2\msvc2015_64
+    - QTDIR: C:\Qt\5.9.3\mingw53_32
+    - QTDIR: C:\Qt\5.9.3\msvc2013_64
+    - QTDIR: C:\Qt\5.9.3\msvc2015
+    - QTDIR: C:\Qt\5.9.3\msvc2015_64
+    - QTDIR: C:\Qt\5.10.0\mingw53_32
+    - QTDIR: C:\Qt\5.10.0\msvc2013_64
+    - QTDIR: C:\Qt\5.10.0\msvc2015
+    - QTDIR: C:\Qt\5.10.0\msvc2015_64
 
 configuration:
   - debug
