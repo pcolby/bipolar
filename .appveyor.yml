@@ -2,6 +2,7 @@ version: '{branch}-{build}'
 
 environment:
   matrix:
+    # Tip: sed -nre 's|.*Qt/.*/|    - QTDIR: &|p' | tr '/' '\' | sort -nt. -k1.20,1 -k2,2 -k3
     - QTDIR: C:\Qt\5.3\mingw482_32
     - QTDIR: C:\Qt\5.3\msvc2013_opengl
     - QTDIR: C:\Qt\5.3\msvc2013_64_opengl
@@ -26,14 +27,14 @@ environment:
     - QTDIR: C:\Qt\5.8\msvc2013_64
     - QTDIR: C:\Qt\5.8\msvc2015
     - QTDIR: C:\Qt\5.8\msvc2015_64
-    - QTDIR: C:\Qt\5.9.3\mingw53_32
-    - QTDIR: C:\Qt\5.9.3\msvc2013_64
-    - QTDIR: C:\Qt\5.9.3\msvc2015
-    - QTDIR: C:\Qt\5.9.3\msvc2015_64
-    - QTDIR: C:\Qt\5.10.0\mingw53_32
-    - QTDIR: C:\Qt\5.10.0\msvc2013_64
-    - QTDIR: C:\Qt\5.10.0\msvc2015
-    - QTDIR: C:\Qt\5.10.0\msvc2015_64
+    - QTDIR: C:\Qt\5.9.4\mingw53_32
+    - QTDIR: C:\Qt\5.9.4\msvc2013_64
+    - QTDIR: C:\Qt\5.9.4\msvc2015
+    - QTDIR: C:\Qt\5.9.4\msvc2015_64
+    - QTDIR: C:\Qt\5.10.1\mingw53_32
+    - QTDIR: C:\Qt\5.10.1\msvc2013_64
+    - QTDIR: C:\Qt\5.10.1\msvc2015
+    - QTDIR: C:\Qt\5.10.1\msvc2015_64
 
 configuration:
   - debug
