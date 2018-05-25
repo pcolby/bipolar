@@ -3,34 +3,15 @@ version: '{branch}-{build}'
 environment:
   matrix:
     # Tip: sed -nre 's|.*Qt/.*/|    - QTDIR: &|p' | tr '/' '\' | sort -nt. -k1.20,1 -k2,2 -k3
-    - QTDIR: C:\Qt\5.3\mingw482_32
-    - QTDIR: C:\Qt\5.3\msvc2013_opengl
-    - QTDIR: C:\Qt\5.3\msvc2013_64_opengl
-    - QTDIR: C:\Qt\5.4\mingw491_32
-    - QTDIR: C:\Qt\5.4\msvc2013_opengl
-    - QTDIR: C:\Qt\5.4\msvc2013_64_opengl
-    - QTDIR: C:\Qt\5.5\mingw492_32
-    - QTDIR: C:\Qt\5.5\msvc2013
-    - QTDIR: C:\Qt\5.5\msvc2013_64
-    - QTDIR: C:\Qt\5.6\mingw49_32
-    - QTDIR: C:\Qt\5.6\msvc2013
-    - QTDIR: C:\Qt\5.6\msvc2013_64
-    - QTDIR: C:\Qt\5.6\msvc2015
-    - QTDIR: C:\Qt\5.6\msvc2015_64
-    - QTDIR: C:\Qt\5.7\mingw53_32
-    - QTDIR: C:\Qt\5.7\msvc2013
-    - QTDIR: C:\Qt\5.7\msvc2013_64
-    - QTDIR: C:\Qt\5.7\msvc2015
-    - QTDIR: C:\Qt\5.7\msvc2015_64
-    - QTDIR: C:\Qt\5.8\mingw53_32
-    - QTDIR: C:\Qt\5.8\msvc2013
-    - QTDIR: C:\Qt\5.8\msvc2013_64
-    - QTDIR: C:\Qt\5.8\msvc2015
-    - QTDIR: C:\Qt\5.8\msvc2015_64
-    - QTDIR: C:\Qt\5.9.4\mingw53_32
-    - QTDIR: C:\Qt\5.9.4\msvc2013_64
-    - QTDIR: C:\Qt\5.9.4\msvc2015
-    - QTDIR: C:\Qt\5.9.4\msvc2015_64
+    - QTDIR: C:\Qt\5.6.3\mingw49_32
+    - QTDIR: C:\Qt\5.6.3\msvc2013
+    - QTDIR: C:\Qt\5.6.3\msvc2013_64
+    - QTDIR: C:\Qt\5.6.3\msvc2015
+    - QTDIR: C:\Qt\5.6.3\msvc2015_64
+    - QTDIR: C:\Qt\5.9.5\mingw53_32
+    - QTDIR: C:\Qt\5.9.5\msvc2013_64
+    - QTDIR: C:\Qt\5.9.5\msvc2015
+    - QTDIR: C:\Qt\5.9.5\msvc2015_64
     - QTDIR: C:\Qt\5.10.1\mingw53_32
     - QTDIR: C:\Qt\5.10.1\msvc2013_64
     - QTDIR: C:\Qt\5.10.1\msvc2015
@@ -93,7 +74,7 @@ deploy:
     on:
       appveyor_repo_tag: true
       configuration: release
-      QTDIR: C:\Qt\5.9.2\msvc2015_64
+      QTDIR: C:\Qt\5.10.1\msvc2015_64
 
 notifications:
   - provider: Webhook
