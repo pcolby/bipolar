@@ -2532,7 +2532,7 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                 trackPoint.appendChild(doc.createElement(QLatin1String("Extensions")))
                     .appendChild(tpx);
 
-                if ((index < cadence.length()) && (cadence.at(index).toInt() >= 0) &&
+                if ((index < speed.length()) && (speed.at(index).toInt() >= 0) &&
                     (!sensorOffline(samples.value(QLatin1String("speed-offline")).toList(), index))) {
                     tpx.appendChild(doc.createElement(QLatin1String("Speed")))
                         .appendChild(doc.createTextNode(QString::fromLatin1("%1")
