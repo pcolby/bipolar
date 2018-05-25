@@ -43,10 +43,7 @@ before_build:
 build_script:
   - '%make%'
   - cd %APPVEYOR_BUILD_FOLDER%-build/pkg/nsis
-  # Qt 5.6.2 windeployqt issue (https://bugreports.qt.io/browse/QTBUG-56616)
-  # Remove the following SKIP_NSIS concept if/when AppVeyor gets Qt 5.6.3+
-  - if %QTDIR%==C:\Qt\5.6\mingw49_32 if %CONFIGURATION%==debug set SKIP_NSIS=QTBUG-56616
-  - if defined SKIP_NSIS ( echo Skipping NSIS due to %SKIP_NSIS% ) else %make% nsis
+  - %make% nsis
 
 after_build:
   # Add a link to the build output within the source directory. This is needed because AppVeyor does
