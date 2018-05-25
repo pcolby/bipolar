@@ -23,13 +23,12 @@ env:
   - QT=57 BREW=ex   PPA=beineri/opt-qt571-trusty
   - QT=58 BREW=ex   PPA=beineri/opt-qt58-trusty
   - QT=59 BREW=ex   PPA=beineri/opt-qt593-trusty
-  - QT=510 BREW=@5.10
+  - QT=510 BREW=@ex PPA=ppa:beineri/opt-qt-5.10.1-trusty
 
 matrix:
   # Qt no longer supports GCC on OSX.
   allow_failures:
     - { os: osx, compiler: gcc, env: QT=5  BREW= }
-    - { os: osx, compiler: gcc, env: QT=510 BREW=@5.10 }
   exclude:
     - { os: osx, env: QT=5  BREW=ex   PPA=ubuntu-sdk-team/ppa      }
     - { os: osx, env: QT=51 BREW=ex   PPA=beineri/opt-qt511-trusty }
@@ -41,7 +40,7 @@ matrix:
     - { os: osx, env: QT=57 BREW=ex   PPA=beineri/opt-qt571-trusty }
     - { os: osx, env: QT=58 BREW=ex   PPA=beineri/opt-qt58-trusty  }
     - { os: osx, env: QT=59 BREW=ex   PPA=beineri/opt-qt593-trusty }
-    - { os: linux, env: QT=510 BREW=@5.10 }
+    - { os: osx, env: QT=510 BREW=@ex PPA=ppa:beineri/opt-qt-5.10.1-trusty }
 
 before_install:
   - '[[ "$TRAVIS_OS_NAME" != linux || -z "$PPA" ]] || sudo add-apt-repository -y ppa:$PPA'
