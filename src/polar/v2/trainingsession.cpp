@@ -1819,13 +1819,13 @@ QStringList TrainingSession::toHRM(const bool rrDataOnly) const
             ? map.value(RRSAMPLES).toMap().value(QLatin1String("value")).toList()
             : flattenHrvSamplesForHrm(samples);
 
-        const bool haveAltitude     = ((!rrDataOnly) && (haveAnySamples(samples, QLatin1String("speed"))));
+        const bool haveAltitude     = ((!rrDataOnly) && (haveAnySamples(samples, QLatin1String("altitude"))));
         const bool haveCadence      = ((!rrDataOnly) && (haveAnySamples(samples, QLatin1String("cadence"))));
         const bool havePowerLeft    = ((!rrDataOnly) && (haveAnySamples(samples, QLatin1String("left-pedal-power"))));
         const bool havePowerRight   = ((!rrDataOnly) && (haveAnySamples(samples, QLatin1String("right-pedal-power"))));
         const bool havePower        = (havePowerLeft || havePowerRight);
         const bool havePowerBalance = havePower;
-        const bool haveSpeed        = ((!rrDataOnly) && (haveAnySamples(samples, QLatin1String("altitude"))));
+        const bool haveSpeed        = ((!rrDataOnly) && (haveAnySamples(samples, QLatin1String("speed"))));
 
         QString hrmData;
         QTextStream stream(&hrmData);
@@ -2532,7 +2532,7 @@ QDomDocument TrainingSession::toTCX(const QString &buildTime) const
                 trackPoint.appendChild(doc.createElement(QLatin1String("Extensions")))
                     .appendChild(tpx);
 
-                if ((index < cadence.length()) && (cadence.at(index).toInt() >= 0) &&
+                if ((index < speed.length()) && (speed.at(index).toInt() >= 0) &&
                     (!sensorOffline(samples.value(QLatin1String("speed-offline")).toList(), index))) {
                     tpx.appendChild(doc.createElement(QLatin1String("Speed")))
                         .appendChild(doc.createTextNode(QString::fromLatin1("%1")
