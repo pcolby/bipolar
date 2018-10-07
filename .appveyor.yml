@@ -8,6 +8,8 @@ environment:
     - QTDIR: C:\Qt\5.6.3\msvc2013_64
     - QTDIR: C:\Qt\5.6.3\msvc2015
     - QTDIR: C:\Qt\5.6.3\msvc2015_64
+    - QTDIR: C:\Qt\5.7\mingw53_32
+    - QTDIR: C:\Qt\5.7\msvc2015
     - QTDIR: C:\Qt\5.9.5\mingw53_32
     - QTDIR: C:\Qt\5.9.5\msvc2013_64
     - QTDIR: C:\Qt\5.9.5\msvc2015
@@ -16,6 +18,9 @@ environment:
     - QTDIR: C:\Qt\5.10.1\msvc2013_64
     - QTDIR: C:\Qt\5.10.1\msvc2015
     - QTDIR: C:\Qt\5.10.1\msvc2015_64
+    - QTDIR: C:\Qt\5.11.1\mingw53_32
+    - QTDIR: C:\Qt\5.11.1\msvc2015
+    - QTDIR: C:\Qt\5.11.1\msvc2015_64
 
 configuration:
   - debug
