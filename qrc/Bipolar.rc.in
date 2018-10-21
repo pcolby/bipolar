@@ -26,7 +26,7 @@ BEGIN
             VALUE \"FileDescription\", \"Bipolar application\\0\"
             VALUE \"FileVersion\", \"$$VERSION\\0\"
             VALUE \"InternalName\", \"Bipolar\\0\"
-            VALUE \"LegalCopyright\", \"2014-2017 Paul Colby\\0\"
+            VALUE \"LegalCopyright\", \"2014-2018 Paul Colby\\0\"
             VALUE \"OriginalFilename\", \"Bipolar.exe\\0\"
           //VALUE \"PrivateBuild\", \"\\0\"
             VALUE \"ProductName\", \"Bipolar\\0\"

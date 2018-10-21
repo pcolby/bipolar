@@ -1,6 +1,6 @@
 ## Bipolar Changelog
 
-### 0.5.8 (_unreleased_)
+### 0.5.8 (2018-10-21)
 Bugs:
 - check for speed (not cadence) for TCX speed output ([#86](../../pull/86))
 - correct detection of speed and altitude for HRM output ([#86](../../pull/86))
