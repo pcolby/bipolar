@@ -2,7 +2,7 @@
 
 ### 0.5.9 (_unreleased_)
 Features:
-- compatible with FlowSync 3 (#89)
+- compatible with FlowSync 3 ([#89](../../issues/89))
 
 ### 0.5.8 (2018-10-21)
 Bugs:
