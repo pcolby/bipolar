@@ -15,7 +15,7 @@ install:
 
 before_script:
   - sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer
-  - xcodebuild -license
+  - sudo xcodebuild -license
   - xcodebuild -showsdks
 
 script:
