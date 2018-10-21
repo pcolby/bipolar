@@ -4,7 +4,7 @@
 # * Xcode
 #
 
-QT_VERSION=5.1.1 # The version used by Polar FlowSync.
+QT_VERSION=5.5.1 # The version used by Polar FlowSync.
 QT_NAME="qt-everywhere-opensource-src-$QT_VERSION"
 
 CP=`which cp`       || { echo 'Failed to find: cp'    2>&1; exit 1; }
@@ -21,7 +21,7 @@ function fetchSource {
     if [ ! -e "$SELF_DIR/$QT_NAME.tar.gz" ]; then
         echo "Fetching $QT_NAME.tar.gz"
         "$CURL" --location \
-            "http://download.qt.io/archive/qt/5.1/$QT_VERSION/single/$QT_NAME.tar.gz" \
+            "http://download.qt.io/archive/qt/5.5/$QT_VERSION/single/$QT_NAME.tar.gz" \
             --output "$QT_NAME.tar.gz"
     fi
 }
