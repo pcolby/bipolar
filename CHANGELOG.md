@@ -1,5 +1,9 @@
 ## Bipolar Changelog
 
+### 0.5.9 (_unreleased_)
+Features:
+- compatible with FlowSync 3 (#89)
+
 ### 0.5.8 (2018-10-21)
 Bugs:
 - check for speed (not cadence) for TCX speed output ([#86](../../pull/86))
