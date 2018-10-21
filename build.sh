@@ -34,9 +34,9 @@ function extractSource {
         "$TAR" xzf "$SELF_DIR/$QT_NAME.tar.gz" -C "$SELF_DIR" || return
         echo "Fixing pre-Qt57 xcodebuild bug"
         find "$SELF_DIR" -name 'default_pre.prf'
-        cat "$SELF_DIR/$QT_NAME/mkspecs/features/mac/default_pre.prf"
-        "$SED" -i.ori -Ee 's/(-find xc)run/\1odebuild/g' "$SELF_DIR/$QT_NAME/mkspecs/features/mac/default_pre.prf" || return
-        cat "$SELF_DIR/$QT_NAME/mkspecs/features/mac/default_pre.prf"
+        cat "$SELF_DIR/$QT_NAME/qtbase/mkspecs/features/mac/default_pre.prf"
+        "$SED" -i.ori -Ee 's/(-find xc)run/\1odebuild/g' "$SELF_DIR/$QT_NAME//qtbase/mkspecs/features/mac/default_pre.prf" || return
+        cat "$SELF_DIR/$QT_NAME//qtbase/mkspecs/features/mac/default_pre.prf"
     fi
 }
 
