@@ -14,6 +14,8 @@ install:
     --strip-components=1 AaronWallace-MacOSX_SDKs-ba4d5b3/MacOSX10.8.sdk
 
 before_script:
+  - sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer
+  - xcodebuild -license
   - xcodebuild -showsdks
 
 script:
