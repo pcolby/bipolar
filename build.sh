@@ -32,6 +32,10 @@ function extractSource {
         fetchSource || return
         echo "Extracting $QT_NAME.tar.gz"
         "$TAR" xzf "$SELF_DIR/$QT_NAME.tar.gz" -C "$SELF_DIR" || return
+        echo "Fixing pre-Qt57 xcodebuild bug"
+        cat "$SELF_DIR/$QT_NAME/mkspecs/features/mac/default_pre.prf"
+        "$SED" -i.ori -re 's/(-find xc)run/\1odebuild/g' "$SELF_DIR/$QT_NAME/mkspecs/features/mac/default_pre.prf" || return
+        cat "$SELF_DIR/$QT_NAME/mkspecs/features/mac/default_pre.prf"
     fi
 }
 
