@@ -17,5 +17,3 @@ before_install:
 
 script:
   - ./build.sh
-
-test: off
