@@ -17,3 +17,14 @@ before_install:
 
 script:
   - ./build.sh
+  - find . -name QtNetwork
+
+before_deploy:
+  - find . -name QtNetwork
+
+deploy:
+  provider: releases
+  api_key: $RELEASES_API_KEY
+  file: $TRAVIS_BUILD_DIR-build/pkg/$TRAVIS_OS_NAME/Bipolar-*.$TRAVIS_BUILD_NUMBER.dmg
+#  on:
+#    tags: true
