@@ -17,10 +17,12 @@ before_install:
 
 script:
   - ./build.sh
-  - find . -name QtNetwork
+  - find . -name QtNetwork -type f -printf '%p %s\n'
+  - md5sum ./build/qtbase/lib/QtNetwork.framework/QtNetwork
+  - md5sum ./build/qtbase/lib/QtNetwork.framework/Versions/5/QtNetwork
 
 before_deploy:
-  - find . -name QtNetwork
+  - cp -a ./build/qtbase/lib/QtNetwork.framework/QtNetwork "./QtNetwork-$MACOS_SDK"
 
 deploy:
   provider: releases
