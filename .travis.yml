@@ -20,13 +20,6 @@ script:
 
 before_deploy:
   - ln -s build/qtbase/lib/QtNetwork.framework/QtNetwork QtNetwork-$MACOS_SDK
-  - pwd
-  - ls -l "./QtNetwork-$MACOS_SDK"
-  - ls -l ./build/qtbase/lib/QtNetwork.framework/QtNetwork
-  - ls -l ./build/qtbase/lib/QtNetwork.framework/Versions/5/QtNetwork
-  - file "./QtNetwork-$MACOS_SDK"
-  - file ./build/qtbase/lib/QtNetwork.framework/QtNetwork
-  - file ./build/qtbase/lib/QtNetwork.framework/Versions/5/QtNetwork
 
 deploy:
   provider: releases
