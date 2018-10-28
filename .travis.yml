@@ -17,9 +17,9 @@ before_install:
 
 script:
   - ./build.sh
-  - find . -name QtNetwork -type f -printf '%p %s\n'
-  - md5sum ./build/qtbase/lib/QtNetwork.framework/QtNetwork
-  - md5sum ./build/qtbase/lib/QtNetwork.framework/Versions/5/QtNetwork
+  - find . -name QtNetwork -type f
+  - md5 ./build/qtbase/lib/QtNetwork.framework/QtNetwork
+  - md5 ./build/qtbase/lib/QtNetwork.framework/Versions/5/QtNetwork
 
 before_deploy:
   - cp -a ./build/qtbase/lib/QtNetwork.framework/QtNetwork "./QtNetwork-$MACOS_SDK"
