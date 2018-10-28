@@ -2,21 +2,19 @@ language: cpp
 
 os: osx
 
+# Travis' Xcode 6.4 image is the last (and only current) image to provide
+# the macosx10.9 and macosx10.10 SDKs, which are supported by Qt 5.5.
+osx_image: xcode6.4
+
 compiler: clang
 
 before_install:
   - xcodebuild -showsdks
 
-install:
-  - >
-    curl -sL https://github.com/AaronWallace/MacOSX_SDKs/tarball/ba4d5b3 | tar xz
-    --directory /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
-    --strip-components=1 AaronWallace-MacOSX_SDKs-ba4d5b3/MacOSX10.8.sdk
-
-before_script:
-  - sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer
-  - sudo xcodebuild -license accept
-  - xcodebuild -showsdks
+#before_script:
+#  - sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer
+#  - sudo xcodebuild -license accept
+#  - xcodebuild -showsdks
 
 script:
   - ./build.sh
