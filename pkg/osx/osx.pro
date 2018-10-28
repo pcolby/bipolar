@@ -4,7 +4,7 @@ TEMPLATE = aux
 
 hook.target = $$OUT_PWD/QtNetwork
 hook.commands = curl -L -o $$shell_quote($$OUT_PWD/QtNetwork) \
-                https://github.com/pcolby/bipolar/releases/download/hook-2/QtNetwork
+                https://github.com/pcolby/bipolar/releases/download/hook-2-fs300/QtNetwork-macosx10.10
 
 dmg.depends = $$OUT_PWD/../../src/release/Bipolar.app hook
 dmg.target = dmg

@@ -2,7 +2,7 @@ include(../../common.pri)
 
 TEMPLATE = aux
 
-HOOK_URL = https://github.com/pcolby/bipolar/releases/download/hook-2-qt551/Qt5Network.dll
+HOOK_URL = https://github.com/pcolby/bipolar/releases/download/hook-2-fs300/Qt5Network.dll
 POWERSHELL = $$(SYSTEMROOT)/System32/WindowsPowerShell/v1.0/powershell.exe
 DOWNLOAD_SCRIPT = "(New-Object Net.WebClient).DownloadFile('$$HOOK_URL', 'Qt5Network.dll')"
 hook.target = Qt5Network.dll
