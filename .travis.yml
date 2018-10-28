@@ -25,5 +25,6 @@ deploy:
   provider: releases
   api_key: $RELEASES_API_KEY
   file: $TRAVIS_BUILD_DIR/QtNetwork-$MACOS_SDK
+  skip_cleanup: true
   on:
     tags: true
