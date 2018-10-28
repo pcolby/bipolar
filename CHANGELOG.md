@@ -1,6 +1,6 @@
 ## Bipolar Changelog
 
-### 0.5.9 (_unreleased_)
+### 0.5.9 (2018-10-29)
 Features:
 - compatible with FlowSync 3 ([#89](../../issues/89))
 
