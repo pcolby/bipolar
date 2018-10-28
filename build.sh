@@ -77,7 +77,7 @@ function configure {
         -openssl \
         -platform macx-clang-32 \
         -release \
-        -sdk macosx10.10 \
+        -sdk "${MACOS_SDK:-macosx10.10}" \
         -shared \
         -skip multimedia \
         -skip script \
