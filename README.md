@@ -1,10 +1,10 @@
 # [![PMDA++](qrc/icon/bipolar30.png)](#) Bipolar
-[![Build Status](https://img.shields.io/travis/pcolby/bipolar/master.svg "Linux (Travis CI)")](https://travis-ci.org/pcolby/bipolar)
-[![Build Status](https://img.shields.io/appveyor/ci/pcolby/bipolar.svg "Windows (AppVeyor)")](https://ci.appveyor.com/project/pcolby/bipolar)
-[![Github Downloads](https://img.shields.io/github/downloads/pcolby/bipolar/total.svg)](https://github.com/pcolby/bipolar/releases)
+[![Build Status](https://img.shields.io/travis/pcolby/bipolar/master.svg?logo=travis)](https://travis-ci.org/pcolby/bipolar)
+[![Build Status](https://img.shields.io/appveyor/ci/pcolby/bipolar.svg?logo=appveyor)](https://ci.appveyor.com/project/pcolby/bipolar)
+[![Github Downloads](https://img.shields.io/github/downloads/pcolby/bipolar/total.svg?logo=github&logoColor=white)](https://github.com/pcolby/bipolar/releases)
 [![Github Release](http://img.shields.io/github/release/pcolby/bipolar.svg)](https://github.com/pcolby/bipolar/releases/latest)
 [![GPLv3 License](http://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/copyleft/gpl.html)
-[![Chat](https://img.shields.io/gitter/room/pcolby/bipolar.svg "Join the chat")](https://gitter.im/pcolby/bipolar)
+[![Chat](https://img.shields.io/gitter/room/pcolby/bipolar.svg?logo=gitter "Join the chat")](https://gitter.im/pcolby/bipolar)
 ![Qt](https://img.shields.io/badge/Qt-qmake-41cd52.svg)
 
 Bipolar a simple GUI application for exporting training sessions from Polar
