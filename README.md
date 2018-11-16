@@ -3,7 +3,9 @@
 [![Build Status](https://img.shields.io/appveyor/ci/pcolby/bipolar.svg?logo=appveyor)](https://ci.appveyor.com/project/pcolby/bipolar)
 [![Github Downloads](https://img.shields.io/github/downloads/pcolby/bipolar/total.svg?logo=github&logoColor=white)](https://github.com/pcolby/bipolar/releases)
 [![Github Release](http://img.shields.io/github/release/pcolby/bipolar.svg)](https://github.com/pcolby/bipolar/releases/latest)
-[![GPLv3 License](http://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/copyleft/gpl.html)
+[![GitHub forks](https://img.shields.io/github/forks/pcolby/bipolar.svg)](https://github.com/pcolby/bipolar/network)
+[![GitHub stars](https://img.shields.io/github/stars/pcolby/bipolar.svg)](https://github.com/pcolby/bipolar/stargazers)
+[![GitHub license](https://img.shields.io/github/license/pcolby/bipolar.svg)](https://github.com/pcolby/bipolar/blob/master/LICENSE.md)
 [![Chat](https://img.shields.io/gitter/room/pcolby/bipolar.svg?logo=gitter "Join the chat")](https://gitter.im/pcolby/bipolar)
 ![Qt](https://img.shields.io/badge/Qt-qmake-41cd52.svg)
 
