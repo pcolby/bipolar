@@ -5,9 +5,9 @@
 [![Github Release](http://img.shields.io/github/release/pcolby/bipolar.svg)](https://github.com/pcolby/bipolar/releases/latest)
 [![GitHub forks](https://img.shields.io/github/forks/pcolby/bipolar.svg)](https://github.com/pcolby/bipolar/network)
 [![GitHub stars](https://img.shields.io/github/stars/pcolby/bipolar.svg)](https://github.com/pcolby/bipolar/stargazers)
-[![GitHub license](https://img.shields.io/github/license/pcolby/bipolar.svg)](https://github.com/pcolby/bipolar/blob/master/LICENSE.md)
 [![Chat](https://img.shields.io/gitter/room/pcolby/bipolar.svg?logo=gitter "Join the chat")](https://gitter.im/pcolby/bipolar)
 ![Qt](https://img.shields.io/badge/Qt-qmake-41cd52.svg)
+[![GitHub license](https://img.shields.io/github/license/pcolby/bipolar.svg)](https://github.com/pcolby/bipolar/blob/master/LICENSE.md)
 
 Bipolar a simple GUI application for exporting training sessions from Polar
 sync software, such as [Polar FlowSync].  Currently, the following applications
