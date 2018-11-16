@@ -9,6 +9,9 @@
 ![Qt](https://img.shields.io/badge/Qt-qmake-41cd52.svg)
 [![GitHub license](https://img.shields.io/github/license/pcolby/bipolar.svg)](https://github.com/pcolby/bipolar/blob/master/LICENSE.md)
 
+[![Build history](https://buildstats.info/travisci/chart/pcolby/bipolar?branch=master&showStats=true)](https://travis-ci.org/pcolby/bipolar/builds)
+[![Build history](https://buildstats.info/appveyor/chart/pcolby/bipolar?branch=master&showStats=true)](https://ci.appveyor.com/project/pcolby/bipolar/history)
+
 Bipolar a simple GUI application for exporting training sessions from Polar
 sync software, such as [Polar FlowSync].  Currently, the following applications
 and devices are supported:
