@@ -4,54 +4,54 @@ os:
   - linux
   - osx
 
-dist: trusty
+dist: xenial
 
 compiler:
   - clang
   - gcc
 
 env:
-  - QT=5  BREW=
-  - QT=5  BREW=ex  PPA=ubuntu-sdk-team/ppa
-  - QT=51 BREW=ex  PPA=beineri/opt-qt511-trusty
-  - QT=52 BREW=ex  PPA=beineri/opt-qt521-trusty
-  - QT=53 BREW=ex  PPA=beineri/opt-qt532-trusty
-  - QT=54 BREW=ex  PPA=beineri/opt-qt542-trusty
-  - QT=55 BREW=ex  PPA=beineri/opt-qt551-trusty
-  - QT=56 BREW=ex  PPA=beineri/opt-qt562-trusty
-  - QT=56 BREW=ex  PPA=beineri/opt-qt563-trusty
-  - QT=57 BREW=ex  PPA=beineri/opt-qt571-trusty
-  - QT=58 BREW=ex  PPA=beineri/opt-qt58-trusty
-  - QT=59 BREW=ex  PPA=beineri/opt-qt591-trusty
-  - QT=59 BREW=ex  PPA=beineri/opt-qt592-trusty
-  - QT=59 BREW=ex  PPA=beineri/opt-qt593-trusty
-  - QT=59 BREW=ex  PPA=beineri/opt-qt594-trusty
-  - QT=59 BREW=ex  PPA=beineri/opt-qt595-trusty
-  - QT=59 BREW=ex  PPA=beineri/opt-qt596-trusty
-  - QT=510 BREW=ex PPA=beineri/opt-qt-5.10.1-trusty
+  - QT=5
+  # Tip: curl -s 'https://api.launchpad.net/1.0/~beineri/ppas?ws.size=200' | jq -r '"beineri/" + .entries[].name' | sed -nEe 's/.*opt-qt(([0-9]{2})[0-9]?|-([0-9])+\.([0-9]+)\.([0-9]+))-xenial/  - QT=\2\3\4 BREW=EX PPA=&/p'
+  - QT=56 PPA=beineri/opt-qt562-xenial
+  - QT=56 PPA=beineri/opt-qt563-xenial
+  - QT=57 PPA=beineri/opt-qt571-xenial
+  - QT=58 PPA=beineri/opt-qt58-xenial
+  - QT=59 PPA=beineri/opt-qt59-xenial
+  - QT=59 PPA=beineri/opt-qt591-xenial
+  - QT=59 PPA=beineri/opt-qt592-xenial
+  - QT=59 PPA=beineri/opt-qt593-xenial
+  - QT=59 PPA=beineri/opt-qt594-xenial
+  - QT=59 PPA=beineri/opt-qt595-xenial
+  - QT=59 PPA=beineri/opt-qt596-xenial
+  - QT=510 PPA=beineri/opt-qt-5.10.0-xenial
+  - QT=510 PPA=beineri/opt-qt-5.10.1-xenial
+  - QT=511 PPA=beineri/opt-qt-5.11.0-xenial
+  - QT=511 PPA=beineri/opt-qt-5.11.1-xenial
+  - QT=511 PPA=beineri/opt-qt-5.11.2-xenial
 
 matrix:
   # Qt no longer supports GCC on OSX.
   allow_failures:
-    - { os: osx, compiler: gcc, env: QT=5  BREW= }
+    - { os: osx, compiler: gcc, env: QT=5 }
   exclude:
-    - { os: osx, env: QT=5  BREW=ex  PPA=ubuntu-sdk-team/ppa      }
-    - { os: osx, env: QT=51 BREW=ex  PPA=beineri/opt-qt511-trusty }
-    - { os: osx, env: QT=52 BREW=ex  PPA=beineri/opt-qt521-trusty }
-    - { os: osx, env: QT=53 BREW=ex  PPA=beineri/opt-qt532-trusty }
-    - { os: osx, env: QT=54 BREW=ex  PPA=beineri/opt-qt542-trusty }
-    - { os: osx, env: QT=55 BREW=ex  PPA=beineri/opt-qt551-trusty }
-    - { os: osx, env: QT=56 BREW=ex  PPA=beineri/opt-qt562-trusty }
-    - { os: osx, env: QT=56 BREW=ex  PPA=beineri/opt-qt563-trusty }
-    - { os: osx, env: QT=57 BREW=ex  PPA=beineri/opt-qt571-trusty }
-    - { os: osx, env: QT=58 BREW=ex  PPA=beineri/opt-qt58-trusty  }
-    - { os: osx, env: QT=59 BREW=ex  PPA=beineri/opt-qt591-trusty }
-    - { os: osx, env: QT=59 BREW=ex  PPA=beineri/opt-qt592-trusty }
-    - { os: osx, env: QT=59 BREW=ex  PPA=beineri/opt-qt593-trusty }
-    - { os: osx, env: QT=59 BREW=ex  PPA=beineri/opt-qt594-trusty }
-    - { os: osx, env: QT=59 BREW=ex  PPA=beineri/opt-qt595-trusty }
-    - { os: osx, env: QT=59 BREW=ex  PPA=beineri/opt-qt596-trusty }
-    - { os: osx, env: QT=510 BREW=ex PPA=beineri/opt-qt-5.10.1-trusty }
+    # Tip: curl -s 'https://api.launchpad.net/1.0/~beineri/ppas?ws.size=200' | jq -r '"beineri/" + .entries[].name' | sed -nEe 's/.*opt-qt(([0-9]{2})[0-9]?|-([0-9])+\.([0-9]+)\.([0-9]+))-xenial/    - { os: osx, env: QT=\2\3\4 PPA=& }/p'
+    - { os: osx, env: QT=56 PPA=beineri/opt-qt562-xenial }
+    - { os: osx, env: QT=56 PPA=beineri/opt-qt563-xenial }
+    - { os: osx, env: QT=57 PPA=beineri/opt-qt571-xenial }
+    - { os: osx, env: QT=58 PPA=beineri/opt-qt58-xenial }
+    - { os: osx, env: QT=59 PPA=beineri/opt-qt59-xenial }
+    - { os: osx, env: QT=59 PPA=beineri/opt-qt591-xenial }
+    - { os: osx, env: QT=59 PPA=beineri/opt-qt592-xenial }
+    - { os: osx, env: QT=59 PPA=beineri/opt-qt593-xenial }
+    - { os: osx, env: QT=59 PPA=beineri/opt-qt594-xenial }
+    - { os: osx, env: QT=59 PPA=beineri/opt-qt595-xenial }
+    - { os: osx, env: QT=59 PPA=beineri/opt-qt596-xenial }
+    - { os: osx, env: QT=510 PPA=beineri/opt-qt-5.10.0-xenial }
+    - { os: osx, env: QT=510 PPA=beineri/opt-qt-5.10.1-xenial }
+    - { os: osx, env: QT=511 PPA=beineri/opt-qt-5.11.0-xenial }
+    - { os: osx, env: QT=511 PPA=beineri/opt-qt-5.11.1-xenial }
+    - { os: osx, env: QT=511 PPA=beineri/opt-qt-5.11.2-xenial }
 
 before_install:
   - '[[ "$TRAVIS_OS_NAME" != linux || -z "$PPA" ]] || sudo add-apt-repository -y ppa:$PPA'
@@ -63,8 +63,8 @@ install:
   - '[ "$TRAVIS_OS_NAME" != linux ] || sudo apt-get -qy install cppcheck'
   - '[[ "$TRAVIS_OS_NAME" != linux || "$PPA" != */opt-* ]] || sudo apt-get -qy install qt${QT}base qt${QT}xmlpatterns'
   - '[[ "$TRAVIS_OS_NAME" != linux || "$PPA" == */opt-* ]] || sudo apt-get -qy install qt5-qmake qtbase5-dev libqt5xmlpatterns5-dev'
-  - '[ "$TRAVIS_OS_NAME" != osx ] || brew install cppcheck qt$BREW'
-  - '[ "$TRAVIS_OS_NAME" != osx ] || brew link --force qt$BREW'
+  - '[ "$TRAVIS_OS_NAME" != osx ] || brew install cppcheck qt'
+  - '[ "$TRAVIS_OS_NAME" != osx ] || brew link --force qt'
 
 before_script:
   # Skip cppcheck on OSX for now https://github.com/pcolby/bipolar/issues/79 http://trac.cppcheck.net/ticket/7792
