@@ -76,9 +76,8 @@ before_script:
   - '[[ "$TRAVIS_OS_NAME" != linux || "$PPA" != */opt-* ]] || . /opt/qt$QT/bin/qt$QT-env.sh'
   - '[[ "$TRAVIS_OS_NAME" != linux || "$PPA" == */opt-* ]] || export QT_SELECT=qt5'
   - mkdir -p "$TRAVIS_BUILD_DIR-build"
-  - pushd "$TRAVIS_BUILD_DIR-build"
   - qmake -v
-  - qmake -r -Wall -Wlogic -Wparser CONFIG+=debug_and_release "$TRAVIS_BUILD_DIR"
+  - qmake -o "$TRAVIS_BUILD_DIR-build" -r -Wall -Wlogic -Wparser CONFIG+=debug_and_release "$TRAVIS_BUILD_DIR"
   - popd
 
 script:
