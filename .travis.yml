@@ -78,7 +78,6 @@ before_script:
   - mkdir -p "$TRAVIS_BUILD_DIR-build"
   - qmake -v
   - qmake -o "$TRAVIS_BUILD_DIR-build" -r -Wall -Wlogic -Wparser CONFIG+=debug_and_release "$TRAVIS_BUILD_DIR"
-  - popd
 
 script:
   - make -C "$TRAVIS_BUILD_DIR-build" -j2 all
