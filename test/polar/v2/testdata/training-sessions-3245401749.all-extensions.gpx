@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.1" xmlns:gpxax="http://www.garmin.com/xmlschemas/AccelerationExtension/v1" xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpxdata="http://www.cluetrust.com/XML/GPXDATA/1/0" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" creator="test 1.2.3.4 - https://github.com/pcolby/bipolar" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <name>training-sessions-3245401749</name>
+    <desc>GPX encoding of training-sessions-3245401749</desc>
+    <author>
+      <link href="https://github.com/pcolby/bipolar">
+        <text>Bipolar</text>
+      </link>
+    </author>
+    <time>2014-07-15T12:34:56Z</time>
+  </metadata>
+  <trk>
+    <src>training-sessions-3245401749-exercises-3253957059-create training-sessions-3245401749-exercises-3253957059-samples training-sessions-3245401749-exercises-3253957059-statistics training-sessions-3245401749-exercises-3253957059-zones</src>
+  </trk>
+</gpx>

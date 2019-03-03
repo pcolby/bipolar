@@ -1,0 +1,58 @@
+{
+    "cadence": [
+        {
+            "average": [
+                0
+            ],
+            "maximum": [
+                0
+            ]
+        }
+    ],
+    "heartrate": [
+        {
+            "average": [
+                98
+            ],
+            "maximum": [
+                126
+            ],
+            "minimum": [
+                73
+            ]
+        }
+    ],
+    "speed": [
+        {
+            "average": [
+                0
+            ],
+            "maximum": [
+                0
+            ]
+        }
+    ],
+    "stride": [
+        {
+            "average": [
+                0
+            ],
+            "maximum": [
+                0
+            ]
+        }
+    ],
+    "temperature": [
+        {
+            "average": [
+                23.230195999145508
+            ],
+            "maximum": [
+                23.579999923706055
+            ],
+            "minimum": [
+                22.809999465942383
+            ]
+        }
+    ]
+}
