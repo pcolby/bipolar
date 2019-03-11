@@ -258,6 +258,7 @@ QString TrainingSession::getTcxSport(const quint64 &polarSportValue)
         map.insert(140, TCX_OTHER);  // LES MILLS BODYBALANCE
         map.insert(141, TCX_BIKING); // LES MILLS THE TRIP
         map.insert(142, TCX_OTHER);  // LES MILLS CXWORX
+        map.insert(143, TCX_OTHER);  // LES MILLS BARRE
     }
     QMap<quint64, QString>::ConstIterator iter = map.constFind(polarSportValue);
     if (iter == map.constEnd()) {
