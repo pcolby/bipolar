@@ -1,12 +1,19 @@
 {
-    "23": [
-        "0d000000001512af3440"
-    ],
-    "24": [
-        1
-    ],
     "calories": [
         36
+    ],
+    "cardio-load": [
+        {
+            "activity-load": [
+                0
+            ],
+            "exercise-load": [
+                2.823185443878174
+            ]
+        }
+    ],
+    "cardio-load-interpretation": [
+        1
     ],
     "device": [
         "44B07824"

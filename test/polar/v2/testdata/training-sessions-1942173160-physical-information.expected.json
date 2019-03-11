@@ -1,7 +1,4 @@
 {
-    "16": [
-        "08081500000000"
-    ],
     "aerobic-threshold": [
         {
             "modified": [
@@ -407,6 +404,16 @@
             ]
         }
     ],
+    "sensor-calibration-offset": [
+        {
+            "sample-source-type": [
+                8
+            ],
+            "speed-cal-offset": [
+                0
+            ]
+        }
+    ],
     "training-background": [
         {
             "modified": [
@@ -541,9 +548,6 @@
     ],
     "weight": [
         {
-            "3": [
-                2
-            ],
             "modified": [
                 {
                     "date": [
@@ -579,6 +583,9 @@
                         0
                     ]
                 }
+            ],
+            "source": [
+                2
             ],
             "value": [
                 77.30000305175781

@@ -1,7 +1,4 @@
 {
-    "30": [
-        "0a08080010031800207d120908001000180920c802"
-    ],
     "altitude": [
         134.41842651367188,
         134.41842651367188,
@@ -6542,6 +6539,42 @@
             ],
             "current-power": [
                 0
+            ]
+        }
+    ],
+    "pause-times": [
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "milliseconds": [
+                        328
+                    ],
+                    "minutes": [
+                        0
+                    ],
+                    "seconds": [
+                        9
+                    ]
+                }
+            ],
+            "starttime": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "milliseconds": [
+                        125
+                    ],
+                    "minutes": [
+                        3
+                    ],
+                    "seconds": [
+                        0
+                    ]
+                }
             ]
         }
     ],

@@ -1,13 +1,4 @@
 {
-    "16": [
-        "08081500000000"
-    ],
-    "17": [
-        "08e00312150a0708e20f100b18041208080d1014182320001800"
-    ],
-    "18": [
-        "08ee0112150a0708e30f100218141208080410011827200018001802"
-    ],
     "aerobic-threshold": [
         {
             "modified": [
@@ -413,6 +404,105 @@
             ]
         }
     ],
+    "running-maximum-aerobic-power": [
+        {
+            "modified": [
+                {
+                    "date": [
+                        {
+                            "day": [
+                                20
+                            ],
+                            "month": [
+                                2
+                            ],
+                            "year": [
+                                2019
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                4
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minute": [
+                                1
+                            ],
+                            "seconds": [
+                                39
+                            ]
+                        }
+                    ],
+                    "trusted": [
+                        0
+                    ]
+                }
+            ],
+            "setting-source": [
+                2
+            ],
+            "value": [
+                238
+            ]
+        }
+    ],
+    "sensor-calibration-offset": [
+        {
+            "sample-source-type": [
+                8
+            ],
+            "speed-cal-offset": [
+                0
+            ]
+        }
+    ],
+    "sleep-goal": [
+        {
+            "modified": [
+                {
+                    "date": [
+                        {
+                            "day": [
+                                4
+                            ],
+                            "month": [
+                                11
+                            ],
+                            "year": [
+                                2018
+                            ]
+                        }
+                    ],
+                    "time": [
+                        {
+                            "hour": [
+                                13
+                            ],
+                            "milliseconds": [
+                                0
+                            ],
+                            "minute": [
+                                20
+                            ],
+                            "seconds": [
+                                35
+                            ]
+                        }
+                    ],
+                    "trusted": [
+                        0
+                    ]
+                }
+            ],
+            "sleep-goal-minutes": [
+                480
+            ]
+        }
+    ],
     "training-background": [
         {
             "modified": [
@@ -590,9 +680,6 @@
     ],
     "weight": [
         {
-            "3": [
-                3
-            ],
             "modified": [
                 {
                     "date": [
@@ -628,6 +715,9 @@
                         0
                     ]
                 }
+            ],
+            "source": [
+                3
             ],
             "value": [
                 65.30000305175781

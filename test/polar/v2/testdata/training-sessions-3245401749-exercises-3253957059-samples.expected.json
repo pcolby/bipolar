@@ -1,7 +1,4 @@
 {
-    "30": [
-        "0a0808001005183a2000120908001001180120d407"
-    ],
     "cadence": [
         0,
         0,
@@ -2891,6 +2888,42 @@
         {
             "current-power": [
                 0
+            ]
+        }
+    ],
+    "pause-times": [
+        {
+            "duration": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "milliseconds": [
+                        980
+                    ],
+                    "minutes": [
+                        1
+                    ],
+                    "seconds": [
+                        1
+                    ]
+                }
+            ],
+            "starttime": [
+                {
+                    "hours": [
+                        0
+                    ],
+                    "milliseconds": [
+                        0
+                    ],
+                    "minutes": [
+                        5
+                    ],
+                    "seconds": [
+                        58
+                    ]
+                }
             ]
         }
     ],

@@ -428,6 +428,57 @@ QVariantMap TrainingSession::parseCreateExercise(QIODevice &data) const
     ADD_FIELD_INFO("19/2",     "minutes",           Uint32);
     ADD_FIELD_INFO("19/3",     "seconds",           Uint32);
     ADD_FIELD_INFO("19/4",     "milliseconds",      Uint32);
+    ADD_FIELD_INFO("20",       "accumulated-torque",            Uint32);
+    ADD_FIELD_INFO("21",       "cycling-power-energy",          Uint32);
+    ADD_FIELD_INFO("22",       "sensor-calibration-offset",     EmbeddedMessage);
+    ADD_FIELD_INFO("22/1",     "sample-source-type",            Enumerator);
+    ADD_FIELD_INFO("22/2",     "speed-cal-offset",              Float);
+    ADD_FIELD_INFO("23",       "device_location",               Enumerator);
+    ADD_FIELD_INFO("24",       "power_sample_source_device",    EmbeddedMessage);
+    ADD_FIELD_INFO("24/1",     "start-index",                   Uint32);
+    ADD_FIELD_INFO("24/2",     "source-device",                 EmbeddedMessage);
+    ADD_FIELD_INFO("24/2/1",   "name",                          String);
+    ADD_FIELD_INFO("24/2/2",   "manufacturer",                  String);
+    ADD_FIELD_INFO("24/2/3",   "model",                         String);
+    ADD_FIELD_INFO("24/2/4",   "hardware-code",                 String);
+    ADD_FIELD_INFO("24/2/5",   "platform-version",              EmbeddedMessage);
+    ADD_FIELD_INFO("24/2/5/1", "major",                         Uint32);
+    ADD_FIELD_INFO("24/2/5/2", "minor",                         Uint32);
+    ADD_FIELD_INFO("24/2/5/3", "patch",                         Uint32);
+    ADD_FIELD_INFO("24/2/5/4", "specifier",                     String);
+    ADD_FIELD_INFO("24/2/6",   "software-version",              EmbeddedMessage);
+    ADD_FIELD_INFO("24/2/6/1", "major",                         Uint32);
+    ADD_FIELD_INFO("24/2/6/2", "minor",                         Uint32);
+    ADD_FIELD_INFO("24/2/6/3", "patch",                         Uint32);
+    ADD_FIELD_INFO("24/2/6/4", "specifier",                     String);
+    ADD_FIELD_INFO("24/2/7",   "polarmathsmart-version",        EmbeddedMessage);
+    ADD_FIELD_INFO("24/2/7/1", "major",                         Uint32);
+    ADD_FIELD_INFO("24/2/7/2", "minor",                         Uint32);
+    ADD_FIELD_INFO("24/2/7/3", "patch",                         Uint32);
+    ADD_FIELD_INFO("24/2/7/4", "specifier",                     String);
+    ADD_FIELD_INFO("24/2/8",   "collector",                     EmbeddedMessage); // This one is recursive!
+    ADD_FIELD_INFO("25",       "cardio-load",                   EmbeddedMessage);
+    ADD_FIELD_INFO("25/1",     "activity-load",                 Float);
+    ADD_FIELD_INFO("25/2",     "exercise-load",                 Float);
+    ADD_FIELD_INFO("26",       "cardio-load-interpretation",    Uint32);
+    ADD_FIELD_INFO("27",       "perceived-load",                EmbeddedMessage);
+    ADD_FIELD_INFO("27/1",     "session-rpe",                   Enumerator);
+    ADD_FIELD_INFO("27/2",     "duration",                      Uint32);
+    ADD_FIELD_INFO("28",       "perceived-load-interpretation", Uint32);
+    ADD_FIELD_INFO("29",       "musle-load",                    Float);
+    ADD_FIELD_INFO("30",       "muscle-load-interpretation",    Uint32);
+    ADD_FIELD_INFO("100",      "modified",                      EmbeddedMessage);
+    ADD_FIELD_INFO("100/1",    "date",                          EmbeddedMessage);
+    ADD_FIELD_INFO("100/1/1",  "year",                          Uint32);
+    ADD_FIELD_INFO("100/1/2",  "month",                         Uint32);
+    ADD_FIELD_INFO("100/1/3",  "day",                           Uint32);
+    ADD_FIELD_INFO("100/2",    "time",                          EmbeddedMessage);
+    ADD_FIELD_INFO("100/2/1",  "hour",                          Uint32);
+    ADD_FIELD_INFO("100/2/2",  "minute",                        Uint32);
+    ADD_FIELD_INFO("100/2/3",  "seconds",                       Uint32);
+    ADD_FIELD_INFO("100/2/4",  "milliseconds",                  Uint32);
+    ADD_FIELD_INFO("100/3",    "trusted",                       Bool);
+
     ProtoBuf::Message parser(fieldInfo);
 
     if (isGzipped(data)) {
@@ -535,6 +586,19 @@ QVariantMap TrainingSession::parseCreateSession(QIODevice &data) const
     ADD_FIELD_INFO("21/2/1/1", "year",             Uint32);
     ADD_FIELD_INFO("21/2/1/2", "month",            Uint32);
     ADD_FIELD_INFO("21/2/1/3", "day",              Uint32);
+    ADD_FIELD_INFO("22",       "application-id",                EmbeddedMessage);
+    ADD_FIELD_INFO("22/1",     "value",                         Uint64);
+    ADD_FIELD_INFO("23",       "cardio-load",                   EmbeddedMessage);
+    ADD_FIELD_INFO("23/1",     "activity-load",                 Float);
+    ADD_FIELD_INFO("23/2",     "exercise-load",                 Float);
+    ADD_FIELD_INFO("24",       "cardio-load-interpretation",    Uint32);
+    ADD_FIELD_INFO("25",       "perceived-load",                EmbeddedMessage);
+    ADD_FIELD_INFO("25/1",     "session-rpe",                   Enumerator);
+    ADD_FIELD_INFO("25/2",     "duration",                      Uint32);
+    ADD_FIELD_INFO("26",       "perceived-load-interpretation", Uint32);
+    ADD_FIELD_INFO("27",       "musle-load",                    Float);
+    ADD_FIELD_INFO("28",       "muscle-load-interpretation",    Uint32);
+
     ProtoBuf::Message parser(fieldInfo);
 
     if (isGzipped(data)) {
@@ -676,6 +740,7 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("3/2/2/3",  "seconds",             Uint32);
     ADD_FIELD_INFO("3/2/2/4",  "milliseconds",        Uint32);
     ADD_FIELD_INFO("3/2/3",    "trusted",             Bool);
+    ADD_FIELD_INFO("3/3",      "source",              Enumerator); // 0=default, 2=user, 3=measured.
     ADD_FIELD_INFO("4",        "height",              EmbeddedMessage);
     ADD_FIELD_INFO("4/1",      "value",               Float);
     ADD_FIELD_INFO("4/2",      "modified",            EmbeddedMessage);
@@ -825,6 +890,50 @@ QVariantMap TrainingSession::parsePhysicalInformation(QIODevice &data) const
     ADD_FIELD_INFO("15/2/2/4", "milliseconds",        Uint32);
     ADD_FIELD_INFO("15/2/3",   "trusted",             Bool);
     ADD_FIELD_INFO("15/3",     "source",              Enumerator);
+    ADD_FIELD_INFO("16",       "sensor-calibration-offset", EmbeddedMessage);
+    ADD_FIELD_INFO("16/1",     "sample-source-type",  Enumerator);
+    ADD_FIELD_INFO("16/2",     "speed-cal-offset",    Float);
+    ADD_FIELD_INFO("17",       "sleep-goal",          EmbeddedMessage);
+    ADD_FIELD_INFO("17/1",     "sleep-goal-minutes",  Uint32);
+    ADD_FIELD_INFO("17/2",     "modified",            EmbeddedMessage);
+    ADD_FIELD_INFO("17/2/1",   "date",                EmbeddedMessage);
+    ADD_FIELD_INFO("17/2/1/1", "year",                Uint32);
+    ADD_FIELD_INFO("17/2/1/2", "month",               Uint32);
+    ADD_FIELD_INFO("17/2/1/3", "day",                 Uint32);
+    ADD_FIELD_INFO("17/2/2",   "time",                EmbeddedMessage);
+    ADD_FIELD_INFO("17/2/2/1", "hour",                Uint32);
+    ADD_FIELD_INFO("17/2/2/2", "minute",              Uint32);
+    ADD_FIELD_INFO("17/2/2/3", "seconds",             Uint32);
+    ADD_FIELD_INFO("17/2/2/4", "milliseconds",        Uint32);
+    ADD_FIELD_INFO("17/2/3",   "trusted",             Bool);
+    ADD_FIELD_INFO("18",       "running-maximum-aerobic-power", EmbeddedMessage);
+    ADD_FIELD_INFO("18/1",     "value",               Uint32);
+    ADD_FIELD_INFO("18/2",     "modified",            EmbeddedMessage);
+    ADD_FIELD_INFO("18/2/1",   "date",                EmbeddedMessage);
+    ADD_FIELD_INFO("18/2/1/1", "year",                Uint32);
+    ADD_FIELD_INFO("18/2/1/2", "month",               Uint32);
+    ADD_FIELD_INFO("18/2/1/3", "day",                 Uint32);
+    ADD_FIELD_INFO("18/2/2",   "time",                EmbeddedMessage);
+    ADD_FIELD_INFO("18/2/2/1", "hour",                Uint32);
+    ADD_FIELD_INFO("18/2/2/2", "minute",              Uint32);
+    ADD_FIELD_INFO("18/2/2/3", "seconds",             Uint32);
+    ADD_FIELD_INFO("18/2/2/4", "milliseconds",        Uint32);
+    ADD_FIELD_INFO("18/2/3",   "trusted",             Bool);
+    ADD_FIELD_INFO("18/3",     "setting-source",      Enumerator);
+    ADD_FIELD_INFO("19",       "running-maximum-aerobic-speed", EmbeddedMessage);
+    ADD_FIELD_INFO("19/1",     "value",               Float);
+    ADD_FIELD_INFO("19/2",     "modified",            EmbeddedMessage);
+    ADD_FIELD_INFO("19/2/1",   "date",                EmbeddedMessage);
+    ADD_FIELD_INFO("19/2/1/1", "year",                Uint32);
+    ADD_FIELD_INFO("19/2/1/2", "month",               Uint32);
+    ADD_FIELD_INFO("19/2/1/3", "day",                 Uint32);
+    ADD_FIELD_INFO("19/2/2",   "time",                EmbeddedMessage);
+    ADD_FIELD_INFO("19/2/2/1", "hour",                Uint32);
+    ADD_FIELD_INFO("19/2/2/2", "minute",              Uint32);
+    ADD_FIELD_INFO("19/2/2/3", "seconds",             Uint32);
+    ADD_FIELD_INFO("19/2/2/4", "milliseconds",        Uint32);
+    ADD_FIELD_INFO("19/2/3",   "trusted",             Bool);
+    ADD_FIELD_INFO("19/3",     "setting-source",      Enumerator);
     ADD_FIELD_INFO("100",      "modified",            EmbeddedMessage);
     ADD_FIELD_INFO("100/1",    "date",                EmbeddedMessage);
     ADD_FIELD_INFO("100/1/1",  "year",                Uint32);
@@ -1049,6 +1158,94 @@ QVariantMap TrainingSession::parseSamples(QIODevice &data) const
     ADD_FIELD_INFO("28/2/2/2","minutes",                Uint32);
     ADD_FIELD_INFO("28/2/2/3","seconds",                Uint32);
     ADD_FIELD_INFO("28/2/2/4","milliseconds",           Uint32);
+    ADD_FIELD_INFO("29",         "intervalled-samples",        EmbeddedMessage);
+    ADD_FIELD_INFO("29/1",       "sample-type",                Enumerator);
+    ADD_FIELD_INFO("29/2",       "rec-interval-ms",            Uint32);
+    ADD_FIELD_INFO("29/3",       "sample-source",              EmbeddedMessage);
+    ADD_FIELD_INFO("29/3/1",     "sample-source-type",         Enumerator);
+    ADD_FIELD_INFO("29/3/2",     "start-index",                Uint32);
+    ADD_FIELD_INFO("29/3/3",     "stop-index",                 Uint32);
+    ADD_FIELD_INFO("29/4",       "hr-samples",                 Uint32);
+    ADD_FIELD_INFO("29/5",       "cadence-samples",            Uint32);
+    ADD_FIELD_INFO("29/6",       "speed-samples",              Float);
+    ADD_FIELD_INFO("29/7",       "distance-samples",           Float);
+    ADD_FIELD_INFO("29/8",       "fwd-acceleration",           Float);
+    ADD_FIELD_INFO("29/9",       "moving-type-samples",        Enumerator);
+    ADD_FIELD_INFO("29/10",      "altitude-samples",           Float);
+    ADD_FIELD_INFO("29/11",      "altitude-calibration",       EmbeddedMessage);
+    ADD_FIELD_INFO("29/11/1",    "start-index",                Uint32);
+    ADD_FIELD_INFO("29/11/2",    "value",                      Float);
+    ADD_FIELD_INFO("29/11/3",    "operation",                  Enumerator); // 1=Multiply, 2=Sum
+    ADD_FIELD_INFO("29/11/4",    "cause",                      Enumerator); // 0=Walk, 1=Run, 2=Stand
+    ADD_FIELD_INFO("29/12",      "temperature-samples",        Float);
+    ADD_FIELD_INFO("29/13",      "stride-length-samples",      Uint32);
+    ADD_FIELD_INFO("29/14",      "stride-calibration",         EmbeddedMessage);
+    ADD_FIELD_INFO("29/14/1",    "start-index",                Uint32);
+    ADD_FIELD_INFO("29/14/2",    "value",                      Float);
+    ADD_FIELD_INFO("29/14/3",    "operation",                  Enumerator); // 1=Multiply, 2=Sum
+    ADD_FIELD_INFO("29/14/4",    "cause",                      Enumerator); // 0=Walk, 1=Run, 2=Stand
+    ADD_FIELD_INFO("29/15",      "left-pedal-power-samples",   EmbeddedMessage);
+    ADD_FIELD_INFO("29/15/1",    "current-power",              Int32);
+    ADD_FIELD_INFO("29/15/2",    "cumulative-crank-revs",      Uint32);
+    ADD_FIELD_INFO("29/15/3",    "cumulative-timestamp",       Uint32);
+    ADD_FIELD_INFO("29/15/4",    "min-force-magnitude",        Sint32);
+    ADD_FIELD_INFO("29/15/5",    "max-force-magnitude",        Int32);
+    ADD_FIELD_INFO("29/15/6",    "min-force-angle",            Uint32);
+    ADD_FIELD_INFO("29/15/7",    "max-force-angle",            Uint32);
+    ADD_FIELD_INFO("29/15/8",    "bottom-dead-spot",           Uint32);
+    ADD_FIELD_INFO("29/15/9",    "top-dead-spot",              Uint32);
+    ADD_FIELD_INFO("29/15/10",    "pedal-power-balance",       Uint32);
+    ADD_FIELD_INFO("29/15/11",    "min-torque-magnitude",      Int32);
+    ADD_FIELD_INFO("29/15/12",    "man-torque-magnitude",      Int32);
+    ADD_FIELD_INFO("29/16",       "right-pedal-power-samples", EmbeddedMessage);
+    ADD_FIELD_INFO("29/16/1",     "current-power",             Int32);
+    ADD_FIELD_INFO("29/16/2",     "cumulative-crank-revs",     Uint32);
+    ADD_FIELD_INFO("29/16/3",     "cumulative-timestamp",      Uint32);
+    ADD_FIELD_INFO("29/16/4",     "min-force-magnitude",       Sint32);
+    ADD_FIELD_INFO("29/16/5",     "max-force-magnitude",       Int32);
+    ADD_FIELD_INFO("29/16/6",     "min-force-angle",           Uint32);
+    ADD_FIELD_INFO("29/16/7",     "max-force-angle",           Uint32);
+    ADD_FIELD_INFO("29/16/8",     "bottom-dead-spot",          Uint32);
+    ADD_FIELD_INFO("29/16/9",     "top-dead-spot",             Uint32);
+    ADD_FIELD_INFO("29/16/10",    "pedal-power-balance",       Uint32);
+    ADD_FIELD_INFO("29/16/11",    "min-torque-magnitude",      Int32);
+    ADD_FIELD_INFO("29/16/12",    "man-torque-magnitude",      Int32);
+    ADD_FIELD_INFO("29/17",       "left-power-calibration",    EmbeddedMessage);
+    ADD_FIELD_INFO("29/17/1",     "start-index",               Uint32);
+    ADD_FIELD_INFO("29/17/2",     "value",                     Float);
+    ADD_FIELD_INFO("29/17/3",     "operation",                 Enumerator); // 1=Multiply, 2=Sum
+    ADD_FIELD_INFO("29/17/4",     "cause",                     Enumerator); // 0=Walk, 1=Run, 2=Stand
+    ADD_FIELD_INFO("29/18",       "right-power-calibration",   EmbeddedMessage);
+    ADD_FIELD_INFO("29/18/1",     "start-index",               Uint32);
+    ADD_FIELD_INFO("29/18/2",     "value",                     Float);
+    ADD_FIELD_INFO("29/18/3",     "operation",                 Enumerator); // 1=Multiply, 2=Sum
+    ADD_FIELD_INFO("29/18/4",     "cause",                     Enumerator); // 0=Walk, 1=Run, 2=Stand
+    ADD_FIELD_INFO("29/19",       "rr-samples",                EmbeddedMessage);
+    ADD_FIELD_INFO("29/19/1",     "rr-intervals",              Uint32);
+    ADD_FIELD_INFO("29/19/2",     "rr-sensor-offline",         EmbeddedMessage);
+    ADD_FIELD_INFO("29/19/2/1",   "start-time",                EmbeddedMessage);
+    ADD_FIELD_INFO("29/19/2/1/1", "hour",                      Uint32);
+    ADD_FIELD_INFO("29/19/2/1/2", "minute",                    Uint32);
+    ADD_FIELD_INFO("29/19/2/1/3", "seconds",                   Uint32);
+    ADD_FIELD_INFO("29/19/2/1/4", "milliseconds",              Uint32);
+    ADD_FIELD_INFO("29/19/2/2",   "time-interval",             EmbeddedMessage);
+    ADD_FIELD_INFO("29/19/2/2/1", "hour",                      Uint32);
+    ADD_FIELD_INFO("29/19/2/2/2", "minute",                    Uint32);
+    ADD_FIELD_INFO("29/19/2/2/3", "seconds",                   Uint32);
+    ADD_FIELD_INFO("29/19/2/2/4", "milliseconds",              Uint32);
+    ADD_FIELD_INFO("29/20",       "acceleration-mad-samples",  Float);
+    ADD_FIELD_INFO("30",          "pause-times",               EmbeddedMessage);
+    ADD_FIELD_INFO("30/1",        "starttime",                 EmbeddedMessage);
+    ADD_FIELD_INFO("30/1/1",      "hours",                     Uint32);
+    ADD_FIELD_INFO("30/1/2",      "minutes",                   Uint32);
+    ADD_FIELD_INFO("30/1/3",      "seconds",                   Uint32);
+    ADD_FIELD_INFO("30/1/4",      "milliseconds",              Uint32);
+    ADD_FIELD_INFO("30/2"  ,      "duration",                  EmbeddedMessage);
+    ADD_FIELD_INFO("30/2/1",      "hours",                     Uint32);
+    ADD_FIELD_INFO("30/2/2",      "minutes",                   Uint32);
+    ADD_FIELD_INFO("30/2/3",      "seconds",                   Uint32);
+    ADD_FIELD_INFO("30/2/4",      "milliseconds",              Uint32);
+
     ProtoBuf::Message parser(fieldInfo);
 
     if (isGzipped(data)) {
