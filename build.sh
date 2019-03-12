@@ -70,7 +70,7 @@ function configure {
         -nomake tools \
         -opensource \
         -openssl \
-        -platform macx-clang-32 \
+        -platform macx-clang \
         -release \
         -sdk "${MACOS_SDK:-macosx10.10}" \
         -shared \
