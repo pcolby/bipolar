@@ -20,8 +20,10 @@ win32:VERSION = $$VERSION"."$$VER_BUILD
 # Disable automatic ASCII conversions (best practice for internationalization).
 DEFINES += QT_NO_CAST_FROM_ASCII QT_NO_CAST_TO_ASCII
 
-# Enable C++11 for all supported compilers.
-#CONFIG += c++11
+# Enable C++11 for older Qt versions (qmake does this by default for Qt 5.6+).
+equals(QT_MAJOR_VERSION,5):lessThan(QT_MINOR_VERSION,6) {
+    CONFIG += c++11
+}
 
 # Enable all warnings for all targets.
 CONFIG += warn_on
