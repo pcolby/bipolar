@@ -18,6 +18,9 @@ before_install:
 script:
   - ./build.sh
 
+after_success:
+  - otool -L build/qtbase/lib/QtNetwork.framework/QtNetwork
+
 before_deploy:
   - ln -s build/qtbase/lib/QtNetwork.framework/QtNetwork QtNetwork-$MACOS_SDK
 
