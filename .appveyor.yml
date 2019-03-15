@@ -2,7 +2,7 @@ version: '{branch}-{build}'
 
 environment:
   matrix:
-    # Tip: sed -nre 's|.*Qt/.*/|    - QTDIR: &|p' | tr '/' '\' | sort -nt. -k1.20,1 -k2,2 -k3
+    # Tip: sed -nre 's|.*Qt/.*/|    - QTDIR: &|p' | tr '/' '\\' | sort -nt. -k1.20,1 -k2,2 -k3
     - QTDIR: C:\Qt\5.6.3\mingw49_32
     - QTDIR: C:\Qt\5.6.3\msvc2013
     - QTDIR: C:\Qt\5.6.3\msvc2013_64
