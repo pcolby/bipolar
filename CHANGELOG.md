@@ -1,6 +1,6 @@
 ## Bipolar Changelog
 
-### 0.5.10 (_unreleased_)
+### 0.5.10 (2019-03-16)
 Features:
 - fallback to sport types when session names are absent ([#91](../../issues/91)
 
