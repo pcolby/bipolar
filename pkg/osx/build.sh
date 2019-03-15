@@ -72,7 +72,7 @@ install_name_tool -id \
 # versions set the relevant name to '@rpath/QtCore.framework/Versions/5/QtCore'
 # so the following `-change` doesn't find anything to change anymore.
 install_name_tool -change \
-    '/usr/local/Qt-5.1.1/lib/QtCore.framework/Versions/5/QtCore' \
+    '/usr/local/Qt-5.5.1/lib/QtCore.framework/Versions/5/QtCore' \
     '@executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore' \
     '/Volumes/Bipolar/Hook/QtNetwork' || exit
 
