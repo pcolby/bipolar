@@ -267,6 +267,37 @@ void TestTrainingSession::getOutputBaseFileName_data()
             "|7|Running"
             "|8|$invalid"
             "|9|$$$foo");
+
+    // Check the fallback to sport names if the session name is missing. Note, we really only need
+    // the "|7|$sessionName" component here, but might at well test all other fields as well.
+    QTest::newRow("training-sessions-19946380-create")
+        << QFINDTESTDATA("testdata/training-sessions-3245401749-create")
+        << QString::fromLatin1(
+            "|1|$baseName"
+            "|2|$date"
+            "|3|$dateUTC"
+            "|A|$dateExt"
+            "|B|$dateExtUTC"
+            "|4|$time"
+            "|5|$timeUTC"
+            "|C|$timeExt"
+            "|D|$timeExtUTC"
+            "|7|$sessionName"
+            "|8|$invalid"
+            "|9|$$$foo")
+        << QString::fromLatin1(
+            "|1|training-sessions-3245401749"
+            "|2|20190222"
+            "|3|20190222"
+            "|A|2019-02-22"
+            "|B|2019-02-22"
+            "|4|211341"
+            "|5|191341"
+            "|C|21:13:41"
+            "|D|19:13:41"
+            "|7|"
+            "|8|$invalid"
+            "|9|$$$foo");
 }
 
 void TestTrainingSession::getOutputBaseFileName()
