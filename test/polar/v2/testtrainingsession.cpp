@@ -295,7 +295,7 @@ void TestTrainingSession::getOutputBaseFileName_data()
             "|5|191341"
             "|C|21:13:41"
             "|D|19:13:41"
-            "|7|"
+            "|7|Strength training"
             "|8|$invalid"
             "|9|$$$foo");
 }

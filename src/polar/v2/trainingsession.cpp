@@ -1838,9 +1838,44 @@ QString TrainingSession::getOutputBaseFileName(const QString &format)
         fileName.replace(QLatin1String("$sessionId"), inputFileNameParts.cap(2));
     }
 
-    fileName.replace(QLatin1String("$sessionName"),
-        first(firstMap(parsedSession.value(QLatin1String("session-name")))
-            .value(QLatin1String("text"))).toString());
+    // If there are any $sessionName references
+    if (fileName.contains(QStringLiteral("$sessionName"))) {
+        // Fetch the session name from the sesion.
+        QString sessionName = first(firstMap(parsedSession.value(QLatin1String("session-name")))
+                                    .value(QLatin1String("text"))).toString();
+
+        // If session name is empty (eg common for Vantage V), then fallback to the exercise name.
+        if (sessionName.isEmpty()) {
+            // If we haven't parsed the exercise data yet (really only happens in unit test), do so.
+            if (exerciseCount() < 1) {
+                parse();
+            }
+
+            // Build a unique set of sport names from the individual exercises in the session.
+            QSet<QString> sportNames;
+            foreach (const QVariant &exercise, parsedExercises) {
+                const QString sportName = getPolarSportName(first(firstMap(exercise.toMap()
+                    .value(CREATE).toMap().value(QStringLiteral("sport")))
+                    .value(QStringLiteral("value"))).toULongLong());
+                qDebug() << "No session name, found Polar sport name" << sportName;
+                if (!sportName.isNull()) {
+                    sportNames.insert(sportName);
+                }
+            }
+
+            // Pick an appropriate session name from the sport names.
+            if (sportNames.isEmpty()) {
+                qWarning() << "No session name, and no recognised sport names either";
+                sessionName = QStringLiteral("Unknown session");
+            } else if (sportNames.size() > 1) {
+                qWarning() << "No session name, and multiple unique sport names";
+                sessionName = QStringLiteral("Multisport");
+            } else {
+                sessionName = *sportNames.constBegin();
+            }
+        }
+        fileName.replace(QLatin1String("$sessionName"), sessionName);
+    }
     return fileName;
 }
 
