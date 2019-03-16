@@ -1,8 +1,11 @@
 ## Bipolar Changelog
 
+### 0.5.11 (_unreleased_)
+???
+
 ### 0.5.10 (2019-03-16)
 Features:
-- fallback to sport types when session names are absent ([#91](../../issues/91)
+- fallback to sport types when session names are absent ([#91](../../issues/91))
 
 Bugs:
 - use x86-64 hook on OSX ([#92](../../issues/92))
