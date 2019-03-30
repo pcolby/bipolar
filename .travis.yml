@@ -71,7 +71,8 @@ install:
   - '[ "$TRAVIS_OS_NAME" != linux ] || sudo apt-get -qy install cppcheck'
   - '[[ "$TRAVIS_OS_NAME" != linux || "$PPA" != */opt-* ]] || sudo apt-get -qy install qt${QT}base qt${QT}xmlpatterns libgl1-mesa-dev'
   - '[[ "$TRAVIS_OS_NAME" != linux || "$PPA" == */opt-* ]] || sudo apt-get -qy install qt5-qmake qtbase5-dev libqt5xmlpatterns5-dev'
-  - '[ "$TRAVIS_OS_NAME" != osx ] || brew install cppcheck qt'
+  #- '[ "$TRAVIS_OS_NAME" != osx ] || brew install cppcheck qt'
+  - '[ "$TRAVIS_OS_NAME" != osx ] || brew install cppcheck https://raw.githubusercontent.com/Homebrew/homebrew-core/bc03ca8ad8f74be348801c99b78905926d91abc1/Formula/qt.rb'
   - '[ "$TRAVIS_OS_NAME" != osx ] || brew link --force qt'
 
 before_script:
@@ -88,7 +89,7 @@ before_script:
   - qmake -o "$TRAVIS_BUILD_DIR-build" -r -Wall -Wlogic -Wparser CONFIG+=debug_and_release "$TRAVIS_BUILD_DIR"
 
 script:
-  - make -C "$TRAVIS_BUILD_DIR-build" -j1 all
+  - make -C "$TRAVIS_BUILD_DIR-build" -j2 all
   - make -C "$TRAVIS_BUILD_DIR-build" -j2 check
   - BIPOLAR_TEST_LOCALE=de_DE.UTF-8 make -C "$TRAVIS_BUILD_DIR-build" -j2 check
   - '[ "$TRAVIS_OS_NAME" != osx ] || make -C "$TRAVIS_BUILD_DIR-build/pkg/osx" dmg'
