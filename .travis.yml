@@ -6,8 +6,6 @@ os:
 
 dist: xenial
 
-osx_image: xcode10.2
-
 compiler:
   - clang
   - gcc
