@@ -33,6 +33,9 @@ env:
   - QT=511 PPA=beineri/opt-qt-5.11.3-xenial
   - QT=512 PPA=beineri/opt-qt-5.12.0-xenial
   - QT=512 PPA=beineri/opt-qt-5.12.1-xenial
+  - QT=512 PPA=beineri/opt-qt-5.12.2-xenial
+  - QT=512 PPA=beineri/opt-qt-5.12.3-xenial
+  - QT=512 PPA=beineri/opt-qt-5.12.6-xenial
 
 matrix:
   # Qt no longer supports GCC on OSX.
@@ -60,6 +63,9 @@ matrix:
     - { os: osx, env: QT=511 PPA=beineri/opt-qt-5.11.3-xenial }
     - { os: osx, env: QT=512 PPA=beineri/opt-qt-5.12.0-xenial }
     - { os: osx, env: QT=512 PPA=beineri/opt-qt-5.12.1-xenial }
+    - { os: osx, env: QT=512 PPA=beineri/opt-qt-5.12.2-xenial }
+    - { os: osx, env: QT=512 PPA=beineri/opt-qt-5.12.3-xenial }
+    - { os: osx, env: QT=512 PPA=beineri/opt-qt-5.12.6-xenial }
 
 before_install:
   - '[[ "$TRAVIS_OS_NAME" != linux || -z "$PPA" ]] || sudo add-apt-repository -y ppa:$PPA'
