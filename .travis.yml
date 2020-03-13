@@ -82,7 +82,6 @@ install:
   - '[[ "$TRAVIS_OS_NAME" != linux || "$PPA" != */opt-* ]] || sudo apt-get -qy install qt${QT}base qt${QT}xmlpatterns libgl1-mesa-dev'
   - '[[ "$TRAVIS_OS_NAME" != linux || "$PPA" == */opt-* ]] || sudo apt-get -qy install qt5-qmake qtbase5-dev libqt5xmlpatterns5-dev'
   - '[ "$TRAVIS_OS_NAME" != osx ] || brew install cppcheck qt'
-  - '[ "$TRAVIS_OS_NAME" != osx ] || brew link --force qt'
 
 before_script:
   # Skip cppcheck on OSX for now https://github.com/pcolby/bipolar/issues/79 http://trac.cppcheck.net/ticket/7792
