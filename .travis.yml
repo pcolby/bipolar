@@ -96,7 +96,7 @@ before_script:
   - /usr/local/Cellar/qt/5.13.2/bin/qmake -o "$TRAVIS_BUILD_DIR-build" -r -Wall -Wlogic -Wparser CONFIG+=debug_and_release "$TRAVIS_BUILD_DIR"
 
 script:
-  - make -C "$TRAVIS_BUILD_DIR-build" -j2 all
+  - make -C "$TRAVIS_BUILD_DIR-build" all
   - make -C "$TRAVIS_BUILD_DIR-build" -j2 check
   - BIPOLAR_TEST_LOCALE=de_DE.UTF-8 make -C "$TRAVIS_BUILD_DIR-build" -j2 check
   - '[ "$TRAVIS_OS_NAME" != osx ] || make -C "$TRAVIS_BUILD_DIR-build/pkg/osx" dmg'
