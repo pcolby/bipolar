@@ -75,14 +75,12 @@ before_install:
   - '[[ "$TRAVIS_OS_NAME" != linux || -z "$PPA" ]] || sudo add-apt-repository -y ppa:$PPA'
   - '[ "$TRAVIS_OS_NAME" != linux ] || sudo apt-get -qy update'
   - '[ "$TRAVIS_OS_NAME" != osx ] || brew update'
-# - '[ "$TRAVIS_OS_NAME" != osx ] || brew search qt' # Causes Homebrew API rate-limit issues.
 
 install:
   - '[ "$TRAVIS_OS_NAME" != linux ] || sudo apt-get -qy install cppcheck'
   - '[[ "$TRAVIS_OS_NAME" != linux || "$PPA" != */opt-* ]] || sudo apt-get -qy install qt${QT}base qt${QT}xmlpatterns libgl1-mesa-dev'
   - '[[ "$TRAVIS_OS_NAME" != linux || "$PPA" == */opt-* ]] || sudo apt-get -qy install qt5-qmake qtbase5-dev libqt5xmlpatterns5-dev'
   - '[ "$TRAVIS_OS_NAME" != osx ] || brew install cppcheck'
-  - '[ "$TRAVIS_OS_NAME" != osx ] || brew upgrade qt'
 
 before_script:
   # Skip cppcheck on OSX for now https://github.com/pcolby/bipolar/issues/79 http://trac.cppcheck.net/ticket/7792
@@ -94,8 +92,8 @@ before_script:
   - '[[ "$TRAVIS_OS_NAME" != linux || "$PPA" != */opt-* ]] || . /opt/qt$QT/bin/qt$QT-env.sh'
   - '[[ "$TRAVIS_OS_NAME" != linux || "$PPA" == */opt-* ]] || export QT_SELECT=qt5'
   - mkdir -p "$TRAVIS_BUILD_DIR-build"
-  - qmake -v
-  - qmake -o "$TRAVIS_BUILD_DIR-build" -r -Wall -Wlogic -Wparser CONFIG+=debug_and_release "$TRAVIS_BUILD_DIR"
+  - /usr/local/Cellar/qt/5.13.2/bin/qmake -v
+  - /usr/local/Cellar/qt/5.13.2/bin/qmake -o "$TRAVIS_BUILD_DIR-build" -r -Wall -Wlogic -Wparser CONFIG+=debug_and_release "$TRAVIS_BUILD_DIR"
 
 script:
   - make -C "$TRAVIS_BUILD_DIR-build" -j2 all
