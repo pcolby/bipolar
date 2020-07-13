@@ -29,7 +29,7 @@
 
 typedef QObject * (*ObjectConstructor)();
 
-class ObjectFactory : public QMap<QByteArray, ObjectConstructor> {
+class ObjectFactory : public QMultiMap<QByteArray, ObjectConstructor> {
 public:
     template<class T> void registerClass()
     {

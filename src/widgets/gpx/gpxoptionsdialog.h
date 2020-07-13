@@ -26,7 +26,7 @@ class GpxOptionsDialog : public QDialog {
     Q_OBJECT
 
 public:
-    GpxOptionsDialog(QWidget *parent=0, Qt::WindowFlags flags=0);
+    GpxOptionsDialog(QWidget *parent=0, Qt::WindowFlags flags=Qt::WindowFlags());
 
 };
 

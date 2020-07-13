@@ -28,7 +28,7 @@ class GeneralGpxOptions : public QWidget {
     Q_OBJECT
 
 public:
-    GeneralGpxOptions(QWidget *parent=0, Qt::WindowFlags flags=0);
+    GeneralGpxOptions(QWidget *parent=0, Qt::WindowFlags flags=Qt::WindowFlags());
 
 public slots:
     void load();

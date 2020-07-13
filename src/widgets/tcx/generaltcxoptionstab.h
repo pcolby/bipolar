@@ -32,7 +32,7 @@ public:
 
     static const bool UtcOnlyDefaultSetting;
 
-    GeneralTcxOptions(QWidget *parent=0, Qt::WindowFlags flags=0);
+    GeneralTcxOptions(QWidget *parent=0, Qt::WindowFlags flags=Qt::WindowFlags());
 
 public slots:
     void load();

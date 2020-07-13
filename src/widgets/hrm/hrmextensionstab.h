@@ -32,7 +32,7 @@ public:
 
     static const bool LapNamesExtDefaultSetting;
 
-    HrmExtensionsTab(QWidget *parent=0, Qt::WindowFlags flags=0);
+    HrmExtensionsTab(QWidget *parent=0, Qt::WindowFlags flags=Qt::WindowFlags());
 
 public slots:
     void load();

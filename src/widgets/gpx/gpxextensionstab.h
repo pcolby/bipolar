@@ -36,7 +36,7 @@ public:
     static const bool GarminAccelerationExtDefaultSetting;
     static const bool GarminTrackPointExtDefaultSetting;
 
-    GpxExtensionsTab(QWidget *parent=0, Qt::WindowFlags flags=0);
+    GpxExtensionsTab(QWidget *parent=0, Qt::WindowFlags flags=Qt::WindowFlags());
 
 public slots:
     void load();

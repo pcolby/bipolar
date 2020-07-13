@@ -26,7 +26,7 @@ class HrmOptionsDialog : public QDialog {
     Q_OBJECT
 
 public:
-    HrmOptionsDialog(QWidget *parent=0, Qt::WindowFlags flags=0);
+    HrmOptionsDialog(QWidget *parent=0, Qt::WindowFlags flags=Qt::WindowFlags());
 
 };
 

@@ -26,7 +26,7 @@ class TcxOptionsDialog : public QDialog {
     Q_OBJECT
 
 public:
-    TcxOptionsDialog(QWidget *parent=0, Qt::WindowFlags flags=0);
+    TcxOptionsDialog(QWidget *parent=0, Qt::WindowFlags flags=Qt::WindowFlags());
 
 };
 

@@ -152,9 +152,9 @@ polar::v2::TrainingSession * TestTrainingSession::getTrainingSession(const QStri
         Q_CHECK_PTR(session);
         iter = trainingSessions.insert(baseName, session);
     }
-    iter.value()->setGpxOptions(0);
-    iter.value()->setHrmOptions(0);
-    iter.value()->setTcxOptions(0);
+    iter.value()->setGpxOptions(polar::v2::TrainingSession::GpxOptions());
+    iter.value()->setHrmOptions(polar::v2::TrainingSession::HrmOptions());
+    iter.value()->setTcxOptions(polar::v2::TrainingSession::TcxOptions());
     return iter.value();
 }
 

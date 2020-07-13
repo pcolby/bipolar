@@ -26,7 +26,7 @@ class MainWizard : public QWizard {
   Q_OBJECT
 
 public:
-    MainWizard(QWidget *parent=0, Qt::WindowFlags flags=0);
+    MainWizard(QWidget *parent=0, Qt::WindowFlags flags=Qt::WindowFlags());
 
 public slots:
     void checkHook();
