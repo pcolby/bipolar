@@ -1,4 +1,4 @@
-# [![PMDA++](qrc/icon/bipolar30.png)](#) Bipolar
+# [![Bipolar Logo](qrc/icon/bipolar30.png)](#) Bipolar
 [![Build Status](https://img.shields.io/travis/pcolby/bipolar/master.svg?logo=travis)](https://travis-ci.org/pcolby/bipolar)
 [![Build Status](https://img.shields.io/appveyor/ci/pcolby/bipolar.svg?logo=appveyor)](https://ci.appveyor.com/project/pcolby/bipolar)
 [![Github Downloads](https://img.shields.io/github/downloads/pcolby/bipolar/total.svg?logo=github&logoColor=white)](https://github.com/pcolby/bipolar/releases)
