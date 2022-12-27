@@ -8,7 +8,9 @@ set -o errexit -o noclobber -o nounset -o pipefail # or set -Ceuo pipefail
 shopt -s inherit_errexit
 
 : "${QT_VERSION:=5.15.1}" # The version used by Polar FlowSync.
-: "${QT_NAME:=qt-everywhere-opensource-src-$QT_VERSION}"
+: "${QT_NAME:=qt-everywhere-src-$QT_VERSION}"
+: "${SCRIPT_DIR:="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"}"
+: "${OUTPUT_DIR:=$SCRIPT_DIR}"
 
 function require {
   local C
@@ -20,47 +22,33 @@ function require {
   done
 }
 
-require cp curl mkdir patch sed tar
+require cp mkdir patch sed tar wget
 
-SELF_DIR="$(dirname "${BASH_SOURCE[0]}")"
-
-# Fetch the Qt source, if not already present.
-function fetchSource {
-    if [ ! -e "$SELF_DIR/$QT_NAME.tar.gz" ]; then
-        echo "Fetching $QT_NAME.tar.gz"
-        "$CURL" --location \
-            "http://download.qt.io/archive/qt/5.5/$QT_VERSION/single/$QT_NAME.tar.gz" \
-            --output "$QT_NAME.tar.gz"
-    fi
-}
-
-# Extract source, if not already extracted.
-function extractSource {
-    if [ ! -e "$SELF_DIR/$QT_NAME" ]; then
-        fetchSource || return
-        echo "Extracting $QT_NAME.tar.gz"
-        "$TAR" xzf "$SELF_DIR/$QT_NAME.tar.gz" -C "$SELF_DIR" || return
-    fi
+# Fetch (if not already) and extract (if not already) the Qt source.
+[[ -e "$OUTPUT_DIR/$QT_NAME" ]] || {
+  qtArchive="$OUTPUT_DIR/$QT_NAME.tar.xz"
+  [[ -e "$qtArchive" ]] || {
+    echo "Fetching $qtArchive"
+    "$WGET" -q -O "$qtArchive" \
+      "https://download.qt.io/archive/qt/${QT_VERSION%.*}/${QT_VERSION}/single/${QT_NAME}.tar.xz"
+  }
+  echo "Extracting $qtArchive"
+  "$TAR" xJf "$qtArchive" -C "$OUTPUT_DIR"
 }
 
 # Patch the source with our hook code.
-function patchSource {
-    extractSource || return
-    NETWORK_ACCESS_DIR="$SELF_DIR/$QT_NAME/qtbase/src/network/access/"
-    if [ ! -e "$NETWORK_ACCESS_DIR/qnetworkaccessmanager.ori" ]; then
-        echo "Backing up $NETWORK_ACCESS_DIR/qnetworkaccessmanager.cpp"
-        "$CP" -a \
-            "$NETWORK_ACCESS_DIR/qnetworkaccessmanager.cpp" \
-            "$NETWORK_ACCESS_DIR/qnetworkaccessmanager.ori" || return
-    fi
-    echo "Applying qnetworkaccessmanager.patch"
-    "$SED" -e '1,2 s/\\/\//g' "$SELF_DIR/qnetworkaccessmanager.patch" | \
-        "$PATCH" --directory "$SELF_DIR/$QT_NAME" --forward --strip 0 ; RC=$?
-    if [ $RC -eq 1 ]; then
-        echo 'Assuming patch is already applied and continuing.'
-        return 0
-    fi
-    return $RC
+NETWORK_ACCESS_DIR="$OUTPUT_DIR/$QT_NAME/qtbase/src/network/access/"
+[[ -e "$NETWORK_ACCESS_DIR/qnetworkaccessmanager.ori" ]] || {
+  echo 'Backing up qnetworkaccessmanager.cpp'
+  "$CP" -a \
+    "$NETWORK_ACCESS_DIR/qnetworkaccessmanager.cpp" \
+    "$NETWORK_ACCESS_DIR/qnetworkaccessmanager.ori"
+  echo "Applying qnetworkaccessmanager.patch"
+  "$PATCH" --directory "$OUTPUT_DIR/$QT_NAME" --forward --strip 0 < "$OUTPUT_DIR/qnetworkaccessmanager.patch" || {
+    rc=$?
+    [[ "$rc" -eq 1 ]] || exit "$rc"
+    echo 'Assuming patch is already applied and continuing'
+  }
 }
 
 # Configure the Qt build.
