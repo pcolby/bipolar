@@ -1,20 +1,28 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # Prerequisites:
 # * Xcode
 #
 
-QT_VERSION=5.5.1 # The version used by Polar FlowSync.
-QT_NAME="qt-everywhere-opensource-src-$QT_VERSION"
+set -o errexit -o noclobber -o nounset -o pipefail # or set -Ceuo pipefail
+shopt -s inherit_errexit
 
-CP=`which cp`       || { echo 'Failed to find: cp'    2>&1; exit 1; }
-CURL=`which curl`   || { echo 'Failed to find: curl'  2>&1; exit 1; }
-MKDIR=`which mkdir` || { echo 'Failed to find: mkdir' 2>&1; exit 1; }
-PATCH=`which patch` || { echo 'Failed to find: patch' 2>&1; exit 1; }
-SED=`which sed`     || { echo 'Failed to find: sed'   2>&1; exit 1; }
-TAR=`which tar`     || { echo 'Failed to find: tar'   2>&1; exit 1; }
+: "${QT_VERSION:=5.15.1}" # The version used by Polar FlowSync.
+: "${QT_NAME:=qt-everywhere-opensource-src-$QT_VERSION}"
 
-SELF_DIR=`dirname "$0"`
+function require {
+  local C
+  for c in "$@"; do
+    local -u V="${c//[^[:word:]]/_}";
+    if [ -v "$V" ]; then continue; fi
+    C=$(command -v "$c") || { echo "Required command not found: $c" >&2; exit 1; }
+    declare -gr "$V"="$C"
+  done
+}
+
+require cp curl mkdir patch sed tar
+
+SELF_DIR="$(dirname "${BASH_SOURCE[0]}")"
 
 # Fetch the Qt source, if not already present.
 function fetchSource {
