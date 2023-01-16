@@ -28,6 +28,7 @@ jobs:
       env:
         OUTPUT_DIR: ${{ runner.temp }}
         QT_VERSION: 5.15.2
+        WGET: C:\msys64\usr\bin\wget.exe
     - uses: actions/upload-artifact@v3
       with:
         name: windows
