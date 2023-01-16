@@ -9,8 +9,19 @@ shopt -s inherit_errexit
 
 : "${QT_VERSION:=5.15.1}" # The version used by Polar FlowSync.
 : "${QT_NAME:=qt-everywhere-src-$QT_VERSION}"
-: "${SCRIPT_DIR:="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"}"
-: "${OUTPUT_DIR:=$SCRIPT_DIR}"
+: "${OUTPUT_DIR:=.}"
+
+# Equivalent to `dirname $(readlink -f $0)`, but compatible with MacOS.
+function canonicalDirName {
+  local path="$1"
+  local dir="$(cd -P "$(dirname "$path")" >/dev/null 2>&1 && pwd -P)"
+  while [[ -L "$path" ]]; do
+    path=$(readlink "$path")
+    [[ "$path" == /* ]] || path="$dir/$path"
+    dir="$(cd -P "$(dirname "$path")" >/dev/null 2>&1 && pwd -P)"
+  done
+  echo "$dir"
+}
 
 function require {
   local C
@@ -37,23 +48,25 @@ require cp mkdir patch sed tar wget
 }
 
 # Patch the source with our hook code.
-NETWORK_ACCESS_DIR="$OUTPUT_DIR/$QT_NAME/qtbase/src/network/access/"
-[[ -e "$NETWORK_ACCESS_DIR/qnetworkaccessmanager.ori" ]] || {
+networkAccessDir="$OUTPUT_DIR/$QT_NAME/qtbase/src/network/access/"
+[[ -e "$networkAccessDir/qnetworkaccessmanager.ori" ]] || {
   echo 'Backing up qnetworkaccessmanager.cpp'
   "$CP" -a \
-    "$NETWORK_ACCESS_DIR/qnetworkaccessmanager.cpp" \
-    "$NETWORK_ACCESS_DIR/qnetworkaccessmanager.ori"
-  echo "Applying qnetworkaccessmanager.patch"
-  "$PATCH" --directory "$OUTPUT_DIR/$QT_NAME" --forward --strip 0 < "$OUTPUT_DIR/qnetworkaccessmanager.patch" || {
+    "$networkAccessDir/qnetworkaccessmanager.cpp" \
+    "$networkAccessDir/qnetworkaccessmanager.ori"
+  patchFile="$(canonicalDirName "${BASH_SOURCE[0]}")/qnetworkaccessmanager.patch"
+  echo "Applying $patchFile"
+  "$PATCH" --directory "$OUTPUT_DIR/$QT_NAME" --forward --strip 0 < "$patchFile" || {
     rc=$?
     [[ "$rc" -eq 1 ]] || exit "$rc"
     echo 'Assuming patch is already applied and continuing'
   }
 }
 
+exit
+
 # Configure the Qt build.
 function configure {
-    patchSource || return
     ${MKDIR} "$SELF_DIR/build"
     pushd "$SELF_DIR/build"
     "../$QT_NAME/configure" \
