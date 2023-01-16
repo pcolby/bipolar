@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 #
-# Prerequisites:
-# * Xcode
+# Build a patched Qt5Network library for Bipolar. See
+# https://github.com/pcolby/bipolar/wiki/Hooks for more information.
 #
 
-set -o errexit -o noclobber -o nounset -o pipefail # or set -Ceuo pipefail
+set -o errexit -o noclobber -o nounset -o pipefail
 shopt -s inherit_errexit
 
-: "${QT_VERSION:=5.15.1}" # The version used by Polar FlowSync.
+: "${QT_VERSION:=5.15.8}" # The version used by Polar FlowSync.
 : "${QT_NAME:=qt-everywhere-src-$QT_VERSION}"
 : "${OUTPUT_DIR:=.}"
 
@@ -63,41 +63,31 @@ networkAccessDir="$OUTPUT_DIR/$QT_NAME/qtbase/src/network/access/"
   }
 }
 
-exit
-
 # Configure the Qt build.
-function configure {
-    ${MKDIR} "$SELF_DIR/build"
-    pushd "$SELF_DIR/build"
-    "../$QT_NAME/configure" \
-        -confirm-license \
-        -framework \
-        -no-gui \
-        -no-opengl \
-        -no-widgets \
-        -nomake examples \
-        -nomake tools \
-        -opensource \
-        -openssl \
-        -platform macx-clang \
-        -release \
-        -sdk "${MACOS_SDK:-macosx10.10}" \
-        -shared \
-        -skip multimedia \
-        -skip script \
-        -skip svg \
-        -skip webkit ; RC=$?
-    popd
-    return $RC
+[[ "${RUNNER_OS:-}" != macOS ]] || {
+  configPlatform='macx-clang'
+  configFramework='-framework'
+  configSdk='macosx10.10'
 }
+[[ "${RUNNER_OS:-}" != Windows ]] || {
+  configOpenssl='-I C:\OpenSSL-Win32\include -L C:\OpenSSL-Win32\lib'
+  configPlatform='win32-msvc'
+}
+"$MKDIR" -p "$OUTPUT_DIR/build"
+( cd "$OUTPUT_DIR/build" && "../$QT_NAME/configure" \
+  -confirm-license \
+  ${configFramework:-} \
+  -no-{gui,open{gl,vg},widgets} \
+  -nomake examples \
+  -nomake tools \
+  -opensource \
+  -openssl ${configOpenssl:-} \
+  ${configPlatform:+-platform "$configPlatform"} \
+  -release \
+  ${configSdk:+-sdk "$configSdk"} \
+  -shared \
+  $("$SED" -Ene '/qtbase/!s/^\[submodule "(.*)"\]$/-skip \1/p ' "../$QT_NAME/.gitmodules")
+)
 
 # Build Qt.
-function build {
-    configure || return
-    pushd "$SELF_DIR/build"
-    make module-qtbase ; RC=$?
-    popd
-    return $RC
-}
-
-build
+make -C "$OUTPUT_DIR/build"
