@@ -5,7 +5,7 @@
 #
 
 set -o errexit -o noclobber -o nounset -o pipefail
-shopt -s inherit_errexit
+[[ "${RUNNER_OS:-}" == macOS ]] || shopt -s inherit_errexit
 
 : "${QT_VERSION:=5.15.8}" # The version used by Polar FlowSync.
 : "${QT_NAME:=qt-everywhere-src-$QT_VERSION}"
