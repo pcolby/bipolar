@@ -14,7 +14,7 @@ shopt -s inherit_errexit
 # Equivalent to `dirname $(readlink -f $0)`, but compatible with MacOS.
 function canonicalDirName {
   local path="$1"
-  local dir="$(cd -P "$(dirname "$path")" >/dev/null 2>&1 && pwd -P)"
+  local dir; dir="$(cd -P "$(dirname "$path")" >/dev/null 2>&1 && pwd -P)"
   while [[ -L "$path" ]]; do
     path=$(readlink "$path")
     [[ "$path" == /* ]] || path="$dir/$path"
@@ -74,7 +74,8 @@ networkAccessDir="$OUTPUT_DIR/$QT_NAME/qtbase/src/network/access/"
   configPlatform='win32-msvc'
 }
 "$MKDIR" -p "$OUTPUT_DIR/build"
-( cd "$OUTPUT_DIR/build" && "../$QT_NAME/configure" \
+# shellcheck disable=SC2046,SC2086 # We disable globbing, and want splitting.
+( set -o noglob && cd "$OUTPUT_DIR/build" && "../$QT_NAME/configure" \
   -confirm-license \
   ${configFramework:-} \
   -no-{gui,open{gl,vg},widgets} \
