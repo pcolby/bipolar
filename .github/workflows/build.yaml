@@ -1,0 +1,35 @@
+name: Build Hook
+
+on: [push, pull_request]
+
+jobs:
+  mac:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v3
+    - run: ./build.sh
+      shell: bash
+      env:
+        OUTPUT_DIR: ${{ runner.temp }}
+        QT_VERSION: 5.15.1
+    - uses: actions/upload-artifact@v3
+      with:
+        name: macOS
+        path: ${{ runner.temp }}/build/qtbase/lib/QtNetwork.framework/Versions/5/QtNetwork
+        if-no-files-found: error
+
+  win:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: ilammy/msvc-dev-cmd@v1
+    - run: ./build.sh
+      shell: bash
+      env:
+        OUTPUT_DIR: ${{ runner.temp }}
+        QT_VERSION: 5.15.2
+    - uses: actions/upload-artifact@v3
+      with:
+        name: windows
+        path: ${{ runner.temp }}/build/qtbase/lib/Qt5Network.dll
+        if-no-files-found: error
