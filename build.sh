@@ -7,7 +7,7 @@
 set -o errexit -o noclobber -o nounset -o pipefail
 [[ "${RUNNER_OS:-}" == macOS ]] || shopt -s inherit_errexit
 
-: "${QT_VERSION:=5.15.8}" # The version used by Polar FlowSync.
+: "${QT_VERSION:=5.15.2}" # The version used by Polar FlowSync.
 : "${QT_NAME:=qt-everywhere-src-$QT_VERSION}"
 : "${OUTPUT_DIR:=.}"
 
@@ -33,14 +33,14 @@ function require {
   done
 }
 
-require cp mkdir patch sed tar wget
+require cp curl mkdir patch sed tar
 
 # Fetch (if not already) and extract (if not already) the Qt source.
 [[ -e "$OUTPUT_DIR/$QT_NAME" ]] || {
   qtArchive="$OUTPUT_DIR/$QT_NAME.tar.xz"
   [[ -e "$qtArchive" ]] || {
     echo "Fetching $qtArchive"
-    "$WGET" -q -O "$qtArchive" \
+    "$CURL" -LO --output-dir "$OUTPUT_DIR" \
       "https://download.qt.io/archive/qt/${QT_VERSION%.*}/${QT_VERSION}/single/${QT_NAME}.tar.xz"
   }
   echo "Extracting $qtArchive"
