@@ -24,12 +24,12 @@ function canonicalDirName {
 }
 
 function require {
-  local C
+  local C c
   for c in "$@"; do
-    local -u V="${c//[^[:word:]]/_}";
-    if [ -v "$V" ]; then continue; fi
+    local v="${c//[^[:word:]]/_}";
+    if [ -v "${v^^}" ]; then continue; fi
     C=$(command -v "$c") || { echo "Required command not found: $c" >&2; exit 1; }
-    declare -gr "$V"="$C"
+    declare -gr "${v^^}"="$C"
   done
 }
 
