@@ -45,7 +45,7 @@ require cp curl mkdir patch sed tar
       "https://download.qt.io/archive/qt/${QT_VERSION%.*}/${QT_VERSION}/single/${QT_NAME}.tar.xz"
   }
   echo "Extracting $qtArchive"
-  "$TAR" xJf "$qtArchive" -C "$OUTPUT_DIR"
+  "$TAR" xJf "$qtArchive" -C "$OUTPUT_DIR" --force-local
 }
 
 # Patch the source with our hook code.
