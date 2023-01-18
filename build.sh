@@ -26,10 +26,11 @@ function canonicalDirName {
 function require {
   local C c
   for c in "$@"; do
-    local v="${c//[^[:word:]]/_}";
-    if [ -v "${v^^}" ]; then continue; fi
+    local V="${c//[^[:word:]]/_}"
+    V="$(tr 'a-z' 'A-Z' <<< "$V")" # For macOS's old Bash only.
+    if [ -v "$V" ]; then continue; fi
     C=$(command -v "$c") || { echo "Required command not found: $c" >&2; exit 1; }
-    declare -gr "${v^^}"="$C"
+    declare -gr "$V"="$C"
   done
 }
 
