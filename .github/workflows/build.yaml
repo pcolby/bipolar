@@ -23,10 +23,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: ilammy/msvc-dev-cmd@v1
-    - run: ./build.sh
+    - run: ${{ github.workspace }}/build.sh
       shell: bash
+      working-directory: ${{ runner.temp }}
       env:
-        OUTPUT_DIR: ${{ runner.temp }}
         QT_VERSION: 5.15.2
     - uses: actions/upload-artifact@v3
       with:
