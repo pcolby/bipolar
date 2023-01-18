@@ -23,9 +23,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: ilammy/msvc-dev-cmd@v1
-    - run: ${{ github.workspace }}/build.sh
+    - run: OUTPUT_DIR="$(cygpath -u "$RUNNER_TEMP")" ./build.sh
       shell: bash
-      working-directory: ${{ runner.temp }}
       env:
         QT_VERSION: 5.15.2
     - uses: actions/upload-artifact@v3
