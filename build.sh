@@ -27,7 +27,7 @@ function require {
   local C c
   for c in "$@"; do
     local V="${c//[^[:word:]]/_}"
-    V="$(tr 'a-z' 'A-Z' <<< "$V")" # For macOS's old Bash only.
+    V="$(tr '[:lower:]' '[:upper:]' <<< "$V")" # For macOS's old Bash only.
     if [ -v "$V" ]; then continue; fi
     C=$(command -v "$c") || { echo "Required command not found: $c" >&2; exit 1; }
     eval "$V"="$C"
