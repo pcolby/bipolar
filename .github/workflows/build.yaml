@@ -4,7 +4,11 @@ on: [push, pull_request]
 
 jobs:
   mac:
-    runs-on: macos-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ macos-11, macos-12 ]
     steps:
     - uses: actions/checkout@v3
     - run: ./build.sh
@@ -19,7 +23,11 @@ jobs:
         if-no-files-found: error
 
   win:
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ windows-2019, windows-2022 ]
     steps:
     - uses: actions/checkout@v3
     - uses: ilammy/msvc-dev-cmd@v1
