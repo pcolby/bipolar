@@ -68,7 +68,7 @@ networkAccessDir="$OUTPUT_DIR/$QT_NAME/qtbase/src/network/access/"
 [[ "${RUNNER_OS:-}" != macOS ]] || {
   configPlatform='macx-clang'
   configFramework='-framework'
-  configSdk='macosx10.10'
+  #configSdk='macosx10.10'
 }
 [[ "${RUNNER_OS:-}" != Windows ]] || {
   configOpenssl='-I C:\OpenSSL-Win32\include -L C:\OpenSSL-Win32\lib'
