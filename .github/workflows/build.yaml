@@ -41,7 +41,9 @@ jobs:
       env:
         QT_VERSION: 5.15.2
     - run: find "$GITHUB_WORKSPACE" -name 'Qt5Network.dll'
+      shell: bash
     - run: find "$RUNNER_TEMP" -name 'Qt5Network.dll'
+      shell: bash
     - uses: actions/upload-artifact@v3
       with:
         name: windows
