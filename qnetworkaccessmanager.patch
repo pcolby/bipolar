@@ -31,7 +31,7 @@
 +            .arg(QDateTime::currentDateTime().toString())
 +            .arg(QDir::toNativeSeparators(dataDir.absolutePath())).toUtf8());
 +        dataDir.mkpath(fileName);
-+        foreach (const QChar &c, urlPath.startsWith(QLatin1Char('/')) ? urlPath.mid(1) : urlPath) {
++        Q_FOREACH (const QChar &c, urlPath.startsWith(QLatin1Char('/')) ? urlPath.mid(1) : urlPath) {
 +            fileName += (c.isLetterOrNumber()) ? c : QChar::fromLatin1('-');
 +        }
 +        debug.write(QString::fromLatin1("%1 fileName %2\r")
