@@ -10,8 +10,10 @@ jobs:
       matrix:
         os: [ macos-11, macos-12 ]
     steps:
-    - run: ls /usr/local/Cellar/
-    - run: ls /usr/local/opt/
+    - run: ls -l /usr/local/opt/
+    - run: ls /usr/local/opt/openssl
+    - run: ls /usr/local/opt/openssl@1.1
+    - run: ls /usr/local/opt/openssl@3
     - run: brew list
     - run: brew list --cask
     - uses: actions/checkout@v3
