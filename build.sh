@@ -101,5 +101,7 @@ echo "Building Qt for $RUNNER_OS"
 [[ "${RUNNER_OS:-}" != macOS   ]] || make -C "$OUTPUT_DIR/build"
 [[ "${RUNNER_OS:-}" != Windows ]] || {
   dir "$OUTPUT_DIR/build/"
-  nmake.exe -F "$OUTPUT_DIR/build/Makefile"
+  cd "$OUTPUT_DIR/build"
+  nmake.exe
+  #nmake.exe -F "$OUTPUT_DIR/build/Makefile"
 }
