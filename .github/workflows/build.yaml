@@ -19,7 +19,7 @@ jobs:
     - run: otool -L "$RUNNER_TEMP/build/qtbase/lib/QtNetwork.framework/Versions/5/QtNetwork"
     - uses: actions/upload-artifact@v3
       with:
-        name: macOS
+        name: ${{ matrix.os }}
         path: ${{ runner.temp }}/build/qtbase/lib/QtNetwork.framework/Versions/5/QtNetwork
         if-no-files-found: error
 
@@ -46,6 +46,6 @@ jobs:
       shell: bash
     - uses: actions/upload-artifact@v3
       with:
-        name: windows
+        name: ${{ matrix.os }}
         path: ${{ runner.temp }}/build/qtbase/lib/Qt5Network.dll
         if-no-files-found: error
