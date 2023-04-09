@@ -35,7 +35,7 @@ jobs:
         arch: amd64     # Matches Qt5Network.dll 5.15.2
       #  toolset: 14.26  # Matches Qt5Network.dll 5.15.2
       #  vsversion: 2019 # Matches Qt5Network.dll 5.15.2
-    - run: OUTPUT_DIR="$(cygpath -u "$RUNNER_TEMP")" ./build.sh
+    - run: ./build.sh
       shell: bash
       env:
         QT_VERSION: 5.15.2
