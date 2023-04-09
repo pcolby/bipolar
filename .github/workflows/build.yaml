@@ -10,6 +10,9 @@ jobs:
       matrix:
         os: [ macos-11, macos-12 ]
     steps:
+    - run: ls /usr/local/Cellar/
+    - run: brew list
+    - run: brew list --cask
     - uses: actions/checkout@v3
     - run: ./build.sh
       shell: bash
