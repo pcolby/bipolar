@@ -74,6 +74,7 @@ networkAccessDir="$OUTPUT_DIR/$QT_NAME/qtbase/src/network/access/"
   configOpenssl='-I C:\OpenSSL-Win32\include -L C:\OpenSSL-Win32\lib'
   configPlatform='win32-msvc'
 }
+echo "Configuring Qt for $RUNNER_OS ($configPlatform)"
 "$MKDIR" -p "$OUTPUT_DIR/build"
 # shellcheck disable=SC2046,SC2086 # We disable globbing, and want splitting.
 ( set -o noglob && cd "$OUTPUT_DIR/build" && "../$QT_NAME/configure" \
@@ -92,6 +93,7 @@ networkAccessDir="$OUTPUT_DIR/$QT_NAME/qtbase/src/network/access/"
 )
 
 # Build Qt.
+echo "Building Qt for $RUNNER_OS"
 [[ "${RUNNER_OS:-}" != macOS   ]] || make -C "$OUTPUT_DIR/build"
 [[ "${RUNNER_OS:-}" != Windows ]] || {
   dir "$OUTPUT_DIR/build/"
