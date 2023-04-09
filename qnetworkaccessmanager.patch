@@ -1,6 +1,15 @@
 --- ./qtbase/src/network/access/qnetworkaccessmanager.cpp	2020-10-27 19:02:11.000000000 +1100
-+++ ./qtbase/src/network/access/qnetworkaccessmanager.new	2023-04-09 14:13:32.503075064 +1000
-@@ -876,6 +876,68 @@
++++ ./qtbase/src/network/access/qnetworkaccessmanager.new	2023-04-09 14:40:06.860221584 +1000
+@@ -95,6 +95,8 @@
+ 
+ #include "qnetconmonitor_p.h"
+ 
++#include "QtCore/qstandardpaths.h"
++
+ QT_BEGIN_NAMESPACE
+ 
+ Q_GLOBAL_STATIC(QNetworkAccessFileBackendFactory, fileBackend)
+@@ -876,6 +878,68 @@
  */
  QNetworkReply *QNetworkAccessManager::post(const QNetworkRequest &request, QIODevice *data)
  {
