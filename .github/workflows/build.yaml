@@ -29,8 +29,9 @@ jobs:
       matrix:
         os: [ windows-2019, windows-2022 ]
     steps:
-    - run: dir C:/
-    - run: dir C:/OpenSSL-Win32
+    - run: dir 'C:\Program Files'
+    - run: dir 'C:\Program Files\OpenSSL'
+    - run: dir 'C:\Program Files\OpenSSL-Win64'
     - uses: actions/checkout@v3
     - uses: ilammy/msvc-dev-cmd@v1
       with:
