@@ -65,7 +65,7 @@ networkAccessDir="$OUTPUT_DIR/$QT_NAME/qtbase/src/network/access/"
 }
 
 # Configure the Qt build.
-declare -a configOpenssl
+declare -a configOpenssl=
 [[ "${RUNNER_OS:-}" != macOS ]] || {
   configure="configure"
   configPlatform='macx-clang'
