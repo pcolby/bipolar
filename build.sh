@@ -65,6 +65,7 @@ networkAccessDir="$OUTPUT_DIR/$QT_NAME/qtbase/src/network/access/"
 }
 
 # Configure the Qt build.
+declare -a configOpenssl
 [[ "${RUNNER_OS:-}" != macOS ]] || {
   configure="configure"
   configPlatform='macx-clang'
@@ -73,7 +74,7 @@ networkAccessDir="$OUTPUT_DIR/$QT_NAME/qtbase/src/network/access/"
 }
 [[ "${RUNNER_OS:-}" != Windows ]] || {
   configure="configure.bat"
-  configOpenssl="-I 'C:\Progra~1\OpenSSL\include' -L 'C:\Progra~1\OpenSSL\lib'"
+  configOpenssl=(-I 'C:\Progra~1\OpenSSL\include' -L 'C:\Progra~1\OpenSSL\lib')
   configPlatform='win32-msvc'
 }
 echo "Configuring Qt for $RUNNER_OS ($configPlatform)"
@@ -86,7 +87,7 @@ echo "Configuring Qt for $RUNNER_OS ($configPlatform)"
   -nomake examples \
   -nomake tools \
   -opensource \
-  -openssl ${configOpenssl:-} \
+  -openssl "${configOpenssl[@]}" \
   ${configPlatform:+-platform "$configPlatform"} \
   -release \
   ${configSdk:+-sdk "$configSdk"} \
