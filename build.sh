@@ -92,4 +92,8 @@ networkAccessDir="$OUTPUT_DIR/$QT_NAME/qtbase/src/network/access/"
 )
 
 # Build Qt.
-make -C "$OUTPUT_DIR/build"
+[[ "${RUNNER_OS:-}" != macOS   ]] || make -C "$OUTPUT_DIR/build"
+[[ "${RUNNER_OS:-}" != Windows ]] || {
+  dir "$OUTPUT_DIR/build/"
+  nmake.exe -F "$OUTPUT_DIR/build/Makefile"
+}
