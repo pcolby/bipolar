@@ -16,8 +16,6 @@ jobs:
       env:
         OUTPUT_DIR: ${{ runner.temp }}
         QT_VERSION: 5.15.1
-    - run: find "$GITHUB_WORKSPACE" -name 'QtNetwork'
-    - run: find "$RUNNER_TEMP" -name 'QtNetwork'
     - uses: actions/upload-artifact@v3
       with:
         name: macOS
