@@ -11,6 +11,7 @@ jobs:
         os: [ macos-11, macos-12 ]
     steps:
     - run: ls /usr/local/Cellar/
+    - run: ls /usr/local/opt/
     - run: brew list
     - run: brew list --cask
     - uses: actions/checkout@v3
