@@ -3,7 +3,7 @@
 set -o errexit -o noclobber -o nounset -o pipefail # or set -Ceuo pipefail
 shopt -s inherit_errexit
 
-: "${QT_VERSION:=5.15.1}" # The version used by Polar FlowSync.
+: "${QT_VERSION:=5.15.2}" # The version used by Polar FlowSync.
 : "${QT_NAME:=qt-everywhere-src-$QT_VERSION}"
 : "${SCRIPT_DIR:="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"}"
 : "${OUTPUT_DIR:=$SCRIPT_DIR}"
