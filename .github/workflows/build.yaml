@@ -30,9 +30,9 @@ jobs:
         os: [ windows-2019, windows-2022 ]
     steps:
     - run: dir 'C:\Program Files'
-    - run: dir 'C:\Program~1'
+    - run: dir 'C:\Progra~1'
     - run: dir 'C:\Program Files\OpenSSL'
-    - run: dir 'C:\Program~1\OpenSSL'
+    - run: dir 'C:\Progra~1\OpenSSL'
     - uses: actions/checkout@v3
     - uses: ilammy/msvc-dev-cmd@v1
       with:
