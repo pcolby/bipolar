@@ -66,18 +66,20 @@ networkAccessDir="$OUTPUT_DIR/$QT_NAME/qtbase/src/network/access/"
 
 # Configure the Qt build.
 [[ "${RUNNER_OS:-}" != macOS ]] || {
+  configure="configure"
   configPlatform='macx-clang'
   configFramework='-framework'
   #configSdk='macosx10.10'
 }
 [[ "${RUNNER_OS:-}" != Windows ]] || {
+  configure="configure.bat"
   configOpenssl='-I C:\OpenSSL-Win32\include -L C:\OpenSSL-Win32\lib'
   configPlatform='win32-msvc'
 }
 echo "Configuring Qt for $RUNNER_OS ($configPlatform)"
 "$MKDIR" -p "$OUTPUT_DIR/build"
 # shellcheck disable=SC2046,SC2086 # We disable globbing, and want splitting.
-( set -o noglob && cd "$OUTPUT_DIR/build" && "../$QT_NAME/configure" \
+( set -o noglob && cd "$OUTPUT_DIR/build" && "../$QT_NAME/$configure" \
   -confirm-license \
   ${configFramework:-} \
   -no-{gui,open{gl,vg},widgets} \
