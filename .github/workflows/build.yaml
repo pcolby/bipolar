@@ -10,18 +10,14 @@ jobs:
       matrix:
         os: [ macos-11, macos-12 ]
     steps:
-    - run: ls -l /usr/local/opt/
-    - run: ls /usr/local/opt/openssl
-    - run: ls /usr/local/opt/openssl@1.1
-    - run: ls /usr/local/opt/openssl@3
-    - run: brew list
-    - run: brew list --cask
     - uses: actions/checkout@v3
     - run: ./build.sh
       shell: bash
       env:
         OUTPUT_DIR: ${{ runner.temp }}
         QT_VERSION: 5.15.1
+    - run: find "$GITHUB_WORKSPACE" -name 'QtNetwork'
+    - run: find "$RUNNER_TEMP" -name 'QtNetwork'
     - uses: actions/upload-artifact@v3
       with:
         name: macOS
@@ -35,10 +31,6 @@ jobs:
       matrix:
         os: [ windows-2019, windows-2022 ]
     steps:
-    - run: dir 'C:\Program Files'
-    - run: dir 'C:\Progra~1'
-    - run: dir 'C:\Program Files\OpenSSL'
-    - run: dir 'C:\Progra~1\OpenSSL'
     - uses: actions/checkout@v3
     - uses: ilammy/msvc-dev-cmd@v1
       with:
@@ -49,6 +41,8 @@ jobs:
       shell: bash
       env:
         QT_VERSION: 5.15.2
+    - run: find "$GITHUB_WORKSPACE" -name 'Qt5Network.dll'
+    - run: find "$RUNNER_TEMP" -name 'Qt5Network.dll'
     - uses: actions/upload-artifact@v3
       with:
         name: windows
