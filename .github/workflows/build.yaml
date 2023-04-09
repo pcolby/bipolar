@@ -16,6 +16,7 @@ jobs:
       env:
         OUTPUT_DIR: ${{ runner.temp }}
         QT_VERSION: 5.15.1
+    - run: otool -L "$RUNNER_TEMP/build/qtbase/lib/QtNetwork.framework/Versions/5/QtNetwork"
     - uses: actions/upload-artifact@v3
       with:
         name: macOS
