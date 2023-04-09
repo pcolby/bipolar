@@ -73,7 +73,7 @@ networkAccessDir="$OUTPUT_DIR/$QT_NAME/qtbase/src/network/access/"
 }
 [[ "${RUNNER_OS:-}" != Windows ]] || {
   configure="configure.bat"
-  configOpenssl='-I C:\OpenSSL-Win32\include -L C:\OpenSSL-Win32\lib'
+  configOpenssl='-I "C:\Program Files\OpenSSL\include" -L "C:\Program Files\OpenSSL\lib"'
   configPlatform='win32-msvc'
 }
 echo "Configuring Qt for $RUNNER_OS ($configPlatform)"
