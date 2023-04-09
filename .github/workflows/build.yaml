@@ -30,6 +30,7 @@ jobs:
         os: [ windows-2019, windows-2022 ]
     steps:
     - run: dir 'C:\Program Files'
+    - run: dir /X 'C:\Program Files'
     - run: dir 'C:\Program Files\OpenSSL'
     - run: dir 'C:\Program Files\OpenSSL\include'
     - run: dir 'C:\Program Files\OpenSSL\lib'
