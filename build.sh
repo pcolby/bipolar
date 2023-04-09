@@ -68,6 +68,7 @@ networkAccessDir="$OUTPUT_DIR/$QT_NAME/qtbase/src/network/access/"
 declare -a configOpenssl=
 [[ "${RUNNER_OS:-}" != macOS ]] || {
   configure="configure"
+  configOpenssl=(-I '/usr/local/opt/openssl@1.1/include' -L '/usr/local/opt/openssl@1.1/lib')
   configPlatform='macx-clang'
   configFramework='-framework'
   #configSdk='macosx10.10'
