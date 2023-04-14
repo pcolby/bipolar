@@ -25,7 +25,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: linux
-        path: ${{ runner.temp }}/bipolar
+        path: ${{ runner.temp }}/src/release/bipolar
         if-no-files-found: error
 
   linux:
