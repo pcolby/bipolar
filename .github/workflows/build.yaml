@@ -19,8 +19,8 @@ jobs:
         make -C "$RUNNER_TEMP" all
     - name: Test
       run: |
-        make -C "$RUNNER_TEMP" test
-        BIPOLAR_TEST_LOCALE=de_DE.UTF-8 make -C "$RUNNER_TEMP" test
+        make -C "$RUNNER_TEMP" check
+        BIPOLAR_TEST_LOCALE=de_DE.UTF-8 make -C "$RUNNER_TEMP" check
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
@@ -46,8 +46,8 @@ jobs:
         make -C "$RUNNER_TEMP" all
     - name: Test
       run:
-        make -C "$RUNNER_TEMP" test
-        BIPOLAR_TEST_LOCALE=de_DE.UTF-8 make -C "$RUNNER_TEMP" test
+        make -C "$RUNNER_TEMP" check
+        BIPOLAR_TEST_LOCALE=de_DE.UTF-8 make -C "$RUNNER_TEMP" check
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
@@ -73,8 +73,8 @@ jobs:
         make -C "$RUNNER_TEMP" all
     - name: Test
       run:
-        make -C "$RUNNER_TEMP" test
-        BIPOLAR_TEST_LOCALE=de_DE.UTF-8 make -C "$RUNNER_TEMP" test
+        make -C "$RUNNER_TEMP" check
+        BIPOLAR_TEST_LOCALE=de_DE.UTF-8 make -C "$RUNNER_TEMP" check
     - name: Make macOS disk image
       run:
         make -C "$RUNNER_TEMP-build/pkg/osx" dmg'
@@ -108,10 +108,10 @@ jobs:
         qmake -o "$RUNNER_TEMP" -r -Wall -Wlogic -Wparser CONFIG+=release "$GITHUB_WORKSPACE"
         cd "$RUNNER_TEMP" && nmake.exe all
     - name: Test
-      run: nmake.exe test
+      run: nmake.exe check
       working-directory: ${{ runner.temp }}
     - name: Test i18n
-      run: nmake.exe test
+      run: nmake.exe check
       env:
         BIPOLAR_TEST_LOCALE: german
       working-directory: ${{ runner.temp }}
