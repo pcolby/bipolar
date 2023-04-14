@@ -26,11 +26,12 @@ jobs:
         make -C "$RUNNER_TEMP" check
       env:
         BIPOLAR_TEST_LOCALE: de_DE.UTF-8
+    - run: find "$RUNNER_TEMP" -type f
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
         name: linux
-        path: ${{ runner.temp }}/src/release/bipolar
+        path: ${{ runner.temp }}/src/release/Bipolar
         if-no-files-found: error
 
   linux:
