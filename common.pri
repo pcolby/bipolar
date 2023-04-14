@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2014-2019 Paul Colby <git@colby.id.au>
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-VERSION = 0.5.11
+VERSION = 0.6.0
 SPECIAL_BUILD = Internal
 TOPDIR = $$PWD
 
