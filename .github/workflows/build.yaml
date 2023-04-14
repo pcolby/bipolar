@@ -26,7 +26,6 @@ jobs:
         make -C "$RUNNER_TEMP" check
       env:
         BIPOLAR_TEST_LOCALE: de_DE.UTF-8
-    - run: find "$RUNNER_TEMP" -type f
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
@@ -66,7 +65,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: linux-${{ matrix.qt }}
-        path: ${{ runner.temp }}/bipolar
+        path: ${{ runner.temp }}/src/release/Bipolar
         if-no-files-found: error
 
   mac:
@@ -92,8 +91,8 @@ jobs:
       env:
         BIPOLAR_TEST_LOCALE: de_DE.UTF-8
     - name: Make macOS disk image
-      run:
-        make -C "$RUNNER_TEMP-build/pkg/osx" dmg'
+      run: make -C "$RUNNER_TEMP-build/pkg/osx" dmg'
+    - run: find "$RUNNER_TEMP" -type f
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
