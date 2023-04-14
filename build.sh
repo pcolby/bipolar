@@ -115,8 +115,8 @@ echo "Configuring Qt for $RUNNER_OS ($configPlatform)"
 
 # Build Qt.
 echo "Building Qt for $RUNNER_OS"
-[[ "${RUNNER_OS:-}" != macOS   ]] || make -C "$OUTPUT_DIR/build"
+[[ "${RUNNER_OS:-}" != macOS   ]] || make -C "$OUTPUT_DIR/build" module-qtbase
 [[ "${RUNNER_OS:-}" != Windows ]] || {
   cd "$OUTPUT_DIR/build"
-  nmake.exe
+  nmake.exe module-qtbase
 }
