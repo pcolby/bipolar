@@ -102,10 +102,7 @@ jobs:
         version: ${{ matrix.qt }}
         modules: ${{ startsWith(matrix.qt, '6') && 'xmlpatterns' || '' }}
     - name: Configure MSVC
-      if: ${{ contains(matrix.generator, 'nmake') }}
       uses: ilammy/msvc-dev-cmd@v1
-      with:
-        arch: ${{ matrix.msvcArch }}
     - name: Build
       run: |
         qmake -o "$RUNNER_TEMP" -r -Wall -Wlogic -Wparser CONFIG+=release "$GITHUB_WORKSPACE"
