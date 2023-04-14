@@ -1,0 +1,126 @@
+name: Build and Test
+
+on: [push, pull_request]
+
+jobs:
+  linux0:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install Qt
+      run: |
+        sudo apt-mark hold grub-efi-amd64-signed
+        sudo apt update
+        sudo apt upgrade
+        sudo apt install qtbase5-dev qttools5-dev qttools5-dev-tools
+    - name: Build
+      run: |
+        qmake -o "$RUNNER_TEMP" -r -Wall -Wlogic -Wparser CONFIG+=release "$GITHUB_WORKSPACE"
+        make -C "$RUNNER_TEMP" all
+    - name: Test
+      run: |
+        make -C "$RUNNER_TEMP" test
+        BIPOLAR_TEST_LOCALE=de_DE.UTF-8 make -C "$RUNNER_TEMP" test
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: linux
+        path: ${{ runner.temp }}/bipolar
+        if-no-files-found: error
+
+  linux:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        qt: [ '5.9.9', '5.10.1', '5.11.3', '5.12.12', '5.13.2', '5.14.2', '5.15.2', '6.0.4', '6.1.3', '6.2.4', '6.3.2', '6.4.3', '6.5.0' ]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: ${{ matrix.qt }}
+    - name: Build
+      run: |
+        qmake -o "$RUNNER_TEMP" -r -Wall -Wlogic -Wparser CONFIG+=release "$GITHUB_WORKSPACE"
+        make -C "$RUNNER_TEMP" all
+    - name: Test
+      run:
+        make -C "$RUNNER_TEMP" test
+        BIPOLAR_TEST_LOCALE=de_DE.UTF-8 make -C "$RUNNER_TEMP" test
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: linux-${{ matrix.qt }}
+        path: ${{ runner.temp }}/bipolar
+        if-no-files-found: error
+
+  mac:
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        qt: [ '5.9.9', '5.10.1', '5.11.3', '5.12.12', '5.13.2', '5.14.2', '5.15.2', '6.0.4', '6.1.3', '6.2.4', '6.3.2', '6.4.3', '6.5.0' ]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: ${{ matrix.qt }}
+    - name: Build
+      run: |
+        qmake -o "$RUNNER_TEMP" -r -Wall -Wlogic -Wparser CONFIG+=release "$GITHUB_WORKSPACE"
+        make -C "$RUNNER_TEMP" all
+    - name: Test
+      run:
+        make -C "$RUNNER_TEMP" test
+        BIPOLAR_TEST_LOCALE=de_DE.UTF-8 make -C "$RUNNER_TEMP" test
+    - name: Make macOS disk image
+      run:
+        make -C "$RUNNER_TEMP-build/pkg/osx" dmg'
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: macos-${{ matrix.qt }}
+        path: ${{ runner.temp }}/Bipolar*.dmg
+        if-no-files-found: error
+
+  win:
+    runs-on: windows-latest
+    defaults: { run: { shell: cmd } }
+    strategy:
+      fail-fast: false
+      matrix:
+        qt: [ '5.9.9', '5.10.1', '5.11.3', '5.12.12', '5.13.2', '5.14.2', '5.15.2', '6.0.4', '6.1.3', '6.2.4', '6.3.2', '6.4.3', '6.5.0' ]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: ${{ matrix.qt }}
+    - name: Configure MSVC
+      if: ${{ contains(matrix.generator, 'nmake') }}
+      uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: ${{ matrix.msvcArch }}
+    - name: Build
+      run: |
+        qmake -o "$RUNNER_TEMP" -r -Wall -Wlogic -Wparser CONFIG+=release "$GITHUB_WORKSPACE"
+        cd "$RUNNER_TEMP" && nmake.exe all
+    - name: Test
+      run: nmake.exe test
+      woroking-directory: ${{ runner.temp }}
+    - name: Test i18n
+      run: nmake.exe test
+      env:
+        BIPOLAR_TEST_LOCALE: german
+      woroking-directory: ${{ runner.temp }}
+    - name: Package NSIS installer
+      run: nmake.exe nsis
+      woroking-directory: ${{ runner.temp }}/pkg/nsis
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: win-${{ matrix.qt }}
+        path: ${{ runner.temp }}/pkg/nsis/Bipolar-*.exe
+        if-no-files-found: error

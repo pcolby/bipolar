@@ -1,0 +1,50 @@
+name: Static Analysis
+
+on: [push, pull_request]
+
+jobs:
+  CodeQL:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install Qt
+      run: |
+        sudo apt-mark hold grub-efi-amd64-signed
+        sudo apt update
+        sudo apt upgrade
+        sudo apt install qtbase5-dev qttools5-dev qttools5-dev-tools
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: cpp
+    - name: Build
+      run: |
+        qmake -o "$RUNNER_TEMP" -r -Wall -Wlogic -Wparser CONFIG+=release "$GITHUB_WORKSPACE"
+        make -C "$RUNNER_TEMP" all
+      working-directory: ${{ runner.temp }}
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+
+  Cppcheck:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install Cppcheck
+      run: |
+        sudo apt-mark hold grub-efi-amd64-signed
+        sudo apt update
+        sudo apt upgrade
+        sudo apt install cppcheck
+    - uses: actions/checkout@v3
+    - name: Perform Cppcheck Analysis
+      run: ./.cppcheck.sh --xml --xml-version=2 2> "$RUNNER_TEMP/cppcheck.xml"
+    - name: Generate Report
+      if: ${{ failure() }}
+      run: |
+        cppcheck-htmlreport --title=Bipolar --file="$RUNNER_TEMP/cppcheck.xml" \
+          --report-dir="$RUNNER_TEMP/report" --source-dir="$GITHUB_WORKSPACE"
+    - name: Upload Report
+      if: ${{ failure() }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: Cppcheck HTML Report
+        path: "${{ runner.temp }}/report"
