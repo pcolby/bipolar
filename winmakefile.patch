@@ -1,10 +1,10 @@
---- qtbase\qmake\generators\win32\winmakefile.cpp	Mon Aug 26 04:04:06 2013
-+++ qtbase\qmake\generators\win32\winmakefile.new	Wed Oct  8 17:41:01 2014
-@@ -465,6 +465,7 @@
+--- ./qtbase/qmake/generators/win32/winmakefile.cpp	2020-10-27 19:02:11.000000000 +1100
++++ ./qtbase/qmake/generators/win32/winmakefile.new	2023-04-14 12:17:30.671308371 +1000
+@@ -385,6 +385,7 @@
          ts << "\t\t\t\tVALUE \"CompanyName\", \"" << companyName << "\\0\"\n";
          ts << "\t\t\t\tVALUE \"FileDescription\", \"" <<  description << "\\0\"\n";
          ts << "\t\t\t\tVALUE \"FileVersion\", \"" << versionString << "\\0\"\n";
-+        ts << "\t\t\t\tVALUE \"InternalName\", \"Bipolar Hook 2\\0\"\n";
++        ts << "\t\t\t\tVALUE \"InternalName\", \"Bipolar Hook 3\\0\"\n";
          ts << "\t\t\t\tVALUE \"LegalCopyright\", \"" << copyright << "\\0\"\n";
          ts << "\t\t\t\tVALUE \"OriginalFilename\", \"" << originalName << "\\0\"\n";
          ts << "\t\t\t\tVALUE \"ProductName\", \"" << productName << "\\0\"\n";

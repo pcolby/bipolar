@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -o errexit -o noclobber -o nounset -o pipefail # or set -Ceuo pipefail
+set -o errexit -o noclobber -o nounset -o pipefail
 shopt -s inherit_errexit
 
 : "${QT_VERSION:=5.15.2}" # The version used by Polar FlowSync.
@@ -20,11 +20,18 @@ function require {
 
 require diff
 
-echo "Updating $SCRIPT_DIR/qnetworkaccessmanager.patch"
-pushd "$OUTPUT_DIR/$QT_NAME"
-mv ./qtbase/src/network/access/qnetworkaccessmanager.cpp ./qtbase/src/network/access/qnetworkaccessmanager.new
-mv ./qtbase/src/network/access/qnetworkaccessmanager.ori ./qtbase/src/network/access/qnetworkaccessmanager.cpp
-"$DIFF" -u './qtbase/src/network/access/qnetworkaccessmanager'.{cpp,new} >| "$SCRIPT_DIR/qnetworkaccessmanager.patch" || true
-mv ./qtbase/src/network/access/qnetworkaccessmanager.cpp ./qtbase/src/network/access/qnetworkaccessmanager.ori
-mv ./qtbase/src/network/access/qnetworkaccessmanager.new ./qtbase/src/network/access/qnetworkaccessmanager.cpp
-popd
+for patchName in qnetworkaccessmanager winmakefile; do
+  patchFile="$SCRIPT_DIR/$patchName.patch"
+  echo "Updating $patchFile"
+  pushd "$OUTPUT_DIR/$QT_NAME" > /dev/null
+  targetFile="$(sed -Ene '1s/^---[[:blank:]]+([^[:blank:]]+)[[:blank:]].*$/\1/p' "$patchFile")"
+  for fileName in "$targetFile" "${targetFile%.*}.ori"; do
+    [[ -s "$fileName" ]] || { echo "File does not exist, or is empty: $fileName" >&2; exit 1; }
+  done
+  mv "$targetFile" "${targetFile%.*}.new"
+  mv "${targetFile%.*}.ori" "$targetFile"
+  "$DIFF" -u "${targetFile%.*}".{cpp,new} >| "$patchFile" || true
+  mv "$targetFile" "${targetFile%.*}.ori"
+  mv "${targetFile%.*}.new" "$targetFile"
+  popd > /dev/null
+done

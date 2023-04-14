@@ -49,6 +49,23 @@ require cp curl mkdir patch sed tar
 }
 
 # Patch the source with our hook code.
+for patchName in qnetworkaccessmanager winmakefile; do
+  patchFile="$(canonicalDirName "${BASH_SOURCE[0]}")/$patchName.patch"
+  targetFile="$(sed -Ene '1s/^---[[:blank:]]+([^[:blank:]]+)[[:blank:]].*$/\1/p' "$patchFile")"
+  [[ -e "$OUTPUT_DIR/$QT_NAME/${targetFile%.*}.ori" ]] || {
+    echo "Backing up ${targetFile##*/}"
+    "$CP" -a \
+      "$OUTPUT_DIR/$QT_NAME/$targetFile" \
+      "$OUTPUT_DIR/$QT_NAME/${targetFile%.*}.ori"
+    echo "Applying ${patchFile##*/}"
+    "$PATCH" --directory "$OUTPUT_DIR/$QT_NAME" --forward --strip 0 < "$patchFile" || {
+      rc=$?
+      [[ "$rc" -eq 1 ]] || exit "$rc"
+      echo 'Assuming patch is already applied and continuing'
+    }
+  }
+done
+
 networkAccessDir="$OUTPUT_DIR/$QT_NAME/qtbase/src/network/access/"
 [[ -e "$networkAccessDir/qnetworkaccessmanager.ori" ]] || {
   echo 'Backing up qnetworkaccessmanager.cpp'
