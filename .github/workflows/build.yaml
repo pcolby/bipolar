@@ -12,7 +12,7 @@ jobs:
         sudo apt-mark hold grub-efi-amd64-signed
         sudo apt update
         sudo apt upgrade
-        sudo apt install qtbase5-dev qttools5-dev qttools5-dev-tools
+        sudo apt install qtbase5-dev libqt5xmlpatterns5-dev qttools5-dev qttools5-dev-tools
     - name: Build
       run: |
         qmake -o "$RUNNER_TEMP" -r -Wall -Wlogic -Wparser CONFIG+=release "$GITHUB_WORKSPACE"
