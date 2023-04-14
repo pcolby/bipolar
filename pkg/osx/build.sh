@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# SPDX-FileCopyrightText: 2014-2019 Paul Colby <git@colby.id.au>
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 while [ $# -gt 0 ]; do
   case "$1" in
