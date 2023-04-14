@@ -114,10 +114,10 @@ jobs:
       run: nmake.exe test
       env:
         BIPOLAR_TEST_LOCALE: german
-      woroking-directory: ${{ runner.temp }}
+      working-directory: ${{ runner.temp }}
     - name: Package NSIS installer
       run: nmake.exe nsis
-      woroking-directory: ${{ runner.temp }}/pkg/nsis
+      working-directory: ${{ runner.temp }}/pkg/nsis
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
