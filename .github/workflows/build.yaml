@@ -109,7 +109,7 @@ jobs:
         cd "$RUNNER_TEMP" && nmake.exe all
     - name: Test
       run: nmake.exe test
-      woroking-directory: ${{ runner.temp }}
+      working-directory: ${{ runner.temp }}
     - name: Test i18n
       run: nmake.exe test
       env:
