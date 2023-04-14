@@ -105,8 +105,8 @@ jobs:
       uses: ilammy/msvc-dev-cmd@v1
     - name: Build
       run: |
-        qmake -o "$RUNNER_TEMP" -r -Wall -Wlogic -Wparser CONFIG+=release "$GITHUB_WORKSPACE"
-        cd "$RUNNER_TEMP" && nmake.exe all
+        qmake -o "%RUNNER_TEMP%" -r -Wall -Wlogic -Wparser CONFIG+=release "%GITHUB_WORKSPACE%"
+        cd "%RUNNER_TEMP%" && nmake.exe all
     - name: Test
       run: nmake.exe check
       working-directory: ${{ runner.temp }}
