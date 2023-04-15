@@ -6,7 +6,7 @@ SPECIAL_BUILD = Internal
 TOPDIR = $$PWD
 
 # Setup build number, where available.
-isEmpty(VER_BUILD):VER_BUILD = $$(APPVEYOR_BUILD_NUMBER)
+isEmpty(VER_BUILD):VER_BUILD = $$(GITHUB_RUN_NUMBER)
 isEmpty(VER_BUILD):VER_BUILD = 0
 isEmpty(VER_PAT) {
     # Qmake only automatically assigns VER_PAT on some platforms.
