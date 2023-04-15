@@ -20,7 +20,7 @@ and devices are supported:
 3. Download the [latest Bipolar release] - you'll want the
    `Bipolar-<version>.dmg` file for OS X.
 4. Open the downloaded `Bipolar-<version>.dmg` file.
-5. Read the includes `README.txt` file.
+5. Read the included `README.txt` file.
 6. Enter the `Hook` folder.
 7. Run the `install.command` script.
 
