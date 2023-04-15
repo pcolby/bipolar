@@ -2036,12 +2036,12 @@ void TestTrainingSession::unzip()
 
     const polar::v2::TrainingSession session(QLatin1String("ignored"));
 
-    qInfo() << "Default initial buffer size";
+    qDebug() << "Default initial buffer size";
     QByteArray unzipped = session.unzip(data);
     QCOMPARE(unzipped.size(), expected.size());
     QCOMPARE(unzipped, expected);
 
-    qInfo() << "Tiny intitial buffer size";
+    qDebug() << "Tiny intitial buffer size";
     unzipped = session.unzip(data, 1);
     QCOMPARE(unzipped.size(), expected.size());
     QCOMPARE(unzipped, expected);
