@@ -2,6 +2,15 @@
 
 ## [Unreleased][]
 
+### Features
+
+- compatible with FlowSync 4 ([#94](../../issues/94))
+
+### Other
+
+- upgraded to Qt 5.15
+- switched to GitHub Actions
+
 ## [0.5.10][] (2019-03-16)
 
 ### Features
