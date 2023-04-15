@@ -134,6 +134,8 @@ jobs:
       env:
         CONFIGURATION: release
       working-directory: ${{ runner.temp }}/pkg/nsis
+    - run: find "$RUNNER_TEMP" -type f
+      shell: bash
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
