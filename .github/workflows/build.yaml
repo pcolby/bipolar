@@ -92,7 +92,6 @@ jobs:
         BIPOLAR_TEST_LOCALE: de_DE.UTF-8
     - name: Make macOS disk image
       run: make -C "$RUNNER_TEMP/pkg/osx" dmg
-    - run: find "$RUNNER_TEMP" -type f
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
@@ -134,8 +133,6 @@ jobs:
       env:
         CONFIGURATION: release
       working-directory: ${{ runner.temp }}/pkg/nsis
-    - run: find "$RUNNER_TEMP" -type f
-      shell: bash
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
