@@ -3,7 +3,7 @@
 
 #include "bundleinfo.h"
 
-#include <CFBundle.h>
+#include <CoreFoundation/CFBundle.h>
 #include <QVarLengthArray>
 
 BundleInfo::BundleInfo(const QString &fileName)
@@ -24,7 +24,7 @@ bool BundleInfo::isValid() const
 }
 
 QString getBundleInfo(const CFBundleRef bundle, const CFStringRef &key)
-{    
+{
     const CFTypeRef ref = CFBundleGetValueForInfoDictionaryKey(bundle, key);
     if ((ref == NULL) || (CFGetTypeID(ref) != CFStringGetTypeID())) {
         return QString(); // Not a string.
