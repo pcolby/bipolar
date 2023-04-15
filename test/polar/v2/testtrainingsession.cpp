@@ -2035,6 +2035,14 @@ void TestTrainingSession::unzip()
     QVERIFY2(!expected.isEmpty(), "failed to load testdata");
 
     const polar::v2::TrainingSession session(QLatin1String("ignored"));
-    QCOMPARE(session.unzip(data), expected);   // Default initial buffer size.
-    QCOMPARE(session.unzip(data,1), expected); // Tiny initial buffer size.
+
+    qInfo() << "Default initial buffer size";
+    QByteArray unzipped = session.unzip(data);
+    QCOMPARE(unzipped.size(), expected.size());
+    QCOMPARE(unzipped, expected);
+
+    qInfo() << "Tiny intitial buffer size";
+    unzipped = session.unzip(data, 1);
+    QCOMPARE(unzipped.size(), expected.size());
+    QCOMPARE(unzipped, expected);
 }
