@@ -97,7 +97,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: macos-${{ matrix.qt }}
-        path: ${{ runner.temp }}/Bipolar*.dmg
+        path: ${{ runner.temp }}/pkg/osx/Bipolar-*.dmg
         if-no-files-found: error
 
   win:
