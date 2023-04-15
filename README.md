@@ -1,16 +1,7 @@
 # [![Bipolar Logo](qrc/icon/bipolar30.png)](#) Bipolar
-[![Build Status](https://img.shields.io/travis/pcolby/bipolar/master.svg?logo=travis)](https://travis-ci.org/pcolby/bipolar)
-[![Build Status](https://img.shields.io/appveyor/ci/pcolby/bipolar.svg?logo=appveyor)](https://ci.appveyor.com/project/pcolby/bipolar)
-[![Github Downloads](https://img.shields.io/github/downloads/pcolby/bipolar/total.svg?logo=github&logoColor=white)](https://github.com/pcolby/bipolar/releases)
-[![Github Release](http://img.shields.io/github/release/pcolby/bipolar.svg)](https://github.com/pcolby/bipolar/releases/latest)
-[![GitHub forks](https://img.shields.io/github/forks/pcolby/bipolar.svg)](https://github.com/pcolby/bipolar/network)
-[![GitHub stars](https://img.shields.io/github/stars/pcolby/bipolar.svg)](https://github.com/pcolby/bipolar/stargazers)
-[![Chat](https://img.shields.io/gitter/room/pcolby/bipolar.svg?logo=gitter "Join the chat")](https://gitter.im/pcolby/bipolar)
-![Qt](https://img.shields.io/badge/Qt-qmake-41cd52.svg)
-[![GitHub license](https://img.shields.io/github/license/pcolby/bipolar.svg)](https://github.com/pcolby/bipolar/blob/master/LICENSE.md)
 
-[![Build history](https://buildstats.info/travisci/chart/pcolby/bipolar?branch=master&showStats=true)](https://travis-ci.org/pcolby/bipolar/builds)
-[![Build history](https://buildstats.info/appveyor/chart/pcolby/bipolar?branch=master&showStats=true)](https://ci.appveyor.com/project/pcolby/bipolar/history)
+[![Build Status](https://github.com/pcolby/bipolar/actions/workflows/build.yaml/badge.svg?branch=main)](https://github.com/pcolby/bipolar/actions/workflows/build.yaml?query=branch%3Amain)
+[![Static Analysis](https://github.com/pcolby/bipolar/actions/workflows/static.yaml/badge.svg?branch=main)](https://github.com/pcolby/bipolar/actions/workflows/static.yaml?query=branch%3Amain)
 
 Bipolar a simple GUI application for exporting training sessions from Polar
 sync software, such as [Polar FlowSync].  Currently, the following applications
