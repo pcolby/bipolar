@@ -26,8 +26,8 @@ if [ ! -e "$HOOK" ]; then
     exit 1
 fi
 
-if [ -n "$TRAVIS_BUILD_NUMBER" ]; then
-    VERSION="$VERSION.$TRAVIS_BUILD_NUMBER"
+if [ -n "$GITHUB_RUN_NUMBER" ]; then
+    VERSION="$VERSION.$GITHUB_RUN_NUMBER"
 fi
 
 if [ -e /Volumes/Bipolar ]; then
