@@ -65,14 +65,11 @@ macx:equals(QT_MAJOR_VERSION,5):equals(QT_MINOR_VERSION,5) {
     QMAKE_CXXFLAGS_WARN_ON += -Wno-return-stack-address
 }
 
-# Disable deprecated-copy warnings for modern compilers with old Qt's (earlier than 5.13).
-equals(QT_MAJOR_VERSION,5):lessThan(QT_MINOR_VERSION,13) {
-    *-clang {
-      message(Adding '-Wno-deprecated-copy-with-user-provided-copy' flag for $$QMAKE_CXX and $$QT_VERSION)
-      QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-copy-with-user-provided-copy
-    }
-    *-g++ {
-      message(Adding '-Wno-deprecated-copy' flag for $$QMAKE_CXX and $$QT_VERSION)
-      QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-copy
-    }
+# Disable deprecated-copy warnings for modern compilers with old Qt's.
+*-clang:equals(QT_MAJOR_VERSION,5):lessThan(QT_MINOR_VERSION,15) {
+    message(Adding '-Wno-deprecated-copy-with-user-provided-copy' flag for $$QMAKE_CXX and $$QT_VERSION)
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-copy-with-user-provided-copy
+*-g++:equals(QT_MAJOR_VERSION,5):lessThan(QT_MINOR_VERSION,13) {
+    message(Adding '-Wno-deprecated-copy' flag for $$QMAKE_CXX and $$QT_VERSION)
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-copy
 }
