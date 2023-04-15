@@ -91,7 +91,7 @@ jobs:
       env:
         BIPOLAR_TEST_LOCALE: de_DE.UTF-8
     - name: Make macOS disk image
-      run: make -C "$RUNNER_TEMP-build/pkg/osx" dmg
+      run: make -C "$RUNNER_TEMP/pkg/osx" dmg
     - run: find "$RUNNER_TEMP" -type f
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
