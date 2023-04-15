@@ -129,6 +129,8 @@ jobs:
       working-directory: ${{ runner.temp }}
     - name: Package NSIS installer
       run: nmake.exe nsis
+      env:
+        CONFIGURATION: release
       working-directory: ${{ runner.temp }}/pkg/nsis
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
