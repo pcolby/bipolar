@@ -69,6 +69,7 @@ macx:equals(QT_MAJOR_VERSION,5):equals(QT_MINOR_VERSION,5) {
 *-clang:equals(QT_MAJOR_VERSION,5):lessThan(QT_MINOR_VERSION,15) {
     message(Adding '-Wno-deprecated-copy-with-user-provided-copy' flag for $$QMAKE_CXX and $$QT_VERSION)
     QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-copy-with-user-provided-copy
+}
 *-g++:equals(QT_MAJOR_VERSION,5):lessThan(QT_MINOR_VERSION,13) {
     message(Adding '-Wno-deprecated-copy' flag for $$QMAKE_CXX and $$QT_VERSION)
     QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-copy
