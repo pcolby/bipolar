@@ -62,17 +62,17 @@ macx-g++:contains(CONFIG, c++11) {
 # Workaround LLVM bug https://llvm.org/bugs/show_bug.cgi?id=26396 https://bugreports.qt.io/browse/QTBUG-52134
 macx:equals(QT_MAJOR_VERSION,5):equals(QT_MINOR_VERSION,5) {
     message(Adding '-Wno-return-stack-address' flag $$QT_VERSION)
-    QMAKE_CXXFLAGS += -Wno-return-stack-address
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-return-stack-address
 }
 
 # Disable deprecated-copy warnings for modern compilers with old Qt's (earlier than 5.13).
 equals(QT_MAJOR_VERSION,5):lessThan(QT_MINOR_VERSION,13) {
     *-clang {
       message(Adding '-Wno-deprecated-copy-with-user-provided-copy' flag for $$QMAKE_CXX and $$QT_VERSION)
-      QMAKE_CXXFLAGS += -Wno-deprecated-copy-with-user-provided-copy
+      QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-copy-with-user-provided-copy
     }
     *-g++ {
       message(Adding '-Wno-deprecated-copy' flag for $$QMAKE_CXX and $$QT_VERSION)
-      QMAKE_CXXFLAGS += -Wno-deprecated-copy
+      QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-copy
     }
 }
