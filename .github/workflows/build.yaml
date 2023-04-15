@@ -119,6 +119,8 @@ jobs:
       run: |
         qmake -o "%RUNNER_TEMP%" -r -Wall -Wlogic -Wparser CONFIG+=release "%GITHUB_WORKSPACE%"
         cd "%RUNNER_TEMP%" && nmake.exe all
+      env:
+        CONFIGURATION: release
     - name: Test
       run: nmake.exe check
       working-directory: ${{ runner.temp }}
