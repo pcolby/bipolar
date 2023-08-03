@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 VERSION = 0.6.0
-SPECIAL_BUILD = Internal
+SPECIAL_BUILD = Release
 TOPDIR = $$PWD
 
 # Setup build number, where available.

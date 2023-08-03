@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased][]
+## [0.6.0][] (2023-04-15)
 
 ### Features
 
@@ -198,7 +198,8 @@ Special thanks to @profanum429 and @trimathias for contributing to this release.
 - initial release of the first export hook, supporting Polar FlowSync 2.1 on
   Windows only.
 
-[Unreleased]: https://github.com/pcolby/bipolar/compare/v0.5.10...HEAD
+[Unreleased]: https://github.com/pcolby/bipolar/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/pcolby/bipolar/releases/tag/v0.6.0
 [0.5.10]: https://github.com/pcolby/bipolar/releases/tag/v0.5.10
 [0.5.9]: https://github.com/pcolby/bipolar/releases/tag/v0.5.9
 [0.5.8]: https://github.com/pcolby/bipolar/releases/tag/v0.5.8
