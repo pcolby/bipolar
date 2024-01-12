@@ -3,6 +3,27 @@
 [![Build Status](https://github.com/pcolby/bipolar/actions/workflows/build.yaml/badge.svg?branch=main)](https://github.com/pcolby/bipolar/actions/workflows/build.yaml?query=branch%3Amain)
 [![Static Analysis](https://github.com/pcolby/bipolar/actions/workflows/static.yaml/badge.svg?branch=main)](https://github.com/pcolby/bipolar/actions/workflows/static.yaml?query=branch%3Amain)
 
+> [!IMPORTANT]  
+> After 10 years, Polar has begun _sunsetting_ the FlowSync (desktop) application,
+> and requires the Flow (Android and iOS) app instead for full data sync. From the
+> [Polar FLowSync support FAQs](https://support.polar.com/au-en/support/which_products_are_compatible_with_polar_flowsync_software):
+> 
+> > WHICH PRODUCTS ARE COMPATIBLE WITH POLAR FLOWSYNC SOFTWARE?
+> >
+> > The following data cannot be synced using the Polar FlowSync software on your
+> > computer: skin temperature, wrist ECG and SpO2 (blood oxygen saturation). We
+> > recommend syncing with Flow app as **we're gradually sunsetting FlowSync**.
+> > FlowSync doesn't support all the features on your watch, which means that some
+> > of the data won't be synced. If you continue with FlowSync anyways, you can sync
+> > the missing data with Flow app later. For full support, we recommend syncing
+> > with Polar Flow app.
+> 
+> As such, I no longer intend to continue any development on this Bipolar project.
+> Thanks for all the support, and interest while the project was active. I personall
+> found it very fulfilling 😊
+
+## Introduction
+
 Bipolar a simple GUI application for exporting training sessions from Polar
 sync software, such as [Polar FlowSync].  Currently, the following applications
 and devices are supported:
