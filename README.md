@@ -19,7 +19,7 @@
 > > with Polar Flow app.
 > 
 > As such, I no longer intend to continue any development on this Bipolar project.
-> Thanks for all the support, and interest while the project was active. I personall
+> Thanks for all the support, and interest while the project was active. I personally
 > found it very fulfilling 😊
 
 ## Introduction
