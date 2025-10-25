@@ -44,7 +44,7 @@ jobs:
           --report-dir="$RUNNER_TEMP/report" --source-dir="$GITHUB_WORKSPACE"
     - name: Upload Report
       if: ${{ failure() }}
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v5
       with:
         name: Cppcheck HTML Report
         path: "${{ runner.temp }}/report"

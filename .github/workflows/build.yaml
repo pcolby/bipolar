@@ -27,7 +27,7 @@ jobs:
       env:
         BIPOLAR_TEST_LOCALE: de_DE.UTF-8
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v5
       with:
         name: linux
         path: ${{ runner.temp }}/src/release/Bipolar
@@ -62,7 +62,7 @@ jobs:
       env:
         BIPOLAR_TEST_LOCALE: de_DE.UTF-8
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v5
       with:
         name: linux-${{ matrix.qt }}
         path: ${{ runner.temp }}/src/release/Bipolar
@@ -93,7 +93,7 @@ jobs:
     - name: Make macOS disk image
       run: make -C "$RUNNER_TEMP/pkg/osx" dmg
     - name: Upload artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v5
       with:
         name: macos-${{ matrix.qt }}
         path: ${{ runner.temp }}/pkg/osx/Bipolar-*.dmg
@@ -134,7 +134,7 @@ jobs:
         CONFIGURATION: release
       working-directory: ${{ runner.temp }}/pkg/nsis
     - name: Upload artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v5
       with:
         name: win-${{ matrix.qt }}
         path: ${{ runner.temp }}/pkg/nsis/Bipolar-*.exe
