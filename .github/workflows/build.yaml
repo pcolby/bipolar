@@ -17,7 +17,7 @@ jobs:
         OUTPUT_DIR: ${{ runner.temp }}
         QT_VERSION: 5.15.1
     - run: otool -L "$RUNNER_TEMP/build/qtbase/lib/QtNetwork.framework/Versions/5/QtNetwork"
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v5
       with:
         name: ${{ matrix.os }}
         path: ${{ runner.temp }}/build/qtbase/lib/QtNetwork.framework/Versions/5/QtNetwork
@@ -40,7 +40,7 @@ jobs:
       shell: bash
       env:
         QT_VERSION: 5.15.2
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v5
       with:
         name: ${{ matrix.os }}
         path: ${{ github.workspace }}/build/qtbase/lib/Qt5Network.dll
